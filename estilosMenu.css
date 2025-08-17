@@ -1,0 +1,125 @@
+:root{
+    font-family: "Inter Tight", sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+
+
+.encabezado{
+    display: flex;
+    align-items: center; 
+    justify-content:space-between;
+    width: 100vh;
+}
+
+.boton-secundario{
+    background-color: #e4dcdc;
+    border-radius: 20px;
+    border-style: none;
+    color:black;
+}
+
+.cuadro-platos{
+    display: flex;
+    background-color: white;
+    width: 100vh;
+    justify-content: center;
+    /*align-items: center; */
+    flex-direction: column;
+}
+
+.plato{
+    padding: 10px;
+    font-size: 10px;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 20px;
+    /*width: 90%;*/
+    /*justify-content: center;*/
+    align-items: center;
+}
+
+.informacion-plato{
+    font-size: 10px;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 70px;
+}
+
+.precio-plato{
+    justify-self: end;
+}
+
+.imagen-plato {
+  width: 50px;
+  height: auto;
+  border-radius: 10px; 
+}
+
+
+body main{
+    display: flex;
+    justify-content: center ; /* centra horizontalmente */
+    align-items: center;
+    background-color: #f1eeee;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icono {
+  background-color: #cd1818;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  align-content: flex-start;
+  margin: 10px;
+}
+
+.logo{
+    display: flex;
+    color: black;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen-perfil{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px; 
+  object-fit: cover; 
+}
+
+.boton-navbar{
+  background: none;
+  border: none;
+  padding: 10px;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.nav-bar{
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-principal{
+    display: flex;
+    flex-direction: column;
+}
