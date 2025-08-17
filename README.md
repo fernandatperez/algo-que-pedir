@@ -1,16 +1,18 @@
 # 🍽️ Algo que Pedir
 
-**Algo que Pedir** es una maqueta de aplicación web para gestión de pedidos en locales gastronómicos. Este proyecto presenta una serie de vistas estáticas desarrolladas con HTML y CSS, enfocadas en la experiencia del usuario y la organización visual de la interfaz.
+**Algo que Pedir** es una aplicación web para gestión de pedidos en locales gastronómicos. Este proyecto presenta una serie de vistas estáticas desarrolladas con HTML y CSS, enfocadas en la experiencia del usuario y la organización visual de la interfaz.
 
 ## 👨‍🏫 Tutor:
+
 👨‍💻 FOGLIA, Pablo
 
-## 🤝 Integrantes:
-👨‍💻 ANDRES BIANCHIMANO, Maximiliano
-👨‍💻 CERNADAS, Nicolas
-👩‍💻 CORREA, Catalina		
-👩‍💻 COSSETTINI REYES, Dana
-👩‍💻 PÉREZ, Fernanda
+## 🤝 Integrantes
+
+👨‍💻 **Andrés Bianchimano**, Maximiliano  
+👨‍💻 **Cernadas**, Nicolás  
+👩‍💻 **Correa**, Catalina  
+👩‍💻 **Cossettini Reyes**, Dana  
+👩‍💻 **Pérez**, Fernanda
 
 ## 📚 Vistas incluidas
 
