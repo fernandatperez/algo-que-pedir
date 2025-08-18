@@ -1,0 +1,25 @@
+/* Importo el css */
+@import url(style.css);
+@import url(login.css);
+
+.invalid-password{
+  color: var(--color-primario);
+}
+
+.validation-password{
+    border-color: var(--color-primario);
+}
+
+.ph-warning-circle{
+  font-size: 1.2rem;
+  color: var(--color-primario);
+}
+
+.invalid-password{
+  align-items: center;
+}
+
+.invalid-container{
+    display: flex;
+    margin-top: 0.5em;
+}

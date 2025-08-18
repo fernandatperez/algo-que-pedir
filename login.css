@@ -1,0 +1,116 @@
+@import url(style.css);
+
+body{
+    height: 100vh;
+    display: flex;
+    align-content: center; 
+    justify-content: center;
+    margin: 0;
+}
+
+input{
+    border-radius: 3px;
+    border: 1px gray solid;
+    padding: 8px;
+    width: 100%; /* se adapta al contenedor */
+    box-sizing: border-box;
+}
+.card{
+    width: 100%;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* max-width: 55vw; */
+    max-width: 47rem;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin: auto;
+}
+
+.header-container{
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 1rem 0;
+}
+
+.main-title{
+    margin: 1rem;
+}
+
+.icon-container{
+    /* el elemento padre les dice en que posicion tienen que ubicarse los hijos */
+    position: relative;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+.ph-cooking-pot{
+    font-size: 2rem; /* son 28px porque en mi html defini mi font-size: 14px; */
+    position: absolute;
+    color: white;
+}
+
+.ph-circle{
+    color: var(--color-primario);
+    font-size: 4em;
+}
+
+.form-section, .btn-group{
+    width: 100%;
+    margin: 0 auto; 
+}
+
+.form-section {
+    flex-direction: column;
+    display: flex;
+    gap: 1em;
+    max-width: 450px; 
+    color: var(--color-content);
+}
+
+.password-input{
+    position: relative;
+}
+
+.ph-eye-slash{
+    position: absolute;
+    justify-self: end;
+    padding: 0.5em;
+    font-size: 1.2rem;
+}
+
+.principal-button{
+    display: flex;
+    justify-content: center;
+    font-family: var(--fuente-default);
+    color: white;
+    background-color: var(--color-primario);
+    margin-top: 2em;
+    border: none;
+    padding: 1em;
+    border-radius: 2em;
+    width: 100%;
+    max-width: 35rem;
+    justify-self: center; 
+    /* para que cuando pase el mouse por arriba, cambie le color del fondo */
+    &:hover{
+        background-color: #cd1d26;
+        transition: background-color 0.3s ease
+    }
+}
+
+.secondary-section{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border: none;
+    color: var(--color-content);
+    margin-bottom: 3em;
+}
+
+.register-link{
+    color: var(--color-content);
+    padding-left: 0.5em;
+    align-self: center;
+}
