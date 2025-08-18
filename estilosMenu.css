@@ -14,6 +14,7 @@
 }
 
 .boton-secundario{
+    cursor: pointer;
     background-color: #e4dcdc;
     border-radius: 20px;
     border-style: none;
