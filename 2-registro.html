@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="1-style.css">
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    /> <!-- esto es para los iconos -->
+</head>
+<body>
+    <div class="main-container"> <!-- Contenedor principal centrado -->
+
+        <div class="main-header">
+            <div class="contenedor-pot">
+                <img src="assets/icons/cooking-pot-white.svg" alt="Icono de cooking pot">
+            </div>
+            <h2>Crea tu cuenta</h2> 
+        </div>
+
+        <!-- Formulario de inicio de sesión -->
+        <form class="login-form">
+            <!-- Campo de usuario -->
+            <label for="username">Usuario*</label> <!-- Si lo pones adentro lo pone al lado-->
+            <input type="text" id="username" name="username" placeholder="Escribir" required>
+            <!-- type="text" Tipo de campo (texto plano) -->
+            <!-- id="username" ID único para CSS/JS -->
+            <!-- name="username" Nombre para enviar datos al servidor -->
+            <!-- placeholder="Usuario" Texto de ejemplo -->
+            <!-- required Campo obligatorio -->
+
+            <!-- Campo de contraseña -->
+            <label for="password">Password*</label> <!-- Si lo pones afuera lo pone arriba-->
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                <img id="togglePassword" class="eye-icon" src="assets/icons/eye.svg" alt="Icono de ojo" width="20"> <!-- Icono para mostrar/ocultar -->
+            </div>
+
+            <label for="password">Re-ingrese el Password*</label> <!-- Si lo pones afuera lo pone arriba-->
+            <div class="password-container">
+                <input type="password" id="password-rojo" name="password" placeholder="Repetir contraseña" required> <!-- la id es password-rojo solo para copiar la imagen estatica -->
+                <img id="togglePassword" class="eye-icon" src="assets/icons/eye.svg" alt="Icono de ojo" width="20"> <!-- Icono para mostrar/ocultar -->
+                <div id="contenedor-rojo">
+                    <i class="ph ph-warning"></i>
+                    <p id="text-rojo">Las contraseñas no coiciden</p>
+                </div>
+            </div>
+
+            <!-- Botón de iniciar sesión -->
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <!-- Link para registrarse -->
+        <p class="register-text">¿Ya tienes una cuenta? <a href="./login.html">Inicia sesión</a></p>
+    </div>
+
+    <script src="funcionalidad.js"></script>
+
+</body>
+</html>

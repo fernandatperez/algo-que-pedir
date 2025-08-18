@@ -1,0 +1,170 @@
+/* ============================= Variables ============================= */
+
+:root { /* Ámbito global (todo el documento) */
+    --color-primario: hsl(1, 77%, 55%); /* nose saturacion brillo */
+    --color-secundario: rgb(165, 41, 41);
+    --border-radius-full: 100px;
+    --font-title: 1.8rem;
+    --font-default: 0.8rem;
+    --color-boton-hover: hsl(1, 77%, 45%);
+    --color-boton-active: hsl(1, 77%, 35%);
+    /* font-size: 35px; */
+}
+
+/* ============================= Main ============================= */
+/* 16px es igual a 1rem default me parece */
+
+* { /* esto esta bueno para resetear todo */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* hace que toda la medida sea el box model*/
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* toma como referencia la altura completa de la ventana, con % no funciona no se porque */
+}
+
+/* ============================= Tarjeta ============================= */
+
+.main-container {
+    background-color: white;
+    padding: 3em 6em ; /* vertical y horizontal */
+    border-radius: 10px; /* esto no se si ponerlo con em o que */
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    /* box-shadow: desplazamientoX desplazamientoY desenfoque color; */
+    width: 37.5rem;
+}
+
+/* ============================= Header ============================= */
+
+.main-header {
+    display: flex;
+    justify-content: center;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    gap: 1.5em; /* esto esta bueno para poner en el centro como queres si no te sirve space-evenly */
+    margin-bottom: 1em;
+}
+.main-header .contenedor-pot {
+    background-color: var(--color-primario);
+    border-radius: var(--border-radius-full);
+    height: 3.125rem;
+    width: 3.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contenedor-pot > img {
+    width: 2.2rem;
+}
+.main-header h2 {
+    font-size: var(--font-title);
+}
+
+/* ============================= Usuario y Password ============================= */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+.login-form label {
+    text-align: left;
+    font-size: var(--font-default);
+}
+.login-form input {
+    padding: 0.625rem; /* esto hace que sea mas ancho*/
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: var(--font-default);
+    margin-bottom: 1.2em;
+    width: 100%; /* esto hace que ocupe todo, si no no llega a llenar el password y repetir password, creo que es porque estan dentro de un div, y les mata el tamaño*/
+}
+
+/* ============================= Password ============================= */
+
+.password-container {
+    position: relative; /* referencia para el ojo, asi lo puedo poner en absolute */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+}
+.password-container input {
+    padding-right: 50px; /* esto es para que no escriba arriba del ojo */
+}
+/* .password-container > img { */
+    /* position: relative; */
+    /* cursor: pointer; */                        /* !esto es medio wachin*/
+    /* top: -44px; */
+    /* left: 380px; */
+    /* transform: translateY(-29px); */
+    /* transform: translateX(29px); */
+/* } */
+.password-container .eye-icon {
+    position: absolute;
+    cursor: pointer;
+    top: 0.5rem;
+    left: 23.5rem;
+}
+.password-container .eye-icon:hover {
+    opacity: 0.8;
+}
+
+/* ============================= Esto es solo para la muestra de error de contraseña ============================= */
+#password-rojo {
+    border: 1px solid var(--color-primario);
+}
+#contenedor-rojo {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 2.5rem;
+    gap: 0.2rem;
+    color: var(--color-primario);
+}
+#text-rojo {
+    font-size: 0.7rem;
+}
+.ph-warning{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ============================= Botones ============================= */
+
+.login-form button {
+    margin-top: 1rem;
+    padding: 0.8rem; /* esto hace que sea mas ancho*/
+    background-color: var(--color-primario);
+    color: white; /* color del texto */
+    border: none;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-default);
+    font-weight: bold; /* negrita */
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.login-form button:hover {
+    background-color: var(--color-boton-hover);
+}
+.login-form button:active {
+    background-color: var(--color-boton-active);
+}
+
+.register-text {
+    display: flex;
+    justify-content: center;
+    gap: 0.2em;
+    margin-top: 1rem;
+    font-size: var(--font-default);
+    color: var(--color-secundario);
+    margin-bottom: 2em;
+}
+.register-text a {
+    color: var(--color-secundario); /* esto lo pongo porque si no, no metoma la negrita */
+}
