@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 10px;
+    font-family: Roboto;
+    --border-gray: rgb(211, 211, 211);
+    --border-gray-dark: rgb(137, 137, 137);
+}
+/* ------------------ */
+
+/* Main container */
+.container {
+    font-size: 2em;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(241, 241, 241);
+}
+/* ------------------- */
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25em 1.3em 0.25em 1.3em;
+    width: 100%;
+    border-bottom: 0.05em solid var(--border-gray);
+    background-color: white;
+}
+
+.logo-site-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25em;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 0.7em;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+}
+
+.nav-item {
+    margin-right: 1.5em;
+}
+
+.nav-avatar {
+    display: flex;
+}
+
+/* ------------------- */
+
+/* Main content */
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Dimensions */
+    margin:2em 0 2em 0;
+}
+
+.title {
+    /* Styles */
+    font-size: 1.7em;
+}
+
+.new-ingredient-btn {
+    /* Styles */
+    font-size: 0.55em;
+    /* Dimensions */
+    padding: 0.6em 1.5em 0.6em 1.5em;
+    border: none;
+    border-radius: 2em;
+    color: rgb(50, 50, 50);
+    background-color: rgb(183, 183, 183);
+}
+/* ------------------- */
+
+/* ------------- Ingredients table ---------- */
+.ingredients-table {
+    /* Display */
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    
+    /* Border */
+    border: 1px solid var(--border-gray);
+    border-radius: 0.4em;
+    background-color: white;
+    
+}
+
+.row {
+    display: contents;
+    text-align: center;
+}
+
+.cell {
+    padding: 1em;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.cell:first-child {
+    text-align: left;
+}
+
+.row:last-child .cell{
+    border-bottom: none;
+}
+
+
+
+/* ----------- Icons ------------- */
+.ph {
+    color: var(--border-gray-dark);
+}
+.ph-trash {
+    color: rgb(226, 22, 22);
+}
+
+.ph-cooking-pot {
+    background-color: red;
+    color: white;
+    border-radius: 2em;
+    padding: 0.5em;
+    font-size: 1.2em;
+}
+
+.ph-user-circle {
+    color: black;
+    font-size: 1.8em;
+}

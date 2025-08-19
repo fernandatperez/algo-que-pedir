@@ -1,0 +1,66 @@
+First grid try, columns not centered
+/* --------------- Grid ---------- */
+.ingredients-table {
+    /* Style */
+    font-size: 0.9em;
+
+    /* Display */
+    display: grid;
+
+    /* Border */
+    border: 1px solid var(--border-gray);
+    border-radius: 0.4em;
+
+    /* Dimensions */
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-gray);
+    padding: 1.3rem;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.cell {
+    text-align: center;
+}
+----------------------------------------
+First flex try, centered but too big
+.ingredients-table {
+    display: flex;
+    flex-direction: column;
+
+    /* Border */
+    border: 1px solid var(--border-gray);
+    border-radius: 0.3em;
+}
+
+.row {
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Dimensions */
+    padding: 0.9em;
+
+    /* Border */
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.row:last-child {
+    border: none;
+}
+
+.cell {
+    width: 20%;
+    text-align: center;
+}
+
+.cell:first-child {
+    text-align: left;
+}
+----------------------------------------------------
