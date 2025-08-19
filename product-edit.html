@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importo CSS -->
+    <link href="style.css" rel="stylesheet" />
+    <title>Edicion de Plato</title>
+</head>
+<body>
+    <header></header>
+    <main class="main-edicion-plato container-column">
+        <form action="" class="form-edicion-plato container-column">
+            <h1 class="titulo-edicion-plato">Editar Plato</h1>
+            <section class="form-section-edicion-plato form-section-datos-plato">
+                <div class="datos-plato container-column">
+                    <div>
+                        <label for="nombre-plato">Nombre del Plato*</label>
+                        <input type="text" id="nombre-plato" placeholder="Hamburguesa triple completa">
+                    </div>
+                    <div>
+                        <label for="descripcion-plato">Descripción*</label>
+                        <!-- <input type="text" id="descripcion-plato"
+                        maxlength='1000' minlength='100'
+                        class="input descripcion-textarea"
+                        placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezas"> -->
+                        <textarea id="descripcion-plato"
+                        maxlength='1000' minlength='100'
+                        class="input descripcion-textarea"
+                        placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezos."></textarea>
+                    </div>
+                    <div>
+                        <label for="url-plato">URL de la imagen del plato*</label>
+                        <input type="text" id="url-plato"
+                        placeholder="http://images.google.com/altaburger.jag">
+                    </div>
+                </div>
+                <img src="./assets/hamburguesa.jpg" alt="anvorguesa" class="img-edicion-plato">
+            </section>
+            <section class="form-section-edicion-plato form-section-costos-plato"></section>
+            <section class="form-section-edicion-plato form-section-ingredientes-plato"></section>
+            <section class="btn-group-edicion"></section>
+        </form>
+    </main>
+
+        <!-- <form action="" class="form-edicion-plato container-column">
+            <h1>Editar Plato</h1>
+            <div class="form-edicion-plato-group">
+                <div class="container-column">
+                    <div class="container-column">
+                        <label for="nombre-plato">Nombre del plato*</label>
+                        <input type="text" 
+                        class="input" 
+                        id="nombre-plato" 
+                        placeholder="Hamburguesa triple completa">
+                    </div>
+                    <div class="container-column">
+                        <label for="descripcion-plato">Descripción*</label>
+                        <textarea 
+                        id="descripcion-plato" 
+                        maxlength='1000' minlength='100'
+                        class="input descripcion-textarea"
+                        placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezas"></textarea>
+                    </div>
+                    <div class="container-column">
+                        <label for="url-plato">URL de la imagen del plato*</label>
+                        <input type="text" 
+                        class="input" 
+                        id="url-plato"
+                        placeholder="http://images.google.com/altaburger.jag">
+                    </div>
+                </div>
+                <img src="./assets/hamburguesa.jpg" alt="ANVORGUESA" class="imagen-edicion-plato">
+            </div>
+        </form> -->
+    
+</body>
+</html>
