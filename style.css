@@ -11,6 +11,7 @@
   --font-family: "Roboto", sans-serif;
   --font-color: #171212;
   --font-color-secondary: rgb(96, 96, 96);
+  --background-color: #fdfdfd;
 }
 
 html, body{

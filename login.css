@@ -6,6 +6,7 @@ body{
     align-items: center; 
     justify-content: center;
     margin: 0;
+    background-color: var(--background-color);
 }
 
 .login-container{
@@ -13,8 +14,9 @@ body{
     box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    /* max-width: 55vw; */
-    max-width: 47rem;
+    max-width: 55vw;
+    min-width: 18.36rem;
+    /* max-width: 47rem; */
     border-radius: 1rem;
     padding: 1.5rem;
     margin: auto;
@@ -141,4 +143,11 @@ body{
 
 .form-input{
     padding: 8px 28px 8px 8px; 
+}
+
+@media screen and (max-width: 400px) {
+    .login-container{
+        box-shadow: none;
+        max-width: 47rem;
+    }
 }
