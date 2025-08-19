@@ -11,11 +11,12 @@ body{
 input{
     border-radius: 3px;
     border: 1px gray solid;
-    padding: 8px;
+    padding: 8px 28px 8px 8px; /* esto puede variar */
     width: 100%; /* se adapta al contenedor */
     box-sizing: border-box;
 }
-.card{
+
+.login-container{
     width: 100%;
     box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -35,6 +36,7 @@ input{
 
 .main-title{
     margin: 1rem;
+    color: var(--font-color);
 }
 
 .icon-container{
@@ -47,13 +49,10 @@ input{
 
 .ph-cooking-pot{
     font-size: 2rem; /* son 28px porque en mi html defini mi font-size: 14px; */
-    position: absolute;
     color: white;
-}
-
-.ph-circle{
-    color: var(--color-primario);
-    font-size: 4em;
+    background-color: var(--primary-color);
+    border-radius: 2rem;
+    padding: 0.5rem;
 }
 
 .form-section, .btn-group{
@@ -66,7 +65,7 @@ input{
     display: flex;
     gap: 1em;
     max-width: 450px; 
-    color: var(--color-content);
+    color: var(--font-color-secondary);
 }
 
 .password-input{
@@ -83,9 +82,9 @@ input{
 .principal-button{
     display: flex;
     justify-content: center;
-    font-family: var(--fuente-default);
+    font-family: var(--font-family);
     color: white;
-    background-color: var(--color-primario);
+    background-color: var(--primary-color);
     margin-top: 2em;
     border: none;
     padding: 1em;
@@ -105,12 +104,12 @@ input{
     justify-content: center;
     background-color: white;
     border: none;
-    color: var(--color-content);
+    color: var(--font-color-secondary);
     margin-bottom: 3em;
 }
 
 .register-link{
-    color: var(--color-content);
+    color: var(--font-color-secondary);
     padding-left: 0.5em;
     align-self: center;
 }

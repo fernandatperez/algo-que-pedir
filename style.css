@@ -6,14 +6,15 @@
 @import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css);
 
 :root {
-  --color-primario: #E82933;
-  --color-secundario: #FA954D;
-  --fuente-default: "Roboto", sans-serif;
-  --color-content: rgb(96, 96, 96);
+  --primary-color: #E82933;
+  /* --secondary-color: #FA954D; */
+  --font-family: "Roboto", sans-serif;
+  --font-color: #171212;
+  --font-color-secondary: rgb(96, 96, 96);
 }
 
 html{
-  font-family: var(--fuente-default);
+  font-family: var(--font-family);
   font-size: 14px;
 }
 

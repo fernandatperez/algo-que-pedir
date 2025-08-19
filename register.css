@@ -3,16 +3,16 @@
 @import url(login.css);
 
 .invalid-password{
-  color: var(--color-primario);
+  color: var(--primary-color);
 }
 
 .validation-password{
-    border-color: var(--color-primario);
+    border-color: var(--primary-color);
 }
 
 .ph-warning-circle{
   font-size: 1.2rem;
-  color: var(--color-primario);
+  color: var(--primary-color);
 }
 
 .invalid-password{
