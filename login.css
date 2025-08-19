@@ -3,17 +3,9 @@
 body{
     height: 100vh;
     display: flex;
-    align-content: center; 
+    align-items: center; 
     justify-content: center;
     margin: 0;
-}
-
-input{
-    border-radius: 3px;
-    border: 1px gray solid;
-    padding: 8px 28px 8px 8px; /* esto puede variar */
-    width: 100%; /* se adapta al contenedor */
-    box-sizing: border-box;
 }
 
 .login-container{
@@ -28,7 +20,7 @@ input{
     margin: auto;
 }
 
-.header-container{
+.header-section{
     display: flex;
     justify-content: center;
     margin: 2rem 0 1rem 0;
@@ -60,12 +52,19 @@ input{
     margin: 0 auto; 
 }
 
+.btn-group{
+    margin-top: 2em;
+}
+
+.label{
+    color: var(--font-color-secondary);
+}
+
 .form-section {
     flex-direction: column;
     display: flex;
     gap: 1em;
     max-width: 450px; 
-    color: var(--font-color-secondary);
 }
 
 .password-input{
@@ -75,31 +74,50 @@ input{
 .ph-eye-slash{
     position: absolute;
     justify-self: end;
+    align-items: center;
     padding: 0.5em;
     font-size: 1.2rem;
 }
 
-.principal-button{
+.btn{
     display: flex;
     justify-content: center;
-    font-family: var(--font-family);
-    color: white;
-    background-color: var(--primary-color);
-    margin-top: 2em;
-    border: none;
-    padding: 1em;
-    border-radius: 2em;
-    width: 100%;
-    max-width: 35rem;
-    justify-self: center; 
-    /* para que cuando pase el mouse por arriba, cambie le color del fondo */
-    &:hover{
-        background-color: #cd1d26;
-        transition: background-color 0.3s ease
-    }
+    /* margin: 0 auto; */
 }
 
-.secondary-section{
+.btn-primary{
+    border: none;
+    color: white;
+    background-color: var(--primary-color);
+    /* padding: 0.5em;
+    border-radius: 0.3em; */
+}
+
+/* clase para el boton secundario */
+/* .btn-secondary{
+    border-color: var(--primary-color);
+    border: 1px solid;
+    color: var(--primary-color);
+    background-color: white;
+    padding: 0.5em;
+    border-radius: 0.3em;
+} */
+
+.btn-login{
+    padding: 1em;
+    justify-self: center; 
+    width: 100%;
+    border-radius: 2em;
+    max-width: 35rem;
+}
+
+/* para que cuando pase el mouse por arriba, cambie le color del fondo */
+.btn-primary:hover {
+  background-color: #cd1d26;
+  transition: background-color 0.3s ease;
+}
+
+.register-section{
     display: flex;
     justify-content: center;
     background-color: white;
@@ -112,4 +130,15 @@ input{
     color: var(--font-color-secondary);
     padding-left: 0.5em;
     align-self: center;
+}
+
+.input{
+    border-radius: 3px;
+    border: 1px gray solid;
+    width: 100%; /* se adapta al contenedor */
+    box-sizing: border-box;
+}
+
+.form-input{
+    padding: 8px 28px 8px 8px; 
 }

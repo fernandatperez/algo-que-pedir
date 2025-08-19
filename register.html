@@ -10,7 +10,7 @@
   <body>
     <div class="login-container">
       <!-- HEADER -->
-      <div class="header-container">
+      <div class="header-section">
         <div class="icon-container">
           <i class="ph-fill ph-cooking-pot"></i>
         </div>
@@ -19,35 +19,33 @@
       <!-- FORMULARIO -->
       <form class="form-section">
         <div class="form-group">
-          <label>Usuario*</label>
-          <input type="email" placeholder="Escribir" class="email-input">
+          <label class="label">Usuario*</label>
+          <input type="email" placeholder="Escribir" class="input form-input">
         </div>
         <div class="form-group password-container">
-          <label>Contraseña*</label>
+          <label class="label">Contraseña*</label>
           <div class="password-input">
-            <input type="password">
+            <input type="password" class="input form-input">
             <i class="ph ph-eye-slash"></i>
           </div>
         </div>
         <!-- Por ahora no lo validamos  -->
         <div class="form-group">
-            <label>Re-ingrese la contraseña*</label>
+            <label class="label">Re-ingrese la contraseña*</label>
             <div class="password-input">
-                <input type="password" class="validation-password">
+                <input type="password" class="input form-input validation-password">
                 <i class="ph ph-eye-slash"></i>
             </div>
             <div class="password-container invalid-container">
                 <i class="ph ph-warning-circle"></i>
-                <div class="invalid-password">
-                    Las contraseñas no coinciden
-                </div>
+                <div class="invalid-password">Las contraseñas no coinciden</div>
             </div>
         </div>
       </form>
       <!-- FOOTER -->
       <div class="btn-group" role="group">
-        <button class="principal-button">Registrarse</button>
-        <div class="secondary-section"> 
+        <button class="btn btn-primary btn-login">Registrarse</button>
+        <div class="register-section"> 
           <p>¿Ya tenes una cuenta?</p>
           <a href="" class="register-link">Inicia Sesión</a>
         </div>
