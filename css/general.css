@@ -1,0 +1,47 @@
+/* Font */
+@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Icons */
+@import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css);
+@import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css);
+
+:root {
+    /* --primary-font: "Roboto", sans-serif; */
+    --primary-font: "Montserrat", sans-serif;
+    --font-color-primary: #171212;
+    --font-color-secondary: #606060;
+    font-size: 10px;
+
+    --background-color-primary: #F9F9F9;
+    --primary-color: #E82933;
+    --alternative-color: #FA954D;
+    --border-color: #5F6163;
+    --error-text-color: red;
+}
+
+*,
+*::before,
+*::after,
+ html{
+  font-family: var(--primary-font);
+  box-sizing: border-box;
+}
+
+body {
+  /* box-sizing: border-box; */
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-regular {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

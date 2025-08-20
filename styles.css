@@ -1,0 +1,5 @@
+/* Importo los css */
+@import url(./css/general.css);
+@import url(./css/register.css);
+@import url(./css/login.css);
+@import url(./css/product-edit.css);
