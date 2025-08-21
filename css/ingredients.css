@@ -1,26 +1,12 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    font-size: 10px;
-    font-family: Roboto;
-    --border-gray: rgb(211, 211, 211);
-    --border-gray-dark: rgb(137, 137, 137);
-}
-/* ------------------ */
-
 /* Main container */
 .container {
-    font-size: 2em;
+    font-size: 1.5em;
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(241, 241, 241);
+    background-color: var(--background-color-secondary);
 }
 /* ------------------- */
 
@@ -30,8 +16,8 @@
     justify-content: space-between;
     padding: 0.25em 1.3em 0.25em 1.3em;
     width: 100%;
-    border-bottom: 0.05em solid var(--border-gray);
-    background-color: white;
+    border-bottom: 0.05em solid var(--border-color);
+    background-color: var(--background-color-primary);
 }
 
 .logo-site-name {
@@ -45,6 +31,10 @@
     display: flex;
     align-items: center;
     margin-right: 0.7em;
+}
+
+.site-name {
+    font-weight: 650;
 }
 
 .nav-menu {
@@ -76,23 +66,27 @@
     align-items: center;
 
     /* Dimensions */
-    margin:2em 0 2em 0;
+    margin: 2em 0 1.8em 0;
 }
 
 .title {
     /* Styles */
     font-size: 1.7em;
+    font-weight: 700;
 }
 
 .new-ingredient-btn {
     /* Styles */
-    font-size: 0.55em;
+    font-size: 0.8em;
+    color: var(--font-color-primary);
+    background-color: rgb(233, 233, 233);
+    font-weight: 550;
+    
+    
     /* Dimensions */
     padding: 0.6em 1.5em 0.6em 1.5em;
     border: none;
     border-radius: 2em;
-    color: rgb(50, 50, 50);
-    background-color: rgb(183, 183, 183);
 }
 /* ------------------- */
 
@@ -103,9 +97,9 @@
     grid-template-columns: repeat(5, auto);
     
     /* Border */
-    border: 1px solid var(--border-gray);
+    border: 1px solid var(--border-color);
     border-radius: 0.4em;
-    background-color: white;
+    background-color: var(--background-color-primary);
     
 }
 
@@ -116,7 +110,7 @@
 
 .cell {
     padding: 1em;
-    border-bottom: 1px solid var(--border-gray);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .cell:first-child {
@@ -131,14 +125,14 @@
 
 /* ----------- Icons ------------- */
 .ph {
-    color: var(--border-gray-dark);
+    color: var(--icon-color);
 }
 .ph-trash {
-    color: rgb(226, 22, 22);
+    color: var(--primary-color);
 }
 
 .ph-cooking-pot {
-    background-color: red;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 2em;
     padding: 0.5em;
