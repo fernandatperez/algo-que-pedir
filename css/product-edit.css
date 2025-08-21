@@ -1,0 +1,188 @@
+.container-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.main-product-edit {
+    width: 100%;
+    margin: 0;
+    /* padding: 1rem 10rem; */
+    background-color: var(--background-color-primary);
+}
+
+.form-product-edit {
+    row-gap: 1rem;
+    width: 80vw;
+    font-size: 1.5em;
+}
+
+.title-product-edit {
+    align-self: flex-start;
+    /* padding-top: .5em; */
+    /* font-weight: 900; */
+}
+
+/* -- PRODUCT INFO SECTION -- */
+
+.form-section-product-edit {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+}
+
+.form-section-product-info {
+    display: flex;
+    column-gap: 2em;
+    justify-content: space-around;
+    /* display: grid; */
+    /* gap: 1rem; */
+    /* grid-template-columns: repeat(2,50%); */
+}
+
+.product-info {
+    align-items: flex-start;
+    justify-content: space-between;
+    row-gap: 1em;
+
+    width: 50%;
+    div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.img-edit-container {
+    width: 50%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.img-product-edit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.description-textarea {
+    height: 10em;
+    font-family: var(--font-family);
+
+    /* este es el input que hizo dana, hay que hacerlo .clase */
+    border-radius: 3px;
+    border: 1px gray solid;
+    padding: 8px 28px 8px 8px; /* esto puede variar */
+
+}
+
+/* -- COST SECTION -- */
+
+.form-section-product-cost {
+    align-items: flex-start;
+    row-gap: 1rem;
+}
+
+.number-input-group {
+    width: 100%;
+    position: relative;
+}
+
+.product-cost-number-input {
+    padding: 8px;
+    position: relative;
+
+    /* A chequear si se quiere en todos los inputs  */
+    &:focus {
+        outline: none;
+        border: 2px solid var(--border-color);
+    }
+}
+
+.number-input-arrows {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    font-size: 1.7em;
+    padding: .1em .3em;
+    pointer-events: none;
+    color: var(--border-color);
+    /* opacity: 0; */
+}
+
+/* Para las flechitas del number  */
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: inner-spin-button;
+    opacity: 0;
+    margin: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 1em;
+    height: 100%;
+}
+
+.switch-button-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-cost-label {
+    font-size: .9em;
+    font-weight: 800;
+    margin: 0;
+}
+.product-cost-p {
+    font-size: .9em;
+    margin: 0;
+}
+
+/* Switch Button */
+.switch-button-container {
+    margin: 0;
+    /* width: 4.5rem;  */
+    /* height: 2.5rem; */
+    min-width: 45px;
+    width: 45px;
+    height: 25px;
+    padding: 0;
+    border: 0;
+    border-radius: 50px;
+    background-color: #e9e9e9;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    box-sizing: border-box;
+    transition: .3s background-color ease-in-out;
+}
+.switch-button-container:hover {
+    background-color: lightgreen;
+    transition: .4s background-color ease-in-out;
+}
+
+.switch-button {
+    background-color: #fff;
+    height: 100%;
+    /* width: 2.5rem; */
+    width: 25px;
+    box-shadow: var(--border-color) 0px 0px 5px -2px;
+    border-radius: 100%;
+    
+    transform: translateX(0%);
+    transition: .3s transform ease-in-out;
+}
+.switch-button-container:hover .switch-button {
+    transform: translateX(80%);
+    transition: .3s transform ease-in-out;
+}
+
+/* -- INGREDIENTS SECTION -- */

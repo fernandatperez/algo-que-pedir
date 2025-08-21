@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importo CSS -->
+    <link href="../styles.css" rel="stylesheet" />
+    <title>Edicion de Plato</title>
+</head>
+<body>
+    <header></header>
+    <main class="main-product-edit container-column">
+        <form action="" class="form-product-edit container-column">
+            <header class="title-product-edit header-title">Editar Plato</header>
+            <section class="form-section-product-edit form-section-product-info">
+                <div class="product-info container-column">
+                    <div>
+                        <label for="product-name">Nombre del Plato*</label>
+                        <input type="text" id="product-name" 
+                        class="input"
+                        placeholder="Hamburguesa triple completa">
+                    </div>
+                    <div>
+                        <label for="product-description">Descripción*</label>
+                        <textarea id="product-description"
+                        maxlength='1000' minlength='100'
+                        class="input description-textarea"
+                        placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezos."></textarea>
+                    </div>
+                    <div>
+                        <label for="url-plato">URL de la imagen del plato*</label>
+                        <input type="text" id="url-plato"
+                        class="input"
+                        placeholder="http://images.google.com/altaburger.jag">
+                    </div>
+                </div>
+                <div class="img-edit-container"><img src="../assets/img/hamburguesa.jpg" alt="anvorguesa" class="img-product-edit"></div>
+            </section>
+
+            <section class="form-section-product-edit form-section-product-cost container-column">
+                <h2 class="subtitle">Costos</h2>
+                <div class="number-input-group">
+                    <label for="product-base-cost">Precio Base*</label>
+                    <input type="number" id="product-base-cost"
+                    class="input product-cost-number-input"
+                    placeholder="Escribir...">
+                    <i class="ph ph-caret-up-down number-input-arrows"></i>
+                </div>
+                <div class="switch-button-group">
+                    <div>
+                        <h3 class="product-cost-label">Plato de Autor</h3>
+                        <p class="product-cost-p">Aplica un porcentaje adicional al precio de venta</p>
+                    </div>
+                    <button disabled class="switch-button-container">
+                        <div class="switch-button"></div>
+                    </button>
+                </div>
+                <div class="switch-button-group">
+                    <div>
+                        <h3 class="product-cost-label">Plato de Promoción</h3>
+                        <p class="product-cost-p">Aplica un descuento al precio de venta</p>
+                    </div>
+                    <button disabled class="switch-button-container">
+                        <div class="switch-button"></div>
+                    </button>
+                </div>
+            </section>
+            
+            <section class="form-section-product-edit form-section-product-ingredients"></section>
+            
+            <section class="btn-group-actions"></section>
+        </form>
+    </main>
+</body>
+</html>
