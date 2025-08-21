@@ -1,5 +1,0 @@
-- Como hacerlo mas responsive o asi esta bien?
-- Importa si usas Rem o Em?
-- Cual es la diferencia entre los contenedores?
-- La manera de poner el ojo esta bien?
-- Un css para todo?
