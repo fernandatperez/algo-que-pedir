@@ -3,13 +3,13 @@
 :root { /* Ámbito global (todo el documento) */
     --color-primario: hsl(1, 77%, 55%); /* nose saturacion brillo */
     --color-secundario: rgb(165, 41, 41);
-    --border-radius-full: 100px;
-    --font-title: 1.8rem;
-    --font-header: 1rem;
-    --font-default: 0.8rem;
+    --border-radius-full: 50px;
+    --font-title: 2rem;
+    --font-header: 1.2rem;
+    --font-default: 1rem;
     --color-boton-hover: hsl(1, 77%, 45%);
     --color-boton-active: hsl(1, 77%, 35%);
-    /* font-size: 35px; */
+    font-size: 10px;
 }
 
 /* ============================= Main ============================= */
@@ -29,7 +29,7 @@ body{
 
 .main-nav {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     gap: 2.8em; /* esto esta bueno para poner en el centro como queres si no te sirve space-evenly */
     flex-direction: row;
@@ -70,8 +70,8 @@ body{
 /* ============================= Main body (casi) ============================= */
 
 .titulo-tabs-grid {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 80px;
+    padding-right: 80px;
 }
 .titulo {
     font-size: var(--font-title);
@@ -79,8 +79,11 @@ body{
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
+.titulo-tabs {
+    padding: 10px;
+}
 
-/* ============================= Tabs ============================= */
+/* ============================= Tab ============================= */
 
 .tabs {
     display: flex;
@@ -119,7 +122,59 @@ body{
     gap: 5px;
 }
 
+/* ============================= Elemento de grid ============================= */
+
 .grid-element {
-    background-color: #6b7280;
-    height: 150px;
+    background-color: #cecece;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #6b7280;
+}
+
+/* ========== Tag pedido ========== */
+
+.pedido{ 
+    padding: 5px;
+}
+
+/* ========== Usuario ========== */
+
+.user > img { /* el primer hijo */
+    width: 46px;
+}
+.user {
+    display: flex;
+    flex-direction: row;
+}
+.user-info {
+    padding: 5px;
+}
+
+/* ========== Detalles ========== */
+
+.detalles {
+    padding: 5px;
+}
+
+/* ========== Ubicacion ========== */
+
+.direccion i {
+    font-size: 20px;
+}
+.direccion {
+    display: flex;
+    flex-direction: row;
+}
+
+/* ========== Boton ========== */
+
+.boton-grid {
+    display: flex;
+    justify-self: end;
+}
+.boton-grid button {
+    background-color: var(--color-primario);
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
 }
