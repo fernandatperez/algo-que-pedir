@@ -48,7 +48,7 @@
                 </div>
                 <div class="switch-button-group">
                     <div>
-                        <h3 class="product-cost-label">Plato de Autor</h3>
+                        <h4 class="h4-product-edit">Plato de Autor</h4>
                         <p class="product-cost-p">Aplica un porcentaje adicional al precio de venta</p>
                     </div>
                     <button disabled class="switch-button-container">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="switch-button-group">
                     <div>
-                        <h3 class="product-cost-label">Plato de Promoción</h3>
+                        <h4 class="h4-product-edit">Plato de Promoción</h4>
                         <p class="product-cost-p">Aplica un descuento al precio de venta</p>
                     </div>
                     <button disabled class="switch-button-container">
@@ -66,7 +66,51 @@
                 </div>
             </section>
             
-            <section class="form-section-product-edit form-section-product-ingredients"></section>
+            <section class="form-section-product-edit form-section-product-ingredients">
+                <h2 class="subtitle">Ingredientes</h2>
+                <div class="product-ingredients-cost-subtitle">
+                    <h4 class="h4-product-edit">Costo de Producción</h4>
+                    <p class="product-cost-p">$100</p>
+                </div>
+
+                <div class="product-edit-ingredients-table">
+                    <header class="product-edit-ingredients-table-header grid-row">
+                        <div class="cell" id="nombre">Nombre</div>
+                        <div class="cell" id="grupo-alimenticio"><p>Grupo</p> <p class="p-alimenticio">Alimenticio</p></div>
+                        <div class="cell" id="origen">Origen</div>
+                        <div class="cell" id="acciones">Acciones</div>
+                    </header>
+
+                    <div class="product-edit-ingredients-table-content grid-row">
+                            <div class="cell" id="nombre-1">Carne de Res</div>
+                            <div class="cell" id="grupo-alimenticio-1">Proteínas</div>
+                            <i class="cell ph ph-cow" id="origen-1"></i>
+                            <button disabled class="cell ingredient-action-btn"><i class="ph ph-trash" id="acciones-1"></i></button>
+                    </div>
+
+                    <div class="product-edit-ingredients-table-content grid-row">
+                            <div class="cell" id="nombre-2">Queso Cheddar</div>
+                            <div class="cell" id="grupo-alimenticio-2">Lacteos</div>
+                            <i class="cell ph ph-cow" id="origen-2"></i>
+                            <button disabled class="cell ingredient-action-btn"><i class="ph ph-trash" id="acciones-2"></i></button>
+                    </div>
+
+                    <div class="product-edit-ingredients-table-content grid-row">
+                            <div class="cell" id="nombre-3">Lechuga</div>
+                            <div class="cell" id="grupo-alimenticio-3">Frutas y Verduras</div>
+                            <i class="cell ph ph-plant" id="origen-3"></i>
+                            <button disabled class="cell ingredient-action-btn"><i class="ph ph-trash" id="acciones-3"></i></button>
+                    </div>
+
+                    <div class="product-edit-ingredients-table-content grid-row">
+                            <div class="cell" id="nombre-4">Tomate</div>
+                            <div class="cell" id="grupo-alimenticio-4">Frutas y Verduras</div>
+                            <i class="cell ph ph-plant" id="origen-4"></i>
+                            <button disabled class="cell ingredient-action-btn"><i class="ph ph-trash" id="acciones-4"></i></button>
+                    </div>
+
+                </div>
+            </section>
             
             <section class="btn-group-actions"></section>
         </form>
