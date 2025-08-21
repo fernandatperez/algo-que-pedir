@@ -4,8 +4,8 @@
     --color-primario: hsl(1, 77%, 55%); /* nose saturacion brillo */
     --color-secundario: rgb(165, 41, 41);
     --border-radius-full: 50px;
-    --font-title: 2rem;
-    --font-header: 1.2rem;
+    --font-title: 2.5rem;
+    --font-header: 1.25rem;
     --font-default: 1rem;
     --color-boton-hover: hsl(1, 77%, 45%);
     --color-boton-active: hsl(1, 77%, 35%);
@@ -63,15 +63,18 @@ body{
     align-items: center;
     gap: 2rem;
 }
-.opciones-y-icono > img {
+/* .opciones-y-icono > img {
     width: 2.6rem;
+} */
+.opciones-y-icono > i {
+    font-size: 2.6rem;
 }
 
 /* ============================= Main body (casi) ============================= */
 
 .titulo-tabs-grid {
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 5vw;
+    padding-right: 5vw;
 }
 .titulo {
     font-size: var(--font-title);
@@ -117,64 +120,128 @@ body{
 
 .main-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr 1fr; */
+    /* esto lo que hace es que siempre tenga 3 columnas y 3 filas */
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 300px, 400px), 1fr)); */
+    /* grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 300px, 400px), auto)); */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 270px));
+    justify-content: center; /* opcional, centra el contenido */
     gap: 5px;
 }
 
 /* ============================= Elemento de grid ============================= */
 
 .grid-element {
-    background-color: #cecece;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #6b7280;
+    background-color: #ffffff; /* fondo blanco */
+    padding: 16px;
+    border-radius: 12px; /* bordes más redondeados */
+    border: 1px solid #e5e7eb; /* gris claro */
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08); /* sombra suave */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* espacio entre secciones */
+    transition: transform 0.2s ease;
+    /* width: 100%; */
+    /* width: clamp(220px, 25vw, 400px); */
+}
+.grid-element:hover {
+    transform: translateY(-3px); /* efecto flotante */
 }
 
 /* ========== Tag pedido ========== */
 
-.pedido{ 
-    padding: 5px;
+.pedido { 
+    /* font-size: 0.9rem; */
+    color: #6b7280;
 }
-
 /* ========== Usuario ========== */
 
-.user > img { /* el primer hijo */
-    width: 46px;
-}
 .user {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 }
-.user-info {
-    padding: 5px;
+.user > i { /* el primer hijo */
+    font-size: 46px;
+    color: #6b7280;
 }
+
+.user .nombre {
+    font-size: var(--font-header);
+    font-weight: bold;
+}
+.user-info .usuario {
+    font-size: 0.85rem;
+    /* color: burlywood; */
+    color: rgb(167, 142, 142);
+}
+
 
 /* ========== Detalles ========== */
 
 .detalles {
-    padding: 5px;
+    /* font-size: 0.85rem; */
+    color: #374151;
+    text-align: ce;
 }
 
 /* ========== Ubicacion ========== */
 
-.direccion i {
-    font-size: 20px;
-}
 .direccion {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.ping-container {
+    background-color: hsl(220, 5%, 87%);
+    border-radius: 8px;
+    width: 3.5em;
+    height: 3.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ping-container i {
+    font-size: 20px;
+}
+.coordenadas {
+    /* color: burlywood; */
+    color: rgb(167, 142, 142);
+}
+
+/* ========== Pago ========== */
+
+.pago {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #374151;
+}
+.pago i {
+    font-size: 22px;
 }
 
 /* ========== Boton ========== */
 
 .boton-grid {
     display: flex;
-    justify-self: end;
+    justify-content: flex-end;
 }
 .boton-grid button {
     background-color: var(--color-primario);
     border: none;
-    padding: 5px;
+    color: white;
+    padding: 8px 16px; /* padding: top right bottom left; */
     border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.boton-grid button:hover {
+    background-color: var(--color-boton-hover);
+}
+.boton-grid button:active {
+    background-color: var(--color-boton-active);
 }
