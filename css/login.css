@@ -1,4 +1,4 @@
-@import url(style.css);
+@import url(general.css);
 
 body{
     height: 100vh;
@@ -10,7 +10,7 @@ body{
 
 input{
     border-radius: 3px;
-    border: 1px gray solid;
+    border: 1px var(--border-color) solid;
     padding: 8px 28px 8px 8px; /* esto puede variar */
     width: 100%; /* se adapta al contenedor */
     box-sizing: border-box;

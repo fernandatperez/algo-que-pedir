@@ -1,5 +1,5 @@
 /* Importo el css */
-@import url(style.css);
+@import url(general.css);
 @import url(login.css);
 
 .invalid-password{
