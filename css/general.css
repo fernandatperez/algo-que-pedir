@@ -18,18 +18,22 @@
     --alternative-color: #FA954D;
     --border-color: #5F6163;
     --error-text-color: red;
+    --button-hover-color: hsl(1, 77%, 45%);
+    --button-active-color: hsl(1, 77%, 35%);
+    --border-radius-rounded: 50px;
 }
 
 *,
 *::before,
 *::after,
  html{
-  font-family: var(--primary-font);
+  /* font-family: var(--primary-font); */
   box-sizing: border-box;
 }
 
 body {
   /* box-sizing: border-box; */
+  font-family: var(--primary-font);
 }
 
 .roboto-regular {
