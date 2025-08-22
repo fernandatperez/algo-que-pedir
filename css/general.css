@@ -18,6 +18,9 @@
     --alternative-color: #FA954D;
     --border-color: #909090;
     --error-text-color: red;
+    --button-hover-color: hsl(1, 77%, 45%);
+    --button-active-color: hsl(1, 77%, 35%);
+    --border-radius-rounded: 50px;
 }
 
 *,
