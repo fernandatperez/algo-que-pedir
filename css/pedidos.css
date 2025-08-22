@@ -25,6 +25,20 @@ body {
     background-color: #f5f5f5;
 }
 
+
+/* ============================= grid de estructura ============================= */
+
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    /* width: 100vw; */
+    /* height: 100vh; */
+}
+
 /* ============================= Nav-bar ============================= */
 
 .main-nav {
@@ -36,6 +50,8 @@ body {
     border: 1px solid #ccc;
     padding: 0.8rem 4rem; /* padding: top right bottom left; */
     background-color: white;
+
+    grid-area: header;
 }
 .icon-and-text {
     display: flex;
@@ -75,11 +91,54 @@ h2.active { /* this is just for the screenshot */
     font-size: 3rem;
 }
 
+/* ============================= Mobile-nab ============================= */
+
+.mobile-nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border: 1px solid #ccc;
+    padding: 0.8rem; /* padding: top right bottom left; */
+    background-color: white;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    grid-area: footer;
+}
+.mobile-nav .pot-container {
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-rounded);
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon-and-text-mobile {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.mobile-icons {
+    display: flex;
+    gap: 3rem;
+}
+.mobile-icons i {
+    font-size: 2rem;
+}
+
 /* ============================= Main body (almost) ============================= */
 
 .title-tabs-grid {
     padding-left: 5vw;
     padding-right: 5vw;
+
+    grid-area: main;
 }
 .line {
     border-bottom: 1px solid #e5e7eb;
@@ -249,4 +308,48 @@ h2.active { /* this is just for the screenshot */
 }
 .action-container button:active {
     background-color: var(--button-active-color);
+}
+
+
+/* ========== media ========== */
+
+/* Desktop (>=769px) */
+@media (min-width: 769px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+
+    .ph.ph-list.hidden {
+        display: none;
+    }
+}
+
+/* Tablet (401px – 768px) */
+@media (min-width: 401px) and (max-width: 768px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+
+    .options-and-icon h2 {
+        display: none;
+    }
+    .options-and-icon .active {
+        display: flex;
+    }
+}
+
+/* Mobile (<=400px) */
+@media (max-width: 400px) {
+    .main-nav {
+        display: none;
+    }
+    .mobile-nav {
+        display: flex;
+    }
 }
