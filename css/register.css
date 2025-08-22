@@ -1,0 +1,13 @@
+.invalid-text, .ph-warning-circle{
+  color: var(--error-text-color);
+}
+
+input.invalid-input{
+  border-color: var(--error-text-color);
+}
+
+.invalid-container{
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
+}
