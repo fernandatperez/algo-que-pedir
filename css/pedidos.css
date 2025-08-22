@@ -1,0 +1,252 @@
+/* ============================= Variables ============================= */
+
+:root { /* Global scope (whole document) */
+    /* --primary-color: hsl(1, 77%, 55%); not sure saturation brightness */
+    /* --border-radius-full: 50px; */
+    --font-title: 2.5rem;
+    --font-nav: 1.5rem;
+    --font-header: 1.25rem;
+    --font-default: 1rem;
+    /* --button-hover-color: hsl(1, 77%, 45%); */
+    /* --button-active-color: hsl(1, 77%, 35%); */
+    /* font-size: 10px; */
+}
+
+/* ============================= Main ============================= */
+/* 16px is equal to 1rem default I think */
+
+* { /* this is good to reset everything */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* makes the entire measure follow the box model */
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+body {
+    background-color: #f5f5f5;
+}
+
+/* ============================= Nav-bar ============================= */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border: 1px solid #ccc;
+    padding: 0.8rem 4rem; /* padding: top right bottom left; */
+    background-color: white;
+}
+.icon-and-text {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+.main-nav .pot-container {
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-rounded);
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pot-container > img {
+    width: 2rem;
+}
+.main-nav h2 {
+    font-size: var(--font-header);
+    font-weight: 400;
+    cursor: pointer;
+}
+.main-nav h1 {
+    font-size: var(--font-nav);
+}
+h2.active { /* this is just for the screenshot */
+    font-weight: 700;
+}
+.options-and-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.options-and-icon > i {
+    font-size: 3rem;
+}
+
+/* ============================= Main body (almost) ============================= */
+
+.title-tabs-grid {
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+.line {
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 10px;
+}
+.title {
+    font-size: var(--font-title);
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.title-tabs {
+    padding: 10px 10px 0px; /* padding: top right bottom left; */
+}
+
+/* ============================= Tabs ============================= */
+
+.tabs {
+    display: flex;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+}
+.tab {
+    position: relative;
+    cursor: pointer;
+    color: #6b7280;
+    font-weight: 500;
+    padding-bottom: 15px;
+}
+.tab.active { /* this is just for the screenshot */
+    font-weight: bold;
+    color: black;
+}
+.tab::after { /* pseudo-element drawn after each .tab */
+    content: ""; /* this makes something render */
+    position: absolute;
+    bottom: 0; /* these two spawn it at the bottom left */
+    left: 0;
+    width: 100%;
+    height: 5px;
+    /* background-color: transparent; invisible by default */
+    background-color: #e5e7eb;
+}
+
+/* ============================= Grid ============================= */
+
+.main-grid {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr 1fr; */
+    /* this makes it always have 3 columns and 3 rows */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 270px));
+    justify-content: center; /* optional, centers the content */
+    gap: 5px;
+}
+
+/* ============================= Grid item ============================= */
+
+.grid-item {
+    background-color: #ffffff; /* white background */
+    padding: 16px;
+    border-radius: 12px; /* more rounded corners */
+    border: 1px solid #e5e7eb; /* light gray */
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08); /* soft shadow */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* space between sections */
+    transition: transform 0.2s ease;
+    /* width: 100%; */
+    /* width: clamp(220px, 25vw, 400px); */
+}
+.grid-item:hover {
+    transform: translateY(-3px); /* floating effect */
+}
+
+/* ========== Order tag ========== */
+
+.order { 
+    /* font-size: 0.9rem; */
+    color: #6b7280;
+}
+
+/* ========== User ========== */
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.user > i { /* the first child */
+    font-size: 46px;
+    color: #6b7280;
+}
+
+.user .name {
+    font-size: var(--font-header);
+    font-weight: bold;
+}
+.user-info .username {
+    font-size: 0.85rem;
+    /* color: burlywood; */
+    color: rgb(167, 142, 142);
+}
+
+/* ========== Details ========== */
+
+.details {
+    /* font-size: 0.85rem; */
+    color: #374151;
+    text-align: ce;
+}
+
+/* ========== Address ========== */
+
+.address {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pin-container {
+    background-color: hsl(220, 5%, 87%);
+    border-radius: 8px;
+    width: 3.5em;
+    height: 3.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pin-container i {
+    font-size: 20px;
+}
+.coordinates {
+    /* color: burlywood; */
+    color: rgb(167, 142, 142);
+}
+
+/* ========== Payment ========== */
+
+.payment {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #374151;
+}
+.payment i {
+    font-size: 22px;
+}
+
+/* ========== Action container ========== */
+
+.action-container {
+    display: flex;
+    justify-content: flex-end;
+}
+.action-container button {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 8px 16px; /* padding: top right bottom left; */
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.action-container button:hover {
+    background-color: var(--button-hover-color);
+}
+.action-container button:active {
+    background-color: var(--button-active-color);
+}
