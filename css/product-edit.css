@@ -75,7 +75,11 @@
 
 .description-textarea {
     height: 10em;
+    min-height: 10em;
     max-height: 10em;
+    
+    min-width: 100%;
+    max-width: 100%;
 
     /* este es el input que hizo dana, hay que hacerlo .clase */
     border-radius: 3px;
