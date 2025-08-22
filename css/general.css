@@ -16,7 +16,7 @@
     --background-color-primary: #F9F9F9;
     --primary-color: #E82933;
     --alternative-color: #FA954D;
-    --border-color: #5F6163;
+    --border-color: #909090;
     --error-text-color: red;
 }
 
@@ -31,6 +31,12 @@
 body {
   /* box-sizing: border-box; */
   font-family: var(--primary-font);
+}
+
+/* Esto se necesita para que los inputs hereden la fuente */
+input, select, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
 }
 
 .roboto-regular {
@@ -56,7 +62,7 @@ body {
 }
 
 .subtitle {
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-weight: 800;
   font-style: normal;
   padding-top: .5em;
