@@ -1,32 +1,15 @@
-/* ============================= Variables ============================= */
-
-:root { /* Global scope (whole document) */
-    /* --primary-color: hsl(1, 77%, 55%); not sure saturation brightness */
-    /* --border-radius-full: 50px; */
-    --font-title: 2.5rem;
-    --font-nav: 1.5rem;
-    --font-header: 1.25rem;
-    --font-default: 1rem;
-    /* --button-hover-color: hsl(1, 77%, 45%); */
-    /* --button-active-color: hsl(1, 77%, 35%); */
-    /* font-size: 10px; */
+:root {
+    --dark-gray: #374151;
+    --light-gray: #6b7280;
+    --lighter-gray: #e5e7eb;
 }
 
-/* ============================= Main ============================= */
-/* 16px is equal to 1rem default I think */
-
-* { /* this is good to reset everything */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* makes the entire measure follow the box model */
-    /* font-family: Arial, Helvetica, sans-serif; */
-}
 body {
-    background-color: #f5f5f5;
+    background-color: var(--background-color-primary);
 }
 
 
-/* ============================= grid de estructura ============================= */
+/* ============================= Layout Grid ============================= */
 
 .container {
     display: grid;
@@ -35,8 +18,8 @@ body {
         "header"
         "main"
         "footer";
-    /* width: 100vw; */
-    /* height: 100vh; */
+    width: 100vw;
+    height: 100vh;
 }
 
 /* ============================= Nav-bar ============================= */
@@ -47,7 +30,7 @@ body {
     align-items: center;
     gap: 2.8em; /* good for centering, if not use space-evenly */
     flex-direction: row;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-color);
     padding: 0.8rem 4rem; /* padding: top right bottom left; */
     background-color: white;
 
@@ -58,28 +41,16 @@ body {
     align-items: center;
     gap: 1.2rem;
 }
-.main-nav .pot-container {
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius-rounded);
-    height: 3rem;
-    width: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.pot-container > img {
-    width: 2rem;
-}
 .main-nav h2 {
     font-size: var(--font-header);
-    font-weight: 400;
+    font-weight: normal;
     cursor: pointer;
 }
 .main-nav h1 {
     font-size: var(--font-nav);
 }
 h2.active { /* this is just for the screenshot */
-    font-weight: 700;
+    font-weight: bold;
 }
 .options-and-icon {
     display: flex;
@@ -93,13 +64,14 @@ h2.active { /* this is just for the screenshot */
 
 /* ============================= Mobile-nab ============================= */
 
+/*! esto repite lo de arriba */
 .mobile-nav {
     display: none;
     justify-content: center;
     align-items: center;
     gap: 2.8em; /* good for centering, if not use space-evenly */
     flex-direction: row;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     padding: 0.8rem; /* padding: top right bottom left; */
     background-color: white;
 
@@ -109,15 +81,6 @@ h2.active { /* this is just for the screenshot */
     width: 100%;
 
     grid-area: footer;
-}
-.mobile-nav .pot-container {
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius-rounded);
-    height: 3rem;
-    width: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .icon-and-text-mobile {
     display: flex;
@@ -141,8 +104,8 @@ h2.active { /* this is just for the screenshot */
     grid-area: main;
 }
 .line {
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 10px;
+    border-bottom: 1px solid var(--lighter-gray);
+    margin-bottom: 1em;
 }
 .title {
     font-size: var(--font-title);
@@ -151,22 +114,22 @@ h2.active { /* this is just for the screenshot */
     margin-bottom: 2rem;
 }
 .title-tabs {
-    padding: 10px 10px 0px; /* padding: top right bottom left; */
+    padding: 1em 1em 0em; /* padding: top right bottom left; */
 }
 
 /* ============================= Tabs ============================= */
 
 .tabs {
     display: flex;
-    gap: 20px;
+    gap: 2em;
     font-family: Arial, sans-serif;
 }
 .tab {
     position: relative;
     cursor: pointer;
-    color: #6b7280;
-    font-weight: 500;
-    padding-bottom: 15px;
+    color: var(--light-gray);
+    font-weight: normal;
+    padding-bottom: 1.5em;
 }
 .tab.active { /* this is just for the screenshot */
     font-weight: bold;
@@ -178,9 +141,9 @@ h2.active { /* this is just for the screenshot */
     bottom: 0; /* these two spawn it at the bottom left */
     left: 0;
     width: 100%;
-    height: 5px;
+    height: 0.5em;
     /* background-color: transparent; invisible by default */
-    background-color: #e5e7eb;
+    background-color: var(--lighter-gray);
 }
 
 /* ============================= Grid ============================= */
@@ -190,35 +153,32 @@ h2.active { /* this is just for the screenshot */
     /* grid-template-columns: 1fr 1fr 1fr; */
     /* grid-template-rows: 1fr 1fr 1fr; */
     /* this makes it always have 3 columns and 3 rows */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 270px));
+    grid-template-columns: repeat(auto-fit, minmax(22em, 27em));
     justify-content: center; /* optional, centers the content */
-    gap: 5px;
+    gap: 0.5em;
 }
 
 /* ============================= Grid item ============================= */
 
 .grid-item {
-    background-color: #ffffff; /* white background */
-    padding: 16px;
-    border-radius: 12px; /* more rounded corners */
-    border: 1px solid #e5e7eb; /* light gray */
+    background-color: white;
+    padding: 1.5em;
+    border-radius: var(--border-radius-default);
+    border: 1px solid var(--border-color); /* light gray */
     box-shadow: 0px 2px 6px rgba(0,0,0,0.08); /* soft shadow */
     display: flex;
     flex-direction: column;
-    gap: 12px; /* space between sections */
+    gap: 1.25em; /* space between sections */
     transition: transform 0.2s ease;
-    /* width: 100%; */
-    /* width: clamp(220px, 25vw, 400px); */
 }
 .grid-item:hover {
-    transform: translateY(-3px); /* floating effect */
+    transform: translateY(-5px); /* floating effect */
 }
 
 /* ========== Order tag ========== */
 
 .order { 
-    /* font-size: 0.9rem; */
-    color: #6b7280;
+    color: var(--light-gray)
 }
 
 /* ========== User ========== */
@@ -226,11 +186,11 @@ h2.active { /* this is just for the screenshot */
 .user {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.8em;
 }
 .user > i { /* the first child */
-    font-size: 46px;
-    color: #6b7280;
+    font-size: 4.6em;
+    color: var(--light-gray)
 }
 
 .user .name {
@@ -240,15 +200,13 @@ h2.active { /* this is just for the screenshot */
 .user-info .username {
     font-size: 0.85rem;
     /* color: burlywood; */
-    color: rgb(167, 142, 142);
+    color: var(--font-color-tertiary);
 }
 
 /* ========== Details ========== */
 
 .details {
-    /* font-size: 0.85rem; */
-    color: #374151;
-    text-align: ce;
+    color: var(--dark-gray);
 }
 
 /* ========== Address ========== */
@@ -256,11 +214,11 @@ h2.active { /* this is just for the screenshot */
 .address {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1em;
 }
 .pin-container {
     background-color: hsl(220, 5%, 87%);
-    border-radius: 8px;
+    border-radius: var(--border-radius-default);
     width: 3.5em;
     height: 3.5em;
     display: flex;
@@ -268,11 +226,11 @@ h2.active { /* this is just for the screenshot */
     align-items: center;
 }
 .pin-container i {
-    font-size: 20px;
+    font-size: 2em;
 }
 .coordinates {
     /* color: burlywood; */
-    color: rgb(167, 142, 142);
+    color: var(--font-color-tertiary);
 }
 
 /* ========== Payment ========== */
@@ -280,11 +238,11 @@ h2.active { /* this is just for the screenshot */
 .payment {
     display: flex;
     align-items: center;
-    gap: 6px;
-    color: #374151;
+    gap: 0.6em;
+    color: var(--dark-gray);
 }
 .payment i {
-    font-size: 22px;
+    font-size: 2.2em;
 }
 
 /* ========== Action container ========== */
@@ -297,8 +255,8 @@ h2.active { /* this is just for the screenshot */
     background-color: var(--primary-color);
     border: none;
     color: white;
-    padding: 8px 16px; /* padding: top right bottom left; */
-    border-radius: 5px;
+    padding: 0.8em 1.6em; /* padding: top right bottom left; */
+    border-radius: 0.5em;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
