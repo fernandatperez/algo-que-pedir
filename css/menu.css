@@ -1,0 +1,181 @@
+body main{
+    display: flex;
+    justify-content: center ; 
+    align-items: center;
+    background-color: var(--background-color-alternate);
+    flex-direction: column;
+}
+
+header{
+    background-color: var(--background-color-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* barra de navegacion principal */
+.nav-bar{
+    display: flex;
+    align-items: center;
+}
+
+.icon{
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: var(--background-color-primary);
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  align-content: flex-start;
+  margin: 10px;
+}
+
+.logo{
+    display: flex;
+    color: black;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-image{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px; 
+  object-fit: cover; 
+}
+
+/*botones de la barra del navegador*/
+
+.button-navbar{
+  background: none;
+  border: none;
+  padding: 10px;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/*contenedor principal */
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+}
+
+/* titulo del contenedor personal */
+.title{
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;  
+  flex-direction: row;         
+}
+
+.title h1{
+    font-size: 1.5rem;             
+    max-width: 100%;
+}
+
+.title button{
+    font-size: 1.5rem;             
+}
+
+
+
+/*boton gris dentro del titulo */
+.alternative-button{
+    cursor: pointer;
+    background-color: var(--background-color-secondary);
+    border-radius: 20px;
+    border-style: none;
+    color:black;
+}
+
+/*contenedor blanco con la informacion de los platos */
+.meal-container{
+    display: flex;
+    background-color: var(--background-color-primary);
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*diseño especial para cada registro de plato */
+.meal{
+    padding: 1em;
+    font-size: 1em;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 2em;
+    align-items: center;
+}
+
+.text-meal{
+    font-size: 1er;
+    flex-direction: column;
+    padding-left: 1em;
+    padding-right: 2em;
+}
+
+.price-meal{
+    justify-self: end;
+}
+
+.image-meal{
+  width: 50px;
+  height: auto;
+  border-radius: 10px; 
+}
+
+
+
+/* vista en tablet */
+@media (min-width:401px) and (max-width: 768px) {
+  .title{
+    display: flex;
+    align-items: center;           
+    text-align: center;           
+    font-size: 1vh;
+    max-width: 100%;
+
+    }
+    
+    .title h1 {
+      font-size: 1.5rem;             
+      max-width: 100%;
+
+    }
+
+    .title button {
+      justify-content: end;
+    }
+}
+
+/* vista en celular */
+@media (max-width: 400px) {
+  .title{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-size: 1vh;
+    max-width: 100%;
+    }
+    
+    .title h1 {
+      font-size: 1.5rem;           
+    }
+
+    .main-container{
+        max-width: 100%;
+    }
+
+    .meal{
+        box-sizing: border-box;
+        flex-shrink: 1;
+    }
+}
+
