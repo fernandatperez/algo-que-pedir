@@ -10,37 +10,30 @@
 <body>
     <!-- section esta mal aca? Que uso? -->
     <section class="ingredients-container">
-        <header class="web-header">
-            <section class="logo-site-name">
+
+        <!-- Header -->
+        <header class="main-nav">
+
+            <div class="icon-and-text">
                 <div class="pot-container">
                     <i class="ph-fill ph-cooking-pot"></i>
                 </div>
-                <div>
-                    <button class="site-name">
-                        Algo que pedir
-                    </button>
-                </div>
-            </section>
-            
-            <nav class="nav-menu">
-                <button class="nav-item">
-                    Pedidos
-                </button>
-                <button class="nav-item">
-                    Menu
-                </button>
-                <button class="nav-item no-hid">
-                    Ingredientes
-                </button>
-                <button class="nav-item">
-                    Cuenta 
-                </button>
-                <button class="nav-item hidden">
-                    <i class="ph ph-list"></i>
-                </button>
-                <button class="nav-avatar">
-                    <i class="ph ph-user-circle"></i>
-                </button>
+                <h1>Algo que pedir</h1> 
+            </div>
+
+            <nav class="options-and-icon">
+                <h2>Pedidos</h2> 
+                <h2>Menú</h2> 
+                <h2 class="active">Ingredientes</h2> 
+                <h2>Cuentas</h2> 
+                <!-- <i class="ph ph-list hidden"></i> -->
+                <label id="nav-hamburger" class="hidden">
+                    <input type="checkbox" id="hamburger-toggle">
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                </label>
+                <i class="ph ph-user-circle"></i>
             </nav>
 
         </header>
