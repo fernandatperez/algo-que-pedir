@@ -214,6 +214,10 @@ para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobi
 
 /* TABLET */
 @media (401px < width <= 768px) {
+    .main {
+        font-size: 0.7em;
+        width: 90%;
+    }
     .nav-item {
         display: none;
     }
@@ -225,9 +229,19 @@ para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobi
     .nav-item.hidden {
         display: flex;
     }
+    .section-title {
+        margin-top: 10em;
+    }
 }
 /* MOBILE */
 @media (width <= 400px) {
+    .container {
+        width: 100%;
+    }
+
+    .main {
+        font-size: 0.7em;
+    }
     .section-title {
         flex-direction: column;
         margin: 0;
@@ -261,7 +275,7 @@ para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobi
     }
     
     .nav-mobile-menu {
-        gap: 4em;
+        gap: 3.5em;
     }
 
     .mobile-nav-bar {
