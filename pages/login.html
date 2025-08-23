@@ -3,14 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
     <!-- Importo CSS -->
-    <link href="login.css" rel="stylesheet" />
+    <link href="/styles.css" rel="stylesheet" />
     <title>Iniciar Sesion</title>
   </head>
   <body>
     <div class="login-container">
       <!-- HEADER -->
-      <div class="header-container">
+      <div class="header-section">
         <div class="icon-container">
           <i class="ph-fill ph-cooking-pot"></i>
         </div>
@@ -19,21 +29,21 @@
       <!-- FORMULARIO -->
       <form class="form-section">
         <div class="form-group">
-          <label>Usuario*</label>
-          <input type="email" placeholder="Escribir" class="email-input">
+          <label class="label">Usuario*</label>
+          <input type="email" placeholder="Escribir" class="input-primary form-input">
         </div>
         <div class="form-group password-container">
-          <label>Contraseña*</label>
+          <label class="label">Contraseña*</label>
           <div class="password-input">
-            <input type="password">
+            <input type="password" class="input-primary form-input">
             <i class="ph ph-eye-slash"></i>
           </div>
         </div>
       </form>
       <!-- FOOTER -->
       <div class="btn-group" role="group">
-        <button class="principal-button">Iniciar Sesión</button>
-        <div class="secondary-section"> 
+        <button class="btn btn-primary btn-login">Iniciar Sesión</button>
+        <div class="register-section"> 
           <p>¿No tenes una cuenta?</p>
           <a href="" class="register-link">Regístrate</a>
         </div>
