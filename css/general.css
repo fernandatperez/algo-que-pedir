@@ -1,38 +1,87 @@
-/* Font */
+/* ============================= Fonts ============================= */
 @import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap);
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Icons */
+/* ============================= Variables ============================= */
 @import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css);
 @import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css);
 
+/* ============================= Variables ============================= */
 :root {
     /* --primary-font: "Roboto", sans-serif; */
     --primary-font: "Montserrat", sans-serif;
     --font-color-primary: #171212;
     --font-color-secondary: #606060;
+    --font-color-tertiary: rgb(167, 142, 142);
     font-size: 10px;
 
     --background-color-primary: #F9F9F9;
     --background-color-secondary: #f5f5f5;
-    --primary-color: #E82933;
-    --alternative-color: #FA954D;
-    --border-color: #5f6163;
+
     --border-light-color: #bdc3c9;
-    --error-text-color: red;
     --icon-color: #898989;
+
+    --error-text-color: red;
+    --alternative-color: #FA954D;
+    
+    --primary-color: #E82933;
+    --button-hover-color: hsl(1, 77%, 45%);
+    --button-active-color: hsl(1, 77%, 35%);
+    
+    --border-radius-rounded: 50px;
+    --border-radius-default: 10px;
+    --border-color: #ccc;
+
+    --font-title: 2.5rem;
+    --font-nav: 1.5rem;
+    --font-header: 1.25rem;
+    --font-default: 1rem;
 }
 
+/*
+SE PUEDE COMPARTIR EL ICONO DE LA PAGINA
+EL NAV
+EL FOOTER PARA EL CELU
+LOS BOTONES
+*/
+
+/* VER SI CAMBIAR DE LUGAR*/
+/* ============================= Main-icon ============================= */
+
+.pot-container { 
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-rounded);
+    height: 3.2rem;
+    width: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pot-container > i {
+    font-size: 1.85rem;
+}
+
+
+/* ============================= Reset ============================= */
 *,
 *::before,
 *::after,
-html {
-  margin: 0;
-  box-sizing: border-box;
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body {
-  font-family: var(--primary-font);
+body { font-family: var(--primary-font); } /* sin esto no se ven los iconos */
+
+button:hover {
+  cursor: pointer;
+}
+
+/* Esto se necesita para que los inputs hereden la fuente */
+input, select, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
 }
 
 .roboto-regular {
@@ -49,6 +98,18 @@ body {
   font-style: normal;
 }
 
-button:hover {
-  cursor: pointer;
+.header-title {
+  font-size: 3rem;
+  font-weight: 800;
+  font-style: normal;
+  padding-top: .5em;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 2rem;
+  font-weight: 800;
+  font-style: normal;
+  padding-top: .5em;
+  margin: 0;
 }
