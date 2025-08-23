@@ -1,4 +1,5 @@
-body{
+/* Cambiamos esto por una clase xq rompia especificidades de otros archivos */
+.body-container {
     width: 100%;
     height: 100vh;
     display: flex;
