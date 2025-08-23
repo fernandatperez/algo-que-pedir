@@ -12,8 +12,10 @@
     --font-color-primary: #171212;
     --font-color-secondary: #606060;
     font-size: 10px;
-
+    --button-color-secondary: #949292;
     --background-color-primary: #F9F9F9;
+    --background-color-secondary: #dbd9d9;
+    --background-color-alternate: #f1eeee;
     --primary-color: #E82933;
     --alternative-color: #FA954D;
     --border-color: #5F6163;
@@ -44,4 +46,12 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+.secondary-button{
+    cursor: pointer;
+    background-color: var(--botton-color-secondary);
+    border-radius: 20px;
+    border-style: none;
+    color:black;
 }
