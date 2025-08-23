@@ -10,6 +10,7 @@
 :root {
     /* --primary-font: "Roboto", sans-serif; */
     --primary-font: "Montserrat", sans-serif;
+    --icon-font: "Roboto", sans-serif;
     --font-color-primary: #171212;
     --font-color-secondary: #606060;
     --font-color-tertiary: rgb(167, 142, 142);

@@ -1,25 +1,13 @@
-/* Importo el css */
-@import url(general.css);
-@import url(login.css);
-
-.invalid-password{
-  color: var(--primary-color);
+.invalid-text, .ph-warning-circle{
+  color: var(--error-text-color);
 }
 
-.validation-password{
-    border-color: var(--primary-color);
-}
-
-.ph-warning-circle{
-  font-size: 1.2rem;
-  color: var(--primary-color);
-}
-
-.invalid-password{
-  align-items: center;
+input.invalid-input{
+  border-color: var(--error-text-color);
 }
 
 .invalid-container{
-    display: flex;
-    margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
 }
