@@ -51,11 +51,25 @@ LOS BOTONES
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .pot-container > i {
     font-size: 1.85rem;
 }
+.pot-container > i:hover{
+    animation: gentle-spin 0.3s ease-in-out 1;
+}
 
+/* hacer que las tarjetas cambien de tamaño no la linea eso se puede creo
+que el footer en cell se vea bien
+mejorar la anmacion */
+
+@keyframes gentle-spin {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
 
 /* ============================= Reset ============================= */
 *,

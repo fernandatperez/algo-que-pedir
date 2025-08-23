@@ -95,11 +95,57 @@ h2.active { /* this is just for the screenshot */
     font-size: 2rem;
 }
 
+
+/* ============================= Hamburguer ============================= */
+/* fuera el checkbox */
+#hamburger-toggle {
+    display: none;
+}
+
+/* creo icono */
+#nav-hamburger {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#nav-hamburger span {
+    height: 2px;
+    width: 2.25em;
+    background: var(--font-color-primary);
+    border-radius: 9px;
+    transition: 0.25s ease-in-out;
+}
+
+/* === cuando el checkbox está marcado (abierto) === */
+
+#hamburger-toggle:checked ~ span:nth-child(2) {
+    position: absolute;
+    transform: rotate(135deg);
+}
+
+#hamburger-toggle:checked ~ span:nth-child(3) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+#hamburger-toggle:checked ~ span:nth-child(4) {
+    position: absolute;
+    transform: rotate(-135deg);
+}
+
+
 /* ============================= Main body (almost) ============================= */
 
 .title-tabs-grid {
     padding-left: 5vw;
     padding-right: 5vw;
+    padding-bottom: 8vh; /* esto es solo mobile */
 
     grid-area: main;
 }
@@ -153,7 +199,7 @@ h2.active { /* this is just for the screenshot */
     /* grid-template-columns: 1fr 1fr 1fr; */
     /* grid-template-rows: 1fr 1fr 1fr; */
     /* this makes it always have 3 columns and 3 rows */
-    grid-template-columns: repeat(auto-fit, minmax(22em, 27em));
+    grid-template-columns: repeat(auto-fit, minmax(24em, 0.75fr));
     justify-content: center; /* optional, centers the content */
     gap: 0.5em;
 }
@@ -279,8 +325,10 @@ h2.active { /* this is just for the screenshot */
     .mobile-nav {
         display: none;
     }
-
-    .ph.ph-list.hidden {
+    .hidden {
+        display: none;
+    }
+    #nav-hamburger { /* si no le pongo este no se porque no funciona */
         display: none;
     }
 }
