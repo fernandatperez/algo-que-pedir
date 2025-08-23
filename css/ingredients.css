@@ -1,22 +1,60 @@
-/* Main container */
+/* Main container & initial definitions*/
 .container {
     font-size: 1.5em;
+    display: grid;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-rows: 1fr 13fr 1fr; /*Esto no esta bien asi no?*/
+    grid-template-areas:
+    "header"
+    "main"
+    "footer";
     background-color: var(--background-color-secondary);
+    /* 
+    Se aplica a los ítems dentro de la grilla (cada celda).
+    Define cómo se alinea el contenido dentro de su propia celda en el eje horizontal.
+    justify-content -> mueve la grilla completa dentro del contenedor
+    */
+    justify-items: center;
+}
+
+button {
+    font-size: 1em;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+/* Que tan mal esta esto...? */
+/* Es solo para los iconos del medio entre editar y borrar */
+.no-hover:hover {
+    cursor: default;
 }
 /* ------------------- */
+/* Mobile Header */
+.mobile-nav-bar {
+    grid-area: footer;
+    width: 100%;
+    display: none; /*cambiar a none, se muestra solo en mobile*/
+    padding: 0.25em 1.3em 0.25em 1.3em;
+    background-color: var(--background-color-primary);
+}
 
+.nav-mobile-menu {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.hidden {
+    display: none;
+}
 /* Header */
-.header {
+.web-header {
+    grid-area: header;
     display: flex;
     justify-content: space-between;
     padding: 0.25em 1.3em 0.25em 1.3em;
     width: 100%;
-    border-bottom: 0.05em solid var(--border-color);
+    border-bottom: 0.05em solid var(--border-light-color);
     background-color: var(--background-color-primary);
 }
 
@@ -40,21 +78,14 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 0.25em;
-}
-
-.nav-item {
-    margin-right: 1.5em;
-}
-
-.nav-avatar {
-    display: flex;
+    gap: 1.5em;
 }
 
 /* ------------------- */
 
 /* Main content */
 .main {
+    grid-area: main;
     display: flex;
     flex-direction: column;
     width: 75%;
@@ -92,39 +123,55 @@
 
 /* ------------- Ingredients table ---------- */
 .ingredients-table {
-    /* Display */
     display: grid;
-    grid-template-columns: repeat(5, auto);
-    
-    /* Border */
-    border: 1px solid var(--border-color);
-    border-radius: 0.4em;
-    background-color: var(--background-color-primary);
-    
 }
 
 .row {
-    display: contents;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1.5fr 0.5fr 1fr;
+    border: 1px solid var(--border-light-color);
+    border-bottom: 0;    
 }
 
-.cell {
-    padding: 1em;
-    border-bottom: 1px solid var(--border-color);
+.row:first-child {
+    border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
 }
 
-.cell:first-child {
+.row:last-child {
+    border-bottom: 1px solid var(--border-light-color);
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+.cell:first-child,
+.cell:nth-child(3) {
+    padding-left: 1.5em;
     text-align: left;
 }
 
-.row:last-child .cell{
-    border-bottom: none;
+
+.cell {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 2em 1em; /*Esto puede generar bardo*/
+    color: var(--font-color-secondary);
+    font-weight: 450;
 }
 
+.header {
+    color: black;
+    font-weight: 550;
+}
+
+.gray-text {
+    color: var(--font-color-secondary);
+}
 
 
 /* ----------- Icons ------------- */
 .ph {
+    font-size: 1.5em;
     color: var(--icon-color);
 }
 .ph-trash {
@@ -143,3 +190,90 @@
     color: black;
     font-size: 1.8em;
 }
+
+.ph-list {
+    font-size: 2.3em;
+    font-weight: 550;
+    color: black;
+}
+
+.ph-bowl-food {
+    color: black;
+    font-weight: 600;
+}
+/* 
+No deberia estar todo adentro de media queries? Osea para la web defino todo aca,
+para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobile lo mismo...
+*/
+/* WEB */
+@media (width >= 769px) {
+    .nav-item.hidden {
+        display: none;
+    }
+}
+
+/* TABLET */
+@media (401px < width <= 768px) {
+    .nav-item {
+        display: none;
+    }
+    
+    .nav-item.no-hid {
+        display: flex;
+    }
+
+    .nav-item.hidden {
+        display: flex;
+    }
+}
+/* MOBILE */
+@media (width <= 400px) {
+    .section-title {
+        flex-direction: column;
+        margin: 0;
+    }
+    .section-title .title {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.8em;
+    }
+    .section-title .new-ingredient {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 1.36em;
+    }
+    .row {
+        font-size: 1em;
+        grid-template-columns: 40% 30% 30%;
+    }
+    .cell {
+        padding: 2em 0.9em;
+    }
+
+    .cell:nth-child(3),
+    .cell:nth-child(4) {
+        display: none;
+    }
+
+    .cell:last-child {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .nav-mobile-menu {
+        gap: 4em;
+    }
+
+    .mobile-nav-bar {
+        display: flex;
+    }
+
+    .web-header {
+        display: none;
+    }
+
+    .hidden {
+        display: inline;
+    }
+}
+
