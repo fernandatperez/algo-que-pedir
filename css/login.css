@@ -61,7 +61,6 @@ body{
 .label{
     color: var(--font-color-secondary);
 }
-
 .form-section {
     flex-direction: column;
     display: flex;

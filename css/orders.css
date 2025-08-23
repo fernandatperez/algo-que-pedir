@@ -1,0 +1,313 @@
+:root {
+    --dark-gray: #374151;
+    --light-gray: #6b7280;
+    --lighter-gray: #e5e7eb;
+}
+
+body {
+    background-color: var(--background-color-primary);
+}
+
+
+/* ============================= Layout Grid ============================= */
+
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    width: 100vw;
+    height: 100vh;
+}
+
+/* ============================= Nav-bar ============================= */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 4rem; /* padding: top right bottom left; */
+    background-color: white;
+
+    grid-area: header;
+}
+.icon-and-text {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+.main-nav h2 {
+    font-size: var(--font-header);
+    font-weight: normal;
+    cursor: pointer;
+}
+.main-nav h1 {
+    font-size: var(--font-nav);
+}
+h2.active { /* this is just for the screenshot */
+    font-weight: bold;
+}
+.options-and-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.options-and-icon > i {
+    font-size: 3rem;
+}
+
+/* ============================= Mobile-nab ============================= */
+
+/*! esto repite lo de arriba */
+.mobile-nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border: 1px solid var(--border-color);
+    padding: 0.8rem; /* padding: top right bottom left; */
+    background-color: white;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    grid-area: footer;
+}
+.icon-and-text-mobile {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.mobile-icons {
+    display: flex;
+    gap: 3rem;
+}
+.mobile-icons i {
+    font-size: 2rem;
+}
+
+/* ============================= Main body (almost) ============================= */
+
+.title-tabs-grid {
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+    grid-area: main;
+}
+.line {
+    border-bottom: 1px solid var(--lighter-gray);
+    margin-bottom: 1em;
+}
+.title {
+    font-size: var(--font-title);
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.title-tabs {
+    padding: 1em 1em 0em; /* padding: top right bottom left; */
+}
+
+/* ============================= Tabs ============================= */
+
+.tabs {
+    display: flex;
+    gap: 2em;
+    font-family: Arial, sans-serif;
+}
+.tab {
+    position: relative;
+    cursor: pointer;
+    color: var(--light-gray);
+    font-weight: normal;
+    padding-bottom: 1.5em;
+}
+.tab.active { /* this is just for the screenshot */
+    font-weight: bold;
+    color: black;
+}
+.tab::after { /* pseudo-element drawn after each .tab */
+    content: ""; /* this makes something render */
+    position: absolute;
+    bottom: 0; /* these two spawn it at the bottom left */
+    left: 0;
+    width: 100%;
+    height: 0.5em;
+    /* background-color: transparent; invisible by default */
+    background-color: var(--lighter-gray);
+}
+
+/* ============================= Grid ============================= */
+
+.main-grid {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr 1fr; */
+    /* this makes it always have 3 columns and 3 rows */
+    grid-template-columns: repeat(auto-fit, minmax(22em, 27em));
+    justify-content: center; /* optional, centers the content */
+    gap: 0.5em;
+}
+
+/* ============================= Grid item ============================= */
+
+.grid-item {
+    background-color: white;
+    padding: 1.5em;
+    border-radius: var(--border-radius-default);
+    border: 1px solid var(--border-color); /* light gray */
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08); /* soft shadow */
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em; /* space between sections */
+    transition: transform 0.2s ease;
+}
+.grid-item:hover {
+    transform: translateY(-5px); /* floating effect */
+}
+
+/* ========== Order tag ========== */
+
+.order { 
+    color: var(--light-gray)
+}
+
+/* ========== User ========== */
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
+.user > i { /* the first child */
+    font-size: 4.6em;
+    color: var(--light-gray)
+}
+
+.user .name {
+    font-size: var(--font-header);
+    font-weight: bold;
+}
+.user-info .username {
+    font-size: 0.85rem;
+    /* color: burlywood; */
+    color: var(--font-color-tertiary);
+}
+
+/* ========== Details ========== */
+
+.details {
+    color: var(--dark-gray);
+}
+
+/* ========== Address ========== */
+
+.address {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.pin-container {
+    background-color: hsl(220, 5%, 87%);
+    border-radius: var(--border-radius-default);
+    width: 3.5em;
+    height: 3.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pin-container i {
+    font-size: 2em;
+}
+.coordinates {
+    /* color: burlywood; */
+    color: var(--font-color-tertiary);
+}
+
+/* ========== Payment ========== */
+
+.payment {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    color: var(--dark-gray);
+}
+.payment i {
+    font-size: 2.2em;
+}
+
+/* ========== Action container ========== */
+
+.action-container {
+    display: flex;
+    justify-content: flex-end;
+}
+.action-container button {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 0.8em 1.6em; /* padding: top right bottom left; */
+    border-radius: 0.5em;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.action-container button:hover {
+    background-color: var(--button-hover-color);
+}
+.action-container button:active {
+    background-color: var(--button-active-color);
+}
+
+
+/* ========== media ========== */
+
+/* Desktop (>=769px) */
+@media (min-width: 769px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+
+    .ph.ph-list.hidden {
+        display: none;
+    }
+}
+
+/* Tablet (401px – 768px) */
+@media (min-width: 401px) and (max-width: 768px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+
+    .options-and-icon h2 {
+        display: none;
+    }
+    .options-and-icon .active {
+        display: flex;
+    }
+}
+
+/* Mobile (<=400px) */
+@media (max-width: 400px) {
+    .main-nav {
+        display: none;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+}
