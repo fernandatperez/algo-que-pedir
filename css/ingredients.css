@@ -1,20 +1,15 @@
 /* Main container & initial definitions*/
-.container {
+.ingredients-container {
     font-size: 1.5em;
     display: grid;
     width: 100vw;
     height: 100vh;
-    grid-template-rows: 1fr 13fr 1fr; /*Esto no esta bien asi no?*/
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
     "header"
     "main"
     "footer";
-    background-color: var(--background-color-secondary);
-    /* 
-    Se aplica a los ítems dentro de la grilla (cada celda).
-    Define cómo se alinea el contenido dentro de su propia celda en el eje horizontal.
-    justify-content -> mueve la grilla completa dentro del contenedor
-    */
+    background-color: var(--background-color-primary);
     justify-items: center;
 }
 
@@ -24,29 +19,13 @@ button {
     border: none;
     padding: 0;
 }
+
 /* Que tan mal esta esto...? */
 /* Es solo para los iconos del medio entre editar y borrar */
 .no-hover:hover {
     cursor: default;
 }
 /* ------------------- */
-/* Mobile Header */
-.mobile-nav-bar {
-    grid-area: footer;
-    width: 100%;
-    display: none; /*cambiar a none, se muestra solo en mobile*/
-    padding: 0.25em 1.3em 0.25em 1.3em;
-    background-color: var(--background-color-primary);
-}
-
-.nav-mobile-menu {
-    display: flex;
-    width: 100%;
-    align-items: center;
-}
-.hidden {
-    display: none;
-}
 /* Header */
 .web-header {
     grid-area: header;
@@ -80,11 +59,10 @@ button {
     align-items: center;
     gap: 1.5em;
 }
-
 /* ------------------- */
 
 /* Main content */
-.main {
+.ingredients-main {
     grid-area: main;
     display: flex;
     flex-direction: column;
@@ -100,7 +78,7 @@ button {
     margin: 2em 0 1.8em 0;
 }
 
-.title {
+.ingredients-title {
     /* Styles */
     font-size: 1.7em;
     font-weight: 700;
@@ -126,31 +104,31 @@ button {
     display: grid;
 }
 
-.row {
+.ingredients-row {
     display: grid;
     grid-template-columns: 1fr 2fr 1.5fr 0.5fr 1fr;
     border: 1px solid var(--border-light-color);
     border-bottom: 0;    
 }
 
-.row:first-child {
+.ingredients-row:first-child {
     border-top-right-radius: 1em;
     border-top-left-radius: 1em;
 }
 
-.row:last-child {
+.ingredients-row:last-child {
     border-bottom: 1px solid var(--border-light-color);
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
 }
-.cell:first-child,
-.cell:nth-child(3) {
+.ingredients-cell:first-child,
+.ingredients-cell:nth-child(3) {
     padding-left: 1.5em;
     text-align: left;
 }
 
 
-.cell {
+.ingredients-cell {
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -214,10 +192,11 @@ para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobi
 
 /* TABLET */
 @media (401px < width <= 768px) {
-    .main {
-        font-size: 0.7em;
-        width: 90%;
+    .ingredients-main {
+        font-size: 0.65em;
+        width: 92%;
     }
+
     .nav-item {
         display: none;
     }
@@ -235,41 +214,42 @@ para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobi
 }
 /* MOBILE */
 @media (width <= 400px) {
-    .container {
+    .ingredients-container {
         width: 100%;
     }
 
-    .main {
-        font-size: 0.7em;
+    .ingredients-main {
+        font-size: 0.6em;
     }
     .section-title {
         flex-direction: column;
         margin: 0;
     }
-    .section-title .title {
+    .section-title .ingredients-title {
         width: 100%;
         text-align: left;
         margin-bottom: 0.8em;
+        margin-top: 3em;
     }
     .section-title .new-ingredient {
         width: 100%;
         text-align: left;
         margin-bottom: 1.36em;
     }
-    .row {
+    .ingredients-row {
         font-size: 1em;
         grid-template-columns: 40% 30% 30%;
     }
-    .cell {
+    .ingredients-cell {
         padding: 2em 0.9em;
     }
 
-    .cell:nth-child(3),
-    .cell:nth-child(4) {
+    .ingredients-cell:nth-child(3),
+    .ingredients-cell:nth-child(4) {
         display: none;
     }
 
-    .cell:last-child {
+    .ingredients-cell:last-child {
         display: flex;
         justify-content: center;
     }
