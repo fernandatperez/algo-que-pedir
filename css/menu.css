@@ -1,9 +1,10 @@
 body main{
     display: flex;
-    justify-content: center ; 
     align-items: center;
     background-color: var(--background-color-alternate);
     flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
 header{
@@ -65,6 +66,7 @@ header{
 .main-container{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* titulo del contenedor personal */
@@ -78,6 +80,7 @@ header{
 .title h1{
     font-size: 1.5rem;             
     max-width: 100%;
+    padding: 1em 1em 1em 0em;
 }
 
 .title button{
@@ -176,6 +179,10 @@ header{
     .meal{
         box-sizing: border-box;
         flex-shrink: 1;
+    }
+
+    .web-header {
+        display: none;
     }
 }
 
