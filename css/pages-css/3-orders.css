@@ -18,7 +18,8 @@ body {
         "header"
         "main"
         "footer";
-    width: 100vw;
+    /* width: 100vw; */
+    width: 100%; /* si le pongo 100% no tengo el scroll porque? */
     height: 100vh;
 }
 
@@ -31,7 +32,8 @@ body {
     gap: 2.8em; /* good for centering, if not use space-evenly */
     flex-direction: row;
     border-bottom: 1px solid var(--border-color);
-    padding: 0.8rem 4rem; /* padding: top right bottom left; */
+    padding: 0.8rem clamp(1.8rem, 4vw, 4rem); /* padding: top right bottom left; */
+                     /* minimo, ideal, maximo */
     background-color: white;
 
     grid-area: header;
@@ -41,6 +43,11 @@ body {
     align-items: center;
     gap: 1.2rem;
 }
+
+.icon-and-text h1 {
+    min-width: 12rem;
+}
+
 .main-nav h2 {
     font-size: var(--font-header);
     font-weight: normal;
@@ -119,24 +126,23 @@ h2.active { /* this is just for the screenshot */
     width: 2.25em;
     background: var(--font-color-primary);
     border-radius: 9px;
-    transition: 0.25s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 
 /* === cuando el checkbox está marcado (abierto) === */
 
 #hamburger-toggle:checked ~ span:nth-child(2) {
-    position: absolute;
-    transform: rotate(135deg);
+    transform: translateY(7px) rotate(135deg);
+
 }
 
 #hamburger-toggle:checked ~ span:nth-child(3) {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(20px);
 }
 
 #hamburger-toggle:checked ~ span:nth-child(4) {
-    position: absolute;
-    transform: rotate(-135deg);
+transform: translateY(-7px) rotate(-135deg);
 }
 
 
@@ -199,7 +205,7 @@ h2.active { /* this is just for the screenshot */
     /* grid-template-columns: 1fr 1fr 1fr; */
     /* grid-template-rows: 1fr 1fr 1fr; */
     /* this makes it always have 3 columns and 3 rows */
-    grid-template-columns: repeat(auto-fit, minmax(24em, 0.75fr));
+    grid-template-columns: repeat(auto-fit, minmax(23em, 0.65fr));
     justify-content: center; /* optional, centers the content */
     gap: 0.5em;
 }
