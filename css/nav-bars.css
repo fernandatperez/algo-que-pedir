@@ -76,3 +76,89 @@ h2.active { /* this is just for the screenshot */
 .mobile-icons i {
     font-size: 2rem;
 }
+/* ============================= ANIMATIONS ============================= */
+
+/* ============================= Hamburguer ============================= */
+/* fuera el checkbox */
+#hamburger-toggle {
+    display: none;
+}
+
+/* creo icono */
+#nav-hamburger {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#nav-hamburger span {
+    height: 2px;
+    width: 2.25em;
+    background: var(--font-color-primary);
+    border-radius: 9px;
+    transition: 0.3s ease-in-out;
+}
+
+/* === cuando el checkbox está marcado (abierto) === */
+
+#hamburger-toggle:checked ~ span:nth-child(2) {
+    transform: translateY(7px) rotate(135deg);
+
+}
+
+#hamburger-toggle:checked ~ span:nth-child(3) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#hamburger-toggle:checked ~ span:nth-child(4) {
+transform: translateY(-7px) rotate(-135deg);
+}
+
+/* MEDIA QUERIES */
+/* Desktop (>=769px) */
+@media (min-width: 769px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+    .hidden {
+        display: none;
+    }
+    #nav-hamburger { /* si no le pongo este no se porque no funciona */
+        display: none;
+    }
+}
+
+/* Tablet (401px – 768px) */
+@media (min-width: 401px) and (max-width: 768px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+
+    .options-and-icon h2 {
+        display: none;
+    }
+    .options-and-icon .active {
+        display: flex;
+    }
+}
+/* Mobile (<=400px) */
+@media (max-width: 400px) {
+    .main-nav {
+        display: none;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+}
