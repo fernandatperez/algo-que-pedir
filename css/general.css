@@ -1,12 +1,15 @@
 /* ============================= Fonts ============================= */
+
 @import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap);
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* ============================= Variables ============================= */
+
 @import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css);
 @import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css);
 
 /* ============================= Variables ============================= */
+
 :root {
     /* --primary-font: "Roboto", sans-serif; */
     --primary-font: "Montserrat", sans-serif;
@@ -23,7 +26,6 @@
     --alternative-color: #FA954D;
     --icon-color: #898989;
     --error-text-color: red;
-    
     
     --primary-color: #E82933;
     --button-hover-color: hsl(1, 77%, 45%);
@@ -61,6 +63,7 @@ LOS BOTONES
 }
 .pot-container > i {
     font-size: 1.85rem;
+    color: white;
 }
 .pot-container > i:hover{
     animation: gentle-spin 0.3s ease-in-out 1;
@@ -78,10 +81,8 @@ mejorar la anmacion */
 }
 
 /* ============================= Reset ============================= */
-*,
-*::before,
-*::after,
-html, body {
+
+*, *::before, *::after, html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;

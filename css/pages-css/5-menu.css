@@ -1,4 +1,6 @@
-body main{
+@import url(3-orders.css);
+
+.main-container-menu{
     display: flex;
     align-items: center;
     background-color: var(--background-color-alternate);
@@ -7,62 +9,14 @@ body main{
     margin: 0;
 }
 
-header{
+.header-menu{
     background-color: var(--background-color-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* barra de navegacion principal */
-.nav-bar{
-    display: flex;
-    align-items: center;
-}
-
-.icon{
-  background-color: var(--primary-color);
-  border-radius: 50%;
-  color: var(--background-color-primary);
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px;
-  width: 20px;
-  height: 20px;
-  align-content: flex-start;
-  margin: 10px;
-}
-
-.logo{
-    display: flex;
-    color: black;
-    font-weight: bolder;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile-image{
-  width: 50px;
-  height: 50px;
-  border-radius: 50px; 
-  object-fit: cover; 
-}
-
-/*botones de la barra del navegador*/
-
-.button-navbar{
-  background: none;
-  border: none;
-  padding: 10px;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  font-weight: bold;
-}
-
 /*contenedor principal */
-
 .main-container{
     display: flex;
     flex-direction: column;
@@ -70,7 +24,7 @@ header{
 }
 
 /* titulo del contenedor personal */
-.title{
+.title {
   display: flex;
   justify-content: space-between; 
   align-items: center;  
@@ -180,9 +134,11 @@ header{
         box-sizing: border-box;
         flex-shrink: 1;
     }
-
-    .web-header {
+    .main-nav {
         display: none;
+    }
+    .mobile-nav {
+        display: flex;
     }
 }
 
