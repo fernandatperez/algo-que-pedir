@@ -1,76 +1,32 @@
-body main{
+@import url(3-orders.css);
+
+.main-container-menu{
+    background-color: var(--background-color-alternate);
     display: flex;
     align-items: center;
-    background-color: var(--background-color-alternate);
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 25vh;
 }
 
-header{
+.header-menu{
     background-color: var(--background-color-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* barra de navegacion principal */
-.nav-bar{
-    display: flex;
-    align-items: center;
-}
-
-.icon{
-  background-color: var(--primary-color);
-  border-radius: 50%;
-  color: var(--background-color-primary);
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px;
-  width: 20px;
-  height: 20px;
-  align-content: flex-start;
-  margin: 10px;
-}
-
-.logo{
-    display: flex;
-    color: black;
-    font-weight: bolder;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile-image{
-  width: 50px;
-  height: 50px;
-  border-radius: 50px; 
-  object-fit: cover; 
-}
-
-/*botones de la barra del navegador*/
-
-.button-navbar{
-  background: none;
-  border: none;
-  padding: 10px;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  font-weight: bold;
-}
-
 /*contenedor principal */
 
-.main-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+.main-container {
+    padding-bottom: 8vh;
 }
 
 /* titulo del contenedor personal */
-.title{
+.title {
   display: flex;
   justify-content: space-between; 
   align-items: center;  
@@ -78,9 +34,13 @@ header{
 }
 
 .title h1{
-    font-size: 1.5rem;             
-    max-width: 100%;
-    padding: 1em 1em 1em 0em;
+    font-size: var(--font-title);             
+    padding: 1rem;
+}
+
+.pedidos{
+    font-size: var(--font-header);             
+    padding: 1rem;
 }
 
 .title button{
@@ -96,6 +56,7 @@ header{
     border-radius: 20px;
     border-style: none;
     color:black;
+    padding: 0.5em;
 }
 
 /*contenedor blanco con la informacion de los platos */
@@ -180,9 +141,11 @@ header{
         box-sizing: border-box;
         flex-shrink: 1;
     }
-
-    .web-header {
+    .main-nav {
         display: none;
+    }
+    .mobile-nav {
+        display: flex;
     }
 }
 

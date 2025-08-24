@@ -1,3 +1,5 @@
+@import url(/css/pages-css/1-login.css);
+
 .invalid-text, .ph-warning-circle{
   color: var(--error-text-color);
 }
