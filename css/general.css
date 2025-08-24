@@ -28,6 +28,7 @@
     --border-color: #ccc;
 
     --font-title: 2.5rem;
+    --font-subtitle: 2rem;
     --font-nav: 1.5rem;
     --font-header: 1.25rem;
     --font-default: 1rem;
@@ -91,17 +92,73 @@ input, select, textarea, button {
 }
 
 .header-title {
-  font-size: 3rem;
+  font-size: var(--font-title);
   font-weight: 800;
   font-style: normal;
   padding-top: .5em;
   margin: 0;
+  align-self: flex-start; /* En todas las pages está a la izquierda */
+  /* tiene que estar dentro de flex */
 }
 
 .subtitle {
-  font-size: 2rem;
+  font-size: var(--font-subtitle);
   font-weight: 800;
   font-style: normal;
   padding-top: .5em;
   margin: 0;
+  align-self: flex-start; /* En todas las pages está a la izquierda */
+  /* tiene que estar dentro de flex */
+}
+
+/* ============================= Containers ============================= */
+
+/* FLEX COLUMNA CENTRADA */
+.container-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* ocupa todo el ancho del container */
+  margin: 0;
+  /* background-color: var(--background-color-primary); */
+}
+
+/* FLEX COLUMNA 90VW*/
+/* se combina con container-column. Es el container del contenido main.*/
+.main-form { /* se le puede cambiar el nombre */
+  width: 90vw; /* ocupa el 90% */
+  row-gap: 1rem; /* gap entre secciones */
+  font-size: 1.5em;
+  padding: .5em;
+}
+
+/* FLEX ROW WRAP */
+.container-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* ocupa todo el ancho del container */
+  margin: 0;
+}
+
+/* GRID 2 COLUMNAS */
+.grid-cols-2 {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 1em;
+  row-gap: 1em;
+}
+
+/* ============================= Sizing ============================= */
+
+.w-50 {
+  width: 50% !important; 
+  /* es important porque si se usa es porque se requiere (despues explico) */
+}
+
+.w-100 {
+  width: 100% !important;
 }
