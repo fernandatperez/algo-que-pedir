@@ -1,28 +1,3 @@
-.container-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.main-product-edit {
-    width: 100%;
-    margin: 0;
-    /* padding: 1rem 10rem; */
-    background-color: var(--background-color-primary);
-}
-
-.form-product-edit {
-    row-gap: 1rem;
-    width: 90vw;
-    font-size: 1.5em;
-    padding: .5em;
-}
-
-.title-product-edit {
-    align-self: flex-start;
-    /* font-weight: 900; */
-}
 
 .h4-product-edit {
     /* font-size: .9em; */
@@ -30,14 +5,14 @@
     margin: 0;
 }
 
-/* -- PRODUCT INFO SECTION -------------------------- */
-
 .form-section-product-edit {
     background-color: #fff;
     border-radius: 10px;
     padding: 1rem;
     width: 100%;
 }
+
+/* -- PRODUCT INFO SECTION -------------------------- */
 
 .form-section-product-info {
     display: flex;
@@ -88,10 +63,6 @@
 
 }
 
-.input {
-    /* padding: 1em; */
-}
-
 /* -- COST SECTION -------------------------- */
 
 .form-section-product-cost {
@@ -99,7 +70,7 @@
     row-gap: 1rem;
 }
 
-.number-input-group {
+.input-group {
     width: 100%;
     position: relative;
 }
@@ -333,7 +304,7 @@ input[type=number]::-webkit-inner-spin-button {
     }
 
     .number-input-arrows {
-        font-size: 2.5em;
+        font-size: 2em;
     }
 
     .switch-button-container {

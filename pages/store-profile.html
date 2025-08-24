@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importo CSS -->
+    <link href="../styles.css" rel="stylesheet" />
+    <title>Informacion del Local</title>
+</head>
+<body>
+    <header></header>
+
+    <main class="container-column">
+        <form action="" class="main-form container-column">
+            <header class="header-title">Informacion del local</header>
+            <section class="form-section-store-profile form-section-store-info">
+                <div class="store-info container-column">
+                    <div>
+                        <label for="store-name">Nombre del local*</label>
+                        <input type="text" id="store-name" 
+                        class="input"
+                        placeholder="Carlo's Bake Shop">
+                    </div>
+                    <div>
+                        <label for="url-store-img">URL de la imagen*</label>
+                        <input type="text" id="url-store-img"
+                        class="input"
+                        placeholder="http://images.google.com/CarlosBakeShop.jag">
+                    </div>
+                </div>
+                <div class="img-store-container"><img src="../assets/img/CarlosBakeShop.jpg" alt="local" class="img-store-profile"></div>
+            </section>
+
+            <section class="form-section-store-profile container-column">
+                <h2 class="subtitle">Dirección</h2>
+                <div class="input-group-dir grid-cols-2">
+                    <div class="input-group">
+                        <label for="store-dir">Dirección*</label>
+                        <input type="text" id="store-dir" 
+                        class="input"
+                        placeholder="Escribir">
+                    </div>
+                    <div class="input-group">
+                        <label for="store-altitude">Altura*</label>
+                        <input type="number" id="store-altitude"
+                        class="input product-cost-number-input"
+                        placeholder="Escribir numero...">
+                        <i class="ph ph-caret-up-down number-input-arrows"></i>
+                    </div>
+                    <div class="input-group">
+                        <label for="store-latitude">Latitud*</label>
+                        <input type="number" id="store-latitude"
+                        class="input product-cost-number-input"
+                        placeholder="Escribir numero...">
+                        <i class="ph ph-caret-up-down number-input-arrows"></i>
+                    </div>
+                    <div class="input-group">
+                        <label for="store-longitude">Longitud*</label>
+                        <input type="number" id="store-longitude"
+                        class="input product-cost-number-input"
+                        placeholder="Escribir numero...">
+                        <i class="ph ph-caret-up-down number-input-arrows"></i>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="form-section-store-profile form-section-store-commission container-column">
+                <h2 class="subtitle">Porcentajes</h2>
+                <div class="grid-cols-2">
+                    <div class="input-group">
+                        <label for="app-commission">Porcentaje de comision con la app*</label>
+                        <input type="number" id="app-commission"
+                        class="input product-cost-number-input"
+                        placeholder="Escribir numero...">
+                        <i class="ph ph-caret-up-down number-input-arrows"></i>
+                    </div>
+                    <div class="input-group">
+                        <label for="author-commission">Porcentaje de comision con autores de platos*</label>
+                        <input type="number" id="author-commission"
+                        class="input product-cost-number-input"
+                        placeholder="Escribir numero...">
+                        <i class="ph ph-caret-up-down number-input-arrows"></i>
+                    </div>                    
+                </div>
+            </section>
+
+            <section class="form-section-store-profile container-column">
+                <h2 class="subtitle">Metodos de Pago</h2>
+                <div class="payments-checkbox-group">
+                    <label for="efectivo" class="">
+                        <input type="checkbox" id="efectivo" 
+                        name="efectivo" 
+                        value="EFECTIVO"
+                        class="payment-checkbox">
+                        <span>Efectivo</span>
+                    </label>
+    
+                    <label for="qr">
+                        <input type="checkbox" id="qr" 
+                        name="qr" 
+                        value="QR"
+                        class="payment-checkbox">
+                        <span>QR</span>
+                    </label>
+
+                    <label for="transferencia">
+                        <input type="checkbox" id="transferencia" 
+                        name="transferencia" 
+                        value="TRANSFERENCIA"
+                        class="payment-checkbox">
+                        <span>Transferencia</span>
+                    </label>
+
+                </div>
+            </section>
+            
+            <section class="btn-group-actions">
+                <button disabled class="principal-button">Guardar Cambios</button>
+                <button disabled class="btn-secondary">Descartar Cambios</button>
+            </section>
+        </form>
+    </main>
+</body>
+</html>
