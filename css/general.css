@@ -18,7 +18,6 @@
     --font-color-secondary: #606060;
     --font-color-tertiary: rgb(167, 142, 142);
     font-size: 10px;
-    --button-color-secondary: #949292;
     --background-color-primary: #F9F9F9;
     --background-color-secondary: #dbd9d9;
     --background-color-alternate: #f1eeee;
@@ -30,6 +29,7 @@
     --primary-color: #E82933;
     --button-hover-color: hsl(1, 77%, 45%);
     --button-active-color: hsl(1, 77%, 35%);
+    --button-color-secondary: #949292;
     
     --border-radius-rounded: 50px;
     --border-radius-default: 10px;

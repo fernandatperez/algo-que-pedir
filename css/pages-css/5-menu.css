@@ -1,12 +1,15 @@
 @import url(3-orders.css);
 
 .main-container-menu{
+    background-color: var(--background-color-alternate);
     display: flex;
     align-items: center;
-    background-color: var(--background-color-alternate);
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 25vh;
 }
 
 .header-menu{
@@ -17,10 +20,9 @@
 }
 
 /*contenedor principal */
-.main-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+
+.main-container {
+    padding-bottom: 8vh;
 }
 
 /* titulo del contenedor personal */
@@ -32,9 +34,13 @@
 }
 
 .title h1{
-    font-size: 1.5rem;             
-    max-width: 100%;
-    padding: 1em 1em 1em 0em;
+    font-size: var(--font-title);             
+    padding: 1rem;
+}
+
+.pedidos{
+    font-size: var(--font-header);             
+    padding: 1rem;
 }
 
 .title button{
@@ -50,6 +56,7 @@
     border-radius: 20px;
     border-style: none;
     color:black;
+    padding: 0.5em;
 }
 
 /*contenedor blanco con la informacion de los platos */
