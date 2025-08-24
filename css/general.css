@@ -126,7 +126,7 @@ input, select, textarea, button {
 /* FLEX COLUMNA 90VW*/
 /* se combina con container-column. Es el container del contenido main.*/
 .main-form { /* se le puede cambiar el nombre */
-  width: 90vw; /* ocupa el 90% */
+  width: 80vw; /* ocupa el 80% */
   row-gap: 1rem; /* gap entre secciones */
   font-size: 1.5em;
   padding: .5em;
