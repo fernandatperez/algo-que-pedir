@@ -1,3 +1,5 @@
+@import url(3-orders.css);
+
 .container-column {
     display: flex;
     flex-direction: column;
@@ -88,9 +90,9 @@
 
 }
 
-.input {
-    /* padding: 1em; */
-}
+/* .input {
+    padding: 1em;
+} */
 
 /* -- COST SECTION -------------------------- */
 
