@@ -1,3 +1,6 @@
+@import url(/algo-que-pedir-2025-grupo1/css/general.css);
+@import url(/algo-que-pedir-2025-grupo1/css/navbar.css);
+
 body main{
     display: flex;
     align-items: center;

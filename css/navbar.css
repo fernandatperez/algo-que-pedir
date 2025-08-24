@@ -1,0 +1,99 @@
+/* ============================= Nav-bar ============================= */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 4rem; /* padding: top right bottom left; */
+    background-color: white;
+    grid-area: header;
+}
+
+.icon-and-text {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+.main-nav h2 {
+    font-size: var(--font-header);
+    font-weight: normal;
+    cursor: pointer;
+}
+.main-nav h1 {
+    font-size: var(--font-nav);
+}
+h2.active { /* this is just for the screenshot */
+    font-weight: bold;
+}
+.options-and-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.options-and-icon > i {
+    font-size: 3rem;
+}
+
+/* ============================= Mobile-nab ============================= */
+
+/*! esto repite lo de arriba */
+.mobile-nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 2.8em; 
+    flex-direction: row;
+    border: 1px solid var(--border-color);
+    padding: 0.8rem; 
+    background-color: white;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    grid-area: footer;
+}
+.icon-and-text-mobile {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.mobile-icons {
+    display: flex;
+    gap: 3rem;
+}
+.mobile-icons i {
+    font-size: 2rem;
+}
+
+
+/* ============================= Hamburguer ============================= */
+/* fuera el checkbox */
+#hamburger-toggle {
+    display: none;
+}
+
+/* creo icono */
+#nav-hamburger {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#nav-hamburger span {
+    height: 2px;
+    width: 2.25em;
+    background: var(--font-color-primary);
+    border-radius: 9px;
+    transition: 0.25s ease-in-out;
+}
