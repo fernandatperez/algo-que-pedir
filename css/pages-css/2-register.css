@@ -1,3 +1,4 @@
+@import url(/css/general.css);
 @import url(/css/pages-css/1-login.css);
 
 .invalid-text, .ph-warning-circle{
@@ -6,6 +7,11 @@
 
 input.invalid-input{
   border-color: var(--error-text-color);
+  /* A chequear si se quiere en todos los inputs  */
+    &:focus {
+        outline: none;
+        border: 2px solid var(--button-hover-color);
+    }
 }
 
 .invalid-container{
