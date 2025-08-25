@@ -1,5 +1,5 @@
-@import url(/algo-que-pedir-2025-grupo1/css/general.css);
-@import url(/css/nav-bars.css);
+@import url(../general.css);
+@import url(../nav-bars.css);
 
 body main{
     display: flex;

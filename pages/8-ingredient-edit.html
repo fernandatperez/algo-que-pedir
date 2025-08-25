@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/general.css">
-    <link rel="stylesheet" href="/css/pages-css/8-ingredient-edit.css">
-    <title>Detalle del pedido</title>
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/pages-css/8-ingredient-edit.css">
+    <title>Editar ingrediente</title>
 
 </head>
 <body>
@@ -36,8 +36,43 @@
             </nav>
         </header>
 
+        <section class="main-body">
 
+            <article class="section-title">
+                Editar ingrediente
+            </article>
 
+            <article class="ingredient-edit-section">
+                <h3>Nombre del ingrediente*</h3>
+                <input type="text" placeholder="Lechuga">
+                <h3>Costo*</h3>
+                <div class="absolute-dollar-sign">
+                    <p>$</p>
+                    <input type="text" placeholder="5">
+                </div>
+                <h3>Grupo Alimenticio</h3>
+                <select>
+                    <option value="" disabled selected hidden>Seleccionar</option>
+                    <option value="frutas">Frutas y verduras</option>
+                    <option value="verduras">Proteinas</option>
+                    <option value="carnes">Cereales y tuberculos</option>
+                    <option value="cereales">Lacteos</option>
+                </select>
+                <div class="animal-origin-display">
+                    <h3>Origen animal</h3>
+                    <div class="slide-button">
+                        <div class="background-div">
+                            <div class="circle-slide"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <section class="btn-group-actions">
+                <button disabled class="btn-primary">Guardar Cambios</button>
+                <button disabled class="btn-secondary">Descartar Cambios</button>
+            </section>
+        </section>
 
         <!-- Mobile nav -->
             <footer class="mobile-nav">

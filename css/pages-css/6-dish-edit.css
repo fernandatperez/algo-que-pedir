@@ -1,5 +1,6 @@
-@import url(3-orders.css);
+@import url(../nav-bars.css);
 @import url(./1-login.css);
+@import url(./3-orders.css);
 
 .container-column {
     display: flex;
