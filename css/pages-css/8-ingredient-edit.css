@@ -2,6 +2,7 @@
 /* ------------- MAIN BODY ---------------- */
 /* Copiado del de maxi, pasar a general */
 .orders-container {
+    font-size: var(--font-nav);
     display: grid;
     grid-template-rows: auto 1fr auto; 
     grid-template-areas:
@@ -24,13 +25,13 @@
 .section-title {
     font-size: var(--font-title);
     font-weight: bold;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin: 1.5em 0 1.5em 6%;
 }
 
 .ingredient-edit-section {
     font-size: var(--font-nav);
     justify-self: center;
+    margin-bottom: 1.34em;
 }
 
 .ingredient-edit-section input,
@@ -67,9 +68,11 @@
     align-items: center;
     gap: 1em;
 }
+
 .animal-origin-display h3 {
     margin:0;
 }
+
 /* Slide Button */
 .slide-button {
     position: relative;
@@ -78,8 +81,9 @@
 .background-div {
     width: 2.5em;
     height: 1.3em;
-    background-color: var(--background-color-secondary);
+    background-color: var(--background-color-alternate);
     border-radius: 0.6em;
+    transition: background 0.3s;
 }
 
 .circle-slide {
@@ -88,8 +92,42 @@
     top: 0.08em;
     width: 1.25em;
     height: 1.12em;
-    background-color: var(--font-color-secondary);
-    border-radius: 1em;
+    background-color: var(--background-color-primary);
+    border-radius: 0.9em;
+
+    box-shadow: 0.15em 0.1em 0.3em rgba(0,0,0,0.2);
+    
+}
+
+.toggle {
+    position: absolute;
+    left: 0.08em;
+    top: 0.08em;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.toggle:checked + .background-div {
+    background: rgb(196, 255, 107);
+}
+
+.toggle:checked {
+    transform: translateX(1.15em)
+}
+
+.toggle:checked + .background-div .circle-slide {
+    box-shadow: -0.15em 0.1em 0.3em rgba(0,0,0,0.2);
+    transform: translateX(1.15em);
+}
+
+section .btn-group-actions {
+    justify-content: flex-end;
+    padding: 1em 3em 0 3em;
+}
+
+section .hidden {
+        display: none;
 }
 
 
@@ -114,7 +152,7 @@
     border-color: var(--primary-color);
     border: 1px solid;
     padding: 1em;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     align-items: center;
     
@@ -136,7 +174,7 @@
     border-color: var(--primary-color);
     border: 1px solid;
     padding: 1em;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     align-items: center;
     
@@ -148,3 +186,40 @@
     }
 }
 /* ----------------------------------------------- */
+
+/* QUERIES */
+
+@media (width >= 769px) {
+    .no-hid {
+        display: flex;
+    }
+}
+
+@media (401px < width <= 768px) {
+    .section-title {
+        margin-top: 5em;
+    }
+}
+
+@media (width < 401px) {
+    .no-hid {
+        display: none;
+    }
+
+    section .hidden {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+    }
+    
+    .main-body {
+        width: 80%;
+    }
+    .section-title {
+        margin: 5em 0 2em 0;
+    }
+
+    .ingredient-edit-section {
+        margin-bottom: 5em;
+    }
+}
