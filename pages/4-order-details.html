@@ -1,16 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/general.css">
-    <link rel="stylesheet" href="/css/pages-css/4-order-details.css">
-    <title>Detalle del pedido</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/general.css">
+  <link rel="stylesheet" href="/css/pages-css/4-order-details.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Nata+Sans:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>Detalle pedido</title>
 </head>
+
 <body>
+    <!-- aca tiene que ir el header -->
+     <!-- Header -->
+        <header class="header-menu main-nav">
+            <div class="icon-and-text">
+                <div class="pot-container">
+                    <i class="ph-fill ph-cooking-pot"></i>
+                </div>
+                <h1>Algo que pedir</h1> 
+            </div>
+            
+            <nav class="options-and-icon">
+                <h2>Pedidos</h2> 
+                <h2 class="active">Menú</h2> 
+                <h2>Ingredientes</h2> 
+                <h2>Cuentas</h2> 
+                <!-- <i class="ph ph-list hidden"></i> -->
+                <label id="nav-hamburger" class="hidden">
+                    <input type="checkbox" id="hamburger-toggle">
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                </label>
+                <i class="ph ph-user-circle"></i>
+            </nav>
+
+        </header>
+    <!-- Hidden navigation bar -->
+        <footer class="mobile-nav">
+            <div class="icon-and-text-mobile">
+                <div class="pot-container">
+                    <i class="ph-fill ph-cooking-pot"></i>
+                </div>
+                <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart"></i>
+                    <i class="ph ph-fork-knife"></i>
+                    <i class="ph ph-bowl-food"></i>
+                    <i class="ph ph-user"></i>
+                </div>
+            </div>
+        </footer>
     
-    <h1>completar</h1>
+<main>
+    <div class="main-container">
+    <div class="title">
+     <h1>Detalle pedido</h1>
+     <div>
+     <p>Estado del Pedido</p>
+     <button class = "alternative-button2">Pendiente</button>
+     </div>
+    </div>
+    <section class="inner-container">
+        <article>
+            <p>Cliente</p>
+            <div class="profile">
+                <img src="../assets/icons/default-avatar-profile-icon-vector-600nw.webp" alt="pin en un mapa">
+                <div>
+                <p>Sofía Miller</p>
+                <p><strong>usuario:</strong> smiller2006</p>
+                </div>
+            </div>
+        </article>
+        <article>
+            <p>Direccion de entrega</p>
+            <div class="profile">
+                <img src="../assets/icons/map-pin.svg" alt="pin en un mapa">
+                <div>
+                <p>Av siempre viva 555</p>
+                <p>lat: 40.7128 long:-74.0060</p>
+                </div>
+            </div>
+        </article>       
+    </section>
+
+    <section class="inner-container">
+    <section class="product-main">
+
+            <section class="section-title">
+                <h3>Resumen del pedido</h3>
+            </section>
+
+            <section class="product-table">
+                <article class="product-row">
+                    <div class="product-cell">
+                        <h4>Plato</h4>
+                    </div>
+                    <div class="product-cell">
+                        <h4>Cantidad</h4>
+                    </div>
+                    <div class="product-cell">
+                        <h4>Precio</h4>
+                    </div>
+                </article> 
+                <article class="product-row">
+                    <div class="product-cell">
+                        <img src="/assets/img/hamburguesa.png" alt="hamburguesa">
+                        <div>
+                        <h4>Hamburguesa con queso</h4>
+                        <p>Hamburguesa con queso acompañada de papas fritas y bebida</p>
+                        </div>
+                    </div>
+                    <div class="product-cell">
+                        1
+                    </div>
+                    <div class="product-cell">
+                        $12.00
+                    </div>
+                </article>
+                <article class="product-row">
+                    <div class="product-cell">
+                        <img src="/assets/img/pizza.png" alt="pizza">
+                        <div>
+                        <h4>Pizza</h4>
+                        <p>De muzzarella con tomate y albahaca</p>
+                        </div>
+                    </div>
+                    <div class="product-cell">
+                        1
+                    </div>
+                    <div class="product-cell">
+                        $16.00
+                    </div>
+                </article>
+                <article class="product-row">
+                    <div class="product-cell">
+                        <img src="/assets/img/ensalada.png" alt="ensalada">
+                        <div>
+                        <h4>Ensalada</h4>
+                        <p>De hojas frescas y vegetales organicos</p>
+                        </div>
+                    </div>
+                    <div class="product-cell">
+                        1
+                    </div>
+                    <div class="product-cell">
+                        $10.00
+                    </div>
+                </article> 
+           </section>
+</section>
+</section>
+
+<section class="inner-container">
+    <h4>Pago</h4>
+    <div class="payment-table">
+        <div class="payment-row">
+         <p class="payment-item">Subtotal</p>
+         <p class="payment-price">$20.00</p>
+        </div>
+    </div>
+    <div class="payment-table">
+        <div class="payment-row">
+         <p class="payment-item">Comision del delivery</p>
+         <p class="payment-price">$2.00</p>
+        </div>
+    </div>
+    <div class="payment-table">
+        <div class="payment-row">
+         <p class="payment-item">Incremento por tipo de pago</p>
+         <p class="payment-price">$1.10</p>
+        </div>
+    </div>
+    <div class="payment-table">
+        <div class="payment-row">
+         <p class="payment-item">Total</p>
+         <p class="payment-price">$23.10</p>
+        </div>
+    </div>
+    <div class="payment-method"></div>
+        <h4>Metodo de pago</h4>
+        <div class="payment-content">
+         <img src="../assets/icons/credit-card-thin.svg" alt="tarjeta de credito">
+         <p>Pago con tarjeta de credito</p>
+        </div>
+    </div>
+    
+</section>
+    
+</div>
+    
+    
+</main>
 
 </body>
 </html>

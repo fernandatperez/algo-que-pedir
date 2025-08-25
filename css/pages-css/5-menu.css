@@ -44,7 +44,7 @@
 }
 
 .title button{
-    font-size: 1.5rem;             
+    font-size: var(--font-default);            
 }
 
 
@@ -71,7 +71,7 @@
 /*diseño especial para cada registro de plato */
 .meal{
     padding: 1em;
-    font-size: 1em;
+    font-size: var(--font-default);
     display: grid;
     grid-template-columns: auto auto 1fr;
     gap: 2em;
@@ -79,7 +79,7 @@
 }
 
 .text-meal{
-    font-size: 1er;
+    font-size:  var(--font-default);
     flex-direction: column;
     padding-left: 1em;
     padding-right: 2em;
@@ -103,13 +103,13 @@
     display: flex;
     align-items: center;           
     text-align: center;           
-    font-size: 1vh;
+    font-size: var(--font-title);
     max-width: 100%;
 
     }
     
     .title h1 {
-      font-size: 1.5rem;             
+      font-size: var(--font-default);           
       max-width: 100%;
 
     }
@@ -125,12 +125,12 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    font-size: 1vh;
+    font-size: var(--font-title);
     max-width: 100%;
     }
     
     .title h1 {
-      font-size: 1.5rem;           
+      font-size: var(--font-default);           
     }
 
     .main-container{
