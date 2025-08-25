@@ -126,8 +126,8 @@ section .btn-group-actions {
     padding: 1em 3em 0 3em;
 }
 
-section .hidden {
-        display: none;
+section.btn-group-actions.hidden {
+    display: none;
 }
 
 
@@ -202,11 +202,11 @@ section .hidden {
 }
 
 @media (width < 401px) {
-    .no-hid {
+    section.btn-group-actions.no-hid {
         display: none;
     }
 
-    section .hidden {
+    section.btn-group-actions.hidden {
         display: flex;
         justify-content: space-between;
         padding: 0;
