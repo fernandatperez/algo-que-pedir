@@ -128,7 +128,7 @@ input, select, textarea, button {
 .main-form { /* se le puede cambiar el nombre */
   width: 80vw; /* ocupa el 80% */
   row-gap: 1rem; /* gap entre secciones */
-  font-size: 1.5em;
+  font-size: var(--font-default);
   padding: .5em;
 }
 
