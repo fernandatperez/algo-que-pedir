@@ -1,3 +1,5 @@
+@import url(../nav-bars.css);
+
 :root {
     --dark-gray: #374151;
     --light-gray: #6b7280;
@@ -8,91 +10,18 @@ body {
     background-color: var(--background-color-primary);
 }
 
-
 /* ============================= Layout Grid ============================= */
 
-.container {
+.orders-container {
     display: grid;
     grid-template-rows: auto 1fr auto; 
     grid-template-areas:
         "header"
         "main"
         "footer";
-    width: 100vw;
+    /* width: 100vw; */
+    width: 100%; /* si le pongo 100% no tengo el scroll porque? */
     height: 100vh;
-}
-
-/* ============================= Nav-bar ============================= */
-
-.main-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2.8em; /* good for centering, if not use space-evenly */
-    flex-direction: row;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0.8rem 4rem; /* padding: top right bottom left; */
-    background-color: white;
-
-    grid-area: header;
-}
-.icon-and-text {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-}
-.main-nav h2 {
-    font-size: var(--font-header);
-    font-weight: normal;
-    cursor: pointer;
-}
-.main-nav h1 {
-    font-size: var(--font-nav);
-}
-h2.active { /* this is just for the screenshot */
-    font-weight: bold;
-}
-.options-and-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-.options-and-icon > i {
-    font-size: 3rem;
-}
-
-/* ============================= Mobile-nab ============================= */
-
-/*! esto repite lo de arriba */
-.mobile-nav {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    gap: 2.8em; /* good for centering, if not use space-evenly */
-    flex-direction: row;
-    border: 1px solid var(--border-color);
-    padding: 0.8rem; /* padding: top right bottom left; */
-    background-color: white;
-
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-
-    grid-area: footer;
-}
-.icon-and-text-mobile {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
-.mobile-icons {
-    display: flex;
-    gap: 3rem;
-}
-.mobile-icons i {
-    font-size: 2rem;
 }
 
 /* ============================= Main body (almost) ============================= */
@@ -100,6 +29,7 @@ h2.active { /* this is just for the screenshot */
 .title-tabs-grid {
     padding-left: 5vw;
     padding-right: 5vw;
+    padding-bottom: 8vh; /* esto es solo mobile */
 
     grid-area: main;
 }
@@ -153,7 +83,7 @@ h2.active { /* this is just for the screenshot */
     /* grid-template-columns: 1fr 1fr 1fr; */
     /* grid-template-rows: 1fr 1fr 1fr; */
     /* this makes it always have 3 columns and 3 rows */
-    grid-template-columns: repeat(auto-fit, minmax(22em, 27em));
+    grid-template-columns: repeat(auto-fit, minmax(23em, 0.65fr));
     justify-content: center; /* optional, centers the content */
     gap: 0.5em;
 }
@@ -266,48 +196,4 @@ h2.active { /* this is just for the screenshot */
 }
 .action-container button:active {
     background-color: var(--button-active-color);
-}
-
-
-/* ========== media ========== */
-
-/* Desktop (>=769px) */
-@media (min-width: 769px) {
-    .main-nav {
-        display: flex;
-    }
-    .mobile-nav {
-        display: none;
-    }
-
-    .ph.ph-list.hidden {
-        display: none;
-    }
-}
-
-/* Tablet (401px – 768px) */
-@media (min-width: 401px) and (max-width: 768px) {
-    .main-nav {
-        display: flex;
-    }
-    .mobile-nav {
-        display: none;
-    }
-
-    .options-and-icon h2 {
-        display: none;
-    }
-    .options-and-icon .active {
-        display: flex;
-    }
-}
-
-/* Mobile (<=400px) */
-@media (max-width: 400px) {
-    .main-nav {
-        display: none;
-    }
-    .mobile-nav {
-        display: flex;
-    }
 }

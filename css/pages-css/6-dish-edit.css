@@ -1,3 +1,21 @@
+@import url(../nav-bars.css);
+@import url(./1-login.css);
+@import url(./3-orders.css);
+
+.container-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.main-product-edit {
+    width: 100%;
+    margin: 0;
+    /* padding: 1rem 10rem; */
+    background-color: var(--background-color-primary);
+}
+
 .form-product-edit {
     font-size: 1.5em;
     transition: .3s font-size ease-in-out;
@@ -84,12 +102,6 @@
 .product-cost-number-input {
     padding: 8px;
     position: relative;
-
-    /* A chequear si se quiere en todos los inputs  */
-    &:focus {
-        outline: none;
-        border: 2px solid var(--border-color);
-    }
 }
 
 .number-input-arrows {
@@ -269,28 +281,39 @@ input[type=number]::-webkit-inner-spin-button {
     padding: 0 1em;
 }
 
-.btn-group-actions .principal-button {
-    width: fit-content;
-    border-radius: 1rem;
-    cursor: pointer;
-
-    margin: 0;
-    align-items: center;
-}
-
-/* clase para el boton secundario */
-.btn-group-actions .btn-secondary{    
+/* .btn-group-actions .btn-primary {
     width: fit-content;
     display: flex;
     justify-content: center;
+    color:  #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border: 1px solid;
+    padding: 1em;
+    border-radius: ;
+    cursor: pointer;
+    align-items: center;
+    
+    &:hover{
+        background-color: var(--button-hover-color) ;
+        transition: background-color 0.3s ease;
+        transition: color 0.3s ease;
+    }
+} */
+
+.btn-dish{
+    padding: 1em;
+    border-radius: 1rem;
+}
+
+/* clase para el boton secundario */
+.btn-group-actions .btn-secondary{  
     color: var(--primary-color);
     background-color: #fff;
     border-color: var(--primary-color);
     border: 1px solid;
     padding: 1em;
     border-radius: 1rem;
-    cursor: pointer;
-    align-items: center;
     
     &:hover{
         color: #fff;

@@ -1,0 +1,164 @@
+/* ============================= Nav-bar ============================= */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem clamp(1.8rem, 4vw, 4rem); /* padding: top right bottom left; */
+                     /* minimo, ideal, maximo */
+    background-color: white;
+
+    grid-area: header;
+}
+.icon-and-text {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.icon-and-text h1 {
+    min-width: 12rem;
+}
+
+.main-nav h2 {
+    font-size: var(--font-header);
+    font-weight: normal;
+    cursor: pointer;
+}
+.main-nav h1 {
+    font-size: var(--font-nav);
+}
+h2.active { /* this is just for the screenshot */
+    font-weight: bold;
+}
+.options-and-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.options-and-icon > i {
+    font-size: 3rem;
+}
+
+/* ============================= Mobile-nab ============================= */
+
+/*! esto repite lo de arriba */
+.mobile-nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border: 1px solid var(--border-color);
+    padding: 0.8rem; /* padding: top right bottom left; */
+    background-color: white;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    grid-area: footer;
+}
+.icon-and-text-mobile {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.mobile-icons {
+    display: flex;
+    gap: 3rem;
+}
+.mobile-icons i {
+    font-size: 2rem;
+}
+/* ============================= ANIMATIONS ============================= */
+
+/* ============================= Hamburguer ============================= */
+/* fuera el checkbox */
+#hamburger-toggle {
+    display: none;
+}
+
+/* creo icono */
+#nav-hamburger {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#nav-hamburger span {
+    height: 2px;
+    width: 2.25em;
+    background: var(--font-color-primary);
+    border-radius: 9px;
+    transition: 0.3s ease-in-out;
+}
+
+/* === cuando el checkbox está marcado (abierto) === */
+
+#hamburger-toggle:checked ~ span:nth-child(2) {
+    transform: translateY(7px) rotate(135deg);
+
+}
+
+#hamburger-toggle:checked ~ span:nth-child(3) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#hamburger-toggle:checked ~ span:nth-child(4) {
+transform: translateY(-7px) rotate(-135deg);
+}
+
+/* MEDIA QUERIES */
+/* Desktop (>=769px) */
+@media (min-width: 769px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+    .hidden {
+        display: none;
+    }
+    #nav-hamburger { /* si no le pongo este no se porque no funciona */
+        display: none;
+    }
+}
+
+/* Tablet (401px – 768px) */
+@media (min-width: 401px) and (max-width: 768px) {
+    .main-nav {
+        display: flex;
+    }
+    .mobile-nav {
+        display: none;
+    }
+
+    .options-and-icon h2 {
+        display: none;
+    }
+    .options-and-icon .active {
+        display: flex;
+    }
+}
+/* Mobile (<=400px) */
+@media (max-width: 400px) {
+    .main-nav {
+        display: none;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+}

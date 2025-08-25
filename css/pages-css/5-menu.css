@@ -1,0 +1,151 @@
+@import url(../nav-bars.css);
+
+.main-container-menu{
+    background-color: var(--background-color-alternate);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 25vh;
+}
+
+.header-menu{
+    background-color: var(--background-color-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*contenedor principal */
+
+.main-container {
+    padding-bottom: 8vh;
+}
+
+/* titulo del contenedor personal */
+.title {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;  
+  flex-direction: row;         
+}
+
+.title h1{
+    font-size: var(--font-title);             
+    padding: 1rem;
+}
+
+.pedidos{
+    font-size: var(--font-header);             
+    padding: 1rem;
+}
+
+.title button{
+    font-size: var(--font-default);            
+}
+
+
+
+/*boton gris dentro del titulo */
+.alternative-button{
+    cursor: pointer;
+    background-color: var(--background-color-secondary);
+    border-radius: 20px;
+    border-style: none;
+    color:black;
+    padding: 0.5em;
+}
+
+/*contenedor blanco con la informacion de los platos */
+.meal-container{
+    display: flex;
+    background-color: var(--background-color-primary);
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*diseño especial para cada registro de plato */
+.meal{
+    padding: 1em;
+    font-size: var(--font-default);
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 2em;
+    align-items: center;
+}
+
+.text-meal{
+    font-size:  var(--font-default);
+    flex-direction: column;
+    padding-left: 1em;
+    padding-right: 2em;
+}
+
+.price-meal{
+    justify-self: end;
+}
+
+.image-meal{
+  width: 50px;
+  height: auto;
+  border-radius: 10px; 
+}
+
+
+
+/* vista en tablet */
+@media (min-width:401px) and (max-width: 768px) {
+  .title{
+    display: flex;
+    align-items: center;           
+    text-align: center;           
+    font-size: var(--font-title);
+    max-width: 100%;
+
+    }
+    
+    .title h1 {
+      font-size: var(--font-default);           
+      max-width: 100%;
+
+    }
+
+    .title button {
+      justify-content: end;
+    }
+}
+
+/* vista en celular */
+@media (max-width: 400px) {
+  .title{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-size: var(--font-title);
+    max-width: 100%;
+    }
+    
+    .title h1 {
+      font-size: var(--font-default);           
+    }
+
+    .main-container{
+        max-width: 100%;
+    }
+
+    .meal{
+        box-sizing: border-box;
+        flex-shrink: 1;
+    }
+    .main-nav {
+        display: none;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+}
+
