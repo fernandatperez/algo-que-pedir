@@ -1,3 +1,7 @@
+.form-product-edit {
+    font-size: 1.5em;
+    transition: .3s font-size ease-in-out;
+}
 
 .h4-product-edit {
     /* font-size: .9em; */
@@ -73,6 +77,8 @@
 .input-group {
     width: 100%;
     position: relative;
+    align-items: start;
+
 }
 
 .product-cost-number-input {
@@ -91,8 +97,8 @@
     bottom: 0;
     right: 0;
 
-    font-size: 2em;
-    padding: .1em .3em;
+    font-size: 1.6em;
+    padding: .2em .3em;
     pointer-events: none;
     color: var(--font-color-secondary);
     /* opacity: 0; */
@@ -244,6 +250,14 @@ input[type=number]::-webkit-inner-spin-button {
         height: 100%
     }
 
+    .product-edit-ingredients-table-header {
+        font-weight: 700;
+    }
+
+    .product-edit-ingredients-table-content .col-2 {
+        color: var(--font-color-secondary);
+    }
+
 }
 
 /* -- ACTION BUTTONS -------------------------- */
@@ -293,7 +307,7 @@ input[type=number]::-webkit-inner-spin-button {
 /** Tablet: 401px - 768 px. */
 @media screen and (min-width: 401px) and (max-width: 768px) {
     .form-product-edit {
-        font-size: 1em;
+        font-size: 1.25em;
     }
 
     .title-product-edit {
@@ -304,7 +318,7 @@ input[type=number]::-webkit-inner-spin-button {
     }
 
     .number-input-arrows {
-        font-size: 2em;
+        /* font-size: 2em; */
     }
 
     .switch-button-container {
