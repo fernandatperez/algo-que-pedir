@@ -1,3 +1,7 @@
+.form-store-profile {
+    font-size: 1.5em;
+    transition: .3s font-size ease-in-out;
+}
 .form-section-store-profile {
     background-color: #fff;
     border-radius: 10px;
@@ -42,6 +46,7 @@
 /* -- DIR SECTION -------------------------- */
 
 .input-group-dir {
+    align-items: end;
     /* column-gap: 1em; */
     /* row-gap: 1em; */
 }
@@ -68,16 +73,41 @@
 
 /** Tablet: 401px - 768 px. */
 @media screen and (min-width: 401px) and (max-width: 768px) {
-    /* .form-product-edit {
-        font-size: 1em;
+    .form-store-profile {
+        font-size: 1.25em;
     }
-
+    /* 
     .title-product-edit {
         font-size: 2em;
     }
     .product-edit-subtitle {
         font-size: 1.5em;
     } */
+}
 
+/** Mobile: max: 400px */
+@media screen and (max-width: 400px) {
+    /* .form-store-profile {
+        font-size: 1em;
+    } */
 
+    .form-section-store-info {
+        flex-direction: column;
+    }
+
+    .store-info {
+        width: 100%;
+    }
+
+    .img-store-container {
+        width: 100%;
+    }
+
+    .input-group-dir {
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .payments-checkbox-group {
+        flex-direction: column;
+    }
 }
