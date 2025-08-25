@@ -1,4 +1,4 @@
-@import url(/css/nav-bars.css);
+@import url(../nav-bars.css);
 
 .main-container-menu{
     background-color: var(--background-color-alternate);
