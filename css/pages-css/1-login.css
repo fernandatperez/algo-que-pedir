@@ -1,6 +1,7 @@
 @import url(/css/general.css);
 
-.section-login{
+/* ==== MAIN CONTAINER ====*/
+.login-container{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -11,7 +12,8 @@
     margin: 0;
 }
 
-.login-container{
+/* ==== LOGIN SECTION ==== */
+.login-section{
     background-color: white;
     box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
     width: 80%;
@@ -22,6 +24,7 @@
     margin: auto;
 }
 
+/* ==== HEADER ==== */
 .header-section{
     display: flex;
     justify-content: center;
@@ -29,6 +32,7 @@
 }
 
 .main-title{
+    font-size: 2.2rem;
     margin: 1rem;
     color: var(--font-color-primary);
 }
@@ -49,13 +53,10 @@
     padding: 0.5rem;
 }
 
+/* ==== FORM ==== */
 .form-section, .btn-group{
     width: 100%;
     margin: 0 auto; 
-}
-
-.btn-group{
-    margin-top: 2em;
 }
 
 .label{
@@ -69,6 +70,23 @@
     max-width: 38rem;
 }
 
+.input-primary{
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px gray solid;
+    width: 100%; /* se adapta al contenedor */
+    box-sizing: border-box;
+    &:focus {
+        outline: none;
+        border: 2px solid var(--font-color-secondary);
+    }
+}
+
+.form-input{
+    padding: 8px 28px 8px 8px; 
+    font-size: 1em;
+}
+
 .password-input{
     position: relative;
 }
@@ -80,6 +98,12 @@
     justify-self: end;
     align-items: center;
     padding: 0.5em;
+}
+
+/* ==== BUTTONS ==== */
+
+.btn-group{
+    margin-top: 2em;
 }
 
 .btn{
@@ -122,6 +146,7 @@
   transition: background-color 0.3s ease;
 }
 
+/* ==== FORM ACTIONS ==== */
 .register-section{
     display: flex;
     justify-content: center;
@@ -136,30 +161,12 @@
     align-self: center;
 }
 
-.input-primary{
-    padding: 8px;
-    border-radius: 3px;
-    border: 1px gray solid;
-    width: 100%; /* se adapta al contenedor */
-    box-sizing: border-box;
-    /* A chequear si se quiere en todos los inputs  */
-    &:focus {
-        outline: none;
-        border: 2px solid var(--font-color-secondary);
-    }
-}
-
-.form-input{
-    padding: 8px 28px 8px 8px; 
-    font-size: 1em;
-}
-
 @media screen and (max-width: 400px) {
-    .section-login{
+    .login-container{
         font-size: 0.8em;
     }
-    .login-container{
-        min-width: 230px;
+    .login-section{
+        min-width: 28em;
         background-color: white;
         box-shadow: none;
         padding: 1em;
@@ -168,10 +175,10 @@
         font-size: 2em;
     }
     .form-section{
-        max-width: 250px;
+        max-width: 28em;
     }
     .btn-login{
-        max-width: 300px;
+        max-width: 32em;
     }
     .ph-eye-slash{
         font-size: 1.5em;
@@ -179,25 +186,24 @@
 }
 
 @media (min-width: 401px) and (max-width: 768px) {
-    .section-login{
+    .login-container{
         font-size: 1em;
     }
     .main-title{
         font-size: 1.8em; /* 24.3px */
     }
-    .login-container{
+    .login-section{
         width: 70%;
-        /* width: 60rem; */
-        min-width: 400px;
+        min-width: 40em;
     }
     .form-input, .btn-login{
         font-size: 0.9em;
     }
     .btn-login{
-        width: 350px;
+        width: 38em;
     }
     .form-section{
-        width: 325px;
+        width: 30em;
     }
     .ph-eye-slash{
         font-size: 1.5em;

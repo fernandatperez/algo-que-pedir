@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Importo CSS -->
     <link href="/css/pages-css/2-register.css" rel="stylesheet" />
-    <title>Registrarse</title>
+    
+    <title>Sign Up</title>
   </head>
   <body>
-    <div class="section-login">
-      <div class="login-container">
+    <main class="login-container">
+
+      <section class="login-section">
+
         <!-- HEADER -->
-        <div class="header-section">
+        <header class="header-section">
           <div class="icon-container">
             <i class="ph-fill ph-cooking-pot"></i>
           </div>
           <h1 class="main-title">Algo que pedir</h1>
-        </div>
-        <!-- FORMULARIO -->
+        </header>
+
+        <!-- FORM -->
         <form class="form-section">
           <div class="form-group">
             <label class="label">Usuario*</label>
@@ -30,7 +34,8 @@
               <i class="ph ph-eye-slash"></i>
             </div>
           </div>
-          <!-- Por ahora no lo validamos  -->
+
+          <!-- VALIDATION (Por ahora no lo validamos)  -->
           <div class="form-group">
               <label class="label">Re-ingrese la contraseña*</label>
               <div class="password-input">
@@ -42,16 +47,20 @@
                   <div class="invalid-text">Las contraseñas no coinciden</div>
               </div>
           </div>
+
         </form>
-        <!-- FOOTER -->
-        <div class="btn-group" role="group">
+
+        <!-- FORM ACTIONS -->
+        <footer class="btn-group" role="group">
           <button class="btn btn-primary btn-login">Registrarse</button>
           <div class="register-section"> 
             <p>¿Ya tenes una cuenta?</p>
             <a href="" class="register-link">Inicia Sesión</a>
           </div>
-        </div>
-      </div>
-    </div>
+        </footer>
+
+      </section>
+
+    </main>
   </body>
 </html>

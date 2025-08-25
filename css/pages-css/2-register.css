@@ -7,7 +7,6 @@
 
 input.invalid-input{
   border-color: var(--error-text-color);
-  /* A chequear si se quiere en todos los inputs  */
     &:focus {
         outline: none;
         border: 2px solid var(--button-hover-color);
