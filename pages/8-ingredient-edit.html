@@ -21,9 +21,9 @@
             </div>
 
             <nav class="options-and-icon">
-                <h2 class="active">Pedidos</h2> 
+                <h2>Pedidos</h2> 
                 <h2>Menú</h2> 
-                <h2>Ingredientes</h2> 
+                <h2 class="active">Ingredientes</h2> 
                 <h2>Cuentas</h2> 
                 <!-- <i class="ph ph-list hidden"></i> -->
                 <label id="nav-hamburger" class="hidden">
@@ -61,6 +61,7 @@
                 <div class="animal-origin-display">
                     <h3>Origen animal</h3>
                     <div class="slide-button">
+                        <input type="checkbox" class="toggle">
                         <div class="background-div">
                             <div class="circle-slide"></div>
                         </div>
@@ -68,9 +69,13 @@
                 </div>
             </article>
             
-            <section class="btn-group-actions">
+            <section class="btn-group-actions no-hid">
                 <button disabled class="btn-primary">Guardar Cambios</button>
                 <button disabled class="btn-secondary">Descartar Cambios</button>
+            </section>
+            <section class="btn-group-actions hidden">
+                <button disabled class="btn-primary">Guardar</button>
+                <button disabled class="btn-secondary">Descartar</button>
             </section>
         </section>
 
