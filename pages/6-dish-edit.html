@@ -37,9 +37,10 @@
 
         </header>
 
-    <main class="main-product-edit container-column">
-        <form action="" class="form-product-edit container-column">
-            <header class="title-product-edit header-title">Editar Plato</header>
+        <!-- Content -->
+        <main class="container-column">
+        <form action="" class="form-product-edit container-column main-content">
+            <header class="header-title">Editar Plato</header>
             <section class="form-section-product-edit form-section-product-info">
                 <div class="product-info container-column">
                     <div>
@@ -51,23 +52,23 @@
                     <div>
                         <label for="product-description">Descripción*</label>
                         <textarea id="product-description"
-                        maxlength="1000" minlength="100"
-                        class="input description-textarea"
+                        maxlength='1000' minlength='100'
+                        class="input-primary description-textarea"
                         placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezos."></textarea>
                     </div>
                     <div>
-                        <label for="url-plato">URL de la imagen del plato*</label>
-                        <input type="text" id="url-plato"
+                        <label for="url-product-img">URL de la imagen del plato*</label>
+                        <input type="text" id="url-product-img"
                         class="input-primary"
                         placeholder="http://images.google.com/altaburger.jag">
                     </div>
                 </div>
-                <div class="img-edit-container"><img src="/assets/img/hamburguesa2.jpg" alt="anvorguesa" class="img-product-edit"></div>
+                <div class="img-edit-container"><img src="../assets/img/hamburguesa2.jpg" alt="anvorguesa" class="img-product-edit"></div>
             </section>
 
             <section class="form-section-product-edit form-section-product-cost container-column">
                 <h2 class="subtitle product-edit-subtitle">Costos</h2>
-                <div class="number-input-group">
+                <div class="input-group">
                     <label for="product-base-cost">Precio Base*</label>
                     <input type="number" id="product-base-cost"
                     class="input-primary product-cost-number-input"
@@ -144,24 +145,22 @@
                 <button disabled class="btn btn-primary btn-dish">Guardar Cambios</button>
                 <button disabled class="btn btn-secondary">Descartar Cambios</button>
             </section>
-
-            <!-- Mobile nav -->
-            <footer class="mobile-nav">
-                <div class="icon-and-text-mobile">
-                    <div class="pot-container">
-                        <i class="ph-fill ph-cooking-pot"></i>
-                    </div>
-                    <div class="mobile-icons">
-                        <i class="ph ph-shopping-cart"></i>
-                        <i class="ph ph-fork-knife"></i>
-                        <i class="ph ph-bowl-food"></i>
-                        <i class="ph ph-user"></i>
-                    </div>
-                </div>
-            </footer>
-
-
         </form>
     </main>
+
+    <!-- Mobile nav -->
+    <footer class="mobile-nav">
+        <div class="icon-and-text-mobile">
+            <div class="pot-container">
+                <i class="ph-fill ph-cooking-pot"></i>
+            </div>
+            <div class="mobile-icons">
+                <i class="ph ph-shopping-cart"></i>
+                <i class="ph ph-fork-knife"></i>
+                <i class="ph ph-bowl-food"></i>
+                <i class="ph ph-user"></i>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -68,10 +68,14 @@ h2.active { /* this is just for the screenshot */
     display: flex;
     align-items: center;
     gap: 3rem;
+    /* justify-content: center; */
+    /* width: 90%; */
 }
 .mobile-icons {
     display: flex;
     gap: 3rem;
+    /* justify-content: space-evenly; */
+    /* width: 100%; */
 }
 .mobile-icons i {
     font-size: 2rem;
