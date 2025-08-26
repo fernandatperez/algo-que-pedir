@@ -52,7 +52,6 @@ body {
 .tabs {
     display: flex;
     gap: 2em;
-    font-family: Arial, sans-serif;
 }
 .tab {
     position: relative;
