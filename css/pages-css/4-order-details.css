@@ -220,6 +220,8 @@ body main{
     justify-content: space-between;         
     font-size: var(--font-header);
     max-width: 100%;
+    margin-right: 2em;
+    margin-left: 2em;
     }
     
   .title h1 {
@@ -229,6 +231,11 @@ body main{
 
   .title button {
     justify-content: end;
+  }
+
+  .inner-container{
+    margin-right: 2em;
+    margin-left: 2em;
   }
 
 }
@@ -265,7 +272,7 @@ body main{
   }
 
   .inner-container:nth-child(4){
-    padding-bottom: 5em;
+    padding-bottom: 1em;
   }
 
 }
