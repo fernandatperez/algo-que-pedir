@@ -175,25 +175,3 @@ body {
     font-size: 2.2em;
 }
 
-/* ========== Action container ========== */
-
-.action-container {
-    display: flex;
-    justify-content: flex-end;
-}
-.action-container button {
-    background-color: var(--primary-color);
-    border: none;
-    color: white;
-    padding: 0.8em 1.6em; /* padding: top right bottom left; */
-    border-radius: 0.5em;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-.action-container button:hover {
-    background-color: var(--button-hover-color);
-}
-.action-container button:active {
-    background-color: var(--button-active-color);
-}

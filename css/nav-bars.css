@@ -61,7 +61,7 @@ h2.active { /* this is just for the screenshot */
     bottom: 0;
     left: 0;
     width: 100%;
-
+    margin-top: 5em;
     grid-area: footer;
 }
 .icon-and-text-mobile {
