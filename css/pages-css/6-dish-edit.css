@@ -2,20 +2,6 @@
 @import url(./1-login.css);
 @import url(./3-orders.css);
 
-.container-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.main-product-edit {
-    width: 100%;
-    margin: 0;
-    /* padding: 1rem 10rem; */
-    background-color: var(--background-color-primary);
-}
-
 .form-product-edit {
     font-size: 1.5em;
     transition: .3s font-size ease-in-out;
@@ -77,12 +63,6 @@
     
     min-width: 100%;
     max-width: 100%;
-
-    /* este es el input que hizo dana, hay que hacerlo .clase */
-    border-radius: 3px;
-    border: 1px gray solid;
-    padding: 8px 28px 8px 8px; /* esto puede variar */
-
 }
 
 /* -- COST SECTION -------------------------- */
@@ -96,7 +76,6 @@
     width: 100%;
     position: relative;
     align-items: start;
-
 }
 
 .product-cost-number-input {
@@ -109,7 +88,7 @@
     bottom: 0;
     right: 0;
 
-    font-size: 1.6em;
+    font-size: 2.4rem;
     padding: .2em .3em;
     pointer-events: none;
     color: var(--font-color-secondary);
@@ -281,26 +260,6 @@ input[type=number]::-webkit-inner-spin-button {
     padding: 0 1em;
 }
 
-/* .btn-group-actions .btn-primary {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    color:  #fff;
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    border: 1px solid;
-    padding: 1em;
-    border-radius: ;
-    cursor: pointer;
-    align-items: center;
-    
-    &:hover{
-        background-color: var(--button-hover-color) ;
-        transition: background-color 0.3s ease;
-        transition: color 0.3s ease;
-    }
-} */
-
 .btn-dish{
     padding: 1em;
     border-radius: 1rem;
@@ -331,13 +290,6 @@ input[type=number]::-webkit-inner-spin-button {
 @media screen and (min-width: 401px) and (max-width: 768px) {
     .form-product-edit {
         font-size: 1.25em;
-    }
-
-    .title-product-edit {
-        font-size: 2em;
-    }
-    .product-edit-subtitle {
-        font-size: 1.5em;
     }
 
     .number-input-arrows {
@@ -374,7 +326,7 @@ input[type=number]::-webkit-inner-spin-button {
     }
     
     .form-product-edit {
-        font-size: 1em;
+        font-size: 1.2em;
     }
 
     .product-cost-p {
@@ -417,7 +369,7 @@ input[type=number]::-webkit-inner-spin-button {
             display: none;
         }
     }
-    .btn-group-actions .principal-button, 
+    .btn-group-actions .btn-primary, 
     .btn-group-actions .btn-secondary {
         padding: .8em;
         width: 50%;
