@@ -91,8 +91,9 @@ mejorar la anmacion */
     box-sizing: border-box;
 }
 
-body { font-family: var(--primary-font); } /* sin esto no se ven los iconos */
+html { font-family: var(--primary-font); } /* sin esto no se ven los iconos */
 
+body { background-color: var(--background-color-primary);}
 button:hover {
   cursor: pointer;
 }

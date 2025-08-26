@@ -29,6 +29,7 @@
 .header-section{
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 2rem 0 1rem 0;
 }
 
@@ -42,17 +43,15 @@
     /* el elemento padre les dice en que posicion tienen que ubicarse los hijos */
     position: relative;
     display: flex;
-    align-items: center; 
-    justify-content: center;
 }
-
+/* 
 .ph-cooking-pot{
-    font-size: 2rem; /* son 28px porque en mi html defini mi font-size: 14px; */
+    font-size: 2rem; son 28px porque en mi html defini mi font-size: 14px; 
     color: white;
     background-color: var(--primary-color);
     border-radius: 2rem;
     padding: 0.5rem;
-}
+} */
 
 /* ==== FORM ==== */
 .form-section, .btn-group{
@@ -96,8 +95,9 @@
     color: var(--icon-color);
     font-size: 1.3em;
     position: absolute;
-    justify-self: end;
-    align-items: center;
+    right: 0;
+    /* top: 50%;
+    transform: translateY(50%); */
     padding: 0.5em;
 }
 

@@ -13,7 +13,7 @@
     color: white;
     background-color: var(--primary-color);
     padding: .5em;
-    border-radius: 0.5em;
+    border-radius: 0.5rem;
 }
 
 /* para que cuando pase el mouse por arriba, cambie le color del fondo */
