@@ -10,28 +10,29 @@
     padding: 0.8rem clamp(1.8rem, 4vw, 4rem); /* padding: top right bottom left; */
                      /* minimo, ideal, maximo */
     background-color: white;
-
-    grid-area: header;
+    width: 100%;
 }
+
 .icon-and-text {
     display: flex;
     align-items: center;
     gap: 1.2rem;
 }
 
-.icon-and-text h1 {
+.icon-and-text .main-title {
     min-width: 12rem;
-}
-
-.main-nav h2 {
-    font-size: var(--font-header);
-    font-weight: normal;
-    cursor: pointer;
-}
-.main-nav h1 {
+    font-weight: bold;
     font-size: var(--font-nav);
 }
-h2.active { /* this is just for the screenshot */
+
+.btn-empty {
+    all: unset;        /* Quita todos los estilos heredados */
+    display: inline-block; /* Necesario para que siga comportándose como botón */
+    cursor: pointer;   /* Opcional, si quieres que parezca clickeable */
+    font-size: var(--font-header);
+}
+
+.active { /* this is just for the screenshot */
     font-weight: bold;
 }
 .options-and-icon {
@@ -44,26 +45,6 @@ h2.active { /* this is just for the screenshot */
     font-size: 3rem;
 }
 
-/* ============================= Mobile-nab ============================= */
-
-/*! esto repite lo de arriba */
-.mobile-nav {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    gap: 2.8em; /* good for centering, if not use space-evenly */
-    flex-direction: row;
-    border: 1px solid var(--border-color);
-    padding: 0.8rem; /* padding: top right bottom left; */
-    background-color: white;
-
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin-top: 5em;
-    grid-area: footer;
-}
 .icon-and-text-mobile {
     display: flex;
     align-items: center;
@@ -80,6 +61,8 @@ h2.active { /* this is just for the screenshot */
 .mobile-icons i {
     font-size: 2rem;
 }
+
+
 /* ============================= ANIMATIONS ============================= */
 
 /* ============================= Hamburguer ============================= */
@@ -127,42 +110,64 @@ transform: translateY(-7px) rotate(-135deg);
 /* MEDIA QUERIES */
 /* Desktop (>=769px) */
 @media (min-width: 769px) {
+    /* Mostrar navbar completo */
     .main-nav {
         display: flex;
     }
-    .mobile-nav {
-        display: none;
-    }
-    .hidden {
-        display: none;
-    }
-    #nav-hamburger { /* si no le pongo este no se porque no funciona */
+    /* Ocultar mobile icons y nav-hamburger */
+    .mobile-icons, #nav-hamburger {
         display: none;
     }
 }
+
 
 /* Tablet (401px – 768px) */
 @media (min-width: 401px) and (max-width: 768px) {
     .main-nav {
         display: flex;
     }
-    .mobile-nav {
+    .options-and-icon .btn-empty {
+        display: none; /* oculta todos */
+    }
+    .options-and-icon .btn-empty.active {
+        display: inline-block; /* solo mostrar el activo */
+    }
+
+    /* Ocultar mobile icons */
+    .mobile-icons {
         display: none;
     }
 
-    .options-and-icon h2 {
-        display: none;
-    }
-    .options-and-icon .active {
+    #nav-hamburger {
         display: flex;
     }
 }
+
 /* Mobile (<=400px) */
 @media (max-width: 400px) {
-    .main-nav {
+
+    .options-and-icon .btn-empty {
+        display: none; /* oculta todos */
+    }
+    .options-and-icon .btn-empty.active {
+        display: none; /* solo mostrar el activo */
+    }
+    #nav-hamburger {
         display: none;
     }
-    .mobile-nav {
-        display: flex;
+    .user-img {
+        display: none;
     }
+    .main-title {
+        display: none;
+    }
+    .main-nav {
+        gap: 3rem;
+        justify-content: center;
+    }
+
+    .orders-container {
+        flex-direction: column-reverse;
+    }
+
 }

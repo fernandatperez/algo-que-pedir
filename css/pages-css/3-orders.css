@@ -14,20 +14,17 @@ body {
 /* ============================= Layout Grid ============================= */
 
 .orders-container {
-    display: grid;
-    grid-template-rows: auto 1fr auto; 
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
-    /* width: 100vw; */
-    width: 100%; /* si le pongo 100% no tengo el scroll porque? */
-    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }
 
 /* ============================= Main body (almost) ============================= */
 
 .title-tabs-grid {
+    width: 100%;
     padding-left: 5vw;
     padding-right: 5vw;
     padding-bottom: 8vh; /* esto es solo mobile */
