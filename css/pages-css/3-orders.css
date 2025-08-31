@@ -57,6 +57,7 @@ body {
     color: var(--light-gray);
     font-weight: normal;
     padding-bottom: 1.5em;
+    font-size: var(--font-default);
 }
 .tab.active { /* this is just for the screenshot */
     font-weight: bold;
@@ -188,4 +189,26 @@ body {
 }
 .action-container button:active {
     background-color: var(--button-active-color);
+}
+
+
+/* Mobile (<=400px) */
+@media (max-width: 400px) {
+/* 
+    .orders-container {
+        flex-direction: column-reverse;
+    } */
+
+    .main-nav {
+    position: fixed;
+    bottom: 0;      /* lo pega al borde inferior */
+    left: 0;        /* lo alinea a la izquierda */
+    width: 100%;    /* ocupa todo el ancho */
+    background: white; /* opcional */
+    border-top: 1px solid #ccc; /* opcional */
+    padding: 1rem;  /* opcional */
+    }
+
+
+
 }

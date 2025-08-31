@@ -166,8 +166,4 @@ transform: translateY(-7px) rotate(-135deg);
         justify-content: center;
     }
 
-    .orders-container {
-        flex-direction: column-reverse;
-    }
-
 }
