@@ -1,6 +1,6 @@
 @import url(../general.css);
 @import url(../nav-bars.css);
-@import url(../buttons.css);
+@import url(../component-css/buttons.css);
 
 body main{
     display: flex;
@@ -53,15 +53,7 @@ body main{
 
 
 /*boton dentro del titulo */
-.alternative-button2{
-  cursor: pointer;
-  background-color: var(--alternative-color);
-  border-radius: 20px;
-  border-style: none;
-  color:var(--font-color-special);
-  padding: 0em 4em;
-  font-size: var(--font-default);
-  }
+
 
 /*contenedor blanco con la informacion de los platos */
 .inner-container{
