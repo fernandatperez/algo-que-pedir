@@ -150,13 +150,23 @@ input, select, textarea, button {
   /* background-color: var(--background-color-primary); */
 }
 
-/* FLEX COLUMNA 90VW*/
+/* FLEX COLUMNA 80VW*/
 /* se combina con container-column. Es el container del contenido main.*/
 .main-content { /* se le puede cambiar el nombre */
   width: 80vw; /* ocupa el 80% */
   row-gap: 1rem; /* gap entre secciones */
   font-size: var(--font-default);
   padding: .5em .5em 5.5em .5em;
+}
+
+/* ESTILO PARA SECCIONES */
+.content-section {
+  display: flex;
+  gap: 1em;
+  width: 100%; /* 100% del .main-content (osea 80vw) */
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 /* FLEX ROW WRAP */
@@ -179,6 +189,7 @@ input, select, textarea, button {
   row-gap: 1em;
 }
 
+
 /* ============================= Sizing ============================= */
 
 .w-50 {
@@ -188,4 +199,19 @@ input, select, textarea, button {
 
 .w-100 {
   width: 100% !important;
+}
+
+/* ============================= Media Queries ============================= */
+
+/** Mobile: max: 400px */
+@media screen and (max-width: 430px) {
+
+  /* FLEX COLUMNA 90VW*/
+  .main-content {
+    width: 90vw;
+  }
+
+  .display-none-mobile {
+    display: none;
+  }
 }

@@ -1,5 +1,5 @@
 @import url(../general.css);
-@import url(../buttons.css);
+@import url(../component-css/buttons.css);
 
 /* ==== MAIN CONTAINER ====*/
 .login-container{

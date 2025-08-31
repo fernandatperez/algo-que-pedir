@@ -1,5 +1,5 @@
 @import url(../nav-bars.css);
-@import url(../buttons.css);
+@import url(../component-css/buttons.css);
 
 :root {
     --dark-gray: #374151;

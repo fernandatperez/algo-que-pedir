@@ -8,6 +8,16 @@
     /* margin: 0 auto; */
 }
 
+.btn-group-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 0 1em;
+}
+
+
+/* ==== PRIMARY BUTTON ==== */
 .btn-primary{
     border: none;
     color: white;
@@ -22,6 +32,7 @@
   transition: background-color 0.3s ease;
 }
 
+/* ==== SECONDARY BUTTON ==== */
 .btn-secondary{  
     color: var(--primary-color);
     background-color: #fff;
@@ -35,5 +46,24 @@
         background-color: var(--primary-color);
         transition: background-color 0.3s ease;
         transition: color 0.3s ease;
+    }
+}
+
+/* ==== ICON BUTTON ==== */
+.icon-action-btn {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    height: 100%
+}
+
+/** Mobile: max: 400px */
+@media screen and (max-width: 430px) {
+
+    .btn-group-actions .btn-primary, 
+    .btn-group-actions .btn-secondary {
+        padding: .8em;
+        width: 50%;
+        align-items: center;
     }
 }
