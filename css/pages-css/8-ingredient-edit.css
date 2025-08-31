@@ -29,18 +29,20 @@
 }
 
 .ingredient-edit-section {
+    display: flex;
+    flex-direction: column;
     font-size: var(--font-nav);
     justify-self: center;
     margin-bottom: 1.34em;
+    row-gap: 1em;
 }
-
-.ingredient-edit-section input,
+/* 
 .ingredient-edit-section select {
     padding: 0.5em 5em 0.5em 1.2em;
     margin-bottom: 1em;
     border: 1px solid var(--font-color-secondary);
     border-radius: 0.5em;
-}
+} */
 
 .ingredient-edit-section h3 {
     color: var(--font-color-secondary);
@@ -52,14 +54,8 @@
     margin-top: 1em;
 }
 
-.absolute-dollar-sign {
-    position: relative;
-}
-
-.absolute-dollar-sign p {
-    position: absolute;
-    left: 2.5%;
-    top: 15.7%;
+.input-ingredient-edit{
+    padding-left: 1.8em;
 }
 
 .animal-origin-display {
@@ -71,32 +67,6 @@
 
 .animal-origin-display h3 {
     margin:0;
-}
-
-/* Slide Button */
-.slide-button {
-    position: relative;
-}
-
-.background-div {
-    width: 2.5em;
-    height: 1.3em;
-    background-color: var(--background-color-alternate);
-    border-radius: 0.6em;
-    transition: background 0.3s;
-}
-
-.circle-slide {
-    position: absolute;
-    left: 0.08em;
-    top: 0.08em;
-    width: 1.25em;
-    height: 1.12em;
-    background-color: var(--background-color-primary);
-    border-radius: 0.9em;
-
-    box-shadow: 0.15em 0.1em 0.3em rgba(0,0,0,0.2);
-    
 }
 
 .toggle {

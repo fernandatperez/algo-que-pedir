@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Importo CSS -->
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/component-css/input.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/component-css/icon.css">
     <link rel="stylesheet" href="../css/pages-css/1-login.css">
 
     <title>Login</title>
@@ -13,23 +17,23 @@
 
         <!-- HEADER -->
         <header class="header-section">
-          <div class="pot-container">
+          <a class="pot-container">
               <i class="ph-fill ph-cooking-pot"></i>
-          </div>
+          </a>
           <h1 class="main-title">Algo que pedir</h1>
         </header>
 
         <!-- FORM -->
         <form class="form-section">
           <div class="form-group">
-            <label class="label">Usuario*</label>
-            <input type="email" placeholder="Escribir" class="input-primary form-input">
+            <label class="label-color" id="label-usuario">Usuario*</label>
+            <input type="email" placeholder="Escribir" id="input-usuario" class="input-primary form-input">
           </div>
           <div class="form-group password-container">
-            <label class="label">Contraseña*</label>
-            <div class="password-input">
-              <input type="password" class="input-primary form-input">
-              <i class="ph ph-eye-slash"></i>
+            <label class="label-color" id="label-contraseña">Contraseña*</label>
+            <div class="input-with-icon">
+              <input type="password" id="input-contraseña" class="input-primary form-input">
+              <i class="ph ph-eye-slash input-icon"></i>
             </div>
           </div>
         </form>

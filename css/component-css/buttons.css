@@ -37,3 +37,16 @@
         transition: color 0.3s ease;
     }
 }
+
+.alternative-button2{
+    border: none;
+    color: var(--font-color-special);
+    background-color: var(--alternative-color);
+    padding: .5em;
+    border-radius: 0.5rem;
+
+    &:hover{
+        background-color: #f97f27;
+        transition: background-color 0.3s ease;
+    }
+}

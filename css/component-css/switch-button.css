@@ -1,0 +1,25 @@
+/* Slide Button */
+.slide-button {
+    position: relative;
+}
+
+.background-div {
+    width: 2.5em;
+    height: 1.3em;
+    background-color: var(--background-color-alternate);
+    border-radius: 0.6em;
+    transition: background-color 0.3s;
+}
+
+.circle-slide {
+    position: absolute;
+    left: 0.08em;
+    top: 0.08em;
+    width: 1.25em;
+    height: 1.12em;
+    background-color: var(--background-color-primary);
+    border-radius: 0.9em;
+
+    box-shadow: 0.15em 0.1em 0.3em rgba(0,0,0,0.2);
+}
+

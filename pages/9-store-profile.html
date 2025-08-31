@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Importo CSS -->
     <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/component-css/input.css">
     <link rel="stylesheet" href="../css/pages-css/9-store-profile.css">
     <title>Informacion del Local</title>
 </head>
@@ -13,9 +15,9 @@
     <header class="main-nav">
 
         <div class="icon-and-text">
-            <div class="pot-container">
+            <a class="pot-container">
                 <i class="ph-fill ph-cooking-pot"></i>
-            </div>
+            </a>
             <h1>Algo que pedir</h1> 
         </div>
 
@@ -42,13 +44,13 @@
             <section class="form-section-store-profile form-section-store-info">
                 <div class="store-info container-column">
                     <div class="input-group">
-                        <label for="store-name">Nombre del local*</label>
+                        <label for="store-name" class="label-color">Nombre del local*</label>
                         <input type="text" id="store-name" 
                         class="input-primary"
                         placeholder="Carlo's Bake Shop">
                     </div>
                     <div class="input-group">
-                        <label for="url-store-img">URL de la imagen*</label>
+                        <label for="url-store-img" class="label-color">URL de la imagen*</label>
                         <input type="text" id="url-store-img"
                         class="input-primary"
                         placeholder="http://images.google.com/CarlosBakeShop.jag">
@@ -61,27 +63,27 @@
                 <h2 class="subtitle">Dirección</h2>
                 <div class="input-group-dir grid-cols-2">
                     <div class="input-group">
-                        <label for="store-dir">Dirección*</label>
+                        <label for="store-dir" class="label-color">Dirección*</label>
                         <input type="text" id="store-dir" 
                         class="input-primary"
                         placeholder="Escribir">
                     </div>
                     <div class="input-group">
-                        <label for="store-altitude">Altura*</label>
+                        <label for="store-altitude" class="label-color">Altura*</label>
                         <input type="number" id="store-altitude"
                         class="input-primary product-cost-number-input"
                         placeholder="Escribir numero...">
                         <i class="ph ph-caret-up-down number-input-arrows"></i>
                     </div>
                     <div class="input-group">
-                        <label for="store-latitude">Latitud*</label>
+                        <label for="store-latitude" class="label-color">Latitud*</label>
                         <input type="number" id="store-latitude"
                         class="input-primary product-cost-number-input"
                         placeholder="Escribir numero...">
                         <i class="ph ph-caret-up-down number-input-arrows"></i>
                     </div>
                     <div class="input-group">
-                        <label for="store-longitude">Longitud*</label>
+                        <label for="store-longitude" class="label-color">Longitud*</label>
                         <input type="number" id="store-longitude"
                         class="input-primary product-cost-number-input"
                         placeholder="Escribir numero...">
@@ -94,14 +96,14 @@
                 <h2 class="subtitle">Porcentajes</h2>
                 <div class="input-group-dir grid-cols-2">
                     <div class="input-group">
-                        <label for="app-commission">Porcentaje de comision con la app*</label>
+                        <label for="app-commission" class="label-color">Porcentaje de comision con la app*</label>
                         <input type="number" id="app-commission"
                         class="input-primary product-cost-number-input"
                         placeholder="Escribir numero...">
                         <i class="ph ph-caret-up-down number-input-arrows"></i>
                     </div>
                     <div class="input-group">
-                        <label for="author-commission">Porcentaje de comision con autores de platos*</label>
+                        <label for="author-commission" class="label-color">Porcentaje de comision con autores de platos*</label>
                         <input type="number" id="author-commission"
                         class="input-primary product-cost-number-input"
                         placeholder="Escribir numero...">
