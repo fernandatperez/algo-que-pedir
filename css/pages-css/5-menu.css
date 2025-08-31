@@ -1,15 +1,13 @@
+@import url(../general.css);
 @import url(../nav-bars.css);
+@import url(../component-css/buttons.css);
 
-.main-container-menu{
+
+.main-style-menu{
     background-color: var(--background-color-alternate);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    padding-bottom: 25vh;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
 }
 
 .header-menu{
@@ -63,8 +61,6 @@
 
 /*contenedor blanco con la informacion de los platos */
 .meal-container{
-    display: flex;
-    background-color: var(--background-color-primary);
     width: 100%;
     justify-content: center;
     flex-direction: column;

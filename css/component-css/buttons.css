@@ -57,6 +57,17 @@
     height: 100%
 }
 
+/* ==== ALTERNATE BUTTON (COLOR NARANJA LETRAS BLANCAS)==== */
+.btn-alternate{
+  cursor: pointer;
+  background-color: var(--alternative-color);
+  border-radius: 20px;
+  border-style: none;
+  color:var(--font-color-special);
+  padding: 0em 4em;
+  font-size: var(--font-default);
+}
+
 /** Mobile: max: 400px */
 @media screen and (max-width: 430px) {
 
