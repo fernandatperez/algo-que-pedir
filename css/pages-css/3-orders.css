@@ -1,5 +1,5 @@
 @import url(../nav-bars.css);
-@import url(../buttons.css);
+@import url(../component-css/buttons.css);
 
 :root {
     --dark-gray: #374151;
@@ -36,7 +36,7 @@ body {
     margin-bottom: 1em;
 }
 .title {
-    font-size: var(--font-title);
+    font-size: var(--font-h1);
     font-weight: bold;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -122,7 +122,7 @@ body {
 }
 
 .user .name {
-    font-size: var(--font-header);
+    font-size: var(--font-h4);
     font-weight: bold;
 }
 .user-info .username {

@@ -1,5 +1,5 @@
 @import url(../general.css);
-@import url(../buttons.css);
+@import url(../component-css/buttons.css);
 
 /* ==== MAIN CONTAINER ====*/
 .login-container{
@@ -131,7 +131,7 @@
     align-self: center;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 430px) {
     .login-container{
         font-size: 0.8em;
     }
@@ -155,7 +155,7 @@
     }
 }
 
-@media (min-width: 401px) and (max-width: 768px) {
+@media (min-width: 431px) and (max-width: 768px) {
     .login-container{
         font-size: 1em;
     }

@@ -122,7 +122,7 @@ transform: translateY(-7px) rotate(-135deg);
 
 
 /* Tablet (401px – 768px) */
-@media (min-width: 401px) and (max-width: 768px) {
+@media (min-width: 431px) and (max-width: 768px) {
     .main-nav {
         display: flex;
     }
@@ -143,9 +143,9 @@ transform: translateY(-7px) rotate(-135deg);
     }
 }
 
-/* Mobile (<=400px) */
-@media (max-width: 400px) {
-
+/* Mobile (<=430px) */
+@media (max-width: 430px) {
+  
     .options-and-icon .btn-empty {
         display: none; /* oculta todos */
     }

@@ -162,7 +162,7 @@ para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobi
 }
 
 /* TABLET */
-@media (401px < width <= 768px) {
+@media (431px < width <= 768px) {
     .ingredients-main {
         font-size: 0.65em;
         width: 92%;
@@ -184,7 +184,7 @@ para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobi
     }
 }
 /* MOBILE */
-@media (width <= 400px) {
+@media (width <= 430px) {
     .ingredients-container {
         width: 100%;
     }
