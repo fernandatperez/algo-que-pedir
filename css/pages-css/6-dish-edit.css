@@ -1,9 +1,9 @@
-@import url(../nav-bars.css);
-@import url(./1-login.css); /* input-primary */
+/* @import url(../nav-bars.css);
+@import url(./1-login.css); 
 @import url(../component-css/dish-number-input.css);
 @import url(../component-css/dish-switch-button.css);
 @import url(../component-css/dish-edit-table.css);
-@import url(../component-css/buttons.css);
+@import url(../component-css/buttons.css); */
 
 .form-product-edit {
     font-size: 1.5em;

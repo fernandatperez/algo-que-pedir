@@ -1,8 +1,7 @@
-@import url(../nav-bars.css);
-@import url(./1-login.css); /* input-primary */
-/* @import url(./6-dish-edit.css); */
+/* @import url(../nav-bars.css);
+@import url(./1-login.css);
 @import url(../component-css/dish-number-input.css);
-@import url(../component-css/buttons.css);
+@import url(../component-css/buttons.css); */
 
 .form-store-profile {
     font-size: 1.5em;
