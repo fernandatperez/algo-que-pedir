@@ -44,7 +44,7 @@
 /* -- MEDIA QUERIES -- */
 
 /** Tablet: 401px - 768 px. */
-@media screen and (min-width: 401px) and (max-width: 768px) {
+@media screen and (min-width: 431px) and (max-width: 768px) {
 
     .switch-button-container {
         /* como los puse fijos en px en web, ahora use calc... help */

@@ -2,7 +2,7 @@
 /* ------------- MAIN BODY ---------------- */
 /* Copiado del de maxi, pasar a general */
 .orders-container {
-    font-size: var(--font-nav);
+    font-size: var(--font-h3);
     display: grid;
     grid-template-rows: auto 1fr auto; 
     grid-template-areas:
@@ -23,13 +23,13 @@
 }
 /* Esto tambien se repite del de Maxi */
 .section-title {
-    font-size: var(--font-title);
+    font-size: var(--font-h1);
     font-weight: bold;
     margin: 1.5em 0 1.5em 6%;
 }
 
 .ingredient-edit-section {
-    font-size: var(--font-nav);
+    font-size: var(--font-h3);
     justify-self: center;
     margin-bottom: 1.34em;
 }
@@ -195,13 +195,13 @@ section.btn-group-actions.hidden {
     }
 }
 
-@media (401px < width <= 768px) {
+@media (431px < width <= 768px) {
     .section-title {
         margin-top: 5em;
     }
 }
 
-@media (width < 401px) {
+@media (width < 431px) {
     section.btn-group-actions.no-hid {
         display: none;
     }

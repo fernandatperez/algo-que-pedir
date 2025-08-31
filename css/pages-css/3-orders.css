@@ -14,20 +14,17 @@ body {
 /* ============================= Layout Grid ============================= */
 
 .orders-container {
-    display: grid;
-    grid-template-rows: auto 1fr auto; 
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
-    /* width: 100vw; */
-    width: 100%; /* si le pongo 100% no tengo el scroll porque? */
-    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }
 
 /* ============================= Main body (almost) ============================= */
 
 .title-tabs-grid {
+    width: 100%;
     padding-left: 5vw;
     padding-right: 5vw;
     padding-bottom: 8vh; /* esto es solo mobile */
@@ -39,7 +36,7 @@ body {
     margin-bottom: 1em;
 }
 .title {
-    font-size: var(--font-title);
+    font-size: var(--font-h1);
     font-weight: bold;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -60,6 +57,7 @@ body {
     color: var(--light-gray);
     font-weight: normal;
     padding-bottom: 1.5em;
+    font-size: var(--font-default);
 }
 .tab.active { /* this is just for the screenshot */
     font-weight: bold;
@@ -124,7 +122,7 @@ body {
 }
 
 .user .name {
-    font-size: var(--font-header);
+    font-size: var(--font-h4);
     font-weight: bold;
 }
 .user-info .username {
@@ -191,4 +189,28 @@ body {
 }
 .action-container button:active {
     background-color: var(--button-active-color);
+}
+
+
+/*! esto ver si se puede cambiar*/
+
+/* Mobile (<=400px) */
+@media (max-width: 400px) {
+/* 
+    .orders-container {
+        flex-direction: column-reverse;
+    } */
+
+    .main-nav {
+    position: fixed;
+    bottom: 0;      /* lo pega al borde inferior */
+    left: 0;        /* lo alinea a la izquierda */
+    width: 100%;    /* ocupa todo el ancho */
+    background: white; /* opcional */
+    border-top: 1px solid #ccc; /* opcional */
+    padding: 1rem;  /* opcional */
+    }
+
+
+
 }
