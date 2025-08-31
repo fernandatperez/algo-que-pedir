@@ -34,13 +34,13 @@ body main{
 }
 
 .title h1{
-  font-size: var(--font-title);           
+  font-size: var(--font-h1);           
   max-width: 100%;
   padding: 1em 1em 1em 0em;
 }
 
 .title p{
-  font-size: var(--font-default);    
+  font-size: var(--font-text);    
   font-style: normal; 
   padding: 1em 1em 1em 1em;      
 }  
@@ -60,7 +60,7 @@ body main{
   border-style: none;
   color:var(--font-color-special);
   padding: 0em 4em;
-  font-size: var(--font-default);
+  font-size: var(--font-text);
   }
 
 /*contenedor blanco con la informacion de los platos */
@@ -221,20 +221,20 @@ body main{
 
 
 /* vista en tablet */
-@media (min-width:401px) and (max-width: 768px) {
+@media (min-width:431px) and (max-width: 768px) {
   .title{
     display: flex;
     align-items: center;           
     /*text-align: center;  */
     justify-content: space-between;         
-    font-size: var(--font-header);
+    font-size: var(--font-h4);
     max-width: 100%;
     margin-right: 2em;
     margin-left: 2em;
     }
     
   .title h1 {
-    font-size: var(--font-header);            
+    font-size: var(--font-h4);            
     max-width: 100%;
   }
 
@@ -250,17 +250,17 @@ body main{
 }
 
 /* vista en celular */
-@media (max-width: 400px) {
+@media (max-width: 430px) {
   .title{
     display: flex;
     flex-direction: column;
     align-items: start;
-    font-size: var(--font-title);
+    font-size: var(--font-h1);
     max-width: 100%;
     }
     
   .title h1 {
-    font-size: var(--font-title);           
+    font-size: var(--font-h1);           
   }
 
   .main-container{

@@ -24,12 +24,12 @@
 }
 
 .main-nav h2 {
-    font-size: var(--font-header);
+    font-size: var(--font-h4);
     font-weight: normal;
     cursor: pointer;
 }
 .main-nav h1 {
-    font-size: var(--font-nav);
+    font-size: var(--font-h3);
 }
 h2.active { /* this is just for the screenshot */
     font-weight: bold;
