@@ -53,43 +53,25 @@
 
 
 
-/*para probar*/
-.inner-container > article > p{
-  font-weight: bold;
+/* MODIFICACIONES PARA MI TABLA */
+/* Cantidad de columnas */
+.product-edit-ingredients-table .grid-table-row {
+  color: var(--border-light-color);
+  grid-template-columns: 3fr 1fr 1fr; 
+  color: var(--font-color-secondary);
 }
 
-.product-table {
-    display: grid;
-    width: inherit;
-}
-
-.product-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    border: 1px solid var(--border-light-color);
-    border-bottom: 0;  
+/* texto de segunda columna */
+.product-edit-ingredients-table-content {
+    font-weight: 500;
+    color: var(--font-color-secondary);
+    justify-content: space-between; 
     align-items: center;
+    gap: 1em;
+  font-size: 0.8em; 
 }
-
-.product-row:first-child {
-    border-top-right-radius: 1em;
-    border-top-left-radius: 1em;
-}
-
-.product-row:last-child {
-    border-bottom: 1px solid var(--border-light-color);
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
-}
-.product-cell:first-child,
-.product-cell:nth-child(3) {
-    padding-left: 1.5em;
-    text-align: left;
-}
-
 
 .product-cell {
-  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   padding: 2em 1em; 
@@ -97,14 +79,6 @@
   font-weight: 450;
   display: flex;
   flex-direction: row;
-}
-
-
-.product-cell img{
-  width: 50px;
-  height: auto;
-  border-radius: 10px;
-  margin: 0em 1em 0em 0em;
 }
 
 .action-container {
@@ -125,6 +99,8 @@
 }
 
 
+
+
 /* vista en tablet */
 @media (min-width:431px) and (max-width: 768px) {
   .main-content {
@@ -140,6 +116,10 @@
   padding-right: 2em;
  }
 
+ .smaller-size{
+  font-size: 3vw;
+ }
+
 }
 
 /* vista en celular */
@@ -151,7 +131,12 @@
   .header-container {
     flex-direction: column;
     align-items: flex-start;
-    font-size: 0.8em;
+    font-size: 3vw;
+  }
+
+  .btn-alternate{
+    padding-left: 2em;
+    padding-right: 2em;
   }
 
   .main-container{
@@ -182,6 +167,10 @@
     width: 100%;
     justify-content: space-between
   }
+
+  .smaller-size{
+  font-size: 5vw;
+ }
 
 }
 
