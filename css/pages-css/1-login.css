@@ -102,6 +102,7 @@
     color: var(--button-hover-color);
     padding-left: 0.5em;
     align-self: center;
+    text-decoration: underline;
 }
 
 @media (min-width: 431px) and (max-width: 768px) {

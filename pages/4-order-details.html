@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/nav-bars.css">
     <link rel="stylesheet" href="../css/flex-grid.css">
+    <link rel="stylesheet" href="../css/component-css/user-details.css">
     <link rel="stylesheet" href="../css/component-css/buttons.css">
     <link rel="stylesheet" href="../css/pages-css/4-order-details.css">
     <link rel="stylesheet" href="../css/component-css/dish-edit-table.css">
@@ -64,24 +65,26 @@
         </div>
     <section class="content-section-grid grid-cols-2">
         <article>
-            <p>Cliente</p>
-            <div class="content-section jc-start">
-                <img src="../assets/icons/default-avatar-profile-icon-vector-600nw.webp" alt="pin en un mapa">
-                <div>
-                    <p>Sofía Miller</p>
-                    <p><strong>usuario:</strong> smiller2006</p>
+            <h3 class="py-05">Cliente</h3>
+            <div class="user">
+                <i class="ph ph-user-circle"></i>
+                <div class="user-info">
+                    <div class="name">Sofía Miller</div>
+                    <div class="username"><strong>usuario:</strong> smiller2006</div>
                 </div>
             </div>
         </article>
         <article>
-            <p>Direccion de entrega</p>
-            <div class="content-section jc-start">
-                <img src="../assets/icons/map-pin.svg" alt="pin en un mapa">
-                <div>
-                    <p>Av siempre viva 555</p>
-                    <p>lat: 40.7128 long:-74.0060</p>
+            <h3 class="py-05">Direccion de entrega</h3>
+            <address class="address-container">
+                <div class="pin-container">
+                    <i class="ph ph-map-pin"></i>
                 </div>
-            </div>
+                <div>
+                    <div class="address"><strong>Av siempre viva 555</strong></div>
+                    <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                </div>
+            </address>
         </article>       
     </section>
 
@@ -146,7 +149,7 @@
 </section>
 
 <section class="content-section-grid grid">
-    <h4>Pago</h4>
+    <h3>Pago</h3>
     <div class="payment-table">
         <div class="payment-row">
          <p class="payment-item">Subtotal</p>
@@ -171,11 +174,10 @@
          <p class="payment-price">$23.10</p>
         </div>
     </div>
-    <div class="payment-method"></div>
-        <h4>Metodo de pago</h4>
-        <div class="payment-content">
-         <img src="../assets/icons/credit-card-thin.svg" alt="tarjeta de credito">
-         <p>Pago con tarjeta de credito</p>
+        <h3 class="pt-05">Metodo de pago</h3>
+        <div class="payment">
+            <i class="ph ph-credit-card"></i> 
+            <span class="payment-text">Pago con tarjeta de crédito</span>
         </div>     
 </section>
     <div class="action-container">
