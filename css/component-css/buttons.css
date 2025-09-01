@@ -8,6 +8,16 @@
     /* margin: 0 auto; */
 }
 
+.btn-group-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 0 1em;
+}
+
+
+/* ==== PRIMARY BUTTON ==== */
 .btn-primary{
     border: none;
     color: white;
@@ -22,6 +32,7 @@
   transition: background-color 0.3s ease;
 }
 
+/* ==== SECONDARY BUTTON ==== */
 .btn-secondary{  
     color: var(--primary-color);
     background-color: #fff;
@@ -38,15 +49,32 @@
     }
 }
 
-.alternative-button2{
-    border: none;
-    color: var(--font-color-special);
-    background-color: var(--alternative-color);
-    padding: .5em;
-    border-radius: 0.5rem;
+/* ==== ICON BUTTON ==== */
+.icon-action-btn {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    height: 100%
+}
 
-    &:hover{
-        background-color: #f97f27;
-        transition: background-color 0.3s ease;
+/* ==== ALTERNATE BUTTON (COLOR NARANJA LETRAS BLANCAS)==== */
+.btn-alternate{
+  cursor: pointer;
+  background-color: var(--alternative-color);
+  border-radius: 20px;
+  border-style: none;
+  color:var(--font-color-special);
+  padding: 0em 4em;
+  font-size: var(--font-default);
+}
+
+/** Mobile: max: 400px */
+@media screen and (max-width: 430px) {
+
+    .btn-group-actions .btn-primary, 
+    .btn-group-actions .btn-secondary {
+        padding: .8em;
+        width: 50%;
+        align-items: center;
     }
 }

@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Importo CSS -->
     <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/nav-bars.css">
+    <link rel="stylesheet" href="../css/flex-grid.css">
+    <link rel="stylesheet" href="../css/pages-css/1-login.css">
+    <link rel="stylesheet" href="../css/component-css/dish-number-input.css">
+    <link rel="stylesheet" href="../css/component-css/dish-switch-button.css">
+    <link rel="stylesheet" href="../css/component-css/dish-edit-table.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
     <link rel="stylesheet" href="../css/pages-css/6-dish-edit.css">
     <title>Edicion de Plato</title>
 </head>
@@ -41,7 +48,7 @@
         <main class="container-column">
         <form action="" class="form-product-edit container-column main-content">
             <header class="header-title">Editar Plato</header>
-            <section class="form-section-product-edit form-section-product-info">
+            <section class="content-section form-section-product-info">
                 <div class="product-info container-column">
                     <div>
                         <label for="product-name">Nombre del Plato*</label>
@@ -66,19 +73,18 @@
                 <div class="img-edit-container"><img src="../assets/img/hamburguesa2.jpg" alt="anvorguesa" class="img-product-edit"></div>
             </section>
 
-            <section class="form-section-product-edit form-section-product-cost container-column">
+            <section class="container-column content-section form-section-product-cost">
                 <h2 class="subtitle product-edit-subtitle">Costos</h2>
                 <div class="input-group">
                     <label for="product-base-cost">Precio Base*</label>
                     <input type="number" id="product-base-cost"
                     class="input-primary product-cost-number-input"
                     placeholder="Escribir numero...">
-                    <i class="ph ph-caret-up-down number-input-arrows"></i>
                 </div>
                 <div class="switch-button-group">
                     <div>
-                        <h4 class="h4-product-edit">Plato de Autor</h4>
-                        <p class="product-cost-p">Aplica un porcentaje adicional al precio de venta</p>
+                        <h3 class="h3-product-edit">Plato de Autor</h3>
+                        <p class="display-none-mobile">Aplica un porcentaje adicional al precio de venta</p>
                     </div>
                     <button disabled class="switch-button-container">
                         <div class="switch-button"></div>
@@ -86,8 +92,8 @@
                 </div>
                 <div class="switch-button-group">
                     <div>
-                        <h4 class="h4-product-edit">Plato de Promoción</h4>
-                        <p class="product-cost-p">Aplica un descuento al precio de venta</p>
+                        <h3 class="h3-product-edit">Plato de Promoción</h3>
+                        <p class="display-none-mobile">Aplica un descuento al precio de venta</p>
                     </div>
                     <button disabled class="switch-button-container">
                         <div class="switch-button"></div>
@@ -95,55 +101,55 @@
                 </div>
             </section>
             
-            <section class="form-section-product-edit form-section-product-ingredients">
+            <section class="content-section form-section-product-ingredients container-column">
                 <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
                 <div class="product-ingredients-cost-subtitle">
-                    <h4 class="h4-product-edit">Costo de Producción</h4>
-                    <p class="product-cost-p">$100</p>
+                    <h3 class="h3-product-edit">Costo de Producción</h3>
+                    <span class="product-cost-p">$100</span>
                 </div>
 
-                <div class="product-edit-ingredients-table">
-                    <header class="product-edit-ingredients-table-header grid-row">
-                        <div class="cell col-1" id="nombre">Nombre</div>
-                        <div class="cell col-2" id="grupo-alimenticio"><p>Grupo</p> <p class="p-alimenticio">Alimenticio</p></div>
-                        <div class="cell col-3" id="origen">Origen</div>
-                        <div class="cell col-4" id="acciones">Acciones</div>
+                <div class="grid-table-container product-edit-ingredients-table">
+                    <header class="grid-table-row table-header">
+                        <div class="cell" id="nombre">Nombre</div>
+                        <div class="cell" id="grupo-alimenticio"><span>Grupo</span> <span class="p-alimenticio display-none-mobile">Alimenticio</span></div>
+                        <div class="cell col-centered" id="origen">Origen</div>
+                        <div class="cell col-centered" id="acciones">Acciones</div>
                     </header>
 
-                    <div class="product-edit-ingredients-table-content grid-row">
-                            <div class="cell col-1" id="nombre-1">Carne de Res</div>
-                            <div class="cell col-2" id="grupo-alimenticio-1">Proteínas</div>
-                            <i class="cell col-3 ph ph-cow" id="origen-1"></i>
-                            <button disabled class="cell col-4 ingredient-action-btn"><i class="ph ph-trash" id="acciones-1"></i></button>
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-1">Carne de Renacuajo</div>
+                        <div class="cell" id="grupo-alimenticio-1">Proteínas</div>
+                        <div class="cell col-centered"><i class="ph ph-cow" id="origen-1"></i></div>
+                        <button disabled class="cell col-centered icon-action-btn"><i class="ph ph-trash" id="acciones-1"></i></button>
                     </div>
 
-                    <div class="product-edit-ingredients-table-content grid-row">
-                            <div class="cell col-1" id="nombre-2">Queso Cheddar</div>
-                            <div class="cell col-2" id="grupo-alimenticio-2">Lacteos</div>
-                            <i class="cell col-3 ph ph-cow" id="origen-2"></i>
-                            <button disabled class="cell col-4 ingredient-action-btn"><i class="ph ph-trash" id="acciones-2"></i></button>
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-2">Queso Cheddar</div>
+                        <div class="cell" id="grupo-alimenticio-2">Lacteos</div>
+                        <div class="cell col-centered"><i class="ph ph-cow" id="origen-2"></i></div>
+                        <button disabled class="cell col-centered icon-action-btn"><i class="ph ph-trash" id="acciones-2"></i></button>
                     </div>
 
-                    <div class="product-edit-ingredients-table-content grid-row">
-                            <div class="cell col-1" id="nombre-3">Lechuga</div>
-                            <div class="cell col-2" id="grupo-alimenticio-3">Frutas y Verduras</div>
-                            <i class="cell col-3 ph ph-plant" id="origen-3"></i>
-                            <button disabled class="cell col-4 ingredient-action-btn"><i class="ph ph-trash" id="acciones-3"></i></button>
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-3">Lechuga</div>
+                        <div class="cell" id="grupo-alimenticio-3">Frutas y Verduras</div>
+                        <div class="cell col-centered"><i class="ph ph-plant" id="origen-3"></i></div>
+                        <button disabled class="cell col-centered icon-action-btn"><i class="ph ph-trash" id="acciones-3"></i></button>
                     </div>
 
-                    <div class="product-edit-ingredients-table-content grid-row">
-                            <div class="cell col-1" id="nombre-4">Tomate</div>
-                            <div class="cell col-2" id="grupo-alimenticio-4">Frutas y Verduras</div>
-                            <i class="cell col-3 ph ph-plant" id="origen-4"></i>
-                            <button disabled class="cell col-4 ingredient-action-btn"><i class="ph ph-trash" id="acciones-4"></i></button>
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-4">Tomate</div>
+                        <div class="cell" id="grupo-alimenticio-4">Frutas y Verduras</div>
+                        <div class="cell col-centered"><i class="ph ph-plant" id="origen-4"></i></div>
+                        <button disabled class="cell col-centered icon-action-btn"><i class="ph ph-trash" id="acciones-4"></i></button>
                     </div>
 
                 </div>
             </section>
             
             <section class="btn-group-actions">
-                <button disabled class="btn btn-primary btn-dish">Guardar Cambios</button>
-                <button disabled class="btn btn-secondary btn-dish">Descartar Cambios</button>
+                <button disabled class="btn btn-primary btn-dish"><span>Guardar</span> <span class="p-cambios display-none-mobile">Cambios</span></button>
+                <button disabled class="btn btn-secondary btn-dish"><span>Descartar</span><span class="p-cambios display-none-mobile">Cambios</span></button>
             </section>
         </form>
     </main>

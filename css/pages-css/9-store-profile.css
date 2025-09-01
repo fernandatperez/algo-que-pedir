@@ -1,18 +1,11 @@
-@import url(../nav-bars.css);
+/* @import url(../nav-bars.css);
 @import url(./1-login.css);
-@import url(./3-orders.css);
-@import url(./6-dish-edit.css);
+@import url(../component-css/dish-number-input.css);
+@import url(../component-css/buttons.css); */
 
 .form-store-profile {
     font-size: 1.5em;
     transition: .3s font-size ease-in-out;
-}
-.form-section-store-profile {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 1rem;
-    width: 100%;
-    row-gap: 1em;
 }
 
 /* -- STORE INFO SECTION -------------------------- */
@@ -29,7 +22,7 @@
     gap: 2em;
     background-color: #fff;
 
-    width: 60%;
+    flex: 1.7;
     div {
         display: flex;
         flex-direction: column;
@@ -38,7 +31,7 @@
 }
 
 .img-store-container {
-    width: 40%;
+    flex: 1.3;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -49,12 +42,6 @@
 }
 
 /* -- DIR SECTION -------------------------- */
-
-.input-group-dir {
-    align-items: end;
-    /* column-gap: 1em; */
-    /* row-gap: 1em; */
-}
 
 /* -- COMMISSIONS SECTION -------------------------- */
 
@@ -77,15 +64,15 @@
 /* -- MEDIA QUERIES -- */
 
 /** Tablet: 401px - 768 px. */
-@media screen and (min-width: 401px) and (max-width: 768px) {
+@media screen and (min-width: 431px) and (max-width: 768px) {
     .form-store-profile {
         font-size: 1.25em;
     }
     
 }
 
-/** Mobile: max: 400px */
-@media screen and (max-width: 400px) {
+/** Mobile: max: 430px */
+@media screen and (max-width: 430px) {
     .form-store-profile {
         font-size: 1.2em;
     }
