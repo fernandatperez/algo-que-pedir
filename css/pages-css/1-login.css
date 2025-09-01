@@ -104,15 +104,6 @@
     align-self: center;
 }
 
-@media screen and (max-width: 430px) {
-    .login-section{
-        min-width: 90%;
-        background-color: white;
-        box-shadow: none;
-        padding: 1em;
-    }
-}
-
 @media (min-width: 431px) and (max-width: 768px) {
     .login-section{
         min-width: 31em;
@@ -122,5 +113,14 @@
     }
     .form-section{
         width: 25em;
+    }
+}
+
+@media screen and (max-width: 431px) {
+    .login-section{
+        min-width: 90%;
+        background-color: white;
+        box-shadow: none;
+        padding: 1em;
     }
 }

@@ -133,7 +133,7 @@ a {
 /* ============================= Media Queries ============================= */
 
 /** Mobile: max: 430px */
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 431px) {
   .display-none-mobile {
     display: none;
   }

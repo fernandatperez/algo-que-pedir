@@ -56,15 +56,8 @@ section.btn-group-actions.hidden {
 /*------------------------------------------- */
 
 /* --------------- ACTION BUTTONS --------------- */
-.btn-group-actions {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    padding: 0 1em;
-}
 
-.btn-group-actions .btn-primary {
+/* .btn-group-actions .btn-primary {
     width: fit-content;
     display: flex;
     justify-content: center;
@@ -79,14 +72,14 @@ section.btn-group-actions.hidden {
     
     &:hover{
         /* color: #fff; */
-        background-color: var(--button-hover-color) ;
+        /* background-color: var(--button-hover-color) ;
         transition: background-color 0.3s ease;
         transition: color 0.3s ease;
     }
-}
+} */
 
 /* clase para el boton secundario */
-.btn-group-actions .btn-secondary{    
+/* .btn-group-actions .btn-secondary{    
     width: fit-content;
     display: flex;
     justify-content: center;
@@ -105,24 +98,24 @@ section.btn-group-actions.hidden {
         transition: background-color 0.3s ease;
         transition: color 0.3s ease;
     }
-}
+} */
 /* ----------------------------------------------- */
 
 /* QUERIES */
 
-@media (width >= 769px) {
+@media (min-width: 769px) {
     .no-hid {
         display: flex;
     }
 }
 
-@media (431px < width <= 768px) {
+@media (min-width: 431px) and (max-width: 768px) {
     .section-title {
         margin-top: 5em;
     }
 }
 
-@media (width < 431px) {
+@media (max-width: 431px) {
     section.btn-group-actions.no-hid {
         display: none;
     }

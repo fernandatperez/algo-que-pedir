@@ -41,19 +41,19 @@
     font-size: 1.5em;
     color: var(--icon-color);
 }
-@media (width > 768px) {
+@media (min-width: 769px) {
     .hidden-icons {
         display: none;
     }
 }
 
-@media (431px < width <= 768px) {
+@media (min-width: 431px) and (max-width: 768px) {
     .hidden-icons {
         display: none;
-    }
+    }   
 }
 
-@media (width <= 430px) {
+@media (max-width: 431px) {
     .hidden-icons {
         display: flex;
     }
@@ -66,4 +66,3 @@
         grid-template-columns: 2fr 2fr 1fr 1.5fr;
     }
 }
-
