@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../css/flex-grid.css">
     <link rel="stylesheet" href="../css/component-css/buttons.css">
     <link rel="stylesheet" href="../css/pages-css/4-order-details.css">
-    
+    <link rel="stylesheet" href="../css/component-css/dish-edit-table.css">
     <title>Detalle pedido</title>
 </head>
 
@@ -56,9 +56,9 @@
 <main class="container-column">
     <div class="container-column main-content">
         <div class="w-100 flex-row jc-space-between header-container">
-            <h1 class="header-title jc-space-between">Pedido #12345</h1>
+            <h1 class="header-title jc-space-between smaller-size">Pedido #12345</h1>
             <div class="flex-row gap-1 order-state-title">
-                <h2 class="subtitle">Estado del Pedido</h2>
+                <h2 class="subtitle smaller-size">Estado del Pedido</h2>
                 <button class="btn btn-alternate">Pendiente</button>
             </div>
         </div>
@@ -91,64 +91,58 @@
                 <h3>Resumen del pedido</h3>
             </section>
 
-            <section class="product-table">
-                <article class="product-row">
-                    <div class="product-cell">
-                        <h4>Plato</h4>
-                    </div>
-                    <div class="product-cell">
-                        <h4>Cantidad</h4>
-                    </div>
-                    <div class="product-cell">
-                        <h4>Precio</h4>
-                    </div>
-                </article> 
-                <article class="product-row">
-                    <div class="product-cell">
-                        <img src="/assets/img/hamburguesa.png" alt="hamburguesa" class="hide-on-mobile">
+            <div class="grid-table-container product-edit-ingredients-table">
+                <header class="grid-table-row table-header">
+                    <div class="cell">Plato</div>
+                    <div class="cell">Cantidad</div>
+                    <div class="cell">Precio</div>
+                </header> 
+                <article class="grid-table-row product-edit-ingredients-table-content">
+                    <div class="cell product-cell">
+                    <div><img src="/assets/img/hamburguesa.png" alt="hamburguesa" class="hide-on-mobile"></div>
                         <div>
                         <h4>Hamburguesa con queso</h4>
-                        <p class="hide-on-mobile">Hamburguesa con queso acompañada de papas fritas y bebida</p>
+                        <p class="hide-on-mobile">Hamburguesa con queso acompañada de papas fritas y bebida</p>    
                         </div>
                     </div>
-                    <div class="product-cell">
+                    <div class="cell">
                         1
                     </div>
-                    <div class="product-cell">
+                    <div class="cell">
                         $12.00
                     </div>
                 </article>
-                <article class="product-row">
-                    <div class="product-cell">
-                        <img src="/assets/img/pizza.png" alt="pizza" class="hide-on-mobile">
+                <article class="grid-table-row product-edit-ingredients-table-content">
+                    <div class="cell product-cell">
+                    <div><img src="/assets/img/pizza.png" alt="pizza" class="hide-on-mobile"></div>
                         <div>
                         <h4>Pizza</h4>
-                        <p class="hide-on-mobile">De muzzarella con tomate y albahaca</p>
+                        <p class="hide-on-mobile">De muzzarella con tomate y albahaca</p>    
                         </div>
                     </div>
-                    <div class="product-cell">
+                    <div class="cell">
                         1
                     </div>
-                    <div class="product-cell">
+                    <div class="cell">
                         $16.00
                     </div>
                 </article>
-                <article class="product-row">
-                    <div class="product-cell">
-                        <img src="/assets/img/ensalada.png" alt="ensalada" class="hide-on-mobile">
+                <article class="grid-table-row product-edit-ingredients-table-content">
+                    <div class="cell product-cell">
+                    <div><img src="/assets/img/ensalada.png" alt="ensalada" class="hide-on-mobile"></div>
                         <div>
                         <h4>Ensalada</h4>
-                        <p class="hide-on-mobile">De hojas frescas y vegetales organicos</p>
+                        <p class="hide-on-mobile">De hojas frescas y vegetales organicos</p>    
                         </div>
                     </div>
-                    <div class="product-cell">
+                    <div class="cell">
                         1
                     </div>
-                    <div class="product-cell">
+                    <div class="cell">
                         $10.00
                     </div>
-                </article> 
-           </section>
+                </article>
+            </div>    
 </section>
 
 <section class="content-section-grid grid">
