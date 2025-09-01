@@ -4,28 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/nav-bars.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/component-css/dish-edit-table.css">
+    <link rel="stylesheet" href="../css/flex-grid.css">
+    <link rel="stylesheet" href="../css/component-css/icon.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
     <link rel="stylesheet" href="../css/pages-css/7-ingredients.css">
 
     <title>Ingredients</title>
 </head>
 <body>
-    <!-- section esta mal aca? Que uso? -->
-    <section class="ingredients-container">
+    <section class="flex-column">
 
         <!-- Header -->
         <header class="main-nav">
+
             <div class="icon-and-text">
-                <a class="pot-container">
+                <a href="../pages/" class="pot-container">
                     <i class="ph-fill ph-cooking-pot"></i>
                 </a>
-                <h1>Algo que pedir</h1> 
+                <span class="main-title">Algo que pedir</span> 
             </div>
 
             <nav class="options-and-icon">
-                <h2>Pedidos</h2> 
-                <h2>Menú</h2> 
-                <h2 class="active">Ingredientes</h2> 
-                <h2>Cuentas</h2> 
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty">Menú</button> 
+                <button class="btn-empty active">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
                 <!-- <i class="ph ph-list hidden"></i> -->
                 <label id="nav-hamburger" class="hidden">
                     <input type="checkbox" id="hamburger-toggle">
@@ -33,150 +39,92 @@
                     <span class="hidden"></span>
                     <span class="hidden"></span>
                 </label>
-                <i class="ph ph-user-circle"></i>
+                    <i class="ph ph-user-circle user-img"></i>
+                    <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
             </nav>
 
         </header>
-
-        <!-- Hidden navigation bar -->
-        <footer class="mobile-nav">
-            <div class="icon-and-text-mobile">
-                <div class="pot-container">
-                    <i class="ph-fill ph-cooking-pot"></i>
-                </div>
-                <div class="mobile-icons">
-                    <i class="ph ph-shopping-cart"></i>
-                    <i class="ph ph-fork-knife"></i>
-                    <i class="ph ph-bowl-food"></i>
-                    <i class="ph ph-user"></i>
-                </div>
-            </div>
-        </footer>
         
-        <section class="ingredients-main">
+        <section class="main-content">
 
             <section class="section-title">
-                <article class="ingredients-title">
+                <article class="header-title ingredients-title">
                     Ingredientes
                 </article>
                 <div class="new-ingredient">
                     <!--Es un button-->
-                    <button class="new-ingredient-btn">Nuevo Ingrediente</button>
+                    <button class="btn-add ">Nuevo Ingrediente</button>
                 </div>
             </section>
 
-            <div class="ingredients-table">
-                <article class="ingredients-row">
-                    <div class="ingredients-cell header">
-                        Nombre
-                    </div>
-                    <div class="ingredients-cell header">
-                        Costo
-                    </div>
-                    <div class="ingredients-cell header">
-                        Grupo Alimenticio
-                    </div>
-                    <div class="ingredients-cell header">
-                        Origen
-                    </div>
-                    <div class="ingredients-cell header gray-text">
-                        Acciones
-                    </div>
-                </article>
+            <section class="content-section form-section-product-ingredients container-column">
+                <div class="grid-table-container product-edit-ingredients-table">
+                    <header class="grid-table-row table-header">
+                        <div class="cell" id="nombre">Nombre</div>
+                        <div class="cell" id="grupo-alimenticio"><span>Grupo</span> <span class="p-alimenticio display-none-mobile">Alimenticio</span></div>
+                        <div class="cell col-centered" id="origen">Origen</div>
+                        <div class="cell col-centered" id="acciones">Acciones</div>
+                    </header>
 
-                <article class="ingredients-row">
-                    <div class="ingredients-cell">
-                        Tomate
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-1">Carne de Renacuajo</div>
+                        <div class="cell" id="grupo-alimenticio-1">Proteínas</div>
+                        <div class="cell col-centered"><i class="ph ph-cow gray-icon" id="origen-1"></i></div>
+                        <div class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </div>
                     </div>
-                    <div class="ingredients-cell">
-                        $0.50
-                    </div>
-                    <div class="ingredients-cell">
-                        Frutas y verduras
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-plant"></i>
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-eye hidden"></i> <i class="ph ph-line-vertical no-hover hidden"></i> <i class="ph ph-pencil"></i> <i class="ph ph-line-vertical no-hover"></i> <i class="ph ph-trash"></i>
-                    </div>
-                </article>
 
-                <article class="ingredients-row">
-                    <div class="ingredients-cell">
-                        Pechuga de pollo
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-2">Queso Cheddar</div>
+                        <div class="cell" id="grupo-alimenticio-2">Lacteos</div>
+                        <div class="cell col-centered"><i class="ph ph-cow gray-icon" id="origen-2"></i></div>
+                        <div class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </div>
                     </div>
-                    <div class="ingredients-cell">
-                        $3.00
-                    </div>
-                    <div class="ingredients-cell">
-                        Proteinas
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-cow"></i>
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-eye hidden"></i> <i class="ph ph-line-vertical no-hover hidden"></i> <i class="ph ph-pencil"></i> <i class="ph ph-line-vertical no-hover"></i> <i class="ph ph-trash"></i>
-                    </div>
-                </article>
 
-                <article class="ingredients-row">
-                    <div class="ingredients-cell">
-                        Arroz
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-3">Lechuga</div>
+                        <div class="cell" id="grupo-alimenticio-3">Frutas y Verduras</div>
+                        <div class="cell col-centered"><i class="ph ph-plant gray-icon" id="origen-3"></i></div>
+                        <div class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </div>
                     </div>
-                    <div class="ingredients-cell">
-                        $1.00
-                    </div>
-                    <div class="ingredients-cell">
-                        Cereales y tuberculos
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-plant"></i>
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-eye hidden"></i> <i class="ph ph-line-vertical no-hover hidden"></i> <i class="ph ph-pencil"></i> <i class="ph ph-line-vertical no-hover"></i> <i class="ph ph-trash"></i>
-                    </div>
-                </article>
 
-                <article class="ingredients-row">
-                    <div class="ingredients-cell">
-                        Leche
+                    <div class="grid-table-row product-edit-ingredients-table-content">
+                        <div class="cell" id="nombre-4">Tomate</div>
+                        <div class="cell" id="grupo-alimenticio-4">Frutas y Verduras</div>
+                        <div class="cell col-centered"><i class="ph ph-plant gray-icon" id="origen-4"></i></div>
+                        <div class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </div>
                     </div>
-                    <div class="ingredients-cell">
-                        $2.00
-                    </div>
-                    <div class="ingredients-cell">
-                        Lacteos
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-cow"></i>
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-eye hidden"></i> <i class="ph ph-line-vertical no-hover hidden"></i> <i class="ph ph-pencil"></i> <i class="ph ph-line-vertical no-hover"></i> <i class="ph ph-trash"></i>
-                    </div>
-                </article>
 
-                <article class="ingredients-row">
-                    <div class="ingredients-cell">
-                        Palta
-                    </div>
-                    <div class="ingredients-cell">
-                        $1.50
-                    </div>
-                    <div class="ingredients-cell">
-                        Frutas y verduras
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-plant"></i>
-                    </div>
-                    <div class="ingredients-cell">
-                        <i class="ph ph-eye hidden"></i> <i class="ph ph-line-vertical no-hover hidden"></i> <i class="ph ph-pencil"></i> <i class="ph ph-line-vertical no-hover"></i> <i class="ph ph-trash"></i>
-                    </div>
-                </article>
-
-
-
-            </div>
+                </div>
+            </section>
 
         </section>
 

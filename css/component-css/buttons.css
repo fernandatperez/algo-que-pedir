@@ -28,8 +28,8 @@
 
 /* para que cuando pase el mouse por arriba, cambie le color del fondo */
 .btn-primary:hover {
-  background-color: var(--button-hover-color);
-  transition: background-color 0.3s ease;
+    background-color: var(--button-hover-color);
+    transition: background-color 0.3s ease;
 }
 
 /* ==== SECONDARY BUTTON ==== */
@@ -59,13 +59,32 @@
 
 /* ==== ALTERNATE BUTTON (COLOR NARANJA LETRAS BLANCAS)==== */
 .btn-alternate{
-  cursor: pointer;
-  background-color: var(--alternative-color);
-  border-radius: 20px;
-  border-style: none;
-  color:var(--font-color-special);
-  padding: 0em 4em;
-  font-size: var(--font-default);
+    font-size: 1em;
+    cursor: pointer;
+    background-color: var(--alternative-color);
+    border: none;
+    color: white;
+    padding: .5em 5em;
+    border-radius: var(--border-radius-rounded);
+    &:hover{
+        background-color: #ff8127;
+        transition: background-color 0.3s ease;
+        transition: color 0.3s ease;
+    }
+}
+
+/* ==== ADD BUTTON (GRIS CON LETRAS NEGRAS) ==== */
+.btn-add {
+    /* Styles */
+    font-size: var(--font-h4);
+    color: var(--font-color-primary);
+    background-color: rgb(233, 233, 233);
+    font-weight: 550;
+    
+    /* Dimensions */
+    padding: 0.6em 1.5em 0.6em 1.5em;
+    border: none;
+    border-radius: 2em;
 }
 
 /** Mobile: max: 400px */
@@ -77,4 +96,9 @@
         width: 50%;
         align-items: center;
     }
+
+    .btn-add  {
+        font-size: var(--font-text);
+    }
+
 }

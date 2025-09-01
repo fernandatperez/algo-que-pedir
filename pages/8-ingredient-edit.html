@@ -4,30 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/component-css/input.css">
     <link rel="stylesheet" href="../css/component-css/icon.css">
     <link rel="stylesheet" href="../css/component-css/switch-button.css">
+    <link rel="stylesheet" href="../css/nav-bars.css">
+    <link rel="stylesheet" href="../css/flex-grid.css">
     <link rel="stylesheet" href="../css/pages-css/8-ingredient-edit.css">
     <title>Editar ingrediente</title>
 
 </head>
 <body>
-    <section class="orders-container">
+    <section class="container-column">
         <!-- Header -->
         <header class="main-nav">
 
             <div class="icon-and-text">
-                <a class="pot-container">
+                <a href="../pages/" class="pot-container">
                     <i class="ph-fill ph-cooking-pot"></i>
                 </a>
-                <h1>Algo que pedir</h1> 
+                <span class="main-title">Algo que pedir</span> 
             </div>
 
             <nav class="options-and-icon">
-                <h2>Pedidos</h2> 
-                <h2>Menú</h2> 
-                <h2 class="active">Ingredientes</h2> 
-                <h2>Cuentas</h2> 
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty">Menú</button> 
+                <button class="btn-empty active">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
                 <!-- <i class="ph ph-list hidden"></i> -->
                 <label id="nav-hamburger" class="hidden">
                     <input type="checkbox" id="hamburger-toggle">
@@ -35,13 +38,20 @@
                     <span class="hidden"></span>
                     <span class="hidden"></span>
                 </label>
-                <i class="ph ph-user-circle"></i>
+                    <i class="ph ph-user-circle user-img"></i>
+                    <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
             </nav>
+
         </header>
 
-        <section class="main-body">
+        <section class="main-content">
 
-            <article class="section-title">
+            <article class="header-title section-title">
                 Editar ingrediente
             </article>
 
@@ -88,20 +98,6 @@
             </section>
         </section>
 
-        <!-- Mobile nav -->
-            <footer class="mobile-nav">
-                <div class="icon-and-text-mobile">
-                    <div class="pot-container">
-                        <i class="ph-fill ph-cooking-pot"></i>
-                    </div>
-                    <div class="mobile-icons">
-                        <i class="ph ph-shopping-cart"></i>
-                        <i class="ph ph-fork-knife"></i>
-                        <i class="ph ph-bowl-food"></i>
-                        <i class="ph ph-user"></i>
-                    </div>
-                </div>
-            </footer>
     </section>
 
 </body>

@@ -1,6 +1,6 @@
-@import url(../general.css);
-@import url(../nav-bars.css);
-@import url(../component-css/buttons.css);
+/* @import url(../general.css); */
+/* @import url(../nav-bars.css); */
+/* @import url(../component-css/buttons.css); */
 
 
 .main-style-menu{
@@ -38,26 +38,16 @@
     padding: 1rem;
 }
 
-.pedidos{
-    font-size: var(--font-h4);             
-    padding: 1rem;
-}
-
 .title button{
     font-size: var(--font-text);            
 }
 
-
-
-/*boton gris dentro del titulo */
-.alternative-button{
-    cursor: pointer;
-    background-color: var(--background-color-secondary);
-    border-radius: 20px;
-    border-style: none;
-    color:black;
-    padding: 0.5em;
+.menu-subtitle{
+    font-size: var(--font-h4);             
+    padding: 1rem;
 }
+
+
 
 /*contenedor blanco con la informacion de los platos */
 .meal-container{
@@ -71,9 +61,10 @@
     padding: 1em;
     font-size: var(--font-text);
     display: grid;
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: auto 3fr 1fr;
     gap: 2em;
     align-items: center;
+    width: 100%;
 }
 
 .text-meal{
@@ -81,6 +72,7 @@
     flex-direction: column;
     padding-left: 1em;
     padding-right: 2em;
+    align-items: self-start;
 }
 
 .price-meal{

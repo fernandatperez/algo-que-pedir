@@ -4,22 +4,45 @@
 }
 
 .background-div {
-    width: 2.5em;
-    height: 1.3em;
+    height: 1.8em;
+    width: 3.5em;
     background-color: var(--background-color-alternate);
-    border-radius: 0.6em;
+    border-radius: 50px;
     transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
 }
 
 .circle-slide {
     position: absolute;
-    left: 0.08em;
-    top: 0.08em;
-    width: 1.25em;
-    height: 1.12em;
+    left: 8%;
+    width: 1.65em;
+    height: 1.62em;
     background-color: var(--background-color-primary);
     border-radius: 0.9em;
+    transform: translateX(-5%);
 
     box-shadow: 0.15em 0.1em 0.3em rgba(0,0,0,0.2);
 }
 
+.toggle {
+    position: absolute;
+    left: 25%;
+    top: 45%;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.toggle:checked + .background-div {
+    background: var(--button-hover-color);
+}
+
+.toggle:checked {
+    transform: translateX(200%)
+}
+
+.toggle:checked + .background-div .circle-slide {
+    box-shadow: -0.15em 0.1em 0.3em rgba(0,0,0,0.2);
+    transform: translateX(90%);
+}

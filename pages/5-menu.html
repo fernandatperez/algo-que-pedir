@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importo CSS -->
   <link rel="stylesheet" href="../css/general.css">
+  <link rel="stylesheet" href="../css/flex-grid.css">
+  <link rel="stylesheet" href="../css/component-css/buttons.css">
+  <link rel="stylesheet" href="../css/nav-bars.css">
+  <link rel="stylesheet" href="../css/fonts.css">
   <link rel="stylesheet" href="../css/pages-css/5-menu.css">
   <title>Gestion Menu</title>
 </head>
@@ -11,18 +16,19 @@
 <body>
     <!-- Header -->
         <header class="main-nav">
+
             <div class="icon-and-text">
-                <a class="pot-container">
+                <a href="../pages/" class="pot-container">
                     <i class="ph-fill ph-cooking-pot"></i>
                 </a>
-                <h1>Algo que pedir</h1> 
+                <span class="main-title">Algo que pedir</span> 
             </div>
-            
+
             <nav class="options-and-icon">
-                <h2>Pedidos</h2> 
-                <h2 class="active">Menú</h2> 
-                <h2>Ingredientes</h2> 
-                <h2>Cuentas</h2> 
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty active">Menú</button> 
+                <button class="btn-empty">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
                 <!-- <i class="ph ph-list hidden"></i> -->
                 <label id="nav-hamburger" class="hidden">
                     <input type="checkbox" id="hamburger-toggle">
@@ -30,75 +36,82 @@
                     <span class="hidden"></span>
                     <span class="hidden"></span>
                 </label>
-                <i class="ph ph-user-circle"></i>
+                    <i class="ph ph-user-circle user-img"></i>
+                <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
             </nav>
 
         </header>
-    <!-- Hidden navigation bar -->
-        <footer class="mobile-nav">
-            <div class="icon-and-text-mobile">
-                <div class="pot-container">
-                    <i class="ph-fill ph-cooking-pot"></i>
-                </div>
-                <div class="mobile-icons">
-                    <i class="ph ph-shopping-cart"></i>
-                    <i class="ph ph-fork-knife"></i>
-                    <i class="ph ph-bowl-food"></i>
-                    <i class="ph ph-user"></i>
-                </div>
-            </div>
-        </footer>
 
 
-  <main class="container-column ">
-    <div class="main-container">
-      <div class="title">
-      <h1>Gestion del menú</h1>
-      <button class = "alternative-button">Agregar nuevo plato</button>
-    </div>
-        <h3 class="pedidos">Platos disponibles</h3>
+  <main class="container-column">
+    <div class="main-container container-column main-content">
+      <div class="w-100 flex-row jc-space-between ">
+        <h1 class="header-title">Gestion del menú</h1>
+        <button class = "btn-add">Agregar nuevo plato</button>
+      </div>
+        <h3 class="subtitle">Platos disponibles</h3>
         <div class="container-column content-section">
           <article class="meal">
-              <img src="/assets/img/pizza.png" alt="pizza" class="image-meal">
+              <img src="/assets/img/spagettis.png" alt="pizza" class="image-meal">
               <div class="text-meal">
-                <h4>Pizza de mozzarella</h4> 
-                <p>Pizza a la piedra con salsa de tomate, queso mozzarella, albahaca y aceitunas</p>
+                <h4>Pasta Cremosa</h4> 
+                <p class="gray-text">Deliciosa pasta con salsa cremosa</p>
               </div>
-              <div class="price-meal"> 17,00$ </div>
+              <div class="price-meal"> $12.99 </div>
+          </article> 
+          <article class="meal">
+              <img src="/assets/img/hamburguesa2.jpg" alt="pizza" class="image-meal">
+              <div class="text-meal">
+                <h4>Alitas Picantes</h4> 
+                <p class="gray-text">Alitas de pollo picante con salsa para mojar</p>
+              </div>
+              <div class="price-meal"> $9.99 </div>
+          </article> 
+          <article class="meal">
+              <img src="/assets/img/ensalada.png" alt="pizza" class="image-meal">
+              <div class="text-meal">
+                <h4>Ensalada de la Huerta</h4> 
+                <p class="gray-text">Ensalada fresca con hojas mixtas y vinagreta</p>
+              </div>
+              <div class="price-meal"> $7.50 </div>
+          </article> 
+          <article class="meal">
+              <img src="/assets/img/hamburguesa.png" alt="pizza" class="image-meal">
+              <div class="text-meal">
+                <h4>Hamburguesa con Queso</h4> 
+                <p class="gray-text">Hamburguesa clasica con queso y papas fritas</p>
+              </div>
+              <div class="price-meal">$10.50</div>
           </article> 
           <article class="meal">
               <img src="/assets/img/pizza.png" alt="pizza" class="image-meal">
               <div class="text-meal">
-                <h4>Pizza de mozzarella</h4> 
-                <p>Pizza a la piedra con salsa de tomate, queso mozzarella, albahaca y aceitunas</p>
+                <h4>Pescado y Papas Fritas</h4> 
+                <p class="gray-text">Pescado crujiente y papas fritas con salsa tartara</p>
               </div>
-              <div class="price-meal"> 17,00$ </div>
+              <div class="price-meal">$11.75</div>
           </article> 
           <article class="meal">
-              <img src="/assets/img/pizza.png" alt="pizza" class="image-meal">
+              <img src="/assets/img/spagettis.png" alt="pizza" class="image-meal">
               <div class="text-meal">
-                <h4>Pizza de mozzarella</h4> 
-                <p>Pizza a la piedra con salsa de tomate, queso mozzarella, albahaca y aceitunas</p>
+                <h4>Pizza Vegetariana</h4> 
+                <p class="gray-text">Pizza vegetariana con ingredientes variados</p>
               </div>
-              <div class="price-meal"> 17,00$ </div>
+              <div class="price-meal">$14.25</div>
           </article> 
           <article class="meal">
-              <img src="/assets/img/pizza.png" alt="pizza" class="image-meal">
-              <div class="text-meal">
-                <h4>Pizza de mozzarella</h4> 
-                <p>Pizza a la piedra con salsa de tomate, queso mozzarella, albahaca y aceitunas</p>
-              </div>
-              <div class="price-meal"> 17,00$ </div>
-          </article> 
-          <article class="meal">
-              <img src="/assets/img/pizza.png" alt="pizza" class="image-meal">
-              <div class="text-meal">
-                <h4>Pizza de mozzarella</h4> 
-                <p>Pizza a la piedra con salsa de tomate, queso mozzarella, albahaca y aceitunas</p>
-              </div>
-              <div class="price-meal"> 17,00$ </div>
-          </article> 
-                  
+            <img src="/assets/img/pizza.png" alt="pizza" class="image-meal">
+            <div class="text-meal">
+              <h4>Pastel con Chocolate</h4> 
+              <p class="gray-text">Pastel chocolate rico con glaseado</p>
+            </div>
+            <div class="price-meal">$6.50</div>
+        </article>        
           
         </div>
     </div>

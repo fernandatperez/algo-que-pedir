@@ -7,31 +7,33 @@
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/nav-bars.css">
     <link rel="stylesheet" href="../css/flex-grid.css">
-    <link rel="stylesheet" href="../css/pages-css/1-login.css">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/component-css/dish-number-input.css">
     <link rel="stylesheet" href="../css/component-css/dish-switch-button.css">
     <link rel="stylesheet" href="../css/component-css/dish-edit-table.css">
     <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/component-css/input.css">
+    <link rel="stylesheet" href="../css/component-css/switch-button.css">
     <link rel="stylesheet" href="../css/pages-css/6-dish-edit.css">
     <title>Edicion de Plato</title>
 </head>
 <body>
 
-     <!-- Header -->
+        <!-- Header -->
         <header class="main-nav">
 
             <div class="icon-and-text">
-                <a class="pot-container">
+                <a href="../pages/" class="pot-container">
                     <i class="ph-fill ph-cooking-pot"></i>
                 </a>
-                <h1>Algo que pedir</h1> 
+                <span class="main-title">Algo que pedir</span> 
             </div>
 
             <nav class="options-and-icon">
-                <h2>Pedidos</h2> 
-                <h2  class="active">Menú</h2> 
-                <h2>Ingredientes</h2> 
-                <h2>Cuentas</h2> 
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty active">Menú</button> 
+                <button class="btn-empty">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
                 <!-- <i class="ph ph-list hidden"></i> -->
                 <label id="nav-hamburger" class="hidden">
                     <input type="checkbox" id="hamburger-toggle">
@@ -39,7 +41,13 @@
                     <span class="hidden"></span>
                     <span class="hidden"></span>
                 </label>
-                <i class="ph ph-user-circle"></i>
+                    <i class="ph ph-user-circle user-img"></i>
+                <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
             </nav>
 
         </header>
@@ -86,18 +94,24 @@
                         <h3 class="h3-product-edit">Plato de Autor</h3>
                         <p class="display-none-mobile">Aplica un porcentaje adicional al precio de venta</p>
                     </div>
-                    <button disabled class="switch-button-container">
-                        <div class="switch-button"></div>
-                    </button>
+                    <div class="slide-button">
+                        <input type="checkbox" class="toggle">
+                        <div class="background-div">
+                            <div class="circle-slide"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="switch-button-group">
                     <div>
                         <h3 class="h3-product-edit">Plato de Promoción</h3>
                         <p class="display-none-mobile">Aplica un descuento al precio de venta</p>
                     </div>
-                    <button disabled class="switch-button-container">
-                        <div class="switch-button"></div>
-                    </button>
+                    <div class="slide-button">
+                        <input type="checkbox" class="toggle">
+                        <div class="background-div">
+                            <div class="circle-slide"></div>
+                        </div>
+                    </div>
                 </div>
             </section>
             
@@ -154,19 +168,5 @@
         </form>
     </main>
 
-    <!-- Mobile nav -->
-    <footer class="mobile-nav">
-        <div class="icon-and-text-mobile">
-            <div class="pot-container">
-                <i class="ph-fill ph-cooking-pot"></i>
-            </div>
-            <div class="mobile-icons">
-                <i class="ph ph-shopping-cart"></i>
-                <i class="ph ph-fork-knife"></i>
-                <i class="ph ph-bowl-food"></i>
-                <i class="ph ph-user"></i>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

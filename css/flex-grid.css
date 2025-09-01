@@ -8,6 +8,7 @@
 .flex-row {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .grid {
@@ -24,6 +25,21 @@
     row-gap: 1em;
 }
 
+.jc-start{
+    justify-content: start; 
+    align-items:center; 
+}
+
+.jc-space-between{
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.gap-1 {
+    gap: 1em;
+}
+
+
 /* ============================= CONTAINERS ============================= */
 
 /* FLEX COLUMNA CENTRADA */
@@ -39,10 +55,10 @@
 /* FLEX COLUMNA 80VW*/
 /* Se combina con container-column. Es el container del contenido main.*/
 .main-content { /* se le puede cambiar el nombre */
-  width: 80vw; /* ocupa el 80% */
-  row-gap: 1rem; /* gap entre secciones */
-  font-size: var(--font-text);
-  padding: .5em .5em 5.5em .5em; /* padding-bottom para que no joda el header en mobile */
+    width: 80vw; /* ocupa el 80% */
+    row-gap: 1rem; /* gap entre secciones */
+    font-size: var(--font-text);
+    padding: .5em .5em 5.5em .5em; /* padding-bottom para que no joda el header en mobile */
 }
 
 /* ESTILO PARA SECCIONES */
@@ -55,14 +71,34 @@
     border-radius: 10px;
 }
 
+/* HAGO UN CONTENT SECTION PARA LAS SECCIONES CON GRID */
+.content-section-grid {
+    gap: 1em;
+    width: 100%; /* 100% del .main-content (osea 80vw) */
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
 /* FLEX ROW WRAP */
 /* Para cards, por ejemplo */
 .container-row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  width: 100%; /* ocupa todo el ancho del container */
-  margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* ocupa todo el ancho del container */
+    margin: 0;
+}
+
+/* ============================= Media Queries ============================= */
+
+/** Mobile: max: 430px */
+@media screen and (max-width: 430px) {
+
+  /* FLEX COLUMNA 90VW*/
+  .main-content {
+    width: 90vw;
+  }
 }

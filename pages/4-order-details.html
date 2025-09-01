@@ -3,31 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Importo CSS -->
   <link rel="stylesheet" href="../css/general.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/nav-bars.css">
+  <link rel="stylesheet" href="../css/flex-grid.css">
   <link rel="stylesheet" href="../css/component-css/buttons.css">
   <link rel="stylesheet" href="../css/pages-css/4-order-details.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Nata+Sans:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <title>Detalle pedido</title>
+    <title>Detalle pedido</title>
 </head>
 
 <body>
     <!-- aca tiene que ir el header -->
-     <!-- Header -->
+             <!-- Header -->
         <header class="main-nav">
+
             <div class="icon-and-text">
-                <a class="pot-container">
+                <a href="../pages/" class="pot-container">
                     <i class="ph-fill ph-cooking-pot"></i>
                 </a>
-                <h1>Algo que pedir</h1> 
+                <span class="main-title">Algo que pedir</span> 
             </div>
-            
+
             <nav class="options-and-icon">
-                <h2 class="active">Pedidos</h2> 
-                <h2>Menú</h2> 
-                <h2>Ingredientes</h2> 
-                <h2>Cuentas</h2> 
+                <button class="btn-empty active">Pedidos</button> 
+                <button class="btn-empty">Menú</button> 
+                <button class="btn-empty">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
                 <!-- <i class="ph ph-list hidden"></i> -->
                 <label id="nav-hamburger" class="hidden">
                     <input type="checkbox" id="hamburger-toggle">
@@ -35,60 +37,51 @@
                     <span class="hidden"></span>
                     <span class="hidden"></span>
                 </label>
-                <i class="ph ph-user-circle"></i>
+                    <i class="ph ph-user-circle user-img"></i>
+                    <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
             </nav>
 
         </header>
-    <!-- Hidden navigation bar -->
-        <footer class="mobile-nav">
-            <div class="icon-and-text-mobile">
-                <div class="pot-container">
-                    <i class="ph-fill ph-cooking-pot"></i>
-                </div>
-                <div class="mobile-icons">
-                    <i class="ph ph-shopping-cart"></i>
-                    <i class="ph ph-fork-knife"></i>
-                    <i class="ph ph-bowl-food"></i>
-                    <i class="ph ph-user"></i>
-                </div>
-            </div>
-        </footer>
     
-<main>
+<main class="container-column">
     <div class="container-column main-content">
-    <div class="header-title title">
-     <h1>Pedido #12345</h1>
-     <div>
-     <p>Estado del Pedido</p>
-     <button class = "btn-alternate">Pendiente</button>
-     </div>
-    </div>
-    <section class="inner-container">
+        <div class="w-100 flex-row jc-space-between header-container">
+            <h1 class="header-title jc-space-between">Pedido #12345</h1>
+            <div class="flex-row gap-1">
+                <h2 class="subtitle">Estado del Pedido</h2>
+                <button class="btn btn-alternate">Pendiente</button>
+            </div>
+        </div>
+    <section class="content-section-grid grid-cols-2">
         <article>
             <p>Cliente</p>
-            <div class="profile">
+            <div class="content-section jc-start">
                 <img src="../assets/icons/default-avatar-profile-icon-vector-600nw.webp" alt="pin en un mapa">
                 <div>
-                <p>Sofía Miller</p>
-                <p><strong>usuario:</strong> smiller2006</p>
+                    <p>Sofía Miller</p>
+                    <p><strong>usuario:</strong> smiller2006</p>
                 </div>
             </div>
         </article>
         <article>
             <p>Direccion de entrega</p>
-            <div class="profile">
+            <div class="content-section jc-start">
                 <img src="../assets/icons/map-pin.svg" alt="pin en un mapa">
                 <div>
-                <p>Av siempre viva 555</p>
-                <p>lat: 40.7128 long:-74.0060</p>
+                    <p>Av siempre viva 555</p>
+                    <p>lat: 40.7128 long:-74.0060</p>
                 </div>
             </div>
         </article>       
     </section>
 
-    <section class="inner-container">
-    <section class="product-main">
-
+    <section class="content-section-grid grid">
+    
             <section class="section-title">
                 <h3>Resumen del pedido</h3>
             </section>
@@ -152,9 +145,8 @@
                 </article> 
            </section>
 </section>
-</section>
 
-<section class="inner-container">
+<section class="content-section-grid grid">
     <h4>Pago</h4>
     <div class="payment-table">
         <div class="payment-row">

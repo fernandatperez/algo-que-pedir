@@ -18,3 +18,7 @@
     color: var(--icon-color);
     padding-left: 0.3em;
 }
+
+.gray-icon{
+    color: var(--icon-color);
+}

@@ -1,43 +1,16 @@
-@import url(../nav-bars.css);
 /* Main container & initial definitions*/
-.ingredients-container {
-    font-size: 1.5em;
-    display: grid;
-    width: 100%;
-    height: 100vh;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-    "header"
-    "main"
-    "footer";
-    background-color: var(--background-color-primary);
-    justify-items: center;
-}
-
-button {
-    font-size: 1em;
-    background-color: transparent;
-    border: none;
-    padding: 0;
-}
-
-/* Que tan mal esta esto...? */
-/* Es solo para los iconos del medio entre editar y borrar */
-.no-hover:hover {
-    cursor: default;
+.flex-column {
+    align-items: center;
 }
 /* ------------------- */
 
-.main-nav {
-    width: 100%;
+.main-content { /* se le puede cambiar el nombre */
+    row-gap: 0; /* gap entre secciones */
+    padding: 0; /* padding-bottom para que no joda el header en mobile */
 }
 
-/* Main content */
-.ingredients-main {
-    grid-area: main;
-    display: flex;
-    flex-direction: column;
-    width: 75%;
+.header-title {
+    padding: 0;
 }
 
 .section-title {
@@ -49,196 +22,48 @@ button {
     margin: 2em 0 1.8em 0;
 }
 
-.ingredients-title {
-    /* Styles */
-    font-size: 1.7em;
-    font-weight: 700;
-}
-
-.new-ingredient-btn {
-    /* Styles */
-    font-size: 0.8em;
-    color: var(--font-color-primary);
-    background-color: rgb(233, 233, 233);
-    font-weight: 550;
-    
-    
-    /* Dimensions */
-    padding: 0.6em 1.5em 0.6em 1.5em;
-    border: none;
-    border-radius: 2em;
-}
 /* ------------------- */
-
+.content-section {
+    padding: 0;
+}
 /* ------------- Ingredients table ---------- */
-.ingredients-table {
-    display: grid;
+.multiple-action-buttons {
+    display: flex;
+    justify-content: center;
 }
 
-.ingredients-row {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1.5fr 0.5fr 1fr;
-    border: 1px solid var(--border-light-color);
-    border-bottom: 0;    
+.grid-table-row {
+    grid-template-columns: 2fr 3fr 1fr 1fr;
 }
-
-.ingredients-row:first-child {
-    border-top-right-radius: 1em;
-    border-top-left-radius: 1em;
-}
-
-.ingredients-row:last-child {
-    border-bottom: 1px solid var(--border-light-color);
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
-}
-.ingredients-cell:first-child,
-.ingredients-cell:nth-child(3) {
-    padding-left: 1.5em;
-    text-align: left;
-}
-
-
-.ingredients-cell {
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 2em 1em; /*Esto puede generar bardo*/
-    color: var(--font-color-secondary);
-    font-weight: 450;
-}
-
-.header {
-    color: black;
-    font-weight: 550;
-}
-
-.gray-text {
-    color: var(--font-color-secondary);
-}
-
 
 /* ----------- Icons ------------- */
-.ph {
+.ingredients-table-icons {
     font-size: 1.5em;
     color: var(--icon-color);
 }
-.ph-trash {
-    color: var(--primary-color);
-}
-
-.ph-cooking-pot {
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 2em;
-    padding: 0.5em;
-    font-size: 1.2em;
-}
-
-.ph-user-circle {
-    color: black;
-    font-size: 1.8em;
-}
-
-.ph-list {
-    font-size: 2.3em;
-    font-weight: 550;
-    color: black;
-}
-
-.ph-bowl-food {
-    color: black;
-    font-weight: 600;
-}
-/* 
-No deberia estar todo adentro de media queries? Osea para la web defino todo aca,
-para tablet todo lo que quiero cambiar lo cambio en la media de abajo, para mobile lo mismo...
-*/
-/* WEB */
-@media (width >= 769px) {
-    .nav-item.hidden {
+@media (width > 768px) {
+    .hidden-icons {
         display: none;
     }
 }
 
-/* TABLET */
 @media (431px < width <= 768px) {
-    .ingredients-main {
-        font-size: 0.65em;
-        width: 92%;
-    }
-
-    .nav-item {
+    .hidden-icons {
         display: none;
-    }
-    
-    .nav-item.no-hid {
-        display: flex;
-    }
-
-    .nav-item.hidden {
-        display: flex;
-    }
-    .section-title {
-        margin-top: 10em;
     }
 }
-/* MOBILE */
+
 @media (width <= 430px) {
-    .ingredients-container {
-        width: 100%;
-    }
-
-    .ingredients-main {
-        font-size: 0.6em;
-    }
-    .section-title {
-        flex-direction: column;
-        margin: 0;
-    }
-    .section-title .ingredients-title {
-        width: 100%;
-        text-align: left;
-        margin-bottom: 0.8em;
-        margin-top: 3em;
-    }
-    .section-title .new-ingredient {
-        width: 100%;
-        text-align: left;
-        margin-bottom: 1.36em;
-    }
-    .ingredients-row {
-        font-size: 1em;
-        grid-template-columns: 40% 30% 30%;
-    }
-    .ingredients-cell {
-        padding: 2em 0.9em;
-    }
-
-    .ingredients-cell:nth-child(3),
-    .ingredients-cell:nth-child(4) {
-        display: none;
-    }
-
-    .ingredients-cell:last-child {
-        display: flex;
-        justify-content: center;
-    }
-    
-    .nav-mobile-menu {
-        gap: 3.5em;
-    }
-
-    .mobile-nav-bar {
+    .hidden-icons {
         display: flex;
     }
 
-    .web-header {
-        display: none;
+    .new-ingredient-btn {
+        font-size: var(--font-text);
     }
 
-    .hidden {
-        display: inline;
+    .grid-table-row {
+        grid-template-columns: 2fr 2fr 1fr 1.5fr;
     }
 }
 

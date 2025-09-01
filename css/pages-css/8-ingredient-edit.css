@@ -1,31 +1,6 @@
-@import url(../nav-bars.css);
-/* ------------- MAIN BODY ---------------- */
-/* Copiado del de maxi, pasar a general */
-.orders-container {
-    font-size: var(--font-h3);
-    display: grid;
-    grid-template-rows: auto 1fr auto; 
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
-    /* width: 100vw; */
-    width: 100%; /* si le pongo 100% no tengo el scroll porque? */
-    /* height: 100vh; */
-}
-/* ----------------------------------------- */
-
 /* ----------- MAIN SECTION ---------------- */
-.main-body {
-    justify-self: center;
-    width: 75%;
-    height: 100%;
-}
-/* Esto tambien se repite del de Maxi */
-.section-title {
-    font-size: var(--font-h1);
-    font-weight: bold;
-    margin: 1.5em 0 1.5em 6%;
+.header-title {
+    margin: 1em 0;
 }
 
 .ingredient-edit-section {
@@ -69,28 +44,6 @@
     margin:0;
 }
 
-.toggle {
-    position: absolute;
-    left: 0.08em;
-    top: 0.08em;
-    z-index: 1;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.toggle:checked + .background-div {
-    background: rgb(196, 255, 107);
-}
-
-.toggle:checked {
-    transform: translateX(1.15em)
-}
-
-.toggle:checked + .background-div .circle-slide {
-    box-shadow: -0.15em 0.1em 0.3em rgba(0,0,0,0.2);
-    transform: translateX(1.15em);
-}
-
 section .btn-group-actions {
     justify-content: flex-end;
     padding: 1em 3em 0 3em;
@@ -99,8 +52,6 @@ section .btn-group-actions {
 section.btn-group-actions.hidden {
     display: none;
 }
-
-
 
 /*------------------------------------------- */
 

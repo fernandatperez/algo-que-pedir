@@ -8,7 +8,7 @@
     flex-direction: row;
     border-bottom: 1px solid var(--border-color);
     padding: 0.8rem clamp(1.8rem, 4vw, 4rem); /* padding: top right bottom left; */
-                     /* minimo, ideal, maximo */
+                    /* minimo, ideal, maximo */
     background-color: white;
     width: 100%;
 }
@@ -22,19 +22,9 @@
 .icon-and-text .main-title {
     min-width: 12rem;
     font-weight: bold;
-    font-size: var(--font-nav);
+    font-size: var(--font-h3);
 }
 
-.btn-empty {
-    all: unset;        /* Quita todos los estilos heredados */
-    display: inline-block; /* Necesario para que siga comportándose como botón */
-    cursor: pointer;   /* Opcional, si quieres que parezca clickeable */
-    font-size: var(--font-header);
-}
-
-.active { /* this is just for the screenshot */
-    font-weight: bold;
-}
 .options-and-icon {
     display: flex;
     justify-content: center;
@@ -48,22 +38,16 @@
 .icon-and-text-mobile {
     display: flex;
     align-items: center;
-    gap: 3rem;
-    /* justify-content: center; */
-    /* width: 90%; */
+
 }
 .mobile-icons {
     display: flex;
     gap: 3rem;
-    /* justify-content: space-evenly; */
-    /* width: 100%; */
+
 }
 .mobile-icons i {
     font-size: 2rem;
 }
-
-
-/* ============================= ANIMATIONS ============================= */
 
 /* ============================= Hamburguer ============================= */
 /* fuera el checkbox */
@@ -80,14 +64,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 0.5rem;
 }
 
 #nav-hamburger span {
-    height: 2px;
+    height: 0.2rem;
     width: 2.25em;
     background: var(--font-color-primary);
-    border-radius: 9px;
+    border-radius: 1rem;
     transition: 0.3s ease-in-out;
 }
 
@@ -107,7 +91,8 @@
 transform: translateY(-7px) rotate(-135deg);
 }
 
-/* MEDIA QUERIES */
+/* ============================= Media Queries ============================= */
+
 /* Desktop (>=769px) */
 @media (min-width: 769px) {
     /* Mostrar navbar completo */
@@ -119,7 +104,6 @@ transform: translateY(-7px) rotate(-135deg);
         display: none;
     }
 }
-
 
 /* Tablet (401px – 768px) */
 @media (min-width: 431px) and (max-width: 768px) {
@@ -145,7 +129,6 @@ transform: translateY(-7px) rotate(-135deg);
 
 /* Mobile (<=430px) */
 @media (max-width: 430px) {
-  
     .options-and-icon .btn-empty {
         display: none; /* oculta todos */
     }
@@ -164,6 +147,15 @@ transform: translateY(-7px) rotate(-135deg);
     .main-nav {
         gap: 3rem;
         justify-content: center;
+    }
+
+    .main-nav {
+        position: fixed;
+        bottom: 0;      /* lo pega al borde inferior */
+        left: 0;        /* lo alinea a la izquierda */
+        width: 100%;    /* ocupa todo el ancho */
+        border-top: 1px solid #ccc;
+        z-index: 1000;
     }
 
 }

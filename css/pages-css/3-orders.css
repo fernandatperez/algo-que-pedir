@@ -13,13 +13,6 @@ body {
 
 /* ============================= Layout Grid ============================= */
 
-.orders-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-}
 
 /* ============================= Main body (almost) ============================= */
 
@@ -57,7 +50,7 @@ body {
     color: var(--light-gray);
     font-weight: normal;
     padding-bottom: 1.5em;
-    font-size: var(--font-default);
+    font-size: var(--font-text);
 }
 .tab.active { /* this is just for the screenshot */
     font-weight: bold;
@@ -81,16 +74,17 @@ body {
     /* grid-template-columns: 1fr 1fr 1fr; */
     /* grid-template-rows: 1fr 1fr 1fr; */
     /* this makes it always have 3 columns and 3 rows */
-    grid-template-columns: repeat(auto-fit, minmax(23em, 0.65fr));
+    grid-template-columns: repeat(auto-fit, 27em);
     justify-content: center; /* optional, centers the content */
     gap: 0.5em;
+    margin-right: 1em;
 }
 
 /* ============================= Grid item ============================= */
 
 .grid-item {
     background-color: white;
-    padding: 1.5em;
+    padding: 2em;
     border-radius: var(--border-radius-default);
     border: 1px solid var(--border-color); /* light gray */
     box-shadow: 0px 2px 6px rgba(0,0,0,0.08); /* soft shadow */
@@ -126,7 +120,7 @@ body {
     font-weight: bold;
 }
 .user-info .username {
-    font-size: 0.85rem;
+    font-size: var(--font-text);
     /* color: burlywood; */
     color: var(--font-color-tertiary);
 }
@@ -139,7 +133,7 @@ body {
 
 /* ========== Address ========== */
 
-.address {
+.address-container {
     display: flex;
     align-items: center;
     gap: 1em;
@@ -176,41 +170,25 @@ body {
 /* ========== Action Button Container ========== */
 
 .action-container {
-  display: flex;
-  justify-content: flex-end; /* !!! */
-  padding-right: 1em;
-  /* width: 80vw; */
-  width: 100%; /* !!! */
+    display: flex;
+    justify-content: flex-end;
+    width: 100%; 
 }
 
 .action-container button {
     padding: 0.8em 1.6em; /* padding: top right bottom left; */
-    font-size: 1rem;
+    font-size: var(--font-text);
 }
 .action-container button:active {
     background-color: var(--button-active-color);
 }
 
-
-/*! esto ver si se puede cambiar*/
-
-/* Mobile (<=400px) */
-@media (max-width: 400px) {
-/* 
-    .orders-container {
-        flex-direction: column-reverse;
-    } */
-
-    .main-nav {
-    position: fixed;
-    bottom: 0;      /* lo pega al borde inferior */
-    left: 0;        /* lo alinea a la izquierda */
-    width: 100%;    /* ocupa todo el ancho */
-    background: white; /* opcional */
-    border-top: 1px solid #ccc; /* opcional */
-    padding: 1rem;  /* opcional */
-    }
-
-
-
+.order, .user-info, .details, 
+.address-coordinates, .address, .coordinates { /* esto mete los ... */
+    white-space: nowrap;      /* no saltar de línea */
+    overflow: hidden;
+    text-overflow: ellipsis;  /* mostrar "..." */
+    display: block;
+    max-width: 100%;
 }
+
