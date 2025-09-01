@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/component-css/input.css">
+    <link rel="stylesheet" href="../css/component-css/icon.css">
+    <link rel="stylesheet" href="../css/component-css/switch-button.css">
     <link rel="stylesheet" href="../css/pages-css/8-ingredient-edit.css">
     <title>Editar ingrediente</title>
 
@@ -14,9 +17,9 @@
         <header class="main-nav">
 
             <div class="icon-and-text">
-                <div class="pot-container">
+                <a class="pot-container">
                     <i class="ph-fill ph-cooking-pot"></i>
-                </div>
+                </a>
                 <h1>Algo que pedir</h1> 
             </div>
 
@@ -43,22 +46,28 @@
             </article>
 
             <article class="ingredient-edit-section">
-                <h3>Nombre del ingrediente*</h3>
-                <input type="text" placeholder="Lechuga">
-                <h3>Costo*</h3>
-                <div class="absolute-dollar-sign">
-                    <p>$</p>
-                    <input type="text" placeholder="5">
+                <div class="input-group">
+                    <label class="label-color">Nombre del ingrediente*</label>
+                    <input type="text" placeholder="Lechuga" class="input-primary">
                 </div>
-                <h3>Grupo Alimenticio</h3>
-                <select>
-                    <option value="" disabled selected hidden>Seleccionar</option>
-                    <option value="frutas">Frutas y verduras</option>
-                    <option value="verduras">Proteinas</option>
-                    <option value="carnes">Cereales y tuberculos</option>
-                    <option value="cereales">Lacteos</option>
-                </select>
-                <div class="animal-origin-display">
+                <div class="input-group">
+                    <label class="label-color">Costo*</label>
+                    <div class="input-with-icon">
+                        <i class="ph ph-currency-dollar-simple input-icon-dollar"></i>
+                        <input type="text" placeholder="5" class="input-primary input-ingredient-edit">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label class="label-color">Grupo Alimenticio</label>
+                    <select class="input-primary">
+                        <option value="" disabled selected hidden>Seleccionar</option>
+                        <option value="frutas">Frutas y verduras</option>
+                        <option value="verduras">Proteinas</option>
+                        <option value="carnes">Cereales y tuberculos</option>
+                        <option value="cereales">Lacteos</option>
+                    </select>
+                </div>
+                <div class="animal-origin-display input-group">
                     <h3>Origen animal</h3>
                     <div class="slide-button">
                         <input type="checkbox" class="toggle">

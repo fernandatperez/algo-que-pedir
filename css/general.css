@@ -63,6 +63,7 @@ LOS BOTONES
     align-items: center;
     cursor: pointer;
     /* padding: 1em;*/ /* esto evita que se deforme */
+    text-decoration: none;
 }
 .pot-container > i {
     font-size: 1.85rem;
