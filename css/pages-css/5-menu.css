@@ -10,10 +10,8 @@
     /*justify-content: center;*/
 }
 
-.hide-on-mobile {
-    display: none;
-  }
-  
+
+
 .header-menu{
     background-color: var(--background-color-primary);
     display: flex;
@@ -140,5 +138,9 @@
         box-sizing: border-box;
         flex-shrink: 1;
     }
+
+    .hide-on-mobile {
+    display: none;
+  }
 }
 
