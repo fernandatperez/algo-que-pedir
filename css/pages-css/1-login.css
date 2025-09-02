@@ -107,14 +107,14 @@
 
 @media (min-width: 431px) and (max-width: 768px) {
     .login-section{
-        min-width: 31em;
+        min-width: 80%;
     }
-    .btn-login{
-        width: 30em;
+    /* .btn-login{
+        max-width: 90%;
     }
     .form-section{
-        width: 25em;
-    }
+        max-width: 75%;
+    } */
 }
 
 @media screen and (max-width: 431px) {
@@ -123,5 +123,9 @@
         background-color: white;
         box-shadow: none;
         padding: 1em;
+    }
+
+    .form-section {
+        max-width: 90%;
     }
 }

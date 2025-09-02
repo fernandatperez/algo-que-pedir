@@ -65,7 +65,7 @@
 }
 
 /** Mobile: max: 400px */
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 431px) {
 
     .grid-table-container .grid-table-row {
         /* grid-template-columns: repeat(4,1fr); */ /* modificable */

@@ -53,52 +53,6 @@ section.btn-group-actions.hidden {
     display: none;
 }
 
-/*------------------------------------------- */
-
-/* --------------- ACTION BUTTONS --------------- */
-
-/* .btn-group-actions .btn-primary {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    color:  #fff;
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    border: 1px solid;
-    padding: 1em;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    align-items: center;
-    
-    &:hover{
-        /* color: #fff; */
-        /* background-color: var(--button-hover-color) ;
-        transition: background-color 0.3s ease;
-        transition: color 0.3s ease;
-    }
-} */
-
-/* clase para el boton secundario */
-/* .btn-group-actions .btn-secondary{    
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    color: var(--primary-color);
-    background-color: #fff;
-    border-color: var(--primary-color);
-    border: 1px solid;
-    padding: 1em;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    align-items: center;
-    
-    &:hover{
-        color: #fff;
-        background-color: var(--primary-color);
-        transition: background-color 0.3s ease;
-        transition: color 0.3s ease;
-    }
-} */
 /* ----------------------------------------------- */
 
 /* QUERIES */
@@ -116,14 +70,12 @@ section.btn-group-actions.hidden {
 }
 
 @media (max-width: 431px) {
-    section.btn-group-actions.no-hid {
-        display: none;
-    }
-
-    section.btn-group-actions.hidden {
-        display: flex;
+    section.btn-group-actions {
         justify-content: space-between;
         padding: 0;
+    }
+    .btn-group-actions .btn {
+        width: 40%;
     }
     
     .main-body {
