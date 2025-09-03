@@ -1,4 +1,7 @@
 /* ----------- MAIN SECTION ---------------- */
+.main-content {
+    max-width: 65em;
+}
 .header-title {
     margin: 1em 0;
 }
@@ -8,7 +11,7 @@
     flex-direction: column;
     font-size: var(--font-h3);
     justify-self: center;
-    margin-bottom: 1.34em;
+    margin-bottom: 1.671em;
     row-gap: 1em;
 }
 /* 
@@ -22,7 +25,6 @@
 .ingredient-edit-section h3 {
     color: var(--font-color-secondary);
     font-weight: 400;
-    margin-bottom: 0.3em;
 }
 
 .ingredient-edit-section .animal-origin-display {
@@ -46,7 +48,7 @@
 
 section .btn-group-actions {
     justify-content: flex-end;
-    padding: 1em 3em 0 3em;
+    padding: 0;
 }
 
 section.btn-group-actions.hidden {
