@@ -49,6 +49,16 @@
     }
 }
 
+/* ==== LOGIN BUTTON ==== */
+.btn-login{
+    font-size: 0.9em;
+    justify-self: center; 
+    width: 100%;
+    border-radius: 2em;
+    max-width: 35em;
+    height: 3em;
+}
+
 /* ==== ICON BUTTON ==== */
 .icon-action-btn {
     border: 0;
