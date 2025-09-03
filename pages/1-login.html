@@ -21,35 +21,42 @@
 
         <!-- HEADER -->
         <header class="header-section">
-          <a class="pot-container">
+          <a href="../pages/" class="header-link">
+            <span class="pot-container">
               <i class="ph-fill ph-cooking-pot"></i>
+            </span>
+            <span class="title-header">Algo que pedir</span>
           </a>
-          <h1 class="main-title">Algo que pedir</h1>
         </header>
 
         <!-- FORM -->
-        <form class="form-section">
-          <div class="form-group">
-            <label class="label-color" id="label-usuario">Usuario*</label>
-            <input type="email" placeholder="Escribir" id="input-usuario" class="input-primary form-input">
-          </div>
-          <div class="form-group password-container">
-            <label class="label-color" id="label-contraseña">Contraseña*</label>
-            <div class="input-with-icon">
-              <input type="password" id="input-contraseña" class="input-primary form-input">
-              <i class="ph ph-eye-slash input-icon"></i>
-            </div>
-          </div>
-        </form>
+        <form class="form-container">
 
-        <!-- FORM ACTIONS -->
-        <footer class="btn-group" role="group">
-          <button class="btn btn-primary btn-login">Iniciar Sesión</button>
-          <div class="register-section"> 
-            <p>¿No tenes una cuenta?</p>
-            <a href="" class="register-link">Registrate</a>
-          </div>
-        </footer>
+          <!-- FORM FIELD -->
+          <section class="form-field">
+            <div>
+              <label class="label-color" id="label-usuario">Usuario*</label>
+              <input type="email" placeholder="Escribir" id="input-usuario" class="input-primary">
+            </div>
+            <div>
+              <label class="label-color" id="label-contraseña">Contraseña*</label>
+              <div class="input-with-icon">
+                <input type="password" id="input-contraseña" class="input-primary input-password">
+                <i class="ph ph-eye-slash input-icon"></i>
+              </div>
+            </div>
+          </section>
+
+          <!-- FORM ACTIONS -->
+          <section class="form-actions">
+            <button class="btn btn-primary btn-login">Iniciar Sesión</button>
+            <div class="register-section"> 
+              <p>¿No tenes una cuenta?</p>
+              <a href="" class="register-link">Registrate</a>
+            </div>
+          </section>
+  
+        </form>
 
       </main>
 

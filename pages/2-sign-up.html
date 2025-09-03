@@ -16,58 +16,61 @@
     
     <title>Sign Up</title>
   </head>
-  <body>
-    <main class="login-container">
-
-      <section class="login-section">
+  <body class="login-container">
+    <main class="login-section">
 
         <!-- HEADER -->
         <header class="header-section">
-          <a class="pot-container">
+          <a href="../pages/" class="header-link">
+            <span class="pot-container">
               <i class="ph-fill ph-cooking-pot"></i>
+            </span>
+            <span class="title-header">Crea tu cuenta</span>
           </a>
-          <h1 class="main-title">Crea tu cuenta</h1>
         </header>
 
         <!-- FORM -->
-        <form class="form-section">
-          <div class="form-group">
-            <label class="label-color" id="label-usuario">Usuario*</label>
-            <input type="email" placeholder="Escribir" id="input-usuario" class="input-primary form-input">
-          </div>
-          <div class="form-group password-container">
-            <label class="label-color" id="label-contraseña">Contraseña*</label>
-            <div class="input-with-icon">
-              <input type="password" id="input-contraseña" class="input-primary form-input">
-              <i class="ph ph-eye-slash input-icon"></i>
+        <form class="form-container">
+
+          <!-- FORM FIELD -->
+          <section class="form-field">
+            <div>
+              <label class="label-color" id="label-usuario">Usuario*</label>
+              <input type="email" placeholder="Escribir" id="input-usuario" class="input-primary">
             </div>
-          </div>
+            <div>
+              <label class="label-color" id="label-contraseña">Contraseña*</label>
+              <div class="input-with-icon">
+                <input type="password" id="input-contraseña" class="input-primary input-password">
+                <i class="ph ph-eye-slash input-icon"></i>
+              </div>
+            </div>
 
           <!-- VALIDATION (Por ahora no lo validamos)  -->
-          <div class="form-group">
-              <label class="label-color" id="label-reingrese">Re-ingrese la contraseña*</label>
-              <div class="input-with-icon">
-                  <input type="password" id="input'reingrese" class="input-primary form-input invalid-input">
-                  <i class="ph ph-eye-slash input-icon"></i>
-              </div>
-              <div class="password-container invalid-container">
-                  <i class="ph ph-warning-circle"></i>
-                  <div class="invalid-text">Las contraseñas no coinciden</div>
-              </div>
-          </div>
+           <div>
+             <label class="label-color" id="label-reingrese">Re-ingrese la contraseña*</label>
+             <div class="input-with-icon">
+                 <input type="password" id="input-reingrese" class="input-primary input-password invalid-input">
+                 <i class="ph ph-eye-slash input-icon"></i>
+             </div>
+             <div class="invalid-container">
+                 <i class="ph ph-warning-circle"></i>
+                 <div class="invalid-text">Las contraseñas no coinciden</div>
+             </div>
+           </div>
+           
+          </section>
 
+          <!-- FORM ACTIONS -->
+          <section class="form-actions">
+            <button class="btn btn-primary btn-login">Iniciar Sesión</button>
+            <div class="register-section"> 
+              <p>¿No tenes una cuenta?</p>
+              <a href="" class="register-link">Registrate</a>
+            </div>
+          </section>
+  
         </form>
-
-        <!-- FORM ACTIONS -->
-        <footer class="btn-group" role="group">
-          <button class="btn btn-primary btn-login">Registrarse</button>
-          <div class="register-section"> 
-            <p>¿Ya tenes una cuenta?</p>
-            <a href="" class="register-link">Inicia Sesión</a>
-          </div>
-        </footer>
-
-      </section>
 
     </main>
   </body>

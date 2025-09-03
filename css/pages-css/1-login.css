@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     background-color: white;
-    font-size: 1.4em;
+    font-size: 1.5em;
     height: 100vh; /* ocupa toda la pantalla */
     margin: 0;
 }
@@ -15,11 +15,10 @@
     background-color: white;
     box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
     width: 80%;
-    max-width: 60rem;
-    min-width: 18.36rem;
-    padding: 2rem;
-    border-radius: 1rem;
-    margin: auto;
+    max-width: 40em;
+    min-width: 28em;
+    padding: 2em;
+    border-radius: 1em;
 }
 
 /* ==== HEADER ==== */
@@ -27,13 +26,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0 1rem 0;
+    margin: 1.2em 0 0.5em;
 }
 
-.main-title{
+.header-link{
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* separa icono y texto */
+}
+
+.title-header{
     font-size: 2.2rem;
-    margin: 1rem;
     color: var(--font-color-primary);
+    font-weight: 700;
 }
 
 .icon-container{
@@ -51,22 +56,18 @@
 } */
 
 /* ==== FORM ==== */
-.form-section, .btn-group{
-    width: 100%;
-    margin: 0 auto; 
-}
-
-.form-section {
-    font-size: 1em;
+.form-container {
     flex-direction: column;
     display: flex;
-    gap: 1em;
-    max-width: 38rem;
+    gap: 1.5em;
 }
 
-.form-input{
-    padding: 8px 28px 8px 8px; 
-    font-size: 1em;
+.form-field{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 1em;
+    width: 80%;
 }
 
 .ph-eye-slash{
@@ -74,58 +75,58 @@
     cursor: pointer;
 }
 
-/* ==== BUTTONS ==== */
-
-.btn-group{
-    margin-top: 2em;
-}
-
-.btn-login{
-    font-size: 0.9em;
-    padding: 1em;
-    justify-self: center; 
-    width: 100%;
-    border-radius: 2em;
-    max-width: 43rem;
-}
-
 /* ==== FORM ACTIONS ==== */
+.form-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
 .register-section{
     display: flex;
     justify-content: center;
     border: none;
     color: var(--font-color-secondary);
-    margin: 1em 1em 3em 1em;
+    margin-bottom: 3em;
+    gap: 0.5em;
 }
 
 .register-link{
     color: var(--button-hover-color);
-    padding-left: 0.5em;
-    align-self: center;
     text-decoration: underline;
 }
 
-@media (min-width: 431px) and (max-width: 768px) {
+/* @media (min-width: 769px) {
     .login-section{
-        min-width: 80%;
+        font-size: 1.4em;
     }
+    .main-title{
+        font-size: var(--h1);
+    }
+    
+} */
+
+@media (min-width: 431px) and (max-width: 768px) {
+    /* .login-section{
+        min-width: 65vw;
+    } */
     /* .btn-login{
-        max-width: 90%;
+        max-width: 58vw;
     }
     .form-section{
-        max-width: 75%;
+        max-width: 50vw;
     } */
 }
 
 @media screen and (max-width: 431px) {
     .login-section{
-        min-width: 90%;
+        min-width: 90vw;
         background-color: white;
         box-shadow: none;
         padding: 1em;
     }
-
-    .form-section {
-        max-width: 90%;
+    .form-field{
+        max-width: 65vw;
     }
 }
