@@ -104,15 +104,29 @@ input, select, textarea, button {
     font-size: inherit;
 }
 
-a {
-    text-decoration: none;
-}
-
-.btn-empty {
+.btn-empty, button {
     all: unset;        /* Quita todos los estilos heredados */
     display: inline-block; /* Necesario para que siga comportándose como botón */
     cursor: pointer;   /* Opcional, si quieres que parezca clickeable */
     font-size: var(--font-h4);
+}
+
+a {
+  text-decoration: none;
+  color: var(--font-color-primary);
+}
+ /* TAMAÑOS DE ENCABEZADOS */
+h1 {
+  font-size: var(--font-h1);
+}
+h2 {
+  font-size: var(--font-h2);
+}
+h3 {
+  font-size: var(--font-h3);
+}
+h4 {
+  font-size: var(--font-h4);
 }
 
 .active { /* this is just for the screenshot */
