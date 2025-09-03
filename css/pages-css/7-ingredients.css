@@ -33,7 +33,11 @@
 }
 
 .grid-table-row {
-    grid-template-columns: 2fr 3fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1.5fr 1fr 1fr;
+}
+
+.grid-table-container {
+    margin: 0;
 }
 
 /* ----------- Icons ------------- */
@@ -58,11 +62,15 @@
         display: flex;
     }
 
+    .later-hid {
+        display: none;
+    }
+
     .new-ingredient-btn {
         font-size: var(--font-text);
     }
 
     .grid-table-row {
-        grid-template-columns: 2fr 2fr 1fr 1.5fr;
+        grid-template-columns: 2fr 1.5fr 1.5fr;
     }
 }
