@@ -6,6 +6,7 @@
     align-items: center;
     cursor: pointer;
     /* margin: 0 auto; */
+    flex-wrap: wrap;
 }
 
 .btn-group-actions {
@@ -47,6 +48,10 @@
         transition: background-color 0.3s ease;
         transition: color 0.3s ease;
     }
+}
+/* == palabra cambios en action buttons == */
+.p-cambios {
+    padding-left: .3em;
 }
 
 /* ==== LOGIN BUTTON ==== */
