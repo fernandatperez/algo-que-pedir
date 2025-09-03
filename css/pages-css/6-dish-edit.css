@@ -6,14 +6,12 @@
 @import url(../component-css/buttons.css); */
 
 .form-product-edit {
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
     transition: .3s font-size ease-in-out;
 }
 
 .h3-product-edit {
-    font-size: .9em;
     font-weight: 700;
-    margin: 0;
 }
 
 /* -- PRODUCT INFO SECTION -------------------------- */
@@ -80,7 +78,7 @@
 }
 
 .product-cost-p {
-    font-size: .9em;
+    /* font-size: .9em; */
     margin: 0;
     padding-top: .1em; /* alineacion a mano */
 }
@@ -111,12 +109,8 @@
 
 /* -- ACTION BUTTONS -------------------------- */
 .btn-dish{
-    padding: 1em;
+    /* padding: 1em; */
     /* border-radius: 1rem; */
-}
-
-.p-cambios {
-    padding-left: .3em;
 }
 
 /* -- MEDIA QUERIES -- */
@@ -124,7 +118,7 @@
 /** Tablet: 401px - 768 px. */
 @media screen and (min-width: 431px) and (max-width: 768px) {
     .form-product-edit {
-        font-size: 1.25em;
+        /* font-size: 1.25em; */
     }
 }
 
@@ -141,12 +135,16 @@
         width: 100%;
     }
     
-    .form-product-edit {
-        font-size: 1.2em;
-    }
+    /* .form-product-edit {
+    } */
     
     .product-edit-ingredients-table .grid-table-row {
         grid-template-columns: repeat(4,1fr);
+    }
+    .grid-table-row .cell {
+        font-size: .7em;
+        text-align: center;
+        padding: .6em .3em;
     }
 
     .btn-group-actions .btn-primary, 
