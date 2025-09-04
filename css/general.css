@@ -41,6 +41,10 @@
     --font-h3: 1.5rem;
     --font-h4: 1.25rem;
     --font-text: 1.2rem;
+
+    --gap-sm: 1em;
+    --gap-md: 2em;
+    --gap-lg: 3em;
 }
 
 /*

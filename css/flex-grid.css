@@ -35,11 +35,6 @@
     align-items: center;
 }
 
-.gap-1 {
-    gap: 1em;
-}
-
-
 /* ============================= CONTAINERS ============================= */
 
 /* FLEX COLUMNA CENTRADA */
@@ -56,7 +51,7 @@
 /* Se combina con container-column. Es el container del contenido main.*/
 .main-content { /* se le puede cambiar el nombre */
     width: 80vw; /* ocupa el 80% */
-    row-gap: 1rem; /* gap entre secciones */
+    gap: 1rem; /* gap entre secciones */
     font-size: var(--font-text);
     padding: .5em .5em 5.5em .5em; /* padding-bottom para que no joda el header en mobile */
 }
@@ -64,11 +59,11 @@
 /* ESTILO PARA SECCIONES */
 .content-section {
     display: flex;
-    gap: 1em;
+    gap: var(--gap-sm);
     width: 100%; /* 100% del .main-content (osea 80vw) */
     background-color: #fff;
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 1em;
 }
 
 /* HAGO UN CONTENT SECTION PARA LAS SECCIONES CON GRID */
