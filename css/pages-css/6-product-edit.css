@@ -1,12 +1,9 @@
-/* @import url(../nav-bars.css);
-@import url(./1-login.css); 
-@import url(../component-css/dish-number-input.css);
-@import url(../component-css/dish-switch-button.css);
-@import url(../component-css/dish-edit-table.css);
-@import url(../component-css/buttons.css); */
+body {
+    background-color: gray;
+}
+/* -- GENERALES -------------------------- */
 
-.form-product-edit {
-    /* font-size: 1.5em; */
+.main-content {
     transition: .3s font-size ease-in-out;
 }
 
@@ -14,29 +11,31 @@
     font-weight: 700;
 }
 
+fieldset {
+    border: 0;
+    gap: var(--gap-sm)
+}
+
+.form-product-edit {
+    gap: var(--gap-sm);
+}
+
 /* -- PRODUCT INFO SECTION -------------------------- */
 
 .form-section-product-info {
-    gap: 2em;
-    justify-content: space-around;
+    gap: var(--gap-md);
 }
 
 .product-info {
     align-items: flex-start;
     justify-content: space-between;
-    gap: 1em;
-
     flex: 1;
-    div {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
+    gap: var(--gap-sm);
 }
 
 .img-edit-container {
     flex: 1;
-    border-radius: 10px;
+    border-radius: 1em;
     overflow: hidden;
 }
 
@@ -58,18 +57,6 @@
 }
 
 /* -- COST SECTION -------------------------- */
-
-.form-section-product-cost {
-    align-items: flex-start;
-    row-gap: 1rem;
-}
-
-.input-group {
-    width: 100%;
-    position: relative;
-    align-items: start;
-}
-
 .switch-button-group {
     width: 100%;
     display: flex;
@@ -77,22 +64,14 @@
     align-items: center;
 }
 
-.product-cost-p {
-    /* font-size: .9em; */
-    margin: 0;
-    padding-top: .1em; /* alineacion a mano */
-}
-
 /* -- INGREDIENTS SECTION -------------------------- */
 .form-section-product-ingredients {
     align-items: flex-start;
-    gap: 0;
 }
 .product-ingredients-cost-subtitle {
     display: flex;
-    justify-content: flex-start;
-    column-gap: 1rem;
-    margin-top: 1rem;
+    align-items: flex-end;
+    column-gap: var(--gap-sm);
 }
 
 /* MODIFICACIONES PARA MI TABLA */
@@ -102,24 +81,21 @@
 }
 /* texto de segunda columna */
 .product-edit-ingredients-table-content .cell:nth-child(2) {
-    font-weight: 500;
-    color: var(--border-light-color);
+    font-weight: 600;
+    color: var(--font-color-tertiary);
 }
 
 
 /* -- ACTION BUTTONS -------------------------- */
 .btn-dish{
-    /* padding: 1em; */
-    /* border-radius: 1rem; */
+    padding: 1em;
 }
 
 /* -- MEDIA QUERIES -- */
 
 /** Tablet: 401px - 768 px. */
 @media screen and (min-width: 431px) and (max-width: 768px) {
-    .form-product-edit {
-        /* font-size: 1.25em; */
-    }
+    /* Vacía ... */
 }
 
 /** Mobile: max: 400px */
@@ -128,29 +104,13 @@
     .form-section-product-info {
         flex-direction: column;
     }
-    .product-info {
-        width: 100%;
-    }
-    .img-edit-container {
-        width: 100%;
-    }
-    
-    /* .form-product-edit {
-    } */
     
     .product-edit-ingredients-table .grid-table-row {
-        grid-template-columns: repeat(4,1fr);
+        /* grid-template-columns: repeat(4,1fr); */
+        grid-template-columns: 2fr 2fr 1.5fr 1.5fr;  
     }
     .grid-table-row .cell {
-        font-size: .7em;
-        text-align: center;
+        /* font-size: .8em; */
         padding: .6em .3em;
-    }
-
-    .btn-group-actions .btn-primary, 
-    .btn-group-actions .btn-secondary {
-        padding: .8em;
-        width: 50%;
-        align-items: center;
     }
 }
