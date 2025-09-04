@@ -1,6 +1,3 @@
-body {
-    background-color: gray;
-}
 /* -- GENERALES -------------------------- */
 
 .main-content {
@@ -9,11 +6,6 @@ body {
 
 .h3-product-edit {
     font-weight: 700;
-}
-
-fieldset {
-    border: 0;
-    gap: var(--gap-sm)
 }
 
 .form-product-edit {
