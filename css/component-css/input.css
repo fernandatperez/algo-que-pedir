@@ -26,3 +26,9 @@
 .label-color{
     color: var(--font-color-secondary);
 }
+
+/* ======= FIELDSET ======= */
+fieldset {
+    border: 0;
+    gap: var(--gap-sm)
+}
