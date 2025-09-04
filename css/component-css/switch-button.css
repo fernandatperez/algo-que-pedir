@@ -27,8 +27,8 @@
 
 .toggle {
     position: absolute;
-    left: 25%;
-    top: 45%;
+    left: 10%;
+    top: 25%;
     z-index: 1;
     opacity: 0;
     cursor: pointer;
@@ -39,7 +39,7 @@
 }
 
 .toggle:checked {
-    transform: translateX(200%)
+    transform: translateX(150%)
 }
 
 .toggle:checked + .background-div .circle-slide {
