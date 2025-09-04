@@ -44,6 +44,7 @@
     
     &:hover{
         color: #fff;
+        border-color: var(--primary-color);
         background-color: var(--primary-color);
         transition: background-color 0.3s ease;
         transition: color 0.3s ease;
@@ -62,6 +63,7 @@
     border-radius: 2em;
     max-width: 35em;
     height: 3em;
+    padding: 0;
 }
 
 /* ==== ICON BUTTON ==== */
@@ -108,7 +110,7 @@
     .btn-group-actions .btn-primary, 
     .btn-group-actions .btn-secondary {
         padding: .8em;
-        width: 50%;
+        flex: 1;
         align-items: center;
     }
 
