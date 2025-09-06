@@ -148,6 +148,20 @@ h4 {
   width: 100% !important;
 }
 
+.ellipsis-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;       /* o inline-block */
+  width: 100%;          /* dentro de un contenedor con min-width: 0 */
+}
+
+.text-wrapper {
+  min-width: 0;
+  flex: 1;
+}
+
+
 /* ============================= Media Queries ============================= */
 
 /** Mobile: max: 430px */

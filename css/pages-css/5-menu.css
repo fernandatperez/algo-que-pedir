@@ -81,10 +81,16 @@
     justify-self: end;
 }
 
-.image-meal{
-  width: 50px;
+.imgcontainer {
+  width: 5em;
   height: auto;
+  overflow: hidden;     /* recorta si la imagen se sale */
   border-radius: 10px; 
+}
+
+.imgcontainer img {
+  width: 100%;
+  height: auto;
 }
 
 
