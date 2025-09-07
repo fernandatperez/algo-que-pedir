@@ -12,6 +12,9 @@
 
 /* ==== LOGIN SECTION ==== */
 .login-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     background-color: white;
     box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
     width: 80%;
@@ -26,7 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1.2em 0 0.5em;
+    margin-top: 1em;
 }
 
 .header-link{
@@ -46,14 +49,6 @@
     position: relative;
     display: flex;
 }
-/* 
-.ph-cooking-pot{
-    font-size: 2rem; son 28px porque en mi html defini mi font-size: 14px; 
-    color: white;
-    background-color: var(--primary-color);
-    border-radius: 2rem;
-    padding: 0.5rem;
-} */
 
 /* ==== FORM ==== */
 .form-container {
@@ -65,9 +60,14 @@
 .form-field{
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    gap: 1em;
-    width: 80%;
+    align-items: center;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    width: 75%;
 }
 
 .ph-eye-slash{
@@ -108,15 +108,7 @@
 } */
 
 @media (min-width: 431px) and (max-width: 768px) {
-    /* .login-section{
-        min-width: 65vw;
-    } */
-    /* .btn-login{
-        max-width: 58vw;
-    }
-    .form-section{
-        max-width: 50vw;
-    } */
+    /* Vacía ... */
 }
 
 @media screen and (max-width: 431px) {
@@ -125,8 +117,5 @@
         background-color: white;
         box-shadow: none;
         padding: 1em;
-    }
-    .form-field{
-        max-width: 65vw;
     }
 }
