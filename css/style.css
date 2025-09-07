@@ -160,13 +160,3 @@ h4 {
   min-width: 0;
   flex: 1;
 }
-
-
-/* ============================= Media Queries ============================= */
-
-/** Mobile: max: 430px */
-@media screen and (max-width: 431px) {
-  .display-none-mobile {
-    display: none;
-  }
-}
