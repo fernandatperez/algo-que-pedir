@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/component-css/input.css">
+    <link rel="stylesheet" href="../css/component-css/icon.css">
+    <link href="../css/pages-css/2-register.css" rel="stylesheet" />
+    
+    <title>Sign Up</title>
+  </head>
+  <body class="login-container">
+    <main class="login-section">
+
+        <!-- HEADER -->
+        <header class="header-section">
+          <div class="pot-container">
+              <i class="ph-fill ph-cooking-pot"></i>
+          </div>
+          <span class="title-header">Crea tu cuenta</span>
+        </header>
+
+        <!-- FORM -->
+        <form class="form-container">
+
+          <!-- FORM FIELD -->
+          <fieldset form="form-login" class="form-field" name="login-user">
+            <div class="form-group">
+              <label for="login-user" class="label-color">Usuario*</label>
+              <input type="email" placeholder="Escribir" id="login-user" class="input-primary">
+            </div>
+            <div class="form-group">
+              <label for="login-password" class="label-color">Contraseña*</label>
+              <div class="input-with-icon">
+                <input type="password" id="login-password" class="input-primary input-password">
+                <i class="ph ph-eye-slash input-icon"></i>
+              </div>
+            </div>
+
+            <!-- FORM VALIDATION (Por ahora no lo validamos)  -->
+            <div class="form-group">
+              <label for="form-validation" class="label-color">Re-ingrese la contraseña*</label>
+              <div class="input-with-icon">
+                  <input type="password" id="form-validation" class="input-primary input-password invalid-input">
+                  <i class="ph ph-eye-slash input-icon"></i>
+              </div>
+              <div class="invalid-container">
+                  <i class="ph ph-warning-circle"></i>
+                  <div class="invalid-text">Las contraseñas no coinciden</div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- FORM ACTIONS -->
+          <section class="form-actions">
+            <button class="btn btn-primary btn-login">Iniciar Sesión</button>
+            <div class="register-section"> 
+              <p>¿No tenes una cuenta?</p>
+              <a href="" class="register-link">Registrate</a>
+            </div>
+          </section>
+  
+        </form>
+
+    </main>
+  </body>
+</html>

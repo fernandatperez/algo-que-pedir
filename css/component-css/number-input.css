@@ -1,0 +1,11 @@
+/* Para las flechitas del number  */
+/* input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: inner-spin-button;
+    opacity: 1;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+} */

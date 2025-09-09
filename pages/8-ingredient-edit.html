@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/nav-bars.css">
+    <link rel="stylesheet" href="../css/flex-grid.css">
+    <link rel="stylesheet" href="../css/component-css/input.css">
+    <link rel="stylesheet" href="../css/component-css/icon.css">
+    <link rel="stylesheet" href="../css/component-css/switch-button.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/pages-css/8-ingredient-edit.css">
+
+    <title>Editar ingrediente</title>
+
+</head>
+<body>
+    <section class="container-column">
+        <!-- Header -->
+        <header class="main-nav">
+
+            <div class="icon-and-text">
+                <a href="../pages/" class="pot-container">
+                    <i class="ph-fill ph-cooking-pot"></i>
+                </a>
+                <a href="../pages/">
+                <span class="main-title">Algo que pedir</span> 
+                </a>
+            </div>
+
+            <nav class="options-and-icon">
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty">Menú</button> 
+                <button class="btn-empty active">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
+                <!-- <i class="ph ph-list hidden"></i> -->
+                <label id="nav-hamburger" class="hidden">
+                    <input type="checkbox" id="hamburger-toggle">
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                </label>
+                    <i class="ph ph-user-circle user-img"></i>
+                    <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
+            </nav>
+
+        </header>
+
+        <section class="main-content">
+
+            <h1 class="header-title section-title">
+                Editar ingrediente
+            </h1>
+
+            <article class="ingredient-edit-section">
+                <section class="input-group">
+                    <label class="label-color">Nombre del ingrediente*</label>
+                    <input type="text" placeholder="Lechuga" class="input-primary">
+                </section>
+                <section class="input-group">
+                    <label class="label-color">Costo*</label>
+                    <div class="input-with-icon">
+                        <i class="ph ph-currency-dollar-simple input-icon-dollar"></i>
+                        <input type="text" placeholder="5" class="input-primary input-ingredient-edit">
+                    </div>
+                </section>
+                <section class="input-group">
+                    <label class="label-color">Grupo Alimenticio</label>
+                    <select class="input-primary">
+                        <option value="" disabled selected hidden>Seleccionar</option>
+                        <option value="frutas">Frutas y verduras</option>
+                        <option value="verduras">Proteinas</option>
+                        <option value="carnes">Cereales y tuberculos</option>
+                        <option value="cereales">Lacteos</option>
+                    </select>
+                </section>
+                <section class="animal-origin-display input-group">
+                    <h3>Origen animal</h3>
+                    <div class="slide-button">
+                        <input type="checkbox" class="toggle">
+                        <div class="background-div">
+                            <div class="circle-slide"></div>
+                        </div>
+                    </div>
+                </section>
+            </article>
+            
+            <section class="btn-group-actions">
+                <button disabled class="btn btn-secondary">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+                <button disabled class="btn btn-primary">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
+            </section>
+
+        </section>
+
+    </section>
+
+</body>
+</html>

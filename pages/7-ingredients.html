@@ -1,0 +1,145 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/nav-bars.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/flex-grid.css">
+    <link rel="stylesheet" href="../css/component-css/grid-table.css">
+    <link rel="stylesheet" href="../css/component-css/icon.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/pages-css/7-ingredients.css">
+
+    <title>Ingredients</title>
+</head>
+<body>
+    <section class="flex-column">
+
+        <!-- Header -->
+        <header class="main-nav">
+
+            <div class="icon-and-text">
+                <a href="../pages/" class="pot-container">
+                    <i class="ph-fill ph-cooking-pot"></i>
+                </a>
+                <a href="../pages/">
+                    <span class="main-title">Algo que pedir</span> 
+                </a>
+            </div>
+
+            <nav class="options-and-icon">
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty">Menú</button> 
+                <button class="btn-empty active">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
+                <!-- <i class="ph ph-list hidden"></i> -->
+                <label id="nav-hamburger" class="hidden">
+                    <input type="checkbox" id="hamburger-toggle">
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                </label>
+                    <i class="ph ph-user-circle user-img"></i>
+                    <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
+            </nav>
+
+        </header>
+        
+        <section class="main-content">
+
+            <section class="section-title">
+                <h1 class="header-title ingredients-title">
+                    Ingredientes
+                </h1>
+                <div class="new-ingredient">
+                    <!--Es un button-->
+                    <button class="btn-add ">Nuevo Ingrediente</button>
+                </div>
+            </section>
+
+            <section class="content-section form-section-product-ingredients container-column">
+                <div class="grid-table-container product-edit-ingredients-table">
+                    <header class="grid-table-row table-header">
+                        <section class="cell" id="nombre">Nombre</section>
+                        <section class="cell" id="nombre">Costo</section>
+                        <section class="cell later-hid" id="grupo-alimenticio"><span>Grupo</span> <span class="p-alimenticio display-none-mobile">Alimenticio</span></section>
+                        <section class="cell col-centered later-hid" id="origen">Origen</section>
+                        <section class="cell col-centered" id="acciones">Acciones</section>
+                    </header>
+
+                    <article class="grid-table-row product-edit-ingredients-table-content">
+                        <section class="cell" id="nombre-1">Carne de Renacuajo</section>
+                        <section class="cell">$0.50</section>
+                        <section class="cell later-hid" id="grupo-alimenticio-1">Proteínas</section>
+                        <section class="cell col-centered later-hid"><i class="ph ph-cow gray-icon" id="origen-1"></i></section>
+                        <section class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </section>
+                    </article>
+
+                    <article class="grid-table-row product-edit-ingredients-table-content">
+                        <section class="cell" id="nombre-2">Queso Cheddar</section>
+                        <section class="cell">$0.50</section>
+                        <section class="cell later-hid" id="grupo-alimenticio-2">Lacteos</section>
+                        <section class="cell col-centered later-hid"><i class="ph ph-cow gray-icon" id="origen-2"></i></section>
+                        <section class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </section>
+                    </article>
+
+                    <article class="grid-table-row product-edit-ingredients-table-content">
+                        <section class="cell" id="nombre-3">Lechuga</section>
+                        <section class="cell">$0.50</section>
+                        <section class="cell later-hid" id="grupo-alimenticio-3">Frutas y Verduras</section>
+                        <section class="cell col-centered later-hid"><i class="ph ph-plant gray-icon" id="origen-3"></i></section>
+                        <section class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </section>
+                    </article>
+
+                    <article class="grid-table-row product-edit-ingredients-table-content">
+                        <section class="cell" id="nombre-4">Tomate</section>
+                        <section class="cell">$0.50</section>
+                        <section class="cell later-hid" id="grupo-alimenticio-4">Frutas y Verduras</section>
+                        <section class="cell col-centered later-hid"><i class="ph ph-plant gray-icon" id="origen-4"></i></section>
+                        <section class="cell multiple-action-buttons">
+                            <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-pencil gray-icon"></i></button>
+                            <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                            <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-1"></i></button>
+                        </section>
+                    </article>
+
+                </div>
+            </section>
+
+        </section>
+
+    </section>
+</body>
+</html>
