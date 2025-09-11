@@ -28,7 +28,7 @@ export default [
       indent: ['warn', 2],
       'no-extra-parens': 'warn',
       'no-nested-ternary': 'error',
-      'linebreak-style': ['error', 'unix'],
+      'linebreak-style': 'off',
       'no-cond-assign': ['error', 'always'],
       'no-console': 'error',
       '@typescript-eslint/sort-type-constituents': 'error',
