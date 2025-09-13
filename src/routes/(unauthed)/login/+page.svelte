@@ -3,6 +3,7 @@
   import "$lib/css/components-css/icon.css";
   import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/1-login.css";
+  import Input from "$lib/Input.svelte";
 </script>
 
 <section class="login-container">
@@ -20,13 +21,7 @@
       <!-- FORM FIELD -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
-          <label for="login-user" class="label-color">Usuario*</label>
-          <input
-            type="email"
-            placeholder="Escribir"
-            id="login-user"
-            class="input-primary"
-          />
+          <Input label_for="text" label_text="Usuario*" input_type="email" input_placeholder="Usuario" input_id="input-id"/>
         </div>
         <div class="form-group">
           <label for="login-password" class="label-color">Contraseña*</label>
