@@ -26,6 +26,9 @@
     padding: .5em;
     border-radius: 0.5rem;
 }
+.btn-primary a{
+    color: white;
+}
 
 /* para que cuando pase el mouse por arriba, cambie le color del fondo */
 .btn-primary:hover {
