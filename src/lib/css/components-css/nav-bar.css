@@ -106,7 +106,7 @@ transform: translateY(-7px) rotate(-135deg);
     }
 }
 
-/* Tablet (401px – 768px) */
+/* Tablet (431px – 768px) */
 @media (min-width: 431px) and (max-width: 768px) {
     .main-nav {
         display: flex;
