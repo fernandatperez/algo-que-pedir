@@ -1,4 +1,5 @@
 <script>
+  import FormHeader from "$lib/form-header.svelte";
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/icon.css";
   import "$lib/css/components-css/input.css";
@@ -8,12 +9,7 @@
 <section class="login-container">
   <main class="login-section">
     <!-- HEADER -->
-    <header class="header-section">
-      <div class="pot-container">
-        <i class="ph-fill ph-cooking-pot"></i>
-      </div>
-      <span class="title-header">Algo que pedir</span>
-    </header>
+    <FormHeader title="Algo que pedir" />
 
     <!-- FORM -->
     <form class="form-container" id="form-login">
