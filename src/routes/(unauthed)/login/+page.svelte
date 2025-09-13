@@ -4,6 +4,7 @@
   import "$lib/css/components-css/icon.css";
   import "$lib/css/pages-css/1-login.css";
   import Input from "$lib/Input.svelte";
+  import Password from "$lib/Password.svelte";
 </script>
 
 <section class="login-container">
@@ -14,20 +15,11 @@
     <!-- FORM -->
     <form class="form-container" id="form-login">
       <!-- FORM FIELD -->
+       <!-- Chequear estos for y type -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
           <Input label_for="text" label_text="Usuario*" input_type="email" input_placeholder="Usuario" input_id="input-id"/>
-        </div>
-        <div class="form-group">
-          <label for="login-password" class="label-color">Contraseña*</label>
-          <div class="input-with-icon">
-            <input
-              type="password"
-              id="login-password"
-              class="input-primary input-password"
-            />
-            <i class="ph ph-eye-slash input-icon"></i>
-          </div>
+          <Password label_for="text" label_text="Contraseña*" password_type="password" password_id="password-id" />
         </div>
       </fieldset>
 

@@ -10,11 +10,16 @@ let {
 } = $props()
 
 </script>
-
-<label for={label_for} class="label-color">{label_text}</label>
-<input
-  type={input_type}
-  placeholder={input_placeholder}
-  id={input_id}
-  class="input-primary"
-/>
+<!-- 
+Sin esto, se separan los componentes de adentro como si todo estuviera adentro de "form-group"
+No toma los componentes como HTML sino que toma lo de adentro
+-->
+<div>
+  <label for={label_for} class="label-color">{label_text}</label>
+  <input
+    type={input_type}
+    placeholder={input_placeholder}
+    id={input_id}
+    class="input-primary"
+  />
+</div>
