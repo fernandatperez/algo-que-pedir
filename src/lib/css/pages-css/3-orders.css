@@ -1,14 +1,10 @@
-@import url(../nav-bars.css);
-@import url(../component-css/buttons.css);
+/* @import url(../components-css/nav-bar.css);
+@import url(../component-css/buttons.css); */
 
 :root {
     --dark-gray: #374151;
     --light-gray: #6b7280;
     --lighter-gray: #e5e7eb;
-}
-
-body {
-    background-color: var(--background-color-primary);
 }
 
 /* ============================= Layout Grid ============================= */
