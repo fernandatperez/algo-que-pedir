@@ -1,7 +1,7 @@
 <script>
-  import "$lib/css/component-css/buttons.css";
-  import "$lib/css/component-css/icon.css";
-  import "$lib/css/component-css/input.css";
+  import "$lib/css/components-css/buttons.css";
+  import "$lib/css/components-css/icon.css";
+  import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/1-login.css";
 </script>
 
@@ -43,7 +43,9 @@
 
       <!-- FORM ACTIONS -->
       <section class="form-actions">
-        <button class="btn btn-primary btn-login"><a href="/orders">Iniciar Sesión</a></button>
+        <button class="btn btn-primary btn-login"
+          ><a href="/orders">Iniciar Sesión</a></button
+        >
         <div class="register-section">
           <p>¿No tenes una cuenta?</p>
           <a href="/register" class="register-link">Registrate</a>

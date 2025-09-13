@@ -1,6 +1,6 @@
 <script>
-    import "$lib/css/component-css/user-details.css";
-    import "$lib/css/component-css/buttons.css";
+    import "$lib/css/components-css/user-details.css";
+    import "$lib/css/components-css/buttons.css";
     import "$lib/css/pages-css/3-orders.css";
 </script>
 
