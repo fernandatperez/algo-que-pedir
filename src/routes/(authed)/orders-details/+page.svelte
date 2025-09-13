@@ -68,7 +68,7 @@
                     <div class="cell product-cell ellipsis-text">
                         <div class="imgcontainer">
                             <img
-                                src="/assets/img/hamburguesa.png"
+                                src="/src/lib/assets/img/hamburguesa.png"
                                 alt="hamburguesa"
                                 class="hide-on-mobile"
                             />
@@ -92,7 +92,7 @@
                     <div class="cell product-cell">
                         <div class="imgcontainer">
                             <img
-                                src="/assets/img/pizza.png"
+                                src="/src/lib/assets/img/pizza.png"
                                 alt="pizza"
                                 class="hide-on-mobile"
                             />
@@ -113,7 +113,7 @@
                     <div class="cell product-cell ellipsis-text">
                         <div class="imgcontainer">
                             <img
-                                src="/assets/img/ensalada.png"
+                                src="/src/lib/assets/img/ensalada.png"
                                 alt="ensalada"
                                 class="hide-on-mobile"
                             />

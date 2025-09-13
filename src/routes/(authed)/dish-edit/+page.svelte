@@ -60,12 +60,9 @@
             />
           </div>
         </div>
-        <div
-          class="i
-                "
-        >
+        <div class="i">
           <img
-            src="../assets/img/hamburguesa2.jpg"
+            src="/src/lib/assets/img/hamburguesa2.jpg"
             alt="anvorguesa"
             class="img-product-edit"
           />
