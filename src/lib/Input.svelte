@@ -1,4 +1,5 @@
 <script lang="ts">
+import "$lib/css/components-css/input.css";
 
 // let {
 //   label_for = "",

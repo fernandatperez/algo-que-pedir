@@ -1,7 +1,6 @@
 <script>
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/icon.css";
-  import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/1-login.css";
   import Input from "$lib/Input.svelte";
 </script>
