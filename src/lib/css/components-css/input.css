@@ -13,9 +13,11 @@
 
 .input-group{
     width: 100%;
-    position: relative;
-    align-items: start;
+    /*position: relative;*/
+    align-items: flex-start;
+    flex-direction: column;
     gap: 0.1em;
+    display: flex;
 }
 
 .input-password{
