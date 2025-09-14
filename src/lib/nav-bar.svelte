@@ -24,7 +24,11 @@
       <span class="hidden"></span>
       <span class="hidden"></span>
     </label>
-    <i class="ph ph-user-circle user-img"></i>
+
+    <a href="/store-profile" class="icon-link" aria-label="perfil de la tienda">
+       <i class="ph ph-user-circle user-img"></i>
+    </a>
+    
     <div class="mobile-icons">
       <i class="ph ph-shopping-cart hidden"></i>
       <i class="ph ph-fork-knife hidden"></i>
