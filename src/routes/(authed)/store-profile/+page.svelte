@@ -10,12 +10,14 @@
   import CheckboxField from '$lib/CheckboxField.svelte';
   import ButtonGroup from '$lib/BttnGroup.svelte';
   import SectionTitle from '$lib/SectionTitle.svelte';
+    import { text } from "@sveltejs/kit";
 </script>
 
 <!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title">Información del local</h1>
+
+    <SectionTitle text="Información del local" />
     <form id="form-store-profile" class="container-column form-store-profile">
 
       <!-- Datos del Local -->

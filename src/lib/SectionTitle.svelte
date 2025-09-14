@@ -3,4 +3,4 @@
 </script>
 
 <!-- esta componentizacion esta pensada para los titulos que se comparten en todas las paginas-->
-<h1 class="title">{text}</h1>
+<h1 class="header-title">{text}</h1>
