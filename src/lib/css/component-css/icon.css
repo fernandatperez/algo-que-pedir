@@ -1,0 +1,24 @@
+.input-with-icon{
+    position: relative;
+}
+
+.input-icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* centra verticalmente */
+    font-size: 1.3em;
+    color: var(--icon-color);
+}
+
+.input-icon-dollar{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* centra verticalmente */
+    font-size: 1.3em;
+    color: var(--icon-color);
+    padding-left: 0.3em;
+}
+
+.gray-icon{
+    color: var(--icon-color);
+}

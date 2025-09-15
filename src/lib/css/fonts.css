@@ -1,0 +1,35 @@
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-regular {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header-title {
+  font-size: var(--font-h1);
+  font-weight: 700;
+  font-style: normal;
+  margin: 0;
+  align-self: flex-start; /* En todas las pages está a la izquierda */
+  /* tiene que estar dentro de flex */
+}
+
+.subtitle {
+  font-size: var(--font-h2);
+  font-weight: 600;
+  font-style: normal;
+  margin: 0;
+  align-self: flex-start; /* En todas las pages está a la izquierda */
+  /* tiene que estar dentro de flex */
+}
+
+.gray-text{
+    color: var(--font-color-secondary);
+}

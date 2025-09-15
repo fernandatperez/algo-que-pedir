@@ -3,4 +3,4 @@
   Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the
   documentation
 </p>
-<a href="pais">ir a pais</a>
+<a href="order-detail">DETALLE DE PEDIDO</a>
