@@ -1,7 +1,12 @@
-<script>
+<script lang="ts">
     import '$lib/css/components-css/orderCard.css'
 
   let {pedido} = $$props
+
+  const handleStateChange = () => {
+      console.log("Preparando pedido", pedido.pedidoId);
+      // Aca iria la logica del POST para cambiar el estado del pedido a "Preparado"
+  };    
 </script>
 
 <a href="/order-detail/{pedido.pedidoId}" class="order-card">
@@ -37,6 +42,6 @@
     </div>
 
     <div class="action-container">
-        <button class="btn btn-primary"> Preparar </button>
+        <button onclick={handleStateChange} class="btn btn-primary"> Preparar </button>
     </div>
 </a>

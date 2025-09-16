@@ -75,14 +75,14 @@
     };
 
     // Pongo clase active a boton de estado seleccionado
-    
+
     // Esto no funciona
     // Se recomienda usar class:active={condicion} de sveltekit en el boton
     /* const updateActiveTab = (newState: string) => {
         const tabs = document.querySelectorAll(".tab")
         console.log(tabs);
         tabs.forEach((tab) => {
-            if (tab.innerHTML === newState) {
+            if (tab.innerText === newState) {
                 tab.classList.add("active"); // no funciona
             } else {
                 tab.classList.remove("active"); // este fucniona ?
