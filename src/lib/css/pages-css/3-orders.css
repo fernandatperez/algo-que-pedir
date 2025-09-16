@@ -39,13 +39,9 @@
     position: relative;
     cursor: pointer;
     color: var(--light-gray);
-    font-weight: normal;
+    /* font-weight: normal; */
     padding-bottom: 1.5em;
     font-size: var(--font-text);
-}
-.tab.active { /* this is just for the screenshot */
-    font-weight: bold;
-    color: black;
 }
 .tab::after { /* pseudo-element drawn after each .tab */
     content: ""; /* this makes something render */
@@ -56,6 +52,9 @@
     height: 0.5em;
     /* background-color: transparent; invisible by default */
     background-color: var(--lighter-gray);
+}
+.tab.active {
+    color: black;
 }
 
 /* ============================= Grid ============================= */
