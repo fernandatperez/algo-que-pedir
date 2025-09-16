@@ -1,8 +1,10 @@
 <script>
+    import '$lib/css/components-css/orderCard.css'
+
   let {pedido} = $$props
 </script>
 
-<a href="/order-detail/{pedido.pedidoId}" class="grid-item">
+<a href="/order-detail/{pedido.pedidoId}" class="order-card">
     <header class="order">Pedido #{pedido.pedidoId}</header>
 
     <div class="user">
