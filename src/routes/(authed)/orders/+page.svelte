@@ -60,9 +60,10 @@
     // Todos los pedidos (ejemplo)
     let pedidos = $state([single_pedido, single_pedido, single_pedido, single_pedido, single_pedido, single_pedido, single_pedido]);
 
-    let estado = $state("Pendiente");
     
     // Filtrar pedidos por estado
+    let estado = $state("Pendiente");
+
     const filtrarPedidos = (estado: string) => pedidos.filter((pedido) => pedido.estado === estado)
     
     let pedidosFiltrados = $derived(filtrarPedidos(estado));
@@ -70,8 +71,24 @@
     const handleStateChange = (newState: string) => {
         estado = newState;
         console.log("Estado cambiado a:", estado);
-        // pedidosFiltrados = filtrarPedidos(estado);
+        // updateActiveTab(estado);
     };
+
+    // Pongo clase active a boton de estado seleccionado
+    
+    // Esto no funciona
+    // Se recomienda usar class:active={condicion} de sveltekit en el boton
+    /* const updateActiveTab = (newState: string) => {
+        const tabs = document.querySelectorAll(".tab")
+        console.log(tabs);
+        tabs.forEach((tab) => {
+            if (tab.innerHTML === newState) {
+                tab.classList.add("active"); // no funciona
+            } else {
+                tab.classList.remove("active"); // este fucniona ?
+            }
+        });
+    };*/
 
 </script>
 
@@ -81,10 +98,10 @@
     <section class="line">
         <div class="title-tabs">
             <nav class="tabs">
-                <button onclick={() => handleStateChange("Pendiente")} class="btn-empty tab active">Pendientes</button>
-                <button onclick={() => handleStateChange("Preparado")} class="btn-empty tab">Preparados</button>
-                <button onclick={() => handleStateChange("Entregado")} class="btn-empty tab">Entregados</button>
-                <button onclick={() => handleStateChange("Cancelado")} class="btn-empty tab">Cancelados</button>
+                <button onclick={() => handleStateChange("Pendiente")} class="btn-empty tab" class:active={estado == "Pendiente"}>Pendientes</button>
+                <button onclick={() => handleStateChange("Preparado")} class="btn-empty tab" class:active={estado == "Preparado"}>Preparados</button>
+                <button onclick={() => handleStateChange("Entregado")} class="btn-empty tab" class:active={estado == "Entregado"}>Entregados</button>
+                <button onclick={() => handleStateChange("Cancelado")} class="btn-empty tab" class:active={estado == "Cancelado"}>Cancelados</button>
             </nav>
         </div>
     </section>
