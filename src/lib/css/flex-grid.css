@@ -97,3 +97,9 @@
     width: 90vw;
   }
 }
+
+
+/* puse un gap-1 aca porque en el archivo order-details se utiliza un gap pero no existe esa clase */
+.gap-1 {
+    gap: 1em;
+}

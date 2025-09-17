@@ -1,5 +1,5 @@
 <script>
-  import FormHeader from "$lib/form-header.svelte";
+  import IconText from "$lib/IconText.svelte";
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/icon.css";
   import "$lib/css/pages-css/1-login.css";
@@ -10,23 +10,34 @@
 <section class="login-container">
   <main class="login-section">
     <!-- HEADER -->
-    <FormHeader title="Algo que pedir" />
+    <IconText wrapperClass="header-section" />
 
     <!-- FORM -->
     <form class="form-container" id="form-login">
       <!-- FORM FIELD -->
-       <!-- Chequear estos for y type -->
+      <!-- Chequear estos for y type -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
           <Input
-            description = "Usuario*"
-            value = "HOLA! Ah re loco"
-            input_type = "normal"
-            labelProps = {{ class:"label-color", for:"username"}}
-            inputProps = {{ class:"input-primary", type:"email", placeholder:"Usuario", id:"input-id", name:"username"}}
+            description="Usuario*"
+            value="HOLA! Ah re loco"
+            input_type="normal"
+            labelProps={{ class: "label-color", for: "username" }}
+            inputProps={{
+              class: "input-primary",
+              type: "email",
+              placeholder: "Usuario",
+              id: "input-id",
+              name: "username",
+            }}
           />
           <!-- Este se va -->
-          <Password label_for="text" label_text="Contraseña*" password_type="password" password_id="password-id" />
+          <Password
+            label_for="text"
+            label_text="Contraseña*"
+            password_type="password"
+            password_id="password-id"
+          />
         </div>
       </fieldset>
 

@@ -1,13 +1,15 @@
 <script lang="ts">
-
 </script>
+
 <div class="gif-container">
   <h1>Wooops, something went wrong</h1>
-  <img src="/src/lib/assets/img/Vídeo sin título.gif" alt="404-page-not-found" class="blend">
-  <p>Dont worry, you can go back where its still safe</p>
-  <div class="back-home">
-    <a href="/">Home</a>
-  </div>
+  <img
+    src="/src/lib/assets/img/Vídeo sin título.gif"
+    alt="404-page-not-found"
+    class="blend"
+  />
+  <h4>Dont worry, you can go back where its still safe</h4>
+  <a href="/" class="back-home">home</a>
 </div>
 
 <style>
@@ -24,7 +26,6 @@
     max-width: 400px;
     border-radius: 20px; /* esquinas suaves */
     box-shadow: 0 0 60px rgba(0, 150, 255, 0.5); /* halo difuminado */
-    
   }
 
   .back-home {
@@ -33,6 +34,7 @@
     background-color: rgba(36, 39, 216, 0.911);
     width: 60px;
     border-radius: 15%;
+    padding: 0.8em;
   }
 
   a {
