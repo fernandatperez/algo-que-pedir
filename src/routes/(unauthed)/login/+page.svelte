@@ -18,7 +18,14 @@
        <!-- Chequear estos for y type -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
-          <Input label_for="text" label_text="Usuario*" input_type="email" input_placeholder="Usuario" input_id="input-id"/>
+          <Input
+            description = "Usuario*"
+            value = "HOLA! Ah re loco"
+            input_type = "normal"
+            labelProps = {{ class:"label-color", for:"username"}}
+            inputProps = {{ class:"input-primary", type:"email", placeholder:"Usuario", id:"input-id", name:"username"}}
+          />
+          <!-- Este se va -->
           <Password label_for="text" label_text="Contraseña*" password_type="password" password_id="password-id" />
         </div>
       </fieldset>

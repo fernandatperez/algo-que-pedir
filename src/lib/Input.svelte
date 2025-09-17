@@ -1,25 +1,35 @@
 <script lang="ts">
-import "$lib/css/components-css/input.css";
+  import "$lib/css/components-css/input.css";
+  
+  enum InputTypes {
+    Normal = 'normal',
+    Hidden = 'hidden'
+  } // No lo toma, por algun motivo
 
-let {
-  label_for = "",
-  label_text = "",
-  input_type = "text",
-  input_placeholder = "",
-  input_id = ""
-} = $props()
+  interface InputPropsI {
+    description: string,
+    value: string, // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
+    input_type: string,
+    labelProps?: Record<string, unknown>, // -> any and unknown are the same in terms of what is assignable to them
+    inputProps?: Record<string, unknown>,
+    spanProps?: Record<string, unknown>
+    // HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
+  }
+
+  let {
+    description,
+    value,
+    input_type = InputTypes.Normal,
+    labelProps = {},
+    inputProps = {},
+    spanProps = {},
+  }: InputPropsI = $props()
 
 </script>
-<!-- 
-Sin esto, se separan los componentes de adentro como si todo estuviera adentro de "form-group"
-No toma los componentes como HTML sino que toma lo de adentro
--->
-<div>
-  <label for={label_for} class="label-color">{label_text}</label>
-  <input
-    type={input_type}
-    placeholder={input_placeholder}
-    id={input_id}
-    class="input-primary"
-  />
-</div>
+
+<label {...labelProps}>
+  <span {...spanProps}>
+    {description}
+  </span>
+  <input {...inputProps} />
+</label>
