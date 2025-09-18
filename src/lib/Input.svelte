@@ -1,18 +1,19 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
-  
-  enum InputTypes {
-    Normal = 'normal',
-    Hidden = 'hidden'
-  } // No lo toma, por algun motivo
+  import { InputTypes } from "$lib/types";
+
+  // enum InputTypes {
+  //   Normal = 'normal',
+  //   Hidden = 'hidden'
+  // } // No lo toma, por algun motivo
 
   interface InputPropsI {
-    description: string,
-    value: string, // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
-    input_type: string,
-    labelProps?: Record<string, unknown>, // -> any and unknown are the same in terms of what is assignable to them
-    inputProps?: Record<string, unknown>,
-    spanProps?: Record<string, unknown>
+    description: string;
+    value: string; // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
+    input_type: InputTypes; // -> Por que no anda si lo defino aca mismo y si lo importo si?
+    labelProps?: Record<string, unknown>; // -> any and unknown are the same in terms of what is assignable to them
+    inputProps?: Record<string, unknown>;
+    spanProps?: Record<string, unknown>;
     // HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
   }
 
@@ -23,13 +24,38 @@
     labelProps = {},
     inputProps = {},
     spanProps = {},
-  }: InputPropsI = $props()
+  }: InputPropsI = $props();
 
+  const eyeSlash = "ph ph-eye-slash";
+  const eye = "ph ph-eye";
 </script>
 
-<label {...labelProps}>
-  <span {...spanProps}>
-    {description}
-  </span>
-  <input {...inputProps} />
-</label>
+{#if input_type == InputTypes.Normal}
+  <label {...labelProps}>
+    <span {...spanProps}>
+      {description}
+    </span>
+    <input {...inputProps} />
+  </label>
+{:else}
+  <label {...labelProps}>
+    <span {...spanProps}>
+      {description}
+    </span>
+    <!-- Medio raro, pero me esta trayendo el icon.css de la pagina -->
+    <div class="input-with-icon">
+      <button class="input-icon" aria-label="password-show-btn">
+        <i class={eyeSlash}></i>
+      </button>
+      <input {...inputProps} />
+    </div>
+  </label>
+{/if}
+
+<!-- Solo para este component -->
+<style>
+  button {
+    top: 1em;
+    right: 0.3em;
+  }
+</style>

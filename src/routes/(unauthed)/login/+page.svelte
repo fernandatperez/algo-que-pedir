@@ -4,7 +4,7 @@
   import "$lib/css/components-css/icon.css";
   import "$lib/css/pages-css/1-login.css";
   import Input from "$lib/Input.svelte";
-  import Password from "$lib/Password.svelte";
+  import { InputTypes } from "$lib/types";
 </script>
 
 <section class="login-container">
@@ -18,11 +18,15 @@
       <!-- Chequear estos for y type -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
+          <!-- Username -->
           <Input
             description="Usuario*"
-            value="HOLA! Ah re loco"
-            input_type="normal"
-            labelProps={{ class: "label-color", for: "username" }}
+            value=""
+            input_type={InputTypes.Normal}
+            labelProps={{
+              class: "label-color",
+              for: "username",
+            }}
             inputProps={{
               class: "input-primary",
               type: "email",
@@ -31,21 +35,30 @@
               name: "username",
             }}
           />
-          <!-- Este se va -->
-          <Password
-            label_for="text"
-            label_text="Contraseña*"
-            password_type="password"
-            password_id="password-id"
+          <!-- Password -->
+          <Input
+            description="Contraseña*"
+            value=""
+            input_type={InputTypes.Hidden}
+            labelProps={{
+              class: "label-color",
+              for: "username",
+            }}
+            inputProps={{
+              class: "input-primary",
+              type: "password",
+              id: "password-id",
+              name: "password",
+            }}
           />
         </div>
       </fieldset>
 
       <!-- FORM ACTIONS -->
       <section class="form-actions">
-        <button class="btn btn-primary btn-login"
-          ><a href="/orders">Iniciar Sesión</a></button
-        >
+        <button class="btn btn-primary btn-login">
+          <a href="/orders">Iniciar Sesión</a>
+        </button>
         <div class="register-section">
           <p>¿No tenes una cuenta?</p>
           <a href="/register" class="register-link">Registrate</a>
