@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "$lib/css/style.css"
   import "$lib/css/fonts.css"
   import "$lib/css/nav-bars.css"
@@ -15,11 +15,11 @@
   import GridRow from "$lib/components/GridRow.svelte"
 
   // 'page' is deprecated dice
-  import { page } from "$app/stores";
-  // import { page } from "$app/state";
+  // import { page } from "$app/stores"
+  import { page } from "$app/state";
 
   // id del pedido para hacer fetch/find() del pedido
-  const pedidoId = $page.params.pedidoId;
+  const pedidoId = page.params.pedidoId
 
 
   let pedido = $state({

@@ -53,7 +53,7 @@
     /* background-color: transparent; invisible by default */
     background-color: var(--lighter-gray);
 }
-.tab.active {
+.active {
     color: black;
 }
 

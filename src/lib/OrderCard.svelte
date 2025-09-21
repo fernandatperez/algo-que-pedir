@@ -1,11 +1,12 @@
 <script lang="ts">
     import '$lib/css/components-css/orderCard.css'
 
-  let {pedido} = $$props
+  let { pedido } = $props()
 
   const handleStateChange = () => {
       console.log("Preparando pedido", pedido.pedidoId);
       // Aca iria la logica del POST para cambiar el estado del pedido a "Preparado"
+      // Hay que ver en que estado está y a qué estado cambia !!
   };    
 </script>
 

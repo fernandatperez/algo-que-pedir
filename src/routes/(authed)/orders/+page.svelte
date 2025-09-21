@@ -9,7 +9,7 @@
     import ensaladaImg from "$lib/assets/img/ensalada.png";
 
     // Ejemplo de pedido
-    let single_pedido = $state({
+    let singlePedido = $state({
         pedidoId: 12345,
         cliente: {
             nombre: "Sofía Miller",
@@ -57,11 +57,54 @@
         pago: "Tarjeta de crédito",
     });
 
+    // Ejemplo de pedido
+    let otroPedido = $state({
+        pedidoId: 54545,
+        cliente: {
+            nombre: "Ricardo Fort",
+            usuario: "rickyricon",
+            direccion: {
+                calle: "Av Corrientes 354",
+                latitud: 42.78,
+                longitud: -73.06,
+            },
+        },
+        local: {
+            nombre: "McDonalds",
+            direccion: {
+                calle: "McCalle 123",
+                latitud: 41.761,
+                longitud: -73.942,
+            },
+        },
+        platos: [
+            {
+                nombre: "Hamburguesa con queso",
+                descripcion:
+                    "Hamburguesa con queso acompañada de papas fritas y bebida",
+                cantidad: 1,
+                precio: 12.0,
+                imagen: hamburguesaImg,
+            },
+            {
+                nombre: "Ensalada",
+                descripcion: "De hojas frescas y vegetales organicos",
+                cantidad: 1,
+                precio: 10.0,
+                imagen: ensaladaImg,
+            },
+        ],
+        estado: "Preparado",
+        cupon: null,
+        pago: "QR",
+    });
+
     // Todos los pedidos (ejemplo)
-    let pedidos = $state([single_pedido, single_pedido, single_pedido, single_pedido, single_pedido, single_pedido, single_pedido]);
+    let pedidos = $state([singlePedido, otroPedido, singlePedido, singlePedido, singlePedido, singlePedido, singlePedido]);
 
     
     // Filtrar pedidos por estado
+    // mejor pedirlo filtrado al back, y no pedir todo
     let estado = $state("Pendiente");
 
     const filtrarPedidos = (estado: string) => pedidos.filter((pedido) => pedido.estado === estado)
@@ -71,6 +114,7 @@
     const handleStateChange = (newState: string) => {
         estado = newState;
         console.log("Estado cambiado a:", estado);
+        // console.log("Pedidos filtrados:", pedidosFiltrados);
         // updateActiveTab(estado);
     };
 
