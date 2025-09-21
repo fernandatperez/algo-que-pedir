@@ -7,13 +7,17 @@
   //   Hidden = 'hidden'
   // } // No lo toma, por algun motivo
 
+  type OptionalProps = {
+    [key: string]: unknown // diff vals
+  }
+
   interface InputPropsI {
     description: string;
     value: string; // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
     input_type: InputTypes; // -> Por que no anda si lo defino aca mismo y si lo importo si?
-    labelProps?: Record<string, unknown>; // -> any and unknown are the same in terms of what is assignable to them
-    inputProps?: Record<string, unknown>;
-    spanProps?: Record<string, unknown>;
+    labelProps?: OptionalProps; // -> any and unknown are the same in terms of what is assignable to them. Unknown contains each and every type in TypeScript
+    inputProps?: OptionalProps;
+    spanProps?: OptionalProps;
     // HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
   }
 
@@ -26,10 +30,12 @@
     spanProps = {},
   }: InputPropsI = $props();
 
+  // Icon classes
   const eyeSlash = "ph ph-eye-slash";
   const eye = "ph ph-eye";
 
-  let visibility = $state(false);
+  type Visibility = true | false
+  let visibility: Visibility = $state(false);
 
   function changeVisibility() {
     if (!visibility) {
