@@ -1,7 +1,7 @@
 <script lang="ts">
   import Input from "$lib/Input.svelte";
 
-  interface InputField {
+ interface InputField {
     label_for: string;
     label_text: string;
     input_placeholder: string;

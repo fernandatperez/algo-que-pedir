@@ -1,3 +1,4 @@
+<!-- no entiendo que me esta tomando como 'legacy', no encuentro nada deprecado -->
 <script lang="ts">
   import "$lib/css/flex-grid.css";
   import "$lib/css/fonts.css";
@@ -8,7 +9,12 @@
   import "$lib/css/pages-css/9-store-profile.css";
   import Input from "$lib/Input.svelte";
   import FieldsetGroup from "$lib/FieldsetGroup.svelte";
-  import { storeInfo, storeDir, storeCommission, paymentMethods } from "$lib/data/formData";
+  import {
+    storeInfo,
+    storeDir,
+    storeCommission,
+    paymentMethods,
+  } from "$lib/data/formData";
 </script>
 
 <main class="container-column">
@@ -17,28 +23,31 @@
 
     <form id="form-store-profile" class="container-column form-store-profile">
       <!-- Datos del Local -->
-      <div class="grid-cols-2 input-group-dir ">
-      <FieldsetGroup {...storeInfo} />
-      <div class="img-store-container">
-        <img
-          src="/src/lib/assets/img/CarlosBakeShop.jpg"
-          alt="local"
-          class="img-store-profile"
-        />
-      </div>
+      <div class="grid-cols-2 input-group-dir">
+        <FieldsetGroup {...storeInfo} />
+        <div class="img-store-container">
+          <img
+            src="/src/lib/assets/img/CarlosBakeShop.jpg"
+            alt="local"
+            class="img-store-profile"
+          />
+        </div>
       </div>
 
       <!-- Dirección -->
-      <FieldsetGroup {...storeDir}  />
+      <FieldsetGroup {...storeDir} />
 
       <!-- Porcentajes -->
-      <FieldsetGroup {...storeCommission}/>
+      <FieldsetGroup {...storeCommission} />
 
       <!-- Métodos de pago -->
-      <fieldset name="store-payment-methods" class="container-column content-section">
+      <fieldset
+        name="store-payment-methods"
+        class="container-column content-section"
+      >
         <h2 class="subtitle">Métodos de Pago</h2>
         <div class="payments-checkbox-group">
-          {#each paymentMethods as method}
+          {#each paymentMethods as method(method.id)}
             <label for={method.id} class="label-color">
               <input
                 type="checkbox"
