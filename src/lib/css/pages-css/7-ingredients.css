@@ -4,12 +4,12 @@
 }
 /* ------------------- */
 
-.main-content { /* se le puede cambiar el nombre */
+.main-content-ingredients { /* se le puede cambiar el nombre */
     row-gap: 0; /* gap entre secciones */
     padding: 0; /* padding-bottom para que no joda el header en mobile */
 }
 
-.header-title {
+.header-title-ingredients {
     padding: 0;
 }
 
@@ -23,8 +23,10 @@
 }
 
 /* ------------------- */
-.content-section {
+.content-section-ingredients {
+    background-color: white;
     padding: 0;
+    width: 80vw;
 }
 /* ------------- Ingredients table ---------- */
 .multiple-action-buttons {
@@ -39,6 +41,24 @@
 .grid-table-container {
     margin: 0;
 }
+
+/* ------------- Form ---------- */
+
+.form-nuevo-ingrediente {
+    display: flex;
+    gap: 8px;
+    /* margin: 10px 0; */
+    align-items: center;
+  }
+
+  /* .form-nuevo-ingrediente input,
+  .form-nuevo-ingrediente select {
+    padding: 4px;
+  } */
+
+  .form-nuevo-ingrediente button {
+    padding: 4px 10px;
+  }
 
 /* ----------- Icons ------------- */
 .ingredients-table-icons {
