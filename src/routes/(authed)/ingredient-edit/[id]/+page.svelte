@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
   import "$lib/css/component-css/input.css";
@@ -9,6 +9,8 @@
   import "$lib/css/pages-css/8-ingredient-edit.css";
   
   import { goto } from '$app/navigation';
+
+  import type { IngredientType } from '$lib/type/ingredient';
 
   function irAIngredients () {
     goto ('/ingredients')
@@ -23,7 +25,7 @@
       <form class="ingredient-edit-section" id="form-ingredient-edit">
         <section class="input-group">
           <label class="label-color">Nombre del ingrediente*</label>
-          <input type="text" placeholder="Lechuga" class="input-primary" required>
+          <input type="text" placeholder="" class="input-primary" required>
         </section>
 
         <section class="input-group">

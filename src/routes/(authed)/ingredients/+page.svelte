@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
   import "$lib/css/component-css/grid-table.css";
@@ -7,42 +7,20 @@
   import "$lib/css/component-css/input.css";
   import "$lib/css/pages-css/7-ingredients.css";
 
-  import Ingredient from "$lib/Ingredient.svelte";
+  import Ingredient from "$lib/components/Ingredient.svelte";
+
+  import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients";
+  import type { IngredientType } from "$lib/type/ingredient";
+  import { createEmptyIngredient } from "$lib/type/ingredient";
 
   // Valores reactivos $state()
   // te permite crear un estado reactivo , lo que significa que tu interfaz de usuario reacciona cuando cambia.
   // de padre a hijo
   // https://svelte.dev/docs/svelte/$state
-  let ingredientes = $state([
-    {
-      id: 1,
-      nombre: "Carne de Renacuajo",
-      costo: "$0.50",
-      grupoAlimenticio: "Proteínas",
-      origenIcon: "ph-cow",
-    },
-    {
-      id: 2,
-      nombre: "Queso Cheddar",
-      costo: "$0.50",
-      grupoAlimenticio: "Lácteos",
-      origenIcon: "ph-cow",
-    },
-    {
-      id: 3,
-      nombre: "Lechuga",
-      costo: "$0.10",
-      grupoAlimenticio: "Frutas y Verduras",
-      origenIcon: "ph-plant",
-    },
-    {
-      id: 4,
-      nombre: "Tomate",
-      costo: "$0.20",
-      grupoAlimenticio: "Frutas y Verduras",
-      origenIcon: "ph-plant",
-    },
-  ]);
+  let ingredientes = $state<IngredientType[]>(INGREDIENT_MOCK);
+
+  // Creamos un objeto vacío usando la funcion
+  let nuevoIngrediente = $state(createEmptyIngredient());
 
   const gruposAlimenticios = [
     { value: "frutas", label: "Frutas y Verduras", icon: "ph-plant" },
@@ -56,37 +34,29 @@
   // Estado para mostrar/ocultar formulario
   let mostrandoFormulario = $state(false);
 
-  // Inputs del nuevo ingrediente
-  let nuevoNombre = $state("");
-  let nuevoCosto = $state("");
-  let nuevoGrupo = $state("");
-
   // Acción: agregar ingrediente
   function guardarIngrediente() {
     // trim: eliminar los espacios en blanco al inicio y al final del texto.
-    if (!nuevoNombre.trim()) return;
+    if (!nuevoIngrediente.nombre.trim()) return;
 
+    // Asigno un id al nuevo ingrediente
+    nuevoIngrediente.id = ingredientes.length + 1;
+
+    // Asigno el icono correspondiente al grupo alimenticio seleccionado
     const grupoSeleccionado = gruposAlimenticios.find(
-      (grupo) => grupo.value === nuevoGrupo,
+      (grupo) => grupo.value === nuevoIngrediente.grupoAlimenticio,
     );
-
-    const nuevoIngrediente = {
-      id: ingredientes.length + 1,
-      nombre: nuevoNombre.trim(),
-      costo: "$" + nuevoCosto || "$0.00",
-      grupoAlimenticio: grupoSeleccionado?.label || "Sin grupo",
-      origenIcon: grupoSeleccionado?.icon || "ph-question",
-    };
+    nuevoIngrediente.origenIcon = grupoSeleccionado?.icon || "ph-question";
 
     // Agrego el nuevoIngrediente a la lista
-    // ingredientes.push(nuevoIngrediente);
-    //  Tambien se puede hacer asi, cual es la diferencia???
     ingredientes = [nuevoIngrediente, ...ingredientes];
 
+    reset();
+  }
+
+  function reset(){
     // Reset
-    nuevoNombre = "";
-    nuevoCosto = "";
-    nuevoGrupo = "";
+    nuevoIngrediente = createEmptyIngredient();
     mostrandoFormulario = false;
   }
 
@@ -131,7 +101,7 @@
               <input
                 class="input-primary"
                 placeholder="Huevo"
-                bind:value={nuevoNombre}
+                bind:value={nuevoIngrediente.nombre}
                 required
               />
               <!-- bind:value permite que fluyan en sentido inverso, de hijo a padre -->
@@ -140,32 +110,34 @@
               <input
                 class="input-primary"
                 placeholder="$0.80"
-                bind:value={nuevoCosto}
+                bind:value={nuevoIngrediente.costo}
                 required
               />
             </section>
             <section class="cell">
-              <select class="input-primary" bind:value={nuevoGrupo}>
+              <select class="input-primary" bind:value={nuevoIngrediente.grupoAlimenticio}>
                 <option value="" disabled selected hidden>Seleccionar</option>
+
                 {#each gruposAlimenticios as grupo}
                   <option value={grupo.value}> {grupo.label} </option>
                 {/each}
+
               </select>
             </section>
           </form>
         {/if}
 
-        <!-- Renderizamos cada ingrediente -->
+        <!-- Renderizamos cada ingrediente -> Props { ingredient: Ingredient } -->
         <!-- Usamos el rest property {...ing} para pasar todas las propiedades de la lista de ingredientes -->
         {#each ingredientes as ing}
-          <!-- Componente -->
-          <Ingredient {...ing} />
+          <Ingredient ingredient={ing} />
         {/each}
+
       </div>
     </section>
     {#if mostrandoFormulario}
       <section class="btn-group-actions btn-group-new-ingredient">
-        <button form="form-ingredient" class="btn btn-secondary" onclick={() => (mostrandoFormulario = false)}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+        <button form="form-ingredient" class="btn btn-secondary" onclick={() => (reset())}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
         <button form="form-ingredient" class="btn btn-primary" onclick={guardarIngrediente} type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
       </section>
     {/if}
