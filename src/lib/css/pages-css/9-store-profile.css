@@ -47,6 +47,14 @@
 
 }
 
+.stacked-inputs {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem; /* Espaciado entre inputs */
+}
+
+
 .payment-checkbox {
     width: fit-content;
 }
