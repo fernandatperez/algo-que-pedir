@@ -18,23 +18,25 @@
 <section class="container-column">
   <section class="main-content">
 
-    <h1 class="header-title section-title"> Editar ingrediente </h1>
+    <h1 class="header-title"> Editar ingrediente </h1>
 
-      <article class="ingredient-edit-section">
+      <form class="ingredient-edit-section" id="form-ingredient-edit">
         <section class="input-group">
           <label class="label-color">Nombre del ingrediente*</label>
-          <input type="text" placeholder="Lechuga" class="input-primary">
+          <input type="text" placeholder="Lechuga" class="input-primary" required>
         </section>
+
         <section class="input-group">
           <label class="label-color">Costo*</label>
           <div class="input-with-icon">
               <i class="ph ph-currency-dollar-simple input-icon-dollar"></i>
-              <input type="text" placeholder="5" class="input-primary input-ingredient-edit">
+              <input type="text" placeholder="5" class="input-primary input-ingredient-edit" required>
           </div>
         </section>
+
         <section class="input-group">
           <label class="label-color">Grupo Alimenticio</label>
-          <select class="input-primary">
+          <select class="input-primary" required>
             <option value="" disabled selected hidden>Seleccionar</option>
             <option value="frutas">Frutas y verduras</option>
             <option value="verduras">Proteinas</option>
@@ -42,6 +44,7 @@
             <option value="cereales">Lacteos</option>
           </select>
         </section>
+
         <section class="animal-origin-display input-group">
           <h3>Origen animal</h3>
           <div class="slide-button">
@@ -51,13 +54,14 @@
             </div>
           </div>
         </section>
-      </article>
-      
-      <section class="btn-group-actions">
-        <button class="btn btn-secondary" on:click={irAIngredients}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
-        <button class="btn btn-primary">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
-      </section>
 
+      </form>
+
+      <section class="btn-group-actions">
+        <button form="form-ingredient-edit" class="btn btn-secondary" on:click={irAIngredients}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+        <button form="form-ingredient-edit" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
+      </section>
+      
   </section>
 
 </section>

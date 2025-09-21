@@ -9,8 +9,8 @@
 
   let { id, nombre, costo, grupoAlimenticio, origenIcon } = $props()
 
-  function irAIngredientEdit () {
-    goto ('/ingredient-edit')
+  function irAIngredientEdit(id: number) {
+    goto(`/ingredient-edit/${id}`);
   }
 </script>
 
@@ -22,7 +22,7 @@
   <section class="cell multiple-action-buttons">
       <button disabled class="icon-action-btn hidden-icons"><i class="ph ph-eye gray-icon"></i></button>
       <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
-      <button class="icon-action-btn" on:click={irAIngredientEdit}><i class="ph ph-pencil gray-icon"></i></button>
+      <button class="icon-action-btn" onclick={() => irAIngredientEdit(id)}><i class="ph ph-pencil gray-icon"></i></button>
       <span><i class="ph ph-line-vertical gray-icon"></i></span>
       <button disabled class="icon-action-btn"><i class="ph ph-trash gray-icon" id="acciones-{id}"></i></button>
   </section>
