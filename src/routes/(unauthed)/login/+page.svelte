@@ -55,9 +55,7 @@
 
       <!-- FORM ACTIONS -->
       <section class="form-actions">
-        <a href="/orders" class="btn btn-primary btn-login">
-            Iniciar Sesión
-        </a>
+        <a href="/orders" class="btn btn-primary btn-login"> Iniciar Sesión </a>
         <!-- Como metemos validacion del back aca? No del real sino Mock -->
         <div class="register-section">
           <p>¿No tenes una cuenta?</p>
