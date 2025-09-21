@@ -46,7 +46,6 @@
             }}
             inputProps={{
               class: "input-primary",
-              type: "password",
               id: "password-id",
               name: "password",
             }}
@@ -56,9 +55,10 @@
 
       <!-- FORM ACTIONS -->
       <section class="form-actions">
-        <button class="btn btn-primary btn-login">
-          <a href="/orders">Iniciar Sesión</a>
-        </button>
+        <a href="/orders" class="btn btn-primary btn-login">
+            Iniciar Sesión
+        </a>
+        <!-- Como metemos validacion del back aca? No del real sino Mock -->
         <div class="register-section">
           <p>¿No tenes una cuenta?</p>
           <a href="/register" class="register-link">Registrate</a>

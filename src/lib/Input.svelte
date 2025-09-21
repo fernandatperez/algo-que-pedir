@@ -28,6 +28,17 @@
 
   const eyeSlash = "ph ph-eye-slash";
   const eye = "ph ph-eye";
+
+  let visibility = $state(false);
+
+  function changeVisibility() {
+    if (!visibility) {
+      visibility = true;
+    } else {
+      visibility = false;
+    }
+  }
+
 </script>
 
 {#if input_type == InputTypes.Normal}
@@ -44,15 +55,19 @@
     </span>
     <!-- Medio raro, pero me esta trayendo el icon.css de la pagina -->
     <div class="input-with-icon">
-      <button class="input-icon" aria-label="password-show-btn">
-        <i class={eyeSlash}></i>
+      <button
+        class="input-icon"
+        aria-label="password-show-btn"
+        type="button"
+        onclick={changeVisibility}
+      >
+        <i class={visibility ? eye : eyeSlash}></i>
       </button>
-      <input {...inputProps} />
+      <input type={visibility ? "text" : "password"} {...inputProps} />
     </div>
   </label>
 {/if}
 
-<!-- Solo para este component -->
 <style>
   button {
     top: 1em;
