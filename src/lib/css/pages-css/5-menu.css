@@ -2,6 +2,11 @@
 /* @import url(../nav-bars.css); */
 /* @import url(../component-css/buttons.css); */
 
+/* le puse este margin porque en el modelo esta mas separadp*/
+.margin-2em{
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
 
 .main-style-menu{
     background-color: var(--background-color-alternate);

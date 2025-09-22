@@ -32,6 +32,7 @@ export default [
       'no-cond-assign': ['error', 'always'],
       'no-console': 'error',
       '@typescript-eslint/sort-type-constituents': 'error',
+      '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
   {
