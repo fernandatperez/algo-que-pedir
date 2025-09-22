@@ -1,15 +1,8 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
   import { InputTypes } from "$lib/types";
-
-  // enum InputTypes {
-  //   Normal = 'normal',
-  //   Hidden = 'hidden'
-  // } // No lo toma, por algun motivo
-
-  type OptionalProps = {
-    [key: string]: unknown // diff vals
-  }
+  import type { OptionalProps } from "$lib/types"
+  import { toggleVariable } from "$lib/toggleFunction";
 
   interface InputPropsI {
     description: string;
@@ -18,12 +11,12 @@
     labelProps?: OptionalProps; // -> any and unknown are the same in terms of what is assignable to them. Unknown contains each and every type in TypeScript
     inputProps?: OptionalProps;
     spanProps?: OptionalProps;
-    // HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
+    //HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
   }
 
   let {
     description,
-    value,
+    value = $bindable(""),
     input_type = InputTypes.Normal,
     labelProps = {},
     inputProps = {},
@@ -37,22 +30,14 @@
   type Visibility = true | false
   let visibility: Visibility = $state(false);
 
-  function changeVisibility() {
-    if (!visibility) {
-      visibility = true;
-    } else {
-      visibility = false;
-    }
-  }
-
 </script>
 
 {#if input_type == InputTypes.Normal}
   <label {...labelProps}>
-    <span {...spanProps}>
+    <span class="label-color" {...spanProps}>
       {description}
     </span>
-    <input {...inputProps} />
+    <input {...inputProps} bind:value={value}/>
   </label>
 {:else}
   <label {...labelProps}>
@@ -65,7 +50,7 @@
         class="input-icon"
         aria-label="password-show-btn"
         type="button"
-        onclick={changeVisibility}
+        onclick={() => visibility = toggleVariable(visibility)}
       >
         <i class={visibility ? eye : eyeSlash}></i>
       </button>
@@ -78,5 +63,11 @@
   button {
     top: 1em;
     right: 0.3em;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
   }
 </style>
