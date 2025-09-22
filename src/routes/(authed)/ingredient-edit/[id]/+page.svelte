@@ -45,7 +45,7 @@
         <section class="input-group">
           <label class="label-color" for="form-ingredient-group">Grupo Alimenticio</label>
           <select id="form-ingredient-group" class="input-primary" required>
-            <option value="" disabled selected hidden>Seleccionar</option>
+            <option value="" disabled selected hidden>{ingredient.foodGroup}</option>
             {#each foodGroups as grupo}
               <option value={grupo.value}> {grupo.label} </option>
             {/each}
@@ -55,11 +55,11 @@
         <section class="animal-origin-display input-group">
           <h3>Origen animal</h3>
           <div class="slide-button">
-            <input type="checkbox" class="toggle">
+            <input type="checkbox" class="toggle" id="switch-button" checked = {ingredient.esOrigenAnimal} />
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
-          </div>
+          </div>          
         </section>
 
       </form>

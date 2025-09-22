@@ -28,8 +28,10 @@ export class IngredientType {
     public name: string = ''.trim(),
     public cost: number = 0,
     public foodGroup: FoodGroupValue = 'Frutas y Verduras',
-    public originIcon: string = ''
+    public originIcon: string = '',
+    public esOrigenAnimal: boolean = true
   ) {}
+  
 }
 // export interface IngredientType {
 //   id: number;
