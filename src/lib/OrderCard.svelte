@@ -1,29 +1,34 @@
 <script lang="ts">
     import '$lib/css/components-css/orderCard.css'
+    import type { Order } from './type/order';
 
-  let { pedido } = $props()
+  let { order } : {order: Order }= $props()
 
   const handleStateChange = () => {
-      console.log("Preparando pedido", pedido.pedidoId);
+      console.log("Preparando pedido", order.id);
+      order.estado = "PREPARADO"
+      console.log("Pedido preparado", order.id);
       // Aca iria la logica del POST para cambiar el estado del pedido a "Preparado"
       // Hay que ver en que estado está y a qué estado cambia !!
   };    
 </script>
 
-<a href="/order-detail/{pedido.pedidoId}" class="order-card">
-    <header class="order">Pedido #{pedido.pedidoId}</header>
-
-    <div class="user">
-        <i class="ph ph-user-circle"></i>
-        <div class="user-info">
-            <div class="name">{pedido.cliente.nombre}</div>
-            <div class="username">
-                <strong>usuario:</strong> {pedido.cliente.usuario}
+<div class="order-card">
+    <a href="/order-detail/{order.id}">
+        <header class="order">Pedido #{order.id}</header>
+    
+        <div class="user">
+            <i class="ph ph-user-circle"></i>
+            <div class="user-info">
+                <div class="name">{order.nombreCliente}</div>
+                <div class="username">
+                    <strong>usuario:</strong> {order.usuarioCliente}
+                </div>
             </div>
         </div>
-    </div>
+    </a>
 
-    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+    <p class="details">Hora: {order.createdAt.toLocaleString()} PM | Artículos: { order.platos.length} | Total: $ {order.precioTotal()}</p>
 
     <address class="address-container">
         <div class="pin-container">
@@ -31,18 +36,18 @@
         </div>
         <div class="address-coordinates">
             <span class="address"
-                ><strong>{pedido.cliente.direccion.calle}</strong></span
+                ><strong>{order.direccionCliente}</strong></span
             >
-            <div class="coordinates">Lat: {pedido.cliente.direccion.latitud}, Long: {pedido.cliente.direccion.longitud}</div>
+            <div class="coordinates">Lat: {order.latitudCliente}, Long: {order.longitudCliente}</div>
         </div>
     </address>
 
     <div class="payment">
         <i class="ph ph-credit-card"></i>
-        <span class="payment-text">Pago con {pedido.pago}</span>
+        <span class="payment-text">Pago con <b>{order.tipoPago}</b></span>
     </div>
 
     <div class="action-container">
         <button onclick={handleStateChange} class="btn btn-primary"> Preparar </button>
     </div>
-</a>
+</div>
