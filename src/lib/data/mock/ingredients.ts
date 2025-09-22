@@ -1,8 +1,8 @@
 import type { IngredientType } from '$lib/type/ingredient'
 
 export const INGREDIENT_MOCK: IngredientType[] = [
-  { id: 1, nombre: 'Carne de Renacuajo', costo: '$0.50', grupoAlimenticio: 'Proteínas', origenIcon: 'ph-cow' },
-  { id: 2, nombre: 'Queso Cheddar', costo: '$0.50', grupoAlimenticio: 'Lácteos', origenIcon: 'ph-cow' },
-  { id: 3, nombre: 'Lechuga', costo: '$0.50', grupoAlimenticio: 'Frutas y Verduras', origenIcon: 'ph-plant' },
-  { id: 4, nombre: 'Tomate', costo: '$0.50', grupoAlimenticio: 'Frutas y Verduras', origenIcon: 'ph-plant' }
+  { id: 1, name: 'Carne de Renacuajo', cost: 0.70, foodGroup: 'Proteínas', originIcon: 'ph-cow' },
+  { id: 2, name: 'Queso Cheddar', cost: 0.50, foodGroup: 'Lácteos', originIcon: 'ph-cow' },
+  { id: 3, name: 'Lechuga', cost: 0.40, foodGroup: 'Frutas y Verduras', originIcon: 'ph-plant' },
+  { id: 4, name: 'Tomate', cost: 0.20, foodGroup: 'Frutas y Verduras', originIcon: 'ph-plant' }
 ]

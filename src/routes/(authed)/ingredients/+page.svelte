@@ -10,54 +10,42 @@
   import Ingredient from "$lib/components/Ingredient.svelte";
 
   import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients";
-  import type { IngredientType } from "$lib/type/ingredient";
-  import { createEmptyIngredient } from "$lib/type/ingredient";
+  import { IngredientType } from "$lib/type/ingredient";
+  // import { createEmptyIngredient } from "$lib/type/ingredient";
+  import { foodGroups, type FoodGroupValue } from '$lib/type/ingredient';
 
   // Valores reactivos $state()
-  // te permite crear un estado reactivo , lo que significa que tu interfaz de usuario reacciona cuando cambia.
-  // de padre a hijo
   // https://svelte.dev/docs/svelte/$state
-  let ingredientes = $state<IngredientType[]>(INGREDIENT_MOCK);
+  let ingredients = $state<IngredientType[]>(INGREDIENT_MOCK);
 
-  // Creamos un objeto vacío usando la funcion
-  let nuevoIngrediente = $state(createEmptyIngredient());
-
-  const gruposAlimenticios = [
-    { value: "frutas", label: "Frutas y Verduras", icon: "ph-plant" },
-    { value: "proteinas", label: "Proteínas", icon: "ph-cow" },
-    { value: "cereales", label: "Cereales y tuberculos", icon: "ph-grain" },
-    { value: "lacteos", label: "Lácteos", icon: "ph-cow" },
-    { value: "grasas", label: "Grasas y aceites", icon: "ph-cow" },
-    { value: "azucares", label: "Azucares y dulces", icon: "ph-jar" },
-  ];
-
+  // Creamos un ingrediente nuevo 
+  // <IngredientType> → es el tipo que va a tener tu estado (newIngredient)
+  // new IngredientType() → es el valor inicial que le pasás al estado
+  let newIngredient = $state<IngredientType>(new IngredientType());
+  
   // Estado para mostrar/ocultar formulario
-  let mostrandoFormulario = $state(false);
+  let showForm = $state(false);
 
-  // Acción: agregar ingrediente
-  function guardarIngrediente() {
-    // trim: eliminar los espacios en blanco al inicio y al final del texto.
-    if (!nuevoIngrediente.nombre.trim()) return;
-
+  function saveIngredient() {
     // Asigno un id al nuevo ingrediente
-    nuevoIngrediente.id = ingredientes.length + 1;
+    newIngredient.id = ingredients.length + 1;
 
     // Asigno el icono correspondiente al grupo alimenticio seleccionado
-    const grupoSeleccionado = gruposAlimenticios.find(
-      (grupo) => grupo.value === nuevoIngrediente.grupoAlimenticio,
+    const selectedgroup = foodGroups.find(
+      (grupo) => grupo.value === newIngredient.foodGroup,
     );
-    nuevoIngrediente.origenIcon = grupoSeleccionado?.icon || "ph-question";
+    newIngredient.originIcon = selectedgroup?.icon || "ph-question";
 
-    // Agrego el nuevoIngrediente a la lista
-    ingredientes = [nuevoIngrediente, ...ingredientes];
+    // Agrego el newIngredient a la lista
+    ingredients = [newIngredient, ...ingredients];
 
     reset();
   }
 
   function reset(){
     // Reset
-    nuevoIngrediente = createEmptyIngredient();
-    mostrandoFormulario = false;
+    newIngredient = new IngredientType();
+    showForm = false;
   }
 
   // puedo usar $effect para que se guarde la informacion aunque recargue la pagina????
@@ -72,15 +60,15 @@
       <h1 class="header-title-ingredients ingredients-title">Ingredientes</h1>
       <div class="new-ingredient">
         <!--Es un button-->
-        <button class="btn-add" onclick={() => (mostrandoFormulario = true)}>Nuevo Ingrediente</button>
+        <button class="btn-add" onclick={() => (showForm = true)}>Nuevo Ingrediente</button>
       </div>
     </section>
 
     <section class="content-section-ingredients form-section-product-ingredients container-column">
       <div class="grid-table-container product-edit-ingredients-table">
         <header class="grid-table-row table-header">
-          <section class="cell" id="nombre">Nombre</section>
-          <section class="cell" id="nombre">Costo</section>
+          <section class="cell" id="name">Nombre</section>
+          <section class="cell" id="name">Costo</section>
           <section class="cell later-hid" id="grupo-alimenticio">
             <span> Grupo </span>
             <span class="p-alimenticio display-none-mobile"> Alimenticio </span>
@@ -92,7 +80,7 @@
         </header>
 
         <!-- Formulario emergente por si quiero agregar otro ingrediente -->
-        {#if mostrandoFormulario}
+        {#if showForm}
           <form
             id="form-ingredient"
             class="grid-table-row product-edit-ingredients-table-content"
@@ -101,7 +89,7 @@
               <input
                 class="input-primary"
                 placeholder="Huevo"
-                bind:value={nuevoIngrediente.nombre}
+                bind:value={newIngredient.name}
                 required
               />
               <!-- bind:value permite que fluyan en sentido inverso, de hijo a padre -->
@@ -110,15 +98,15 @@
               <input
                 class="input-primary"
                 placeholder="$0.80"
-                bind:value={nuevoIngrediente.costo}
+                bind:value={newIngredient.cost}
                 required
               />
             </section>
             <section class="cell">
-              <select class="input-primary" bind:value={nuevoIngrediente.grupoAlimenticio}>
+              <select class="input-primary" bind:value={newIngredient.foodGroup}>
                 <option value="" disabled selected hidden>Seleccionar</option>
 
-                {#each gruposAlimenticios as grupo}
+                {#each foodGroups as grupo}
                   <option value={grupo.value}> {grupo.label} </option>
                 {/each}
 
@@ -129,16 +117,16 @@
 
         <!-- Renderizamos cada ingrediente -> Props { ingredient: Ingredient } -->
         <!-- Usamos el rest property {...ing} para pasar todas las propiedades de la lista de ingredientes -->
-        {#each ingredientes as ing}
+        {#each ingredients as ing}
           <Ingredient ingredient={ing} />
         {/each}
 
       </div>
     </section>
-    {#if mostrandoFormulario}
+    {#if showForm}
       <section class="btn-group-actions btn-group-new-ingredient">
         <button form="form-ingredient" class="btn btn-secondary" onclick={() => (reset())}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
-        <button form="form-ingredient" class="btn btn-primary" onclick={guardarIngrediente} type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
+        <button form="form-ingredient" class="btn btn-primary" onclick={saveIngredient} type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
       </section>
     {/if}
   </section>
