@@ -2,15 +2,19 @@
     import '$lib/css/components-css/orderCard.css'
     import type { Order } from './type/order';
 
-  let { order } : {order: Order }= $props()
+    interface Props {
+        order: Order
+    }
 
-  const handleStateChange = () => {
-      console.log("Preparando pedido", order.id);
-      order.estado = "PREPARADO"
-      console.log("Pedido preparado", order.id);
-      // Aca iria la logica del POST para cambiar el estado del pedido a "Preparado"
-      // Hay que ver en que estado está y a qué estado cambia !!
-  };    
+    let { order } : Props = $props()
+
+    const handleStateChange = () => {
+        console.log("Preparando pedido", order.id);
+        order.estado = "PREPARADO"
+        console.log("Pedido preparado", order.id);
+        // Aca iria la logica del POST para cambiar el estado del pedido a "Preparado"
+        // Hay que ver en que estado está y a qué estado cambia !!
+    };    
 </script>
 
 <div class="order-card">
