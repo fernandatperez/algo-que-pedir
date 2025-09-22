@@ -26,6 +26,9 @@
     padding: .5em;
     border-radius: 0.5rem;
 }
+.btn-primary a{
+    color: white;
+}
 
 /* para que cuando pase el mouse por arriba, cambie le color del fondo */
 .btn-primary:hover {
@@ -102,10 +105,6 @@
     padding: 0.6em 1.5em 0.6em 1.5em;
     border: none;
     border-radius: 2em;
-}
-
-.btn-group-new-ingredient{
-    margin-top: 1em;
 }
 
 /** Mobile: max: 400px */

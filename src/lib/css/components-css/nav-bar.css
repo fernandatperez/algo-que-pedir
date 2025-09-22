@@ -13,6 +13,7 @@
     width: 100%;
 }
 
+
 .icon-and-text {
     display: flex;
     align-items: center;
@@ -30,6 +31,11 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
+}
+
+.icon-link i {
+  line-height: 1;
+  font-size: x-large;
 }
 
 .options-and-icon > i {
@@ -90,10 +96,6 @@
 
 #hamburger-toggle:checked ~ span:nth-child(4) {
 transform: translateY(-7px) rotate(-135deg);
-}
-
-.hidden {
-    display: none;
 }
 
 /* ============================= Media Queries ============================= */
@@ -158,8 +160,5 @@ transform: translateY(-7px) rotate(-135deg);
     }
     .main-title {
         display: none;
-    }
-    .hidden {
-        display: flex;
     }
 }
