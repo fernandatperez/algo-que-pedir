@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "./css/components-css/nav-bar.css";
+import "./css/components-css/nav-bar.css";
 </script>
 
 <header class="main-nav">
@@ -16,7 +16,8 @@
     <button class="btn-empty active">Pedidos</button>
     <button class="btn-empty">Menú</button>
     <button class="btn-empty">Ingredientes</button>
-    <button class="btn-empty">Cuentas</button>
+    <button class="btn-empty">Cuentas</button> 
+    
     <!-- <i class="ph ph-list hidden"></i> -->
     <label id="nav-hamburger" class="hidden">
       <input type="checkbox" id="hamburger-toggle" />
@@ -28,7 +29,7 @@
     <a href="/store-profile" class="icon-link" aria-label="perfil de la tienda">
        <i class="ph ph-user-circle user-img"></i>
     </a>
-    
+
     <div class="mobile-icons">
       <i class="ph ph-shopping-cart hidden"></i>
       <i class="ph ph-fork-knife hidden"></i>

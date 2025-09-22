@@ -1,4 +1,5 @@
-<script>
+<!-- no entiendo que me esta tomando como 'legacy', no encuentro nada deprecado -->
+<script lang="ts">
   import "$lib/css/flex-grid.css";
   import "$lib/css/fonts.css";
   import "$lib/css/components-css/number-input.css";
@@ -6,149 +7,156 @@
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/9-store-profile.css";
-  import SectionTitle from "$lib/SectionTitle.svelte";
-  import Input from "$lib/Input.svelte";
-  import { text } from "@sveltejs/kit";
+
+  import { formStore } from "$lib/actions/storeProfileActions.svelte";
+  import {
+    storeInfo,
+    storeDir,
+    storeCommission,
+    paymentMethods,
+  } from "$lib/data/storeProfileNewData";
+
+  // Acceder a los datos originales de la tienda
+  const { formData, originalData, saveData, discardChanges } = formStore;
 </script>
 
-<!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
-    <SectionTitle text="Información del local" />
+    <h1 class="header-title">Información del local</h1>
+
     <form id="form-store-profile" class="container-column form-store-profile">
-      <!-- Datos del Local -->
-      <fieldset
-        form="form-store-profile"
-        name="store-info"
-        class="content-section form-section-store-info>"
-      >
+      <!-- Datos del Local -->        
+      <fieldset name={storeInfo.name} class="container-column content-section form-section-store-commission">
+        <h2 class="subtitle">{storeInfo.title}</h2>
         <div class="grid-cols-2 input-group-dir">
           <div>
-            <Input 
-             label_for="url-store-img" 
-             label_text="Nombre del local*" 
-             input_placeholder="Carlo's Bake Shop" 
-             input_id="store-name"
-            />
-
-            <Input 
-             label_for="url-store-img" 
-             label_text="URL de la imagen*" 
-             input_placeholder="http://images.google.com/CarlosBakeShop.jpg" 
-             input_id="url-store-img"
-            />
+          {#each storeInfo.fields as field (field.input_id)}
+            <div class="input-field ">
+              <label for={field.input_id} class="label-color"
+                >{field.label_text}</label
+              >
+              <input
+                type="text"
+                id={field.input_id}
+                name={field.input_id}
+                placeholder={field.input_placeholder}
+                class="input"
+                bind:value={formData.storeInfo[field.input_id]}
+              />
+            </div>
+          {/each}
           </div>
-
-          <div class="img-store-container">
-            <img
-              src="/src/lib/assets/img/CarlosBakeShop.jpg"
-              alt="local"
-              class="img-store-profile"
-            />
+          <div>
+          <img
+            src={formData.storeInfo["url-store-img"] ||
+              "/src/lib/assets/img/CarlosBakeShop.jpg"}
+            alt="local"
+            class="img-store-profile"
+          />
           </div>
         </div>
+
       </fieldset>
+      
 
       <!-- Dirección -->
-      <fieldset name="store-dir" class="container-column content-section">
-        <h2 class="subtitle">Dirección</h2>
+      <fieldset name={storeDir.name} class="container-column content-section form-section-store-commission">
+        <h2 class="subtitle">{storeDir.title}</h2>
         <div class="grid-cols-2 input-group-dir">
-          <div class="form-group">
-          <Input 
-           label_for="store-dir" 
-           label_text="Dirección*" 
-           input_placeholder="Escribir" 
-           input_id="store-dir"
-          />
-          <Input 
-             label_for="store-altitude" 
-             label_text="Altura*" 
-             input_placeholder="Escribir número..." 
-             input_id="store-altitude"
-          />
-          </div>
-          <div class="form-group">
-          <Input 
-             label_for="store-latitude" 
-             label_text="Latitud*" 
-             input_placeholder="Escribir número..." 
-             input_id="store-latitude"
-          />
-          <Input 
-             label_for="store-longitude" 
-             label_text="Longitud*" 
-             input_placeholder="Escribir número..." 
-             input_id="store-longitude"
-          />
+          {#each storeDir.fields as field (field.input_id)}
+            <div class="input-field">
+              <label for={field.input_id} class="label-color"
+                >{field.label_text}</label
+              >
+              <input
+                type="text"
+                id={field.input_id}
+                name={field.input_id}
+                placeholder={field.input_placeholder}
+                class="input"
+                bind:value={formData.storeDir[field.input_id]}
+              />
+            </div>
+          {/each}
         </div>
-      </div>  
       </fieldset>
 
       <!-- Porcentajes -->
       <fieldset
-        name="store-comission"
+        name={storeCommission.name}
         class="container-column content-section form-section-store-commission"
       >
-      <h2 class="subtitle">Porcentajes</h2>
+        <h2 class="subtitle">{storeCommission.title}</h2>
         <div class="grid-cols-2 input-group-dir">
-          <div class="form-group">
-          <Input 
-             label_for="app-commission" 
-             label_text="Porcentaje de comisión con la app*" 
-             input_placeholder="Escribir número..." 
-             input_id="app-commission"
-          />
-          </div>
-          <div class="form-group">
-          <Input 
-             label_for="author-commission" 
-             label_text="Porcentaje de comisión con autores de platos*" 
-             input_placeholder="Escribir número..." 
-             input_id="author-commission"
-          />
-          </div>
+          {#each storeCommission.fields as field (field.input_id)}
+            <div class="input-field">
+              <label for={field.input_id} class="label-color"
+                >{field.label_text}</label
+              >
+              <input
+                type="number"
+                id={field.input_id}
+                name={field.input_id}
+                placeholder={field.input_placeholder}
+                class="input"
+                bind:value={formData.storeCommission[field.input_id]}
+              />
+            </div>
+          {/each}
         </div>
       </fieldset>
 
       <!-- Métodos de pago -->
-      <fieldset form="form-store-profile" name="store-payment-methods" class="container-column content-section">
-      <h2 class="subtitle">Metodos de Pago</h2>
-      <div class="payments-checkbox-group">
-          <label for="efectivo" class="label-color">
-              <input type="checkbox" 
-               id="efectivo" 
-               name="efectivo" 
-               value="EFECTIVO"
-               class="payment-checkbox">
-               <span>Efectivo</span>
-          </label>
-        
-          <label for="qr" class="label-color">
-             <input 
-                type="checkbox" 
-                id="qr" 
-                name="qr" 
-                value="QR"
-                class="payment-checkbox">
-                <span>QR</span>
-          </label>
-    
-          <label for="transferencia" class="label-color">
-              <input 
-                type="checkbox" 
-                id="transferencia" 
-                name="transferencia" 
-                value="TRANSFERENCIA"
-                class="payment-checkbox">
-                <span>Transferencia</span>
-          </label>
+      <fieldset
+        name="store-payment-methods"
+        class="container-column content-section"
+      >
+        <h2 class="subtitle">Métodos de Pago</h2>
+        <div class="payments-checkbox-group">
+          {#each paymentMethods as method (method.id)}
+            <label for={method.id} class="label-color">
+              <input
+                type="checkbox"
+                id={method.id}
+                name={method.id}
+                value={method.value}
+                class="payment-checkbox"
+                bind:checked={formData.paymentMethods[method.id]}
+              />
+              <span>{method.label}</span>
+            </label>
+          {/each}
         </div>
+      </fieldset>
+
+      <!-- muestro en pantalla como toma con el bind los datos de input -->
+      <fieldset class="container-column content-section">
+        <h2 class="subtitle">Datos del Formulario (JSON)</h2>
+        <pre class="json-preview">{JSON.stringify(formData, null, 2)}</pre>
+      </fieldset>
+
+      <!-- muestro datos originales (JSON guardado) -->
+      <fieldset class="container-column content-section">
+        <h2 class="subtitle">Datos Guardados (JSON Original)</h2>
+        <pre class="json-preview">{JSON.stringify(originalData, null, 2)}</pre>
       </fieldset>
 
       <!-- Botones -->
       <section class="btn-group-actions">
-        <button disabled class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
-        <button disabled class="btn btn-primary btn-store">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
+        <button
+          type="button"
+          class="btn btn-secondary btn-store"
+          on:click={discardChanges}
+        >
+          Descartar <span class="p-cambios display-none-mobile">Cambios</span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-store"
+          on:click={saveData}
+        >
+          Guardar <span class="p-cambios display-none-mobile">Cambios</span>
+        </button>
       </section>
     </form>
   </article>
