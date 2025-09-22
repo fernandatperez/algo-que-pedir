@@ -54,7 +54,7 @@
       >
         <i class={visibility ? eye : eyeSlash}></i>
       </button>
-      <input type={visibility ? "text" : "password"} {...inputProps} />
+      <input type={visibility ? "text" : "password"} {...inputProps} bind:value={value}/>
     </div>
   </label>
 {/if}

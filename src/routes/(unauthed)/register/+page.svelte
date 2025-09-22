@@ -8,6 +8,10 @@
   import Input from "$lib/Input.svelte"
   import { InputTypes } from "$lib/types";
 
+  function registrateValidation() {
+    // No success stays put
+    // Success enters page and creates new user
+  }
 </script>
 
 <section class="login-container">
@@ -31,7 +35,8 @@
               type: "email",
               placeholder: "Escribir",
               id: "register-username-id",
-              class: "input-primary"
+              class: "input-primary",
+              name: "register-username"
             }}
           />
         </div>
