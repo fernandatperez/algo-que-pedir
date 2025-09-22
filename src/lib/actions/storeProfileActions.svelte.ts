@@ -1,5 +1,6 @@
 import { defaultData } from '$lib/data/storeProfileDefaultData'
 import type { FormData } from '../../types/storeProfileTypes'
+// los types los esta tomando mal por la ruta que tenemos definida en tsconfig.json
 
 // aca crea los datos reactivos
 //algunas notas para no olvidarme:
@@ -57,17 +58,5 @@ function createFormStore() {
 
 export const formStore = createFormStore()
 
-export function loadFromLocalStorage(): FormData {
-  if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('storeData')
-    return saved ? JSON.parse(saved) : { ...defaultData }
-  }
-  return { ...defaultData }
-}
 
-export function saveToLocalStorage(data: FormData): void {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('storeData', JSON.stringify(data))
-  }
-}
 

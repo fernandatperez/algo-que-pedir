@@ -18,19 +18,6 @@
 
   // Acceder a los datos originales de la tienda
   const { formData, originalData, saveData, discardChanges } = formStore;
-
-  function handleSave(): void {
-    // aca podria agregar una validacion antes de hacer el save
-    saveData();
-    alert("Datos guardados correctamente");
-  }
-
-  function handleDiscard(): void {
-    if (confirm("¿Estás seguro de que quieres descartar todos los cambios?")) {
-      discardChanges();
-      alert("Cambios descartados");
-    }
-  }
 </script>
 
 <main class="container-column">
