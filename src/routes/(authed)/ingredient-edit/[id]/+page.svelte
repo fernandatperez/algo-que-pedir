@@ -17,8 +17,8 @@
   // Tomar el id de la URL (viene como string)
   const ingredientId = Number(page.params.id);
 
-  // Buscar el ingrediente correcto
-  let ingredient: IngredientType | undefined = INGREDIENT_MOCK.find(i => i.id === ingredientId);
+  // Buscar el ingrediente correcto, y declaro que no va a ser undefined
+  let ingredient: IngredientType = INGREDIENT_MOCK.find(i => i.id === ingredientId)!;
 
   function irAIngredients () {
     goto ('/ingredients')
