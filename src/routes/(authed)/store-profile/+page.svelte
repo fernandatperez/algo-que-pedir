@@ -7,14 +7,30 @@
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/9-store-profile.css";
-  import Input from "$lib/Input.svelte";
-  import FieldsetGroup from "$lib/FieldsetGroup.svelte";
+
+  import { formStore } from "$lib/actions/storeProfileActions.svelte";
   import {
     storeInfo,
     storeDir,
     storeCommission,
     paymentMethods,
-  } from "$lib/data/formData";
+  } from "$lib/data/storeProfileNewData";
+
+  // Acceder a los datos originales de la tienda
+  const { formData, originalData, saveData, discardChanges } = formStore;
+
+  function handleSave(): void {
+    // aca podria agregar una validacion antes de hacer el save
+    saveData();
+    alert("Datos guardados correctamente");
+  }
+
+  function handleDiscard(): void {
+    if (confirm("¿Estás seguro de que quieres descartar todos los cambios?")) {
+      discardChanges();
+      alert("Cambios descartados");
+    }
+  }
 </script>
 
 <main class="container-column">
@@ -22,23 +38,86 @@
     <h1 class="header-title">Información del local</h1>
 
     <form id="form-store-profile" class="container-column form-store-profile">
-      <!-- Datos del Local -->
-      <div class="grid-cols-2 input-group-dir">
-        <FieldsetGroup {...storeInfo} />
-        <div class="img-store-container">
+      <!-- Datos del Local -->        
+      <fieldset name={storeInfo.name} class="container-column content-section form-section-store-commission">
+        <h2 class="subtitle">{storeInfo.title}</h2>
+        <div class="grid-cols-2 input-group-dir">
+          <div>
+          {#each storeInfo.fields as field (field.input_id)}
+            <div class="input-field ">
+              <label for={field.input_id} class="label-color"
+                >{field.label_text}</label
+              >
+              <input
+                type="text"
+                id={field.input_id}
+                name={field.input_id}
+                placeholder={field.input_placeholder}
+                class="input"
+                bind:value={formData.storeInfo[field.input_id]}
+              />
+            </div>
+          {/each}
+          </div>
+          <div>
           <img
-            src="/src/lib/assets/img/CarlosBakeShop.jpg"
+            src={formData.storeInfo["url-store-img"] ||
+              "/src/lib/assets/img/CarlosBakeShop.jpg"}
             alt="local"
             class="img-store-profile"
           />
+          </div>
         </div>
-      </div>
+
+      </fieldset>
+      
 
       <!-- Dirección -->
-      <FieldsetGroup {...storeDir} />
+      <fieldset name={storeDir.name} class="container-column content-section form-section-store-commission">
+        <h2 class="subtitle">{storeDir.title}</h2>
+        <div class="grid-cols-2 input-group-dir">
+          {#each storeDir.fields as field (field.input_id)}
+            <div class="input-field">
+              <label for={field.input_id} class="label-color"
+                >{field.label_text}</label
+              >
+              <input
+                type="text"
+                id={field.input_id}
+                name={field.input_id}
+                placeholder={field.input_placeholder}
+                class="input"
+                bind:value={formData.storeDir[field.input_id]}
+              />
+            </div>
+          {/each}
+        </div>
+      </fieldset>
 
       <!-- Porcentajes -->
-      <FieldsetGroup {...storeCommission} />
+      <fieldset
+        name={storeCommission.name}
+        class="container-column content-section form-section-store-commission"
+      >
+        <h2 class="subtitle">{storeCommission.title}</h2>
+        <div class="grid-cols-2 input-group-dir">
+          {#each storeCommission.fields as field (field.input_id)}
+            <div class="input-field">
+              <label for={field.input_id} class="label-color"
+                >{field.label_text}</label
+              >
+              <input
+                type="number"
+                id={field.input_id}
+                name={field.input_id}
+                placeholder={field.input_placeholder}
+                class="input"
+                bind:value={formData.storeCommission[field.input_id]}
+              />
+            </div>
+          {/each}
+        </div>
+      </fieldset>
 
       <!-- Métodos de pago -->
       <fieldset
@@ -47,7 +126,7 @@
       >
         <h2 class="subtitle">Métodos de Pago</h2>
         <div class="payments-checkbox-group">
-          {#each paymentMethods as method(method.id)}
+          {#each paymentMethods as method (method.id)}
             <label for={method.id} class="label-color">
               <input
                 type="checkbox"
@@ -55,7 +134,7 @@
                 name={method.id}
                 value={method.value}
                 class="payment-checkbox"
-                checked={method.checked}
+                bind:checked={formData.paymentMethods[method.id]}
               />
               <span>{method.label}</span>
             </label>
@@ -63,12 +142,32 @@
         </div>
       </fieldset>
 
+      <!-- muestro en pantalla como toma con el bind los datos de input -->
+      <fieldset class="container-column content-section">
+        <h2 class="subtitle">Datos del Formulario (JSON)</h2>
+        <pre class="json-preview">{JSON.stringify(formData, null, 2)}</pre>
+      </fieldset>
+
+      <!-- muestro datos originales (JSON guardado) -->
+      <fieldset class="container-column content-section">
+        <h2 class="subtitle">Datos Guardados (JSON Original)</h2>
+        <pre class="json-preview">{JSON.stringify(originalData, null, 2)}</pre>
+      </fieldset>
+
       <!-- Botones -->
       <section class="btn-group-actions">
-        <button disabled class="btn btn-secondary btn-store">
+        <button
+          type="button"
+          class="btn btn-secondary btn-store"
+          on:click={discardChanges}
+        >
           Descartar <span class="p-cambios display-none-mobile">Cambios</span>
         </button>
-        <button disabled class="btn btn-primary btn-store">
+        <button
+          type="button"
+          class="btn btn-primary btn-store"
+          on:click={saveData}
+        >
           Guardar <span class="p-cambios display-none-mobile">Cambios</span>
         </button>
       </section>
