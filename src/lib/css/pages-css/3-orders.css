@@ -1,3 +1,5 @@
+@import url('../component-css/buttons.css');
+
 /* ============================= General ============================= */
 :root {
     --dark-gray: #374151;

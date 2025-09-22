@@ -1,7 +1,8 @@
-<script>
-  let { plato } = $$props;
-</script>
+<script lang="ts">
+  import "$lib/css/component-css/grid-table.css"
 
+  let { plato } = $props();
+</script>
 
 <section class="grid-table-row product-edit-ingredients-table-content">
   <div class="cell product-cell ellipsis-text">
@@ -19,7 +20,6 @@
       </p>
     </div>
   </div>
-  <div class="cell">{plato.cantidad}</div>
+  <div class="cell">{"Falta attr"}</div>
   <div class="cell">${plato.precio.toFixed(2)}</div>
 </section>
-

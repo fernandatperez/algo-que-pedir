@@ -1,5 +1,6 @@
-/* ============================= Card ============================= */
+@import url('../component-css/user-details.css');
 
+/* ============================= Card ============================= */
 .order-card {
     background-color: white;
     padding: 2em;
