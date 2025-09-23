@@ -1,17 +1,20 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
-  import { InputTypes } from "$lib/types";
-  import type { OptionalProps } from "$lib/types"
+  import { InputTypes } from "$lib/InputTypes";
+  import type { OptionalProps } from "$lib/InputTypes";
   import { toggleVariable } from "$lib/toggleFunction";
 
   interface InputPropsI {
     description: string;
-    value: string; // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
-    input_type: InputTypes; // -> Por que no anda si lo defino aca mismo y si lo importo si?
-    labelProps?: OptionalProps; // -> any and unknown are the same in terms of what is assignable to them. Unknown contains each and every type in TypeScript
+    value: string;
+    input_type: InputTypes;
+    labelProps?: OptionalProps;
     inputProps?: OptionalProps;
     spanProps?: OptionalProps;
-    //HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
+    // Sin records
+    //HTMLInputElements: HTMLInputElement
+    // HTMLLabelElements: HTMLLabelElement
+    // HTMLSpanElement: HTMLSpanElement
   }
 
   let {
@@ -27,9 +30,8 @@
   const eyeSlash = "ph ph-eye-slash";
   const eye = "ph ph-eye";
 
-  type Visibility = true | false
+  type Visibility = true | false;
   let visibility: Visibility = $state(false);
-
 </script>
 
 {#if input_type == InputTypes.Normal}
@@ -37,7 +39,7 @@
     <span class="label-color" {...spanProps}>
       {description}
     </span>
-    <input {...inputProps} bind:value={value}/>
+    <input {...inputProps} bind:value />
   </label>
 {:else}
   <label {...labelProps}>
@@ -50,11 +52,15 @@
         class="input-icon"
         aria-label="password-show-btn"
         type="button"
-        onclick={() => visibility = toggleVariable(visibility)}
+        onclick={() => (visibility = toggleVariable(visibility))}
       >
         <i class={visibility ? eye : eyeSlash}></i>
       </button>
-      <input type={visibility ? "text" : "password"} {...inputProps} bind:value={value}/>
+      <input
+        type={visibility ? "text" : "password"}
+        {...inputProps}
+        bind:value
+      />
     </div>
   </label>
 {/if}
