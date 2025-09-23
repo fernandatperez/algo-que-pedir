@@ -17,6 +17,8 @@
   let errorMessage1st: string;
   let errorMessage2nd: string;
 
+  console.log(USERS_LIST_MOCK);
+
   function handleRegistration(event: Event) {
     event.preventDefault();
     const foundIdenticalUser = USERS_LIST_MOCK.find(
@@ -33,10 +35,13 @@
       return;
     }
 
-    USERS_LIST_MOCK.push(new User(emailRegisterValue, passwordRegister));
+    USERS_LIST_MOCK.push(
+      new User(emailRegisterValue.toLowerCase(), passwordRegister),
+    );
 
     registerMessage = "Your account has been created successfully.";
 
+    console.log(USERS_LIST_MOCK);
     setTimeout(() => {
       window.location.href = "/";
     }, 3000);
@@ -54,7 +59,7 @@
         <p class="error-login-message">{errorMessage1st}</p>
       </section>
     {:else if errorMessage2nd}
-      <section class="error-message-section"> 
+      <section class="error-message-section">
         <i class="ph ph-warning error-login-message"></i>
         <p class="error-login-message">{errorMessage2nd}</p>
       </section>

@@ -13,7 +13,7 @@
   function handleLogin(event: Event) {
     event.preventDefault();
     const foundUser = USERS_LIST_MOCK.find(
-      (user) => user.email === emailLoginValue,
+      (user) => user.email.toLowerCase() === emailLoginValue,
     );
 
     if (foundUser && foundUser.password === passwordLoginValue) {
@@ -34,8 +34,10 @@
     NO ME MATES VOY A PASAR TODO A ARCHIVOS SEPARADOS ESTABA COOKING
     Hay alguna diferencia entre los Records y los HTMLElement o es solo por convencion?
     Mejores maneras de tratar el relocation
-    Como hago para que los mensajes no queden guardados en las variables? Sino me tira siempre el mismo error xq la variable tiene un mensaje  
+    Como hago para que los mensajes no queden guardados en las variables? Sino me tira siempre el mismo error xq la variable tiene un mensaje
+    No se guardan los datos xq se recarga siempre del mismo archivo cuando se importa. Como se trata eso?
   */
+  console.log(USERS_LIST_MOCK);
 </script>
 
 <section class="login-container">
