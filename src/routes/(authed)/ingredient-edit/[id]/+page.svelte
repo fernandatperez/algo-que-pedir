@@ -15,10 +15,10 @@
   import type { IngredientType } from '$lib/type/ingredient';
 
   // Tomar el id de la URL (viene como string)
-  const ingredientId = Number(page.params.id);
+  const ingredientId = page.params.id;
 
   // Buscar el ingrediente correcto, y declaro que no va a ser undefined
-  let ingredient: IngredientType = INGREDIENT_MOCK.find(i => i.id === ingredientId)!;
+  let ingredient: IngredientType = INGREDIENT_MOCK.find(i => i.id.toString() === ingredientId)!;
 
   function irAIngredients () {
     goto ('/ingredients')
@@ -34,18 +34,18 @@
       <form class="ingredient-edit-section" id="form-ingredient-edit">
         <section class="input-group">
           <label class="label-color" for="form-ingredient-name">Nombre del ingrediente*</label>
-          <input type="text" id="form-ingredient-name" placeholder="{ingredient.name}" class="input-primary" required>
+          <input type="text" id="form-ingredient-name" value="{ingredient.name}" class="input-primary" required>
         </section>
 
         <section class="input-group">
           <label class="label-color" for="form-ingredient-cost">Costo*</label>
-          <input type="text" id="form-ingredient-cost" placeholder="${ingredient.cost}" class="input-primary" required>
+          <input type="text" id="form-ingredient-cost" value="${ingredient.cost}" class="input-primary" required>
         </section>
 
         <section class="input-group">
           <label class="label-color" for="form-ingredient-group">Grupo Alimenticio</label>
           <select id="form-ingredient-group" class="input-primary" required>
-            <option value="" disabled selected hidden>{ingredient.foodGroup}</option>
+            <option value="" selected hidden>{ingredient.foodGroup}</option>
             {#each foodGroups as grupo}
               <option value={grupo.value}> {grupo.label} </option>
             {/each}
@@ -65,7 +65,7 @@
       </form>
 
       <section class="btn-group-actions">
-        <button form="form-ingredient-edit" class="btn btn-secondary" on:click={irAIngredients}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+        <button form="form-ingredient-edit" class="btn btn-secondary" onclick={() => irAIngredients()}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
         <button form="form-ingredient-edit" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
       </section>
     {:else}

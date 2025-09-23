@@ -21,33 +21,49 @@ export const foodGroups = [
 // Resultado: una unión de todos los valores literales de value.
 export type FoodGroupValue = (typeof foodGroups)[number]['value'];
 
-export class IngredientType {
-  constructor(
-    public id: number = 0,
-    // trim: eliminar los espacios en blanco al inicio y al final del texto.
-    public name: string = ''.trim(),
-    public cost: number = 0,
-    public foodGroup: FoodGroupValue = 'Frutas y Verduras',
-    public originIcon: string = '',
-    public esOrigenAnimal: boolean = true
-  ) {}
-  
+export interface IngredientType {
+  id: number;
+  name: string;
+  cost: number;
+  foodGroup: FoodGroupValue;
+  originIcon: string;
+  esOrigenAnimal: boolean
 }
-// export interface IngredientType {
-//   id: number;
-//   name: string;
-//   cost: string;
-//   foodGroup: FoodGroupValue;
-//   originIcon: string;
-// }
 
 // Un “objeto vacío” que te sirve como plantilla cuando quiero crear un nuevo ingrediente
-// export function createEmptyIngredient(): IngredientType {
-//   return {
-//     id: 0,
-//     name: '',
-//     cost: '',
-//     foodGroup: 'Frutas y Verduras', // le pongo un valor por defecto
-//     originIcon: ''
+export function createEmptyIngredient(): IngredientType {
+  return {
+    id: 0,
+    name: ''.trim(),
+    cost: 0,
+    foodGroup: 'Frutas y Verduras', // le pongo un valor por defecto
+    originIcon: '',
+    esOrigenAnimal: true
+  }
+}
+
+// export class IngredientType {
+//   id: number
+//   name: string
+//   cost: number
+//   foodGroup: FoodGroupValue
+//   originIcon: string
+//   esOrigenAnimal: boolean
+//   constructor(id: number, name: string, cost: number, foodGroup: FoodGroupValue, originIcon: string, esOrigenAnimal: boolean) {
+//     this.id = id 
+//     this.name = name
+//     this.cost = cost
+//     this.foodGroup = foodGroup
+//     this.originIcon = originIcon
+//     this.esOrigenAnimal = esOrigenAnimal
 //   }
+// constructor(
+//   public id: number = 0,
+//   // trim: eliminar los espacios en blanco al inicio y al final del texto.
+//   public name: string = ''.trim(),
+//   public cost: number = 0,
+//   public foodGroup: FoodGroupValue = 'Frutas y Verduras',
+//   public originIcon: string = '',
+//   public esOrigenAnimal: boolean = true
+// ) {}
 // }
