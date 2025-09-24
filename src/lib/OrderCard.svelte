@@ -1,4 +1,5 @@
 <script lang="ts">
+    import '$lib/css/components-css/buttons.css'
     import '$lib/css/components-css/orderCard.css'
     import type { Order } from './type/order';
 
@@ -14,7 +15,7 @@
         console.log("Pedido preparado", order.id);
         // Aca iria la logica del POST para cambiar el estado del pedido a "Preparado"
         // Hay que ver en que estado está y a qué estado cambia !!
-    };    
+    }
 </script>
 
 <div class="order-card">
@@ -52,6 +53,6 @@
     </div>
 
     <div class="action-container">
-        <button onclick={handleStateChange} class="btn btn-primary"> Preparar </button>
+        <button onclick={handleStateChange} class="btn btn-primary" disabled={order.estado=="PREPARADO"}>Preparar</button>
     </div>
 </div>
