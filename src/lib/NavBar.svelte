@@ -3,10 +3,10 @@
 
 <!-- hay que cambiar las rutas despues -->
 <nav class="options-and-icon">
-  <a href="/" class="btn-empty active">Pedidos</a>
-  <a href="/" class="btn-empty">Menú</a>
-  <a href="/" class="btn-empty">Ingredientes</a>
-  <a href="/" class="btn-empty">Cuentas</a>
+  <a href="orders" class="btn-empty active">Pedidos</a>
+  <a href="/menu" class="btn-empty">Menú</a>
+  <a href="/ingredients" class="btn-empty">Ingredientes</a>
+  <a href="/store-profile" class="btn-empty">Cuentas</a>
   <!-- <i class="ph ph-list hidden"></i> -->
   <label id="nav-hamburger" class="hidden">
     <input type="checkbox" id="hamburger-toggle" />
@@ -14,7 +14,7 @@
     <span class="hidden"></span>
     <span class="hidden"></span>
   </label>
-  <a href="/">
+  <a href="/store-profile">
     <i class="ph ph-user-circle user-img"></i>
   </a>
   <div class="mobile-icons">
