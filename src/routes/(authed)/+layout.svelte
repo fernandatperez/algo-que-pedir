@@ -1,10 +1,10 @@
 <script>
-  import Navbar from '$lib/nav-bar.svelte';
+  import Header from "$lib/Header.svelte";
 
   let { children } = $props();
 </script>
 
-<Navbar />
+<Header />
 <!-- tiene que comenzar si o si con Mayuscula para que se tome como un componente de svelte -->
 
 {@render children?.()}

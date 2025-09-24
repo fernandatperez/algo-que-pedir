@@ -1,5 +1,5 @@
 <script>
-  import FormHeader from "$lib/form-header.svelte";
+  import IconText from "$lib/IconText.svelte";
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/icon.css";
   import "$lib/css/components-css/input.css";
@@ -9,7 +9,7 @@
 <section class="login-container">
   <main class="login-section">
     <!-- HEADER -->
-    <FormHeader title="Crea tu cuenta" />
+    <IconText title="Crea tu cuenta" wrapperClass="header-section" />
 
     <!-- FORM -->
     <form class="form-container">

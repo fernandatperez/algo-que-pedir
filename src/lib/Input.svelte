@@ -1,25 +1,76 @@
 <script lang="ts">
-import "$lib/css/components-css/input.css";
+  import "$lib/css/components-css/input.css";
+  import { InputTypes } from "$lib/types";
 
-let {
-  label_for = "",
-  label_text = "",
-  input_type = "text",
-  input_placeholder = "",
-  input_id = ""
-} = $props()
+  // enum InputTypes {
+  //   Normal = 'normal',
+  //   Hidden = 'hidden'
+  // } // No lo toma, por algun motivo
+
+  interface InputPropsI {
+    description: string;
+    value: string; // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
+    input_type: InputTypes; // -> Por que no anda si lo defino aca mismo y si lo importo si?
+    labelProps?: Record<string, unknown>; // -> any and unknown are the same in terms of what is assignable to them
+    inputProps?: Record<string, unknown>;
+    spanProps?: Record<string, unknown>;
+    // HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
+  }
+
+  let {
+    description,
+    value,
+    input_type = InputTypes.Normal,
+    labelProps = {},
+    inputProps = {},
+    spanProps = {},
+  }: InputPropsI = $props();
+
+  const eyeSlash = "ph ph-eye-slash";
+  const eye = "ph ph-eye";
+
+  let visibility = $state(false);
+
+  function changeVisibility() {
+    if (!visibility) {
+      visibility = true;
+    } else {
+      visibility = false;
+    }
+  }
 
 </script>
-<!-- 
-Sin esto, se separan los componentes de adentro como si todo estuviera adentro de "form-group"
-No toma los componentes como HTML sino que toma lo de adentro
--->
-<div>
-  <label for={label_for} class="label-color">{label_text}</label>
-  <input
-    type={input_type}
-    placeholder={input_placeholder}
-    id={input_id}
-    class="input-primary"
-  />
-</div>
+
+{#if input_type == InputTypes.Normal}
+  <label {...labelProps}>
+    <span {...spanProps}>
+      {description}
+    </span>
+    <input {...inputProps} />
+  </label>
+{:else}
+  <label {...labelProps}>
+    <span {...spanProps}>
+      {description}
+    </span>
+    <!-- Medio raro, pero me esta trayendo el icon.css de la pagina -->
+    <div class="input-with-icon">
+      <button
+        class="input-icon"
+        aria-label="password-show-btn"
+        type="button"
+        onclick={changeVisibility}
+      >
+        <i class={visibility ? eye : eyeSlash}></i>
+      </button>
+      <input type={visibility ? "text" : "password"} {...inputProps} />
+    </div>
+  </label>
+{/if}
+
+<style>
+  button {
+    top: 1em;
+    right: 0.3em;
+  }
+</style>
