@@ -3,7 +3,7 @@ import type { Order } from '$lib/type/order'
 import { ensalada, hamburguesa, pizza } from '$lib/data/mock/menu-items'
 
 // Ejemplo de pedido
-let firstOrder: Order = {
+export let firstOrder: Order = {
   id: 12345,
   nombreCliente: 'Sofía Miller',
   usuarioCliente: 'smiller2006',
