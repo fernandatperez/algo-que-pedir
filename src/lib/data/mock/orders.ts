@@ -1,93 +1,51 @@
 /* eslint-disable prefer-const */
-import type { Order } from '$lib/type/order'
+import { type OrderJSON, Estado, Pago } from '$lib/type/order'
 import { ensalada, hamburguesa, pizza } from '$lib/data/mock/menu-items'
 
-// Ejemplo de pedido
-let firstOrder: Order = {
+// Ejemplo de pedido JSON
+let firstOrder: OrderJSON = {
   id: 12345,
-  nombreCliente: 'Sofía Miller',
-  usuarioCliente: 'smiller2006',
-  direccionCliente: 'Av siempre viva 555',
-  latitudCliente: '40.7128',
-  longitudCliente: '-74.006',
-  
-  platos: [hamburguesa, pizza, ensalada], // Lista de Platos
-  precioSubtotal() { // Suma de Precios de Platos
-    return this.platos.reduce((accumulator, currentItem) => {
-      return accumulator + currentItem.precio
-    }, 0)
-  },
-  comisionDelivery: 2.0, // Asi o porcentaje ??
-  recargoPago() { 
-    if (this.tipoPago == 'EFECTIVO') {
-      return 1
-    } else {
-      return 1.1
-    }
-  }, // Recargo del 10%, solo cuando no es EFVO
-  precioTotal() { return this.precioSubtotal() * this.recargoPago()  + this.comisionDelivery  }, // Calculado (metodo)
-  tipoPago: 'TRANSFERENCIA',
-  estado: 'PENDIENTE',
-  createdAt: new Date(),
+  name: 'Sofía Miller',
+  user: 'smiller2006',
+  address: 'Av siempre viva 555',
+  lat: '40.7128',
+  long: '-74.006',
+  dishes: [hamburguesa, pizza, ensalada], // Lista de Platos
+  deliveryComission: 2.0, // Asi o porcentaje ??
+  paymentMethod: Pago.TRANSFERENCIA,
+  state: Estado.PENDIENTE,
+  createdAt: new Date().toLocaleString(),
 }
 
 // Otro pedido
-let secondOrder: Order = {
+let secondOrder: OrderJSON = {
   id: 54545,
-  nombreCliente: 'Ricardo Fort',
-  usuarioCliente: 'rickyricon',
-  direccionCliente: 'Maiame 354',
-  latitudCliente: '25.77427',
-  longitudCliente: '-80.19366',
-  
-  platos: [hamburguesa, ensalada], // Lista de Platos
-  precioSubtotal() { // Suma de Precios de Platos
-    return this.platos.reduce((accumulator, currentItem) => {
-      return accumulator + currentItem.precio
-    }, 0)
-  },
-  comisionDelivery: 12.0,
-  recargoPago() { 
-    if (this.tipoPago == 'EFECTIVO') {
-      return 1
-    } else {
-      return 1.1
-    }
-  }, // Recargo del 10%, solo cuando no es EFVO
-  precioTotal() { return this.precioSubtotal() * this.recargoPago()  + this.comisionDelivery  }, // Calculado (metodo)
-  tipoPago: 'EFECTIVO',
-  estado: 'PENDIENTE',
-  createdAt: new Date(),
+  name: 'Ricardo Fort',
+  user: 'rickyricon',
+  address: 'Maiame 354',
+  lat: '25.77427',
+  long: '-80.19366',
+  dishes: [hamburguesa, ensalada], // Lista de Platos
+  deliveryComission: 2.0, // Asi o porcentaje ??
+  paymentMethod: Pago.EFECTIVO,
+  state: Estado.PENDIENTE,
+  createdAt: new Date().toLocaleString(),
 }
 
 // Otro pedido
-let thirdOrder: Order = {
+let thirdOrder: OrderJSON = {
   id: 7853,
-  nombreCliente: 'Alex Caniggia',
-  usuarioCliente: 'fuerabarat',
-  direccionCliente: 'Roma, Italia',
-  latitudCliente: '41.89193',
-  longitudCliente: '12.51133',
-  
-  platos: [pizza, ensalada, hamburguesa], // Lista de Platos
-  precioSubtotal() { // Suma de Precios de Platos
-    return this.platos.reduce((accumulator, currentItem) => {
-      return accumulator + currentItem.precio
-    }, 0)
-  },
-  comisionDelivery: 18.0,
-  recargoPago() { 
-    if (this.tipoPago == 'EFECTIVO') {
-      return 1
-    } else {
-      return 1.1
-    }
-  }, // Recargo del 10%, solo cuando no es EFVO
-  precioTotal() { return this.precioSubtotal() * this.recargoPago()  + this.comisionDelivery  }, // Calculado (metodo)
-  tipoPago: 'TRANSFERENCIA',
-  estado: 'PREPARADO',
-  createdAt: new Date(),
+  name: 'Alex Caniggia',
+  user: 'fuerabarat',
+  address: 'Roma, Italia',
+  lat: '41.89193',
+  long: '12.51133',
+  dishes: [pizza, ensalada, hamburguesa], // Lista de Platos
+  deliveryComission: 2.0, // Asi o porcentaje ??
+  paymentMethod: Pago.TRANSFERENCIA,
+  state: Estado.PREPARADO,
+  createdAt: new Date().toLocaleString(),
 }
 
-// Lista de type Order
-export const ORDERS_MOCK : Order[] = [firstOrder, secondOrder, thirdOrder]
+// Lista de type OrderJSON
+export const ORDERS_MOCK : OrderJSON[] = [firstOrder, secondOrder, thirdOrder]

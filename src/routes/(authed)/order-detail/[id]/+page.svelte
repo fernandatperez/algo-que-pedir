@@ -1,33 +1,10 @@
 <script lang="ts">
   import "$lib/css/pages-css/4-order-details.css"
-
   import GridRow from "$lib/components/GridRow.svelte"
-  import { ORDERS_MOCK } from "$lib/data/mock/orders"
-
-  // 'page' is deprecated dice
-  // import { page } from "$app/stores"
-  import { page } from "$app/state";
   import type { Order } from "$lib/type/order";
 
-  // id del pedido para hacer fetch/find() del pedido
-  const pedidoId = page.params.id // No puedo parsear ni definir el tipo para el parametro de url
-
-  // simulo un GET con el id. Hago un find()
-  const order = ORDERS_MOCK.find( order => order.id.toString() == pedidoId )! // Hago el toString() en el id, ya que el parametro de url no lo puedo parsear
-  /* Non-null assertion operator (!): If you are absolutely certain that find() 
-  will always return a value (e.g., you've performed a prior check or the logic guarantees a match), 
-  you can use the non-null assertion operator (!) to tell TypeScript to treat the value as non-nullable. */
-
-  function recargoTipoDePago(order : Order) : number {
-    let recargo: number 
-    if (order.recargoPago() == 1) {
-      recargo = 0
-    } else {
-      recargo = order.precioSubtotal() * 0.1
-    }
-    return recargo 
-  }
-  let recargo = $derived(recargoTipoDePago(order))
+  let { data } = $props()
+  let { order } = data
 
 </script>
 
@@ -41,7 +18,7 @@
       <h1 class="header-title jc-space-between ellipsis-text">Pedido #{order.id}</h1>
       <div class="flex-row state-btn-container">
         <h2 class="subtitle ellipsis-text">Estado del Pedido</h2>
-        <span class="btn btn-alternate">{order.estado}</span>
+        <span class="btn btn-alternate">{order.state}</span>
       </div>
     </div>
     <section class="content-section-grid grid-cols-2">
@@ -50,8 +27,8 @@
         <div class="user">
           <i class="ph ph-user-circle"></i>
           <div class="user-info">
-            <div class="name">{order.nombreCliente}</div>
-            <div class="username"><strong>usuario:</strong> {order.usuarioCliente}</div>
+            <div class="name">{order.name}</div>
+            <div class="username"><strong>usuario:</strong> {order.user}</div>
           </div>
         </div>
       </section>
@@ -62,8 +39,8 @@
             <i class="ph ph-map-pin"></i>
           </div>
           <div>
-            <div class="address"><strong>{order.direccionCliente}</strong></div>
-            <div class="coordinates">Lat: {order.latitudCliente}, Long: {order.longitudCliente}</div>
+            <div class="address"><strong>{order.address}</strong></div>
+            <div class="coordinates">Lat: {order.lat}, Long: {order.long}</div>
           </div>
         </address>
       </section>
@@ -82,7 +59,7 @@
           <div class="cell">Precio</div>
         </header>
         <!-- Grid Content  -->
-        {#each order.platos as plato }
+        {#each order.dishes as plato }
           <GridRow plato={plato} />
         {/each}
       </div>
@@ -96,11 +73,11 @@
       </div>
       <div class="flex-row jc-space-between">
         <p>Incremento por tipo de pago</p>
-        <p>${recargo.toFixed(2)}</p>
+        <p>${order.recargoTipoDePago().toFixed(2)}</p>
       </div>
       <div class="flex-row jc-space-between">
         <p>Comision del delivery</p>
-        <p>${order.comisionDelivery}</p>
+        <p>${order.deliveryComission}</p>
       </div>
       <div class="flex-row jc-space-between">
         <p>Total</p>
@@ -111,7 +88,7 @@
       <h3 class="padding-top-05-05 h3">Metodo de pago</h3>
       <div class="payment">
         <i class="ph ph-credit-card"></i>
-        <span class="payment-text">Pago con <b>{order.tipoPago}</b></span>
+        <span class="payment-text">Pago con <b>{order.paymentMethod}</b></span>
       </div>
       <div class="action-container">
         <button class="btn btn-primary">Volver</button>

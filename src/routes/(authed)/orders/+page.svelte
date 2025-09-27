@@ -1,29 +1,51 @@
 <script lang="ts">
-    import "$lib/css/pages-css/3-orders.css";
+    import "$lib/css/pages-css/3-orders.css"
 
-    import OrderCard from "$lib/OrderCard.svelte";
-    import { ORDERS_MOCK } from "$lib/data/mock/orders";
+    import OrderCard from "$lib/OrderCard.svelte"
+    // import { ORDERS_MOCK } from "$lib/data/mock/orders";
+    import { Order } from '$lib/type/order'
+    import { orderService } from '$lib/services/orderService'
+    import { onMount } from "svelte"
 
+    // Para filtrar pedidos por estado
+    let estado = $state('PENDIENTE')
+    const handleStateChange = async (newState: string) => {
+        estado = newState
+        // console.log("Estado cambiado a:", estado)
+        await getTareas()
+    }
 
     // Todos los pedidos (ejemplo)
     // mejor pedirlo filtrado al back, y no pedir todo
-    let orders = $state(ORDERS_MOCK);
+    let orders = $state<Order[]>([]);
+    let errorMessage = $state('')
+
+    const getTareas = async () => {
+        errorMessage = ''
+        try {
+            orders = await orderService.getFilteredOrders(estado)
+            if (orders.length == 0) {
+                errorMessage = 'No hay pedidos'
+            }
+        } catch (error) {
+            errorMessage = 'Error de Conexion'
+        }
+    }
     
-    // Filtrar pedidos por estado
-    let estado = $state("PENDIENTE");
-
-    const filtrarPedidos = (estado: string) => orders.filter((order) => order.estado.toUpperCase() === estado)
+    onMount(getTareas)
     
-    let filteredOrders = $derived(filtrarPedidos(estado));
-
-    const handleStateChange = (newState: string) => {
-        estado = newState;
-        console.log("Estado cambiado a:", estado);
-        // console.log("Pedidos filtrados:", pedidosFiltrados);
-        // updateActiveTab(estado);
-    };
-
 </script>
+
+<style>
+    .error-text {
+        background-color: #da8a8a;
+        color: darkred;
+        padding: 1em 3em;
+        border-radius: 1em;
+        border: 1px solid darkred;
+        text-align: center;
+    }
+</style>
 
 <!-- Tabs and content -->
 <main class="title-tabs-grid">
@@ -42,9 +64,11 @@
     <!-- Orders grid -->
     <section class="main-grid">
         <!-- Single order -->
-        {#each filteredOrders as order}
+        {#each orders as order}
             <OrderCard order={order} />
         {/each}
-
+        {#if (errorMessage.trim() != '')}
+            <div class="error-text">{errorMessage}</div>
+        {/if}
     </section>
 </main>

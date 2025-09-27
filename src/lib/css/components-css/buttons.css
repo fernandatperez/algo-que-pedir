@@ -107,6 +107,18 @@
     border-radius: 2em;
 }
 
+/* ==== BUTTON PSEUDO-CLASS SELECTORS ==== */
+.btn-primary:disabled {
+    color: var(--font-color-tertiary);
+    background-color: var(--button-active-color);
+    cursor: auto;
+}
+.btn-primary:disabled:hover {
+    color: var(--font-color-tertiary);
+    background-color: var(--button-active-color);
+    cursor: auto;
+}
+
 /** Mobile: max: 400px */
 @media screen and (max-width: 430px) {
 
