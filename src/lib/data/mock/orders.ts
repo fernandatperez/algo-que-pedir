@@ -61,7 +61,7 @@ let secondOrder: Order = {
 }
 
 // Otro pedido
-let thirdOrder: Order = {
+export let thirdOrder: Order = {
   id: 7853,
   nombreCliente: 'Alex Caniggia',
   usuarioCliente: 'fuerabarat',

@@ -20,40 +20,40 @@
 </script>
 
 <div class="order-card">
-    <a href="/order-detail/{order.id}">
-        <header class="order" data-test-id="order-id">Pedido #{order.id}</header>
+    <a href="/order-detail/{order.id}" data-testid="goto-detail">
+        <header class="order" data-testid="order-id">Pedido #{order.id}</header>
     
         <div class="user">
             <i class="ph ph-user-circle"></i>
             <div class="user-info">
-                <div class="name" data-test-id="client-name">{order.nombreCliente}</div>
-                <div class="username"  data-test-id="client-username">
+                <div class="name">{order.nombreCliente}</div>
+                <div class="username">
                     <strong>usuario:</strong> {order.usuarioCliente}
                 </div>
             </div>
         </div>
     </a>
 
-    <p class="details" data-test-id="order-data">Hora: {order.createdAt.toLocaleString()} PM | Artículos: { order.platos.length} | Total: $ {order.precioTotal().toFixed(2)}</p>
+    <p class="details">Hora: {order.createdAt.toLocaleString()} PM | Artículos: { order.platos.length} | Total: $ {order.precioTotal().toFixed(2)}</p>
 
     <address class="address-container">
         <div class="pin-container">
             <i class="ph ph-map-pin"></i>
         </div>
         <div class="address-coordinates">
-            <span class="address" data-test-id="client-dir">
+            <span class="address">
                 <strong>{order.direccionCliente}</strong>
             </span>
-            <div class="coordinates" data-test-id="client-coordinates">Lat: {order.latitudCliente}, Long: {order.longitudCliente}</div>
+            <div class="coordinates">Lat: {order.latitudCliente}, Long: {order.longitudCliente}</div>
         </div>
     </address>
 
     <div class="payment">
         <i class="ph ph-credit-card"></i>
-        <span class="payment-text" data-test-id="payment">Pago con <b>{order.tipoPago}</b></span>
+        <span class="payment-text">Pago con <b>{order.tipoPago}</b></span>
     </div>
 
     <div class="action-container">
-        <button onclick={handleStateChange} class="btn btn-primary" disabled={order.estado=="PREPARADO"}>Preparar</button>
+        <button onclick={handleStateChange} class="btn btn-primary" disabled={order.estado=="PREPARADO"} data-testid="preparar">Preparar</button>
     </div>
 </div>
