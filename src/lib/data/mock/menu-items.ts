@@ -1,4 +1,4 @@
-import type { MenuItemType } from '$lib/type/menu-item';
+import type { MenuItemType } from '$lib/type/menu-item'
 
 //array de elementeos de el tipo interface MenuItemType 
 export const MENUITEMS_MOCK: MenuItemType[] = [
