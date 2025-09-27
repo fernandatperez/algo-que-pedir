@@ -7,7 +7,7 @@
   // 'page' is deprecated dice
   // import { page } from "$app/stores"
   import { page } from "$app/state";
-  import type { Order } from "$lib/type/order";
+  import type { Order } from "$lib/domain/order";
 
   // id del pedido para hacer fetch/find() del pedido
   const pedidoId = page.params.id // No puedo parsear ni definir el tipo para el parametro de url

@@ -6,7 +6,6 @@
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/5-menu.css";
   //   <link rel="stylesheet" href="../css/style.css" /> esto no hace falta pero no me acuerdo en donde se importa
-
   import MenuItem from '../../../lib/MenuItem.svelte';
 
   import { MENUITEMS_MOCK } from "$lib/data/mock/menu-items";
