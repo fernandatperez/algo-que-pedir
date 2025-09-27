@@ -14,7 +14,7 @@
     storeDir,
     storeCommission,
     paymentMethods,
-  } from "$lib/data/storeProfileNewData";
+  } from "$lib/data/mock/storeProfileNewData";
 
   // Acceder a los datos originales de la tienda
   const { formData, originalData, saveData, discardChanges } = formStore;

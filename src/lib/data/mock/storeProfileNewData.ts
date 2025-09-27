@@ -1,4 +1,4 @@
-import type { FieldsetGroupProps, PaymentMethod } from '../../types/storeProfileTypes'
+import type { FieldsetGroupProps, PaymentMethod } from '$lib/type/storeProfileTypes'
 
 export const storeInfo: FieldsetGroupProps = {
   title: '',

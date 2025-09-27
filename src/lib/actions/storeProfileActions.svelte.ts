@@ -1,5 +1,5 @@
-import { defaultData } from '$lib/data/storeProfileDefaultData'
-import type { FormData } from '../../types/storeProfileTypes'
+import { defaultData } from '$lib/data/mock/storeProfileDefaultData'
+import type { FormData } from '../type/storeProfileTypes'
 // los types los esta tomando mal por la ruta que tenemos definida en tsconfig.json
 
 // aca crea los datos reactivos

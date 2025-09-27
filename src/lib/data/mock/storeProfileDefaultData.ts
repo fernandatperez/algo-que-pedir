@@ -1,4 +1,4 @@
-import type { FormData } from '../../types/storeProfileTypes'
+import type { FormData } from '$lib/type/storeProfileTypes'
 /* datos por defecto de la tienda*/
 /* esta bien que haya definido una clase de typescript? o deberia definirla vacia y poblar con un json? */
 export const defaultData: FormData = {
