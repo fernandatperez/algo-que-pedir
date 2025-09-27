@@ -24,14 +24,15 @@
             value=""
             input_type={InputTypes.Normal}
             labelProps={{
-              for: "login-username",
+              class: "label-color",
+              for: "username",
             }}
             inputProps={{
               class: "input-primary",
               type: "email",
               placeholder: "Usuario",
-              id: "login-username-id",
-              name: "login-username",
+              id: "input-id",
+              name: "username",
             }}
           />
           <!-- Password -->
@@ -40,12 +41,13 @@
             value=""
             input_type={InputTypes.Hidden}
             labelProps={{
-              for: "login-password",
+              class: "label-color",
+              for: "username",
             }}
             inputProps={{
               class: "input-primary",
-              id: "login-password-id",
-              name: "login-password",
+              id: "password-id",
+              name: "password",
             }}
           />
         </div>
@@ -53,9 +55,7 @@
 
       <!-- FORM ACTIONS -->
       <section class="form-actions">
-        <a href="/orders" class="btn btn-primary btn-login">
-            Iniciar Sesión
-        </a>
+        <a href="/orders" class="btn btn-primary btn-login"> Iniciar Sesión </a>
         <!-- Como metemos validacion del back aca? No del real sino Mock -->
         <div class="register-section">
           <p>¿No tenes una cuenta?</p>
