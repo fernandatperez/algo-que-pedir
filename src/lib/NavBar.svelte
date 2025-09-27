@@ -1,12 +1,29 @@
 <script lang="ts">
+
+  // Guarda la ruta activa
+  let activeRoute = "orders";
+
+  function setActive(route: string) {
+    activeRoute = route;
+  }
+
 </script>
 
 <!-- hay que cambiar las rutas despues -->
 <nav class="options-and-icon">
-  <a href="orders" class="btn-empty active">Pedidos</a>
-  <a href="/menu" class="btn-empty">Menú</a>
-  <a href="/ingredients" class="btn-empty">Ingredientes</a>
-  <a href="/store-profile" class="btn-empty">Cuentas</a>
+  <a href="/orders" class="btn-empty {activeRoute === 'orders' ? 'active' : ''}"
+    onclick={() => setActive('orders')}
+  >Pedidos</a>
+  <a href="/menu" class="btn-empty {activeRoute === 'menu' ? 'active' : ''}"
+    onclick={() => setActive('menu')}
+  >Menú</a>
+  <a href="/ingredients" class="btn-empty {activeRoute === 'ingredients' ? 'active' : ''}"
+    onclick={() => setActive('ingredients')}
+  >ingredientes</a>
+  <a href="/store-profile" class="btn-empty {activeRoute === 'store-profile' ? 'active' : ''}"
+    onclick={() => setActive('store-profile')}
+  >Cuentas</a>
+
   <!-- <i class="ph ph-list hidden"></i> -->
   <label id="nav-hamburger" class="hidden">
     <input type="checkbox" id="hamburger-toggle" />
@@ -24,3 +41,4 @@
     <i class="ph ph-user hidden"></i>
   </div>
 </nav>
+
