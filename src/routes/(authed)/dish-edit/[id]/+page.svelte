@@ -11,7 +11,7 @@
   import Input from "$lib/Input.svelte";
   import DinamicImage from "$lib/DinamicImage.svelte";
   import { toggleVariable } from "$lib/toggleFunction";
-  import { InputTypes } from "$lib/types";
+  import { InputTypes } from "$lib/InputTypes";
 
   let inputValue: string = $state(""); // No termino de entender bien como usar las runas
   let inputURL: string = $state("");
