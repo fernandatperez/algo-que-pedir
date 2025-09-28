@@ -1,20 +1,23 @@
+// src/lib/data/mock/storeProfileNewData.ts
 export const storeInfo = {
   name: 'store-info',
   title: 'Datos del Local',
   fields: [
     {
-      input_id: 'store-name',
-      label_text: 'Nombre de la tienda',
-      input_placeholder: 'Ingresa el nombre de tu tienda',
+      field: 'store-name',
+      label: 'Nombre de la tienda',
+      placeholder: 'Ingresa el nombre de tu tienda',
       required: true, 
       minLength: 2,
-      maxLength: 100
+      maxLength: 100,
+      type: 'text' as const  
     },
     {
-      input_id: 'url-store-img', 
-      label_text: 'Imagen de la tienda',
-      input_placeholder: 'URL de la imagen',
-      required: false // tengo que poner una imagen default si esta vacio
+      field: 'url-store-img',
+      label: 'Imagen de la tienda',
+      placeholder: 'URL de la imagen',
+      required: false,
+      type: 'text' as const 
     }
   ]
 }
@@ -24,31 +27,32 @@ export const storeDir = {
   title: 'Dirección',
   fields: [
     {
-      input_id: 'store-dir',
-      label_text: 'Dirección completa',
-      input_placeholder: 'Calle, número, ciudad',
-      required: true 
+      field: 'store-dir',
+      label: 'Dirección completa',
+      placeholder: 'Calle, número, ciudad',
+      required: true,
+      type: 'text' as const  
     },
     {
-      input_id: 'store-altitude',
-      label_text: 'Altitud',
-      input_placeholder: 'Altitud en metros',
+      field: 'store-altitude',
+      label: 'Altitud',
+      placeholder: 'Altitud en metros',
       required: true,
-      type: 'number'
+      type: 'number' as const  
     },
     {
-      input_id: 'store-latitude',
-      label_text: 'Latitud',
-      input_placeholder: 'Coordenada latitud',
+      field: 'store-latitude',
+      label: 'Latitud',
+      placeholder: 'Coordenada latitud',
       required: true,
-      type: 'number'
+      type: 'number' as const  
     },
     {
-      input_id: 'store-longitude', 
-      label_text: 'Longitud',
-      input_placeholder: 'Coordenada longitud',
+      field: 'store-longitude',
+      label: 'Longitud',
+      placeholder: 'Coordenada longitud',
       required: true,
-      type: 'number'
+      type: 'number' as const  
     }
   ]
 }
@@ -58,37 +62,36 @@ export const storeCommission = {
   title: 'Comisiones',
   fields: [
     {
-      input_id: 'app-commission',
-      label_text: 'Comisión de la App (%)',
-      input_placeholder: '0-100',
+      field: 'app-commission',
+      label: 'Comisión de la App (%)',
+      placeholder: '0-100',
       required: true,
-      type: 'number'
+      type: 'number' as const  
     },
     {
-      input_id: 'author-commission',
-      label_text: 'Comisión del Autor (%)', 
-      input_placeholder: '0-100',
+      field: 'author-commission',
+      label: 'Comisión del Autor (%)',  
+      placeholder: '0-100',
       required: true,
-      type: 'number'
+      type: 'number' as const  
     }
   ]
 }
 
 export const paymentMethods = [
   {
-    id: 'efectivo',
+    field: 'efectivo',
     label: 'Efectivo',
-    value: 'efectivo'
+    type: 'checkbox' as const
   },
   {
-    id: 'qr', 
+    field: 'qr',
     label: 'QR',
-    value: 'qr'
+    type: 'checkbox' as const
   },
   {
-    id: 'transferencia',
-    label: 'Transferencia',
-    value: 'transferencia'
+    field: 'transferencia',
+    label: 'Transferencia', 
+    type: 'checkbox' as const
   }
 ]
-
