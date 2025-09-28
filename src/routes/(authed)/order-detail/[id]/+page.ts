@@ -1,5 +1,5 @@
-import { orderService } from "$lib/services/orderService"
-import { redirect } from "@sveltejs/kit"
+import { orderService } from '$lib/services/orderService'
+import { redirect } from '@sveltejs/kit'
 
 export async function load({ params }) {
   try {
