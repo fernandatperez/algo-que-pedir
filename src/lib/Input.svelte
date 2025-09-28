@@ -1,7 +1,6 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
   import { InputTypes } from "$lib/types";
-
   // enum InputTypes {
   //   Normal = 'normal',
   //   Hidden = 'hidden'
@@ -11,10 +10,10 @@
     description: string;
     value: string; // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
     input_type: InputTypes; // -> Por que no anda si lo defino aca mismo y si lo importo si?
-    labelProps?: Record<string, unknown>; // -> any and unknown are the same in terms of what is assignable to them
-    inputProps?: Record<string, unknown>;
-    spanProps?: Record<string, unknown>;
-    // HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
+    labelProps?: OptionalProps; // -> any and unknown are the same in terms of what is assignable to them. Unknown contains each and every type in TypeScript
+    inputProps?: OptionalProps;
+    spanProps?: OptionalProps;
+    //HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
   }
 
   let {

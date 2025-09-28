@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "$lib/css/flex-grid.css";
   import "$lib/css/fonts.css";
   import "$lib/css/components-css/number-input.css";
@@ -7,6 +7,18 @@
   import "$lib/css/components-css/input.css";
   import "$lib/css/components-css/switch-button.css";
   import "$lib/css/pages-css/6-product-edit.css";
+
+  import Input from "$lib/Input.svelte";
+  import DinamicImage from "$lib/DinamicImage.svelte";
+  import { toggleVariable } from "$lib/toggleFunction";
+  import { InputTypes } from "$lib/types";
+
+  let inputValue: string = $state(""); // No termino de entender bien como usar las runas
+  let inputURL: string = $state("");
+
+  let platoAutor: boolean = $state(false)
+  let platoEnPromo: boolean = $state(false)
+
 </script>
 
 <!-- Content -->
@@ -25,17 +37,25 @@
         class="content-section form-section-product-info"
       >
         <div class="container-column product-info">
-          <div class="container-column input-group">
-            <label for="product-name" class="label-color"
-              >Nombre del Plato*</label
-            >
-            <input
-              type="text"
-              id="product-name"
-              class="input-primary"
-              placeholder="Hamburguesa triple completa"
+          <div class="container-column">
+            <!-- Aca esta bien el bind:value? -->
+            <Input
+              description="Nombre del Plato*"
+              bind:value={inputValue}
+              input_type={InputTypes.Normal}
+              labelProps={{
+                class: "w-100",
+                for: "product-name",
+              }}
+              inputProps={{
+                type: "text",
+                class: "input-primary",
+                id: "product-name",
+                placeholder: "Hamburguesa triple completa",
+              }}
             />
           </div>
+          <!-- No rinde elemento. Unico con textarea -->
           <div class="container-column input-group">
             <label for="product-description" class="label-color"
               >Descripción*</label
@@ -48,23 +68,32 @@
               placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezos."
             ></textarea>
           </div>
-          <div class="container-column input-group">
-            <label for="url-product-img" class="label-color"
-              >URL de la imagen del plato*</label
-            >
-            <input
-              type="text"
-              id="url-product-img"
-              class="input-primary"
-              placeholder="http://images.google.com/altaburger.jag"
+          <div class="container-column">
+            <Input
+              description="URL de la imagen del plato*"
+              bind:value={inputURL}
+              input_type={InputTypes.Normal}
+              labelProps={{
+                class: "w-100",
+                for: "url-product-img",
+              }}
+              inputProps={{
+                type: "text",
+                id: "url-product-img",
+                class: "input-primary",
+                placeholder: "/url/de/tu/imagen.png",
+              }}
             />
           </div>
         </div>
         <div class="i">
-          <img
-            src="/src/lib/assets/img/hamburguesa2.jpg"
-            alt="anvorguesa"
-            class="img-product-edit"
+          <!-- Revisar decrecimiento-->
+          <DinamicImage
+            imageURL = {inputURL}
+            imageDescription = "product-load-img"
+            imageProps={{
+              class: "img-product-edit"
+            }}
           />
         </div>
       </fieldset>
@@ -77,13 +106,20 @@
         <h2 class="subtitle">Costos</h2>
 
         <div class="container-column input-group">
-          <label for="product-base-cost" class="label-color">Precio Base*</label
-          >
-          <input
-            type="number"
-            id="product-base-cost"
-            class="input-primary number-input"
-            placeholder="Escribir numero..."
+          <Input 
+            description="Precio Base*"
+            value=""
+            input_type={InputTypes.Normal}
+            labelProps={{
+              class: "w-100",
+              for: "product-base-cost"
+            }}
+            inputProps={{
+              type: "number",
+              id: "product-base-cost",
+              class: "input-primary number-input",
+              placeholder: "Escribir numero..."
+            }}
           />
         </div>
 
@@ -95,10 +131,11 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="es-de-autor" />
+            <input type="checkbox" class="toggle" id="es-de-autor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
+            <!-- Y esto como hacemos para que cuando se clickee haga el toggle de la variable? -->
           </div>
         </div>
 
@@ -110,7 +147,7 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="en-promocion" />
+            <input type="checkbox" class="toggle" id="en-promocion" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>

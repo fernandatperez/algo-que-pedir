@@ -1,5 +1,6 @@
 <script lang='ts'>
-  import type { ValidationMessage } from '$lib/domain/store'
+<!-- se puede poner un nombre mas generico a /domain/ingredient ya que lo vamos a usar todos  -->
+import type { ValidationMessage } from '$lib/domain/ingredient'
 
   const errorsFrom = (errors: ValidationMessage[], field: string) => errors
     .filter((_) => _.field === field)
