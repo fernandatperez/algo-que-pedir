@@ -1,24 +1,20 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
-  import { InputTypes } from "$lib/types";
-  // enum InputTypes {
-  //   Normal = 'normal',
-  //   Hidden = 'hidden'
-  // } // No lo toma, por algun motivo
+
+  import { InputTypes } from "$lib/InputTypes";
+  import type { OptionalProps } from "$lib/InputTypes";
+  import { toggleVariable } from "$lib/utils";
 
   interface InputPropsI {
     description: string;
-    value: string; // -> No termino de entender que es, donde esta, y por que lo pasaria como prop?
-    input_type: InputTypes; // -> Por que no anda si lo defino aca mismo y si lo importo si?
-    labelProps?: OptionalProps; // -> any and unknown are the same in terms of what is assignable to them. Unknown contains each and every type in TypeScript
+    input_type: InputTypes;
+    labelProps?: OptionalProps;
     inputProps?: OptionalProps;
     spanProps?: OptionalProps;
-    //HTMLInputElements: HTMLInputElement // -> Como reparte las propiedades?
   }
 
   let {
     description,
-    value,
     input_type = InputTypes.Normal,
     labelProps = {},
     inputProps = {},
@@ -28,16 +24,9 @@
   const eyeSlash = "ph ph-eye-slash";
   const eye = "ph ph-eye";
 
-  let visibility = $state(false);
 
-  function changeVisibility() {
-    if (!visibility) {
-      visibility = true;
-    } else {
-      visibility = false;
-    }
-  }
-
+  type Visibility = true | false;
+  let visibility: Visibility = $state(false);
 </script>
 
 {#if input_type == InputTypes.Normal}
@@ -45,24 +34,28 @@
     <span {...spanProps}>
       {description}
     </span>
-    <input {...inputProps} />
+
+    <input {...inputProps}/>
   </label>
 {:else}
   <label {...labelProps}>
     <span {...spanProps}>
       {description}
     </span>
-    <!-- Medio raro, pero me esta trayendo el icon.css de la pagina -->
     <div class="input-with-icon">
       <button
         class="input-icon"
         aria-label="password-show-btn"
         type="button"
-        onclick={changeVisibility}
+
+        onclick={() => (visibility = toggleVariable(visibility))}
       >
         <i class={visibility ? eye : eyeSlash}></i>
       </button>
-      <input type={visibility ? "text" : "password"} {...inputProps} />
+      <input
+        type={visibility ? "text" : "password"}
+        {...inputProps}
+      />
     </div>
   </label>
 {/if}

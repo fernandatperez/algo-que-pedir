@@ -1,11 +1,11 @@
 <script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/component-css/input.css";
-  import "$lib/css/component-css/switch-button.css";
-  import "$lib/css/component-css/grid-table.css";
-  import "$lib/css/component-css/icon.css";
-  import "$lib/css/component-css/buttons.css";
+  import "$lib/css/components-css/input.css";
+  import "$lib/css/components-css/switch-button.css";
+  import "$lib/css/components-css/grid-table.css";
+  import "$lib/css/components-css/icon.css";
+  import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/8-ingredient-edit.css";
   
   import { goto } from '$app/navigation';

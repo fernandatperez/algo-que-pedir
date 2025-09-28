@@ -8,6 +8,8 @@ export type Toast = {
 }
 
 function createToastStore() {
+  // writable: store reactivo que te permite guardar un valor que puede cambiar y que otros 
+  // componentes pueden “escuchar” para actualizarse automáticamente cuando ese valor cambie
   const { subscribe, update } = writable<Toast[]>([])
   let counter = 0
 

@@ -11,14 +11,24 @@
   import Input from "$lib/Input.svelte";
   import DinamicImage from "$lib/DinamicImage.svelte";
   import { toggleVariable } from "$lib/toggleFunction";
-  import { InputTypes } from "$lib/types";
+  import { InputTypes } from "$lib/InputTypes";
+  import type { MenuItemType } from "$lib/domain/menuItem";
 
-  let inputValue: string = $state(""); // No termino de entender bien como usar las runas
-  let inputURL: string = $state("");
+  // Recibir los datos del +page.ts
+  let { data } = $props()
+  const { menuItem } = data
 
-  let platoAutor: boolean = $state(false)
-  let platoEnPromo: boolean = $state(false)
+//! =========== esto hay que cambiarloooooo ===========
+  // Estados del formulario inicializados con los datos del menu item
+  let inputValue: string = $state(menuItem?.nombre || "");
+  let inputURL: string = $state(menuItem?.imagen || "");
+  let descripcionValue: string = $state(menuItem?.descripcion || "");
+  let precioValue: number = $state(menuItem?.precio || 0);
 
+
+
+  let platoAutor: boolean = $state(false);
+  let platoEnPromo: boolean = $state(false);
 </script>
 
 <!-- Content -->

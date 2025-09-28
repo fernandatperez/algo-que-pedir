@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
-import type { Order } from '$lib/type/order'
-import { ensalada, hamburguesa, pizza } from '$lib/data/mock/menu-items'
+import type { Order } from '$lib/domain/order'
+import { ensalada, hamburguesa, pizza } from '$lib/data/mock/menuItems'
 
 // Ejemplo de pedido
 let firstOrder: Order = {
