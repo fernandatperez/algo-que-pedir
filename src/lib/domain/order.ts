@@ -1,4 +1,4 @@
-import type { MenuItemType } from '$lib/domain/menuItem';
+import type { MenuItemType } from '$lib/domain/menuItem'
 // A MENU-ITEM LE FALTA: plato.cantidad
 
 export interface Order {

@@ -7,7 +7,7 @@ export const MENUITEMS_JSON_MOCK: MenuItemJSON[] = [
     nombre: 'Pasta con albóndigas',
     descripcion: 'Deliciosa pasta con salsa de tomates y albondigas de cerdo',
     precio: 12.99,
-    imagen: 'spagettis.png',
+    imagen: '/src/lib/assets/img/spagettis.png',
     alt: 'spagettis'
   },
   {
@@ -15,7 +15,7 @@ export const MENUITEMS_JSON_MOCK: MenuItemJSON[] = [
     nombre: 'Hamburguesa con queso y panceta',
     descripcion: 'Combo de hamburguesa con papas y bebida',
     precio: 9.99,
-    imagen: 'hamburguesa2.jpg',
+    imagen: '/src/lib/assets/img/hamburguesa2.jpg',
     alt: 'hamburguesa'
   },
   {
@@ -23,7 +23,7 @@ export const MENUITEMS_JSON_MOCK: MenuItemJSON[] = [
     nombre: 'Ensalada de la Huerta',
     descripcion: 'Ensalada fresca con hojas mixtas y vinagreta',
     precio: 7.50,
-    imagen: 'ensalada.png',
+    imagen: '/src/lib/assets/img/ensalada.png',
     alt: 'ensalada'
   },
   {
@@ -31,7 +31,7 @@ export const MENUITEMS_JSON_MOCK: MenuItemJSON[] = [
     nombre: 'Pizza con mozzarella y tomate',
     descripcion: 'Pizza a la piedra con salsa de tomates frescos y extra queso',
     precio: 11.75,
-    imagen: 'pizza.png',
+    imagen: '/src/lib/assets/img/pizza.png',
     alt: 'pizza'
   },
   {
@@ -39,7 +39,7 @@ export const MENUITEMS_JSON_MOCK: MenuItemJSON[] = [
     nombre: 'Salmon con vegetales grillados',
     descripcion: 'Salmon fresco a la plancha acompañado de vegetales',
     precio: 14.25,
-    imagen: 'salmon.png',
+    imagen: '/src/lib/assets/img/salmon.png',
     alt: 'salmon'
   }
 ]
@@ -51,7 +51,7 @@ const hamburguesaJSON: MenuItemJSON = {
   nombre: 'Hamburguesa con queso',
   descripcion: 'Hamburguesa con queso acompañada de papas fritas y bebida',
   precio: 12.0,
-  imagen: 'hamburguesa.png',
+  imagen: '/src/lib/assets/img/hamburguesa.png',
 }
 
 const pizzaJSON: MenuItemJSON = {
@@ -60,7 +60,7 @@ const pizzaJSON: MenuItemJSON = {
   nombre: 'Pizza Margarita',
   descripcion: 'De muzzarella con tomate y albahaca',
   precio: 16.0,
-  imagen: 'pizza.png',
+  imagen: '/src/lib/assets/img/pizza.png',
 }
 
 const ensaladaJSON: MenuItemJSON = {
@@ -69,7 +69,7 @@ const ensaladaJSON: MenuItemJSON = {
   nombre: 'Ensalada clásica',
   descripcion: 'De hojas frescas y vegetales organicos',
   precio: 10.0,
-  imagen: 'ensalada.png',
+  imagen: '/src/lib/assets/img/ensalada.png',
 }
 
 

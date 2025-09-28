@@ -10,7 +10,7 @@
 
   import Input from "$lib/Input.svelte";
   import DinamicImage from "$lib/DinamicImage.svelte";
-  import { toggleVariable } from "$lib/toggleFunction";
+  import { toggleVariable } from "$lib/utils";
   import { InputTypes } from "$lib/InputTypes";
   import type { MenuItemType } from "$lib/domain/menuItem";
 

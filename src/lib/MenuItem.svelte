@@ -17,7 +17,7 @@
 <a class="meal" href={`/dish-edit/${menuitem.id}`} data-testid="menu-link">
     <div class="imgcontainer">
       <img
-        src="src/lib/assets/img/{menuitem.imagen}"
+        src="{menuitem.imagen}"
         alt={menuitem.alt}
         class="image-meal"
         data-testid="menu-imagen"
