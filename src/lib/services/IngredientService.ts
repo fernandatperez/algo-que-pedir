@@ -10,19 +10,26 @@ class IngredientService {
   }
 
   async getIngredientById(id: number) {
+    // const queryById = () => axios.get<TareaJSON>(REST_SERVER_URL + '/tareas/' + id)
+    // const tareaJson = await getAxiosData(queryById)
+    // return Tarea.fromJson(tareaJson)
     return INGREDIENT_MOCK.find(ingredient => ingredient.id !== undefined && ingredient.id === id)
   }
 
   async createIngredient(ingredient: IngredientType) {
-    const ingredientJSON = { ...ingredient, id: ingredient.id ?? INGREDIENT_MOCK.length + 1 }
-    return ingredientJSON
+    // return axios.post(REST_SERVER_URL + '/tareas', tarea.toJSON())
+    const ingredientJSON = { ...ingredient, id: ingredient.id as number }
+    INGREDIENT_MOCK.push(ingredientJSON)
+    return ingredientJSON  
   }
 
   async updateIngredient(ingredient: IngredientType){
+    // return axios.put<TareaJSON>(REST_SERVER_URL + '/tareas/' + tarea.id, tarea.toJSON())
     return {ingredient}
   }
 
   async deleteIngredient(ingredient: IngredientType){
+    // return axios.delete(REST_SERVER_URL + '/tareas/' + tarea.descripcion)
     const index = INGREDIENT_MOCK.findIndex(item => item.id === ingredient.id)
     if (index !== -1) {
       return INGREDIENT_MOCK.splice(index, 1)[0]

@@ -6,8 +6,9 @@
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/7-ingredients.css";
 
-  import type { IngredientType } from '$lib/domain/ingredient';
-  import { foodGroupDict } from '$lib/domain/ingredient';
+
+  import type { IngredientType } from '$lib/domain/ingredient'
+  import { foodGroupDict } from '$lib/domain/ingredient'
 
   interface Props {
     ingredient: IngredientType
@@ -20,4 +21,10 @@
 <section class="cell" id="nombre-{ingredient.id}">{ingredient.name}</section>
 <section class="cell">${ingredient.cost}</section>
 <section class="cell later-hid" id="grupo-alimenticio-{ingredient.id}">{ingredient.foodGroup}</section>
-<section class="cell col-centered later-hid"><i class="ph {foodGroupDict[ingredient.foodGroup].icon} gray-icon" id="origen-{ingredient.id}"></i></section>
+{#if ingredient.foodGroup}
+  <section class="cell col-centered later-hid">
+    <i class={"ph " + foodGroupDict[ingredient.foodGroup].icon + " gray-icon"} id={"origen-" + ingredient.id}></i>
+  </section>
+{:else}
+  <section class="cell col-centered later-hid"><i class="ph ph-question gray-icon" id="origen-{ingredient.id}"></i></section>
+{/if}

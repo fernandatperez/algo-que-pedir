@@ -26,7 +26,7 @@ export enum FoodGroupValue {
 export const foodGroupDict: Record<FoodGroupValue, { icon: string; label: string }> = {
   [FoodGroupValue.FRUTAS_Y_VERDURAS]: { icon: 'ph-plant', label: 'Frutas y Verduras' },
   [FoodGroupValue.PROTEINAS]: { icon: 'ph-cow', label: 'Proteínas' },
-  [FoodGroupValue.CEREALES_Y_TUBERCULOS]: { icon: 'ph-grain', label: 'Cereales y tuberculos' },
+  [FoodGroupValue.CEREALES_Y_TUBERCULOS]: { icon: 'ph-bread', label: 'Cereales y tuberculos' },
   [FoodGroupValue.LACTEOS]: { icon: 'ph-cow', label: 'Lácteos' },
   [FoodGroupValue.GRASAS_Y_ACEITES]: { icon: 'ph-cow', label: 'Grasas y aceites' },
   [FoodGroupValue.AZUCARES_Y_DULCES]: { icon: 'ph-jar', label: 'Azucares y dulces' },
