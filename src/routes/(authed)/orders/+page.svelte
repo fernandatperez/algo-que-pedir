@@ -3,7 +3,7 @@
 
     import OrderCard from "$lib/OrderCard.svelte"
     // import { ORDERS_MOCK } from "$lib/data/mock/orders";
-    import { Order } from '$lib/type/order'
+    import { Estado, Order } from '$lib/type/order'
     import { orderService } from '$lib/services/orderService'
     import { onMount } from "svelte"
 
@@ -33,6 +33,14 @@
     }
     
     onMount(getTareas)
+
+    const prepararPedido = async (order: Order) => {
+        // console.log("Preparando pedido", order.id)
+        order.state = Estado.PREPARADO
+        await orderService.updateOrderState(order)
+        await getTareas()
+        // console.log("Pedido preparado", order.id)
+    }
     
 </script>
 
@@ -65,7 +73,7 @@
     <section class="main-grid">
         <!-- Single order -->
         {#each orders as order}
-            <OrderCard order={order} />
+            <OrderCard order={order} action={() => prepararPedido(order)} />
         {/each}
         {#if (errorMessage.trim() != '')}
             <div class="error-text">{errorMessage}</div>

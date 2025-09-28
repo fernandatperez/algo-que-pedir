@@ -1,22 +1,15 @@
 <script lang="ts">
     import '$lib/css/components-css/buttons.css'
     import '$lib/css/components-css/orderCard.css'
-    import { orderService } from './services/orderService';
+    import type { MouseEventHandler } from 'svelte/elements';
     import { type Order, Estado } from './type/order'
 
     interface Props {
-        order: Order
+        order: Order,
+        action: MouseEventHandler<HTMLButtonElement>
     }
 
-    let { order } : Props = $props()
-
-    const prepararPedido = async () => {
-        console.log("Preparando pedido", order.id)
-        order.state = Estado.PREPARADO
-        console.log(order)
-        await orderService.updateOrderState(order)
-        console.log("Pedido preparado", order.id)
-    }
+    let { order, action = $bindable() } : Props = $props()
     
 </script>
 
@@ -55,6 +48,6 @@
     </div>
 
     <div class="action-container">
-        <button onclick={prepararPedido} class="btn btn-primary" disabled={order.state!=Estado.PENDIENTE}> Preparar </button>
+        <button onclick={action} class="btn btn-primary" disabled={order.state!=Estado.PENDIENTE}> Preparar </button>
     </div>
 </div>
