@@ -24,15 +24,14 @@
             value=""
             input_type={InputTypes.Normal}
             labelProps={{
-              class: "label-color",
-              for: "username",
+              for: "login-username",
             }}
             inputProps={{
               class: "input-primary",
               type: "email",
               placeholder: "Usuario",
-              id: "input-id",
-              name: "username",
+              id: "login-username-id",
+              name: "login-username",
             }}
           />
           <!-- Password -->
@@ -41,13 +40,12 @@
             value=""
             input_type={InputTypes.Hidden}
             labelProps={{
-              class: "label-color",
-              for: "username",
+              for: "login-password",
             }}
             inputProps={{
               class: "input-primary",
-              id: "password-id",
-              name: "password",
+              id: "login-password-id",
+              name: "login-password",
             }}
           />
         </div>
