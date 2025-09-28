@@ -2,7 +2,7 @@ export type IngredientJSON = {
   id: number
   name: string
   cost: number
-  foodGroup: FoodGroupValue
+  foodGroup?: FoodGroupValue
   esOrigenAnimal: boolean
 }
 
@@ -40,7 +40,7 @@ export class IngredientType {
       // trim: eliminar los espacios en blanco al inicio y al final del texto.
       public name: string = ''.trim(),
       public cost: number = 0,
-      public foodGroup: FoodGroupValue = FoodGroupValue.FRUTAS_Y_VERDURAS,
+      public foodGroup?: FoodGroupValue,
       public esOrigenAnimal: boolean = true 
   ) {}
 
@@ -57,10 +57,10 @@ export class IngredientType {
     if(!this.name){
       this.addError('name', 'Debe ingresar nombre')
     }
-    if(this.cost <= 0){
+    if(this.cost <= 0 || !this.cost){
       this.addError('cost', 'El costo debe ser mayor a 0')
     }
-    if (!this.foodGroup){
+    if (!this.foodGroup || undefined){
       this.addError('foodGroup', 'Debe seleccionar un grupo alimenticio')
     }
   }

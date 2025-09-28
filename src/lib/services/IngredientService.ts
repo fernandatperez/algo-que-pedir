@@ -13,9 +13,9 @@ class IngredientService {
     return INGREDIENT_MOCK.find(ingredient => ingredient.id !== undefined && ingredient.id === id)
   }
 
-  async createIngredient(ingredient: IngredientType){
-    const ingredientJSON = { ...ingredient, id: ingredient.id as number }
-    return INGREDIENT_MOCK.push(ingredientJSON)
+  async createIngredient(ingredient: IngredientType) {
+    const ingredientJSON = { ...ingredient, id: ingredient.id ?? INGREDIENT_MOCK.length + 1 }
+    return ingredientJSON
   }
 
   async updateIngredient(ingredient: IngredientType){

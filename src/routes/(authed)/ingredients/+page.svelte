@@ -63,9 +63,9 @@
 
     try {
       // guardar en el backend
-      await ingredientService.createIngredient(newIngredient)
+      await ingredientService.createIngredient(ingredient)
       // refrescar lista
-      await findIngredients()
+      // await findIngredients()
       // cerrar form
       showForm = false
       errors = [] // limpiar errores
@@ -75,35 +75,13 @@
     }
 
   }
-  
-  // function saveIngredient() {
-  //   if (validarFormulario()){
-  //     // Asigno un id al nuevo ingrediente
-  //     newIngredient.id = ingredients.length + 1;
-  
-  //     // Asigno el icono correspondiente al grupo alimenticio seleccionado
-  //     const selectedgroup = foodGroups.find(
-  //       (grupo) => grupo.value === newIngredient.foodGroup,
-  //     );
-  //     newIngredient.originIcon = selectedgroup?.icon || "ph-question";
-  
-  //     // Agrego el newIngredient a la lista
-  //     ingredients = [newIngredient, ...ingredients];
-  //     showForm = false;
-  //   }
-  // }
 
-  function reset(){
+  const onCancel = () => {
     // Reset
     newIngredient = new IngredientType();
     showForm = false;
+    errors = [] // limpiar errores
   }
-
-  // function deleteIngredient(ingredient: IngredientType) {
-  //   const ingIndex = ingredients.indexOf(ingredient);
-  //   // Elimino un solo elemento desde el indice que le seteo
-  //   ingredients.splice(ingIndex, 1);
-  // }
 
   // Estado para mostrar/ocultar el modal
   let showModal = $state(false)
@@ -157,7 +135,7 @@
         <!-- use:enhance: te trae la data del form cuando llamas al onSubmit, permitiendo sacar el bind:value  -->
         <!-- type="reset" -> onreset={reset} -->
         <!-- type="submit" -> use:enhance={onSubmit} -->
-          <form method="POST" use:enhance={onSubmit} onreset={reset} id="form-ingredient" class="grid-table-row product-edit-ingredients-table-content">
+          <form method="POST" use:enhance={onSubmit} onreset={onCancel} id="form-ingredient" class="grid-table-row product-edit-ingredients-table-content">
             <section class="cell">
               <input
                 class="input-primary"
@@ -179,9 +157,9 @@
                 <option value="" disabled selected hidden>Seleccionar</option>
                 {#each Object.entries(foodGroupDict) as [value, grupo]}
                   <option value={value}> {grupo.label} </option>
-                {/each}
-                <ValidationField errors={errors} field="foodGroup" />
+                  {/each}
               </select>
+              <ValidationField errors={errors} field="foodGroup" />
             </section>
 
             <section class="btn-group-actions btn-group-new-ingredient">
