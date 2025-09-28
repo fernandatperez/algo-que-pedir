@@ -2,6 +2,7 @@
   import "$lib/css/pages-css/4-order-details.css"
   import GridRow from "$lib/components/GridRow.svelte"
   import type { Order } from "$lib/type/order";
+    import { goto } from "$app/navigation";
 
   let { data } = $props()
   let { order } = data
@@ -91,7 +92,7 @@
         <span class="payment-text">Pago con <b>{order.paymentMethod}</b></span>
       </div>
       <div class="action-container">
-        <button class="btn btn-primary">Volver</button>
+        <button class="btn btn-primary" onclick={() => goto('/orders')}>Volver</button>
       </div>
     </section>
   </div>
