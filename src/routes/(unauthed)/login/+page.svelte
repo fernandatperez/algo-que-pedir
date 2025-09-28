@@ -5,38 +5,57 @@
   import "$lib/css/pages-css/1-login.css";
   import Input from "$lib/Input.svelte";
   import { InputTypes } from "$lib/InputTypes";
-  import { USERS_LIST_MOCK } from "$lib/Users_Mock";
+  import { USERS_LIST_MOCK } from "$lib/data/mock/users";
+  import { UserType } from "$lib/domain/user";
+  import type { ValidationMessage } from "$lib/domain/user";
+  import { userService } from "$lib/services/UserService";
+  import { showError } from '$lib/domain/errorHandler'
+  import ValidationField from "$lib/components/ValidationField.svelte";
+  import { goto } from "$app/navigation";
+  import { fade } from "svelte/transition";
 
-  let emailLoginValue: string = "";
-  let passwordLoginValue: string = "";
+  let errors: ValidationMessage[] = $state([])
 
-  function handleLogin(event: Event) {
-    event.preventDefault();
-    const foundUser = USERS_LIST_MOCK.find(
-      (user) => user.email.toLowerCase() === emailLoginValue,
-    );
+  const onSubmit = async (ev: SubmitEvent) => {
+    ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
 
-    if (foundUser && foundUser.password === passwordLoginValue) {
-      window.location.href = "/orders"; // posiblemente haya una mejor manera
-    } else {
-      errorMessage1st = "Wrong email and password combination.";
-      errorMessage2nd = "Have you forgotten your password?";
+    // ev.currentTarget: es el elemento que tiene asignado el event listener
+    // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
+    const form = ev.currentTarget as HTMLFormElement
+    const formData = new FormData(form) // creo el formData
+
+    const user = new UserType(
+      (formData.get("username") ?? "").toString(),
+      (formData.get("password") ?? "").toString()
+    )
+
+    user.validate()
+
+    if (user.errors.length > 0) {
+      errors = [...user.errors]
+      return
+    }
+
+    try {
+      let validation = await userService.getUser(user.username, user.password)
+      if (validation) goto ("/orders")
+      else {
+        errorMessage1st = "Wrong email and password combination"
+        errorMessage2nd = "Have you forgotten your password?"
+        setTimeout(() => {
+          errorMessage1st = ""
+          errorMessage2nd = ""
+        }, 4000)
+      }
+      errors = [] // limpiar errores
+    } catch (error) {
+      showError("Error al crear el ingrediente", error)
     }
   }
 
-  let errorMessage1st: string;
-  let errorMessage2nd: string;
+  let errorMessage1st: string = $state("")
+  let errorMessage2nd: string = $state("")
 
-  // Para Pablo:
-  /*
-    Como hacer que se vayan los mensajes de error despues de 2 segundos o algo asi
-    Como hacer para que no desaparezca el logo y el titulo si las variables no estan definidas al principio (por que pasa?)
-    NO ME MATES VOY A PASAR TODO A ARCHIVOS SEPARADOS ESTABA COOKING
-    Hay alguna diferencia entre los Records y los HTMLElement o es solo por convencion?
-    Mejores maneras de tratar el relocation
-    Como hago para que los mensajes no queden guardados en las variables? Sino me tira siempre el mismo error xq la variable tiene un mensaje
-    No se guardan los datos xq se recarga siempre del mismo archivo cuando se importa. Como se trata eso?
-  */
   console.log(USERS_LIST_MOCK);
 </script>
 
@@ -45,15 +64,14 @@
     <!-- HEADER -->
     <IconText wrapperClass="header-section" />
     {#if errorMessage1st}
-      <section class="error-message-section">
+      <section class="error-message-section" transition:fade>
         <i class="ph ph-warning error-login-message"></i>
         <p class="error-login-message">{errorMessage1st}</p>
-        <p class="error-login-message">{errorMessage2nd}</p>
+        <a href="https://passwords.google.com/" class="error-login-message">{errorMessage2nd}</a>
       </section>
     {/if}
-
     <!-- FORM -->
-    <form class="form-container" id="form-login" onsubmit={handleLogin}>
+    <form class="form-container" id="form-login" onsubmit={onSubmit}>
       <!-- FORM FIELD -->
       <!-- Chequear estos for y type -->
       <fieldset form="form-login" class="form-field" name="login-user">
@@ -61,38 +79,41 @@
           <!-- Username -->
           <Input
             description="Usuario*"
-            bind:value={emailLoginValue}
             input_type={InputTypes.Normal}
             labelProps={{
-              for: "login-username",
+              class: "label-color",
+              for: "username",
             }}
             inputProps={{
               class: "input-primary",
               type: "email",
               placeholder: "Usuario",
-              id: "login-username-id",
-              name: "login-username",
+              id: "input-id",
+              name: "username",
             }}
           />
+          <ValidationField errors={errors} field="username" />
           <!-- Password -->
           <Input
             description="Contraseña*"
-            bind:value={passwordLoginValue}
             input_type={InputTypes.Hidden}
             labelProps={{
-              for: "login-password",
+              class: "label-color",
+              for: "password",
             }}
             inputProps={{
               class: "input-primary",
-              id: "login-password-id",
-              name: "login-password",
+              id: "password-id",
+              name: "password",
             }}
           />
+          <ValidationField errors={errors} field="password" />
         </div>
       </fieldset>
 
       <!-- FORM ACTIONS -->
       <section class="form-actions">
+
         <button type="submit" class="btn btn-primary btn-login">
           Iniciar Sesión
         </button>
@@ -119,5 +140,9 @@
   }
   .error-login-message {
     color: white;
+  }
+
+  a {
+    text-decoration: underline;
   }
 </style>

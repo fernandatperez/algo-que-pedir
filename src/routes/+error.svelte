@@ -32,9 +32,10 @@
     display: flex;
     justify-content: center;
     background-color: rgba(36, 39, 216, 0.911);
-    width: 60px;
-    border-radius: 15%;
-    padding: 0.8em;
+    border-radius: 20%;
+    width: 100px;
+    padding: 1em;
+    font-size: 1.5em;
   }
 
   a {

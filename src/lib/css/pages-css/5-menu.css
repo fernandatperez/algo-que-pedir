@@ -28,7 +28,7 @@
 
 .main-container {
     padding-bottom: 8vh;
-    padding-top: 10vh;
+    padding-top: 2vh;
 }
 
 /* titulo del contenedor personal */
@@ -72,6 +72,11 @@
     gap: 2em;
     align-items: center;
     width: 100%;
+}
+
+.meal:hover{
+  background-color: var(--background-color-alternate);
+  border-radius: 1em;
 }
 
 .text-meal{

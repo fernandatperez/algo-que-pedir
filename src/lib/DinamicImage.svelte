@@ -13,7 +13,6 @@
     imageProps = {}
   }: ImagePropsI = $props()
 
-  // Por aca no falta un $bindable()? Por que funciona igual...
 </script>
 
 <img
