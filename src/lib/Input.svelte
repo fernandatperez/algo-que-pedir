@@ -3,24 +3,18 @@
 
   import { InputTypes } from "$lib/InputTypes";
   import type { OptionalProps } from "$lib/InputTypes";
-  import { toggleVariable } from "$lib/toggleFunction";
+  import { toggleVariable } from "$lib/utils";
 
   interface InputPropsI {
     description: string;
-    value: string;
     input_type: InputTypes;
     labelProps?: OptionalProps;
     inputProps?: OptionalProps;
     spanProps?: OptionalProps;
-    // Sin records
-    //HTMLInputElements: HTMLInputElement
-    // HTMLLabelElements: HTMLLabelElement
-    // HTMLSpanElement: HTMLSpanElement
   }
 
   let {
     description,
-    value = $bindable(''),
     input_type = InputTypes.Normal,
     labelProps = {},
     inputProps = {},
@@ -41,14 +35,13 @@
       {description}
     </span>
 
-    <input {...inputProps} bind:value />
+    <input {...inputProps}/>
   </label>
 {:else}
   <label {...labelProps}>
     <span {...spanProps}>
       {description}
     </span>
-    <!-- Medio raro, pero me esta trayendo el icon.css de la pagina -->
     <div class="input-with-icon">
       <button
         class="input-icon"
@@ -62,7 +55,6 @@
       <input
         type={visibility ? "text" : "password"}
         {...inputProps}
-        bind:value
       />
     </div>
   </label>

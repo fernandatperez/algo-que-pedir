@@ -7,44 +7,66 @@
 
   import Input from "$lib/Input.svelte";
   import { InputTypes } from "$lib/InputTypes";
-  import { USERS_LIST_MOCK } from "$lib/Users_Mock";
-  import { User } from "$lib/User";
+  import { USERS_LIST_MOCK } from "$lib/data/mock/users";
+  import { UserType, ValidationMessage } from "$lib/domain/user";
+  import { userService } from "$lib/services/UserService";
+  import { goto } from "$app/navigation";
+  import { showError } from "$lib/domain/errorHandler";
+  import ValidationField from "$lib/components/ValidationField.svelte";
+  import { fade } from "svelte/transition";
 
-  let emailRegisterValue: string = "";
-  let passwordRegister: string = "";
-  let passwordRetry: string = "";
-  let registerMessage: string;
-  let errorMessage1st: string;
-  let errorMessage2nd: string;
+  let errors: ValidationMessage[] = $state([])
+
+  let registerMessageNoMatched: string = $state("");
+  let successmessage: string = $state("");
+  let successmessage2: string = $state("");
 
   console.log(USERS_LIST_MOCK);
 
-  function handleRegistration(event: Event) {
-    event.preventDefault();
-    const foundIdenticalUser = USERS_LIST_MOCK.find(
-      (user) => user.email === emailRegisterValue,
-    );
+  const onSubmit = async (ev: SubmitEvent) => {
+    ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
 
-    if (foundIdenticalUser) {
-      errorMessage1st = "Email already registered.";
-      return;
+    // ev.currentTarget: es el elemento que tiene asignado el event listener
+    // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
+    const form = ev.currentTarget as HTMLFormElement
+    const formData = new FormData(form) // creo el formData
+
+    const user = new UserType(
+      (formData.get("username") ?? "").toString(),
+      (formData.get("password") ?? "").toString()
+    )
+
+    user.validate()
+
+    if (user.errors.length > 0) {
+      errors = [...user.errors]
+      return
     }
 
-    if (passwordRegister !== passwordRetry) {
-      errorMessage2nd = "Passwords do not match.";
-      return;
+    try {
+      // Esto no esta devolviendo nada catcheable (->)
+      // Ver service y returns
+      await userService.alreadyRegisteredUsername(user.username)
+      if (formData.get("password") == formData.get("password-retry")) {
+        successmessage = "Usuario generado con exito"
+        successmessage2 = "Seras redirigido a la pagina de Ingreso"
+
+        await userService.createUser(user)
+        setTimeout(() => {
+          successmessage = ""
+          successmessage2 = ""
+          goto ("/")
+        }, 2000)
+      } else {
+        registerMessageNoMatched = "Las contraseñas no coinciden"
+        setTimeout(() => {
+          registerMessageNoMatched = ""
+        }, 2000)
+      }
+      errors = [] // limpiar errores
+    } catch (error) {
+      showError("Error al crear el ingrediente", error)
     }
-
-    USERS_LIST_MOCK.push(
-      new User(emailRegisterValue.toLowerCase(), passwordRegister),
-    );
-
-    registerMessage = "Your account has been created successfully.";
-
-    console.log(USERS_LIST_MOCK);
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 3000);
   }
 </script>
 
@@ -52,32 +74,26 @@
   <main class="login-section">
     <!-- HEADER -->
     <IconText title="Crea tu cuenta" wrapperClass="header-section" />
-    {#if errorMessage1st}
-      <!-- Posible componente -->
-      <section class="error-message-section">
+    {#if registerMessageNoMatched}
+      <section class="error-message-section" transition:fade>
         <i class="ph ph-warning error-login-message"></i>
-        <p class="error-login-message">{errorMessage1st}</p>
+        <p class="error-login-message">{registerMessageNoMatched}</p>
       </section>
-    {:else if errorMessage2nd}
-      <section class="error-message-section">
-        <i class="ph ph-warning error-login-message"></i>
-        <p class="error-login-message">{errorMessage2nd}</p>
-      </section>
-    {:else if registerMessage}
-      <section class="success-register-section">
+    {:else if successmessage}
+      <section class="success-register-section" transition:fade>
         <i class="ph ph-user-check success-message"></i>
-        <p class="success-message">{registerMessage}</p>
+        <p class="success-message">{successmessage}</p>
+        <p class="success-message">{successmessage2}</p>
       </section>
     {/if}
 
     <!-- FORM -->
-    <form class="form-container" onsubmit={handleRegistration}>
+    <form class="form-container" onsubmit={onSubmit}>
       <!-- FORM FIELD -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
           <Input
             description="Usuario*"
-            bind:value={emailRegisterValue}
             input_type={InputTypes.Normal}
             labelProps={{
               for: "register-username",
@@ -87,14 +103,14 @@
               placeholder: "Escribir",
               id: "register-username-id",
               class: "input-primary",
-              name: "register-username",
+              name: "username",
             }}
           />
+          <ValidationField errors={errors} field="username" />
         </div>
         <div class="form-group">
           <Input
             description="Contraseña*"
-            bind:value={passwordRegister}
             input_type={InputTypes.Hidden}
             labelProps={{
               for: "register-password",
@@ -102,14 +118,14 @@
             inputProps={{
               id: "register-password-id",
               class: "input-primary",
-              name: "register-password",
+              name: "password",
             }}
           />
+          <ValidationField errors={errors} field="password" />
         </div>
         <div class="form-group">
           <Input
             description="Re-ingrese la contraseña*"
-            bind:value={passwordRetry}
             input_type={InputTypes.Hidden}
             labelProps={{
               for: "register-password-retry",
@@ -117,7 +133,7 @@
             inputProps={{
               id: "register-password-retry-id",
               class: "input-primary",
-              name: "register-password-retry",
+              name: "password-retry",
             }}
           />
         </div>

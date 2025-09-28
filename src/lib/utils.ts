@@ -6,3 +6,4 @@ export function toggleVariable(variable: boolean) {
   }
   return variable
 }
+
