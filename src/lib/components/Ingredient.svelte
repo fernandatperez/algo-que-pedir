@@ -1,9 +1,9 @@
 <script lang='ts'>
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/component-css/grid-table.css";
-  import "$lib/css/component-css/icon.css";
-  import "$lib/css/component-css/buttons.css";
+  import "$lib/css/components-css/grid-table.css";
+  import "$lib/css/components-css/icon.css";
+  import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/7-ingredients.css";
 
   import type { IngredientType } from '$lib/domain/ingredient';

@@ -1,4 +1,4 @@
-import type { MenuItemType } from '$lib/type/menu-item'
+import type { MenuItemType } from '$lib/domain/menuItem'
 
 //array de elementeos de el tipo interface MenuItemType 
 // esto tiene que ser objetos individuales y no una lista
