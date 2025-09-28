@@ -1,5 +1,7 @@
 /* -- GENERALES -------------------------- */
-
+.header-title {
+    margin: 1em 0em;
+}
 .main-content {
     transition: .3s font-size ease-in-out;
 }
@@ -69,9 +71,9 @@
 
 /* MODIFICACIONES PARA MI TABLA */
 /* Cantidad de columnas */
-.product-edit-ingredients-table .grid-table-row {
+/* .product-edit-ingredients-table .grid-table-row {
     grid-template-columns: 2fr 3fr 1fr 1fr;  
-}
+} */
 /* texto de segunda columna */
 .product-edit-ingredients-table-content .cell:nth-child(2) {
     font-weight: 600;

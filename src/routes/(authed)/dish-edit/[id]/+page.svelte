@@ -12,9 +12,9 @@
   import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
   import { InputTypes } from "$lib/components/InputTypes";
-    import Ingredient from "$lib/components/Ingredient.svelte";
-    import { goto } from "$app/navigation";
-    import { MenuItemType } from "$lib/domain/menuItem.js";
+  import Ingredient from "$lib/components/Ingredient.svelte";
+  import { goto } from "$app/navigation";
+    import type { IngredientType } from "$lib/domain/ingredient.js";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -26,12 +26,23 @@
   const onSubmit = () => {
 
   }
+
+  const irAEditar = (ing: IngredientType) => {
+    // No anda esto ni idea Pablo resolvelo porfa
+    // window.location.href = `/ingredient-edit/${ing.id}`  este funciona pero es medio villero
+    goto(`/ingredient-edit/${ing.id}`)
+  }
+
+  const eliminarIng = (ing: IngredientType) => {
+    // Copy paste del de Dana
+    console.info('Ingrediente DELETED') 
+  }
 </script>
 
 <!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title section-title">{title}</h1>
+    <h1 class="header-title">{title}</h1>
     <form
       onsubmit={onSubmit}
       id="form-product-edit"
@@ -169,34 +180,52 @@
           <h3 class="h3">Costo de Producción</h3>
           <!-- Suma del costo de todos los ingredientes -->
            <!-- Va a venir del back -->
-          <p>${menuItem.costoDeProduccion()}</p>
+          <div class="add-ing-button-price">
+            <p>${menuItem.costoDeProduccion()}</p>
+            <p>HOLA!</p>
+          </div>
         </div>
-
-        {#each menuItem.ingredientes as ing}
-        <article class="grid-table-row product-edit-ingredients-table-content">
-            <Ingredient ingredient={ing} />
-            <section class="cell multiple-action-buttons">
-              <button disabled class="icon-action-btn hidden-icons" aria-label="Ver"><i class="ph ph-eye gray-icon"></i></button>
-              <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
-              <button class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
-              <span><i class="ph ph-line-vertical gray-icon"></i></span>
-              <button class="icon-action-btn" onclick={() =>{deleteIngredient ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+        <div class="grid-table-container product-edit-ingredients-table">
+          <header class="grid-table-row table-header">
+            <section class="cell" id="name">Nombre</section>
+            <section class="cell" id="name">Costo</section>
+            <section class="cell later-hid" id="grupo-alimenticio">
+              <span> Grupo </span>
+              <span class="p-alimenticio display-none-mobile"> Alimenticio </span>
             </section>
-
-          </article>
-        {/each}
+            <section class="cell col-centered later-hid" id="origen">
+              Origen
+            </section>
+            <section class="cell col-centered" id="acciones">Acciones</section>
+          </header>
+          {#each menuItem.ingredientes as ing}
+            <article class="grid-table-row product-edit-ingredients-table-content">
+              <Ingredient ingredient={ing} />
+              <section class="cell multiple-action-buttons">
+                <button disabled class="icon-action-btn hidden-icons" aria-label="Ver"><i class="ph ph-eye gray-icon"></i></button>
+                <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                <button class="icon-action-btn" onclick={() => eliminarIng(ing)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+              </section>
+            </article>
+          {/each}
+        </div>
       </fieldset>
 
       <section class="btn-group-actions">
         <button disabled class="btn btn-secondary btn-dish"
-          >Descartar <span class="p-cambios display-none-mobile">Cambios</span
-          ></button
+          >Descartar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
         <button disabled class="btn btn-primary btn-dish"
-          >Guardar <span class="p-cambios display-none-mobile">Cambios</span
-          ></button
+          >Guardar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
       </section>
     </form>
   </article>
 </main>
+
+<style>
+  .add-ing-button-price {
+    display: flex;
+    gap: 10em;
+  }
+</style>

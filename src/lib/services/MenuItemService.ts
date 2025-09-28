@@ -1,4 +1,4 @@
-import { MenuItemType, type MenuItemJSON } from '$lib/domain/menuItem'
+import { MenuItemType } from '$lib/domain/menuItem'
 import { MENU_ITEMS_JSON_MOCK } from '$lib/data/mock/menuItems'
 
 class MenuItemsService {
