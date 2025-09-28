@@ -1,5 +1,6 @@
 <script lang="ts">
   import Input from "$lib/Input.svelte";
+    import { InputTypes } from "./InputTypes";
   
   type InputField = {
     label_for: string;
@@ -24,11 +25,17 @@
   
   <div>
     {#each fields as field (field.input_id)}
+    <!-- Te modifique esto perdon, pero estaba testing si era xq era una version vieja u otra cosa -->
       <Input
-        label_for={field.label_for}
-        label_text={field.label_text}
-        input_placeholder={field.input_placeholder}
-        input_id={field.input_id}
+        description={field.label_text}
+        input_type={InputTypes.Normal}
+        labelProps={{
+          for: field.label_for
+        }}
+        inputProps={{
+          placeholder: field.input_placeholder,
+          id: field.input_id
+        }}
       />
     {/each}
   </div>
