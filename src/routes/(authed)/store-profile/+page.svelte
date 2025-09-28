@@ -18,10 +18,10 @@
     paymentMethods,
   } from "$lib/data/mock/storeProfileNewData";
 
-  // ✅ Obtener todas las funciones del store
+  // traigo los datos y funciones del store
   const { formData, originalData, saveData, discardChanges, validateForm, validateField } = formStore;
 
-  // ✅ Variable para errores con tipo explícito
+  // errors es una lista de validaciones no cumplidas
   let errors = $state<ValidationMessage[]>([]);
   //toda esta porqueria de aca en adelante la tengo que poner en otro lado por que se ve muy mal aca
   // funcion para validar en el momento
@@ -72,7 +72,7 @@
   <article class="container-column main-content">
     <h1 class="header-title">Información del local</h1>
 
-    <!-- ✅ Cambiar a on:submit y quitar use:enhance -->
+    <!-- uso solo onsubmit -->
     <form id="form-store-profile" class="container-column form-store-profile" onsubmit={handleSubmit}>
       
       <!-- Datos del Local -->        
