@@ -35,7 +35,7 @@
         </div>
     </a>
 
-    <p class="details">Hora: {order.createdAt.toLocaleString()} PM | Artículos: { order.dishes.length} | Total: $ {order.precioTotal().toFixed(2)}</p>
+    <p class="details">Hora: {order.createdAt} PM | Artículos: { order.dishes.length} | Total: $ {order.precioTotal().toFixed(2)}</p>
 
     <address class="address-container">
         <div class="pin-container">

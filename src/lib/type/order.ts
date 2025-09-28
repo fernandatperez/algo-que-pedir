@@ -80,8 +80,9 @@ export class Order {
     return this.precioSubtotal() * this.recargoPago()  + this.deliveryComission  
   }
 
-  get fechaEntregaToString(): string {
-    return this.createdAt.toLocaleString()
+  get createdAtString(): string {
+    // return this.createdAt.toLocaleString()
+    return this.createdAt.toString()
   }
 
   toJSON(): OrderJSON {
@@ -96,7 +97,7 @@ export class Order {
       deliveryComission: this.deliveryComission,
       paymentMethod: this.paymentMethod,
       state: this.state,
-      createdAt: this.fechaEntregaToString,
+      createdAt: this.createdAtString,
     }
   }
 }
