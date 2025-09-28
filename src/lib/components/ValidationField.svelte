@@ -1,7 +1,7 @@
 <script lang='ts'>
-  import type { ValidationMessage } from '$lib/domain/ingredient'
+  type AppValidationMessage = import('$lib/domain/ingredient').ValidationMessage | import('$lib/domain/store').ValidationMessage
 
-  const errorsFrom = (errors: ValidationMessage[], field: string) => errors
+  const errorsFrom = (errors: AppValidationMessage[], field: string) => errors
     .filter((_) => _.field === field)
     .map((_) => _.message)
     .join('. ')
