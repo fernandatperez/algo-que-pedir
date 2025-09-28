@@ -11,18 +11,19 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { INGREDIENT_MOCK } from '$lib/data/mock/ingredients';
-  import { foodGroups, type FoodGroupValue } from '$lib/type/ingredient';
-  import type { IngredientType } from '$lib/type/ingredient';
+  import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient';
+  import type { IngredientJSON, IngredientType, ValidationMessage } from '$lib/domain/ingredient';
 
   // Tomar el id de la URL (viene como string)
-  const ingredientId = page.params.id;
+  // const ingredientId = page.params.id;
 
-  // Buscar el ingrediente correcto, y declaro que no va a ser undefined
-  let ingredient: IngredientType = INGREDIENT_MOCK.find(i => i.id.toString() === ingredientId)!;
+  // // Buscar el ingrediente correcto, y declaro que no va a ser undefined
+  // let ingredient: IngredientJSON = INGREDIENT_MOCK.find(i => i.id !== undefined && i.id.toString() === ingredientId)!;
 
-  function irAIngredients () {
-    goto ('/ingredients')
-  }
+  let { data } = $props()
+  const { ingredient } = data
+
+  let errors: ValidationMessage[] = $state([])
 </script>
 
 <section class="container-column">
@@ -45,9 +46,9 @@
         <section class="input-group">
           <label class="label-color" for="form-ingredient-group">Grupo Alimenticio</label>
           <select id="form-ingredient-group" class="input-primary" required>
-            <option value="" selected hidden>{ingredient.foodGroup}</option>
-            {#each foodGroups as grupo}
-              <option value={grupo.value}> {grupo.label} </option>
+            <option value={ingredient.foodGroup} selected hidden>{ingredient.foodGroup}</option>
+            {#each Object.entries(foodGroupDict) as [value, grupo]}
+              <option value={value}> {grupo.label} </option>
             {/each}
           </select>
         </section>
@@ -65,7 +66,7 @@
       </form>
 
       <section class="btn-group-actions">
-        <button form="form-ingredient-edit" class="btn btn-secondary" onclick={() => irAIngredients()}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+        <button form="form-ingredient-edit" class="btn btn-secondary" onclick={() => goto('/ingredients')} type="reset">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
         <button form="form-ingredient-edit" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
       </section>
     {:else}

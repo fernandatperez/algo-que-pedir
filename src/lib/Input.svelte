@@ -1,8 +1,10 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
   import { InputTypes } from "$lib/types";
-  import type { OptionalProps } from "$lib/types"
-  import { toggleVariable } from "$lib/toggleFunction";
+  // enum InputTypes {
+  //   Normal = 'normal',
+  //   Hidden = 'hidden'
+  // } // No lo toma, por algun motivo
 
   interface InputPropsI {
     description: string;
@@ -16,28 +18,34 @@
 
   let {
     description,
-    value = $bindable(""),
+    value,
     input_type = InputTypes.Normal,
     labelProps = {},
     inputProps = {},
     spanProps = {},
   }: InputPropsI = $props();
 
-  // Icon classes
   const eyeSlash = "ph ph-eye-slash";
   const eye = "ph ph-eye";
 
-  type Visibility = true | false
-  let visibility: Visibility = $state(false);
+  let visibility = $state(false);
+
+  function changeVisibility() {
+    if (!visibility) {
+      visibility = true;
+    } else {
+      visibility = false;
+    }
+  }
 
 </script>
 
 {#if input_type == InputTypes.Normal}
   <label {...labelProps}>
-    <span class="label-color" {...spanProps}>
+    <span {...spanProps}>
       {description}
     </span>
-    <input {...inputProps} bind:value={value}/>
+    <input {...inputProps} />
   </label>
 {:else}
   <label {...labelProps}>
@@ -50,11 +58,11 @@
         class="input-icon"
         aria-label="password-show-btn"
         type="button"
-        onclick={() => visibility = toggleVariable(visibility)}
+        onclick={changeVisibility}
       >
         <i class={visibility ? eye : eyeSlash}></i>
       </button>
-      <input type={visibility ? "text" : "password"} {...inputProps} bind:value={value}/>
+      <input type={visibility ? "text" : "password"} {...inputProps} />
     </div>
   </label>
 {/if}
@@ -63,11 +71,5 @@
   button {
     top: 1em;
     right: 0.3em;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2em;
   }
 </style>

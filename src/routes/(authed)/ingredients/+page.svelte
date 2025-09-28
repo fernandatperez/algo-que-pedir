@@ -1,90 +1,106 @@
 <script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/component-css/grid-table.css";
-  import "$lib/css/component-css/icon.css";
-  import "$lib/css/component-css/buttons.css";
-  import "$lib/css/component-css/input.css";
-  import "$lib/css/pages-css/7-ingredients.css";
+  import "$lib/css/component-css/grid-table.css"
+  import "$lib/css/component-css/icon.css"
+  import "$lib/css/component-css/buttons.css"
+  import "$lib/css/component-css/input.css"
+  import "$lib/css/pages-css/7-ingredients.css"
 
-  import Ingredient from "$lib/components/Ingredient.svelte";
-  import { goto } from '$app/navigation';
+  import Ingredient from "$lib/components/Ingredient.svelte"
+  import { goto } from '$app/navigation'
 
-  import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients";
-  import type { IngredientType } from "$lib/type/ingredient";
-  import { createEmptyIngredient } from "$lib/type/ingredient";
-  import { foodGroups, type FoodGroupValue } from '$lib/type/ingredient';
+  import { IngredientType, ValidationMessage } from "$lib/domain/ingredient"
+  import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
+  import { enhance } from '$app/forms'
+  import type { SubmitFunction } from '@sveltejs/kit'
+  import { ingredientService } from '$lib/services/IngredientService';
+  import { onMount } from 'svelte';
+  import { showError } from '$lib/domain/errorHandler'
+  import ValidationField from '$lib/components/ValidationField.svelte';
+  import { Modal, Content, Trigger } from "sv-popup";
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state
-  let ingredients = $state<IngredientType[]>(INGREDIENT_MOCK);
+  let ingredients = $state<IngredientType[]>([])
+  
+  const findIngredients = async () => {
+    try{
+      ingredients = await ingredientService.getAllIngredients()
+    } catch (error){
+      showError('Conexion al servidor fallida', error)
+    }
+  }
+
+  onMount(findIngredients)
+
+  // Creamos un ingrediente nuevo 
+  let newIngredient = <IngredientType>(new IngredientType())
+
+  let errors: ValidationMessage[] = $state([])
 
   // Estado para mostrar/ocultar formulario
   let showForm = $state(false);
 
-  // Creamos un ingrediente nuevo 
-  // <IngredientType> → es el tipo que va a tener tu estado (newIngredient)
-  // new IngredientType() → es el valor inicial que le pasás al estado
-  let newIngredient = $state<IngredientType>(createEmptyIngredient());
+  // tiene que ser tipado por una clase de svelte 
+  const onSubmit: SubmitFunction = async ({ formData, cancel }) => {
+    // formData es un map (key, value) de los inputs del form
+    const ingredient = new IngredientType(
+      ingredients.length + 1,
+      (formData.get('name') ?? "").toString(),
+      parseFloat(formData.get('cost') as string),
+      (formData.get('foodGroup') ?? "") as FoodGroupValue,
+      formData.get("esOrigenAnimal") === "true"
+    )
+    
+    ingredient.validate()
 
-  function validarFormulario(){
-    // Validar que el nombre no esté vacío
-    if (newIngredient.name.trim() === "") {
-      alert("El nombre no puede estar vacío");
-      return false;
+    if (ingredient.errors.length > 0) {
+      errors = [...ingredient.errors]
+      cancel()
+      return
     }
-  
-    // Validar que el costo sea un número positivo
-    if (isNaN(newIngredient.cost) || newIngredient.cost <= 0) {
-      alert("El costo debe ser un número mayor a 0");
-      return false;
+
+    try {
+      // guardar en el backend
+      await ingredientService.createIngredient(ingredient)
+      // refrescar lista
+      // await findIngredients()
+      // cerrar form
+      showForm = false
+      errors = [] // limpiar errores
+    } catch (error) {
+      showError("Error al crear el ingrediente", error)
+      cancel()
     }
-  
-    // Validar que se haya seleccionado un grupo alimenticio
-    if (!foodGroups.some(grupo => grupo.value === newIngredient.foodGroup)) {
-      alert("Debe seleccionar un grupo alimenticio válido.");
-      return false;
-    }
-  
-    return true;
-  }
-  
-  function saveIngredient() {
-    if (validarFormulario()){
-      // Asigno un id al nuevo ingrediente
-      newIngredient.id = ingredients.length + 1;
-  
-      // Asigno el icono correspondiente al grupo alimenticio seleccionado
-      const selectedgroup = foodGroups.find(
-        (grupo) => grupo.value === newIngredient.foodGroup,
-      );
-      newIngredient.originIcon = selectedgroup?.icon || "ph-question";
-  
-      // Agrego el newIngredient a la lista
-      ingredients = [newIngredient, ...ingredients];
-      showForm = false;
-    }
+
   }
 
-  function reset(){
+  const onCancel = () => {
     // Reset
-    newIngredient = createEmptyIngredient();
+    newIngredient = new IngredientType();
     showForm = false;
+    errors = [] // limpiar errores
   }
 
-  // puedo usar $effect para que se guarde la informacion aunque recargue la pagina????
-  // $effect(() => {
-  // 	localStorage.setItem("ingredientes", JSON.stringify(ingredientes));
-  // });
+  // Estado para mostrar/ocultar el modal
+  let showModal = $state(false)
+  let modalId: number = $state(0)
 
-  function goToIngredientEdit(id: number) {
-    goto(`/ingredient-edit/${id}`);
-  }  
+  function openModal(id: number) {
+    modalId = id
+    showModal = true
+  }
 
-  function deleteIngredient(ingredient: IngredientType) {
-    const ingIndex = ingredients.indexOf(ingredient);
-    // Elimino un solo elemento desde el indice que le seteo
-    ingredients.splice(ingIndex, 1);
+  const deleteIngredient = async (ingredient: IngredientType) => {
+    try {
+      await ingredientService.deleteIngredient(ingredient)
+      findIngredients()
+      showModal = false
+    } catch (error: unknown) {
+      showError('Error al eliminar la tarea', error)
+      await findIngredients()
+    }
   }
   
 </script>
@@ -116,36 +132,42 @@
 
         <!-- Formulario emergente por si quiero agregar otro ingrediente -->
         {#if showForm}
-          <form
-            id="form-ingredient"
-            class="grid-table-row product-edit-ingredients-table-content"
-          >
+        <!-- use:enhance: te trae la data del form cuando llamas al onSubmit, permitiendo sacar el bind:value  -->
+        <!-- type="reset" -> onreset={reset} -->
+        <!-- type="submit" -> use:enhance={onSubmit} -->
+          <form method="POST" use:enhance={onSubmit} onreset={onCancel} id="form-ingredient" class="grid-table-row product-edit-ingredients-table-content">
             <section class="cell">
               <input
                 class="input-primary"
                 placeholder="Huevo"
-                bind:value={newIngredient.name}
+                name="name"
               />
-              <!-- bind:value permite que fluyan en sentido inverso, de hijo a padre -->
+              <ValidationField errors={errors} field="name" />
             </section>
             <section class="cell">
               <input
                 class="input-primary"
                 placeholder="$0.80"
-                bind:value={newIngredient.cost}
+                name="cost"
               />
+              <ValidationField errors={errors} field="cost" />
             </section>
             <section class="cell">
-              <select class="input-primary" bind:value={newIngredient.foodGroup}>
+              <select class="input-primary" name="foodGroup">
                 <option value="" disabled selected hidden>Seleccionar</option>
-
-                {#each foodGroups as grupo}
-                  <option value={grupo.value}> {grupo.label} </option>
-                {/each}
-
+                {#each Object.entries(foodGroupDict) as [value, grupo]}
+                  <option value={value}> {grupo.label} </option>
+                  {/each}
               </select>
+              <ValidationField errors={errors} field="foodGroup" />
+            </section>
+
+            <section class="btn-group-actions btn-group-new-ingredient">
+              <button form="form-ingredient" class="btn btn-secondary" type="reset">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+              <button form="form-ingredient" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
             </section>
           </form>
+          
         {/if}
 
         <!-- Renderizamos cada ingrediente -> Props { ingredient: Ingredient } -->
@@ -156,20 +178,44 @@
             <section class="cell multiple-action-buttons">
               <button disabled class="icon-action-btn hidden-icons" aria-label="Ver"><i class="ph ph-eye gray-icon"></i></button>
               <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
-              <button class="icon-action-btn" onclick={() => goToIngredientEdit(ing.id)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+              <button class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
               <span><i class="ph ph-line-vertical gray-icon"></i></span>
-              <button class="icon-action-btn" onclick={() => deleteIngredient(ing)} aria-label="Eliminar"><i class="ph ph-trash gray-icon" id="acciones-{ing.id}"></i></button>
+              <button class="icon-action-btn" onclick={() =>{deleteIngredient ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+          
             </section>
           </article>
         {/each}
 
+        {#if showModal && modalId}
+          <div class="modal-backdrop">
+            <div class="modal">
+              <h2>¿Seguro que querés eliminar {ingredients.find(i => i.id === modalId)?.name}?</h2>
+              <section class="cell multiple-action-buttons modal-btns">
+                <button class="btn btn-secondary btn-modal" onclick={() => showModal = false}>No</button>
+                <button class="btn btn-primary btn-modal" onclick={() => {
+                  const ingredient = ingredients.find(i => i.id === modalId);
+                  if (ingredient) deleteIngredient(ingredient);
+                }}>Sí</button>
+              </section>
+            </div>
+          </div>
+        {/if}
+        <!-- Modal de confirmación para eliminar -->
+          <!-- <Modal class="modal-delete" basic small={true}>
+          <Content class="modal-content">
+            <h2>{`¿Seguro que querés eliminar ${ing.name}?`}</h2>
+            <section class="cell multiple-action-buttons">
+              <button class="btn btn-secondary" onclick={() => goto('/')} aria-label="Cancelar">No</button>
+              <button class="btn btn-primary" onclick={() => deleteIngredient(ing)} aria-label="Eliminar">Si</button>
+            </section>
+          </Content>
+          
+          <Trigger>
+            <button class="icon-action-btn" aria-label="Eliminar"><i class="ph ph-trash gray-icon" id="acciones-{ing.id}"></i></button>
+          </Trigger>
+        </Modal> -->
+
       </div>
     </section>
-    {#if showForm}
-      <section class="btn-group-actions btn-group-new-ingredient">
-        <button form="form-ingredient" class="btn btn-secondary" onclick={() => (reset())}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
-        <button form="form-ingredient" class="btn btn-primary" onclick={saveIngredient} type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
-      </section>
-    {/if}
   </section>
 </section>
