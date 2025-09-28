@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MenuItemType } from "$lib/type/menu-item.ts";
+  import type { MenuItemType } from "$lib/domain/menuItem.ts";
   import { goto } from "$app/navigation";
 
   const { menuitem } = $props<{ menuitem: MenuItemType }>();

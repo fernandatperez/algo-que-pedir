@@ -1,22 +1,83 @@
-export interface MenuItemType { // se le pone Type como sufijo para mostrar que es un tipo de dato
-  id: number;
-  alt: string;
-  nombre: string;
-  descripcion: string;
-  // precio: string;
-  precio: number;
-  imagen: string;
+// Tipo para datos que vienen del servidor/API
+export type MenuItemJSON = {
+  id: number
+  alt: string
+  nombre: string
+  descripcion: string
+  precio: number
+  imagen: string
 }
 
-// factory function, me devuelve un objeto de tipo MenuItemType todo vacio
-export function createEmptyMenuItem(): MenuItemType { // el MenuItemType al final significa que devuelve ese tipo de dato 
-  return {
-    id: 0,
-    alt: '',
-    nombre: '',
-    descripcion: '',
-    precio: 0.0,
-    imagen: ''
+export class ValidationMessage { //esto pordiramos usar todos la misma
+  constructor(
+    public field: string,
+    public message: string
+  ) {}
+}
+
+export class MenuItemType {
+  errors: ValidationMessage[] = []
+
+  constructor(
+    public id?: number,
+    // trim: eliminar los espacios en blanco al inicio y al final del texto
+    public alt: string = ''.trim(),
+    public nombre: string = ''.trim(),
+    public descripcion: string = ''.trim(),
+    public precio: number = 0,
+    public imagen: string = ''.trim(),
+  ) {}
+
+  static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
+    return Object.assign(new MenuItemType(), menuItemJSON, {})
   }
+
+  addError(field: string, message: string) {
+    this.errors.push(new ValidationMessage(field, message))
+  }
+
+  validate() {
+    this.errors = []
+    
+    if (!this.nombre) {
+      this.addError('nombre', 'Debe ingresar nombre del plato')
+    }
+    
+    if (!this.descripcion) {
+      this.addError('descripcion', 'Debe ingresar descripción del plato')
+    }
+    
+    if (this.precio <= 0 || !this.precio) {
+      this.addError('precio', 'El precio debe ser mayor a 0')
+    }
+    
+    if (!this.imagen) {
+      this.addError('imagen', 'Debe seleccionar una imagen')
+    }
+    
+    if (!this.alt) {
+      this.addError('alt', 'Debe ingresar texto alternativo para la imagen??????')
+    }
+  }
+
+  // Metodo helper para formatear precio
+  getFormattedPrice(): string {
+    return `$${this.precio}`
+  }
+
+  // Metodo helper para obtener la ruta completa de la imagen no se si esta bien porque ya tiene parte de la ruta
+  getImagePath(): string {
+    return `src/lib/assets/img/${this.imagen}`
+  }
+
+  // Metodo para verificar si el item es válido
+  // isValid(): boolean {
+  //   this.validate()
+  //   return this.errors.length === 0
+  // }
 }
 
+// Factory function sin nada, la idea seria que (AGREGAR NUEVO PLATO) llame esto y te lleva a una nueva pagina con esto o algo asi
+export function createEmptyMenuItem(): MenuItemType {
+  return new MenuItemType()
+}

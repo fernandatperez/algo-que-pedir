@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import IconText from "$lib/IconText.svelte";
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/icon.css";

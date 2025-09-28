@@ -20,7 +20,7 @@
 
   let {
     description,
-    value,
+    value = $bindable(''),
     input_type = InputTypes.Normal,
     labelProps = {},
     inputProps = {},
