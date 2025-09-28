@@ -15,7 +15,7 @@
     storeInfo,
     storeDir,
     storeCommission,
-    paymentMethods
+    paymentMethods,
   } from "$lib/data/mock/storeProfileNewData";
 
   // ✅ Obtener todas las funciones del store
