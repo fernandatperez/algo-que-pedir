@@ -19,3 +19,4 @@ export function createEmptyMenuItem(): MenuItemType { // el MenuItemType al fina
     imagen: ''
   }
 }
+

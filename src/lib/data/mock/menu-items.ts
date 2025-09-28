@@ -1,6 +1,7 @@
 import type { MenuItemType } from '$lib/type/menu-item'
 
 //array de elementeos de el tipo interface MenuItemType 
+// esto tiene que ser objetos individuales y no una lista
 export const MENUITEMS_MOCK: MenuItemType[] = [
   {
     id: 1,
@@ -44,7 +45,7 @@ export const MENUITEMS_MOCK: MenuItemType[] = [
   }
 ]
 
-
+// export const MOCK ingredientJASON
 
 
 // A MENU-ITEM LE FALTA: plato.cantidad

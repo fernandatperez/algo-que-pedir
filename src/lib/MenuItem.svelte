@@ -14,19 +14,20 @@
 
   <!-- <button onclick={()=> goto(`/dish-edit/${menuitem.id}`)}>hola</button> -->
 
-<a class="meal" href={`/dish-edit/${menuitem.id}`}>
+<a class="meal" href={`/dish-edit/${menuitem.id}`} data-testid="menu-link">
     <div class="imgcontainer">
       <img
-      src="src/lib/assets/img/{menuitem.imagen}"
-      alt={menuitem.alt}
-      class="image-meal"
+        src="src/lib/assets/img/{menuitem.imagen}"
+        alt={menuitem.alt}
+        class="image-meal"
+        data-testid="menu-imagen"
       />
     </div>
     <div class="text-meal text-wrapper">
-      <h4 class="ellipsis-text">{menuitem.nombre}</h4>
-      <p class="gray-text hide-on-mobile ellipsis-text">
+      <h4 class="ellipsis-text" data-testid="menu-nombre">{menuitem.nombre}</h4>
+      <p class="gray-text hide-on-mobile ellipsis-text" data-testid="menu-descripcion">
         {menuitem.descripcion}
       </p>
     </div>
-    <div class="price-meal">{menuitem.precio}</div>
+    <div class="price-meal" data-testid="menu-precio">${menuitem.precio}</div>
 </a>
