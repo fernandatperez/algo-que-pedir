@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "./css/components-css/navBar.css";
+  import "$lib/css/components-css/navBar.css";
   // Guarda la ruta activa
   let activeRoute = "orders";
 

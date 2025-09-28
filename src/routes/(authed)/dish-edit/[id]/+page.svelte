@@ -8,10 +8,10 @@
   import "$lib/css/components-css/switch-button.css";
   import "$lib/css/pages-css/6-product-edit.css";
 
-  import Input from "$lib/Input.svelte";
-  import DinamicImage from "$lib/DinamicImage.svelte";
+  import Input from "$lib/components/Input.svelte";
+  import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
-  import { InputTypes } from "$lib/InputTypes";
+  import { InputTypes } from "$lib/components/InputTypes";
   import type { MenuItemType } from "$lib/domain/menuItem";
 
   // Recibir los datos del +page.ts
@@ -51,7 +51,6 @@
             <!-- Aca esta bien el bind:value? -->
             <Input
               description="Nombre del Plato*"
-              bind:value={inputValue}
               input_type={InputTypes.Normal}
               labelProps={{
                 class: "w-100",
@@ -81,7 +80,6 @@
           <div class="container-column">
             <Input
               description="URL de la imagen del plato*"
-              bind:value={inputURL}
               input_type={InputTypes.Normal}
               labelProps={{
                 class: "w-100",
@@ -118,7 +116,6 @@
         <div class="container-column input-group">
           <Input 
             description="Precio Base*"
-            value=""
             input_type={InputTypes.Normal}
             labelProps={{
               class: "w-100",

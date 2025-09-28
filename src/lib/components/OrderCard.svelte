@@ -1,6 +1,6 @@
 <script lang="ts">
     import '$lib/css/components-css/orderCard.css'
-    import type { Order } from './domain/order';
+    import type { Order } from '$lib/domain/order';
 
     interface Props {
         order: Order

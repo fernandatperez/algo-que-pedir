@@ -1,7 +1,7 @@
 <script lang="ts">
-  import IconText from "$lib/IconText.svelte";
-  import NavBar from "$lib/NavBar.svelte";
-  import "../routes/style.css";
+  import IconText from "$lib/components/IconText.svelte";
+  import NavBar from "$lib/components/NavBar.svelte";
+  import "$lib/css/style.css";
 </script>
 
 <header class="main-nav">

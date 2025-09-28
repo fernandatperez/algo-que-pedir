@@ -1,12 +1,12 @@
 <script lang="ts">
-  import IconText from "$lib/IconText.svelte";
+  import IconText from "$lib/components/IconText.svelte";
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/icon.css";
   import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/2-register.css";
 
-  import Input from "$lib/Input.svelte";
-  import { InputTypes } from "$lib/InputTypes";
+  import Input from "$lib/components/Input.svelte";
+  import { InputTypes } from "$lib/components/InputTypes";
   import { USERS_LIST_MOCK } from "$lib/data/mock/users";
   import { UserType, ValidationMessage } from "$lib/domain/user";
   import { userService } from "$lib/services/UserService";
