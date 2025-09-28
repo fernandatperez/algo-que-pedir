@@ -11,6 +11,8 @@
   import { MENUITEMS_MOCK } from "$lib/data/mock/menuItems";
   import type { MenuItemType } from "$lib/domain/menuItem";
   import { createEmptyMenuItem } from "$lib/domain/menuItem"; // esta funcion crea un objeto vacio, es para el boton agregar nuevo objeto
+  import { goto } from '$app/navigation'
+
 
   let menuitems = $state<MenuItemType[]>(MENUITEMS_MOCK);
 </script>
@@ -21,7 +23,7 @@
       <div class="text-wrapper">
         <h1 class="header-title ellipsis-text">Gestion del menú</h1>
       </div>
-      <button class="btn-add">Agregar nuevo plato</button>
+      <button class="btn-add" onclick={() => goto (`/dish-edit/1`)} >Agregar nuevo plato</button>
     </div>
     <h2 class="subtitle">Platos disponibles</h2>
     <div class="container-column content-section">
