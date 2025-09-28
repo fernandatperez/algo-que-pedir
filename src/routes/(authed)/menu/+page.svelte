@@ -29,7 +29,7 @@
       <div class="text-wrapper">
         <h1 class="header-title ellipsis-text">Gestion del menú</h1>
       </div>
-      <button class="btn-add" onclick={() => goto (`/dish-edit/1`)} >Agregar nuevo plato</button>
+      <button class="btn-add" onclick={() => goto (`/dish-edit/-1`)} >Agregar nuevo plato</button>
       <!-- en este boton se podria usar -->
     </div>
     <h2 class="subtitle">Platos disponibles</h2>

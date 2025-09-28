@@ -12,31 +12,28 @@
   import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
   import { InputTypes } from "$lib/components/InputTypes";
-  import type { MenuItemType } from "$lib/domain/menuItem";
+    import Ingredient from "$lib/components/Ingredient.svelte";
+    import { goto } from "$app/navigation";
+    import { MenuItemType } from "$lib/domain/menuItem.js";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
-  const { menuItem } = data
-
-//! =========== esto hay que cambiarloooooo ===========
-  // Estados del formulario inicializados con los datos del menu item
-  let inputValue: string = $state(menuItem?.nombre || "");
-  let inputURL: string = $state(menuItem?.imagen || "");
-  let descripcionValue: string = $state(menuItem?.descripcion || "");
-  let precioValue: number = $state(menuItem?.precio || 0);
-
-
+  const { title, menuItem } = data
 
   let platoAutor: boolean = $state(false);
   let platoEnPromo: boolean = $state(false);
+
+  const onSubmit = () => {
+
+  }
 </script>
 
 <!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title section-title">Editar Plato</h1>
+    <h1 class="header-title section-title">{title}</h1>
     <form
-      action=""
+      onsubmit={onSubmit}
       id="form-product-edit"
       class="container-column form-product-edit"
     >
@@ -60,7 +57,7 @@
                 type: "text",
                 class: "input-primary",
                 id: "product-name",
-                placeholder: "Hamburguesa triple completa",
+                placeholder: menuItem.nombre,
               }}
             />
           </div>
@@ -74,7 +71,7 @@
               maxlength="1000"
               minlength="100"
               class="input-primary description-textarea"
-              placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezos."
+              placeholder= {menuItem.descripcion}
             ></textarea>
           </div>
           <div class="container-column">
@@ -89,7 +86,7 @@
                 type: "text",
                 id: "url-product-img",
                 class: "input-primary",
-                placeholder: "/url/de/tu/imagen.png",
+                placeholder: menuItem.imagen,
               }}
             />
           </div>
@@ -97,7 +94,7 @@
         <div class="i">
           <!-- Revisar decrecimiento-->
           <DinamicImage
-            imageURL = {inputURL}
+            imageURL = {menuItem.imagen}
             imageDescription = "product-load-img"
             imageProps={{
               class: "img-product-edit"
@@ -125,7 +122,7 @@
               type: "number",
               id: "product-base-cost",
               class: "input-primary number-input",
-              placeholder: "Escribir numero..."
+              placeholder: menuItem.precio
             }}
           />
         </div>
@@ -138,11 +135,11 @@
             </p>
           </label>
           <div class="slide-button">
+            <!-- Esto ya tiene una variable asignada al toggle, en el POST asignamos la variable a la de la clase -->
             <input type="checkbox" class="toggle" id="es-de-autor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
-            <!-- Y esto como hacemos para que cuando se clickee haga el toggle de la variable? -->
           </div>
         </div>
 
@@ -154,7 +151,7 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="en-promocion" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
+            <input type="checkbox" class="toggle" id="en-promocion" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
@@ -170,76 +167,24 @@
         <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
         <div class="product-ingredients-cost-subtitle">
           <h3 class="h3">Costo de Producción</h3>
-          <p>$100</p>
+          <!-- Suma del costo de todos los ingredientes -->
+           <!-- Va a venir del back -->
+          <p>${menuItem.costoDeProduccion()}</p>
         </div>
 
-        <div class="grid-table-container product-edit-ingredients-table">
-          <header class="grid-table-row table-header">
-            <div class="cell" id="nombre">Nombre</div>
-            <div class="cell" id="grupo-alimenticio">
-              <span>Grupo</span>
-              <span class="p-alimenticio display-none-mobile">Alimenticio</span>
-            </div>
-            <div class="cell col-centered" id="origen">Origen</div>
-            <div class="cell col-centered" id="acciones">Acciones</div>
-          </header>
+        {#each menuItem.ingredientes as ing}
+        <article class="grid-table-row product-edit-ingredients-table-content">
+            <Ingredient ingredient={ing} />
+            <section class="cell multiple-action-buttons">
+              <button disabled class="icon-action-btn hidden-icons" aria-label="Ver"><i class="ph ph-eye gray-icon"></i></button>
+              <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+              <button class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+              <span><i class="ph ph-line-vertical gray-icon"></i></span>
+              <button class="icon-action-btn" onclick={() =>{deleteIngredient ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+            </section>
 
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-1">Carne de Renacuajo</div>
-            <div class="cell" id="grupo-alimenticio-1">Proteínas</div>
-            <div class="cell col-centered">
-              <i class="ph ph-cow" id="origen-1"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-1"></i></button
-            >
-          </div>
-
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-2">Queso Cheddar</div>
-            <div class="cell" id="grupo-alimenticio-2">Lacteos</div>
-            <div class="cell col-centered">
-              <i class="ph ph-cow" id="origen-2"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-2"></i></button
-            >
-          </div>
-
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-3">Lechuga</div>
-            <div class="cell" id="grupo-alimenticio-3">Frutas y Verduras</div>
-            <div class="cell col-centered">
-              <i class="ph ph-plant" id="origen-3"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-3"></i></button
-            >
-          </div>
-
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-4">Tomate</div>
-            <div class="cell" id="grupo-alimenticio-4">Frutas y Verduras</div>
-            <div class="cell col-centered">
-              <i class="ph ph-plant" id="origen-4"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-4"></i></button
-            >
-          </div>
-        </div>
+          </article>
+        {/each}
       </fieldset>
 
       <section class="btn-group-actions">
