@@ -64,6 +64,7 @@
     align-items: flex-start;
 }
 .product-ingredients-cost-subtitle {
+    position: relative;
     display: flex;
     align-items: flex-end;
     column-gap: var(--gap-sm);

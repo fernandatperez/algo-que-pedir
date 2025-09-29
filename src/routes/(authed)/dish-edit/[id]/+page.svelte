@@ -13,8 +13,10 @@
   import { toggleVariable } from "$lib/utils";
   import { InputTypes } from "$lib/components/InputTypes";
   import Ingredient from "$lib/components/Ingredient.svelte";
-  import { goto } from "$app/navigation";
-    import type { IngredientType } from "$lib/domain/ingredient.js";
+  import type { ValidationMessage } from "$lib/domain/ingredient.js";
+  import { showError } from "$lib/domain/errorHandler.js";
+  import { menuItemsService } from "$lib/services/MenuItemService.js";
+    import { MenuItemType } from "$lib/domain/menuItem.js";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -22,27 +24,60 @@
 
   let platoAutor: boolean = $state(false);
   let platoEnPromo: boolean = $state(false);
+  let errors: ValidationMessage[] = $state([])
 
-  const onSubmit = () => {
+  const itemEdit = menuItem
 
+  const onSubmit = async (ev: SubmitEvent) => {
+    ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
+
+    // ev.currentTarget: es el elemento que tiene asignado el event listener
+    // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
+    const form = ev.currentTarget as HTMLFormElement
+    const formData = new FormData(form) // creo el formData
+
+    const menuItem = new MenuItemType(
+      itemEdit.id,
+      itemEdit.alt,
+      (formData.get("product-name") ?? "").toString(),
+      (formData.get("product-description") ?? "").toString(),
+      Number(formData.get("product-cost") ?? 0),
+      (formData.get("url-product-image") ?? "").toString(),
+      Boolean(formData.get("author-dish") ?? false),
+      Boolean(formData.get("on-promo-dish") ?? false),
+    )
+    // // Modifying menuItem
+    // itemEdit.nombre = (formData.get("product-name") ?? menuItem.nombre).toString()
+    // itemEdit.descripcion = (formData.get("product-description") ?? menuItem.descripcion).toString()
+    // itemEdit.imagen = (formData.get("url-product-image") ?? "").toString()
+    // itemEdit.precio = Number(formData.get("product-cost") ?? 0)
+    // itemEdit.esDeAutor = Boolean(formData.get("author-dish") ?? "")
+    // itemEdit.enPromocion = Boolean(formData.get("on-promo-dish") ?? "")
+
+    console.info("El plato modificado quedo asi: ", menuItem)
+
+    menuItem.validate()
+
+    if (menuItem.errors.length > 0) {
+      errors = [...menuItem.errors]
+      return
+    }
+
+    try {
+      await menuItemsService.updateMenuItem(itemEdit)
+      errors = [] // limpiar errores
+    } catch (error) {
+      showError("Error al crear el ingrediente", error)
+    }
   }
 
-  const irAEditar = (ing: IngredientType) => {
-    // No anda esto ni idea Pablo resolvelo porfa
-    // window.location.href = `/ingredient-edit/${ing.id}`  este funciona pero es medio villero
-    goto(`/ingredient-edit/${ing.id}`)
-  }
-
-  const eliminarIng = (ing: IngredientType) => {
-    // Copy paste del de Dana
-    console.info('Ingrediente DELETED') 
-  }
+  const removeItem = () => {}
 </script>
 
 <!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title">{title}</h1>
+    <h1 class="header-title-dish">{title}</h1>
     <form
       onsubmit={onSubmit}
       id="form-product-edit"
@@ -68,7 +103,8 @@
                 type: "text",
                 class: "input-primary",
                 id: "product-name",
-                placeholder: menuItem.nombre,
+                name: "product-name",
+                placeholder: itemEdit.nombre,
               }}
             />
           </div>
@@ -82,7 +118,8 @@
               maxlength="1000"
               minlength="100"
               class="input-primary description-textarea"
-              placeholder= {menuItem.descripcion}
+              name="product-description"
+              placeholder= {itemEdit.descripcion}
             ></textarea>
           </div>
           <div class="container-column">
@@ -97,7 +134,8 @@
                 type: "text",
                 id: "url-product-img",
                 class: "input-primary",
-                placeholder: menuItem.imagen,
+                name: "url-product-img",
+                placeholder: itemEdit.imagen,
               }}
             />
           </div>
@@ -105,7 +143,7 @@
         <div class="i">
           <!-- Revisar decrecimiento-->
           <DinamicImage
-            imageURL = {menuItem.imagen}
+            imageURL = {itemEdit.imagen}
             imageDescription = "product-load-img"
             imageProps={{
               class: "img-product-edit"
@@ -133,7 +171,8 @@
               type: "number",
               id: "product-base-cost",
               class: "input-primary number-input",
-              placeholder: menuItem.precio
+              name: "product-cost",
+              placeholder: itemEdit.precio
             }}
           />
         </div>
@@ -147,7 +186,7 @@
           </label>
           <div class="slide-button">
             <!-- Esto ya tiene una variable asignada al toggle, en el POST asignamos la variable a la de la clase -->
-            <input type="checkbox" class="toggle" id="es-de-autor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
+            <input type="checkbox" class="toggle" id="es-de-autor" name="author-dish" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
@@ -162,7 +201,7 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="en-promocion" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
+            <input type="checkbox" class="toggle" id="en-promocion" name="on-promo-dish" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
@@ -176,14 +215,11 @@
         class="container-column content-section form-section-product-ingredients"
       >
         <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
-        <div class="product-ingredients-cost-subtitle">
+        <div class="product-ingredients-cost-subtitle w-100">
           <h3 class="h3">Costo de Producción</h3>
           <!-- Suma del costo de todos los ingredientes -->
            <!-- Va a venir del back -->
-          <div class="add-ing-button-price">
-            <p>${menuItem.costoDeProduccion()}</p>
-            <p>HOLA!</p>
-          </div>
+          <p>${itemEdit.costoDeProduccion()}</p>
         </div>
         <div class="grid-table-container product-edit-ingredients-table">
           <header class="grid-table-row table-header">
@@ -198,13 +234,12 @@
             </section>
             <section class="cell col-centered" id="acciones">Acciones</section>
           </header>
-          {#each menuItem.ingredientes as ing}
+          {#each itemEdit.ingredientes as ing}
             <article class="grid-table-row product-edit-ingredients-table-content">
               <Ingredient ingredient={ing} />
               <section class="cell multiple-action-buttons">
-                <button disabled class="icon-action-btn hidden-icons" aria-label="Ver"><i class="ph ph-eye gray-icon"></i></button>
                 <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
-                <button class="icon-action-btn" onclick={() => eliminarIng(ing)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+                <button class="icon-action-btn" onclick={removeItem} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
               </section>
             </article>
           {/each}
@@ -215,7 +250,7 @@
         <button disabled class="btn btn-secondary btn-dish"
           >Descartar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
-        <button disabled class="btn btn-primary btn-dish"
+        <button class="btn btn-primary btn-dish" type="submit"
           >Guardar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
       </section>
@@ -224,8 +259,11 @@
 </main>
 
 <style>
-  .add-ing-button-price {
-    display: flex;
-    gap: 10em;
+  .header-title-dish {
+    font-size: var(--font-h1);
+    font-weight: 700;
+    font-style: normal;
+    align-self: flex-start;
+    margin: 0.5em 0em;
   }
 </style>
