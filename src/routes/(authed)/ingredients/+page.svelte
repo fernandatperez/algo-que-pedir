@@ -1,10 +1,10 @@
 <script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/component-css/grid-table.css"
-  import "$lib/css/component-css/icon.css"
-  import "$lib/css/component-css/buttons.css"
-  import "$lib/css/component-css/input.css"
+  import "$lib/css/components-css/grid-table.css"
+  import "$lib/css/components-css/icon.css"
+  import "$lib/css/components-css/buttons.css"
+  import "$lib/css/components-css/input.css"
   import "$lib/css/pages-css/7-ingredients.css"
 
   import Ingredient from "$lib/components/Ingredient.svelte"
@@ -12,8 +12,6 @@
 
   import { IngredientType, ValidationMessage } from "$lib/domain/ingredient"
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
-  import { enhance } from '$app/forms'
-  import type { SubmitFunction } from '@sveltejs/kit'
   import { ingredientService } from '$lib/services/IngredientService'
   import { onMount } from 'svelte'
   import { showError } from '$lib/domain/errorHandler'
@@ -76,9 +74,9 @@
     const ingredient = new IngredientType(
       ingredients.length + 1,
       (formData.get("name") ?? "").toString(),
-      parseFloat(formData.get("cost") as string),
+      Number(formData.get("cost") ?? 0),
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
-      formData.get("esOrigenAnimal") === "true"
+      Boolean(formData.get("esOrigenAnimal") ?? "true")
     )
     console.info("el nuevo ingrediente es ", ingredient)
 

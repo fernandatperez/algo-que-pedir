@@ -1,11 +1,11 @@
 <script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/component-css/input.css"
-  import "$lib/css/component-css/switch-button.css"
-  import "$lib/css/component-css/grid-table.css"
-  import "$lib/css/component-css/icon.css"
-  import "$lib/css/component-css/buttons.css"
+  import "$lib/css/components-css/input.css"
+  import "$lib/css/components-css/switch-button.css"
+  import "$lib/css/components-css/grid-table.css"
+  import "$lib/css/components-css/icon.css"
+  import "$lib/css/components-css/buttons.css"
   import "$lib/css/pages-css/8-ingredient-edit.css"
   
   import { goto } from '$app/navigation'
@@ -14,18 +14,17 @@
   import { ingredientService } from '$lib/services/IngredientService.js'
   import { showError } from '$lib/domain/errorHandler.js'
   import ValidationField from '$lib/components/ValidationField.svelte'
-  
   let { data } = $props()
   const { ingredient } = data
   
   let errors: ValidationMessage[] = $state([])
   
-  let ingredientEdit = ingredient
-  // Guardamos el ingrediente original para comparar
-  
-  // let buscarHabilitado = $derived(ingredientEdit.name !== newIngredient.name ||
-  // ingredientEdit.cost !== newIngredient.cost || ingredientEdit.foodGroup !== newIngredient.foodGroup ||
-  // ingredientEdit.esOrigenAnimal !== newIngredient.esOrigenAnimal)
+  let ingredientEdit = $state({ ...ingredient })
+
+  let ingredientLock = $derived(
+    ingredient?.name != ingredientEdit?.name || ingredient?.cost != ingredientEdit?.cost ||
+    ingredient?.foodGroup != ingredientEdit?.foodGroup || ingredient?.esOrigenAnimal != ingredientEdit?.esOrigenAnimal
+  )
   
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
@@ -74,13 +73,13 @@
       <form onsubmit={onSubmit} onreset={onCancel} class="ingredient-edit-section" id="form-ingredient-edit">
         <section class="input-group">
           <label class="label-color" for="form-ingredient-name">Nombre del ingrediente*</label>
-          <input type="text" id="form-ingredient-name" value={ingredientEdit.name} class="input-primary" name="name" required>
+          <input type="text" id="form-ingredient-name" bind:value={ingredientEdit.name} class="input-primary" name="name" required>
           <ValidationField errors={errors} field="name" />
         </section>
 
         <section class="input-group">
           <label class="label-color" for="form-ingredient-cost">Costo*</label>
-          <input type="text" id="form-ingredient-cost" value={ingredientEdit.cost} class="input-primary" name="cost" required>
+          <input type="text" id="form-ingredient-cost" bind:value={ingredientEdit.cost} class="input-primary" name="cost" required>
           <ValidationField errors={errors} field="cost" />
         </section>
 
@@ -109,8 +108,7 @@
 
       <section class="btn-group-actions">
         <button form="form-ingredient-edit" class="btn btn-secondary" onclick={() => goto('/ingredients')} type="reset">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
-        <button form="form-ingredient-edit" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
-        
+        <button form="form-ingredient-edit" class="btn btn-primary" disabled={!ingredientLock} type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
       </section>
     {:else}
       <p>Ingrediente no encontrado.</p>
