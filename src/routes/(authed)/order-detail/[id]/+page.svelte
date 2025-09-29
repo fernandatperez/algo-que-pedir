@@ -15,7 +15,7 @@
 <main class="container-column">
   <div class="container-column main-content">
     <div class="w-100 flex-row jc-space-between header-container text-wrapper">
-      <h1 class="header-title jc-space-between ellipsis-text">Pedido #{order.id}</h1>
+      <h1 class="header-title jc-space-between ellipsis-text" data-testid="order-id">Pedido #{order.id}</h1>
       <div class="flex-row state-btn-container">
         <h2 class="subtitle ellipsis-text">Estado del Pedido</h2>
         <span class="btn btn-alternate">{order.state}</span>

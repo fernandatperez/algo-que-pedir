@@ -3,7 +3,7 @@ import { type OrderJSON, Estado, Pago } from '$lib/domain/order'
 import { ensalada, hamburguesa, pizza } from '$lib/data/mock/menu-items'
 
 // Ejemplo de pedido JSON
-let firstOrder: OrderJSON = {
+export let firstOrder: OrderJSON = {
   id: 12345,
   name: 'Sofía Miller',
   user: 'smiller2006',
@@ -33,7 +33,7 @@ let secondOrder: OrderJSON = {
 }
 
 // Otro pedido
-let thirdOrder: OrderJSON = {
+export let thirdOrder: OrderJSON = {
   id: 7853,
   name: 'Alex Caniggia',
   user: 'fuerabarat',
