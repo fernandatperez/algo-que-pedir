@@ -1,4 +1,3 @@
-<!-- src/lib/components/FormInput.svelte -->
 <script lang="ts">
   import "$lib/css/components-css/input.css";
   import ValidationField from '$lib/components/ValidationField.svelte';
@@ -71,13 +70,13 @@
       {required}
       {min}
       {max}
-      formnovalidate
     />
   {/if}
 
   <ValidationField {errors} {field} />
 </div>
 
+<!--algunos estilos extra, como los formularios que marcan campos madatorios-->
 <style>
   .checkbox-label {
     display: flex;

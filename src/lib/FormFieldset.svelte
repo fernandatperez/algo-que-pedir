@@ -1,8 +1,6 @@
-<!-- En FormFieldset.svelte - versión sin TypeScript estricto -->
 <script lang="ts">
   import FormInput from '$lib/FormInput.svelte'
 
-  // ✅ Sin tipos, solo JavaScript
   let { 
     title = "",
     name,
@@ -14,7 +12,7 @@
 
    let isStoreInfo = $derived(section === 'storeInfo')
 </script>
-
+<!-- esto probablemente se pueda parametrizar de una manera mas linda, tendria que quitar el grid-->
 {#if isStoreInfo}
   <fieldset form="form-store-profile" name={name} class="content-section form-section-store-dir">
     <div class="grid-cols-2 input-field" >
@@ -34,11 +32,7 @@
       {/each}
     </div>
     <div>
-     <img
-            src={formData.storeInfo["url-store-img"] || "/src/lib/assets/img/CarlosBakeShop.jpg"}
-            alt="local"
-            class="img-store-profile"
-          /></div>
+     <img src={formData.storeInfo["url-store-img"] || "/src/lib/assets/img/CarlosBakeShop.jpg"} alt="local" class="img-store-profile"/></div>
   </fieldset>
 {:else}
   <fieldset {name} class="container-column content-section form-section-store-commission">

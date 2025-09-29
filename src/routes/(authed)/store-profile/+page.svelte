@@ -11,7 +11,7 @@
   // Components
   import FormFieldset from '$lib/FormFieldset.svelte';
   
-  // Service - ✅ Importar la instancia
+  // Service 
   import { storeProfileService } from '$lib/services/StoreProfileService'
   import type { ValidationMessage } from '$lib/domain/store';
   
@@ -25,10 +25,8 @@
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
-    isSubmitting = true
-
     try {
-      // Usar el service para validar
+      // Usa el service para validar
       const validation = storeProfileService.validateForm(formData)
       errors = validation.errors
       
@@ -37,10 +35,10 @@
         return
       }
 
-      // Actualizar el service con los datos actuales
+      // Actualiza con el service los datos actuales
       storeProfileService.update(formData)
       
-      // Guardar usando el service
+      // Guarda usando el service
       const success = await storeProfileService.save()
       
       if (success) {
@@ -49,13 +47,11 @@
       }
     } catch (error) {
       alert('Error al guardar los datos')
-    } finally {
-      isSubmitting = false
-    }
+    } 
   }
 
   function handleDiscard() {
-    // ✅ Usar el service para descartar cambios
+    // usa el service para descartar cambios
     storeProfileService.discardChanges()
     
     // Actualizar el estado local con los datos del service
@@ -78,7 +74,6 @@
          bind:formData
          section="storeInfo"
          {errors}
-         
        />
       
       
@@ -103,6 +98,7 @@
       />
 
       <!-- Payment Methods -->
+      
       <FormFieldset
         title="Métodos de Pago"
         name="payment-methods"
@@ -111,6 +107,7 @@
         section="paymentMethods"
         {errors}
       />
+      
       
       <!-- Buttons -->
       <section class="btn-group-actions">
@@ -127,11 +124,7 @@
           class="btn btn-primary btn-store" 
           disabled={isSubmitting}
         >
-          {#if isSubmitting}
-            Guardando...
-          {:else}
-            Guardar <span class="p-cambios display-none-mobile">Cambios</span>
-          {/if}
+          Guardar <span class="p-cambios display-none-mobile">Cambios</span>
         </button>
       </section>
     </form>

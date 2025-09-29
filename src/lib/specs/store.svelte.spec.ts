@@ -1,9 +1,9 @@
-// src/tests/storeProfile.test.ts
+
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/svelte'
 import StoreProfile from '../../routes/(authed)/store-profile/+page.svelte'
 
-// Mock de stores si es necesario
+// Mock de store 
 vi.mock('$lib/stores/storeProfileStore', () => ({
   storeProfileStore: {
     data: {
@@ -17,6 +17,19 @@ vi.mock('$lib/stores/storeProfileStore', () => ({
     discardChanges: vi.fn()
   }
 }))
+
+describe('Debug Test', () => {
+  it('should work', () => {
+    expect(1 + 1).toBe(2)
+  })
+
+  it('should validate basic logic', () => {
+    const isValid = true
+    expect(isValid).toBe(true)
+  })
+})
+
+
 
 describe('StoreProfile', () => {
   it('debería renderizar el formulario correctamente', async () => {

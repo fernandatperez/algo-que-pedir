@@ -58,7 +58,7 @@ export class StoreProfileService {
       // Guardar datos
       this.originalData = { ...this.currentData }
       
-      // Aquí iría la llamada al backend
+      // aca se va a llamar al backend
       // await this.saveToBackend(this.currentData)
       
       this.errors = []
@@ -68,7 +68,7 @@ export class StoreProfileService {
     }
   }
 
-  // Métodos auxiliares específicos del formulario
+  
   discardChanges(): void {
     this.currentData = { ...this.originalData }
     this.errors = []
@@ -78,7 +78,7 @@ export class StoreProfileService {
     this.delete() // Reutiliza delete
   }
 
-  // Getters específicos (pueden mantenerse como están)
+  // Getter específicos
   get formData(): FormData {
     return this.get()
   }
@@ -187,7 +187,7 @@ export class StoreProfileService {
 
     const value = formData[section as keyof FormData][fieldId]
 
-    if (!value || (typeof value === 'string' && value.trim() === '')) {
+    if (!value || typeof value === 'string' && value.trim() === '') {
       return {
         field: fieldId,
         message: `${fieldConfig.label} es requerido`
