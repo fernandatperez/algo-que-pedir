@@ -16,44 +16,43 @@
   import type { ValidationMessage } from "$lib/domain/ingredient.js";
   import { showError } from "$lib/domain/errorHandler.js";
   import { menuItemsService } from "$lib/services/MenuItemService.js";
-    import { MenuItemType } from "$lib/domain/menuItem.js";
+  import { MenuItemType } from "$lib/domain/menuItem.js";
+  import { goto } from "$app/navigation";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
-  const { title, menuItem } = data
+  const { nuevoItem, item } = data
+  let errors: ValidationMessage[] = $state([])
 
   let platoAutor: boolean = $state(false);
   let platoEnPromo: boolean = $state(false);
-  let errors: ValidationMessage[] = $state([])
 
-  const itemEdit = menuItem
+  const itemEdit = $state(item.toJSON())
 
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
-
+    
     // ev.currentTarget: es el elemento que tiene asignado el event listener
     // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
     const form = ev.currentTarget as HTMLFormElement
     const formData = new FormData(form) // creo el formData
-
-    const menuItem = new MenuItemType(
+    
+    // Con form data
+    const menuItem: MenuItemType = new MenuItemType(
       itemEdit.id,
       itemEdit.alt,
-      (formData.get("product-name") ?? "").toString(),
-      (formData.get("product-description") ?? "").toString(),
-      Number(formData.get("product-cost") ?? 0),
-      (formData.get("url-product-image") ?? "").toString(),
-      Boolean(formData.get("author-dish") ?? false),
-      Boolean(formData.get("on-promo-dish") ?? false),
+      (formData.get("product-name") ? formData.get("product-name") : itemEdit.nombre) as string,
+      (formData.get("product-description") ? formData.get("product-description") : itemEdit.descripcion) as string,
+      Number(formData.get("product-cost") ? formData.get("product-cost") : itemEdit.precio),
+      (formData.get("url-product-image") ? formData.get("url-product-image") : itemEdit.imagen) as string,
+      Boolean(formData.get("author-dish") ? formData.get("author-dish") : itemEdit.esDeAutor),
+      Boolean(formData.get("on-promo-dish") ? formData.get("on-promo-dish") : itemEdit.enPromocion)
     )
-    // // Modifying menuItem
-    // itemEdit.nombre = (formData.get("product-name") ?? menuItem.nombre).toString()
-    // itemEdit.descripcion = (formData.get("product-description") ?? menuItem.descripcion).toString()
-    // itemEdit.imagen = (formData.get("url-product-image") ?? "").toString()
-    // itemEdit.precio = Number(formData.get("product-cost") ?? 0)
-    // itemEdit.esDeAutor = Boolean(formData.get("author-dish") ?? "")
-    // itemEdit.enPromocion = Boolean(formData.get("on-promo-dish") ?? "")
 
+    // Dodains way
+    // Para este tendriamos que bindear los values de los componentes al valor del itemEdit
+    // const menuItem: MenuItemType = MenuItemType.fromJson(itemEdit)
+    
     console.info("El plato modificado quedo asi: ", menuItem)
 
     menuItem.validate()
@@ -64,7 +63,7 @@
     }
 
     try {
-      await menuItemsService.updateMenuItem(itemEdit)
+      await menuItemsService.updateMenuItem(menuItem)
       errors = [] // limpiar errores
     } catch (error) {
       showError("Error al crear el ingrediente", error)
@@ -77,7 +76,7 @@
 <!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title-dish">{title}</h1>
+    <h1 class="header-title-dish">{nuevoItem ? "Crear plato" : "Editar plato"}</h1>
     <form
       onsubmit={onSubmit}
       id="form-product-edit"
@@ -219,7 +218,7 @@
           <h3 class="h3">Costo de Producción</h3>
           <!-- Suma del costo de todos los ingredientes -->
            <!-- Va a venir del back -->
-          <p>${itemEdit.costoDeProduccion()}</p>
+          <p>${MenuItemType.costoDeProduccion(itemEdit)}</p>
         </div>
         <div class="grid-table-container product-edit-ingredients-table">
           <header class="grid-table-row table-header">
@@ -238,7 +237,10 @@
             <article class="grid-table-row product-edit-ingredients-table-content">
               <Ingredient ingredient={ing} />
               <section class="cell multiple-action-buttons">
-                <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
+                <!-- Esto ahora funciona....................... -->
+                <button class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+                <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                <!-- Esto sigue sin funcionar -->
                 <button class="icon-action-btn" onclick={removeItem} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
               </section>
             </article>

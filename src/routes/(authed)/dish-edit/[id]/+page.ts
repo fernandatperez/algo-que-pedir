@@ -1,16 +1,17 @@
+import { MenuItemType } from '$lib/domain/menuItem.js'
 import { menuItemsService } from '$lib/services/MenuItemService'
 import { redirect } from '@sveltejs/kit'
 
 export async function load({ params }) {
   try {
-    const id = parseInt(params.id)
-    const menuItem = await menuItemsService.getMenuItem(id)
-    if (menuItem.id == -1) {
-      const title = 'Crear nuevo plato'
-      return { title, menuItem}
+    const nuevoItem = params.id === 'nuevoPlato'
+    let item: MenuItemType
+    if (nuevoItem) {
+      item = new MenuItemType()
+      return {nuevoItem, item}
     } else {
-      const title = 'Editar plato'
-      return { title, menuItem }
+      item = await menuItemsService.getMenuItem(+params.id) // + para que sea un number
+      return {nuevoItem, item}
     }
   }
   catch (error) {

@@ -16,10 +16,9 @@
 
   let menuitems = $state<MenuItemType[]>(MENUITEMS_MOCK);
 
-
-
-
-
+  const crearPlato = () => {
+    goto('/dish-edit/nuevoPlato')
+  }
 
 </script>
 
@@ -29,13 +28,13 @@
       <div class="text-wrapper">
         <h1 class="header-title ellipsis-text">Gestion del menú</h1>
       </div>
-      <button class="btn-add" onclick={() => goto (`/dish-edit/-1`)} >Agregar nuevo plato</button>
+      <button class="btn-add" onclick={crearPlato} >Agregar nuevo plato</button>
       <!-- en este boton se podria usar -->
     </div>
     <h2 class="subtitle">Platos disponibles</h2>
     <div class="container-column content-section">
       <!-- menuitems es la lista, menuitem es la const en el componente -->
-      {#each menuitems as item}
+      {#each menuitems as item (item.id)}
         <MenuItem menuitem={item} />
       {/each}
     </div>

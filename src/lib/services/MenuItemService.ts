@@ -24,6 +24,7 @@ class MenuItemsService {
   }
 
   async updateMenuItem(menuItem: MenuItemType) {
+    // Aca no se como seria
     const newItem = MENU_ITEMS_JSON_MOCK.findIndex(item => item.id == menuItem.id)
     if (newItem != -1) {
       MENU_ITEMS_JSON_MOCK[newItem] = {...menuItem, id: menuItem.id}

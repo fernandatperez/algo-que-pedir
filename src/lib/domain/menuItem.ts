@@ -1,4 +1,4 @@
-import type { IngredientType } from './ingredient'
+import { IngredientType } from './ingredient'
 
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
@@ -44,6 +44,20 @@ export class MenuItemType {
     this.errors.push(new ValidationMessage(field, message))
   }
 
+  toJSON(): MenuItemJSON {
+    return {
+      id: this.id,
+      alt: this.alt,
+      nombre: this.nombre,
+      descripcion: this.descripcion,
+      precio: this.precio,
+      imagen: this.imagen,
+      esDeAutor: this.esDeAutor,
+      enPromocion: this.enPromocion,
+      ingredientes: this.ingredientes
+    }
+  }
+
   validate() {
     this.errors = []
     
@@ -86,14 +100,9 @@ export class MenuItemType {
     return `src/lib/assets/img/${this.imagen}`
   }
 
-  // Metodo para verificar si el item es válido
-  // isValid(): boolean {
-  //   this.validate()
-  //   return this.errors.length === 0
-  // }
-
-  costoDeProduccion(): number {
-    return this.ingredientes.reduce((accumulator, currentItem) => 
+  static costoDeProduccion(menuItemJSON: MenuItemJSON): number {
+    const menuItem = Object.assign(new MenuItemType(), menuItemJSON, {})
+    return menuItem.ingredientes.reduce((accumulator, currentItem) => 
       accumulator + currentItem.cost, 0
     )
   }

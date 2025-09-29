@@ -12,15 +12,16 @@
 </script>
 
 <style>
-.error {
-  background-color: #da8a8a;
-  color: darkred;
-  padding: 0.5em 0.5em;
-  border-radius: 1em;
-  border: 1px solid darkred;
-  text-align: center;
-  margin: 0.8em;
-}
+  .error {
+    background-color: #da8a8a;
+    color: darkred;
+    padding: 0.5em 0.5em;
+    border-radius: 1em;
+    border: 1px solid darkred;
+    text-align: center;
+    /* Modificar esto para el espacio entre error e input, no puedo desde afuera */
+    margin: 0.8em;
+  }
 </style>
 
 {#if !!errorMessage}
