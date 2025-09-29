@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "$lib/css/component-css/grid-table.css"
+  import "$lib/css/components-css/grid-table.css"
 
   let { plato } = $props();
 </script>

@@ -1,10 +1,10 @@
 <script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/component-css/grid-table.css"
-  import "$lib/css/component-css/icon.css"
-  import "$lib/css/component-css/buttons.css"
-  import "$lib/css/component-css/input.css"
+  import "$lib/css/components-css/grid-table.css"
+  import "$lib/css/components-css/icon.css"
+  import "$lib/css/components-css/buttons.css"
+  import "$lib/css/components-css/input.css"
   import "$lib/css/pages-css/7-ingredients.css"
 
   import Ingredient from "$lib/components/Ingredient.svelte"
@@ -14,16 +14,28 @@
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
   import { enhance } from '$app/forms'
   import type { SubmitFunction } from '@sveltejs/kit'
-  import { ingredientService } from '$lib/services/IngredientService';
-  import { onMount } from 'svelte';
+  import { ingredientService } from '$lib/services/IngredientService'
+  import { onMount } from 'svelte'
   import { showError } from '$lib/domain/errorHandler'
-  import ValidationField from '$lib/components/ValidationField.svelte';
-  import { Modal, Content, Trigger } from "sv-popup";
+  import ValidationField from '$lib/components/ValidationField.svelte'
+  import Modal from '$lib/components/Modal.svelte'
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state
   let ingredients = $state<IngredientType[]>([])
   
+  // Creamos un ingrediente nuevo 
+  let newIngredient = <IngredientType>(new IngredientType())
+
+  let errors: ValidationMessage[] = $state([])
+
+  // Estado para mostrar/ocultar formulario
+  let showForm = $state(false)
+
+  // Estado para mostrar/ocultar el modal
+  let showModal = $state(false)
+  let modalId: number = $state(0)
+
   const findIngredients = async () => {
     try{
       ingredients = await ingredientService.getAllIngredients()
@@ -32,82 +44,10 @@
     }
   }
 
+  // onMount es un ciclo de vida (lifecycle hook).
+  // Se ejecuta una sola vez cuando el componente ya está montado en el DOM.
+  // hace que findIngredients se ejecute automáticamente cuando el componente ya está en pantalla
   onMount(findIngredients)
-
-  // Creamos un ingrediente nuevo 
-  let newIngredient = <IngredientType>(new IngredientType())
-
-  let errors: ValidationMessage[] = $state([])
-
-  // Estado para mostrar/ocultar formulario
-  let showForm = $state(false);
-
-  // tiene que ser tipado por una clase de svelte 
-  const onSubmit: SubmitFunction = async ({ formData, cancel }) => {
-    // formData es un map (key, value) de los inputs del form
-    const ingredient = new IngredientType(
-      ingredients.length + 1,
-      (formData.get('name') ?? "").toString(),
-      parseFloat(formData.get('cost') as string),
-      (formData.get('foodGroup') ?? "") as FoodGroupValue,
-      formData.get("esOrigenAnimal") === "true"
-    )
-    
-    ingredient.validate()
-
-    if (ingredient.errors.length > 0) {
-      errors = [...ingredient.errors]
-      cancel()
-      return
-    }
-
-    try {
-      // guardar en el backend
-      await ingredientService.createIngredient(newIngredient)
-      // refrescar lista
-      await findIngredients()
-      // cerrar form
-      showForm = false
-      errors = [] // limpiar errores
-    } catch (error) {
-      showError("Error al crear el ingrediente", error)
-      cancel()
-    }
-
-  }
-  
-  // function saveIngredient() {
-  //   if (validarFormulario()){
-  //     // Asigno un id al nuevo ingrediente
-  //     newIngredient.id = ingredients.length + 1;
-  
-  //     // Asigno el icono correspondiente al grupo alimenticio seleccionado
-  //     const selectedgroup = foodGroups.find(
-  //       (grupo) => grupo.value === newIngredient.foodGroup,
-  //     );
-  //     newIngredient.originIcon = selectedgroup?.icon || "ph-question";
-  
-  //     // Agrego el newIngredient a la lista
-  //     ingredients = [newIngredient, ...ingredients];
-  //     showForm = false;
-  //   }
-  // }
-
-  function reset(){
-    // Reset
-    newIngredient = new IngredientType();
-    showForm = false;
-  }
-
-  // function deleteIngredient(ingredient: IngredientType) {
-  //   const ingIndex = ingredients.indexOf(ingredient);
-  //   // Elimino un solo elemento desde el indice que le seteo
-  //   ingredients.splice(ingIndex, 1);
-  // }
-
-  // Estado para mostrar/ocultar el modal
-  let showModal = $state(false)
-  let modalId: number = $state(0)
 
   function openModal(id: number) {
     modalId = id
@@ -124,6 +64,81 @@
       await findIngredients()
     }
   }
+
+  const onSubmit = async (ev: SubmitEvent) => {
+    ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
+
+    // ev.currentTarget: es el elemento que tiene asignado el event listener
+    // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
+    const form = ev.currentTarget as HTMLFormElement
+    const formData = new FormData(form) // creo el formData
+
+    const ingredient = new IngredientType(
+      ingredients.length + 1,
+      (formData.get("name") ?? "").toString(),
+      parseFloat(formData.get("cost") as string),
+      (formData.get("foodGroup") ?? "") as FoodGroupValue,
+      formData.get("esOrigenAnimal") === "true"
+    )
+    console.info("el nuevo ingrediente es ", ingredient)
+
+    ingredient.validate()
+
+    if (ingredient.errors.length > 0) {
+      errors = [...ingredient.errors]
+      return
+    }
+
+    try {
+      await ingredientService.createIngredient(ingredient)
+
+      await findIngredients()
+
+      showForm = false
+      errors = [] // limpiar errores
+    } catch (error) {
+      showError("Error al crear el ingrediente", error)
+    }
+  }
+
+  const onCancel = () => {
+    // Reset
+    newIngredient = new IngredientType()
+    showForm = false
+    errors = [] // limpiar errores
+  }
+
+  // tiene que ser tipado por una clase de svelte 
+  // const onSubmit: SubmitFunction = async ({ formData, cancel }) => {
+  //   // formData es un map (key, value) de los inputs del form
+  //   const ingredient = new IngredientType(
+  //     ingredients.length + 1,
+  //     (formData.get('name') ?? "").toString(),
+  //     parseFloat(formData.get('cost') as string),
+  //     (formData.get('foodGroup') ?? "") as FoodGroupValue,
+  //     formData.get("esOrigenAnimal") === "true"
+  //   )
+    
+  //   ingredient.validate()
+
+  //   if (ingredient.errors.length > 0) {
+  //     errors = [...ingredient.errors]
+  //     cancel()
+  //     return
+  //   }
+
+  //   try {
+  //     // guardar en el backend
+  //     await ingredientService.createIngredient(ingredient)
+  //     // refrescar lista
+  //     await findIngredients()
+  //     showForm = false
+  //     errors = [] // limpiar errores
+  //   } catch (error) {
+  //     showError("Error al crear el ingrediente", error)
+  //     cancel()
+  //   }
+  // }
   
 </script>
 
@@ -156,22 +171,14 @@
         {#if showForm}
         <!-- use:enhance: te trae la data del form cuando llamas al onSubmit, permitiendo sacar el bind:value  -->
         <!-- type="reset" -> onreset={reset} -->
-        <!-- type="submit" -> use:enhance={onSubmit} -->
-          <form method="POST" use:enhance={onSubmit} onreset={reset} id="form-ingredient" class="grid-table-row product-edit-ingredients-table-content">
+        <!-- type="submit" -> use:enhance={onSubmit} pero es necesario el es necesario el +page.server.ts, asi que de baja-->
+          <form onsubmit={onSubmit} onreset={onCancel} id="form-ingredient" class="grid-table-row product-edit-ingredients-table-content">
             <section class="cell">
-              <input
-                class="input-primary"
-                placeholder="Huevo"
-                name="name"
-              />
+              <input class="input-primary" placeholder="Huevo" name="name"/>
               <ValidationField errors={errors} field="name" />
             </section>
             <section class="cell">
-              <input
-                class="input-primary"
-                placeholder="$0.80"
-                name="cost"
-              />
+              <input class="input-primary" placeholder="$0.80" name="cost"/>
               <ValidationField errors={errors} field="cost" />
             </section>
             <section class="cell">
@@ -180,8 +187,8 @@
                 {#each Object.entries(foodGroupDict) as [value, grupo]}
                   <option value={value}> {grupo.label} </option>
                 {/each}
-                <ValidationField errors={errors} field="foodGroup" />
               </select>
+              <ValidationField errors={errors} field="foodGroup" />
             </section>
 
             <section class="btn-group-actions btn-group-new-ingredient">
@@ -189,7 +196,6 @@
               <button form="form-ingredient" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
             </section>
           </form>
-          
         {/if}
 
         <!-- Renderizamos cada ingrediente -> Props { ingredient: Ingredient } -->
@@ -197,21 +203,33 @@
         {#each ingredients as ing}
         <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing} />
+
             <section class="cell multiple-action-buttons">
               <button disabled class="icon-action-btn hidden-icons" aria-label="Ver"><i class="ph ph-eye gray-icon"></i></button>
               <span><i class="ph ph-line-vertical gray-icon hidden-icons"></i></span>
               <button class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
               <span><i class="ph ph-line-vertical gray-icon"></i></span>
               <button class="icon-action-btn" onclick={() =>{deleteIngredient ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
-          
             </section>
+
           </article>
         {/each}
 
         {#if showModal && modalId}
-          <div class="modal-backdrop">
+          <Modal
+            title ={`¿Seguro que querés eliminar el ingrediente "${ingredients.find(i => i.id === modalId)?.name}"?`} 
+            confirmLabel="Sí"
+            cancelLabel="No"
+            actionConfirm={() => {
+              const ing = ingredients.find(i => i.id === modalId)
+              if (ing) deleteIngredient(ing)
+              showModal = false
+            }}
+            actionCancel={() => showModal = false}
+          />
+          <!-- <div class="modal-backdrop">
             <div class="modal">
-              <h2>¿Seguro que querés eliminar {ingredients.find(i => i.id === modalId)?.name}?</h2>
+              <h2></h2>
               <section class="cell multiple-action-buttons modal-btns">
                 <button class="btn btn-secondary btn-modal" onclick={() => showModal = false}>No</button>
                 <button class="btn btn-primary btn-modal" onclick={() => {
@@ -220,23 +238,8 @@
                 }}>Sí</button>
               </section>
             </div>
-          </div>
+          </div> -->
         {/if}
-        <!-- Modal de confirmación para eliminar -->
-          <!-- <Modal class="modal-delete" basic small={true}>
-          <Content class="modal-content">
-            <h2>{`¿Seguro que querés eliminar ${ing.name}?`}</h2>
-            <section class="cell multiple-action-buttons">
-              <button class="btn btn-secondary" onclick={() => goto('/')} aria-label="Cancelar">No</button>
-              <button class="btn btn-primary" onclick={() => deleteIngredient(ing)} aria-label="Eliminar">Si</button>
-            </section>
-          </Content>
-          
-          <Trigger>
-            <button class="icon-action-btn" aria-label="Eliminar"><i class="ph ph-trash gray-icon" id="acciones-{ing.id}"></i></button>
-          </Trigger>
-        </Modal> -->
-
       </div>
     </section>
   </section>

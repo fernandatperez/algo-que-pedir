@@ -8,17 +8,27 @@
   import "$lib/css/components-css/switch-button.css";
   import "$lib/css/pages-css/6-product-edit.css";
 
-  import Input from "$lib/Input.svelte";
-  import DinamicImage from "$lib/DinamicImage.svelte";
-  import { toggleVariable } from "$lib/toggleFunction";
-  import { InputTypes } from "$lib/types";
+  import Input from "$lib/components/Input.svelte";
+  import DinamicImage from "$lib/components/DinamicImage.svelte";
+  import { toggleVariable } from "$lib/utils";
+  import { InputTypes } from "$lib/components/InputTypes";
+  import type { MenuItemType } from "$lib/domain/menuItem";
 
-  let inputValue: string = $state(""); // No termino de entender bien como usar las runas
-  let inputURL: string = $state("");
+  // Recibir los datos del +page.ts
+  let { data } = $props()
+  const { menuItem } = data
 
-  let platoAutor: boolean = $state(false)
-  let platoEnPromo: boolean = $state(false)
+//! =========== esto hay que cambiarloooooo ===========
+  // Estados del formulario inicializados con los datos del menu item
+  let inputValue: string = $state(menuItem?.nombre || "");
+  let inputURL: string = $state(menuItem?.imagen || "");
+  let descripcionValue: string = $state(menuItem?.descripcion || "");
+  let precioValue: number = $state(menuItem?.precio || 0);
 
+
+
+  let platoAutor: boolean = $state(false);
+  let platoEnPromo: boolean = $state(false);
 </script>
 
 <!-- Content -->
@@ -41,7 +51,6 @@
             <!-- Aca esta bien el bind:value? -->
             <Input
               description="Nombre del Plato*"
-              bind:value={inputValue}
               input_type={InputTypes.Normal}
               labelProps={{
                 class: "w-100",
@@ -71,7 +80,6 @@
           <div class="container-column">
             <Input
               description="URL de la imagen del plato*"
-              bind:value={inputURL}
               input_type={InputTypes.Normal}
               labelProps={{
                 class: "w-100",
@@ -108,7 +116,6 @@
         <div class="container-column input-group">
           <Input 
             description="Precio Base*"
-            value=""
             input_type={InputTypes.Normal}
             labelProps={{
               class: "w-100",

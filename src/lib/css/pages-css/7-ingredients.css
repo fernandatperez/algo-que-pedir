@@ -60,35 +60,6 @@ padding: 4px;
     padding: 4px 10px;
 }
 
-/* ------------- Modal ---------- */
-.modal-btns{
-    gap: 1rem;
-    margin: 1em;
-}
-.btn-modal{
-    width: 100px;
-}
-.modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    gap: 1rem;
-    margin: 0 auto;
-}
-
-.modal {
-    text-align: center;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    max-width: 500px;
-    width: 90%;
-}
-
 /* ----------- Icons ------------- */
 .ingredients-table-icons {
     font-size: 1.5em;

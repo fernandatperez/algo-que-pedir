@@ -1,7 +1,7 @@
 <script lang="ts">
     import "$lib/css/pages-css/3-orders.css";
 
-    import OrderCard from "$lib/OrderCard.svelte";
+    import OrderCard from "$lib/components/OrderCard.svelte";
     import { ORDERS_MOCK } from "$lib/data/mock/orders";
 
 
