@@ -107,6 +107,19 @@
     border-radius: 2em;
 }
 
+.btn-primary:disabled {
+  background-color: #888888; /* gris claro */
+  color: #f0f0f0;           /* opcional, texto más apagado */
+  cursor: not-allowed;       /* cursor con "prohibido" */
+  opacity: 0.6;              /* un toque de transparencia */
+}
+.btn-primary:disabled:hover {
+  background-color: #bdbdbd; /* gris claro */
+  color: #f0f0f0;           /* opcional, texto más apagado */
+  cursor: not-allowed;       /* cursor con "prohibido" */
+  opacity: 0.6;              /* un toque de transparencia */
+}
+
 /** Mobile: max: 400px */
 @media screen and (max-width: 430px) {
 
