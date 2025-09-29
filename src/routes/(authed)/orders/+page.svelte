@@ -2,10 +2,11 @@
     import "$lib/css/pages-css/3-orders.css"
 
     import OrderCard from "$lib/OrderCard.svelte"
-    // import { ORDERS_MOCK } from "$lib/data/mock/orders";
-    import { Estado, Order } from '$lib/type/order'
+    import { Estado, Order } from '$lib/domain/order'
     import { orderService } from '$lib/services/orderService'
     import { onMount } from "svelte"
+    import { showError } from "$lib/domain/errorHandler"
+    import Toaster from "$lib/components/toast/Toaster.svelte"
 
     // Para filtrar pedidos por estado
     let estado = $state('PENDIENTE')
@@ -28,7 +29,7 @@
                 errorMessage = 'No hay pedidos'
             }
         } catch (error) {
-            errorMessage = 'Error de Conexion'
+            showError('Error loading orders', error)
         }
     }
     
@@ -75,8 +76,9 @@
         {#each orders as order}
             <OrderCard order={order} action={() => prepararPedido(order)} />
         {/each}
-        {#if (errorMessage.trim() != '')}
+        <!-- {#if (errorMessage.trim() != '')}
             <div class="error-text">{errorMessage}</div>
-        {/if}
+        {/if} -->
+        <Toaster errorMessage={errorMessage} field={'orders'} />
     </section>
 </main>

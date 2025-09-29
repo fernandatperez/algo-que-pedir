@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { type OrderJSON, Estado, Pago } from '$lib/type/order'
+import { type OrderJSON, Estado, Pago } from '$lib/domain/order'
 import { ensalada, hamburguesa, pizza } from '$lib/data/mock/menu-items'
 
 // Ejemplo de pedido JSON

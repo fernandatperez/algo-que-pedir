@@ -1,4 +1,4 @@
-import { Order, type OrderJSON } from '../type/order'
+import { Order, type OrderJSON } from '../domain/order'
 import { ORDERS_MOCK } from '$lib/data/mock/orders'
 
 class OrderService {

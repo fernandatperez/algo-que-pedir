@@ -1,8 +1,8 @@
 <script lang="ts">
     import '$lib/css/components-css/buttons.css'
     import '$lib/css/components-css/orderCard.css'
-    import type { MouseEventHandler } from 'svelte/elements';
-    import { type Order, Estado } from './domain/order';
+    import type { MouseEventHandler } from 'svelte/elements'
+    import { type Order, Estado } from './domain/order'
 
     interface Props {
         order: Order,

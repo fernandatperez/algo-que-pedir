@@ -1,16 +1,11 @@
+import { ValidationMessage } from './validationMessage'
+
 export type IngredientJSON = {
   id: number
   name: string
   cost: number
   foodGroup?: FoodGroupValue
   esOrigenAnimal: boolean
-}
-
-export class ValidationMessage {
-  constructor(
-    public field: string,
-    public message: string
-  ) {}
 }
 
 export enum FoodGroupValue {

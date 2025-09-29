@@ -10,7 +10,8 @@
   import Ingredient from "$lib/components/Ingredient.svelte"
   import { goto } from '$app/navigation'
 
-  import { IngredientType, ValidationMessage } from "$lib/domain/ingredient"
+  import { IngredientType } from "$lib/domain/ingredient"
+  import { ValidationMessage } from '$lib/domain/validationMessage'
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
   import { enhance } from '$app/forms'
   import type { SubmitFunction } from '@sveltejs/kit'
@@ -184,8 +185,11 @@
             <section class="cell">
               <select class="input-primary" name="foodGroup">
                 <option value="" disabled selected hidden>Seleccionar</option>
-                {#each Object.entries(foodGroupDict) as [value, grupo]}
+                <!-- {#each Object.entries(foodGroupDict) as [value, grupo]}
                   <option value={value}> {grupo.label} </option>
+                {/each} -->
+                {#each Object.keys(foodGroupDict) as value}
+                  <option value={value}>{foodGroupDict[value as FoodGroupValue].label}</option>
                 {/each}
               </select>
               <ValidationField errors={errors} field="foodGroup" />
