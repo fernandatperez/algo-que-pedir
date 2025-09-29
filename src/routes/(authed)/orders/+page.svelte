@@ -7,6 +7,8 @@
     import { onMount } from "svelte"
     import { showError } from "$lib/domain/errorHandler"
     import Toaster from "$lib/components/toast/Toaster.svelte"
+    import ToastContainer from "$lib/components/toast/ToastContainer.svelte";
+    import { toasts } from "$lib/components/toast/toastStore";
 
     // Para filtrar pedidos por estado
     let estado = $state('PENDIENTE')
@@ -20,6 +22,7 @@
     // mejor pedirlo filtrado al back, y no pedir todo
     let orders = $state<Order[]>([]);
     let errorMessage = $state('')
+    let toastLock: boolean = false
 
     const getTareas = async () => {
         errorMessage = ''
@@ -27,6 +30,11 @@
             orders = await orderService.getFilteredOrders(estado)
             if (orders.length == 0) {
                 errorMessage = 'No hay pedidos'
+                if (!toastLock) {
+                    toasts.push(errorMessage, {type: 'error'})
+                    toastLock = true
+                    setTimeout(releaseToast, 5000)
+                }
             }
         } catch (error) {
             showError('Error loading orders', error)
@@ -41,6 +49,10 @@
         await orderService.updateOrderState(order)
         await getTareas()
         // console.log("Pedido preparado", order.id)
+    }
+
+    const releaseToast = () => {
+        toastLock = false
     }
     
 </script>
@@ -79,6 +91,7 @@
         <!-- {#if (errorMessage.trim() != '')}
             <div class="error-text">{errorMessage}</div>
         {/if} -->
-        <Toaster errorMessage={errorMessage} field={'orders'} />
+        <ToastContainer errorMessage={errorMessage}  />
+        <!-- <Toaster errorMessage={errorMessage} field={'orders'} /> -->
     </section>
 </main>

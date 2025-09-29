@@ -20,6 +20,7 @@
   import { showError } from '$lib/domain/errorHandler'
   import ValidationField from '$lib/components/ValidationField.svelte'
   import Modal from '$lib/components/Modal.svelte'
+    import { toasts } from '$lib/components/toast/toastStore';
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state
@@ -29,6 +30,7 @@
   let newIngredient = <IngredientType>(new IngredientType())
 
   let errors: ValidationMessage[] = $state([])
+  let toastLock: boolean = false
 
   // Estado para mostrar/ocultar formulario
   let showForm = $state(false)
@@ -87,6 +89,13 @@
 
     if (ingredient.errors.length > 0) {
       errors = [...ingredient.errors]
+      if (!toastLock) {
+        ingredient.errors.forEach(error => {
+            toasts.push(error.message, {type: 'error'})
+            toastLock = true
+            setTimeout(releaseToast, 5000)
+          })
+      }
       return
     }
 
@@ -107,6 +116,10 @@
     newIngredient = new IngredientType()
     showForm = false
     errors = [] // limpiar errores
+  }
+
+  const releaseToast = () => {
+    toastLock = false
   }
 
   // tiene que ser tipado por una clase de svelte 

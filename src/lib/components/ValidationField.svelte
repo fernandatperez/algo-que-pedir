@@ -1,6 +1,7 @@
 <script lang='ts'>
   import type { ValidationMessage } from '$lib/domain/validationMessage'
-  import Toaster from './toast/Toaster.svelte';
+  // import Toaster from './toast/Toaster.svelte';
+  import ToastContainer from './toast/ToastContainer.svelte';
 
   const errorsFrom = (errors: ValidationMessage[], field: string) => errors
     .filter((_) => _.field === field)
@@ -29,5 +30,5 @@
     {errorMessage}
   </div>
 {/if} -->
-
-<Toaster errorMessage={errorMessage} field={field} />
+<ToastContainer errorMessage={errorMessage}  />
+<!-- <Toaster errorMessage={errorMessage} field={field} /> -->
