@@ -4,7 +4,7 @@ export type InputField = {
   input_placeholder: string;
   input_id: string;
   required?: boolean; 
-  type?: 'email' | 'number' | 'tel' | 'text' | 'url';
+  type?:  'number' | 'text' | 'url';
   minLength?: number;
   maxLength?: number;
 };
@@ -30,11 +30,11 @@ export interface StoreInfo {
 }
 
 export interface StoreDir {
-  'store-dir': string;
-  'store-altitude'?: string;
-  'store-latitude'?: string;
-  'store-longitude'?: string;
-  [key: string]: string | undefined;
+  'store-dir': string;                   
+  'store-altitude'?: number;              
+  'store-latitude'?: number;               
+  'store-longitude'?: number;             
+  [key: string]: number | string | undefined; 
 }
 
 export interface StoreCommission {

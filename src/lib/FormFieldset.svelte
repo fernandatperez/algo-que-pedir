@@ -1,64 +1,64 @@
-<!-- src/lib/components/FormFieldset.svelte -->
+<!-- En FormFieldset.svelte - versión sin TypeScript estricto -->
 <script lang="ts">
-  import FormInput from '$lib/formInput.svelte'
-  import type { ValidationMessage } from '$lib/domain/store';
+  import FormInput from '$lib/FormInput.svelte'
 
-  type InputType = 'text' | 'number'  | 'checkbox';
-
-  interface FormField {
-  field: string;
-  label: string;
-  type: 'text' | 'number' | 'checkbox'; 
-  placeholder?: string;
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
-}
-
-  interface FormFieldsetProps {
-    title?: string;
-    name: string;
-    fields: FormField[];
-    formData: any;
-    section: string;
-    onInput?: (section: string, field: string) => void;
-    onBlur?: (section: string, field: string) => void;
-    errors: ValidationMessage[];
-    layout?: 'grid-cols-2' | 'grid-cols-1' | 'grid-cols-3';
-  }
-
-  let {
+  // ✅ Sin tipos, solo JavaScript
+  let { 
     title = "",
     name,
     fields = [],
-    formData = $bindable(),
+    formData= $bindable(),
     section,
-    onInput,
-    onBlur,
     errors,
-    layout = 'grid-cols-2'
-  }: FormFieldsetProps = $props();
+  } = $props()
+
+   let isStoreInfo = $derived(section === 'storeInfo')
 </script>
 
-<fieldset {name} class="container-column content-section form-section-store-commission">
-  {#if title}
-    <h2 class="subtitle">{title}</h2>
-  {/if}
-  
-  <div class={layout}>
-    {#each fields as fieldConfig (fieldConfig.field)}
-      <FormInput
-        bind:formData
-        {section}
-        field={fieldConfig.field}
-        label={fieldConfig.label}
-        type={fieldConfig.type}
-        placeholder={fieldConfig.placeholder}
-        required={fieldConfig.required}
-        {onInput}
-        {onBlur}
-        {errors}
-      />
-    {/each}
-  </div>
-</fieldset>
+{#if isStoreInfo}
+  <fieldset form="form-store-profile" name={name} class="content-section form-section-store-dir">
+    <div class="grid-cols-2 input-field" >
+      {#each fields as fieldConfig (fieldConfig.field)}
+        <div class="input-field">
+          <FormInput
+            bind:formData
+            {section}
+            field={fieldConfig.field}
+            label={fieldConfig.label}
+            type={fieldConfig.type}
+            placeholder={fieldConfig.placeholder}
+            required={fieldConfig.required}
+            {errors}
+          />
+        </div>
+      {/each}
+    </div>
+    <div>
+     <img
+            src={formData.storeInfo["url-store-img"] || "/src/lib/assets/img/CarlosBakeShop.jpg"}
+            alt="local"
+            class="img-store-profile"
+          /></div>
+  </fieldset>
+{:else}
+  <fieldset {name} class="container-column content-section form-section-store-commission">
+    {#if title}
+      <h2 class="subtitle">{title}</h2>
+    {/if}
+    
+    <div class={ 'grid-cols-2 input-group-dir'}>
+      {#each fields as fieldConfig (fieldConfig.field)}
+        <FormInput
+          bind:formData
+          {section}
+          field={fieldConfig.field}
+          label={fieldConfig.label}
+          type={fieldConfig.type}
+          placeholder={fieldConfig.placeholder}
+          required={fieldConfig.required}
+          {errors}
+        />
+      {/each}
+    </div>
+  </fieldset>
+{/if}

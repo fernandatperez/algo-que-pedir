@@ -23,38 +23,10 @@
   let errors = $state<ValidationMessage[]>([])
   let isSubmitting = $state(false)
 
-  // Temporalmente en handleSubmit - para testear
-function fillWithValidData() {
-  formData = {
-    storeInfo: {
-      'store-name': 'Mi Tienda de Prueba',
-      'url-store-img': 'https://ejemplo.com/imagen.jpg'
-    },
-    storeDir: {
-      'store-dir': 'Calle Falsa 123',
-      'store-altitude': '100',
-      'store-latitude': '-34', 
-      'store-longitude': '-58'
-    },
-    storeCommission: {
-      'app-commission': '15',
-      'author-commission': '10'
-    },
-    paymentMethods: {
-      efectivo: true,
-      qr: false,
-      transferencia: true
-    }
-  }
-}
-
-// Llama esta función temporalmente para testear
-// fillWithValidData()
-
   async function handleSubmit(event: Event) {
     event.preventDefault();
     isSubmitting = true
-    fillWithValidData()
+
     try {
       // Usar el service para validar
       const validation = storeProfileService.validateForm(formData)
@@ -66,10 +38,10 @@ function fillWithValidData() {
       }
 
       // Actualizar el service con los datos actuales
-      storeProfileService.updateForm(formData)
+      storeProfileService.update(formData)
       
       // Guardar usando el service
-      const success = await storeProfileService.saveData()
+      const success = await storeProfileService.save()
       
       if (success) {
         errors = []
@@ -96,29 +68,20 @@ function fillWithValidData() {
   <article class="container-column main-content">
     <h1 class="header-title">Información del local</h1>
 
-    <form id="form-store-profile" class="container-column form-store-profile" onsubmit={handleSubmit}>
+    <form id="form-store-profile" class="container-column form-store-profile" onsubmit={handleSubmit} novalidate>
       
       <!-- Store Info -->
-      <div class="grid-cols-2 input-group-dir">
-        <div>
-          <FormFieldset
-            title={storeInfo.title}
-            name={storeInfo.name}
-            fields={storeInfo.fields}
-            bind:formData
-            section="storeInfo"
-            {errors}
-          />
-        </div>
-        <div>
-          <img
-            src={formData.storeInfo["url-store-img"] || "/src/lib/assets/img/CarlosBakeShop.jpg"}
-            alt="local"
-            class="img-store-profile"
-          />
-        </div>
-      </div>
-
+      <FormFieldset
+         title={storeInfo.title}
+         name={storeInfo.name}
+         fields={storeInfo.fields}
+         bind:formData
+         section="storeInfo"
+         {errors}
+         
+       />
+      
+      
       <!-- Store Direction -->
       <FormFieldset
         title={storeDir.title}
@@ -147,7 +110,6 @@ function fillWithValidData() {
         bind:formData
         section="paymentMethods"
         {errors}
-        layout="grid-cols-1"
       />
       
       <!-- Buttons -->

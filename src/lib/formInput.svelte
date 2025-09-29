@@ -18,9 +18,6 @@
     min?: number;
     max?: number;
     
-    // Eventos
-    onInput?: (section: string, field: string) => void;
-    onBlur?: (section: string, field: string) => void;
     
     // Validación
     errors: ValidationMessage[];
@@ -36,8 +33,6 @@
     required = false,
     min,
     max,
-    onInput,
-    onBlur,
     errors
   }: FormInputProps = $props();
 
@@ -62,8 +57,6 @@
         name={field}
         type="checkbox"
         bind:checked={formData[section][field]}
-        onchange={onInput ? () => onInput(section, field) : undefined}
-        onblur={onBlur ? () => onBlur(section, field) : undefined}
       />
       <span>{label}</span>
     </label>
@@ -75,11 +68,10 @@
       placeholder={placeholder}
       class="input"
       bind:value={formData[section][field]}
-      oninput={onInput ? () => onInput(section, field) : undefined}
-      onblur={onBlur ? () => onBlur(section, field) : undefined}
       {required}
       {min}
       {max}
+      formnovalidate
     />
   {/if}
 

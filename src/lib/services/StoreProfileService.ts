@@ -1,4 +1,3 @@
-// src/lib/services/storeProfileService.ts
 import { defaultData } from '$lib/data/mock/storeProfileDefaultData'
 import { storeInfo, storeDir, storeCommission, paymentMethods } from '$lib/data/mock/storeProfileNewData'
 import type { FormData } from '$lib/type/storeProfileTypes'
@@ -10,25 +9,18 @@ export class StoreProfileService {
   private errors: ValidationMessage[] = []
   private isSubmitting: boolean = false
 
-  // Getters
-  get formData(): FormData {
+  // GET: Obtener datos actuales del formulario
+  get(): FormData {
     return { ...this.currentData }
   }
 
-  get originalFormData(): FormData {
+  // GET ALL: Obtener todos los datos (originales)
+  getAll(): FormData {
     return { ...this.originalData }
   }
 
-  get validationErrors(): ValidationMessage[] {
-    return [...this.errors]
-  }
-
-  get submitting(): boolean {
-    return this.isSubmitting
-  }
-
-  // Actions
-  updateForm(data: Partial<FormData>): void {
+  // UPDATE: Actualizar datos parcialmente
+  update(data: Partial<FormData>): void {
     if (data.storeInfo) {
       this.currentData.storeInfo = { ...this.currentData.storeInfo, ...data.storeInfo }
     }
@@ -43,7 +35,15 @@ export class StoreProfileService {
     }
   }
 
-  async saveData(): Promise<boolean> {
+  // DELETE: Resetear a valores por defecto
+  delete(): void {
+    this.originalData = { ...defaultData }
+    this.currentData = { ...defaultData }
+    this.errors = []
+  }
+
+  // POST/PUT: Guardar cambios (equivalente a save)
+  async save(): Promise<boolean> {
     this.isSubmitting = true
     
     try {
@@ -68,29 +68,45 @@ export class StoreProfileService {
     }
   }
 
+  // Métodos auxiliares específicos del formulario
   discardChanges(): void {
     this.currentData = { ...this.originalData }
     this.errors = []
   }
 
   resetToDefault(): void {
-    this.originalData = { ...defaultData }
-    this.currentData = { ...defaultData }
-    this.errors = []
+    this.delete() // Reutiliza delete
   }
 
-  // Validaciones CORREGIDAS para el nuevo formato
+  // Getters específicos (pueden mantenerse como están)
+  get formData(): FormData {
+    return this.get()
+  }
+
+  get originalFormData(): FormData {
+    return this.getAll()
+  }
+
+  get validationErrors(): ValidationMessage[] {
+    return [...this.errors]
+  }
+
+  get submitting(): boolean {
+    return this.isSubmitting
+  }
+
+  // Validaciones
   validateForm(formData: FormData): { isValid: boolean; errors: ValidationMessage[] } {
     const errors: ValidationMessage[] = []
 
-    // Validar storeInfo - ✅ CORREGIDO: usar field en lugar de input_id
+    // Validar storeInfo 
     storeInfo.fields.forEach(fieldConfig => {
       if (fieldConfig.required) {
-        const value = formData.storeInfo[fieldConfig.field] // ✅ field en lugar de input_id
+        const value = formData.storeInfo[fieldConfig.field] 
         if (!value || value.trim() === '') {
           errors.push({
-            field: fieldConfig.field, // ✅ field en lugar de input_id
-            message: `${fieldConfig.label} es requerido` // ✅ label en lugar de label_text
+            field: fieldConfig.field, 
+            message: `${fieldConfig.label} es requerido` 
           })
         } else if (fieldConfig.minLength && value.trim().length < fieldConfig.minLength) {
           errors.push({
@@ -101,36 +117,28 @@ export class StoreProfileService {
       }
     })
 
-    // Validar storeDir - ✅ CORREGIDO
+    // Validar storeDir 
     storeDir.fields.forEach(fieldConfig => {
       if (fieldConfig.required) {
-        const value = formData.storeDir[fieldConfig.field] // ✅ field en lugar de input_id
-        if (!value || value.trim() === '') {
+        const value = formData.storeDir[fieldConfig.field] 
+        if (!value || value === '') {
           errors.push({
-            field: fieldConfig.field, // ✅ field en lugar de input_id
-            message: `${fieldConfig.label} es requerido` // ✅ label en lugar de label_text
+            field: fieldConfig.field, 
+            message: `${fieldConfig.label} es requerido` 
           })
-        } else if (fieldConfig.type === 'number') {
-          const numValue = parseFloat(value)
-          if (isNaN(numValue)) {
-            errors.push({
-              field: fieldConfig.field,
-              message: `${fieldConfig.label} debe ser un número válido`
-            })
-          }
-        }
+        } 
       }
     })
 
-    // Validar storeCommission - ✅ CORREGIDO
+    // Validar storeCommission 
     storeCommission.fields.forEach(fieldConfig => {
       if (fieldConfig.required) {
-        const value = formData.storeCommission[fieldConfig.field] // ✅ field en lugar de input_id
+        const value = formData.storeCommission[fieldConfig.field] 
         
         if (!value || value.trim() === '') {
           errors.push({
-            field: fieldConfig.field, // ✅ field en lugar de input_id
-            message: `${fieldConfig.label} es requerido` // ✅ label en lugar de label_text
+            field: fieldConfig.field, 
+            message: `${fieldConfig.label} es requerido` 
           })
         } else if (fieldConfig.type === 'number') {
           const numValue = parseFloat(value)
@@ -149,9 +157,9 @@ export class StoreProfileService {
       }
     })
 
-    // Validar paymentMethods - ✅ CORREGIDO para usar los IDs correctos
+    // Validar paymentMethods 
     const hasPaymentMethod = paymentMethods.some(method => 
-      formData.paymentMethods[method.field] === true // ✅ field en lugar de id
+      formData.paymentMethods[method.field] === true 
     )
     
     if (!hasPaymentMethod) {
@@ -164,26 +172,22 @@ export class StoreProfileService {
     return { isValid: errors.length === 0, errors }
   }
 
-  // Función auxiliar para validar campos individuales (si la necesitas)
-  // En tu StoreProfileService - modificar validateField
+  // Validar campo individual
   validateField(formData: FormData, section: string, fieldId: string): ValidationMessage | null {
-  // Verificar que la sección sea válida
     const validSections: (keyof FormData)[] = ['storeInfo', 'storeDir', 'storeCommission', 'paymentMethods']
   
     if (!validSections.includes(section as keyof FormData)) {
       return null
     }
 
-    // Encontrar la configuración del campo
     const allFields = [...storeInfo.fields, ...storeDir.fields, ...storeCommission.fields]
     const fieldConfig = allFields.find(field => field.field === fieldId)
   
     if (!fieldConfig || !fieldConfig.required) return null
 
-    // ✅ CORREGIDO: Usar type assertion
     const value = formData[section as keyof FormData][fieldId]
 
-    if (!value || typeof value === 'string' && value.trim() === '') {
+    if (!value || (typeof value === 'string' && value.trim() === '')) {
       return {
         field: fieldId,
         message: `${fieldConfig.label} es requerido`
@@ -202,6 +206,7 @@ export class StoreProfileService {
 
     return null
   }
+
   // Para uso futuro con backend
   private async saveToBackend(formData: FormData): Promise<void> {
     // await fetch('/api/store-profile', {
