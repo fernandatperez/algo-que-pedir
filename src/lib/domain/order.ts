@@ -1,4 +1,4 @@
-import type { MenuItemType } from '$lib/type/menu-item'
+import type { MenuItemType } from '$lib/domain/menu-item'
 // A MENU-ITEM LE FALTA: plato.cantidad
 
 export enum Estado {

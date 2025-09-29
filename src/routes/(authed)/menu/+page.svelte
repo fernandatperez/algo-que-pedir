@@ -6,12 +6,11 @@
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/5-menu.css";
   //   <link rel="stylesheet" href="../css/style.css" /> esto no hace falta pero no me acuerdo en donde se importa
-
   import MenuItem from '../../../lib/MenuItem.svelte';
 
   import { MENUITEMS_MOCK } from "$lib/data/mock/menu-items";
-  import type { MenuItemType } from "$lib/type/menu-item";
-  import { createEmptyMenuItem } from "$lib/type/menu-item"; // esta funcion crea un objeto vacio, es para el boton agregar nuevo objeto
+  import type { MenuItemType } from "$lib/domain/menu-item";
+  import { createEmptyMenuItem } from "$lib/domain/menu-item"; // esta funcion crea un objeto vacio, es para el boton agregar nuevo objeto
 
   let menuitems = $state<MenuItemType[]>(MENUITEMS_MOCK);
 </script>

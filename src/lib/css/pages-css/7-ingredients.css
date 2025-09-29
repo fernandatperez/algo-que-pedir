@@ -49,16 +49,16 @@
     gap: 8px;
     /* margin: 10px 0; */
     align-items: center;
-  }
+}
 
-  /* .form-nuevo-ingrediente input,
-  .form-nuevo-ingrediente select {
-    padding: 4px;
-  } */
+/* .form-nuevo-ingrediente input,
+.form-nuevo-ingrediente select {
+padding: 4px;
+} */
 
-  .form-nuevo-ingrediente button {
+.form-nuevo-ingrediente button {
     padding: 4px 10px;
-  }
+}
 
 /* ----------- Icons ------------- */
 .ingredients-table-icons {

@@ -4,6 +4,14 @@
   import "$lib/css/components-css/icon.css";
   import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/2-register.css";
+  
+  import Input from "$lib/Input.svelte"
+  import { InputTypes } from "$lib/types";
+
+  function registrateValidation() {
+    // No success stays put
+    // Success enters page and creates new user
+  }
 </script>
 
 <section class="login-container">
@@ -16,28 +24,54 @@
       <!-- FORM FIELD -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
-          <label for="login-user" class="label-color">Usuario*</label>
-          <input
-            type="email"
-            placeholder="Escribir"
-            id="login-user"
-            class="input-primary"
+          <Input
+            description="Usuario*"
+            value=""
+            input_type={InputTypes.Normal}
+            labelProps={{
+              for: "register-username"
+            }}
+            inputProps={{
+              type: "email",
+              placeholder: "Escribir",
+              id: "register-username-id",
+              class: "input-primary",
+              name: "register-username"
+            }}
           />
         </div>
         <div class="form-group">
-          <label for="login-password" class="label-color">Contraseña*</label>
-          <div class="input-with-icon">
-            <input
-              type="password"
-              id="login-password"
-              class="input-primary input-password"
-            />
-            <i class="ph ph-eye-slash input-icon"></i>
-          </div>
+          <Input
+            description="Contraseña*"
+            value=""
+            input_type={InputTypes.Hidden}
+            labelProps={{
+              for: "register-password"
+            }}
+            inputProps={{
+              id: "register-password-id",
+              class: "input-primary",
+              name: "register-password"
+            }}
+          />
         </div>
-
-        <!-- FORM VALIDATION (Por ahora no lo validamos)  -->
         <div class="form-group">
+          <Input
+            description="Re-ingrese la contraseña*"
+            value=""
+            input_type={InputTypes.Hidden}
+            labelProps={{
+              for: "register-password-retry"
+            }}
+            inputProps={{
+              id: "register-password-retry-id",
+              class: "input-primary",
+              name: "register-password-retry"
+            }}
+          />
+        </div>
+        <!-- FORM VALIDATION (Por ahora no lo validamos)  -->
+        <!-- <div class="form-group">
           <label for="form-validation" class="label-color"
             >Re-ingrese la contraseña*</label
           >
@@ -53,7 +87,7 @@
             <i class="ph ph-warning-circle"></i>
             <div class="invalid-text">Las contraseñas no coinciden</div>
           </div>
-        </div>
+        </div> -->
       </fieldset>
 
       <!-- FORM ACTIONS -->
