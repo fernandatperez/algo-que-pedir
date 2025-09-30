@@ -16,8 +16,8 @@
           {toast.message}
         </div>
     {/if}
-  {/each}
-</div>
+    {/each}
+  </div>
 
 <style>
 .toast-container {
@@ -63,17 +63,6 @@
   to {
     opacity: 1;
     transform: translateX(0);
-  }
-}
-
-@keyframes slide-out {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(50px);
   }
 }
 </style>

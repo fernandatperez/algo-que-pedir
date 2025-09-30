@@ -82,15 +82,12 @@
     </section>
 
     <!-- Orders grid -->
+    <ToastContainer errorMessage={errorMessage}  />
     <section class="main-grid">
         <!-- Single order -->
         {#each orders as order}
             <OrderCard order={order} action={() => prepararPedido(order)} />
         {/each}
-        <!-- {#if (errorMessage.trim() != '')}
-            <div class="error-text">{errorMessage}</div>
-        {/if} -->
-        <ToastContainer errorMessage={errorMessage}  />
         <!-- <Toaster errorMessage={errorMessage} field={'orders'} /> -->
     </section>
 </main>
