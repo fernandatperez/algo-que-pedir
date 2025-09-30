@@ -36,7 +36,7 @@
   padding: 0.75rem 1rem;
   border-radius: 8px;
   color: white;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 500;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   animation: slide-in 0.3s ease-out;

@@ -54,11 +54,11 @@
 
 /* texto de segunda columna */
 .product-edit-ingredients-table-content {
-    font-weight: 500;
-    color: var(--font-color-secondary);
-    justify-content: space-between; 
-    align-items: center;
-    gap: 1em;
+  font-weight: 500;
+  color: var(--font-color-secondary);
+  justify-content: space-between; 
+  align-items: center;
+  gap: 1em;
   font-size: 0.8em; 
 }
 

@@ -1,7 +1,7 @@
 import { FoodGroupValue, type IngredientJSON } from '$lib/domain/ingredient'
 
 // simulamos los objetos JSON que vienen del backend
-const firstIngredient: IngredientJSON = {
+export const firstIngredient: IngredientJSON = {
   id: 1,
   name: 'Carne de Renacuajo',
   cost: 0.7,
@@ -9,7 +9,7 @@ const firstIngredient: IngredientJSON = {
   esOrigenAnimal: true
 }
 
-const secondIngredient: IngredientJSON = {
+export const secondIngredient: IngredientJSON = {
   id: 2,
   name: 'Queso Cheddar',
   cost: 0.5,
@@ -17,7 +17,7 @@ const secondIngredient: IngredientJSON = {
   esOrigenAnimal: true
 }
 
-const thirdIngredient: IngredientJSON = {
+export const thirdIngredient: IngredientJSON = {
   id: 3,
   name: 'Lechuga',
   cost: 0.4,
@@ -25,7 +25,7 @@ const thirdIngredient: IngredientJSON = {
   esOrigenAnimal: false
 }
 
-const fourthIngredient: IngredientJSON = {
+export const fourthIngredient: IngredientJSON = {
   id: 4,
   name: 'Tomate',
   cost: 0.2,

@@ -13,8 +13,10 @@
   import ValidationField from "$lib/components/ValidationField.svelte";
   import { goto } from "$app/navigation";
   import { fade } from "svelte/transition";
+  import { toasts } from '$lib/components/toast/toastStore'
 
   let errors: ValidationMessage[] = $state([])
+  let toastLock: boolean = false
 
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
@@ -33,19 +35,26 @@
 
     if (user.errors.length > 0) {
       errors = [...user.errors]
-      return
+      if (!toastLock) {
+        user.errors.forEach(error => {
+            toasts.push(error.message, {type: 'error'})
+            toastLock = true
+            setTimeout(releaseToast, 5000)
+          })
+      }
+      return errors
     }
 
     try {
       let validation = await userService.getUser(user.username, user.password)
       if (validation) goto ("/orders")
       else {
-        errorMessage1st = "Wrong email and password combination"
-        errorMessage2nd = "Have you forgotten your password?"
+        errorMessage1st = "Nombre de usuario y/o contraseña incorrecto/s."
+        errorMessage2nd = "Olvidaste tu contraseña?"
         setTimeout(() => {
           errorMessage1st = ""
           errorMessage2nd = ""
-        }, 4000)
+        }, 3000)
       }
       errors = [] // limpiar errores
     } catch (error) {
@@ -57,6 +66,10 @@
   let errorMessage2nd: string = $state("")
 
   console.log(USERS_LIST_MOCK);
+
+  const releaseToast = () => {
+    toastLock = false
+  }  
 </script>
 
 <section class="login-container">

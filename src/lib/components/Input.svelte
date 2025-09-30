@@ -7,18 +7,25 @@
   
   interface InputPropsI {
     description: string;
+    value?: string | number | boolean;
     input_type: InputTypes;
     labelProps?: OptionalProps;
     inputProps?: OptionalProps;
     spanProps?: OptionalProps;
+    selectProps?: OptionalProps;
+    options?: { value: string; label: string }[];
+    checked?: boolean | null | undefined; // no me dejaba sino por el string del value
   }
 
   let {
     description,
+    value = $bindable(),
     input_type = InputTypes.Normal,
     labelProps = {},
     inputProps = {},
     spanProps = {},
+    options = [],
+    checked = $bindable(),
   }: InputPropsI = $props();
 
   const eyeSlash = "ph ph-eye-slash";
@@ -27,6 +34,7 @@
 
   type Visibility = true | false;
   let visibility: Visibility = $state(false);
+
 </script>
 
 {#if input_type == InputTypes.Normal}
@@ -35,7 +43,28 @@
       {description}
     </span>
 
-    <input {...inputProps}/>
+    <input {...inputProps} bind:value={value}
+    />
+    <!-- Subir -->
+    <!-- bind:value={value} -->
+  </label>
+{:else if input_type == InputTypes.Select}
+  <label {...labelProps}>
+    <span {...spanProps}> 
+      {description} 
+    </span>
+    <select {...inputProps} bind:value={value}>
+      {#each options as option}
+        <option value={option.value}> {option.label} </option>
+      {/each}
+    </select>
+  </label>
+{:else if input_type == InputTypes.Checkbox}
+  <label {...labelProps}>
+    <input type="checkbox" {...inputProps} bind:checked={value as boolean} />
+    <span {...spanProps}>
+      {description}
+    </span>
   </label>
 {:else}
   <label {...labelProps}>
@@ -55,7 +84,10 @@
       <input
         type={visibility ? "text" : "password"}
         {...inputProps}
-      />
+        bind:value={value}
+        />
+        <!-- Subir -->
+        <!-- bind:value={value} -->
     </div>
   </label>
 {/if}

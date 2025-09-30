@@ -10,15 +10,21 @@
   
   import { goto } from '$app/navigation'
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
-  import { IngredientType, type IngredientJSON, type ValidationMessage } from '$lib/domain/ingredient'
+  import type { ValidationMessage } from '$lib/domain/validationMessage.js'
+  import { IngredientType, type IngredientJSON } from '$lib/domain/ingredient'
   import { ingredientService } from '$lib/services/IngredientService.js'
   import { showError } from '$lib/domain/errorHandler.js'
   import ValidationField from '$lib/components/ValidationField.svelte'
+  import Input from "$lib/components/Input.svelte"
+  import { InputTypes } from "$lib/components/InputTypes"
+  import { toasts } from '$lib/components/toast/toastStore'
+
   let { data } = $props()
   const { ingredient } = data
   
   let errors: ValidationMessage[] = $state([])
-  
+  let toastLock: boolean = false
+
   let ingredientEdit = $state({ ...ingredient })
 
   let ingredientLock = $derived(
@@ -39,7 +45,7 @@
       (formData.get("name") ?? "").toString(),
       Number(formData.get("cost") ?? 0),
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
-      Boolean(formData.get("esOrigenAnimal") ?? "true")
+      ingredientEdit.esOrigenAnimal,
     )
     console.info("el nuevo ingrediente es ", ingredient)
 
@@ -47,6 +53,13 @@
 
     if (ingredient.errors.length > 0) {
       errors = [...ingredient.errors]
+      if (!toastLock) {
+        ingredient.errors.forEach(error => {
+            toasts.push(error.message, {type: 'error'})
+            toastLock = true
+            setTimeout(releaseToast, 5000)
+          })
+      }
       return
     }
 
@@ -62,6 +75,10 @@
   const onCancel = () => {
     errors = [] // limpiar errores
   }
+
+  const releaseToast = () => {
+    toastLock = false
+  }
 </script>
 
 <section class="container-column">
@@ -72,32 +89,96 @@
     {#if ingredientEdit}
       <form onsubmit={onSubmit} onreset={onCancel} class="ingredient-edit-section" id="form-ingredient-edit">
         <section class="input-group">
-          <label class="label-color" for="form-ingredient-name">Nombre del ingrediente*</label>
-          <input type="text" id="form-ingredient-name" bind:value={ingredientEdit.name} class="input-primary" name="name" required>
+          <Input
+              description="Nombre del ingrediente*"
+              input_type={InputTypes.Normal}
+              labelProps={{
+                class: "label-color",
+                for: "form-ingredient-name",
+              }}
+              inputProps={{
+                class: "input-primary",
+                id: "form-ingredient-name",
+                type: "text",
+                name: "name",
+              }}
+              bind:value={ingredientEdit.name}
+          />
           <ValidationField errors={errors} field="name" />
+          <!-- <label class="label-color" for="form-ingredient-name">Nombre del ingrediente*</label>
+          <input type="text" id="form-ingredient-name" bind:value={ingredientEdit.name} class="input-primary" name="name" required> -->
         </section>
 
         <section class="input-group">
-          <label class="label-color" for="form-ingredient-cost">Costo*</label>
-          <input type="text" id="form-ingredient-cost" bind:value={ingredientEdit.cost} class="input-primary" name="cost" required>
+          <Input
+              description="Costo*"
+              input_type={InputTypes.Normal}
+              labelProps={{
+                class: "label-color",
+                for: "form-ingredient-cost",
+              }}
+              inputProps={{
+                class: "input-primary",
+                id: "form-ingredient-cost",
+                type: "text",
+                name: "cost",
+              }}
+              bind:value={ingredientEdit.cost}
+          />
           <ValidationField errors={errors} field="cost" />
+          <!-- <label class="label-color" for="form-ingredient-cost">Costo*</label>
+          <input type="text" id="form-ingredient-cost" bind:value={ingredientEdit.cost} class="input-primary" name="cost" required> -->
         </section>
 
         <section class="input-group">
-          <label class="label-color" for="form-ingredient-group">Grupo Alimenticio</label>
-          <select id="form-ingredient-group" class="input-primary" name="foodGroup" required value={ingredientEdit.foodGroup}>
-            <option value="" disabled selected hidden>{ingredientEdit.foodGroup}</option>
-            {#each Object.entries(foodGroupDict) as [value, grupo]}
-              <option value={value}> {grupo.label} </option>
-            {/each}
-          </select>
+          <Input
+              description="Grupo Alimenticio"
+              input_type={InputTypes.Select}
+              labelProps={{
+                class: "label-color",
+                for: "form-ingredient-group",
+              }}
+              inputProps={{
+                class: "input-primary",
+                id: "form-ingredient-group",
+                name: "foodGroup",
+              }}
+              options={
+              Object.keys(foodGroupDict).map(key => ({
+                value: key,
+                label: foodGroupDict[key as FoodGroupValue].label
+              }))
+              }
+              bind:value={ingredientEdit.foodGroup}
+          />
           <ValidationField errors={errors} field="foodGroup" />
+          <!-- <label class="label-color" for="form-ingredient-group">Grupo Alimenticio</label>
+          <select id="form-ingredient-group" class="input-primary" name="foodGroup" required value={ingredientEdit.foodGroup}> 
+            <option value="" disabled selected hidden>{ingredientEdit.foodGroup}</option>
+            {#each Object.keys(foodGroupDict) as value}
+              <option value={value}>{foodGroupDict[value as FoodGroupValue].label}</option>
+            {/each}
+          </select> -->
         </section>
 
         <section class="animal-origin-display input-group">
-          <h3>Origen animal</h3>
+          <h3>Origen Animal</h3>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="switch-button" checked = {ingredientEdit.esOrigenAnimal} name="esOrigenAnimal"/>
+            <!-- <Input
+              description="Origen animal"
+              input_type={InputTypes.Checkbox}
+              labelProps={{
+                class: "label-color",
+                for: "switch-button",
+              }}
+              inputProps={{
+                class: "toggle",
+                id: "switch-button",
+                name: "esOrigenAnimal",
+              }}
+              bind:checked={ingredientEdit.esOrigenAnimal}
+            /> -->
+            <input type="checkbox" class="toggle" id="switch-button" bind:checked={ingredientEdit.esOrigenAnimal} name="esOrigenAnimal"/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>

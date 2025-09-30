@@ -1,7 +1,7 @@
 <script lang="ts">
   import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/components-css/grid-table.css"
+  import "$lib/css/components-css/flex-table.css"
   import "$lib/css/components-css/icon.css"
   import "$lib/css/components-css/buttons.css"
   import "$lib/css/components-css/input.css"
@@ -11,14 +11,16 @@
   import { goto } from '$app/navigation'
 
   import { IngredientType } from "$lib/domain/ingredient"
-  import { ValidationMessage } from '$lib/domain/validationMessage'
+  import type { ValidationMessage } from '$lib/domain/validationMessage'
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
   import { ingredientService } from '$lib/services/IngredientService'
   import { onMount } from 'svelte'
   import { showError } from '$lib/domain/errorHandler'
   import ValidationField from '$lib/components/ValidationField.svelte'
   import Modal from '$lib/components/Modal.svelte'
-    import { toasts } from '$lib/components/toast/toastStore';
+  import { toasts } from '$lib/components/toast/toastStore'
+  import Input from "$lib/components/Input.svelte"
+  import { InputTypes } from "$lib/components/InputTypes"
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state
@@ -94,7 +96,7 @@
             setTimeout(releaseToast, 5000)
           })
       }
-      return
+      return errors
     }
 
     try {
@@ -118,40 +120,7 @@
 
   const releaseToast = () => {
     toastLock = false
-  }
-
-  // tiene que ser tipado por una clase de svelte 
-  // const onSubmit: SubmitFunction = async ({ formData, cancel }) => {
-  //   // formData es un map (key, value) de los inputs del form
-  //   const ingredient = new IngredientType(
-  //     ingredients.length + 1,
-  //     (formData.get('name') ?? "").toString(),
-  //     parseFloat(formData.get('cost') as string),
-  //     (formData.get('foodGroup') ?? "") as FoodGroupValue,
-  //     formData.get("esOrigenAnimal") === "true"
-  //   )
-    
-  //   ingredient.validate()
-
-  //   if (ingredient.errors.length > 0) {
-  //     errors = [...ingredient.errors]
-  //     cancel()
-  //     return
-  //   }
-
-  //   try {
-  //     // guardar en el backend
-  //     await ingredientService.createIngredient(ingredient)
-  //     // refrescar lista
-  //     await findIngredients()
-  //     showForm = false
-  //     errors = [] // limpiar errores
-  //   } catch (error) {
-  //     showError("Error al crear el ingrediente", error)
-  //     cancel()
-  //   }
-  // }
-  
+  }  
 </script>
 
 <section class="flex-column">
@@ -165,8 +134,8 @@
     </section>
 
     <section class="content-section-ingredients form-section-product-ingredients container-column">
-      <div class="grid-table-container product-edit-ingredients-table">
-        <header class="grid-table-row table-header">
+      <div class="flex-table-container">
+        <header class="flex-table-row table-header">
           <section class="cell" id="name">Nombre</section>
           <section class="cell" id="name">Costo</section>
           <section class="cell later-hid" id="grupo-alimenticio">
@@ -184,28 +153,48 @@
         <!-- use:enhance: te trae la data del form cuando llamas al onSubmit, permitiendo sacar el bind:value  -->
         <!-- type="reset" -> onreset={reset} -->
         <!-- type="submit" -> use:enhance={onSubmit} pero es necesario el es necesario el +page.server.ts, asi que de baja-->
-          <form onsubmit={onSubmit} onreset={onCancel} id="form-ingredient" class="grid-table-row product-edit-ingredients-table-content">
-            <section class="cell">
-              <input class="input-primary" placeholder="Huevo" name="name"/>
-              <ValidationField errors={errors} field="name" />
-            </section>
-            <section class="cell">
-              <input class="input-primary" placeholder="$0.80" name="cost"/>
-              <ValidationField errors={errors} field="cost" />
-            </section>
-            <section class="cell">
-              <select class="input-primary" name="foodGroup">
-                <option value="" disabled selected hidden>Seleccionar</option>
-                <!-- {#each Object.entries(foodGroupDict) as [value, grupo]}
-                  <option value={value}> {grupo.label} </option>
-                {/each} -->
-                {#each Object.keys(foodGroupDict) as value}
-                  <option value={value}>{foodGroupDict[value as FoodGroupValue].label}</option>
-                {/each}
-              </select>
-              <ValidationField errors={errors} field="foodGroup" />
-            </section>
+          <form onsubmit={onSubmit} onreset={onCancel} id="form-ingredient" class="flex-table-row product-edit-ingredients-table-content">
+            <div class="fieldset-section">
+              <section class="cell">
+                <Input
+                description=""
+                input_type={InputTypes.Normal}
+                inputProps={{
+                  class: "input-primary",
+                  placeholder: "Huevo",
+                  name: "name",
+                }}
+                />
+                <!-- <input class="input-primary" placeholder="Huevo" name="name"/> -->
+                <ValidationField errors={errors} field="name" />
+              </section>
+              <section class="cell">
+                <Input
+                description=""
+                input_type={InputTypes.Normal}
+                inputProps={{
+                  class: "input-primary",
+                  placeholder: "0.80",
+                  name: "cost",
+                }}
+                />
+                <!-- <input class="input-primary" placeholder="$0.80" name="cost"/> -->
+                <ValidationField errors={errors} field="cost" />
+              </section>
+              <section class="cell">
+                <select class="input-primary" name="foodGroup">
+                  <option value="" disabled selected hidden>Seleccionar</option>
+                  <!-- {#each Object.entries(foodGroupDict) as [value, grupo]}
+                    <option value={value}> {grupo.label} </option>
+                  {/each} -->
+                  {#each Object.keys(foodGroupDict) as value}
+                    <option value={value}>{foodGroupDict[value as FoodGroupValue].label}</option>
+                  {/each}
+                </select>
+                <ValidationField errors={errors} field="foodGroup" />
+              </section>
 
+            </div>
             <section class="btn-group-actions btn-group-new-ingredient">
               <button form="form-ingredient" class="btn btn-secondary" type="reset">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
               <button form="form-ingredient" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
@@ -216,7 +205,7 @@
         <!-- Renderizamos cada ingrediente -> Props { ingredient: Ingredient } -->
         <!-- Usamos el rest property {...ing} para pasar todas las propiedades de la lista de ingredientes -->
         {#each ingredients as ing}
-        <article class="grid-table-row product-edit-ingredients-table-content">
+        <article class="flex-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing} />
 
             <section class="cell multiple-action-buttons">
@@ -242,18 +231,6 @@
             }}
             actionCancel={() => showModal = false}
           />
-          <!-- <div class="modal-backdrop">
-            <div class="modal">
-              <h2></h2>
-              <section class="cell multiple-action-buttons modal-btns">
-                <button class="btn btn-secondary btn-modal" onclick={() => showModal = false}>No</button>
-                <button class="btn btn-primary btn-modal" onclick={() => {
-                  const ingredient = ingredients.find(i => i.id === modalId);
-                  if (ingredient) deleteIngredient(ingredient);
-                }}>Sí</button>
-              </section>
-            </div>
-          </div> -->
         {/if}
       </div>
     </section>

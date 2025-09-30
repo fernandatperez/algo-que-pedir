@@ -12,7 +12,7 @@
     font-size: var(--font-h3);
     justify-self: center;
     margin-bottom: 1.671em;
-    row-gap: 1em;
+    /* row-gap: 1em; */
 }
 /* 
 .ingredient-edit-section select {
@@ -28,7 +28,9 @@
 }
 
 .ingredient-edit-section .animal-origin-display {
+    align-items: center;
     margin-top: 1em;
+    gap: 1em;
 }
 
 .input-ingredient-edit{
@@ -88,6 +90,6 @@ section.btn-group-actions.hidden {
     }
 
     .ingredient-edit-section {
-        margin-bottom: 5em;
+        margin-bottom: 2em;
     }
 }
