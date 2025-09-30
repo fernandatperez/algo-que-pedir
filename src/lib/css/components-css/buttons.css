@@ -20,7 +20,10 @@
 .btn-group-new-ingredient{
     gap: 1em;
     padding-left: 2em;
+    padding: 1em;
+    width: auto;
 }
+
 /* .btn-newIngredient{
     width: 30%;
     text-align: start;
@@ -151,6 +154,10 @@
     }
     .btn-group-new-ingredient .btn {
         font-size: 0.8em;
+    }
+
+    .btn-group-new-ingredient{
+        width: 90%;
     }
 
 }

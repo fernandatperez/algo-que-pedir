@@ -7,17 +7,15 @@
     overflow: hidden;
     width: 100%;
     border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    flex-wrap: wrap; 
+    border-radius: 1rem; 
 }
 
 /* template de tabla (filas) */
 .flex-table-row {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     border-bottom: 1px solid var(--border-color);
-    flex-wrap: wrap; 
     /* grid-template-columns: 2fr 3fr 1fr 1fr; */ /* modificable en cada pag */
 }
 .flex-table-row:last-child {
@@ -32,6 +30,10 @@
     overflow: hidden;
     align-items: center;
     height: fit-content;
+}
+
+.flex-table-row label{
+    width: 100%;
 }
 
 
@@ -73,6 +75,10 @@
     /* .grid-table-container .grid-table-row {
         grid-template-columns: repeat(4,1fr); modificable
     } */
+    .flex-table-row{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
     .flex-table-container .cell {
         text-overflow: ellipsis;
