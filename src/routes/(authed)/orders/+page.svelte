@@ -10,9 +10,9 @@
     import { toasts } from "$lib/components/toast/toastStore";
 
     // Para filtrar pedidos por estado
-    let estado = $state('PENDIENTE')
+    let estadoActual = $state('PENDIENTE')
     const handleStateChange = async (newState: string) => {
-        estado = newState
+        estadoActual = newState
         // console.log("Estado cambiado a:", estado)
         await getTareas()
     }
@@ -26,7 +26,7 @@
     const getTareas = async () => {
         errorMessage = ''
         try {
-            orders = await orderService.getFilteredOrders(estado)
+            orders = await orderService.getFilteredOrders(estadoActual)
             if (orders.length == 0) {
                 errorMessage = 'No hay pedidos'
                 if (!toastLock) {
@@ -73,10 +73,9 @@
     <section class="line">
         <div class="title-tabs">
             <nav class="tabs">
-                <button onclick={() => handleStateChange("PENDIENTE".toUpperCase())} class="btn-empty tab" class:active={estado.toUpperCase() == "PENDIENTE"}>Pendientes</button>
-                <button onclick={() => handleStateChange("PREPARADO".toUpperCase())} class="btn-empty tab" class:active={estado.toUpperCase() == "PREPARADO"}>Preparados</button>
-                <button onclick={() => handleStateChange("ENTREGADO".toUpperCase())} class="btn-empty tab" class:active={estado.toUpperCase() == "ENTREGADO"}>Entregados</button>
-                <button onclick={() => handleStateChange("CANCELADO".toUpperCase())} class="btn-empty tab" class:active={estado.toUpperCase() == "CANCELADO"}>Cancelados</button>
+                {#each Object.keys(Estado) as estado (estado)}
+                    <button onclick={() => handleStateChange(estado)} class="btn-empty tab" data-testid='btn-{estado}' class:active={estadoActual == estado}>{estado}</button>
+                {/each}
             </nav>
         </div>
     </section>

@@ -6,7 +6,7 @@
 
     interface Props {
         order: Order,
-        action: MouseEventHandler<HTMLButtonElement>
+        action?: MouseEventHandler<HTMLButtonElement>
     }
 
     let { order, action = $bindable() } : Props = $props()
@@ -14,8 +14,8 @@
 </script>
 
 <div class="order-card">
-    <a href="/order-detail/{order.id}">
-        <header class="order">Pedido #{order.id}</header>
+    <a href="/order-detail/{order.id}"  data-testid="goto-detail">
+        <header class="order" data-testid="order-id">Pedido #{order.id}</header>
     
         <div class="user">
             <i class="ph ph-user-circle"></i>
@@ -48,6 +48,6 @@
     </div>
 
     <div class="action-container">
-        <button onclick={action} class="btn btn-primary" disabled={order.state!=Estado.PENDIENTE}> Preparar </button>
+        <button onclick={action} class="btn btn-primary" data-testid='preparar-{order.id}' disabled={order.state!=Estado.PENDIENTE}> Preparar </button>
     </div>
 </div>
