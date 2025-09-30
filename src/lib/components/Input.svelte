@@ -39,7 +39,7 @@
 
 {#if input_type == InputTypes.Normal}
   <label {...labelProps}>
-    <span {...spanProps}>
+    <span {...spanProps} data-testid='label-{InputTypes.Normal}'>
       {description}
     </span>
 
@@ -68,7 +68,7 @@
   </label>
 {:else}
   <label {...labelProps}>
-    <span {...spanProps}>
+    <span {...spanProps}  data-testid='label-{InputTypes.Hidden}'>
       {description}
     </span>
     <div class="input-with-icon">
@@ -76,7 +76,7 @@
         class="input-icon"
         aria-label="password-show-btn"
         type="button"
-
+        data-testid='eyeBtn-{labelProps.for}'
         onclick={() => (visibility = toggleVariable(visibility))}
       >
         <i class={visibility ? eye : eyeSlash}></i>
@@ -85,6 +85,7 @@
         type={visibility ? "text" : "password"}
         {...inputProps}
         bind:value={value}
+         data-testid='input-{InputTypes.Hidden}'
         />
         <!-- Subir -->
         <!-- bind:value={value} -->
