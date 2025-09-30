@@ -10,6 +10,7 @@
   
   // Components
   import FormFieldset from '$lib/FormFieldset.svelte';
+  import { toasts } from '$lib/components/toast/toastStore';
   
   // Service 
   import { storeProfileService } from '$lib/services/StoreProfileService'
@@ -21,7 +22,7 @@
   // Estados locales
   let formData = $state({ ...storeProfileService.formData })
   let errors = $state<ValidationMessage[]>([])
-  let isSubmitting = $state(false)
+  let toastLock: boolean = false
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
@@ -31,10 +32,19 @@
       errors = validation.errors
       
       if (!validation.isValid) {
+        if (!toastLock) {
+
+            validation.errors.forEach(error => {
+            toasts.push(error.message, {type: 'error'})
+            toastLock = true
+            setTimeout(releaseToast, 5000)
+          })
+        }
         alert('Por favor corrige los errores antes de guardar')
         return
       }
 
+      const releaseToast = () => {toastLock = false  }
       // Actualiza con el service los datos actuales
       storeProfileService.update(formData)
       
@@ -115,14 +125,12 @@
           type="button" 
           class="btn btn-secondary btn-store" 
           onclick={handleDiscard}
-          disabled={isSubmitting}
         >
           Descartar <span class="p-cambios display-none-mobile">Cambios</span>
         </button>
         <button 
           type="submit" 
-          class="btn btn-primary btn-store" 
-          disabled={isSubmitting}
+          class="btn btn-primary btn-store"
         >
           Guardar <span class="p-cambios display-none-mobile">Cambios</span>
         </button>
