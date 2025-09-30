@@ -11,9 +11,10 @@
 		"strict": true,
 		"module": "ES2015",
 		"lib": [
-			"ES2017"
+			"ES2015"
 		],
-		"moduleResolution": "bundler"
+		"moduleResolution": "bundler",
+		"types": ["svelte", "vitest/globals"]
 	}
 	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
 	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files

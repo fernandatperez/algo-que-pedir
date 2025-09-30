@@ -9,10 +9,10 @@ export const defaultData: FormData = {
     'url-store-img': '/src/lib/assets/img/CarlosBakeShop.jpg'
   },
   storeDir: {
-    'store-dir': 'Av Siempre Viva 123',
-    'store-altitude': '555',
-    'store-latitude': '-34.579839',
-    'store-longitude': '-58.526695'
+    'store-dir': 'Av Siempre Viva',
+    'store-altitude': 123,
+    'store-latitude': -34.579839,
+    'store-longitude': -58.526695
   },
   storeCommission: {
     'app-commission': '3',

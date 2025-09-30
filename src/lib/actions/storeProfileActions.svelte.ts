@@ -1,7 +1,7 @@
 import { defaultData } from '$lib/data/mock/storeProfileDefaultData';
 import { storeInfo, storeDir, storeCommission } from '$lib/data/mock/storeProfileNewData';
 import type { FormData } from '$lib/type/storeProfileTypes';
-import { ValidationMessage } from '$lib/domain/store';
+import { ValidationMessage } from '$lib/domain/validationMessage';
 // los types los esta tomando mal por la ruta que tenemos definida en tsconfig.json
 
 // aca crea los datos reactivos

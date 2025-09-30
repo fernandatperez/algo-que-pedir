@@ -1,16 +1,11 @@
+import { ValidationMessage } from './validationMessage'
+
 export type IngredientJSON = {
-  id: number
+  id?: number
   name: string
   cost: number
   foodGroup?: FoodGroupValue
   esOrigenAnimal: boolean
-}
-
-export class ValidationMessage {
-  constructor(
-    public field: string,
-    public message: string
-  ) {}
 }
 
 export enum FoodGroupValue {
@@ -48,8 +43,22 @@ export class IngredientType {
     return Object.assign(new IngredientType(), ingredientJSON, {})
   }
 
+  toJSON(): IngredientJSON {
+    return {
+      id: this.id,
+      name: this.name,
+      cost: this.cost,
+      foodGroup: this.foodGroup,
+      esOrigenAnimal: this.esOrigenAnimal
+    }
+  }
+
   addError(field: string, message: string) {
     this.errors.push(new ValidationMessage(field, message))
+  }
+
+  invalid(): boolean {
+    return this.errors.length > 0
   }
 
   validate(){

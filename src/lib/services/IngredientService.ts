@@ -25,7 +25,15 @@ class IngredientService {
 
   async updateIngredient(ingredient: IngredientType){
     // return axios.put<TareaJSON>(REST_SERVER_URL + '/tareas/' + tarea.id, tarea.toJSON())
-    return {ingredient}
+    
+    const newIngredient = INGREDIENT_MOCK.findIndex(i => i.id === ingredient.id)
+    if (newIngredient !== -1) {
+      // reemplazamos el ingrediente por el actualizado
+      INGREDIENT_MOCK[newIngredient] = { ...ingredient, id: ingredient.id }
+      return INGREDIENT_MOCK[newIngredient]
+    } else {
+      throw new Error('Ingrediente no encontrado')
+    }
   }
 
   async deleteIngredient(ingredient: IngredientType){

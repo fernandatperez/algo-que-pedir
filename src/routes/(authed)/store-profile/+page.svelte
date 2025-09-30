@@ -1,4 +1,5 @@
 <script lang="ts">
+  // Styles
   import "$lib/css/flex-grid.css";
   import "$lib/css/fonts.css";
   import "$lib/css/components-css/number-input.css";
@@ -7,64 +8,65 @@
   import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/9-store-profile.css";
   
-  import ValidationField from '$lib/components/ValidationField.svelte';
-  import { formStore } from "$lib/actions/storeProfileActions.svelte";
-  import type { ValidationMessage } from '$lib/domain/store';
+  // Components
+  import FormFieldset from '$lib/FormFieldset.svelte';
+  import { toasts } from '$lib/components/toast/toastStore';
+  
+  // Service 
+  import { storeProfileService } from '$lib/services/StoreProfileService'
+  import type { ValidationMessage } from '$lib/domain/validationMessage';
+  
+  // Data
+  import { storeInfo, storeDir, storeCommission, paymentMethods } from "$lib/data/mock/storeProfileNewData";
 
-  import {
-    storeInfo,
-    storeDir,
-    storeCommission,
-    paymentMethods,
-  } from "$lib/data/mock/storeProfileNewData";
+  // Estados locales
+  let formData = $state({ ...storeProfileService.formData })
+  let errors = $state<ValidationMessage[]>([])
+  let toastLock: boolean = false
 
-  // traigo los datos y funciones del store
-  const { formData, originalData, saveData, discardChanges, validateForm, validateField } = formStore;
-
-  // errors es una lista de validaciones no cumplidas
-  let errors = $state<ValidationMessage[]>([]);
-  //toda esta porqueria de aca en adelante la tengo que poner en otro lado por que se ve muy mal aca
-  // funcion para validar en el momento
-  function onInput(section: string, fieldId: string) {
-    // Usar setTimeout para no validar en cada tecla
-    setTimeout(() => {
-      if (validateForm) {
-        const result = validateForm();
-        errors = result.errors;
-      }
-    }, 500);
-  }
-// valida onBlur (cuando hago click fuera del input)
-  function onBlur(section: string, fieldId: string) {
-    if (validateField) {
-      validateField(section, fieldId);
-      const result = validateForm();
-      errors = result.errors;
-    }
-  }
-
-  // maneja el envio del formulario
   async function handleSubmit(event: Event) {
     event.preventDefault();
-    
-    // Validar todo el formulario
-    const validationResult = validateForm();
-    errors = validationResult.errors;
-    
-    if (validationResult.isValid) {
-      // Guardar datos
-      await saveData();
-      errors = []; // Limpiar errores después de guardar
-      alert('Datos guardados correctamente');
-    } else {
-      alert('Por favor corrige los errores antes de guardar');
-    }
+    try {
+      // Usa el service para validar
+      const validation = storeProfileService.validateForm(formData)
+      errors = validation.errors
+      
+      if (!validation.isValid) {
+        if (!toastLock) {
+
+            validation.errors.forEach(error => {
+            toasts.push(error.message, {type: 'error'})
+            toastLock = true
+            setTimeout(releaseToast, 5000)
+          })
+        }
+        alert('Por favor corrige los errores antes de guardar')
+        return
+      }
+
+      const releaseToast = () => {toastLock = false  }
+      // Actualiza con el service los datos actuales
+      storeProfileService.update(formData)
+      
+      // Guarda usando el service
+      const success = await storeProfileService.save()
+      
+      if (success) {
+        errors = []
+        alert('Datos guardados correctamente')
+      }
+    } catch (error) {
+      alert('Error al guardar los datos')
+    } 
   }
 
-  // funcion para descartar cambios
-  function handleDiscardChanges() {
-    discardChanges();
-    errors = []; // Limpiar errores también
+  function handleDiscard() {
+    // usa el service para descartar cambios
+    storeProfileService.discardChanges()
+    
+    // Actualizar el estado local con los datos del service
+    formData = { ...storeProfileService.formData }
+    errors = []
   }
 </script>
 
@@ -72,127 +74,62 @@
   <article class="container-column main-content">
     <h1 class="header-title">Información del local</h1>
 
-    <!-- uso solo onsubmit -->
-    <form id="form-store-profile" class="container-column form-store-profile" onsubmit={handleSubmit}>
+    <form id="form-store-profile" class="container-column form-store-profile" onsubmit={handleSubmit} novalidate>
       
-      <!-- Datos del Local -->        
-      <fieldset name={storeInfo.name} class="container-column content-section form-section-store-commission">
-        <h2 class="subtitle">{storeInfo.title}</h2>
-        <div class="grid-cols-2 input-group-dir">
-          <div>
-          <!-- estaria buenisimo componentizar el fieldset-->
-          {#each storeInfo.fields as field (field.input_id)}
-            <div class="input-field">
-              <label for={field.input_id} class="label-color">
-                {field.label_text}
-              </label>
-              <input
-                type="text"
-                id={field.input_id}
-                name={field.input_id}
-                placeholder={field.input_placeholder}
-                class="input"
-                bind:value={formData.storeInfo[field.input_id]}
-                oninput={() => onInput('storeInfo', field.input_id)}
-                onblur={() => onBlur('storeInfo', field.input_id)}
-              />
-              <!-- pongo las validaciones dentro del each para que ciclen en cada input_Id-->
-              <ValidationField errors={errors} field={field.input_id} />
-            </div>
-          {/each}
-          </div>
-          <div>
-          <img
-            src={formData.storeInfo["url-store-img"] || "/src/lib/assets/img/CarlosBakeShop.jpg"}
-            alt="local"
-            class="img-store-profile"
-          />
-          </div>
-        </div>
-      </fieldset>
-
-      <!-- Dirección -->
-      <fieldset name={storeDir.name} class="container-column content-section form-section-store-commission">
-        <h2 class="subtitle">{storeDir.title}</h2>
-        <div class="grid-cols-2 input-group-dir">
-          {#each storeDir.fields as field (field.input_id)}
-            <div class="input-field">
-              <label for={field.input_id} class="label-color">
-                {field.label_text}
-              </label>
-              <input
-                type="text"
-                id={field.input_id}
-                name={field.input_id}
-                placeholder={field.input_placeholder}
-                class="input"
-                bind:value={formData.storeDir[field.input_id]}
-                oninput={() => onInput('storeDir', field.input_id)}
-                onblur={() => onBlur('storeDir', field.input_id)}
-              />
-              <ValidationField errors={errors} field={field.input_id} />
-            </div>
-          {/each}
-        </div>
-      </fieldset>
-
-      <!-- Porcentajes -->
-      <fieldset name={storeCommission.name} class="container-column content-section form-section-store-commission">
-        <h2 class="subtitle">{storeCommission.title}</h2>
-        <div class="grid-cols-2 input-group-dir">
-          {#each storeCommission.fields as field (field.input_id)}
-            <div class="input-field">
-              <label for={field.input_id} class="label-color">
-                {field.label_text}
-              </label>
-              <input
-                type="number"
-                id={field.input_id}
-                name={field.input_id}
-                placeholder={field.input_placeholder}
-                class="input"
-                bind:value={formData.storeCommission[field.input_id]}
-                oninput={() => onInput('storeCommission', field.input_id)}
-                onblur={() => onBlur('storeCommission', field.input_id)}
-              />
-              <ValidationField errors={errors} field={field.input_id} />
-            </div>
-          {/each}
-        </div>
-      </fieldset>
-
-      <!-- Métodos de pago -->
-      <fieldset name="store-payment-methods" class="container-column content-section">
-        <h2 class="subtitle">Métodos de Pago</h2>
-        <div class="payments-checkbox-group">
-          {#each paymentMethods as method (method.id)}
-            <label for={method.id} class="label-color">
-              <input
-                type="checkbox"
-                id={method.id}
-                name={method.id}
-                value={method.value}
-                class="payment-checkbox"
-                bind:checked={formData.paymentMethods[method.id]}
-                onchange={() => onInput('paymentMethods', method.id)}
-              />
-              <span>{method.label}</span>
-            </label>
-          {/each}
-        </div>
-      </fieldset>
+      <!-- Store Info -->
+      <FormFieldset
+         title={storeInfo.title}
+         name={storeInfo.name}
+         fields={storeInfo.fields}
+         bind:formData
+         section="storeInfo"
+         {errors}
+       />
       
-      <!-- Botones -->
+      
+      <!-- Store Direction -->
+      <FormFieldset
+        title={storeDir.title}
+        name={storeDir.name}
+        fields={storeDir.fields}
+        bind:formData
+        section="storeDir"
+        {errors}
+      />
+
+      <!-- Store Commission -->
+      <FormFieldset
+        title={storeCommission.title}
+        name={storeCommission.name}
+        fields={storeCommission.fields}
+        bind:formData
+        section="storeCommission"
+        {errors}
+      />
+
+      <!-- Payment Methods -->
+      
+      <FormFieldset
+        title="Métodos de Pago"
+        name="payment-methods"
+        fields={paymentMethods}
+        bind:formData
+        section="paymentMethods"
+        {errors}
+      />
+      
+      
+      <!-- Buttons -->
       <section class="btn-group-actions">
-        <button
-          type="button"
-          class="btn btn-secondary btn-store"
-          onclick={handleDiscardChanges}
+        <button 
+          type="button" 
+          class="btn btn-secondary btn-store" 
+          onclick={handleDiscard}
         >
           Descartar <span class="p-cambios display-none-mobile">Cambios</span>
         </button>
-        <button
-          type="submit"
+        <button 
+          type="submit" 
           class="btn btn-primary btn-store"
         >
           Guardar <span class="p-cambios display-none-mobile">Cambios</span>
