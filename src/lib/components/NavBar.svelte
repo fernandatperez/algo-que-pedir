@@ -27,7 +27,7 @@
 <nav class="options-and-icon">
   {#each routes as route}
     <a 
-    class:active={isActive(route.path)}
+    class:active={isActive(route.path)} class="btn-empty"
     aria-current={page.url.pathname === route.path ? 'page' : undefined}
     href={route.path}>{route.label}
     </a>
