@@ -10,13 +10,15 @@
   import Ingredient from "$lib/components/Ingredient.svelte"
   import { goto } from '$app/navigation'
 
-  import { IngredientType, ValidationMessage } from "$lib/domain/ingredient"
+  import { IngredientType } from "$lib/domain/ingredient"
+  import { ValidationMessage } from '$lib/domain/validationMessage'
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
   import { ingredientService } from '$lib/services/IngredientService'
   import { onMount } from 'svelte'
   import { showError } from '$lib/domain/errorHandler'
   import ValidationField from '$lib/components/ValidationField.svelte'
   import Modal from '$lib/components/Modal.svelte'
+    import { toasts } from '$lib/components/toast/toastStore';
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state
@@ -26,6 +28,7 @@
   let newIngredient = <IngredientType>(new IngredientType())
 
   let errors: ValidationMessage[] = $state([])
+  let toastLock: boolean = false
 
   // Estado para mostrar/ocultar formulario
   let showForm = $state(false)
@@ -84,6 +87,13 @@
 
     if (ingredient.errors.length > 0) {
       errors = [...ingredient.errors]
+      if (!toastLock) {
+        ingredient.errors.forEach(error => {
+            toasts.push(error.message, {type: 'error'})
+            toastLock = true
+            setTimeout(releaseToast, 5000)
+          })
+      }
       return
     }
 
@@ -104,6 +114,10 @@
     newIngredient = new IngredientType()
     showForm = false
     errors = [] // limpiar errores
+  }
+
+  const releaseToast = () => {
+    toastLock = false
   }
 
   // tiene que ser tipado por una clase de svelte 
@@ -182,8 +196,11 @@
             <section class="cell">
               <select class="input-primary" name="foodGroup">
                 <option value="" disabled selected hidden>Seleccionar</option>
-                {#each Object.entries(foodGroupDict) as [value, grupo]}
+                <!-- {#each Object.entries(foodGroupDict) as [value, grupo]}
                   <option value={value}> {grupo.label} </option>
+                {/each} -->
+                {#each Object.keys(foodGroupDict) as value}
+                  <option value={value}>{foodGroupDict[value as FoodGroupValue].label}</option>
                 {/each}
               </select>
               <ValidationField errors={errors} field="foodGroup" />

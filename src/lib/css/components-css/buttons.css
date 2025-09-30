@@ -107,17 +107,16 @@
     border-radius: 2em;
 }
 
+/* ==== BUTTON PSEUDO-CLASS SELECTORS ==== */
 .btn-primary:disabled {
-  background-color: #888888; /* gris claro */
-  color: #f0f0f0;           /* opcional, texto más apagado */
-  cursor: not-allowed;       /* cursor con "prohibido" */
-  opacity: 0.6;              /* un toque de transparencia */
+    color: var(--font-color-tertiary);
+    background-color: var(--button-active-color);
+    cursor: auto;
 }
 .btn-primary:disabled:hover {
-  background-color: #bdbdbd; /* gris claro */
-  color: #f0f0f0;           /* opcional, texto más apagado */
-  cursor: not-allowed;       /* cursor con "prohibido" */
-  opacity: 0.6;              /* un toque de transparencia */
+    color: var(--font-color-tertiary);
+    background-color: var(--button-active-color);
+    cursor: auto;
 }
 
 /** Mobile: max: 400px */

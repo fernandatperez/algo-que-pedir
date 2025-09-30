@@ -15,7 +15,7 @@ function createToastStore() {
 
   function push(message: string, opts: Partial<Omit<Toast, 'id'>> = {}) {
     const id = ++counter
-    const toast: Toast = { id, message, type: 'info', duration: 3000, ...opts }
+    const toast: Toast = { id, message, type: 'info', duration: 5000, ...opts }
     update((toasts) => [...toasts, toast])
 
     // auto-remove after duration
