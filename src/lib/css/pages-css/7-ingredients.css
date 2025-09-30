@@ -60,6 +60,19 @@ padding: 4px;
     padding: 4px 10px;
 }
 
+.fieldset-section {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    flex-wrap: wrap; 
+}
+
+.fieldset-section .cell {
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; 
+}
 /* ----------- Icons ------------- */
 .ingredients-table-icons {
     font-size: 1.5em;
@@ -89,8 +102,14 @@ padding: 4px;
     .new-ingredient-btn {
         font-size: var(--font-text);
     }
-
-    .grid-table-row {
-        grid-template-columns: 2fr 1.5fr 1.5fr;
+    .display-none-mobile{
+        display: none;
     }
+
+    /* .grid-table-row {
+        grid-template-columns: 2fr 1.5fr 1.5fr;
+    } */
+     .fieldset-section{
+        width: 100%;
+     }
 }

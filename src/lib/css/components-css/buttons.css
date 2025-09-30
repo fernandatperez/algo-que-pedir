@@ -17,6 +17,14 @@
     padding: 0 1em;
 }
 
+.btn-group-new-ingredient{
+    gap: 1em;
+    padding-left: 2em;
+}
+/* .btn-newIngredient{
+    width: 30%;
+    text-align: start;
+} */
 
 /* ==== PRIMARY BUTTON ==== */
 .btn-primary{
@@ -135,6 +143,14 @@
 
     .btn-login{
         width: 92%;
+    }
+
+    .btn-primary.btn-group-new-ingredient{
+        padding: 0;
+        margin: 1em;
+    }
+    .btn-group-new-ingredient .btn {
+        font-size: 0.8em;
     }
 
 }
