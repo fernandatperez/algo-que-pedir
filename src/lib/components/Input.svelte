@@ -7,6 +7,7 @@
   
   interface InputPropsI {
     description: string;
+    // value: string
     input_type: InputTypes;
     labelProps?: OptionalProps;
     inputProps?: OptionalProps;
@@ -15,6 +16,7 @@
 
   let {
     description,
+    // value,
     input_type = InputTypes.Normal,
     labelProps = {},
     inputProps = {},
@@ -35,7 +37,10 @@
       {description}
     </span>
 
-    <input {...inputProps}/>
+    <input {...inputProps}
+    />
+    <!-- Subir -->
+    <!-- bind:value={value} -->
   </label>
 {:else}
   <label {...labelProps}>
@@ -55,7 +60,9 @@
       <input
         type={visibility ? "text" : "password"}
         {...inputProps}
-      />
+        />
+        <!-- Subir -->
+        <!-- bind:value={value} -->
     </div>
   </label>
 {/if}

@@ -40,12 +40,12 @@
       let validation = await userService.getUser(user.username, user.password)
       if (validation) goto ("/orders")
       else {
-        errorMessage1st = "Wrong email and password combination"
-        errorMessage2nd = "Have you forgotten your password?"
+        errorMessage1st = "Nombre de usuario y/o contraseña incorrecto/s."
+        errorMessage2nd = "Olvidaste tu contraseña?"
         setTimeout(() => {
           errorMessage1st = ""
           errorMessage2nd = ""
-        }, 4000)
+        }, 3000)
       }
       errors = [] // limpiar errores
     } catch (error) {

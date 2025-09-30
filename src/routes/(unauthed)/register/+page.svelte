@@ -56,12 +56,12 @@
           successmessage = ""
           successmessage2 = ""
           goto ("/")
-        }, 2000)
+        }, 3000)
       } else {
         registerMessageNoMatched = "Las contraseñas no coinciden"
         setTimeout(() => {
           registerMessageNoMatched = ""
-        }, 2000)
+        }, 3000)
       }
       errors = [] // limpiar errores
     } catch (error) {
@@ -136,6 +136,7 @@
               name: "password-retry",
             }}
           />
+          <ValidationField errors={errors} field="password"/>
         </div>
       </fieldset>
 
@@ -154,6 +155,9 @@
 </section>
 
 <style>
+  .form-group {
+    gap: 0.5em;
+  }
   /* Esto es solo para que lo vean no se vuelvan locos */
   .error-message-section {
     display: flex;

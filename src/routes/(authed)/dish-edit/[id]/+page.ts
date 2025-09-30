@@ -1,17 +1,22 @@
-import type { PageLoad } from './$types'
-import { MENUITEMS_MOCK } from '$lib/data/mock/menuItems'
-import { showError } from '$lib/domain/errorHandler'
+import { MenuItemType } from '$lib/domain/menuItem.js'
+import { menuItemsService } from '$lib/services/MenuItemService'
+import { redirect } from '@sveltejs/kit'
 
-export const load: PageLoad = async ({ params }) => {
-  const id = parseInt(params.id)
+export async function load({ params }) {
   try {
-    const menuItem = await MENUITEMS_MOCK.find(item => item.id !== undefined && item.id === id)
-    if (!menuItem) {
-      throw new Error('Menu item no encontrado')
+    const nuevoItem = params.id === 'nuevoPlato'
+    let item: MenuItemType
+    if (nuevoItem) {
+      item = new MenuItemType()
+      return {nuevoItem, item}
+    } else {
+      item = await menuItemsService.getMenuItem(+params.id) // + para que sea un number
+      return {nuevoItem, item}
     }
-    return { menuItem }
-  } catch (error) {
-    showError('Error loading menu item', error)
-    return { menuItem: null } // para no romper el componente
+  }
+  catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error al cargar el plato', error)
+    throw redirect(302, '/menu')
   }
 }

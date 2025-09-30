@@ -9,17 +9,32 @@
   import MenuItem from '$lib/components/MenuItem.svelte';
 
   import { MENUITEMS_MOCK } from "$lib/data/mock/menuItems";
+  import { MENU_ITEMS_JSON_MOCK } from "$lib/data/mock/menuItems";
   import type { MenuItemType } from "$lib/domain/menuItem";
+  import type { MenuItemJSON } from "$lib/domain/menuItem";
   import { createEmptyMenuItem } from "$lib/domain/menuItem"; // esta funcion crea un objeto vacio, es para el boton agregar nuevo objeto
   import { goto } from '$app/navigation'
 
+  import { menuItemsService } from "$lib/services/MenuItemService.js"
+    import { showError } from "$lib/domain/errorHandler";
+    import { onMount } from "svelte";
 
-  let menuitems = $state<MenuItemType[]>(MENUITEMS_MOCK);
+  let menuitems: MenuItemJSON[]
 
+  const findMenuItems = async () => {
+    try{
+      menuitems = await menuItemsService.getAllMenuItems()
+      console.info(menuitems)
+    } catch (error){
+      showError('Conexion al servidor fallida', error)
+    }
+  }
 
+  const crearPlato = () => {
+    goto('/dish-edit/nuevoPlato')
+  }
 
-
-
+  onMount(findMenuItems)
 
 </script>
 
@@ -29,13 +44,13 @@
       <div class="text-wrapper">
         <h1 class="header-title ellipsis-text">Gestion del menú</h1>
       </div>
-      <button class="btn-add" onclick={() => goto (`/dish-edit/1`)} >Agregar nuevo plato</button>
+      <button class="btn-add" onclick={crearPlato} >Agregar nuevo plato</button>
       <!-- en este boton se podria usar -->
     </div>
     <h2 class="subtitle">Platos disponibles</h2>
     <div class="container-column content-section">
       <!-- menuitems es la lista, menuitem es la const en el componente -->
-      {#each menuitems as item}
+      {#each menuitems as item (item.id)}
         <MenuItem menuitem={item} />
       {/each}
     </div>

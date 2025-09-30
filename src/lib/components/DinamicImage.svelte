@@ -2,7 +2,7 @@
   import type { OptionalProps } from "$lib/components/InputTypes"
 
   interface ImagePropsI {
-    imageURL: string
+    imageURL?: string
     imageDescription: string
     imageProps?: OptionalProps
   }

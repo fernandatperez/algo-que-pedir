@@ -12,31 +12,99 @@
   import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
   import { InputTypes } from "$lib/components/InputTypes";
-  import type { MenuItemType } from "$lib/domain/menuItem";
+  import Ingredient from "$lib/components/Ingredient.svelte";
+  import type { ValidationMessage } from "$lib/domain/ingredient.js";
+  import { showError } from "$lib/domain/errorHandler.js";
+  import { menuItemsService } from "$lib/services/MenuItemService.js";
+  import { MenuItemType } from "$lib/domain/menuItem.js";
+  import { goto } from "$app/navigation";
+  import { GLOBAL_ID } from "$lib/services/MenuItemService.js";
+    import { MENU_ITEMS_JSON_MOCK } from "$lib/data/mock/menuItems.js";
+    import ValidationField from "$lib/components/ValidationField.svelte";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
-  const { menuItem } = data
-
-//! =========== esto hay que cambiarloooooo ===========
-  // Estados del formulario inicializados con los datos del menu item
-  let inputValue: string = $state(menuItem?.nombre || "");
-  let inputURL: string = $state(menuItem?.imagen || "");
-  let descripcionValue: string = $state(menuItem?.descripcion || "");
-  let precioValue: number = $state(menuItem?.precio || 0);
-
-
+  const { nuevoItem, item } = data
+  let errors: ValidationMessage[] = $state([])
 
   let platoAutor: boolean = $state(false);
   let platoEnPromo: boolean = $state(false);
+
+  const itemEdit = $state(item.toJSON())
+
+  const onSubmit = async (ev: SubmitEvent) => {
+    const esNuevoItem = itemEdit.id == -1
+    ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
+    
+    // ev.currentTarget: es el elemento que tiene asignado el event listener
+    // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
+    const form = ev.currentTarget as HTMLFormElement
+    const formData = new FormData(form) // creo el formData
+    
+    // Con form data
+    const menuItem: MenuItemType = new MenuItemType(
+      (itemEdit.id == -1 ? GLOBAL_ID() : itemEdit.id),
+      itemEdit.alt,
+      (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
+      (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
+      Number(formData.get("precio") ? formData.get("precio") : itemEdit.precio),
+      (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
+      Boolean(formData.get("esDeAutor") ? formData.get("author-dish") : itemEdit.esDeAutor),
+      Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion)
+    )
+
+    // Dodains way
+    // Para este tendriamos que bindear los values de los componentes al valor del itemEdit
+    // const menuItem: MenuItemType = MenuItemType.fromJson(itemEdit)
+    
+    console.info("El plato modificado quedo asi: ", menuItem)
+    
+    menuItem.validate()
+    
+    if (menuItem.errors.length > 0) {
+      errors = [...menuItem.errors]
+      // return -> 
+    }
+    
+    try {
+      if (esNuevoItem) {
+        await menuItemsService.createMenuItem(menuItem)
+      } else {
+        await menuItemsService.updateMenuItem(menuItem)
+      }
+      console.info(MENU_ITEMS_JSON_MOCK) 
+      errors = [] // limpiar errores
+    } catch (error) {
+      showError("Error al crear el ingrediente", error)
+    }
+  }
+
+  const removeItem = () => {}
+
+  const saveBtn = () => {
+    console.info("Mostrar que se guardaron los cambios.")
+    console.info("Mensaje de seras redirigido en unos instantes...")
+    setTimeout(() => {
+      goto("/menu")
+    }, 3000)
+  }
+
+  const discardBtn = () => {
+    console.info("Mostrar que NO se guardaron los cambios.")
+    console.info("Mensaje de seras redirigido en unos instantes...")
+    setTimeout(() => {
+      goto("/menu")
+    }, 3000)
+  }
+  // Los errores en consola despues de guardar/descartar son las url's invalidas que no se encuentran para cargar las fotos en Menu.
 </script>
 
 <!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title section-title">Editar Plato</h1>
+    <h1 class="header-title-dish">{nuevoItem ? "Crear plato" : "Editar plato"}</h1>
     <form
-      action=""
+      onsubmit={onSubmit}
       id="form-product-edit"
       class="container-column form-product-edit"
     >
@@ -54,15 +122,17 @@
               input_type={InputTypes.Normal}
               labelProps={{
                 class: "w-100",
-                for: "product-name",
+                for: "nombre",
               }}
               inputProps={{
                 type: "text",
                 class: "input-primary",
                 id: "product-name",
-                placeholder: "Hamburguesa triple completa",
+                name: "nombre",
+                placeholder: itemEdit.nombre,
               }}
             />
+            <!-- <ValidationField errors={errors} field="nombre" /> -->
           </div>
           <!-- No rinde elemento. Unico con textarea -->
           <div class="container-column input-group">
@@ -74,8 +144,10 @@
               maxlength="1000"
               minlength="100"
               class="input-primary description-textarea"
-              placeholder="Hamburguesa triple con una deliciosa cebolla morada salteada que junto con el acomparamiento de lechuga, tomate y cheddar generan una sensación única e inugualable. Viene sin adherezos."
+              name="descripcion"
+              placeholder= {itemEdit.descripcion}
             ></textarea>
+            <!-- <ValidationField errors={errors} field="descripcion" /> -->
           </div>
           <div class="container-column">
             <Input
@@ -89,15 +161,17 @@
                 type: "text",
                 id: "url-product-img",
                 class: "input-primary",
-                placeholder: "/url/de/tu/imagen.png",
+                name: "imagen",
+                placeholder: itemEdit.imagen,
               }}
             />
+            <!-- <ValidationField errors={errors} field="imagen" /> -->
           </div>
         </div>
         <div class="i">
           <!-- Revisar decrecimiento-->
           <DinamicImage
-            imageURL = {inputURL}
+            imageURL = {itemEdit.imagen}
             imageDescription = "product-load-img"
             imageProps={{
               class: "img-product-edit"
@@ -125,9 +199,11 @@
               type: "number",
               id: "product-base-cost",
               class: "input-primary number-input",
-              placeholder: "Escribir numero..."
+              name: "precio",
+              placeholder: itemEdit.precio
             }}
           />
+          <!-- <ValidationField errors={errors} field="precio" /> -->
         </div>
 
         <div class="switch-button-group">
@@ -138,12 +214,13 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="es-de-autor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
+            <!-- Esto ya tiene una variable asignada al toggle, en el POST asignamos la variable a la de la clase -->
+            <input type="checkbox" class="toggle" id="es-de-autor" name="esDeAutor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
-            <!-- Y esto como hacemos para que cuando se clickee haga el toggle de la variable? -->
           </div>
+          <!-- <ValidationField errors={errors} field="esDeAutor" /> -->
         </div>
 
         <div class="switch-button-group">
@@ -154,11 +231,12 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="en-promocion" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
+            <input type="checkbox" class="toggle" id="en-promocion" name="enPromocion" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
           </div>
+          <!-- <ValidationField errors={errors} field="enPromocion" /> -->
         </div>
       </fieldset>
 
@@ -168,90 +246,58 @@
         class="container-column content-section form-section-product-ingredients"
       >
         <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
-        <div class="product-ingredients-cost-subtitle">
+        <div class="product-ingredients-cost-subtitle w-100">
           <h3 class="h3">Costo de Producción</h3>
-          <p>$100</p>
+          <!-- Suma del costo de todos los ingredientes -->
+           <!-- Va a venir del back -->
+          <p>${MenuItemType.costoDeProduccion(itemEdit)}</p>
         </div>
-
         <div class="grid-table-container product-edit-ingredients-table">
           <header class="grid-table-row table-header">
-            <div class="cell" id="nombre">Nombre</div>
-            <div class="cell" id="grupo-alimenticio">
-              <span>Grupo</span>
-              <span class="p-alimenticio display-none-mobile">Alimenticio</span>
-            </div>
-            <div class="cell col-centered" id="origen">Origen</div>
-            <div class="cell col-centered" id="acciones">Acciones</div>
+            <section class="cell" id="name">Nombre</section>
+            <section class="cell" id="name">Costo</section>
+            <section class="cell later-hid" id="grupo-alimenticio">
+              <span> Grupo </span>
+              <span class="p-alimenticio display-none-mobile"> Alimenticio </span>
+            </section>
+            <section class="cell col-centered later-hid" id="origen">
+              Origen
+            </section>
+            <section class="cell col-centered" id="acciones">Acciones</section>
           </header>
-
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-1">Carne de Renacuajo</div>
-            <div class="cell" id="grupo-alimenticio-1">Proteínas</div>
-            <div class="cell col-centered">
-              <i class="ph ph-cow" id="origen-1"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-1"></i></button
-            >
-          </div>
-
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-2">Queso Cheddar</div>
-            <div class="cell" id="grupo-alimenticio-2">Lacteos</div>
-            <div class="cell col-centered">
-              <i class="ph ph-cow" id="origen-2"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-2"></i></button
-            >
-          </div>
-
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-3">Lechuga</div>
-            <div class="cell" id="grupo-alimenticio-3">Frutas y Verduras</div>
-            <div class="cell col-centered">
-              <i class="ph ph-plant" id="origen-3"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-3"></i></button
-            >
-          </div>
-
-          <div class="grid-table-row product-edit-ingredients-table-content">
-            <div class="cell" id="nombre-4">Tomate</div>
-            <div class="cell" id="grupo-alimenticio-4">Frutas y Verduras</div>
-            <div class="cell col-centered">
-              <i class="ph ph-plant" id="origen-4"></i>
-            </div>
-            <button
-              disabled
-              class="cell col-centered icon-action-btn"
-              aria-label="delete-icon"
-              ><i class="ph ph-trash" id="acciones-4"></i></button
-            >
-          </div>
+          {#each itemEdit.ingredientes as ing}
+            <article class="grid-table-row product-edit-ingredients-table-content">
+              <Ingredient ingredient={ing} />
+              <section class="cell multiple-action-buttons">
+                <!-- Esto ahora funciona....................... -->
+                <button class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+                <span><i class="ph ph-line-vertical gray-icon"></i></span>
+                <!-- Esto sigue sin funcionar -->
+                <button class="icon-action-btn" onclick={removeItem} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+              </section>
+            </article>
+          {/each}
         </div>
       </fieldset>
 
       <section class="btn-group-actions">
-        <button disabled class="btn btn-secondary btn-dish"
-          >Descartar <span class="p-cambios display-none-mobile">Cambios</span
-          ></button
+        <button disabled class="btn btn-secondary btn-dish" onclick={discardBtn}
+          >Descartar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
-        <button disabled class="btn btn-primary btn-dish"
-          >Guardar <span class="p-cambios display-none-mobile">Cambios</span
-          ></button
+        <button class="btn btn-primary btn-dish" type="submit" onclick={saveBtn}
+          >Guardar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
       </section>
     </form>
   </article>
 </main>
+
+<style>
+  .header-title-dish {
+    font-size: var(--font-h1);
+    font-weight: 700;
+    font-style: normal;
+    align-self: flex-start;
+    margin: 0.5em 0em;
+  }
+</style>
