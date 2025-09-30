@@ -14,8 +14,11 @@
   import { showError } from "$lib/domain/errorHandler";
   import ValidationField from "$lib/components/ValidationField.svelte";
   import { fade } from "svelte/transition";
+  import { toasts } from '$lib/components/toast/toastStore'
+    import { clear } from "@testing-library/user-event/dist/cjs/utility/clear.js";
 
   let errors: ValidationMessage[] = $state([])
+  let toastLock: boolean = false
 
   let registerMessageNoMatched: string = $state("");
   let successmessage: string = $state("");
@@ -40,9 +43,15 @@
 
     if (user.errors.length > 0) {
       errors = [...user.errors]
-      return
+      if (!toastLock) {
+        user.errors.forEach(error => {
+            toasts.push(error.message, {type: 'error'})
+            toastLock = true
+            setTimeout(releaseToast, 5000)
+          })
+      }
+      return errors
     }
-
     try {
       // Esto no esta devolviendo nada catcheable (->)
       // Ver service y returns
@@ -68,6 +77,10 @@
       showError("Error al crear el ingrediente", error)
     }
   }
+
+  const releaseToast = () => {
+    toastLock = false
+  } 
 </script>
 
 <section class="login-container">
@@ -96,7 +109,8 @@
             description="Usuario*"
             input_type={InputTypes.Normal}
             labelProps={{
-              for: "register-username",
+              class: "label-color",
+              for: "username",
             }}
             inputProps={{
               type: "email",
@@ -107,13 +121,13 @@
             }}
           />
           <ValidationField errors={errors} field="username" />
-        </div>
-        <div class="form-group">
+        
           <Input
             description="Contraseña*"
             input_type={InputTypes.Hidden}
             labelProps={{
-              for: "register-password",
+              class: "label-color",
+              for: "password",
             }}
             inputProps={{
               id: "register-password-id",
@@ -122,12 +136,12 @@
             }}
           />
           <ValidationField errors={errors} field="password" />
-        </div>
-        <div class="form-group">
+
           <Input
             description="Re-ingrese la contraseña*"
             input_type={InputTypes.Hidden}
             labelProps={{
+              class: "label-color",
               for: "register-password-retry",
             }}
             inputProps={{
@@ -155,9 +169,6 @@
 </section>
 
 <style>
-  .form-group {
-    gap: 0.5em;
-  }
   /* Esto es solo para que lo vean no se vuelvan locos */
   .error-message-section {
     display: flex;

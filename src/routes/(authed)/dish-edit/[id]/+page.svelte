@@ -13,7 +13,7 @@
   import { toggleVariable } from "$lib/utils";
   import { InputTypes } from "$lib/components/InputTypes";
   import Ingredient from "$lib/components/Ingredient.svelte";
-  import type { ValidationMessage } from "$lib/domain/ingredient.js";
+  import type { ValidationMessage } from "$lib/domain/validationMessage";
   import { showError } from "$lib/domain/errorHandler.js";
   import { menuItemsService } from "$lib/services/MenuItemService.js";
   import { MenuItemType } from "$lib/domain/menuItem.js";
