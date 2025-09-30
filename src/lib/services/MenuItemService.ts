@@ -27,7 +27,7 @@ class MenuItemsService {
     // Aca no se como seria
     const newItem = MENU_ITEMS_JSON_MOCK.findIndex(item => item.id == menuItem.id)
     if (newItem != -1) {
-      MENU_ITEMS_JSON_MOCK[newItem] = {...menuItem, id: menuItem.id}
+      MENU_ITEMS_JSON_MOCK[newItem] = {...menuItem}
       return MENU_ITEMS_JSON_MOCK[newItem]
     } else {
       throw new Error('Item no encontrado')

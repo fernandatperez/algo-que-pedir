@@ -39,7 +39,7 @@
     
     // Con form data
     const menuItem: MenuItemType = new MenuItemType(
-      itemEdit.id,
+      itemEdit.id = 100,
       itemEdit.alt,
       (formData.get("product-name") ? formData.get("product-name") : itemEdit.nombre) as string,
       (formData.get("product-description") ? formData.get("product-description") : itemEdit.descripcion) as string,
@@ -68,6 +68,7 @@
     } catch (error) {
       showError("Error al crear el ingrediente", error)
     }
+
   }
 
   const removeItem = () => {}
@@ -252,7 +253,7 @@
         <button disabled class="btn btn-secondary btn-dish"
           >Descartar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
-        <button class="btn btn-primary btn-dish" type="submit"
+        <button class="btn btn-primary btn-dish" type="submit" onclick={() => goto('/menu')}
           >Guardar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
       </section>
