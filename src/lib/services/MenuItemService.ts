@@ -1,5 +1,10 @@
 import { MenuItemType } from '$lib/domain/menuItem'
 import { MENU_ITEMS_JSON_MOCK } from '$lib/data/mock/menuItems'
+let GLOBAL_VAR = 5
+export const GLOBAL_ID = () => {
+  GLOBAL_VAR += 1
+  return GLOBAL_VAR
+}
 class MenuItemsService {
   async getAllMenuItems(){
     return MENU_ITEMS_JSON_MOCK.map(MenuItemType.fromJson)
@@ -20,7 +25,7 @@ class MenuItemsService {
   async createMenuItem(item: MenuItemType) {
     const itemJSON = { ...item }
     MENU_ITEMS_JSON_MOCK.push(itemJSON)
-    return itemJSON  
+    return MENU_ITEMS_JSON_MOCK  
   }
 
   async updateMenuItem(menuItem: MenuItemType) {

@@ -18,6 +18,9 @@
   import { menuItemsService } from "$lib/services/MenuItemService.js";
   import { MenuItemType } from "$lib/domain/menuItem.js";
   import { goto } from "$app/navigation";
+  import { GLOBAL_ID } from "$lib/services/MenuItemService.js";
+    import { MENU_ITEMS_JSON_MOCK } from "$lib/data/mock/menuItems.js";
+    import ValidationField from "$lib/components/ValidationField.svelte";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -30,6 +33,7 @@
   const itemEdit = $state(item.toJSON())
 
   const onSubmit = async (ev: SubmitEvent) => {
+    const esNuevoItem = itemEdit.id == -1
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
     
     // ev.currentTarget: es el elemento que tiene asignado el event listener
@@ -39,14 +43,14 @@
     
     // Con form data
     const menuItem: MenuItemType = new MenuItemType(
-      itemEdit.id = 100,
+      (itemEdit.id == -1 ? GLOBAL_ID() : itemEdit.id),
       itemEdit.alt,
-      (formData.get("product-name") ? formData.get("product-name") : itemEdit.nombre) as string,
-      (formData.get("product-description") ? formData.get("product-description") : itemEdit.descripcion) as string,
-      Number(formData.get("product-cost") ? formData.get("product-cost") : itemEdit.precio),
-      (formData.get("url-product-image") ? formData.get("url-product-image") : itemEdit.imagen) as string,
-      Boolean(formData.get("author-dish") ? formData.get("author-dish") : itemEdit.esDeAutor),
-      Boolean(formData.get("on-promo-dish") ? formData.get("on-promo-dish") : itemEdit.enPromocion)
+      (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
+      (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
+      Number(formData.get("precio") ? formData.get("precio") : itemEdit.precio),
+      (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
+      Boolean(formData.get("esDeAutor") ? formData.get("author-dish") : itemEdit.esDeAutor),
+      Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion)
     )
 
     // Dodains way
@@ -54,24 +58,45 @@
     // const menuItem: MenuItemType = MenuItemType.fromJson(itemEdit)
     
     console.info("El plato modificado quedo asi: ", menuItem)
-
+    
     menuItem.validate()
-
+    
     if (menuItem.errors.length > 0) {
       errors = [...menuItem.errors]
-      return
+      // return -> 
     }
-
+    
     try {
-      await menuItemsService.updateMenuItem(menuItem)
+      if (esNuevoItem) {
+        await menuItemsService.createMenuItem(menuItem)
+      } else {
+        await menuItemsService.updateMenuItem(menuItem)
+      }
+      console.info(MENU_ITEMS_JSON_MOCK) 
       errors = [] // limpiar errores
     } catch (error) {
       showError("Error al crear el ingrediente", error)
     }
-
   }
 
   const removeItem = () => {}
+
+  const saveBtn = () => {
+    console.info("Mostrar que se guardaron los cambios.")
+    console.info("Mensaje de seras redirigido en unos instantes...")
+    setTimeout(() => {
+      goto("/menu")
+    }, 3000)
+  }
+
+  const discardBtn = () => {
+    console.info("Mostrar que NO se guardaron los cambios.")
+    console.info("Mensaje de seras redirigido en unos instantes...")
+    setTimeout(() => {
+      goto("/menu")
+    }, 3000)
+  }
+  // Los errores en consola despues de guardar/descartar son las url's invalidas que no se encuentran para cargar las fotos en Menu.
 </script>
 
 <!-- Content -->
@@ -97,16 +122,17 @@
               input_type={InputTypes.Normal}
               labelProps={{
                 class: "w-100",
-                for: "product-name",
+                for: "nombre",
               }}
               inputProps={{
                 type: "text",
                 class: "input-primary",
                 id: "product-name",
-                name: "product-name",
+                name: "nombre",
                 placeholder: itemEdit.nombre,
               }}
             />
+            <!-- <ValidationField errors={errors} field="nombre" /> -->
           </div>
           <!-- No rinde elemento. Unico con textarea -->
           <div class="container-column input-group">
@@ -118,9 +144,10 @@
               maxlength="1000"
               minlength="100"
               class="input-primary description-textarea"
-              name="product-description"
+              name="descripcion"
               placeholder= {itemEdit.descripcion}
             ></textarea>
+            <!-- <ValidationField errors={errors} field="descripcion" /> -->
           </div>
           <div class="container-column">
             <Input
@@ -134,10 +161,11 @@
                 type: "text",
                 id: "url-product-img",
                 class: "input-primary",
-                name: "url-product-img",
+                name: "imagen",
                 placeholder: itemEdit.imagen,
               }}
             />
+            <!-- <ValidationField errors={errors} field="imagen" /> -->
           </div>
         </div>
         <div class="i">
@@ -171,10 +199,11 @@
               type: "number",
               id: "product-base-cost",
               class: "input-primary number-input",
-              name: "product-cost",
+              name: "precio",
               placeholder: itemEdit.precio
             }}
           />
+          <!-- <ValidationField errors={errors} field="precio" /> -->
         </div>
 
         <div class="switch-button-group">
@@ -186,11 +215,12 @@
           </label>
           <div class="slide-button">
             <!-- Esto ya tiene una variable asignada al toggle, en el POST asignamos la variable a la de la clase -->
-            <input type="checkbox" class="toggle" id="es-de-autor" name="author-dish" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
+            <input type="checkbox" class="toggle" id="es-de-autor" name="esDeAutor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
           </div>
+          <!-- <ValidationField errors={errors} field="esDeAutor" /> -->
         </div>
 
         <div class="switch-button-group">
@@ -201,11 +231,12 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="en-promocion" name="on-promo-dish" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
+            <input type="checkbox" class="toggle" id="en-promocion" name="enPromocion" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
           </div>
+          <!-- <ValidationField errors={errors} field="enPromocion" /> -->
         </div>
       </fieldset>
 
@@ -250,10 +281,10 @@
       </fieldset>
 
       <section class="btn-group-actions">
-        <button disabled class="btn btn-secondary btn-dish"
+        <button disabled class="btn btn-secondary btn-dish" onclick={discardBtn}
           >Descartar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
-        <button class="btn btn-primary btn-dish" type="submit" onclick={() => goto('/menu')}
+        <button class="btn btn-primary btn-dish" type="submit" onclick={saveBtn}
           >Guardar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
       </section>

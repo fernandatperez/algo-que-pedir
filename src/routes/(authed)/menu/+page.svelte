@@ -19,11 +19,12 @@
     import { showError } from "$lib/domain/errorHandler";
     import { onMount } from "svelte";
 
-  let menuitems = $state<MenuItemJSON[]>([]);
+  let menuitems: MenuItemJSON[]
 
-    const findMenuItems = async () => {
+  const findMenuItems = async () => {
     try{
       menuitems = await menuItemsService.getAllMenuItems()
+      console.info(menuitems)
     } catch (error){
       showError('Conexion al servidor fallida', error)
     }
@@ -34,7 +35,6 @@
   }
 
   onMount(findMenuItems)
-
 
 </script>
 
