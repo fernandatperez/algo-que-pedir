@@ -6,6 +6,10 @@
   align-self: center;
 }
 
+.state-btn-container {
+ gap: 1em;
+}
+
 .payment-method{
   padding: 2em;
 }

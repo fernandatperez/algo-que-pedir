@@ -2,9 +2,11 @@
   import "$lib/css/components-css/navBar.css";
   // Guarda la ruta activa
   let activeRoute = "orders";
+  import { page } from "$app/state";
+
 
   function setActive(route: string) {
-    activeRoute = route;
+    // activeRoute = route;
   }
 
   const routes = [
@@ -21,7 +23,7 @@
     <a 
       href={route.path} 
       class="btn-empty {activeRoute === route.key ? 'active' : ''}"
-      on:click={() => setActive(route.key)}
+      onclick={() => setActive(route.key)}
     >
       {route.label}
     </a>
@@ -38,7 +40,7 @@
     <ul class="dropdown-menu">
       {#each routes as route}
       <li>
-        <a href={route.path} on:click={() => setActive(route.key)}>
+        <a href={route.path} onclick={() => setActive(route.key)}>
           {route.label}
         </a>
       </li>
@@ -48,25 +50,25 @@
 </div>
 
   <a class="icono-perfil" href="/store-profile" aria-label="ir a perfil"
-    on:click={() => setActive("store-profile")}>
+    onclick={() => setActive("store-profile")} class:active={page.url.pathname  === "/store-profile"}>
     <i class="ph ph-user-circle user-img" aria-label="icono perfil"></i>
   </a>
 
   <div class="mobile-icons">
     <a href="/orders" aria-label="ir a orders"
-      on:click={() => setActive("orders")}>
+      onclick={() => setActive("orders")} class:active={page.url.pathname  === "/orders"}>
       <i class="ph ph-shopping-cart hidden"></i>
     </a>
     <a href="/menu" aria-label="ir a menu"
-      on:click={() => setActive("menu")}>
+      onclick={() => setActive("menu")} class:active={page.url.pathname  === "/menu"}>
       <i class="ph ph-fork-knife hidden"></i>
     </a>
     <a href="/ingredients" aria-label="ir a ingredientes"
-      on:click={() => setActive("ingredients")}>
+      onclick={() => setActive("ingredients")} class:active={page.url.pathname  === "/ingredients"}>
       <i class="ph ph-bowl-food hidden"></i>
     </a>
     <a href="/store-profile" aria-label="ir a perfil"
-      on:click={() => setActive("store-profile")}>
+      onclick={() => setActive("store-profile")} class:active={page.url.pathname  === "/store-profile"}>
       <i class="ph ph-user hidden"></i>
     </a>
   </div>
