@@ -13,7 +13,7 @@
   
   // Service 
   import { storeProfileService } from '$lib/services/StoreProfileService'
-  import type { ValidationMessage } from '$lib/domain/store';
+  import type { ValidationMessage } from '$lib/domain/validationMessage';
   
   // Data
   import { storeInfo, storeDir, storeCommission, paymentMethods } from "$lib/data/mock/storeProfileNewData";

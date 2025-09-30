@@ -2,7 +2,7 @@
 import { defaultData } from '$lib/data/mock/storeProfileDefaultData'
 import { storeProfileService } from '$lib/services/StoreProfileService'
 import type { FormData } from '$lib/type/storeProfileTypes'
-import type { ValidationMessage } from '$lib/domain/store'
+import type { ValidationMessage } from '$lib/domain/validationMessage'
 
 export function createStoreProfileStore() {
   let originalData = $state<FormData>({ ...defaultData })

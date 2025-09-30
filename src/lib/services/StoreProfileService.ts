@@ -1,7 +1,7 @@
 import { defaultData } from '$lib/data/mock/storeProfileDefaultData'
 import { storeInfo, storeDir, storeCommission, paymentMethods } from '$lib/data/mock/storeProfileNewData'
 import type { FormData } from '$lib/type/storeProfileTypes'
-import { ValidationMessage } from '$lib/domain/store'
+import { ValidationMessage } from '$lib/domain/validationMessage'
 
 export class StoreProfileService {
   private originalData: FormData = { ...defaultData }

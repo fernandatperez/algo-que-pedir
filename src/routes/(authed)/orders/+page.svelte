@@ -1,29 +1,71 @@
 <script lang="ts">
-    import "$lib/css/pages-css/3-orders.css";
+    import "$lib/css/pages-css/3-orders.css"
+    import OrderCard from "$lib/OrderCard.svelte"
+    import { Estado, Order } from '$lib/domain/order'
+    import { orderService } from '$lib/services/orderService'
+    import { onMount } from "svelte"
+    import { showError } from "$lib/domain/errorHandler"
+    // import Toaster from "$lib/components/toast/Toaster.svelte"
+    import ToastContainer from "$lib/components/toast/ToastContainer.svelte";
+    import { toasts } from "$lib/components/toast/toastStore";
 
-    import OrderCard from "$lib/components/OrderCard.svelte";
-    import { ORDERS_MOCK } from "$lib/data/mock/orders";
-
+    // Para filtrar pedidos por estado
+    let estado = $state('PENDIENTE')
+    const handleStateChange = async (newState: string) => {
+        estado = newState
+        // console.log("Estado cambiado a:", estado)
+        await getTareas()
+    }
 
     // Todos los pedidos (ejemplo)
     // mejor pedirlo filtrado al back, y no pedir todo
-    let orders = $state(ORDERS_MOCK);
+    let orders = $state<Order[]>([]);
+    let errorMessage = $state('')
+    let toastLock: boolean = false
+
+    const getTareas = async () => {
+        errorMessage = ''
+        try {
+            orders = await orderService.getFilteredOrders(estado)
+            if (orders.length == 0) {
+                errorMessage = 'No hay pedidos'
+                if (!toastLock) {
+                    toasts.push(errorMessage, {type: 'error'})
+                    toastLock = true
+                    setTimeout(releaseToast, 5000)
+                }
+            }
+        } catch (error) {
+            showError('Error loading orders', error)
+        }
+    }
     
-    // Filtrar pedidos por estado
-    let estado = $state("PENDIENTE");
+    onMount(getTareas)
 
-    const filtrarPedidos = (estado: string) => orders.filter((order) => order.estado.toUpperCase() === estado)
+    const prepararPedido = async (order: Order) => {
+        // console.log("Preparando pedido", order.id)
+        order.state = Estado.PREPARADO
+        await orderService.updateOrderState(order)
+        await getTareas()
+        // console.log("Pedido preparado", order.id)
+    }
+
+    const releaseToast = () => {
+        toastLock = false
+    }
     
-    let filteredOrders = $derived(filtrarPedidos(estado));
-
-    const handleStateChange = (newState: string) => {
-        estado = newState;
-        console.log("Estado cambiado a:", estado);
-        // console.log("Pedidos filtrados:", pedidosFiltrados);
-        // updateActiveTab(estado);
-    };
-
 </script>
+
+<style>
+    .error-text {
+        background-color: #da8a8a;
+        color: darkred;
+        padding: 1em 3em;
+        border-radius: 1em;
+        border: 1px solid darkred;
+        text-align: center;
+    }
+</style>
 
 <!-- Tabs and content -->
 <main class="title-tabs-grid">
@@ -42,9 +84,13 @@
     <!-- Orders grid -->
     <section class="main-grid">
         <!-- Single order -->
-        {#each filteredOrders as order}
-            <OrderCard order={order} />
+        {#each orders as order}
+            <OrderCard order={order} action={() => prepararPedido(order)} />
         {/each}
-
+        <!-- {#if (errorMessage.trim() != '')}
+            <div class="error-text">{errorMessage}</div>
+        {/if} -->
+        <ToastContainer errorMessage={errorMessage}  />
+        <!-- <Toaster errorMessage={errorMessage} field={'orders'} /> -->
     </section>
 </main>

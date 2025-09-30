@@ -1,7 +1,9 @@
 <script lang='ts'>
-  type AppValidationMessage = import('$lib/domain/ingredient').ValidationMessage | import('$lib/domain/store').ValidationMessage
+  import type { ValidationMessage } from '$lib/domain/validationMessage'
+  // import Toaster from './toast/Toaster.svelte';
+  import ToastContainer from './toast/ToastContainer.svelte';
 
-  const errorsFrom = (errors: AppValidationMessage[], field: string) => errors
+  const errorsFrom = (errors: ValidationMessage[], field: string) => errors
     .filter((_) => _.field === field)
     .map((_) => _.message)
     .join('. ')
@@ -11,7 +13,7 @@
   let errorMessage = $derived(errorsFrom(errors, field))
 </script>
 
-<style>
+<!-- <style>
 .error {
   background-color: #da8a8a;
   color: darkred;
@@ -27,4 +29,6 @@
   <div class='error' data-testid={'error-field-' + field}>
     {errorMessage}
   </div>
-{/if}
+{/if} -->
+<ToastContainer errorMessage={errorMessage}  />
+<!-- <Toaster errorMessage={errorMessage} field={field} /> -->

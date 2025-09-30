@@ -1,7 +1,7 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
   import ValidationField from '$lib/components/ValidationField.svelte';
-  import type { ValidationMessage } from '$lib/domain/store';
+  import type { ValidationMessage } from '$lib/domain/validationMessage';
 
   interface FormInputProps {
     // Conexión automática con formData
