@@ -13,8 +13,6 @@
   import { IngredientType } from "$lib/domain/ingredient"
   import { ValidationMessage } from '$lib/domain/validationMessage'
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
-  import { enhance } from '$app/forms'
-  import type { SubmitFunction } from '@sveltejs/kit'
   import { ingredientService } from '$lib/services/IngredientService'
   import { onMount } from 'svelte'
   import { showError } from '$lib/domain/errorHandler'
@@ -79,9 +77,9 @@
     const ingredient = new IngredientType(
       ingredients.length + 1,
       (formData.get("name") ?? "").toString(),
-      parseFloat(formData.get("cost") as string),
+      Number(formData.get("cost") ?? 0),
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
-      formData.get("esOrigenAnimal") === "true"
+      Boolean(formData.get("esOrigenAnimal") ?? "true")
     )
     console.info("el nuevo ingrediente es ", ingredient)
 
