@@ -1,3 +1,4 @@
+
 <script lang="ts">
   // Styles
   import "$lib/css/flex-grid.css";
@@ -9,73 +10,84 @@
   import "$lib/css/pages-css/9-store-profile.css";
   import Input from "$lib/components/Input.svelte";
   import { InputTypes } from "$lib/components/InputTypes"
-  
-  // Components
-  import FormFieldset from '$lib/FormFieldset.svelte';
+  import {StoreType} from "$lib/domain/store"
+  import { showError } from '$lib/domain/errorHandler'
+  import { onMount } from 'svelte'
   import { toasts } from '$lib/components/toast/toastStore';
-  
-  // Service 
-  import { storeProfileService } from '$lib/services/StoreProfileService'
+  import {  storeService } from '$lib/services/StoreProfileService'
   import type { ValidationMessage } from '$lib/domain/validationMessage';
+  import ValidationField from "$lib/components/ValidationField.svelte";
   
-  // Data
-  import { storeInfo, storeDir, storeCommission, paymentMethods } from "$lib/data/mock/storeProfileNewData";
-
-  // Estados locales
-  let formData = $state({ ...storeProfileService.formData })
-  let errors = $state<ValidationMessage[]>([])
+  let store = $state<StoreType[]>([])
+  let newStore = <StoreType>(new StoreType())
+  let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
-  async function handleSubmit(event: Event) {
-    event.preventDefault();
-    try {
-      // Usa el service para validar
-      const validation = storeProfileService.validateForm(formData)
-      errors = validation.errors
-      
-      if (!validation.isValid) {
-        if (!toastLock) {
+  const findStore = async () => {
+    try{
+      store = await storeService.getStore()
+    } catch (error){
+      showError('Conexion al servidor fallida', error)
+    }
+  }
 
-            validation.errors.forEach(error => {
+  onMount(findStore)
+
+  const onSubmit = async (ev: SubmitEvent) => {
+    ev.preventDefault()
+    errors = []
+    const form =ev.currentTarget as HTMLFormElement
+    const formData = new FormData(form)
+
+    // Crear store actualizado con los valores ACTUALES del formulario
+    const store = new StoreType(
+      (formData.get("name" )?? "")?.toString(),
+      (formData.get("storeURL" )?? "")?.toString(),
+      (formData.get("storeAddress" )?? "")?.toString(),
+      Number(formData.get("storeAltitude" )?? 0),
+      Number(formData.get("storeLatitude" )?? 0),
+      Number(formData.get("storeLongitude" )?? 0),
+      Number(formData.get("storeAppCommission" )?? 0),
+      Number(formData.get("storeAuthorCommission" )?? 0),
+      Boolean(formData.get("storePaymentEfectivo")?? "true"),
+      Boolean(formData.get("storePaymentQR")?? "true"),
+      Boolean(formData.get("storePaymentTransferencia")?? "true"),
+    )
+    console.info("el nuevo local es ", store)
+    // Validar
+    store.validate()
+
+    if (store.errors.length > 0) {
+      errors = [...store.errors]
+      if (!toastLock) {
+        store.errors.forEach(error => {
             toasts.push(error.message, {type: 'error'})
             toastLock = true
             setTimeout(releaseToast, 5000)
           })
-        }
-        alert('Por favor corrige los errores antes de guardar')
-        return
       }
+      return errors
+    }
 
-      const releaseToast = () => {toastLock = false  }
-      // Actualiza con el service los datos actuales
-      storeProfileService.update(formData)
-      
-      // Guarda usando el service
-      const success = await storeProfileService.save()
-      
-      if (success) {
-        errors = []
-        alert('Datos guardados correctamente')
-      }
+    try {
+      await storeService.updateStore(store)
+      await findStore()
+      errors = []
+      toasts.push('Tienda actualizada exitosamente', { type: 'success' })
     } catch (error) {
-      alert('Error al guardar los datos')
+      showError("Error al actualizar la tienda", error)
     } 
   }
 
-  function handleDiscard() {
-    // usa el service para descartar cambios
-    storeProfileService.discardChanges()
-    
-    // Actualizar el estado local con los datos del service
-    formData = { ...storeProfileService.formData }
-    errors = []
+  function releaseToast() {
+    toastLock = false
   }
 </script>
 
 <main class="container-column">
   <article class="container-column main-content">
     <h1 class="header-title">Información del local</h1>
-     <form action="" id="form-store-profile" class="container-column form-store-profile">
+     <form action="" id="form-store-profile" class="container-column form-store-profile" onsubmit={onSubmit}>
       <!-- Datos del Local  -->
         <fieldset form="form-store-profile" name="store-info" class="content-section form-section-store-info">
           <div class="grid-cols-2 input-group-dir " >
@@ -90,6 +102,7 @@
                     name: "name",
                     }}
                 />
+                <ValidationField errors={errors} field="name" />
                </div>   
                 <div>
                   <Input
@@ -98,12 +111,15 @@
                     inputProps={{
                     class: "input-primary",
                     label: "Imagen*",
-                    name: "name",
+                    name: "storeURL",
                     }}/>
+                  <ValidationField errors={errors} field="name" />  
             </div>
             
             </div>  
-            <div class="img-store-container"><img src="src\lib\assets\img\CarlosBakeShop.jpg" alt="local" class="img-store-profile"></div>  
+            <div class="img-store-container">
+              <img src= "src/lib/assets/img/CarlosBakeShop.jpg" alt="local" class="img-store-profile">
+            </div>  
             
           </div> 
           
@@ -119,8 +135,9 @@
                 inputProps={{
                 class: "input-primary",
                 label: "Dirección*",
-                name: "name",
+                name: "storeAddress",
               }}/>
+              <ValidationField errors={errors} field="address" />
             </div>
             <div>
               <Input
@@ -129,18 +146,20 @@
                 inputProps={{
                 class: "input-primary",
                 label: "Altura*",
-                name: "name",
+                name: "storeAltitude",
               }}/>
+              <ValidationField errors={errors} field="altitude" />
            </div>  
            <div>
-                            <Input
+                <Input
                 description="Latitud"
                 input_type={InputTypes.Normal}
                 inputProps={{
                 class: "input-primary",
                 label: "Latitud*",
-                name: "name",
+                name: "storeLatitude",
             }}/>
+            <ValidationField errors={errors} field="latitude" />
           </div> 
           <div>
               <Input
@@ -149,48 +168,51 @@
                 inputProps={{
                 class: "input-primary",
                 label: "Longitud*",
-                name: "name",
+                name: "storeLongitude",
             }}/>
+            <ValidationField errors={errors} field="longitude" />
           </div> 
           </div>
         </fieldset>
         <fieldset form="form-store-profile" name="store-comission" class="container-column content-section form-section-store-commission">
         <h2 class="subtitle">Porcentajes</h2>
         <div class="grid-cols-2 input-group-dir ">
-        <div class="container-column input-group">
-          <div class="grid-cols-2 input-group-dir ">
+          <div>
               <Input
                 description="Porcentaje de comision con la app*"
                 input_type={InputTypes.Normal}
                 inputProps={{
                 class: "input-primary",
                 label: "Porcentaje de comision con la app*",
-                name: "name",
+                name: "storeAppCommission",
             }}/>
+            <ValidationField errors={errors} field="appcommission" />
             </div>
       
-            <div class="container-column input-group">
+            <div>
               <Input
                 description="Porcentaje de comision con autores de platos*"
                 input_type={InputTypes.Normal}
                 inputProps={{
                 class: "input-primary",
                 label: "Porcentaje de comision con autores de platos*",
-                name: "name",
+                name: "storeAuthorCommission",
             }}/>
-            </div>                    
-            </div>
-            </div>
-          </fieldset>
+            <ValidationField errors={errors} field="authorcommission" />
+            </div>         
+        </div>  
+        </fieldset>
     
          <fieldset form="form-store-profile" name="store-payment-methods" class="container-column content-section">
           <h2 class="subtitle">Metodos de Pago</h2>
           <div class="payments-checkbox-group">
+            
             <label for="efectivo" class="label-color">
             <input type="checkbox" id="efectivo" 
                    name="efectivo" 
                    value="EFECTIVO"
-                   class="payment-checkbox">
+                   class="payment-checkbox"
+            >
                    <span>Efectivo</span>
             </label>
         
@@ -198,23 +220,28 @@
             <input type="checkbox" id="qr" 
                    name="qr" 
                    value="QR"
-                   class="payment-checkbox">
+                   class="payment-checkbox"
+            >
                    <span>QR</span>
             </label>
-    
+
             <label for="transferencia" class="label-color">
             <input type="checkbox" id="transferencia" 
                    name="transferencia" 
                    value="TRANSFERENCIA"
-                   class="payment-checkbox">
+                   class="payment-checkbox"
+            >
                    <span>Transferencia</span>
             </label>
+            <ValidationField errors={errors} field="metodopago" />
             </div>
           </fieldset>
                 
                 <section class="btn-group-actions">
-                    <button disabled class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
-                    <button disabled class="btn btn-primary btn-store">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
+                    <button type="button" class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+                    <button type="submit" class="btn btn-primary btn-store" > Guardar
+                     <span class="p-cambios display-none-mobile">Cambios</span>
+                    </button>
                 </section>
             </form>
   </article>
