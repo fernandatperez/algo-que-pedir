@@ -1,9 +1,6 @@
 <script lang="ts">
-  import '$lib/css/fonts.css'
   import '$lib/css/flex-grid.css'
-  import "$lib/css/components-css/input.css"
   import "$lib/css/components-css/switch-button.css"
-  import "$lib/css/components-css/grid-table.css"
   import "$lib/css/components-css/icon.css"
   import "$lib/css/components-css/buttons.css"
   import "$lib/css/pages-css/8-ingredient-edit.css"
@@ -82,7 +79,7 @@
 </script>
 
 <section class="container-column">
-  <section class="main-content">
+  <section class="main-content ingredient-edit-content">
 
     <h1 class="header-title"> Editar ingrediente </h1>
 

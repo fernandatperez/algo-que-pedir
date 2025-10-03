@@ -5,6 +5,7 @@
 /* ------------------- */
 
 .main-content-ingredients { /* se le puede cambiar el nombre */
+    width: 80%;
     row-gap: 0; /* gap entre secciones */
     padding: 0; /* padding-bottom para que no joda el header en mobile */
 }
@@ -19,7 +20,7 @@
     align-items: center;
 
     /* Dimensions */
-    margin: 2em 0 1.8em 0;
+    margin: 2.2em 0 2.2em 0;
 }
 
 /* ------------------- */

@@ -1,11 +1,9 @@
 <script lang="ts">
   // Styles
   import "$lib/css/flex-grid.css";
-  import "$lib/css/fonts.css";
   import "$lib/css/components-css/number-input.css";
   import "$lib/css/components-css/grid-table.css";
   import "$lib/css/components-css/buttons.css";
-  import "$lib/css/components-css/input.css";
   import "$lib/css/pages-css/9-store-profile.css";
   
   // Components

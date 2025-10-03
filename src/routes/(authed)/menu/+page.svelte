@@ -1,10 +1,9 @@
 <!-- muy importante poner ts -->
 <script lang="ts">
-  import "$lib/css/pages-css/5-menu.css";
   import "$lib/css/flex-grid.css";
-  import "$lib/css/fonts.css";
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/5-menu.css";
+
   //   <link rel="stylesheet" href="../css/style.css" /> esto no hace falta pero no me acuerdo en donde se importa
   import MenuItem from '$lib/components/MenuItem.svelte';
 
@@ -39,10 +38,10 @@
 </script>
 
 <main class="container-column">
-  <div class="main-container container-column main-content">
-    <div class="w-100 flex-row jc-space-between gap-1 margin-2em">
+  <div class="main-container-menu container-column main-content">
+    <div class="w-100 flex-row jc-space-between gap-1">
       <div class="text-wrapper">
-        <h1 class="header-title ellipsis-text">Gestion del menú</h1>
+        <h1 class="header-title-menu ellipsis-text">Gestion del menú</h1>
       </div>
       <button class="btn-add" onclick={crearPlato} >Agregar nuevo plato</button>
       <!-- en este boton se podria usar -->

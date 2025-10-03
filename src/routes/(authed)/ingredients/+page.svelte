@@ -1,10 +1,7 @@
 <script lang="ts">
-  import '$lib/css/fonts.css'
-  import '$lib/css/flex-grid.css'
   import "$lib/css/components-css/flex-table.css"
   import "$lib/css/components-css/icon.css"
   import "$lib/css/components-css/buttons.css"
-  import "$lib/css/components-css/input.css"
   import "$lib/css/pages-css/7-ingredients.css"
 
   import Ingredient from "$lib/components/Ingredient.svelte"

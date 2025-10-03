@@ -1,10 +1,8 @@
 <script lang="ts">
   import "$lib/css/flex-grid.css";
-  import "$lib/css/fonts.css";
   import "$lib/css/components-css/number-input.css";
   import "$lib/css/components-css/grid-table.css";
   import "$lib/css/components-css/buttons.css";
-  import "$lib/css/components-css/input.css";
   import "$lib/css/components-css/switch-button.css";
   import "$lib/css/pages-css/6-product-edit.css";
 
@@ -121,7 +119,7 @@
               description="Nombre del Plato*"
               input_type={InputTypes.Normal}
               labelProps={{
-                class: "w-100",
+                class: "w-100 label-color",
                 for: "nombre",
               }}
               inputProps={{
@@ -154,7 +152,7 @@
               description="URL de la imagen del plato*"
               input_type={InputTypes.Normal}
               labelProps={{
-                class: "w-100",
+                class: "w-100 label-color",
                 for: "url-product-img",
               }}
               inputProps={{
@@ -168,7 +166,7 @@
             <!-- <ValidationField errors={errors} field="imagen" /> -->
           </div>
         </div>
-        <div class="i">
+        <div class="image-product-edit">
           <!-- Revisar decrecimiento-->
           <DinamicImage
             imageURL = {itemEdit.imagen}

@@ -120,14 +120,17 @@
 
 /* ==== BUTTON PSEUDO-CLASS SELECTORS ==== */
 .btn-primary:disabled {
-    color: var(--font-color-tertiary);
-    background-color: var(--button-active-color);
-    cursor: auto;
+  background-color: #888888;
+  color: #f0f0f0;          
+  cursor: not-allowed;      
+  opacity: 0.6;             
 }
+
 .btn-primary:disabled:hover {
-    color: var(--font-color-tertiary);
-    background-color: var(--button-active-color);
-    cursor: auto;
+  background-color: #bdbdbd; 
+  color: #f0f0f0;          
+  cursor: not-allowed;       /* cursor con "prohibido" */
+  opacity: 0.6;             
 }
 
 /** Mobile: max: 400px */

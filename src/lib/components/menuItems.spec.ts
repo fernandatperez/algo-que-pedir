@@ -2,7 +2,7 @@ import { MENUITEMS_MOCK } from '../data/mock/menuItems'
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/svelte'
 
-import MenuItem from '../MenuItem.svelte'
+import MenuItem from './MenuItem.svelte'
 
 import userEvent from '@testing-library/user-event'
 

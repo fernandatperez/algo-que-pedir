@@ -3,6 +3,7 @@
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/components-css/icon.css";
   import "$lib/css/pages-css/1-login.css";
+
   import Input from "$lib/components/Input.svelte";
   import { InputTypes } from "$lib/components/InputTypes";
   import { USERS_LIST_MOCK } from "$lib/data/mock/users";

@@ -1,5 +1,6 @@
 <script lang="ts">
   import "$lib/css/pages-css/4-order-details.css"
+  
   import GridRow from "$lib/components/GridRow.svelte"
   import { goto } from "$app/navigation";
 
