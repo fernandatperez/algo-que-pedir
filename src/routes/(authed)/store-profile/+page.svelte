@@ -20,12 +20,14 @@
   
   let store = $state<StoreType[]>([])
   let newStore = <StoreType>(new StoreType())
+  let currentStore = $state<StoreType | null>(null) 
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
   const findStore = async () => {
     try{
       store = await storeService.getStore()
+      currentStore = store[0]
     } catch (error){
       showError('Conexion al servidor fallida', error)
     }
@@ -49,22 +51,25 @@
       Number(formData.get("storeLongitude" )?? 0),
       Number(formData.get("storeAppCommission" )?? 0),
       Number(formData.get("storeAuthorCommission" )?? 0),
-      Boolean(formData.get("storePaymentEfectivo")?? "true"),
-      Boolean(formData.get("storePaymentQR")?? "true"),
-      Boolean(formData.get("storePaymentTransferencia")?? "true"),
+      // no estoy segura si deberia traer asi los checkbox del formdata
+      formData.has("storePaymentEfectivo"),  
+      formData.has("storePaymentQR"),         
+      formData.has("storePaymentTransferencia") 
     )
-    console.info("el nuevo local es ", store)
+
     // Validar
     store.validate()
 
     if (store.errors.length > 0) {
       errors = [...store.errors]
       if (!toastLock) {
-        store.errors.forEach(error => {
-            toasts.push(error.message, {type: 'error'})
-            toastLock = true
-            setTimeout(releaseToast, 5000)
-          })
+    // trae un error de cada input para que no salgan toast duplicados
+       const uniqueMessages = [...new Set(store.errors.map(error => error.message))]
+       uniqueMessages.forEach(message => {
+       toasts.push(message, {type: 'error'})
+       })
+      toastLock = true
+      setTimeout(releaseToast, 5000)
       }
       return errors
     }
@@ -73,7 +78,7 @@
       await storeService.updateStore(store)
       await findStore()
       errors = []
-      toasts.push('Tienda actualizada exitosamente', { type: 'success' })
+      alert('Tienda actualizada exitosamente')
     } catch (error) {
       showError("Error al actualizar la tienda", error)
     } 
@@ -100,6 +105,7 @@
                     class: "input-primary",
                     label: "Nombre del local*",
                     name: "name",
+                    value: currentStore?.name || ""
                     }}
                 />
                 <ValidationField errors={errors} field="name" />
@@ -112,13 +118,14 @@
                     class: "input-primary",
                     label: "Imagen*",
                     name: "storeURL",
+                    value: currentStore?.storeURL || ""
                     }}/>
-                  <ValidationField errors={errors} field="name" />  
+                  <ValidationField errors={errors} field="url" />  
             </div>
             
             </div>  
             <div class="img-store-container">
-              <img src= "src/lib/assets/img/CarlosBakeShop.jpg" alt="local" class="img-store-profile">
+              <img src={currentStore?.storeURL || "src/lib/assets/img/CarlosBakeShop.jpg"} alt="local" class="img-store-profile">
             </div>  
             
           </div> 
@@ -136,6 +143,7 @@
                 class: "input-primary",
                 label: "Dirección*",
                 name: "storeAddress",
+                value: currentStore?.storeAddress || ""
               }}/>
               <ValidationField errors={errors} field="address" />
             </div>
@@ -147,6 +155,7 @@
                 class: "input-primary",
                 label: "Altura*",
                 name: "storeAltitude",
+                value: currentStore?.storeAltitude || ""
               }}/>
               <ValidationField errors={errors} field="altitude" />
            </div>  
@@ -158,6 +167,7 @@
                 class: "input-primary",
                 label: "Latitud*",
                 name: "storeLatitude",
+                value: currentStore?.storeLatitude || ""
             }}/>
             <ValidationField errors={errors} field="latitude" />
           </div> 
@@ -169,6 +179,7 @@
                 class: "input-primary",
                 label: "Longitud*",
                 name: "storeLongitude",
+                value: currentStore?.storeLongitude || ""
             }}/>
             <ValidationField errors={errors} field="longitude" />
           </div> 
@@ -185,6 +196,7 @@
                 class: "input-primary",
                 label: "Porcentaje de comision con la app*",
                 name: "storeAppCommission",
+                value: currentStore?.storeAppCommission || ""
             }}/>
             <ValidationField errors={errors} field="appcommission" />
             </div>
@@ -194,9 +206,10 @@
                 description="Porcentaje de comision con autores de platos*"
                 input_type={InputTypes.Normal}
                 inputProps={{
-                class: "input-primary",
+                class: "input-primary number-input",
                 label: "Porcentaje de comision con autores de platos*",
                 name: "storeAuthorCommission",
+                value: currentStore?.storeAuthorCommission || ""
             }}/>
             <ValidationField errors={errors} field="authorcommission" />
             </div>         
@@ -206,43 +219,51 @@
          <fieldset form="form-store-profile" name="store-payment-methods" class="container-column content-section">
           <h2 class="subtitle">Metodos de Pago</h2>
           <div class="payments-checkbox-group">
-            
-            <label for="efectivo" class="label-color">
-            <input type="checkbox" id="efectivo" 
-                   name="efectivo" 
-                   value="EFECTIVO"
-                   class="payment-checkbox"
-            >
-                   <span>Efectivo</span>
-            </label>
-        
-            <label for="qr" class="label-color">
-            <input type="checkbox" id="qr" 
-                   name="qr" 
-                   value="QR"
-                   class="payment-checkbox"
-            >
-                   <span>QR</span>
-            </label>
+            <!-- Checkbox Efectivo -->
+           <Input
+           description="Efectivo"
+           input_type={InputTypes.Checkbox}
+           inputProps={{
+           class: "payment-checkbox",
+           label: "Efectivo",
+           name: "storePaymentEfectivo",
+           id: "storePaymentEfectivo",
+           checked: currentStore?.storePaymentEfectivo || false  
+           }}
+           />
 
-            <label for="transferencia" class="label-color">
-            <input type="checkbox" id="transferencia" 
-                   name="transferencia" 
-                   value="TRANSFERENCIA"
-                   class="payment-checkbox"
-            >
-                   <span>Transferencia</span>
-            </label>
-            <ValidationField errors={errors} field="metodopago" />
-            </div>
-          </fieldset>
-                
-                <section class="btn-group-actions">
-                    <button type="button" class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
-                    <button type="submit" class="btn btn-primary btn-store" > Guardar
-                     <span class="p-cambios display-none-mobile">Cambios</span>
-                    </button>
-                </section>
-            </form>
+         <!-- Checkbox QR -->
+         <Input
+          description="QR"
+          input_type={InputTypes.Checkbox}
+          inputProps={{
+          class: "payment-checkbox",
+          label: "QR",
+          name: "storePaymentQR",
+          id: "storePaymentQR",
+          checked: currentStore?.storePaymentQR || false 
+         }}
+        />
+
+       <!-- Checkbox Transferencia -->
+        <Input
+          description="Transferencia"
+          input_type={InputTypes.Checkbox}
+          inputProps={{
+          class: "payment-checkbox",
+          label: "Transferencia",
+          name: "storePaymentTransferencia",
+          id: "storePaymentTransferencia",
+          checked: currentStore?.storePaymentTransferencia || false  
+         }}
+        />
+        <ValidationField errors={errors} field="metodopago" />
+       </div>
+     </fieldset>           
+    <section class="btn-group-actions">
+      <button type="button" class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+      <button type="submit" class="btn btn-primary btn-store" > Guardar<span class="p-cambios display-none-mobile">Cambios</span></button>
+    </section>
+    </form>
   </article>
 </main>

@@ -20,7 +20,7 @@ export class StoreType {
 
   constructor(
     public name: string = ''.trim(), 
-    public storeImg: string = ''.trim(), 
+    public storeURL: string = ''.trim(), 
     public storeAddress: string = ''.trim(),               
     public storeAltitude: number = 0,            
     public storeLatitude: number = 0,              
@@ -41,7 +41,7 @@ export class StoreType {
   toJSON(): StoreJSON {
     return {
       name: this.name,
-      storeImg: this.storeImg,
+      storeURL: this.storeURL,
       storeAddress: this.storeAddress,                 
       storeAltitude: this.storeAltitude,             
       storeLatitude: this.storeLatitude,               
@@ -70,7 +70,7 @@ export class StoreType {
       this.addError('name', 'Debe ingresar nombre del local')
     }
  
-    if (!this.storeImg) {
+    if (!this.storeURL) {
       this.addError('img', 'Debe ingresar URL de imagen')
     }
 
@@ -98,7 +98,7 @@ export class StoreType {
       this.addError('appcommission', 'Debe ingresar una comision')
     }
 
-    if (!this.storePaymentEfectivo || !this.storePaymentQR || !this.storePaymentQR )
+    if (!this.storePaymentEfectivo && !this.storePaymentQR && !this.storePaymentTransferencia )
       this.addError('metodopago', 'Debe ingresar al menos un metodo de pago')
   }
 }
