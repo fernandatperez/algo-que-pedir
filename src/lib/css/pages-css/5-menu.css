@@ -15,8 +15,6 @@
     /*justify-content: center;*/
 }
 
-
-
 .header-menu{
     background-color: var(--background-color-primary);
     display: flex;
@@ -26,7 +24,7 @@
 
 /*contenedor principal */
 
-.main-container {
+.main-container-menu {
     padding-bottom: 8vh;
     padding-top: 2vh;
 }
@@ -54,6 +52,10 @@
     padding: 1rem;
 }
 
+.header-title-menu{
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
 
 
 /*contenedor blanco con la informacion de los platos */

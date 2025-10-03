@@ -1,9 +1,14 @@
 /* -- GENERALES -------------------------- */
-.main-content {
+.main-content-store {
     transition: .3s font-size ease-in-out;
 }
 .form-store-profile {
     gap: var(--gap-sm);
+}
+
+.header-title-store{
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 /* -- STORE INFO SECTION -------------------------- */
