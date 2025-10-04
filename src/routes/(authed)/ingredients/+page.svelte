@@ -17,7 +17,7 @@
   import Modal from '$lib/components/Modal.svelte'
   import { toasts } from '$lib/components/toast/toastStore'
   import Input from "$lib/components/Input.svelte"
-  import { InputTypes } from "$lib/components/InputTypes"
+  import { InputTypes } from "$lib/components/InputPropsI"
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Input from "$lib/components/Input.svelte";
-  import { InputTypes } from "./InputTypes";
+  import { InputTypes } from "./InputPropsI";
   
   type InputField = {
     label_for: string;

@@ -7,7 +7,7 @@
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/9-store-profile.css";
   import Input from "$lib/components/Input.svelte";
-  import { InputTypes } from "$lib/components/InputTypes"
+  import { InputTypes } from "$lib/components/InputPropsI"
   import {StoreType} from "$lib/domain/store"
   import { showError } from '$lib/domain/errorHandler'
   import { onMount } from 'svelte'

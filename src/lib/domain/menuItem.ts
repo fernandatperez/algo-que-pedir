@@ -65,28 +65,12 @@ export class MenuItemType {
       this.addError('nombre', 'Debe ingresar nombre del plato')
     }
     
-    if (!this.descripcion) {
-      this.addError('descripcion', 'Debe ingresar descripción del plato')
-    }
-    
     if (this.precio <= 0 || !this.precio) {
       this.addError('precio', 'El precio debe ser mayor a 0')
     }
     
     if (!this.imagen) {
       this.addError('imagen', 'Debe seleccionar una imagen')
-    }
-    
-    if (!this.alt) {
-      this.addError('alt', 'Debe ingresar texto alternativo para la imagen')
-    }
-
-    if (!this.esDeAutor) {
-      this.addError('esDeAutor', 'Especifique si es o no de autor')
-    }
-
-    if (!this.enPromocion) {
-      this.addError('enPromocion', 'Especifique si esta o no en promo')
     }
   }
 

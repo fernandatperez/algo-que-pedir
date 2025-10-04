@@ -1,7 +1,7 @@
 import Input from '$lib/components/Input.svelte'
 import { describe, it, expect } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/svelte'
-import { InputTypes } from './InputTypes'
+import { InputTypes } from './InputPropsI'
 
 describe('el input', () => {
 

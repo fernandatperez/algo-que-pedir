@@ -6,7 +6,7 @@
   
   import IconText from "$lib/components/IconText.svelte";
   import Input from "$lib/components/Input.svelte";
-  import { InputTypes } from "$lib/components/InputTypes";
+  import { InputTypes } from "$lib/components/InputPropsI";
   import { USERS_LIST_MOCK } from "$lib/data/mock/users";
   import { UserType, ValidationMessage } from "$lib/domain/user";
   import { userService } from "$lib/services/UserService";

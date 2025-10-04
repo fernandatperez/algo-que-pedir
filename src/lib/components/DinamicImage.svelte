@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { OptionalProps } from "$lib/components/InputTypes"
+  import type { OptionalProps } from "$lib/components/InputPropsI"
 
   interface ImagePropsI {
     imageURL?: string

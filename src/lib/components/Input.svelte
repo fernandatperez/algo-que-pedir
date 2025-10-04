@@ -1,8 +1,8 @@
 <script lang="ts">
   import "$lib/css/components-css/input.css";
 
-  import { InputTypes } from "$lib/components/InputTypes";
-  import type { OptionalProps } from "$lib/components/InputTypes";
+  import { InputTypes } from "$lib/components/InputPropsI";
+  import type { OptionalProps } from "$lib/components/InputPropsI";
   import { toggleVariable } from "$lib/utils";
   
   interface InputPropsI {

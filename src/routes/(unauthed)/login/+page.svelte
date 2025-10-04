@@ -5,7 +5,7 @@
   import "$lib/css/pages-css/1-login.css";
 
   import Input from "$lib/components/Input.svelte";
-  import { InputTypes } from "$lib/components/InputTypes";
+  import { InputTypes } from "$lib/components/InputPropsI";
   import { USERS_LIST_MOCK } from "$lib/data/mock/users";
   import { UserType } from "$lib/domain/user";
   import type { ValidationMessage } from "$lib/domain/user";

@@ -13,7 +13,7 @@
   import { showError } from '$lib/domain/errorHandler.js'
   import ValidationField from '$lib/components/ValidationField.svelte'
   import Input from "$lib/components/Input.svelte"
-  import { InputTypes } from "$lib/components/InputTypes"
+  import { InputTypes } from "$lib/components/InputPropsI.js"
   import { toasts } from '$lib/components/toast/toastStore'
 
   let { data } = $props()

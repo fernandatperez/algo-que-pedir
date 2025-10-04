@@ -9,7 +9,6 @@
   import Input from "$lib/components/Input.svelte";
   import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
-  import { InputTypes } from "$lib/components/InputTypes";
   import Ingredient from "$lib/components/Ingredient.svelte";
   import type { ValidationMessage } from "$lib/domain/validationMessage";
   import { showError } from "$lib/domain/errorHandler.js";
@@ -17,8 +16,18 @@
   import { MenuItemType } from "$lib/domain/menuItem.js";
   import { goto } from "$app/navigation";
   import { GLOBAL_ID } from "$lib/services/MenuItemService.js";
-    import { MENU_ITEMS_JSON_MOCK } from "$lib/data/mock/menuItems.js";
-    import ValidationField from "$lib/components/ValidationField.svelte";
+  import { MENU_ITEMS_JSON_MOCK } from "$lib/data/mock/menuItems.js";
+  import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients.js"
+  import { IngredientType, type IngredientJSON } from "$lib/domain/ingredient.js";
+  import ValidationField from "$lib/components/ValidationField.svelte";
+  import InputNew from "$lib/components/InputNew.svelte";
+  import { InputTypes } from "$lib/components/InputPropsI.js";
+
+  /*
+    TODO
+      Se fue el padding entre inputs por que esta comentado en login.css
+  
+  */
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -29,6 +38,7 @@
   let platoEnPromo: boolean = $state(false);
 
   const itemEdit = $state(item.toJSON())
+
 
   const onSubmit = async (ev: SubmitEvent) => {
     const esNuevoItem = itemEdit.id == -1
@@ -48,12 +58,9 @@
       Number(formData.get("precio") ? formData.get("precio") : itemEdit.precio),
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
       Boolean(formData.get("esDeAutor") ? formData.get("author-dish") : itemEdit.esDeAutor),
-      Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion)
+      Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion),
+      selectedIngs
     )
-
-    // Dodains way
-    // Para este tendriamos que bindear los values de los componentes al valor del itemEdit
-    // const menuItem: MenuItemType = MenuItemType.fromJson(itemEdit)
     
     console.info("El plato modificado quedo asi: ", menuItem)
     
@@ -61,7 +68,8 @@
     
     if (menuItem.errors.length > 0) {
       errors = [...menuItem.errors]
-      // return -> 
+      console.info(errors)
+      return 
     }
     
     try {
@@ -71,33 +79,53 @@
         await menuItemsService.updateMenuItem(menuItem)
       }
       console.info(MENU_ITEMS_JSON_MOCK) 
+      // Aca poner un toast de guardado exitoso
+      setTimeout(() => {
+        goto("/menu")
+      }, 3000)
       errors = [] // limpiar errores
     } catch (error) {
       showError("Error al crear el ingrediente", error)
     }
   }
 
-  const removeItem = () => {}
-
-  const saveBtn = () => {
-    console.info("Mostrar que se guardaron los cambios.")
-    console.info("Mensaje de seras redirigido en unos instantes...")
-    setTimeout(() => {
-      goto("/menu")
-    }, 3000)
+  const removeItem = (id?: number) => {
+    const itemIndex = itemEdit.ingredientes.findIndex(item => item.id == id)
+    itemEdit.ingredientes.splice(itemIndex, 1)
+    selectedIngs = itemEdit.ingredientes
+    updateAvailables()
   }
 
   const discardBtn = () => {
-    console.info("Mostrar que NO se guardaron los cambios.")
-    console.info("Mensaje de seras redirigido en unos instantes...")
-    setTimeout(() => {
+    // Aca deberia aparecer el cartel de dana de confirmar descartar
       goto("/menu")
-    }, 3000)
   }
-  // Los errores en consola despues de guardar/descartar son las url's invalidas que no se encuentran para cargar las fotos en Menu.
+  
+  let showModal = $state(false)
+
+  let availableIngredients: IngredientJSON[] = $state(
+    itemEdit.ingredientes && itemEdit.ingredientes.length > 0
+      ? INGREDIENT_MOCK.filter(
+        ing => !itemEdit.ingredientes.some(sel => sel.id === ing.id))
+      : INGREDIENT_MOCK
+  )
+  
+  let selectedIngs: IngredientType[] = $state([])
+  
+  const updateAvailables = () => {
+    availableIngredients = INGREDIENT_MOCK.filter(
+    ing => !itemEdit.ingredientes.some(itemIng => itemIng.id === ing.id))
+    selectedIngs = []
+  }
+
+  const guardarModal = () => {
+    showModal = toggleVariable(showModal)
+    selectedIngs.forEach(ing => itemEdit.ingredientes.push(ing))
+    updateAvailables()
+  }
+
 </script>
 
-<!-- Content -->
 <main class="container-column">
   <article class="container-column main-content">
     <h1 class="header-title-dish">{nuevoItem ? "Crear plato" : "Editar plato"}</h1>
@@ -106,7 +134,6 @@
       id="form-product-edit"
       class="container-column form-product-edit"
     >
-      <!-- Datos del Plato  -->
       <fieldset
         form="form-product-edit"
         name="product-info"
@@ -114,25 +141,19 @@
       >
         <div class="container-column product-info">
           <div class="container-column">
-            <!-- Aca esta bien el bind:value? -->
-            <Input
-              description="Nombre del Plato*"
+            <InputNew
+              label_text="Nombre del Plato*"
+              label_for="nombre"
               input_type={InputTypes.Normal}
-              labelProps={{
-                class: "w-100 label-color",
-                for: "nombre",
-              }}
-              inputProps={{
-                type: "text",
-                class: "input-primary",
-                id: "product-name",
-                name: "nombre",
-                placeholder: itemEdit.nombre,
-              }}
+              type="text"
+              class="input-primary"
+              id="product-name"
+              name="name"
+              bind:value={itemEdit.nombre}
+              placeholder="Escribir |"
             />
-            <!-- <ValidationField errors={errors} field="nombre" /> -->
+            <ValidationField errors={errors} field="nombre" />
           </div>
-          <!-- No rinde elemento. Unico con textarea -->
           <div class="container-column input-group">
             <label for="product-description" class="label-color"
               >Descripción*</label
@@ -143,31 +164,25 @@
               minlength="100"
               class="input-primary description-textarea"
               name="descripcion"
-              placeholder= {itemEdit.descripcion}
+              value = {itemEdit.descripcion}
             ></textarea>
-            <!-- <ValidationField errors={errors} field="descripcion" /> -->
           </div>
           <div class="container-column">
-            <Input
-              description="URL de la imagen del plato*"
+            <InputNew
+              label_text="URL de la imagen del plato*"
+              label_for="url-product-img"
               input_type={InputTypes.Normal}
-              labelProps={{
-                class: "w-100 label-color",
-                for: "url-product-img",
-              }}
-              inputProps={{
-                type: "text",
-                id: "url-product-img",
-                class: "input-primary",
-                name: "imagen",
-                placeholder: itemEdit.imagen,
-              }}
+              type="text"
+              class="input-primary"
+              id="url-product-img"
+              name="imagen"
+              bind:value={itemEdit.imagen}
+              placeholder="Escribir |"
             />
-            <!-- <ValidationField errors={errors} field="imagen" /> -->
+            <ValidationField errors={errors} field="imagen" />
           </div>
         </div>
         <div class="image-product-edit">
-          <!-- Revisar decrecimiento-->
           <DinamicImage
             imageURL = {itemEdit.imagen}
             imageDescription = "product-load-img"
@@ -177,7 +192,6 @@
           />
         </div>
       </fieldset>
-      <!-- Costos  -->
       <fieldset
         form="form-product-edit"
         name="product-cost"
@@ -186,22 +200,18 @@
         <h2 class="subtitle">Costos</h2>
 
         <div class="container-column input-group">
-          <Input 
-            description="Precio Base*"
-            input_type={InputTypes.Normal}
-            labelProps={{
-              class: "w-100",
-              for: "product-base-cost"
-            }}
-            inputProps={{
-              type: "number",
-              id: "product-base-cost",
-              class: "input-primary number-input",
-              name: "precio",
-              placeholder: itemEdit.precio
-            }}
-          />
-          <!-- <ValidationField errors={errors} field="precio" /> -->
+          <InputNew
+              label_text="Precio Base*"
+              label_for="product-base-cost"
+              input_type={InputTypes.Normal}
+              type="number"
+              class="input-primary number-input"
+              id="product-base-cost"
+              name="precio"
+              bind:value={itemEdit.precio}
+              placeholder="Escribir |"
+            />
+          <ValidationField errors={errors} field="precio" />
         </div>
 
         <div class="switch-button-group">
@@ -212,13 +222,11 @@
             </p>
           </label>
           <div class="slide-button">
-            <!-- Esto ya tiene una variable asignada al toggle, en el POST asignamos la variable a la de la clase -->
             <input type="checkbox" class="toggle" id="es-de-autor" name="esDeAutor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
           </div>
-          <!-- <ValidationField errors={errors} field="esDeAutor" /> -->
         </div>
 
         <div class="switch-button-group">
@@ -234,7 +242,6 @@
               <div class="circle-slide"></div>
             </div>
           </div>
-          <!-- <ValidationField errors={errors} field="enPromocion" /> -->
         </div>
       </fieldset>
 
@@ -246,11 +253,30 @@
         <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
         <div class="product-ingredients-cost-subtitle w-100">
           <h3 class="h3">Costo de Producción</h3>
-          <!-- Suma del costo de todos los ingredientes -->
-           <!-- Va a venir del back -->
           <p>${MenuItemType.costoDeProduccion(itemEdit)}</p>
+          <button type="button" class="add-ingredient-btn" onclick={() => showModal= toggleVariable(showModal)}>Añadir ingrediente</button>
+          
         </div>
-        <div class="grid-table-container product-edit-ingredients-table">
+        {#if showModal}
+        <!-- Hubiera estado barbaro usar el de Dana, pero no me sirve el HTML :/ -->
+          <div class="modal">
+            <h3>Seleccionar ingredientes</h3>
+            {#if availableIngredients.length != 0}
+              {#each availableIngredients as ingr}
+                <label>
+                  <input type="checkbox" bind:group={selectedIngs} value={ingr}>
+                  {ingr.name}
+                </label>
+                <br>
+              {/each}
+            {:else}
+              <span>No hay ingredientes para mostrar</span>
+              <br>
+            {/if}
+            <button type="button" onclick={guardarModal}>Guardar</button>
+          </div>
+        {/if}
+          <div class="grid-table-container product-edit-ingredients-table">
           <header class="grid-table-row table-header">
             <section class="cell" id="name">Nombre</section>
             <section class="cell" id="name">Costo</section>
@@ -267,11 +293,10 @@
             <article class="grid-table-row product-edit-ingredients-table-content">
               <Ingredient ingredient={ing} />
               <section class="cell multiple-action-buttons">
-                <!-- Esto ahora funciona....................... -->
-                <button class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+                <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
                 <span><i class="ph ph-line-vertical gray-icon"></i></span>
                 <!-- Esto sigue sin funcionar -->
-                <button class="icon-action-btn" onclick={removeItem} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+                <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
               </section>
             </article>
           {/each}
@@ -279,10 +304,10 @@
       </fieldset>
 
       <section class="btn-group-actions">
-        <button disabled class="btn btn-secondary btn-dish" onclick={discardBtn}
+        <button class="btn btn-secondary btn-dish" type="reset" onclick={discardBtn}
           >Descartar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
-        <button class="btn btn-primary btn-dish" type="submit" onclick={saveBtn}
+        <button class="btn btn-primary btn-dish" type="submit"
           >Guardar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
       </section>
@@ -297,5 +322,10 @@
     font-style: normal;
     align-self: flex-start;
     margin: 0.5em 0em;
+  }
+
+  .add-ingredient-btn {
+    position: absolute;
+    right: 0;
   }
 </style>
