@@ -72,7 +72,7 @@
 
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
-
+    errors = []
     // ev.currentTarget: es el elemento que tiene asignado el event listener
     // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
     const form = ev.currentTarget as HTMLFormElement
