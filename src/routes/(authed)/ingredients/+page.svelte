@@ -60,7 +60,12 @@
       findIngredients()
       showModal = false
     } catch (error: unknown) {
-      showError('Error al eliminar la tarea', error)
+      if(!toastLock) {
+        toasts.push('Error al eliminar el ingrediente', {type: 'error'})
+        toastLock = true
+        setTimeout(releaseToast, 5000)
+      }
+      showError('Error al eliminar el ingrediente', error)
       await findIngredients()
     }
   }
@@ -86,13 +91,6 @@
 
     if (ingredient.errors.length > 0) {
       errors = [...ingredient.errors]
-      if (!toastLock) {
-        ingredient.errors.forEach(error => {
-            toasts.push(error.message, {type: 'error'})
-            toastLock = true
-            setTimeout(releaseToast, 5000)
-          })
-      }
       return errors
     }
 

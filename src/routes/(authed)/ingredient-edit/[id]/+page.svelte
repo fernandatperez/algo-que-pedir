@@ -50,13 +50,6 @@
 
     if (ingredient.errors.length > 0) {
       errors = [...ingredient.errors]
-      if (!toastLock) {
-        ingredient.errors.forEach(error => {
-            toasts.push(error.message, {type: 'error'})
-            toastLock = true
-            setTimeout(releaseToast, 5000)
-          })
-      }
       return
     }
 
@@ -65,6 +58,11 @@
       goto("/ingredients")
       errors = [] // limpiar errores
     } catch (error) {
+      if(!toastLock) {
+        toasts.push('Error al crear el ingrediente', {type: 'error'})
+        toastLock = true
+        setTimeout(releaseToast, 5000)
+      }
       showError("Error al crear el ingrediente", error)
     }
   }

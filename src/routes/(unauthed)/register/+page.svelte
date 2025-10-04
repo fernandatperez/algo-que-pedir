@@ -23,6 +23,7 @@
   let registerMessageNoMatched: string = $state("");
   let successmessage: string = $state("");
   let successmessage2: string = $state("");
+  let successmessages: string[] = $state([]);
 
   console.log(USERS_LIST_MOCK);
 
@@ -43,13 +44,6 @@
 
     if (user.errors.length > 0) {
       errors = [...user.errors]
-      if (!toastLock) {
-        user.errors.forEach(error => {
-            toasts.push(error.message, {type: 'error'})
-            toastLock = true
-            setTimeout(releaseToast, 5000)
-          })
-      }
       return errors
     }
     try {
@@ -57,8 +51,16 @@
       // Ver service y returns
       await userService.alreadyRegisteredUsername(user.username)
       if (formData.get("password") == formData.get("password-retry")) {
-        successmessage = "Usuario generado con exito"
-        successmessage2 = "Seras redirigido a la pagina de Ingreso"
+        successmessages = ['Usuario generado con exito.',' Seras redirigido a la pagina de Ingreso']
+        // successmessage2 = "Seras redirigido a la pagina de Ingreso"
+
+        if(!toastLock) {
+          successmessages.forEach((message) => {
+            toasts.push(message, {type: 'success'})
+          })
+          toastLock = true
+          setTimeout(releaseToast, 5000)
+        }
 
         await userService.createUser(user)
         setTimeout(() => {
@@ -68,12 +70,14 @@
         }, 3000)
       } else {
         registerMessageNoMatched = "Las contraseñas no coinciden"
+        toasts.push(registerMessageNoMatched, {type: 'error'})
         setTimeout(() => {
           registerMessageNoMatched = ""
         }, 3000)
       }
       errors = [] // limpiar errores
     } catch (error) {
+      toasts.push("Error al crear el ingrediente", {type: 'error'})
       showError("Error al crear el ingrediente", error)
     }
   }
@@ -87,7 +91,7 @@
   <main class="login-section">
     <!-- HEADER -->
     <IconText title="Crea tu cuenta" wrapperClass="header-section" />
-    {#if registerMessageNoMatched}
+    <!-- {#if registerMessageNoMatched}
       <section class="error-message-section" transition:fade>
         <i class="ph ph-warning error-login-message"></i>
         <p class="error-login-message">{registerMessageNoMatched}</p>
@@ -98,7 +102,7 @@
         <p class="success-message">{successmessage}</p>
         <p class="success-message">{successmessage2}</p>
       </section>
-    {/if}
+    {/if} -->
 
     <!-- FORM -->
     <form class="form-container" onsubmit={onSubmit}>

@@ -2,25 +2,24 @@
   import { toasts } from './toastStore'
   import { fade, fly } from 'svelte/transition'
 
-  // console.log(toasts)
-  const {errorMessage} = $props()
 </script>
 
 <div class="toast-container">
   {#each $toasts as toast (toast.id)}
-    {#if toast.message == errorMessage}
-      <div
-        class="toast {toast.type}"
-        in:fly={{ x: 200, duration: 200 }}
-        out:fade={{ duration: 200 }}>
-          {toast.message}
-        </div>
-    {/if}
+    <div
+      class="toast {toast.type}"
+      in:fly={{ x: 200, duration: 200 }}
+      out:fade={{ duration: 200 }}>
+        {toast.message}
+      </div>
     {/each}
   </div>
 
 <style>
 .toast-container {
+  position: fixed;
+  top: 5em;
+  right: 1em;
   margin-top: 1em;
   display: flex;
   flex-direction: column;
@@ -33,10 +32,10 @@
 .toast {
   width: 100%;
   text-align: center;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
   border-radius: 8px;
   color: white;
-  font-size: 1em;
+  font-size: 2em;
   font-weight: 500;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   animation: slide-in 0.3s ease-out;

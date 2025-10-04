@@ -36,13 +36,6 @@
 
     if (user.errors.length > 0) {
       errors = [...user.errors]
-      if (!toastLock) {
-        user.errors.forEach(error => {
-            toasts.push(error.message, {type: 'error'})
-            toastLock = true
-            setTimeout(releaseToast, 5000)
-          })
-      }
       return errors
     }
 
@@ -50,8 +43,13 @@
       let validation = await userService.getUser(user.username, user.password)
       if (validation) goto ("/orders")
       else {
-        errorMessage1st = "Nombre de usuario y/o contraseña incorrecto/s."
-        errorMessage2nd = "Olvidaste tu contraseña?"
+        errorMessages = ["Nombre de usuario y/o contraseña incorrecto/s.", "Olvidaste tu contraseña?"]
+        // errorMessage2nd = "Olvidaste tu contraseña?" // este habria que ponerlo en otro lado. sin timeout.
+        if(!toastLock) {
+          errorMessages.forEach((error) => {
+            toasts.push(error, {type: 'error'})
+          })
+        }
         setTimeout(() => {
           errorMessage1st = ""
           errorMessage2nd = ""
@@ -65,6 +63,7 @@
 
   let errorMessage1st: string = $state("")
   let errorMessage2nd: string = $state("")
+  let errorMessages: string[] = $state([])
 
   console.log(USERS_LIST_MOCK);
 

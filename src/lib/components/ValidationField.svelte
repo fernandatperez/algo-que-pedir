@@ -13,7 +13,7 @@
   let errorMessage = $derived(errorsFrom(errors, field))
 </script>
 
-<!-- <style>
+<style>
 .error {
   background-color: #da8a8a;
   color: darkred;
@@ -29,6 +29,6 @@
   <div class='error' data-testid={'error-field-' + field}>
     {errorMessage}
   </div>
-{/if} -->
-<ToastContainer errorMessage={errorMessage}  />
+{/if}
+<!-- <ToastContainer errorMessage={errorMessage}  /> -->
 <!-- <Toaster errorMessage={errorMessage} field={field} /> -->
