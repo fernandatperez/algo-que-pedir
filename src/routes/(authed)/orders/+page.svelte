@@ -46,6 +46,7 @@
     const prepararPedido = async (order: Order) => {
         // console.log("Preparando pedido", order.id)
         order.state = Estado.PREPARADO
+        toasts.push('Pedido enviado a preparación', {type: 'success'})
         await orderService.updateOrderState(order)
         await getTareas()
         // console.log("Pedido preparado", order.id)

@@ -76,7 +76,7 @@
       await storeService.updateStore(store)
       await findStore()
       errors = []
-      alert('Tienda actualizada exitosamente')
+      toasts.push('Tienda actualizada exitosamente', {type: 'success'})
     } catch (error) {
       showError("Error al actualizar la tienda", error)
     } 
