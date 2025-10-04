@@ -59,7 +59,7 @@
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
       Boolean(formData.get("esDeAutor") ? formData.get("author-dish") : itemEdit.esDeAutor),
       Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion),
-      selectedIngs
+      itemEdit.ingredientes
     )
     
     console.info("El plato modificado quedo asi: ", menuItem)
