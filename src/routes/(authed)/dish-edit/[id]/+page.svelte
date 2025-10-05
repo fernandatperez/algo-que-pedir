@@ -15,6 +15,7 @@
   import { InputTypes } from "$lib/components/InputPropsI.js";
   import Modal from "$lib/components/Modal.svelte";
   import Input from "$lib/components/Input.svelte";
+  import { toasts } from '$lib/components/toast/toastStore'
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -89,18 +90,10 @@
     }
   }
 
-  const findItem = async () => {
-    try{
-      itemEdit = await menuItemsService.getMenuItem(itemEdit.id)
-    } catch (error){
-      if(!toastLock) {
-        toasts.push('Conexion al servidor fallida', {type: 'error'})
-        setTimeout(releaseToast, 5000)
-      }
-      showError('Conexion al servidor fallida', error)
-    }
-  }
-
+  const releaseToast = () => {
+    toastLock = false
+  }  
+  
   const deleteItem = (ingredientId: number) => {
     const index = itemEdit.ingredientes.findIndex(i => i.id == ingredientId)
     if (index != -1) {
