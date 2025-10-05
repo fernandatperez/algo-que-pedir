@@ -6,7 +6,6 @@
   import "$lib/css/components-css/switch-button.css";
   import "$lib/css/pages-css/6-product-edit.css";
 
-  import Input from "$lib/components/Input.svelte";
   import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
   import Ingredient from "$lib/components/Ingredient.svelte";
@@ -23,8 +22,6 @@
   import InputNew from "$lib/components/InputNew.svelte";
   import { InputTypes } from "$lib/components/InputPropsI.js";
   import Modal from "$lib/components/Modal.svelte";
-  import MenuItem from "$lib/components/MenuItem.svelte";
-  import { toasts } from '$lib/components/toast/toastStore'
 
   /*
     TODO
@@ -42,7 +39,7 @@
   let platoAutor: boolean = $state(false);
   let platoEnPromo: boolean = $state(false);
 
-  let itemEdit = $state({...item})
+  const itemEdit = $state(item.toJSON())
   let modalId: number = $state(0)
 
   let showModalAdd = $state(false)
@@ -98,30 +95,14 @@
     }
   }
 
-  const findItem = async () => {
-    try{
-      itemEdit = await menuItemsService.getMenuItem(itemEdit.id)
-    } catch (error){
-      showError('Conexion al servidor fallida', error)
-    }
-  }
-
-  // const removeItem = (id?: number) => {
-  //   const itemIndex = itemEdit.ingredientes.findIndex(item => item.id == id)
-  //   itemEdit.ingredientes.splice(itemIndex, 1)
-  //   selectedIngs = itemEdit.ingredientes
-  //   updateAvailables()
-  // }
-
   const deleteItem = (ingredientId: number) => {
-    const index = itemEdit.ingredientes.findIndex(i => i.id === ingredientId)
-    if (index !== -1) {
+    const index = itemEdit.ingredientes.findIndex(i => i.id == ingredientId)
+    if (index != -1) {
       itemEdit.ingredientes.splice(index, 1)
       updateAvailables()
     }
     showModalDelete = false
   }
-
 
   const discardBtn = () => {
     // Aca deberia aparecer el cartel de dana de confirmar descartar
@@ -131,7 +112,7 @@
   let availableIngredients: IngredientJSON[] = $state(
     itemEdit.ingredientes && itemEdit.ingredientes.length > 0
       ? INGREDIENT_MOCK.filter(
-        ing => !itemEdit.ingredientes.some(sel => sel.id === ing.id))
+        ing => !itemEdit.ingredientes.some(sel => sel.id == ing.id))
       : INGREDIENT_MOCK
   )
   
@@ -139,23 +120,19 @@
   
   const updateAvailables = () => {
     availableIngredients = INGREDIENT_MOCK.filter(
-    ing => !itemEdit.ingredientes.some(itemIng => itemIng.id === ing.id))
+    ing => !itemEdit.ingredientes.some(itemIng => itemIng.id == ing.id))
     selectedIngs = []
   }
 
   const guardarModal = () => {
     showModalAdd = false
-    selectedIngs.forEach(ing => itemEdit.ingredientes.push(ing))
+    selectedIngs.forEach(ing => itemEdit.ingredientes.push(IngredientType.fromJson(ing)))
     updateAvailables()
   }
 
   const descartarModal = () => {
     showModalAdd = false
   }
-
-  const releaseToast = () => {
-    toastLock = false
-  }  
 
   function openModal(id: number) {
     modalId = id
@@ -248,6 +225,7 @@
               name="precio"
               bind:value={itemEdit.precio}
               placeholder="Escribir |"
+              step="any"
             />
           <ValidationField errors={errors} field="precio" />
         </div>

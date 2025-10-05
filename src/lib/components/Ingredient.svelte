@@ -21,7 +21,7 @@
 <section class="cell later-hid" id="grupo-alimenticio-{ingredient.id}">{ingredient.foodGroup}</section>
 {#if ingredient.foodGroup}
   <section class="cell col-centered later-hid">
-    <i class={"ph " + foodGroupDict[ingredient.foodGroup].icon + " gray-icon"} id={"origen-" + ingredient.id}></i>
+    <i class={"ph " + ingredient.icono() + " gray-icon"} id={"origen-" + ingredient.id}></i>
   </section>
 {:else}
   <section class="cell col-centered later-hid"><i class="ph ph-question gray-icon" id="origen-{ingredient.id}"></i></section>
