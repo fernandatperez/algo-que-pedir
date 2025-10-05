@@ -111,24 +111,3 @@
     </form>
   </main>
 </section>
-
-<style>
-  /* Esto es solo para que lo vean no se vuelvan locos */
-  .error-message-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--error-text-color);
-    border-radius: 1em;
-    padding: 0.5em;
-    width: 70%;
-  }
-  .error-login-message {
-    color: white;
-  }
-
-  a {
-    text-decoration: underline;
-  }
-</style>
