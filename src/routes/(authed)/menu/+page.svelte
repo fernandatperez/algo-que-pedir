@@ -1,10 +1,5 @@
 <!-- muy importante poner ts -->
 <script lang="ts">
-  import "$lib/css/flex-grid.css";
-  import "$lib/css/components-css/buttons.css";
-  import "$lib/css/pages-css/5-menu.css";
-
-  //   <link rel="stylesheet" href="../css/style.css" /> esto no hace falta pero no me acuerdo en donde se importa
   import MenuItem from '$lib/components/MenuItem.svelte';
 
   import type { MenuItemJSON } from "$lib/domain/menuItem";
@@ -32,6 +27,12 @@
   onMount(findMenuItems)
 
 </script>
+
+<style>
+  @import url("$lib/css/flex-grid.css");
+  @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/pages-css/5-menu.css");
+</style>
 
 <main class="container-column">
   <div class="main-container-menu container-column main-content">

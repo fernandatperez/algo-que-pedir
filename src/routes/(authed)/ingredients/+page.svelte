@@ -1,9 +1,4 @@
 <script lang="ts">
-  import "$lib/css/components-css/flex-table.css"
-  import "$lib/css/components-css/icon.css"
-  import "$lib/css/components-css/buttons.css"
-  import "$lib/css/pages-css/7-ingredients.css"
-
   import Ingredient from "$lib/components/Ingredient.svelte"
   import { goto } from '$app/navigation'
 
@@ -118,6 +113,14 @@
     toastLock = false
   }  
 </script>
+
+<style>
+  @import url("$lib/css/flex-grid.css");
+  @import url("$lib/css/components-css/flex-table.css");
+  @import url("$lib/css/components-css/icon.css");
+  @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/pages-css/7-ingredients.css");
+</style>
 
 <section class="flex-column">
   <section class="main-content-ingredients">

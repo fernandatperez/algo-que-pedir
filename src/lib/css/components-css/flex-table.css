@@ -23,7 +23,8 @@
 }
 
 /* ESTILO DE CADA CELDA */
-.flex-table-row .cell {
+/* .flex-table-row  */
+.cell {
     width: 100%;
     flex: 1; /* ancho igual por defecto */
     padding: 1em;

@@ -32,7 +32,7 @@
        {/if}
      </div>
     
-    <section class="cell multiple-action-buttons modal-btns">
+    <section class="multiple-action-buttons modal-btns">
       <button class="btn btn-secondary btn-modal" onclick={data.actionCancel}>{data.cancelLabel}</button>
       <button class="btn btn-primary btn-modal" onclick={data.actionConfirm}>{data.confirmLabel}</button>
     </section>
@@ -40,6 +40,7 @@
 </div>
 
 <style>
+  @import url('$lib/css/components-css/buttons.css');
 .modal-btns{
     gap: 1rem;
     margin: 1em;
@@ -72,6 +73,11 @@
   flex-direction: column;
   align-items: center; /* opcional: alinea a la izquierda */
   margin-top: 1em;
+}
+
+.multiple-action-buttons {
+    display: flex;
+    justify-content: center;
 }
 
 </style>

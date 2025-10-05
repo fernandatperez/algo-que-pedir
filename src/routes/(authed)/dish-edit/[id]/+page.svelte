@@ -1,11 +1,4 @@
 <script lang="ts">
-  import "$lib/css/flex-grid.css";
-  import "$lib/css/components-css/number-input.css";
-  import "$lib/css/components-css/grid-table.css";
-  import "$lib/css/components-css/buttons.css";
-  import "$lib/css/components-css/switch-button.css";
-  import "$lib/css/pages-css/6-product-edit.css";
-
   import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
   import Ingredient from "$lib/components/Ingredient.svelte";
@@ -88,7 +81,23 @@
       }, 3000)
       errors = [] // limpiar errores
     } catch (error) {
+      if(!toastLock) {
+        toasts.push("Error al crear el ingrediente", {type: 'error'})
+        setTimeout(releaseToast, 5000)
+      }
       showError("Error al crear el ingrediente", error)
+    }
+  }
+
+  const findItem = async () => {
+    try{
+      itemEdit = await menuItemsService.getMenuItem(itemEdit.id)
+    } catch (error){
+      if(!toastLock) {
+        toasts.push('Conexion al servidor fallida', {type: 'error'})
+        setTimeout(releaseToast, 5000)
+      }
+      showError('Conexion al servidor fallida', error)
     }
   }
 
@@ -137,6 +146,30 @@
   }
 
 </script>
+
+<style>
+  @import url("$lib/css/flex-grid.css");
+  @import url("$lib/css/components-css/number-input.css");
+  @import url("$lib/css/components-css/grid-table.css");
+  @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/components-css/input.css");
+  @import url("$lib/css/components-css/switch-button.css");
+  @import url("$lib/css/pages-css/7-ingredients.css");
+  @import url("$lib/css/pages-css/6-product-edit.css");
+
+  .header-title-dish {
+    font-size: var(--font-h1);
+    font-weight: 700;
+    font-style: normal;
+    align-self: flex-start;
+    margin: 0.5em 0em;
+  }
+
+  .add-ingredient-btn {
+    position: absolute;
+    right: 0;
+  }
+</style>
 
 <main class="container-column">
   <article class="container-column main-content">
@@ -355,18 +388,3 @@
     </form>
   </article>
 </main>
-
-<style>
-  .header-title-dish {
-    font-size: var(--font-h1);
-    font-weight: 700;
-    font-style: normal;
-    align-self: flex-start;
-    margin: 0.5em 0em;
-  }
-
-  .add-ingredient-btn {
-    position: absolute;
-    right: 0;
-  }
-</style>

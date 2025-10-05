@@ -1,6 +1,5 @@
 <script lang="ts">
-  import GridRow from "$lib/components/GridRow.svelte"
-  import "$lib/css/pages-css/4-order-details.css"
+  import Grid from "$lib/components/GridRow.svelte"
   
   import { goto } from "$app/navigation";
 
@@ -8,6 +7,13 @@
   let { order } = data
 
 </script>
+
+<style>
+  @import url('$lib/css/flex-grid.css');
+  @import url('$lib/css/components-css/user-details.css');
+  @import url('$lib/css/components-css/buttons.css');
+  @import url('$lib/css/pages-css/4-order-details.css');
+</style>
 
 <svelte:head>
   <title>Detalle del pedido</title>
@@ -48,23 +54,13 @@
     </section>
 
     <section class="content-section-grid grid">
-      <section class="section-title">
+      <section>
         <h3>Resumen del pedido</h3>
       </section>
 
-      <div class="grid-table-container product-edit-ingredients-table">
-        <!-- Grid Header -->
-        <header class="grid-table-row table-header">
-          <div class="cell">Plato</div>
-          <div class="cell">Cantidad</div>
-          <div class="cell">Precio</div>
-        </header>
-        <!-- Grid Content  -->
-        {#each order.dishes as plato }
-          <GridRow plato={plato} />
-        {/each}
-      </div>
-    </section>
+      <!-- Grid Content  -->
+      <Grid platos={order.dishes} />
+      </section>
 
     <section class="content-section-grid grid">
       <h3>Pago</h3>

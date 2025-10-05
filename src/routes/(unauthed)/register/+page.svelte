@@ -1,9 +1,9 @@
 <script lang="ts">
-  import "$lib/css/components-css/buttons.css";
-  import "$lib/css/components-css/icon.css";
+  import "$lib/css/components-css/buttons.css"
+  import "$lib/css/components-css/icon.css"
   import "$lib/css/pages-css/1-login.css"
-  import "$lib/css/pages-css/2-register.css";
-  
+  import "$lib/css/pages-css/2-register.css"
+
   import IconText from "$lib/components/IconText.svelte";
   import { InputTypes } from "$lib/components/InputPropsI";
   import { USERS_LIST_MOCK } from "$lib/data/mock/users";
@@ -78,10 +78,18 @@
   } 
 </script>
 
+<style>
+  /* @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/components-css/icon.css");
+  @import url("$lib/css/pages-css/1-login.css");
+  @import url("$lib/css/pages-css/2-register.css"); */
+</style>
+
 <section class="login-container">
   <main class="login-section">
     <!-- HEADER -->
     <IconText title="Crea tu cuenta" wrapperClass="header-section" />
+
     <!-- FORM -->
     <form class="form-container" onsubmit={onSubmit}>
       <!-- FORM FIELD -->
