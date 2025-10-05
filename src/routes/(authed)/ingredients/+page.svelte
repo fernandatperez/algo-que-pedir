@@ -16,8 +16,8 @@
   import ValidationField from '$lib/components/ValidationField.svelte'
   import Modal from '$lib/components/Modal.svelte'
   import { toasts } from '$lib/components/toast/toastStore'
-  import Input from "$lib/components/Input.svelte"
   import { InputTypes } from "$lib/components/InputPropsI"
+  import Input from "$lib/components/Input.svelte";
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state
@@ -152,29 +152,29 @@
           <form onsubmit={onSubmit} onreset={onCancel} id="form-ingredient" class="flex-table-row product-edit-ingredients-table-content">
             <div class="fieldset-section">
               <section class="cell">
-                <Input
-                description=""
-                input_type={InputTypes.Normal}
-                inputProps={{
-                  class: "input-primary",
-                  placeholder: "Huevo",
-                  name: "name",
-                }}
+                <Input 
+                  label_text=""
+                  label_for=""
+                  input_type={InputTypes.Normal}
+                  value=""
+                  class= "input-primary"
+                  placeholder= "Huevo"
+                  name= "name"
                 />
-                <!-- <input class="input-primary" placeholder="Huevo" name="name"/> -->
                 <ValidationField errors={errors} field="name" />
               </section>
               <section class="cell">
                 <Input
-                description=""
-                input_type={InputTypes.Normal}
-                inputProps={{
-                  class: "input-primary",
-                  placeholder: "0.80",
-                  name: "cost",
-                }}
+                  label_text=""
+                  label_for=""
+                  input_type={InputTypes.Normal}
+                  value=""
+                  class= "input-primary"
+                  placeholder= "0.80"
+                  name= "cost"
+                  type="number"
+                  step="any"
                 />
-                <!-- <input class="input-primary" placeholder="$0.80" name="cost"/> -->
                 <ValidationField errors={errors} field="cost" />
               </section>
               <section class="cell">

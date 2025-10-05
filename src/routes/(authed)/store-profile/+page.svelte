@@ -6,7 +6,6 @@
   import "$lib/css/components-css/grid-table.css";
   import "$lib/css/components-css/buttons.css";
   import "$lib/css/pages-css/9-store-profile.css";
-  import Input from "$lib/components/Input.svelte";
   import { InputTypes } from "$lib/components/InputPropsI"
   import {StoreType} from "$lib/domain/store"
   import { showError } from '$lib/domain/errorHandler'
@@ -15,6 +14,7 @@
   import {  storeService } from '$lib/services/StoreProfileService'
   import type { ValidationMessage } from '$lib/domain/validationMessage';
   import ValidationField from "$lib/components/ValidationField.svelte";
+  import Input from "$lib/components/Input.svelte";
   
   let store = $state<StoreType[]>([])
   let newStore = <StoreType>(new StoreType())
@@ -91,39 +91,28 @@
         <fieldset form="form-store-profile" name="store-info" class="content-section form-section-store-info">
           <div class="grid-cols-2 input-group-dir" >
             <div class="container-column form-section-store-info">
-                <div class="container-column">
+              <div class="container-column">
                 <Input
-                    description="Nombre del local"
-                    input_type={InputTypes.Normal}
-                    inputProps={{
-                    class: "input-primary",
-                    label: "Nombre del local*",
-                    name: "name",
-                    value: currentStore?.name || ""
-                    }}
-                    labelProps={{
-                      class: 'input-group',
-                    }}
+                  label_text="Nombre del local*"
+                  label_for="name"
+                  input_type={InputTypes.Normal}
+                  value={currentStore?.name || ""}
+                  class= "input-primary"
+                  name= "name"
                 />
                 <ValidationField errors={errors} field="name" />
-               </div>   
-                <div class="container-column">
-                  <Input
-                    description="URL de la imagen*"
-                    input_type={InputTypes.Normal}
-                    inputProps={{
-                    class: "input-primary",
-                    label: "Imagen*",
-                    name: "storeURL",
-                    value: currentStore?.storeURL || ""
-                    }}
-                    labelProps={{
-                      class: 'input-group',
-                    }}
-                  />
-                  <ValidationField errors={errors} field="url" />  
-            </div>
-            
+              </div>   
+              <div class="container-column">
+                <Input
+                label_text="URL de la imagen*"
+                label_for="storeURL"
+                input_type={InputTypes.Normal}
+                value={currentStore?.storeURL || ""}
+                class= "input-primary"
+                name= "storeURL"
+                />
+                <ValidationField errors={errors} field="url" />  
+              </div>
             </div>  
             <div class="img-store-container">
               <img src={currentStore?.storeURL || "src/lib/assets/img/CarlosBakeShop.jpg"} alt="local" class="img-store-profile">
@@ -138,50 +127,52 @@
             <div class="grid-cols-2 input-group-dir ">
             <div>
               <Input
-                description="Direccion Local"
+                label_text="Direccion Local"
+                label_for="storeAddress"
                 input_type={InputTypes.Normal}
-                inputProps={{
-                class: "input-primary",
-                label: "Dirección*",
-                name: "storeAddress",
-                value: currentStore?.storeAddress || ""
-              }}/>
+                value={currentStore?.storeAddress || ""}
+                class= "input-primary"
+                name= "storeAddress"
+              />
               <ValidationField errors={errors} field="address" />
             </div>
             <div>
               <Input
-                description="Altura"
+                label_text="Altura"
+                label_for="storeAltitude"
                 input_type={InputTypes.Normal}
-                inputProps={{
-                class: "input-primary",
-                label: "Altura*",
-                name: "storeAltitude",
-                value: currentStore?.storeAltitude || ""
-              }}/>
+                value={currentStore?.storeAltitude || 0}
+                class= "input-primary"
+                name= "storeAltitude"
+                type="number"
+                step="any"
+              />
               <ValidationField errors={errors} field="altitude" />
            </div>  
            <div>
-                <Input
-                description="Latitud"
-                input_type={InputTypes.Normal}
-                inputProps={{
-                class: "input-primary",
-                label: "Latitud*",
-                name: "storeLatitude",
-                value: currentStore?.storeLatitude || ""
-            }}/>
+            <Input
+              label_text="Latitud"
+              label_for="storeLatitude"
+              input_type={InputTypes.Normal}
+              value={currentStore?.storeLatitude || ""}
+              class= "input-primary"
+              name= "storeLatitude"
+              type="number"
+              step="any"
+            />
             <ValidationField errors={errors} field="latitude" />
           </div> 
           <div>
-              <Input
-                description="Longitud"
-                input_type={InputTypes.Normal}
-                inputProps={{
-                class: "input-primary",
-                label: "Longitud*",
-                name: "storeLongitude",
-                value: currentStore?.storeLongitude || ""
-            }}/>
+            <Input
+              label_text="Longitud"
+              label_for="storeLongitude"
+              input_type={InputTypes.Normal}
+              value={currentStore?.storeLongitude || ""}
+              class= "input-primary"
+              name= "storeLongitude"
+              type="number"
+              step="any"
+            />
             <ValidationField errors={errors} field="longitude" />
           </div> 
           </div>
@@ -190,28 +181,30 @@
         <h2 class="subtitle">Porcentajes</h2>
         <div class="grid-cols-2 input-group-dir ">
           <div>
-              <Input
-                description="Porcentaje de comision con la app*"
-                input_type={InputTypes.Normal}
-                inputProps={{
-                class: "input-primary",
-                label: "Porcentaje de comision con la app*",
-                name: "storeAppCommission",
-                value: currentStore?.storeAppCommission || ""
-            }}/>
+            <Input
+              label_text="Porcentaje de comision con la app*"
+              label_for="storeAppCommission"
+              input_type={InputTypes.Normal}
+              value={currentStore?.storeAppCommission || ""}
+              class= "input-primary"
+              name= "storeAppCommission"
+              type="number"
+              step="any"
+            />
             <ValidationField errors={errors} field="appcommission" />
             </div>
       
             <div>
-              <Input
-                description="Porcentaje de comision con autores de platos*"
-                input_type={InputTypes.Normal}
-                inputProps={{
-                class: "input-primary number-input",
-                label: "Porcentaje de comision con autores de platos*",
-                name: "storeAuthorCommission",
-                value: currentStore?.storeAuthorCommission || ""
-            }}/>
+            <Input
+              label_text="Porcentaje de comision con autores de platos*"
+              label_for="storeAuthorCommission"
+              input_type={InputTypes.Normal}
+              value={currentStore?.storeAuthorCommission || ""}
+              class= "input-primary number-input"
+              name= "storeAuthorCommission"
+              type="number"
+              step="any"
+            />
             <ValidationField errors={errors} field="authorcommission" />
             </div>         
         </div>  
@@ -221,43 +214,37 @@
           <h2 class="subtitle">Metodos de Pago</h2>
           <div class="payments-checkbox-group">
             <!-- Checkbox Efectivo -->
-           <Input
-           description="Efectivo"
-           input_type={InputTypes.Checkbox}
-           inputProps={{
-           class: "payment-checkbox",
-           label: "Efectivo",
-           name: "storePaymentEfectivo",
-           id: "storePaymentEfectivo",
-           checked: currentStore?.storePaymentEfectivo || false  
-           }}
-           />
+          <label for="storePaymentEfectivo">
+          <span>Efectivo</span>
+          <input
+            type="checkbox"
+            class="payment-checkbox"
+            name="storePaymentEfectivo"
+            id="storePaymentEfectivo"
+            checked={currentStore?.storePaymentEfectivo || false}>
+          </label>
 
-         <!-- Checkbox QR -->
-         <Input
-          description="QR"
-          input_type={InputTypes.Checkbox}
-          inputProps={{
-          class: "payment-checkbox",
-          label: "QR",
-          name: "storePaymentQR",
-          id: "storePaymentQR",
-          checked: currentStore?.storePaymentQR || false 
-         }}
-        />
+          <!-- Checkbox QR -->
+          <label for="storePaymentQR">
+            <span>QR</span>
+            <input
+              type="checkbox"
+              class="payment-checkbox"
+              name="storePaymentQR"
+              id="storePaymentQR"
+              checked={currentStore?.storePaymentQR || false}>
+          </label>
 
        <!-- Checkbox Transferencia -->
-        <Input
-          description="Transferencia"
-          input_type={InputTypes.Checkbox}
-          inputProps={{
-          class: "payment-checkbox",
-          label: "Transferencia",
-          name: "storePaymentTransferencia",
-          id: "storePaymentTransferencia",
-          checked: currentStore?.storePaymentTransferencia || false  
-         }}
-        />
+        <label for="storePaymentTransferencia">
+          <span>Transferencia</span>
+          <input
+            type="checkbox"
+            class="payment-checkbox"
+            name="storePaymentTransferencia"
+            id="storePaymentTransferencia"
+            checked={currentStore?.storePaymentTransferencia || false}>
+        </label>
         <ValidationField errors={errors} field="metodopago" />
        </div>
      </fieldset>           

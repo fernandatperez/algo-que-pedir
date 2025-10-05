@@ -7,16 +7,12 @@
   //   <link rel="stylesheet" href="../css/style.css" /> esto no hace falta pero no me acuerdo en donde se importa
   import MenuItem from '$lib/components/MenuItem.svelte';
 
-  import { MENUITEMS_MOCK } from "$lib/data/mock/menuItems";
-  import { MENU_ITEMS_JSON_MOCK } from "$lib/data/mock/menuItems";
-  import type { MenuItemType } from "$lib/domain/menuItem";
   import type { MenuItemJSON } from "$lib/domain/menuItem";
-  import { createEmptyMenuItem } from "$lib/domain/menuItem"; // esta funcion crea un objeto vacio, es para el boton agregar nuevo objeto
   import { goto } from '$app/navigation'
 
   import { menuItemsService } from "$lib/services/MenuItemService.js"
-    import { showError } from "$lib/domain/errorHandler";
-    import { onMount } from "svelte";
+  import { showError } from "$lib/domain/errorHandler";
+  import { onMount } from "svelte";
 
   let menuitems: MenuItemJSON[]
 

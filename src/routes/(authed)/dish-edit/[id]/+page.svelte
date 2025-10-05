@@ -19,27 +19,24 @@
   import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients.js"
   import { IngredientType, type IngredientJSON } from "$lib/domain/ingredient.js";
   import ValidationField from "$lib/components/ValidationField.svelte";
-  import InputNew from "$lib/components/InputNew.svelte";
   import { InputTypes } from "$lib/components/InputPropsI.js";
   import Modal from "$lib/components/Modal.svelte";
-
-  /*
-    TODO
-      Se fue el padding entre inputs por que esta comentado en login.css
-  
-  */
+  import Input from "$lib/components/Input.svelte";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
   const { nuevoItem, item } = data
+  
+  const itemEdit = $state(item.toJSON())
+
+  console.info(itemEdit)
 
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
-  let platoAutor: boolean = $state(false);
-  let platoEnPromo: boolean = $state(false);
+  let platoAutor: boolean = $state(itemEdit.esDeAutor);
+  let platoEnPromo: boolean = $state(itemEdit.enPromocion);
 
-  const itemEdit = $state(item.toJSON())
   let modalId: number = $state(0)
 
   let showModalAdd = $state(false)
@@ -63,8 +60,8 @@
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
       (formData.get("precio") ? formData.get("precio") : itemEdit.precio) as number,
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
-      Boolean(formData.get("esDeAutor") ? formData.get("author-dish") : itemEdit.esDeAutor),
-      Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion),
+      platoAutor,
+      platoEnPromo,
       itemEdit.ingredientes
     )
     
@@ -156,7 +153,7 @@
       >
         <div class="container-column product-info">
           <div class="container-column">
-            <InputNew
+            <Input
               label_text="Nombre del Plato*"
               label_for="nombre"
               input_type={InputTypes.Normal}
@@ -183,7 +180,7 @@
             ></textarea>
           </div>
           <div class="container-column">
-            <InputNew
+            <Input
               label_text="URL de la imagen del plato*"
               label_for="url-product-img"
               input_type={InputTypes.Normal}
@@ -197,7 +194,7 @@
             <ValidationField errors={errors} field="imagen" />
           </div>
         </div>
-        <div class="image-product-edit">
+        <div class="image-product-edit img-edit-container">
           <DinamicImage
             imageURL = {itemEdit.imagen}
             imageDescription = "product-load-img"
@@ -215,7 +212,7 @@
         <h2 class="subtitle">Costos</h2>
 
         <div class="container-column input-group">
-          <InputNew
+          <Input
               label_text="Precio Base*"
               label_for="product-base-cost"
               input_type={InputTypes.Normal}
@@ -238,7 +235,14 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="es-de-autor" name="esDeAutor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
+            <input
+              type="checkbox"
+              class="toggle"
+              id="es-de-autor"
+              name="esDeAutor"
+              onclick={() => platoAutor = toggleVariable(platoAutor)}
+              checked={platoAutor}
+              />
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
@@ -253,7 +257,13 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="en-promocion" name="enPromocion" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
+            <input type="checkbox"
+              class="toggle"
+              id="en-promocion"
+              name="enPromocion"
+              onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}
+              checked={platoEnPromo}
+              />
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
