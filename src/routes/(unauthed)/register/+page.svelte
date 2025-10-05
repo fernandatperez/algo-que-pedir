@@ -19,8 +19,6 @@
   let toastLock: boolean = false
 
   let registerMessageNoMatched: string = $state("");
-  let successmessage: string = $state("");
-  let successmessage2: string = $state("");
   let successmessages: string[] = $state([]);
 
   console.log(USERS_LIST_MOCK);
@@ -61,11 +59,6 @@
         }
 
         await userService.createUser(user)
-        setTimeout(() => {
-          successmessage = ""
-          successmessage2 = ""
-          goto ("/")
-        }, 3000)
       } else {
         registerMessageNoMatched = "Las contraseñas no coinciden"
         toasts.push(registerMessageNoMatched, {type: 'error'})
@@ -89,19 +82,6 @@
   <main class="login-section">
     <!-- HEADER -->
     <IconText title="Crea tu cuenta" wrapperClass="header-section" />
-    <!-- {#if registerMessageNoMatched}
-      <section class="error-message-section" transition:fade>
-        <i class="ph ph-warning error-login-message"></i>
-        <p class="error-login-message">{registerMessageNoMatched}</p>
-      </section>
-    {:else if successmessage}
-      <section class="success-register-section" transition:fade>
-        <i class="ph ph-user-check success-message"></i>
-        <p class="success-message">{successmessage}</p>
-        <p class="success-message">{successmessage2}</p>
-      </section>
-    {/if} -->
-
     <!-- FORM -->
     <form class="form-container" onsubmit={onSubmit}>
       <!-- FORM FIELD -->

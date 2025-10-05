@@ -306,36 +306,31 @@
             {/snippet}
           </Modal>
         {/if}
-          <!-- <div class="modal">
-            <h3>Seleccionar ingredientes</h3>
-            {/if}
-            <button type="button" onclick={guardarModal}>Guardar</button>
-          </div>
-        {/if} -->
-          <div class="grid-table-container product-edit-ingredients-table">
-          <header class="grid-table-row table-header">
-            <section class="cell" id="name">Nombre</section>
-            <section class="cell" id="name">Costo</section>
-            <section class="cell later-hid" id="grupo-alimenticio">
-              <span> Grupo </span>
-              <span class="p-alimenticio display-none-mobile"> Alimenticio </span>
+
+        <div class="grid-table-container product-edit-ingredients-table">
+        <header class="grid-table-row table-header">
+          <section class="cell" id="name">Nombre</section>
+          <section class="cell" id="name">Costo</section>
+          <section class="cell later-hid" id="grupo-alimenticio">
+            <span> Grupo </span>
+            <span class="p-alimenticio display-none-mobile"> Alimenticio </span>
+          </section>
+          <section class="cell col-centered later-hid" id="origen">
+            Origen
+          </section>
+          <section class="cell col-centered" id="acciones">Acciones</section>
+        </header>
+        {#each itemEdit.ingredientes as ing}
+          <article class="grid-table-row product-edit-ingredients-table-content">
+            <Ingredient ingredient={ing} />
+            <section class="cell multiple-action-buttons">
+              <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+              <span><i class="ph ph-line-vertical gray-icon"></i></span>
+              <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+              <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
             </section>
-            <section class="cell col-centered later-hid" id="origen">
-              Origen
-            </section>
-            <section class="cell col-centered" id="acciones">Acciones</section>
-          </header>
-          {#each itemEdit.ingredientes as ing}
-            <article class="grid-table-row product-edit-ingredients-table-content">
-              <Ingredient ingredient={ing} />
-              <section class="cell multiple-action-buttons">
-                <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
-                <span><i class="ph ph-line-vertical gray-icon"></i></span>
-                <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
-                <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
-              </section>
-            </article>            
-          {/each}
+          </article>            
+        {/each}
          
         </div>
       </fieldset>
@@ -348,7 +343,6 @@
           actionCancel={() => showModalDelete = false}
         />
       {/if}
-
 
       <section class="btn-group-actions">
         <button class="btn btn-secondary btn-dish" type="reset" onclick={discardBtn}

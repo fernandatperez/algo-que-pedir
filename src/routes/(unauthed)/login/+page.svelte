@@ -59,9 +59,6 @@
 
   console.log(USERS_LIST_MOCK);
 
-  const releaseToast = () => {
-    toastLock = false
-  }  
 </script>
 
 <section class="login-container">
