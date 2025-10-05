@@ -51,7 +51,7 @@
 }
 
 .toast.info {
-  background-color: #2563eb;
+  background-color: var(--alternative-color);
 }
 
 @keyframes slide-in {

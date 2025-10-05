@@ -60,15 +60,6 @@
 
     if (store.errors.length > 0) {
       errors = [...store.errors]
-      if (!toastLock) {
-    // trae un error de cada input para que no salgan toast duplicados
-       const uniqueMessages = [...new Set(store.errors.map(error => error.message))]
-       uniqueMessages.forEach(message => {
-       toasts.push(message, {type: 'error'})
-       })
-      toastLock = true
-      setTimeout(releaseToast, 5000)
-      }
       return errors
     }
 
@@ -78,6 +69,11 @@
       errors = []
       toasts.push('Tienda actualizada exitosamente', {type: 'success'})
     } catch (error) {
+      // error 500
+      if(!toastLock) {
+        toasts.push('Error al actualizar la tienda', {type: 'error'})
+        setTimeout(releaseToast, 5000)
+      }
       showError("Error al actualizar la tienda", error)
     } 
   }
@@ -93,9 +89,9 @@
      <form action="" id="form-store-profile" class="container-column form-store-profile" onsubmit={onSubmit}>
       <!-- Datos del Local  -->
         <fieldset form="form-store-profile" name="store-info" class="content-section form-section-store-info">
-          <div class="grid-cols-2 input-group-dir " >
-            <div>
-                <div>
+          <div class="grid-cols-2 input-group-dir" >
+            <div class="container-column form-section-store-info">
+                <div class="container-column">
                 <Input
                     description="Nombre del local"
                     input_type={InputTypes.Normal}
@@ -105,10 +101,13 @@
                     name: "name",
                     value: currentStore?.name || ""
                     }}
+                    labelProps={{
+                      class: 'input-group',
+                    }}
                 />
                 <ValidationField errors={errors} field="name" />
                </div>   
-                <div>
+                <div class="container-column">
                   <Input
                     description="URL de la imagen*"
                     input_type={InputTypes.Normal}
@@ -117,7 +116,11 @@
                     label: "Imagen*",
                     name: "storeURL",
                     value: currentStore?.storeURL || ""
-                    }}/>
+                    }}
+                    labelProps={{
+                      class: 'input-group',
+                    }}
+                  />
                   <ValidationField errors={errors} field="url" />  
             </div>
             

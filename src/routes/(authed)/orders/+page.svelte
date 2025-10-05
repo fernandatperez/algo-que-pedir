@@ -28,16 +28,13 @@
         errorMessage = ''
         try {
             orders = await orderService.getFilteredOrders(estadoActual)
-            if (orders.length == 0) {
-                errorMessage = 'No hay pedidos'
-                if (!toastLock) {
-                    toasts.push(errorMessage, {type: 'error'})
-                    toastLock = true
-                    setTimeout(releaseToast, 5000)
-                }
-            }
         } catch (error) {
-            showError('Error loading orders', error)
+            if (!toastLock) {
+                toasts.push('Error cargando los pedidos', {type: 'error'})
+                toastLock = true
+                setTimeout(releaseToast, 5000)
+            }
+            showError('Error cargando los pedidos', error)
         }
     }
     
@@ -46,7 +43,7 @@
     const prepararPedido = async (order: Order) => {
         // console.log("Preparando pedido", order.id)
         order.state = Estado.PREPARADO
-        toasts.push('Pedido enviado a preparación', {type: 'success'})
+        toasts.push('Pedido enviado a preparación', {type: 'info'})
         await orderService.updateOrderState(order)
         await getTareas()
         // console.log("Pedido preparado", order.id)
@@ -59,12 +56,12 @@
 </script>
 
 <style>
-    .error-text {
-        background-color: #da8a8a;
-        color: darkred;
+    .no-orders {
+        background-color: var(--background-color-secondary);
+        color: var(--font-color-secondary);
         padding: 1em 3em;
         border-radius: 1em;
-        border: 1px solid darkred;
+        border: 1px solid var(--font-color-secondary);
         text-align: center;
     }
 </style>
@@ -83,12 +80,13 @@
     </section>
 
     <!-- Orders grid -->
-    <ToastContainer errorMessage={errorMessage}  />
     <section class="main-grid">
         <!-- Single order -->
         {#each orders as order}
             <OrderCard order={order} action={() => prepararPedido(order)} />
         {/each}
-        <!-- <Toaster errorMessage={errorMessage} field={'orders'} /> -->
+        {#if orders.length == 0}
+                <div class="no-orders">No hay pedidos</div>
+        {/if}
     </section>
 </main>
