@@ -81,11 +81,6 @@
     color: var(--font-color-tertiary);
 }
 
-.image-product-edit{
-    width: 50%;
-}
-
-
 /* -- ACTION BUTTONS -------------------------- */
 .btn-dish{
     padding: 1em;

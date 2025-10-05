@@ -1,8 +1,9 @@
 <script lang="ts">
+  import "$lib/css/components-css/buttons.css"
+  import "$lib/css/components-css/icon.css"
+  import "$lib/css/pages-css/1-login.css"
+
   import IconText from "$lib/components/IconText.svelte";
-  import "$lib/css/components-css/buttons.css";
-  import "$lib/css/components-css/icon.css";
-  import "$lib/css/pages-css/1-login.css";
 
   import Input from "$lib/components/Input.svelte";
   import { InputTypes } from "$lib/components/InputPropsI";
@@ -72,17 +73,16 @@
   }  
 </script>
 
+<style>
+  /* @import url("$lib/css/components-css/buttons.css"); */
+  /* @import url("$lib/css/components-css/icon.css"); */
+  /* @import url("$lib/css/pages-css/1-login.css"); */
+</style>
+
 <section class="login-container">
   <main class="login-section">
     <!-- HEADER -->
     <IconText wrapperClass="header-section" />
-    {#if errorMessage1st}
-      <section class="error-message-section" transition:fade>
-        <i class="ph ph-warning error-login-message"></i>
-        <p class="error-login-message">{errorMessage1st}</p>
-        <a href="https://passwords.google.com/" class="error-login-message">{errorMessage2nd}</a>
-      </section>
-    {/if}
     <!-- FORM -->
     <form class="form-container" id="form-login" onsubmit={onSubmit}>
       <!-- FORM FIELD -->
@@ -138,24 +138,3 @@
     </form>
   </main>
 </section>
-
-<style>
-  /* Esto es solo para que lo vean no se vuelvan locos */
-  .error-message-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--error-text-color);
-    border-radius: 1em;
-    padding: 0.5em;
-    width: 70%;
-  }
-  .error-login-message {
-    color: white;
-  }
-
-  a {
-    text-decoration: underline;
-  }
-</style>

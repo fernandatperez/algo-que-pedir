@@ -1,6 +1,4 @@
 <script lang="ts">
-    import "$lib/css/pages-css/3-orders.css"
-    
     import OrderCard from '$lib/components/OrderCard.svelte'
     import { Estado, Order } from '$lib/domain/order'
     import { orderService } from '$lib/services/orderService'
@@ -56,6 +54,7 @@
 </script>
 
 <style>
+    @import url("$lib/css/pages-css/3-orders.css");
     .no-orders {
         background-color: var(--background-color-secondary);
         color: var(--font-color-secondary);

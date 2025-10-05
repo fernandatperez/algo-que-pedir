@@ -1,6 +1,4 @@
 <script lang="ts">
-    import '$lib/css/components-css/buttons.css'
-    import '$lib/css/components-css/orderCard.css'
     import type { MouseEventHandler } from 'svelte/elements'
     import { type Order, Estado } from '../domain/order'
 
@@ -12,6 +10,11 @@
     let { order, action = $bindable() } : Props = $props()
     
 </script>
+
+<style>
+    @import url('$lib/css/components-css/buttons.css');
+    @import url('$lib/css/components-css/orderCard.css');
+</style>
 
 <div class="order-card">
     <a href="/order-detail/{order.id}"  data-testid="goto-detail">

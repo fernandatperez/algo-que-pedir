@@ -15,6 +15,15 @@
 
 </script>
 
+<style>
+  .img-product-edit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.5em;
+}
+</style>
+
 <img
   src={imageURL || "/src/lib/assets/img/defaultImage.png"}
   alt={imageDescription}

@@ -51,6 +51,11 @@
     color: var(--primary-color);
 }
 
+.imgcontainer {
+  height: auto;
+  margin: 0em 1em 0em 0em;
+}
+
 /* ----- MEDIA QUERIES ----- */
 
 /** Tablet: 401px - 768 px. */

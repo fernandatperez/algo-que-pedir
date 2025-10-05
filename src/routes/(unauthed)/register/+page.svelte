@@ -1,9 +1,9 @@
 <script lang="ts">
-  import "$lib/css/components-css/buttons.css";
-  import "$lib/css/components-css/icon.css";
+  import "$lib/css/components-css/buttons.css"
+  import "$lib/css/components-css/icon.css"
   import "$lib/css/pages-css/1-login.css"
-  import "$lib/css/pages-css/2-register.css";
-  
+  import "$lib/css/pages-css/2-register.css"
+
   import IconText from "$lib/components/IconText.svelte";
   import Input from "$lib/components/Input.svelte";
   import { InputTypes } from "$lib/components/InputPropsI";
@@ -87,22 +87,17 @@
   } 
 </script>
 
+<style>
+  /* @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/components-css/icon.css");
+  @import url("$lib/css/pages-css/1-login.css");
+  @import url("$lib/css/pages-css/2-register.css"); */
+</style>
+
 <section class="login-container">
   <main class="login-section">
     <!-- HEADER -->
     <IconText title="Crea tu cuenta" wrapperClass="header-section" />
-    <!-- {#if registerMessageNoMatched}
-      <section class="error-message-section" transition:fade>
-        <i class="ph ph-warning error-login-message"></i>
-        <p class="error-login-message">{registerMessageNoMatched}</p>
-      </section>
-    {:else if successmessage}
-      <section class="success-register-section" transition:fade>
-        <i class="ph ph-user-check success-message"></i>
-        <p class="success-message">{successmessage}</p>
-        <p class="success-message">{successmessage2}</p>
-      </section>
-    {/if} -->
 
     <!-- FORM -->
     <form class="form-container" onsubmit={onSubmit}>
@@ -171,32 +166,3 @@
     </form>
   </main>
 </section>
-
-<style>
-  /* Esto es solo para que lo vean no se vuelvan locos */
-  .error-message-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--error-text-color);
-    border-radius: 1em;
-    padding: 0.5em;
-    width: 70%;
-  }
-  .error-login-message,
-  success-message {
-    color: white;
-  }
-
-  .success-register-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: greenyellow;
-    border-radius: 1em;
-    padding: 0.5em;
-    width: 70%;
-  }
-</style>

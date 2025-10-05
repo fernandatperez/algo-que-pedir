@@ -1,11 +1,5 @@
 
 <script lang="ts">
-  // Styles
-  import "$lib/css/flex-grid.css";
-  import "$lib/css/components-css/number-input.css";
-  import "$lib/css/components-css/grid-table.css";
-  import "$lib/css/components-css/buttons.css";
-  import "$lib/css/pages-css/9-store-profile.css";
   import Input from "$lib/components/Input.svelte";
   import { InputTypes } from "$lib/components/InputPropsI"
   import {StoreType} from "$lib/domain/store"
@@ -82,6 +76,15 @@
     toastLock = false
   }
 </script>
+
+<style>
+    /* Styles */
+  @import url("$lib/css/flex-grid.css");
+  @import url("$lib/css/components-css/number-input.css");
+  @import url("$lib/css/components-css/grid-table.css");
+  @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/pages-css/9-store-profile.css");
+</style>
 
 <main class="container-column">
   <article class="container-column main-content">

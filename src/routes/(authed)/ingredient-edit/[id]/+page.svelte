@@ -1,10 +1,4 @@
 <script lang="ts">
-  import '$lib/css/flex-grid.css'
-  import "$lib/css/components-css/switch-button.css"
-  import "$lib/css/components-css/icon.css"
-  import "$lib/css/components-css/buttons.css"
-  import "$lib/css/pages-css/8-ingredient-edit.css"
-  
   import { goto } from '$app/navigation'
   import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
   import type { ValidationMessage } from '$lib/domain/validationMessage.js'
@@ -75,6 +69,14 @@
     toastLock = false
   }
 </script>
+
+<style>
+  @import url('$lib/css/flex-grid.css');
+  @import url("$lib/css/components-css/switch-button.css");
+  @import url("$lib/css/components-css/icon.css");
+  @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/pages-css/8-ingredient-edit.css");
+</style>
 
 <section class="container-column">
   <section class="main-content ingredient-edit-content">

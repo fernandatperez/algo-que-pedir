@@ -13,6 +13,9 @@
   // }
 </script>
 
+<style>
+  @import url("$lib/css/pages-css/5-menu.css");
+</style>
   <!-- <button onclick={()=> goto(`/dish-edit/${menuitem.id}`)}>hola</button> -->
 
 <a class="meal" href={`/dish-edit/${menuitem.id}`} data-testid="menu-link">
