@@ -48,7 +48,6 @@
       await userService.alreadyRegisteredUsername(user.username)
       if (formData.get("password") == formData.get("password-retry")) {
         successmessages = ['Usuario generado con exito.',' Seras redirigido a la pagina de Ingreso']
-        // successmessage2 = "Seras redirigido a la pagina de Ingreso"
 
         if(!toastLock) {
           successmessages.forEach((message) => {
@@ -59,6 +58,10 @@
         }
 
         await userService.createUser(user)
+
+        setTimeout(() => {
+          goto("/")
+        }, 2000)
       } else {
         registerMessageNoMatched = "Las contraseñas no coinciden"
         toasts.push(registerMessageNoMatched, {type: 'error'})
