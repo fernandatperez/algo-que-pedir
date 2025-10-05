@@ -157,8 +157,5 @@
         flex-shrink: 1;
     }
 
-    .hide-on-mobile {
-    display: none;
-  }
 }
 

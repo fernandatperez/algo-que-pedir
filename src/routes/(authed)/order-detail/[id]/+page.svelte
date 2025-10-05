@@ -1,7 +1,7 @@
 <script lang="ts">
+  import GridRow from "$lib/components/GridRow.svelte"
   import "$lib/css/pages-css/4-order-details.css"
   
-  import GridRow from "$lib/components/GridRow.svelte"
   import { goto } from "$app/navigation";
 
   let { data } = $props()
@@ -24,7 +24,7 @@
     </div>
     <section class="content-section-grid grid-cols-2">
       <section>
-        <h3 class="padding-y-05-05">Cliente</h3>
+        <h3 class="padding-y-05">Cliente</h3>
         <div class="user">
           <i class="ph ph-user-circle"></i>
           <div class="user-info">
@@ -34,7 +34,7 @@
         </div>
       </section>
       <section>
-        <h3 class="padding-y-05-05">Direccion de entrega</h3>
+        <h3 class="padding-y-05">Direccion de entrega</h3>
         <address class="address-container">
           <div class="pin-container">
             <i class="ph ph-map-pin"></i>
