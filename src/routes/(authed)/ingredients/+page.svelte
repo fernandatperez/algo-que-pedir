@@ -98,9 +98,10 @@
       await ingredientService.createIngredient(ingredient)
 
       await findIngredients()
-
+      toasts.push('Ingrediente guardado exitosamente', {type: 'success'})
       showForm = false
       errors = [] // limpiar errores
+
     } catch (error) {
       showError("Error al crear el ingrediente", error)
     }
