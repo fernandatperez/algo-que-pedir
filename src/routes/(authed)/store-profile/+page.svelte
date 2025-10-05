@@ -210,44 +210,44 @@
         </div>  
         </fieldset>
     
-         <fieldset form="form-store-profile" name="store-payment-methods" class="container-column content-section">
+        <fieldset form="form-store-profile" name="store-payment-methods" class="container-column content-section">
           <h2 class="subtitle">Metodos de Pago</h2>
           <div class="payments-checkbox-group">
             <!-- Checkbox Efectivo -->
-          <label for="storePaymentEfectivo">
-          <span>Efectivo</span>
-          <input
-            type="checkbox"
-            class="payment-checkbox"
-            name="storePaymentEfectivo"
-            id="storePaymentEfectivo"
-            checked={currentStore?.storePaymentEfectivo || false}>
-          </label>
+            <label for="storePaymentEfectivo">
+              <span>Efectivo</span>
+              <input
+                type="checkbox"
+                class="payment-checkbox"
+                name="storePaymentEfectivo"
+                id="storePaymentEfectivo"
+                checked={currentStore?.storePaymentEfectivo || false}>
+            </label>
 
-          <!-- Checkbox QR -->
-          <label for="storePaymentQR">
-            <span>QR</span>
-            <input
-              type="checkbox"
-              class="payment-checkbox"
-              name="storePaymentQR"
-              id="storePaymentQR"
-              checked={currentStore?.storePaymentQR || false}>
-          </label>
+            <!-- Checkbox QR -->
+            <label for="storePaymentQR">
+              <span>QR</span>
+              <input
+                type="checkbox"
+                class="payment-checkbox"
+                name="storePaymentQR"
+                id="storePaymentQR"
+                checked={currentStore?.storePaymentQR || false}>
+            </label>
 
-       <!-- Checkbox Transferencia -->
-        <label for="storePaymentTransferencia">
-          <span>Transferencia</span>
-          <input
-            type="checkbox"
-            class="payment-checkbox"
-            name="storePaymentTransferencia"
-            id="storePaymentTransferencia"
-            checked={currentStore?.storePaymentTransferencia || false}>
-        </label>
-        <ValidationField errors={errors} field="metodopago" />
-       </div>
-     </fieldset>           
+            <!-- Checkbox Transferencia -->
+            <label for="storePaymentTransferencia">
+              <span>Transferencia</span>
+              <input
+                type="checkbox"
+                class="payment-checkbox"
+                name="storePaymentTransferencia"
+                id="storePaymentTransferencia"
+                checked={currentStore?.storePaymentTransferencia || false}>
+            </label>
+            <ValidationField errors={errors} field="metodopago" />
+          </div>
+        </fieldset>           
     <section class="btn-group-actions">
       <button type="button" class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
       <button type="submit" class="btn btn-primary btn-store" > Guardar<span class="p-cambios display-none-mobile">Cambios</span></button>
