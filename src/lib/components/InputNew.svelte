@@ -21,7 +21,7 @@
 </script>
 
 {#if input_type == InputTypes.Normal}
-<label class="w-100 label-color" for={label_for}>
+<label class="w-100 label-color input-group" for={label_for}>
   <span data-testid='label-normal'>
     {label_text}
   </span>
@@ -29,7 +29,7 @@
   <input {...others} value={value}>
 </label>
 {:else}
-  <label class="w-100 label-color" for={label_for}>
+  <label class="w-100 label-color input-group" for={label_for}>
     <span data-testid='label-hidden'>
       {label_text}
     </span>
