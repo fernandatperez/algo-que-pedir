@@ -12,6 +12,7 @@
     confirmLabel?: string
     actionCancel: MouseEventHandler<HTMLButtonElement>
     actionConfirm: MouseEventHandler<HTMLButtonElement>
+    children?: any // prop para contenido dinámico
   }
 
   let data: ModalProps = $props()
@@ -20,6 +21,17 @@
 <div class="modal-backdrop">
   <div class="modal">
     <h2>{data.title}</h2>
+
+    <!-- Si hay message, lo muestro -->
+     <div class="modal-message">
+       {#if data.message}
+         <p>{@html data.message}</p> <!-- snippets -->
+       {:else}
+         <!-- Si no hay message, renderizar el snippet pasado -->
+         {@render data.children?.()}
+       {/if}
+     </div>
+    
     <section class="cell multiple-action-buttons modal-btns">
       <button class="btn btn-secondary btn-modal" onclick={data.actionCancel}>{data.cancelLabel}</button>
       <button class="btn btn-primary btn-modal" onclick={data.actionConfirm}>{data.confirmLabel}</button>
@@ -55,4 +67,11 @@
     max-width: 500px;
     width: 90%;
 }
+.modal-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* opcional: alinea a la izquierda */
+  margin-top: 1em;
+}
+
 </style>

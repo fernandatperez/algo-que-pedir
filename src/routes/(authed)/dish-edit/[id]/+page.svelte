@@ -22,6 +22,9 @@
   import ValidationField from "$lib/components/ValidationField.svelte";
   import InputNew from "$lib/components/InputNew.svelte";
   import { InputTypes } from "$lib/components/InputPropsI.js";
+  import Modal from "$lib/components/Modal.svelte";
+  import MenuItem from "$lib/components/MenuItem.svelte";
+  import { toasts } from '$lib/components/toast/toastStore'
 
   /*
     TODO
@@ -32,12 +35,18 @@
   // Recibir los datos del +page.ts
   let { data } = $props()
   const { nuevoItem, item } = data
+
   let errors: ValidationMessage[] = $state([])
+  let toastLock: boolean = false
 
   let platoAutor: boolean = $state(false);
   let platoEnPromo: boolean = $state(false);
 
-  const itemEdit = $state(item.toJSON())
+  let itemEdit = $state({...item})
+  let modalId: number = $state(0)
+
+  let showModalAdd = $state(false)
+  let showModalDelete = $state(false)
 
 
   const onSubmit = async (ev: SubmitEvent) => {
@@ -55,7 +64,7 @@
       itemEdit.alt,
       (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
-      Number(formData.get("precio") ? formData.get("precio") : itemEdit.precio),
+      (formData.get("precio") ? formData.get("precio") : itemEdit.precio) as number,
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
       Boolean(formData.get("esDeAutor") ? formData.get("author-dish") : itemEdit.esDeAutor),
       Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion),
@@ -89,20 +98,36 @@
     }
   }
 
-  const removeItem = (id?: number) => {
-    const itemIndex = itemEdit.ingredientes.findIndex(item => item.id == id)
-    itemEdit.ingredientes.splice(itemIndex, 1)
-    selectedIngs = itemEdit.ingredientes
-    updateAvailables()
+  const findItem = async () => {
+    try{
+      itemEdit = await menuItemsService.getMenuItem(itemEdit.id)
+    } catch (error){
+      showError('Conexion al servidor fallida', error)
+    }
   }
+
+  // const removeItem = (id?: number) => {
+  //   const itemIndex = itemEdit.ingredientes.findIndex(item => item.id == id)
+  //   itemEdit.ingredientes.splice(itemIndex, 1)
+  //   selectedIngs = itemEdit.ingredientes
+  //   updateAvailables()
+  // }
+
+  const deleteItem = (ingredientId: number) => {
+    const index = itemEdit.ingredientes.findIndex(i => i.id === ingredientId)
+    if (index !== -1) {
+      itemEdit.ingredientes.splice(index, 1)
+      updateAvailables()
+    }
+    showModalDelete = false
+  }
+
 
   const discardBtn = () => {
     // Aca deberia aparecer el cartel de dana de confirmar descartar
       goto("/menu")
   }
   
-  let showModal = $state(false)
-
   let availableIngredients: IngredientJSON[] = $state(
     itemEdit.ingredientes && itemEdit.ingredientes.length > 0
       ? INGREDIENT_MOCK.filter(
@@ -119,9 +144,22 @@
   }
 
   const guardarModal = () => {
-    showModal = toggleVariable(showModal)
+    showModalAdd = false
     selectedIngs.forEach(ing => itemEdit.ingredientes.push(ing))
     updateAvailables()
+  }
+
+  const descartarModal = () => {
+    showModalAdd = false
+  }
+
+  const releaseToast = () => {
+    toastLock = false
+  }  
+
+  function openModal(id: number) {
+    modalId = id
+    showModalDelete = true
   }
 
 </script>
@@ -254,28 +292,38 @@
         <div class="product-ingredients-cost-subtitle w-100">
           <h3 class="h3">Costo de Producción</h3>
           <p>${MenuItemType.costoDeProduccion(itemEdit)}</p>
-          <button type="button" class="add-ingredient-btn" onclick={() => showModal= toggleVariable(showModal)}>Añadir ingrediente</button>
+          <button type="button" class="add-ingredient-btn" onclick={() => showModalAdd = true}>Añadir ingrediente</button>
           
         </div>
-        {#if showModal}
-        <!-- Hubiera estado barbaro usar el de Dana, pero no me sirve el HTML :/ -->
-          <div class="modal">
+        {#if showModalAdd}
+          <Modal
+            title="Seleccionar ingredientes"
+            confirmLabel="Guardar"
+            cancelLabel="Descartar"
+            actionConfirm={guardarModal}
+            actionCancel={descartarModal}
+          >
+            {#snippet children()}
+              {#if availableIngredients.length != 0}
+                {#each availableIngredients as ingr}
+                  <label>
+                    <input type="checkbox" bind:group={selectedIngs} value={ingr}>
+                    {ingr.name}
+                  </label>
+                  <br>
+                {/each}
+              {:else}
+                <span>No hay ingredientes para mostrar</span>
+              {/if}
+            {/snippet}
+          </Modal>
+        {/if}
+          <!-- <div class="modal">
             <h3>Seleccionar ingredientes</h3>
-            {#if availableIngredients.length != 0}
-              {#each availableIngredients as ingr}
-                <label>
-                  <input type="checkbox" bind:group={selectedIngs} value={ingr}>
-                  {ingr.name}
-                </label>
-                <br>
-              {/each}
-            {:else}
-              <span>No hay ingredientes para mostrar</span>
-              <br>
             {/if}
             <button type="button" onclick={guardarModal}>Guardar</button>
           </div>
-        {/if}
+        {/if} -->
           <div class="grid-table-container product-edit-ingredients-table">
           <header class="grid-table-row table-header">
             <section class="cell" id="name">Nombre</section>
@@ -295,13 +343,24 @@
               <section class="cell multiple-action-buttons">
                 <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
                 <span><i class="ph ph-line-vertical gray-icon"></i></span>
-                <!-- Esto sigue sin funcionar -->
-                <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+                <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+                <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
               </section>
-            </article>
+            </article>            
           {/each}
+         
         </div>
       </fieldset>
+      {#if showModalDelete && modalId}
+        <Modal
+          title={`¿Seguro que querés eliminar el ingrediente "${itemEdit.ingredientes.find(i => i.id === modalId)?.name}"?`} 
+          confirmLabel="Sí"
+          cancelLabel="No"
+          actionConfirm={() => deleteItem(modalId)}
+          actionCancel={() => showModalDelete = false}
+        />
+      {/if}
+
 
       <section class="btn-group-actions">
         <button class="btn btn-secondary btn-dish" type="reset" onclick={discardBtn}

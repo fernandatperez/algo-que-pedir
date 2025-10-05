@@ -38,6 +38,15 @@ class MenuItemsService {
       throw new Error('Item no encontrado')
     }
   }
+
+  async deleteItem(menuItem: MenuItemType){
+    // return axios.delete(REST_SERVER_URL + '/tareas/' + tarea.descripcion)
+    const index = MENU_ITEMS_JSON_MOCK.findIndex(item => item.id === menuItem.id)
+    if (index !== -1) {
+      return MENU_ITEMS_JSON_MOCK.splice(index, 1)[0]
+    }
+    return null
+  }
 }
 
 export const menuItemsService = new MenuItemsService()
