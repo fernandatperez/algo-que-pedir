@@ -5,7 +5,6 @@
   import "$lib/css/pages-css/2-register.css"
 
   import IconText from "$lib/components/IconText.svelte";
-  import Input from "$lib/components/Input.svelte";
   import { InputTypes } from "$lib/components/InputPropsI";
   import { USERS_LIST_MOCK } from "$lib/data/mock/users";
   import { UserType, ValidationMessage } from "$lib/domain/user";
@@ -13,16 +12,13 @@
   import { goto } from "$app/navigation";
   import { showError } from "$lib/domain/errorHandler";
   import ValidationField from "$lib/components/ValidationField.svelte";
-  import { fade } from "svelte/transition";
   import { toasts } from '$lib/components/toast/toastStore'
-    import { clear } from "@testing-library/user-event/dist/cjs/utility/clear.js";
+  import Input from "$lib/components/Input.svelte";
 
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
   let registerMessageNoMatched: string = $state("");
-  let successmessage: string = $state("");
-  let successmessage2: string = $state("");
   let successmessages: string[] = $state([]);
 
   console.log(USERS_LIST_MOCK);
@@ -63,11 +59,6 @@
         }
 
         await userService.createUser(user)
-        setTimeout(() => {
-          successmessage = ""
-          successmessage2 = ""
-          goto ("/")
-        }, 3000)
       } else {
         registerMessageNoMatched = "Las contraseñas no coinciden"
         toasts.push(registerMessageNoMatched, {type: 'error'})
@@ -105,49 +96,37 @@
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
           <Input
-            description="Usuario*"
+            label_text="Usuario*"
+            label_for="username"
             input_type={InputTypes.Normal}
-            labelProps={{
-              class: "label-color",
-              for: "username",
-            }}
-            inputProps={{
-              type: "email",
-              placeholder: "Escribir",
-              id: "register-username-id",
-              class: "input-primary",
-              name: "username",
-            }}
+            value=""
+            type= "email"
+            placeholder= "Escribir"
+            id= "register-username-id"
+            class= "input-primary"
+            name= "username"
           />
           <ValidationField errors={errors} field="username" />
         
           <Input
-            description="Contraseña*"
+            label_text="Contraseña*"
+            label_for="password"
             input_type={InputTypes.Hidden}
-            labelProps={{
-              class: "label-color",
-              for: "password",
-            }}
-            inputProps={{
-              id: "register-password-id",
-              class: "input-primary",
-              name: "password",
-            }}
+            value=""
+            id= "register-password-id"
+            class= "input-primary"
+            name= "password"
           />
           <ValidationField errors={errors} field="password" />
 
           <Input
-            description="Re-ingrese la contraseña*"
+            label_text="Re-ingrese la contraseña*"
+            label_for="register-password-retry"
             input_type={InputTypes.Hidden}
-            labelProps={{
-              class: "label-color",
-              for: "register-password-retry",
-            }}
-            inputProps={{
-              id: "register-password-retry-id",
-              class: "input-primary",
-              name: "password-retry",
-            }}
+            value=""
+            id= "register-password-retry-id"
+            class= "input-primary"
+            name= "password-retry"
           />
           <ValidationField errors={errors} field="password"/>
         </div>

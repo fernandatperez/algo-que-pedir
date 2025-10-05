@@ -1,10 +1,8 @@
 import type { HTMLInputAttributes } from 'svelte/elements'
 
 export enum InputTypes {
-  Normal = 'normal',
+  Normal = 'normal', // Esto no se refiere al type="text" o type="number", es simplemente para el disposicion del HTML
   Hidden = 'hidden',
-  Select = 'select',
-  Checkbox = 'checkbox',
 }
 export type OptionalProps = {
   [key: string]: unknown // diff vals

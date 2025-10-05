@@ -36,7 +36,7 @@ export class IngredientType {
       public name: string = ''.trim(),
       public cost: number = 0,
       public foodGroup?: FoodGroupValue,
-      public esOrigenAnimal: boolean = true 
+      public esOrigenAnimal: boolean = true
   ) {}
 
   static fromJson(ingredientJSON: IngredientJSON): IngredientType {
@@ -51,6 +51,10 @@ export class IngredientType {
       foodGroup: this.foodGroup,
       esOrigenAnimal: this.esOrigenAnimal
     }
+  }
+
+  icono(): string {
+    return this.esOrigenAnimal ? 'ph-cow' : 'ph-plant'
   }
 
   addError(field: string, message: string) {

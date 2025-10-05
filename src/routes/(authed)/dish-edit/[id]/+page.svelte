@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Input from "$lib/components/Input.svelte";
   import DinamicImage from "$lib/components/DinamicImage.svelte";
   import { toggleVariable } from "$lib/utils";
   import Ingredient from "$lib/components/Ingredient.svelte";
@@ -13,29 +12,24 @@
   import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients.js"
   import { IngredientType, type IngredientJSON } from "$lib/domain/ingredient.js";
   import ValidationField from "$lib/components/ValidationField.svelte";
-  import InputNew from "$lib/components/InputNew.svelte";
   import { InputTypes } from "$lib/components/InputPropsI.js";
   import Modal from "$lib/components/Modal.svelte";
-  import MenuItem from "$lib/components/MenuItem.svelte";
-  import { toasts } from '$lib/components/toast/toastStore'
-
-  /*
-    TODO
-      Se fue el padding entre inputs por que esta comentado en login.css
-  
-  */
+  import Input from "$lib/components/Input.svelte";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
   const { nuevoItem, item } = data
+  
+  const itemEdit = $state(item.toJSON())
+
+  console.info(itemEdit)
 
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
-  let platoAutor: boolean = $state(false);
-  let platoEnPromo: boolean = $state(false);
+  let platoAutor: boolean = $state(itemEdit.esDeAutor);
+  let platoEnPromo: boolean = $state(itemEdit.enPromocion);
 
-  let itemEdit = $state({...item})
   let modalId: number = $state(0)
 
   let showModalAdd = $state(false)
@@ -59,8 +53,8 @@
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
       (formData.get("precio") ? formData.get("precio") : itemEdit.precio) as number,
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
-      Boolean(formData.get("esDeAutor") ? formData.get("author-dish") : itemEdit.esDeAutor),
-      Boolean(formData.get("enPromocion") ? formData.get("enPromocion") : itemEdit.enPromocion),
+      platoAutor,
+      platoEnPromo,
       itemEdit.ingredientes
     )
     
@@ -107,22 +101,14 @@
     }
   }
 
-  // const removeItem = (id?: number) => {
-  //   const itemIndex = itemEdit.ingredientes.findIndex(item => item.id == id)
-  //   itemEdit.ingredientes.splice(itemIndex, 1)
-  //   selectedIngs = itemEdit.ingredientes
-  //   updateAvailables()
-  // }
-
   const deleteItem = (ingredientId: number) => {
-    const index = itemEdit.ingredientes.findIndex(i => i.id === ingredientId)
-    if (index !== -1) {
+    const index = itemEdit.ingredientes.findIndex(i => i.id == ingredientId)
+    if (index != -1) {
       itemEdit.ingredientes.splice(index, 1)
       updateAvailables()
     }
     showModalDelete = false
   }
-
 
   const discardBtn = () => {
     // Aca deberia aparecer el cartel de dana de confirmar descartar
@@ -132,7 +118,7 @@
   let availableIngredients: IngredientJSON[] = $state(
     itemEdit.ingredientes && itemEdit.ingredientes.length > 0
       ? INGREDIENT_MOCK.filter(
-        ing => !itemEdit.ingredientes.some(sel => sel.id === ing.id))
+        ing => !itemEdit.ingredientes.some(sel => sel.id == ing.id))
       : INGREDIENT_MOCK
   )
   
@@ -140,23 +126,19 @@
   
   const updateAvailables = () => {
     availableIngredients = INGREDIENT_MOCK.filter(
-    ing => !itemEdit.ingredientes.some(itemIng => itemIng.id === ing.id))
+    ing => !itemEdit.ingredientes.some(itemIng => itemIng.id == ing.id))
     selectedIngs = []
   }
 
   const guardarModal = () => {
     showModalAdd = false
-    selectedIngs.forEach(ing => itemEdit.ingredientes.push(ing))
+    selectedIngs.forEach(ing => itemEdit.ingredientes.push(IngredientType.fromJson(ing)))
     updateAvailables()
   }
 
   const descartarModal = () => {
     showModalAdd = false
   }
-
-  const releaseToast = () => {
-    toastLock = false
-  }  
 
   function openModal(id: number) {
     modalId = id
@@ -204,7 +186,7 @@
       >
         <div class="container-column product-info">
           <div class="container-column">
-            <InputNew
+            <Input
               label_text="Nombre del Plato*"
               label_for="nombre"
               input_type={InputTypes.Normal}
@@ -231,7 +213,7 @@
             ></textarea>
           </div>
           <div class="container-column">
-            <InputNew
+            <Input
               label_text="URL de la imagen del plato*"
               label_for="url-product-img"
               input_type={InputTypes.Normal}
@@ -262,8 +244,8 @@
       >
         <h2 class="subtitle">Costos</h2>
 
-        <div class="container-column">
-          <InputNew
+        <div class="container-column input-group">
+          <Input
               label_text="Precio Base*"
               label_for="product-base-cost"
               input_type={InputTypes.Normal}
@@ -273,6 +255,7 @@
               name="precio"
               bind:value={itemEdit.precio}
               placeholder="Escribir |"
+              step="any"
             />
           <ValidationField errors={errors} field="precio" />
         </div>
@@ -285,7 +268,14 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="es-de-autor" name="esDeAutor" onclick={() => platoAutor = toggleVariable(platoAutor)}/>
+            <input
+              type="checkbox"
+              class="toggle"
+              id="es-de-autor"
+              name="esDeAutor"
+              onclick={() => platoAutor = toggleVariable(platoAutor)}
+              checked={platoAutor}
+              />
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
@@ -300,7 +290,13 @@
             </p>
           </label>
           <div class="slide-button">
-            <input type="checkbox" class="toggle" id="en-promocion" name="enPromocion" onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}/>
+            <input type="checkbox"
+              class="toggle"
+              id="en-promocion"
+              name="enPromocion"
+              onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}
+              checked={platoEnPromo}
+              />
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
@@ -343,36 +339,31 @@
             {/snippet}
           </Modal>
         {/if}
-          <!-- <div class="modal">
-            <h3>Seleccionar ingredientes</h3>
-            {/if}
-            <button type="button" onclick={guardarModal}>Guardar</button>
-          </div>
-        {/if} -->
-          <div class="grid-table-container product-edit-ingredients-table">
-          <header class="grid-table-row table-header">
-            <section class="cell" id="name">Nombre</section>
-            <section class="cell" id="name">Costo</section>
-            <section class="cell later-hid" id="grupo-alimenticio">
-              <span> Grupo </span>
-              <span class="p-alimenticio display-none-mobile"> Alimenticio </span>
+
+        <div class="grid-table-container product-edit-ingredients-table">
+        <header class="grid-table-row table-header">
+          <section class="cell" id="name">Nombre</section>
+          <section class="cell" id="name">Costo</section>
+          <section class="cell later-hid" id="grupo-alimenticio">
+            <span> Grupo </span>
+            <span class="p-alimenticio display-none-mobile"> Alimenticio </span>
+          </section>
+          <section class="cell col-centered later-hid" id="origen">
+            Origen
+          </section>
+          <section class="cell col-centered" id="acciones">Acciones</section>
+        </header>
+        {#each itemEdit.ingredientes as ing}
+          <article class="grid-table-row product-edit-ingredients-table-content">
+            <Ingredient ingredient={ing} />
+            <section class="cell multiple-action-buttons">
+              <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+              <span><i class="ph ph-line-vertical gray-icon"></i></span>
+              <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+              <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
             </section>
-            <section class="cell col-centered later-hid" id="origen">
-              Origen
-            </section>
-            <section class="cell col-centered" id="acciones">Acciones</section>
-          </header>
-          {#each itemEdit.ingredientes as ing}
-            <article class="grid-table-row product-edit-ingredients-table-content">
-              <Ingredient ingredient={ing} />
-              <section class="cell multiple-action-buttons">
-                <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
-                <span><i class="ph ph-line-vertical gray-icon"></i></span>
-                <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
-                <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
-              </section>
-            </article>            
-          {/each}
+          </article>            
+        {/each}
          
         </div>
       </fieldset>
@@ -385,7 +376,6 @@
           actionCancel={() => showModalDelete = false}
         />
       {/if}
-
 
       <section class="btn-group-actions">
         <button class="btn btn-secondary btn-dish" type="reset" onclick={discardBtn}
