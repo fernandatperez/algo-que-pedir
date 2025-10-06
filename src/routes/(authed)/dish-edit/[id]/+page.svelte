@@ -162,6 +162,12 @@
     position: absolute;
     right: 0;
   }
+
+  @media screen and (max-width: 430px) {
+    .product-edit-ingredients-table .grid-table-row {
+      grid-template-columns: 2fr 1.5fr 1.5fr;  
+    }
+  }
 </style>
 
 <main class="container-column">
