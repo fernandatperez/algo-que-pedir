@@ -1,5 +1,8 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3
 
+import ar.edu.unsam.algo3.Ingrediente
+import ar.edu.unsam.algo3.errores.JSONVacioException
+import ar.edu.unsam.algo3.repositorio.Repositorio
 import kotlinx.serialization.json.*
 
 open class ActualizadorIngredientes(

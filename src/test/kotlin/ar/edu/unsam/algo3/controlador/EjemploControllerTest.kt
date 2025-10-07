@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo3.controller
+package ar.edu.unsam.algo3.controlador
 
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

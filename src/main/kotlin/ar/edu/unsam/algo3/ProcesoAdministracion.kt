@@ -1,4 +1,7 @@
-import ar.edu.unsam.algo2.algoQuePedir.*
+package ar.edu.unsam.algo3
+
+import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.InstanciaActualizador
+import ar.edu.unsam.algo3.repositorio.Repositorio
 
 // todo: Preguntar al profesor si es un repositorio de cada tipo solamente o si hay por ejemplo cada local tiene un repositorio de platos
 // Command

@@ -1,4 +1,6 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo3
+
+import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
 
 // STRATEGY
 interface CriterioCliente {

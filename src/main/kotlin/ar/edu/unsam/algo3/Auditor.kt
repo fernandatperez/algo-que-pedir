@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo3
 
 // === STRATEGY y NULL OBJECT PATTERN
 // Cada strategy redefine a estos metodos:

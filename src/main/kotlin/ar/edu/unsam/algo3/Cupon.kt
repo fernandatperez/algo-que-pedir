@@ -1,4 +1,5 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo3
+import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import java.time.DayOfWeek
 import java.time.LocalDate
 import kotlin.math.min

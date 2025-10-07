@@ -1,6 +1,8 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo3
 
-import Mensaje
+import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.diasHastaAhora
+import ar.edu.unsam.algo3.errores.SobrepasoPuntuacion
+import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 
 enum class Pago {
     EFECTIVO,

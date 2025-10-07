@@ -1,4 +1,6 @@
 import ar.edu.unsam.algo2.algoQuePedir.*
+import ar.edu.unsam.algo3.repositorio.Repositorio
+import ar.edu.unsam.algo3.*
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -68,7 +70,8 @@ class ProcesosAdminSpec: DescribeSpec ({
                     "grupo": "LACTEOS",
                     "origenAnimal": true
                     }]""",
-                ))
+                )
+            )
             procesoAdministracion.ejecutarAcciones()
 
             val ingredienteActualizado = repoIng.obtenerObjeto(1)

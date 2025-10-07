@@ -1,5 +1,10 @@
 package ar.edu.unsam.algo2.algoQuePedir
 
+import ar.edu.unsam.algo3.repositorio.Repositorio
+import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.*
+import ar.edu.unsam.algo3.errores.IdInexistente
+import ar.edu.unsam.algo3.errores.ObjetoIDoVerificacionFallaron
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe

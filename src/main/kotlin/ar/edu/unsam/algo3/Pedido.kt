@@ -1,6 +1,10 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo3
 
-import PedidoConfirmadoObserver
+import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.errores.CuponNoAplicable
+import ar.edu.unsam.algo3.errores.MedioDePagoNoPermitido
+import ar.edu.unsam.algo3.errores.NoEsElMismoUsuario
+import ar.edu.unsam.algo3.errores.PlatoNoEsDeLocalException
 import java.time.LocalDate
 import java.time.LocalTime
 

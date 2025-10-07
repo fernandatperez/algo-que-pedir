@@ -1,4 +1,5 @@
-import ar.edu.unsam.algo2.algoQuePedir.*
+import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.*
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec

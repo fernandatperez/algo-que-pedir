@@ -1,4 +1,4 @@
-import ar.edu.unsam.algo2.algoQuePedir.*
+package ar.edu.unsam.algo3
 
 interface MailSender {
     fun sendMail(mail: Mail)

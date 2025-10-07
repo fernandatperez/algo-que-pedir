@@ -1,3 +1,5 @@
+package ar.edu.unsam.algo3
+
 import java.time.LocalDate
 
 data class Mensaje(

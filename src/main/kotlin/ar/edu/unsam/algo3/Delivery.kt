@@ -1,5 +1,7 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo3
 
+import ar.edu.unsam.algo3.errores.YaEstaEnLaListaException
+import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import org.uqbar.geodds.Point
 import org.uqbar.geodds.Polygon
 

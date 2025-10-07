@@ -1,4 +1,7 @@
-package ar.edu.unsam.algo2.algoQuePedir
+package ar.edu.unsam.algo3.repositorio
+
+import ar.edu.unsam.algo3.errores.IdInexistente
+import ar.edu.unsam.algo3.errores.ObjetoIDoVerificacionFallaron
 
 // Para que un tipo generico pueda ser mas de una sola cosa
 // class Repositorio<Type> where Type : UnaInterfaz, Type : OtraInterfaz...
