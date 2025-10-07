@@ -27,6 +27,12 @@ export const foodGroupDict: Record<FoodGroupValue, { icon: string; label: string
   [FoodGroupValue.AZUCARES_Y_DULCES]: { icon: 'ph-plant', label: 'Azucares y dulces' },
 }
 
+const gruposVegetales = [
+  FoodGroupValue.FRUTAS_Y_VERDURAS,
+  FoodGroupValue.CEREALES_Y_TUBERCULOS,
+  FoodGroupValue.AZUCARES_Y_DULCES
+]
+
 export class IngredientType {
   errors: ValidationMessage[] = []
 
@@ -37,7 +43,11 @@ export class IngredientType {
       public cost: number = 0,
       public foodGroup?: FoodGroupValue,
       public esOrigenAnimal: boolean = true
-  ) {}
+  ) {
+    if (gruposVegetales.find(grupo => grupo == this.foodGroup)) {
+      this.esOrigenAnimal = false
+    }
+  }
 
   static fromJson(ingredientJSON: IngredientJSON): IngredientType {
     return Object.assign(new IngredientType(), ingredientJSON, {})
