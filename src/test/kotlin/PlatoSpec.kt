@@ -1,8 +1,9 @@
 package ar.edu.unsam.algo2.algoQuePedir
 
-import ar.edu.unsam.algo3.*
 import ar.edu.unsam.algo3.errores.DescuentoMayorAlCienException
 import ar.edu.unsam.algo3.errores.NoAplicaDescuentoEnPlatoNuevoException
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.plato.Plato
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -51,16 +52,16 @@ class PlatoSpec : DescribeSpec({
     }
 
     describe("Calculos y porcentajes") {
-        val carne = Ingrediente(
+        val carne = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
             costoMercado = 1000.0
         )
-        val papas = Ingrediente(
+        val papas = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
             costoMercado = 200.0
         )
-        val aceite = Ingrediente(
+        val aceite = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
             costoMercado = 500.0
         )
-        val panRallado = Ingrediente(
+        val panRallado = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
             costoMercado = 300.0
         )
 

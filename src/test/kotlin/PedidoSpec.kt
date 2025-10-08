@@ -1,8 +1,11 @@
 package ar.edu.unsam.algo2.algoQuePedir
 
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
-import ar.edu.unsam.algo3.*
 import ar.edu.unsam.algo3.errores.PlatoNoEsDeLocalException
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.local.Pago
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.plato.Plato
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.spec.IsolationMode.*

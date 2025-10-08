@@ -1,7 +1,17 @@
-import ar.edu.unsam.algo2.algoQuePedir.*
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
-import ar.edu.unsam.algo3.*
 import ar.edu.unsam.algo3.errores.YaEstaEnLaListaException
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.delivery.Delivery
+import ar.edu.unsam.algo3.modelo.delivery.DeliveryCaro
+import ar.edu.unsam.algo3.modelo.delivery.DeliveryCertificado
+import ar.edu.unsam.algo3.modelo.delivery.DeliveryCombinadoAnd
+import ar.edu.unsam.algo3.modelo.delivery.DeliveryCombinadoOr
+import ar.edu.unsam.algo3.modelo.delivery.DeliveryLocales
+import ar.edu.unsam.algo3.modelo.delivery.DeliverySeguro
+import ar.edu.unsam.algo3.modelo.pedido.Estado
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.utils.Direccion
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -76,7 +86,7 @@ class DeliverySpec : DescribeSpec({
         it("Un Delivery Caro puede entregar un pedido mayor o igual a 30000") {
             // Arrange
             val platoCaro = Plato(valorBase = 30001.0) // El total es 33001.1
-            platoCaro.agregarIngrediente(Ingrediente())
+            platoCaro.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente())
             val pedidoCaro = Pedido(
                 usuario = usuarioEnZona,
                 local = localEnZona,
@@ -130,7 +140,7 @@ class DeliverySpec : DescribeSpec({
             val deliverySeguroOCaro = Delivery(zonaDeTrabajo = zonaDelivery, tipo = tipoCombinadoOr)
 
             // Act
-            platoBarato.agregarIngrediente(Ingrediente()) // debe tener al menos 1 ingrediente
+            platoBarato.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente()) // debe tener al menos 1 ingrediente
             pedidoBarato.agregarPlato(platoBarato)
             // Assert
             deliverySeguroOCaro.puedeEntregar(pedidoBarato) shouldBe true
@@ -176,7 +186,7 @@ class DeliverySpec : DescribeSpec({
             val delivery = Delivery(zonaDeTrabajo = zonaDelivery, tipo = tipoCombinadoAndOr)
 
             // Act
-            platoCaro.agregarIngrediente(Ingrediente()) // debe tener al menos 1 ingrediente
+            platoCaro.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente()) // debe tener al menos 1 ingrediente
             pedidoCaro.agregarPlato(platoCaro)
             tipoDeliveryLocal.agregarLocalPreferido(local = localEnZona)
             localEnZona.agregarPuntuacion(5) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
@@ -256,7 +266,7 @@ class DeliverySpec : DescribeSpec({
         it("Un Delivery Caro puede entregar un pedido menor a 30000") {
             // Arrange
             val platoBarato = Plato(valorBase = 1.0) // El total es 1.1
-            platoBarato.agregarIngrediente(Ingrediente())
+            platoBarato.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente())
             val pedidoCaro = Pedido(
                 usuario = usuarioEnZona,
                 local = localEnZona,
@@ -312,7 +322,7 @@ class DeliverySpec : DescribeSpec({
             val deliverySeguroOCaro = Delivery(zonaDeTrabajo = zonaDelivery, tipo = tipoCombinadoOr)
 
             // Act
-            platoBarato.agregarIngrediente(Ingrediente()) // debe tener al menos 1 ingrediente
+            platoBarato.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente()) // debe tener al menos 1 ingrediente
             pedidoEnZona.agregarPlato(platoBarato)
             // Assert
             deliverySeguroOCaro.puedeEntregar(pedidoEnZona) shouldBe false
@@ -358,7 +368,7 @@ class DeliverySpec : DescribeSpec({
             val delivery = Delivery(zonaDeTrabajo = zonaDelivery, tipo = tipoCombinadoAndOr)
 
             // Act
-            platoBarato.agregarIngrediente(Ingrediente()) // debe tener al menos 1 ingrediente
+            platoBarato.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente()) // debe tener al menos 1 ingrediente
             pedidoEnZona.agregarPlato(platoBarato)
             tipoDeliveryLocal.agregarLocalPreferido(local = localPreferido)
             localEnZona.agregarPuntuacion(5) // Certificado: Promedio de puntuacion debe estar entre 4 y 5

@@ -1,7 +1,13 @@
 package ar.edu.unsam.algo2.algoQuePedir
 
-import ar.edu.unsam.algo3.*
+import ar.edu.unsam.algo3.modelo.cupon.DescuentoPorDia
+import ar.edu.unsam.algo3.modelo.cupon.DescuentoPorLocal
+import ar.edu.unsam.algo3.modelo.cupon.DescuentoPorPorcentaje
 import ar.edu.unsam.algo3.errores.CuponNoAplicable
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.local.Pago
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.plato.Plato
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.spec.IsolationMode.*

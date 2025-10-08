@@ -1,4 +1,6 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.delivery
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import java.time.LocalTime
 
 

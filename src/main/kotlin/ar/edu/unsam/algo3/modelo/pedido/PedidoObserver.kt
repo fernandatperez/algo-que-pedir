@@ -1,5 +1,13 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.pedido
 
+import ar.edu.unsam.algo3.modelo.usuario.Combinado
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.utils.Mail
+import ar.edu.unsam.algo3.modelo.utils.MailSender
+import ar.edu.unsam.algo3.modelo.utils.Mensaje
+import ar.edu.unsam.algo3.modelo.auditor.Objetivo
+import ar.edu.unsam.algo3.modelo.usuario.Vegano
+import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.repositorio.Repositorio
 import java.time.LocalDate
 
@@ -15,11 +23,11 @@ class PublicidadMailObserver(
     override fun pedidoConfirmado(pedido: Pedido) {
         if (localContienePlatoPreferido(pedido)) {
             val mail = Mail(
-                    from = "publi@algoquepedir.com",
-                    to = pedido.usuario.mailPrincipal,
-                    subject = "Te puede interesar este plato!",
-                    content = "Basado en tus preferencias no te podes perder: ${platoRecomendado(pedido).nombre}",
-                )
+                from = "publi@algoquepedir.com",
+                to = pedido.usuario.mailPrincipal,
+                subject = "Te puede interesar este plato!",
+                content = "Basado en tus preferencias no te podes perder: ${platoRecomendado(pedido).nombre}",
+            )
             mailSender.sendMail(mail)
         }
     }

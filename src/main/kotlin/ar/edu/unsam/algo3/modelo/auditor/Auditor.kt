@@ -1,4 +1,6 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.auditor
+
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
 
 // === STRATEGY y NULL OBJECT PATTERN
 // Cada strategy redefine a estos metodos:

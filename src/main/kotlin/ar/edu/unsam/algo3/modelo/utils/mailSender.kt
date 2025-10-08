@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.utils
 
 interface MailSender {
     fun sendMail(mail: Mail)

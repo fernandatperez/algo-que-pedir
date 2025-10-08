@@ -1,4 +1,6 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.cupon
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import java.time.DayOfWeek
 import java.time.LocalDate

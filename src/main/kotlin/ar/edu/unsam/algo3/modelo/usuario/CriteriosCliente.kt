@@ -1,6 +1,8 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.usuario
 
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.plato.Plato
 
 // STRATEGY
 interface CriterioCliente {

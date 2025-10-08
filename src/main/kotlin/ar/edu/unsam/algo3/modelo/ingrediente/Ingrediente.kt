@@ -1,6 +1,7 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.ingrediente
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 // defino los grupos alimenticios en una clase enumerada
 // Mayúscula y separado por _ : SCREAMING_SNAKE_CASE

@@ -23,6 +23,10 @@ repositories {
 dependencies {
     val kotestVersion = "5.8.0"
 
+    // Traidos de nuestro proyecto
+    implementation("org.uqbar-project:geodds-xtend:1.0.3") // No parecen importantes. Pero que onda...?
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+
     // básicos de cualquier proyecto Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")

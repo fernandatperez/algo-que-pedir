@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.utils
 
 import org.uqbar.geodds.Point
 

@@ -1,8 +1,20 @@
 package ar.edu.unsam.algo2.algoQuePedir
 
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
-import ar.edu.unsam.algo3.*
 import ar.edu.unsam.algo3.errores.PerteneceAotraListaException
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.CambianteSegunEdad
+import ar.edu.unsam.algo3.modelo.usuario.Combinado
+import ar.edu.unsam.algo3.modelo.usuario.Conservador
+import ar.edu.unsam.algo3.modelo.usuario.Consumista
+import ar.edu.unsam.algo3.modelo.usuario.Exquisito
+import ar.edu.unsam.algo3.modelo.usuario.Fieles
+import ar.edu.unsam.algo3.modelo.usuario.Generalista
+import ar.edu.unsam.algo3.modelo.usuario.Impaciente
+import ar.edu.unsam.algo3.modelo.usuario.Vegano
+import ar.edu.unsam.algo3.modelo.utils.Direccion
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.assertions.throwables.shouldThrow
 //import io.kotest.core.spec.style.StringSpec
@@ -14,23 +26,23 @@ import org.uqbar.geodds.Point // se importo aca no me anda lo de bulid.gradle.kt
 //import io.kotest.matchers.shouldNotBe
 
 class UsuarioSpec : DescribeSpec({
-    val carne = Ingrediente(
+    val carne = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
         nombre = "carne",
         costoMercado = 1000.0,
         esOrigenAnimal = true,
-        grupoAlimenticio = GrupoAlimenticio.PROTEINAS
+        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.PROTEINAS
     )
-    val papa = Ingrediente(
+    val papa = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
         nombre = "papa",
         costoMercado = 200.0,
         esOrigenAnimal = false,
-        grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS
+        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.FRUTAS_Y_VERDURAS
     )
-    val aceite = Ingrediente(
+    val aceite = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
         nombre = "aceite",
         costoMercado = 500.0,
         esOrigenAnimal = false,
-        grupoAlimenticio = GrupoAlimenticio.GRASAS_Y_ACEITES
+        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.GRASAS_Y_ACEITES
     )
 
     val direccionLocalCercano = Direccion(ubicacion = Point(-34.52564, -58.51289))

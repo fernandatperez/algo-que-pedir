@@ -1,10 +1,15 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.pedido
 
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.cupon.Cupon
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.errores.CuponNoAplicable
 import ar.edu.unsam.algo3.errores.MedioDePagoNoPermitido
 import ar.edu.unsam.algo3.errores.NoEsElMismoUsuario
 import ar.edu.unsam.algo3.errores.PlatoNoEsDeLocalException
+import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.cupon.nullCupon
 import java.time.LocalDate
 import java.time.LocalTime
 

@@ -1,6 +1,6 @@
-package ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3
+package ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3 // Esto ta raro...
 
-import ar.edu.unsam.algo3.Ingrediente
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.errores.JSONVacioException
 import ar.edu.unsam.algo3.repositorio.Repositorio
 import kotlinx.serialization.json.*

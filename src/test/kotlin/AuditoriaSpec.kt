@@ -1,5 +1,11 @@
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
-import ar.edu.unsam.algo3.*
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.auditor.ObjetivoAcumuladoVentas
+import ar.edu.unsam.algo3.modelo.auditor.ObjetivoCombinado
+import ar.edu.unsam.algo3.modelo.auditor.ObjetivoPlatosVeganos
+import ar.edu.unsam.algo3.modelo.pedido.AuditoriaObserver
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.plato.Plato
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
@@ -11,30 +17,30 @@ class AuditoriaSpec: DescribeSpec ({
 
     val local = Local()
 
-    val carne = Ingrediente(
+    val carne = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
         nombre = "carne",
         costoMercado = 1000.0,
         esOrigenAnimal = true,
-        grupoAlimenticio = GrupoAlimenticio.PROTEINAS
+        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.PROTEINAS
     )
-    val papa = Ingrediente(
+    val papa = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
         nombre = "papa",
         costoMercado = 200.0,
         esOrigenAnimal = false,
-        grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS
+        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.FRUTAS_Y_VERDURAS
     )
-    val aceite = Ingrediente(
+    val aceite = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
         nombre = "aceite",
         costoMercado = 500.0,
         esOrigenAnimal = false,
-        grupoAlimenticio = GrupoAlimenticio.GRASAS_Y_ACEITES
+        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.GRASAS_Y_ACEITES
     )
 
-    val brocoli = Ingrediente(
+    val brocoli = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
         nombre = "Brocoli",
         costoMercado = 400.0,
         esOrigenAnimal = false,
-        grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS
+        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.FRUTAS_Y_VERDURAS
     )
 
     val milasConFritas = Plato(
@@ -79,7 +85,11 @@ class AuditoriaSpec: DescribeSpec ({
         it("Se cumple el objetivo y devuelve true si supera un acumulado de ventas"){
             // Arrange
             val objetivoAcumuladoVentas = ObjetivoAcumuladoVentas(500.0, 5.0)
-            val pedido = Pedido(platos = mutableListOf(milasConFritas,carneConPapas), local = local, usuario = usuario).apply {
+            val pedido = Pedido(
+                platos = mutableListOf(milasConFritas, carneConPapas),
+                local = local,
+                usuario = usuario
+            ).apply {
                 agregarObserver(AuditoriaObserver)
             }
             AuditoriaObserver.agregarLocal(local, objetivoAcumuladoVentas)
@@ -101,13 +111,17 @@ class AuditoriaSpec: DescribeSpec ({
 
         it("Se testea una auditoria combinada que cumpla con el objetivo"){
             // Arrange
-            val objetivoPlatosVeganos = ObjetivoPlatosVeganos(contadorPlatosVeganos = 2, meta=2)
+            val objetivoPlatosVeganos = ObjetivoPlatosVeganos(contadorPlatosVeganos = 2, meta = 2)
             val objetivoAcumuladoVentas = ObjetivoAcumuladoVentas(500.0, 5.0)
-            val objetivoCombinado = ObjetivoCombinado(mutableSetOf(objetivoAcumuladoVentas,objetivoPlatosVeganos))
-            val pedido = Pedido(platos = mutableListOf(milasConFritas,carneConPapas), local = local, usuario = usuario).apply {
+            val objetivoCombinado = ObjetivoCombinado(mutableSetOf(objetivoAcumuladoVentas, objetivoPlatosVeganos))
+            val pedido = Pedido(
+                platos = mutableListOf(milasConFritas, carneConPapas),
+                local = local,
+                usuario = usuario
+            ).apply {
                 agregarObserver(AuditoriaObserver)
             }
-            val pedidoVegano = Pedido(platos = mutableListOf(papasFritas,brocoliHervido), local = local )
+            val pedidoVegano = Pedido(platos = mutableListOf(papasFritas, brocoliHervido), local = local)
             AuditoriaObserver.agregarLocal(local, objetivoCombinado)
             // Act
             usuario.confirmarPedido(pedido)
@@ -117,13 +131,17 @@ class AuditoriaSpec: DescribeSpec ({
 
         it("Se testea una auditoria combinada que NO cumpla con el objetivo"){
             // Arrange
-            val objetivoPlatosVeganos = ObjetivoPlatosVeganos(contadorPlatosVeganos = 5, meta=10) // Esta NO cumple
+            val objetivoPlatosVeganos = ObjetivoPlatosVeganos(contadorPlatosVeganos = 5, meta = 10) // Esta NO cumple
             val objetivoAcumuladoVentas = ObjetivoAcumuladoVentas(500.0, 5.0) // Esta SI cumple
-            val objetivoCombinado = ObjetivoCombinado(mutableSetOf(objetivoAcumuladoVentas,objetivoPlatosVeganos))
-            val pedido = Pedido(platos = mutableListOf(milasConFritas,carneConPapas), local = local, usuario = usuario).apply {
+            val objetivoCombinado = ObjetivoCombinado(mutableSetOf(objetivoAcumuladoVentas, objetivoPlatosVeganos))
+            val pedido = Pedido(
+                platos = mutableListOf(milasConFritas, carneConPapas),
+                local = local,
+                usuario = usuario
+            ).apply {
                 agregarObserver(AuditoriaObserver)
             }
-            val pedidoVegano = Pedido(platos = mutableListOf(papasFritas,brocoliHervido), local = local )
+            val pedidoVegano = Pedido(platos = mutableListOf(papasFritas, brocoliHervido), local = local)
             AuditoriaObserver.agregarLocal(local, objetivoCombinado)
             // Act
             usuario.confirmarPedido(pedido)

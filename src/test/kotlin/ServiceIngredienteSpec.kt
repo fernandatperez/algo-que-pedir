@@ -1,7 +1,7 @@
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.InstanciaActualizador
 import ar.edu.unsam.algo3.repositorio.Repositorio
-import ar.edu.unsam.algo3.GrupoAlimenticio
-import ar.edu.unsam.algo3.Ingrediente
+import ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.errores.JSONVacioException
 import ar.edu.unsam.algo3.errores.ObjetoIDoVerificacionFallaron
 import io.kotest.assertions.throwables.shouldThrow

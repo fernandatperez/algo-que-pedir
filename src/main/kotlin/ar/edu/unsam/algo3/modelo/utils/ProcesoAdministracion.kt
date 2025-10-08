@@ -1,6 +1,9 @@
-package ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.utils
 
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.InstanciaActualizador
+import ar.edu.unsam.algo3.modelo.cupon.Cupon
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.Repositorio
 
 // todo: Preguntar al profesor si es un repositorio de cada tipo solamente o si hay por ejemplo cada local tiene un repositorio de platos

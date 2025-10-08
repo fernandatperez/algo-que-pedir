@@ -1,8 +1,7 @@
-import ar.edu.unsam.algo2.algoQuePedir.*
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.*
-import ar.edu.unsam.algo3.Direccion
-import ar.edu.unsam.algo3.Local
-import ar.edu.unsam.algo3.Pedido
+import ar.edu.unsam.algo3.modelo.utils.Direccion
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import org.uqbar.geodds.Point

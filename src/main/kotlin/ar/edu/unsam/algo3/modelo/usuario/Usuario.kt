@@ -1,7 +1,14 @@
 package ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3
 
-import ar.edu.unsam.algo3.*
 import ar.edu.unsam.algo3.errores.PerteneceAotraListaException
+import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
+import ar.edu.unsam.algo3.modelo.pedido.Estado
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.CriterioCliente
+import ar.edu.unsam.algo3.modelo.usuario.Generalista
+import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
