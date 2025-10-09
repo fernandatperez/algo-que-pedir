@@ -117,9 +117,9 @@ class Usuario(
     override fun cumpleCriterioDeBusqueda(criterio: String) =
         coincideParcialmenteCon(criterio, nombre) ||
                 coincideParcialmenteCon(criterio, apellido) ||
-                coincideTotalmenteCon(criterio, username)
+                coincideTotalmenteCon(criterio, mailPrincipal) // ->
 
     override fun cumpleCriterioDeCreacion(): Boolean =
-        noEstaVacio(nombre) && noEstaVacio(apellido) && noEstaVacio(username)
+        noEstaVacio(nombre) && noEstaVacio(apellido) && noEstaVacio(mailPrincipal) // ->
 }
 

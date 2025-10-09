@@ -9,7 +9,6 @@ import ar.edu.unsam.algo3.errores.ObjetoIDoVerificacionFallaron
 class Repositorio<Type : ElementoDeRepositorio> {
     var contadorIDs: Int = 1
     val coleccion: MutableList<Type> = mutableListOf()
-
     fun generarID(): Int = contadorIDs++
 
     fun objetosDeRepositorio() = this.coleccion
