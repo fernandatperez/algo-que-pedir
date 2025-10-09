@@ -12,7 +12,7 @@ class UserService {
   async getUser(username: string, password: string) {
     const queryUsuario = () => axios.post<UserJSON>(REST_SERVER_URL + '/login', {
       'correo': username,
-      'contraseña': password
+      'password': password // esto tiene que coincidir con ele DTO me parece
     })
     return UserType.fromJson(await getAxiosData(queryUsuario))
     // return USERS_LIST_MOCK.find(user => 
