@@ -16,12 +16,12 @@ class UsuarioService {
     }
 
     fun buscar(usuario: Usuario): Usuario {
-        val usuario = repositorioUsuario.buscar(usuario.mailPrincipal)
-        if (usuario.isEmpty()) {
+        val usuarioEncontrado = repositorioUsuario.buscar(usuario.mailPrincipal)
+        if (usuarioEncontrado.isEmpty()) {
             throw RuntimeException("No existe un usuario con ese email")
         }
         else {
-            return usuario[0]
+            return usuarioEncontrado[0]
         }
     }
 }

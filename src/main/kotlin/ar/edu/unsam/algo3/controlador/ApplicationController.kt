@@ -6,6 +6,7 @@ import ar.edu.unsam.algo3.DTO.UsuarioDTO
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -17,14 +18,19 @@ class ApplicationController {
 
     @GetMapping("/ejemplo")
     fun defaultGet(): String = "hola"
-
-    @PutMapping("/login")
-    fun getUser(@RequestBody usuarioDTO: UsuarioDTO) {
+// esto estasba con put
+    @PostMapping("/login") // esto no devuelve nada
+    fun getUser(@RequestBody usuarioDTO: UsuarioDTO): UsuarioDTO {
         val user = Usuario(
             mailPrincipal = usuarioDTO.correo,
             password = usuarioDTO.password
         )
-        usuarioService.validar(user)
+        val userValidado = usuarioService.validar(user)
+
+        return UsuarioDTO(
+            correo = userValidado.mailPrincipal,
+            password = "" // no la devolves
+        )
     }
 
 }
