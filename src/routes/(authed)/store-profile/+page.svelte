@@ -9,6 +9,7 @@
   import type { ValidationMessage } from '$lib/domain/validationMessage';
   import ValidationField from "$lib/components/ValidationField.svelte";
   import Input from "$lib/components/Input.svelte";
+  import Checkbox from "$lib/components/checkbox.svelte";
   
   let store = $state<StoreType[]>([])
   let newStore = <StoreType>(new StoreType())
@@ -217,37 +218,28 @@
           <h2 class="subtitle">Metodos de Pago</h2>
           <div class="payments-checkbox-group">
             <!-- Checkbox Efectivo -->
-            <label for="storePaymentEfectivo">
-              <span>Efectivo</span>
-              <input
-                type="checkbox"
-                class="payment-checkbox"
-                name="storePaymentEfectivo"
-                id="storePaymentEfectivo"
-                checked={currentStore?.storePaymentEfectivo || false}>
-            </label>
+            <Checkbox
+              name="storePaymentEfectivo"
+              label="Efectivo" 
+              value="efectivo"
+              checked={currentStore?.storePaymentEfectivo ?? false}
+            />
 
             <!-- Checkbox QR -->
-            <label for="storePaymentQR">
-              <span>QR</span>
-              <input
-                type="checkbox"
-                class="payment-checkbox"
-                name="storePaymentQR"
-                id="storePaymentQR"
-                checked={currentStore?.storePaymentQR || false}>
-            </label>
+            <Checkbox
+              name="storePaymentQR"
+              label="QR" 
+              value="qr"
+              checked={currentStore?.storePaymentQR ?? true }
+            />
 
             <!-- Checkbox Transferencia -->
-            <label for="storePaymentTransferencia">
-              <span>Transferencia</span>
-              <input
-                type="checkbox"
-                class="payment-checkbox"
-                name="storePaymentTransferencia"
-                id="storePaymentTransferencia"
-                checked={currentStore?.storePaymentTransferencia || false}>
-            </label>
+            <Checkbox
+              name="storePaymentTransferencia"
+              label="Transferencia" 
+              value="transferencia"
+              checked={currentStore?.storePaymentTransferencia ?? false}
+            />
             <ValidationField errors={errors} field="metodopago" />
           </div>
         </fieldset>           
