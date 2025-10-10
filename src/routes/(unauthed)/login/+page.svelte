@@ -41,7 +41,7 @@
 
     try {
       let validation = await userService.getUser(user.username, user.password)
-      if (validation) goto ("/orders")
+      if (validation) goto ("/orders") // si devuelve Truthy redirige a orders, quiza se podria mejorar esto con token? 
       else {
         errorMessages = ["Nombre de usuario y/o contraseña incorrecto/s."]
         if(!toastLock) {
@@ -62,11 +62,7 @@
 
 </script>
 
-<style>
-  /* @import url("$lib/css/components-css/buttons.css"); */
-  /* @import url("$lib/css/components-css/icon.css"); */
-  /* @import url("$lib/css/pages-css/1-login.css"); */
-</style>
+
 
 <section class="login-container">
   <main class="login-section">
