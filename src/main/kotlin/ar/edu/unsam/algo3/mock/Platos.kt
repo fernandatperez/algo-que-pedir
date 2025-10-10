@@ -3,6 +3,8 @@ package ar.edu.unsam.algo3.mock
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import java.time.LocalDate
 
+// TODO: [PROFE dijo] Vean la implementación de un boostrap para sacar los mocks, otra cosa que quiero investiguen y la hablamos
+
 object milaConFritas: Plato(
     nombre = "Milanesa con Papas fritas",
     descripcion = "Milanesa de lomo de 3cm de grosor. Papas fritas rebozadas en pimenton del Himalaya. Gustosas salsas a eleccion.",
