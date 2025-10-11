@@ -1,10 +1,10 @@
-package ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.utils
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
 fun LocalDate.aniosHastaAhora(): Long {
-    return ChronoUnit.YEARS.between(this, java.time.LocalDate.now())
+    return ChronoUnit.YEARS.between(this, LocalDate.now())
 }
 
 fun LocalDate.diasHastaAhora(): Long {

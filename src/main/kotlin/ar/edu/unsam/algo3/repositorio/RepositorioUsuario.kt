@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.repositorio
 
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 
 val usuario1 = Usuario(
     nombre = "Carlos",

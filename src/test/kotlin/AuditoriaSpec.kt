@@ -1,4 +1,4 @@
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.auditor.ObjetivoAcumuladoVentas
 import ar.edu.unsam.algo3.modelo.auditor.ObjetivoCombinado

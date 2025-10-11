@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3
+package ar.edu.unsam.algo3.modelo.usuario
 
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import kotlin.random.Random

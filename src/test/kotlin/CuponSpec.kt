@@ -1,5 +1,3 @@
-package ar.edu.unsam.algo2.algoQuePedir
-
 import ar.edu.unsam.algo3.modelo.cupon.DescuentoPorDia
 import ar.edu.unsam.algo3.modelo.cupon.DescuentoPorLocal
 import ar.edu.unsam.algo3.modelo.cupon.DescuentoPorPorcentaje
