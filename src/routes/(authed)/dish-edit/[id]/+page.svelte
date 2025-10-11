@@ -49,11 +49,11 @@
     // Con form data
     const menuItem: MenuItemType = new MenuItemType(
       (itemEdit.id == -1 ? GLOBAL_ID() : itemEdit.id),
-      itemEdit.alt,
       (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
       (formData.get("precio") ? formData.get("precio") : itemEdit.precio) as number,
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
+      itemEdit.costoProduccion,
       platoAutor,
       platoEnPromo,
       itemEdit.ingredientes
@@ -312,7 +312,7 @@
         <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
         <div class="product-ingredients-cost-subtitle w-100">
           <h3 class="h3">Costo de Producción</h3>
-          <p>${MenuItemType.costoDeProduccion(itemEdit)}</p>
+          <p>${itemEdit.costoProduccion}</p>
           <button type="button" class="add-ingredient-btn" onclick={() => showModalAdd = true}>Añadir ingrediente</button>
           
         </div>

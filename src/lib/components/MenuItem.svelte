@@ -22,7 +22,7 @@
     <div class="imgcontainer">
       <img
         src="{menuitem.imagen}"
-        alt={menuitem.alt}
+        alt="" 
         class="image-meal"
         data-testid="menu-imagen"
       />

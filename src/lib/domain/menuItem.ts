@@ -3,11 +3,12 @@ import { IngredientType } from './ingredient'
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
   id: number
-  alt: string
+  // alt: string
   nombre: string
   descripcion: string
   precio: number
   imagen: string
+  costoProduccion: number // ! Cambiar en tests & en mock
   esDeAutor: boolean
   enPromocion: boolean
   ingredientes: IngredientType[]
@@ -26,11 +27,12 @@ export class MenuItemType {
   constructor(
     public id: number = -1,
     // trim: eliminar los espacios en blanco al inicio y al final del texto
-    public alt: string = ''.trim(),
+    // public alt: string = ''.trim(),
     public nombre: string = ''.trim(),
     public descripcion: string = ''.trim(),
     public precio: number = 0,
     public imagen: string = ''.trim(),
+    public costoProduccion: number = 0,
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
     public ingredientes: IngredientType[] = []
@@ -47,11 +49,12 @@ export class MenuItemType {
   toJSON(): MenuItemJSON {
     return {
       id: this.id,
-      alt: this.alt,
+      // alt: this.alt,
       nombre: this.nombre,
       descripcion: this.descripcion,
       precio: this.precio,
       imagen: this.imagen,
+      costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
       ingredientes: this.ingredientes
@@ -82,13 +85,6 @@ export class MenuItemType {
   // Metodo helper para obtener la ruta completa de la imagen no se si esta bien porque ya tiene parte de la ruta
   getImagePath(): string {
     return `src/lib/assets/img/${this.imagen}`
-  }
-
-  static costoDeProduccion(menuItemJSON: MenuItemJSON): number {
-    const menuItem = Object.assign(new MenuItemType(), menuItemJSON, {})
-    return menuItem.ingredientes.reduce((accumulator, currentItem) => 
-      accumulator + currentItem.cost, 0
-    )
   }
 }
 
