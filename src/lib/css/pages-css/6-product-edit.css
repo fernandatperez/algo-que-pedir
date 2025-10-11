@@ -86,6 +86,12 @@
     padding: 1em;
 }
 
+.modal-checkbox label{
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+}
+
 /* -- MEDIA QUERIES -- */
 
 /** Tablet: 401px - 768 px. */

@@ -71,8 +71,11 @@
 .modal-message {
   display: flex;
   flex-direction: column;
-  align-items: center; /* opcional: alinea a la izquierda */
   margin-top: 1em;
+  align-items: flex-start;
+  width: 55%;
+  margin: 0 auto;
+  padding-top: 1em;
 }
 
 .multiple-action-buttons {

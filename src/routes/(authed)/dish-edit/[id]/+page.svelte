@@ -147,6 +147,7 @@
   @import url("$lib/css/components-css/buttons.css");
   @import url("$lib/css/components-css/input.css");
   @import url("$lib/css/components-css/switch-button.css");
+  @import url("$lib/css/components-css/icon.css");
   @import url("$lib/css/pages-css/7-ingredients.css");
   @import url("$lib/css/pages-css/6-product-edit.css");
 
@@ -326,11 +327,13 @@
             {#snippet children()}
               {#if availableIngredients.length != 0}
                 {#each availableIngredients as ingr}
+                <div class="modal-checkbox">
                   <label>
                     <input type="checkbox" bind:group={selectedIngs} value={ingr}>
                     {ingr.name}
                   </label>
                   <br>
+                </div>
                 {/each}
               {:else}
                 <span>No hay ingredientes para mostrar</span>

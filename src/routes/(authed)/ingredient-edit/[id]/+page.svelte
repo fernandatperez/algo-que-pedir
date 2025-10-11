@@ -8,7 +8,8 @@
   import ValidationField from '$lib/components/ValidationField.svelte'
   import { InputTypes } from "$lib/components/InputPropsI.js"
   import { toasts } from '$lib/components/toast/toastStore'
-  import Input from '$lib/components/Input.svelte';
+  import Input from '$lib/components/Input.svelte'
+  import { gruposVegetales } from '$lib/domain/ingredient'
 
   let { data } = $props()
   const { ingredient } = data
@@ -24,6 +25,14 @@
   )
 
   let switchButtonLock = $derived( ingredientEdit?.foodGroup == FoodGroupValue.GRASAS_Y_ACEITES )
+
+  // .some() ya nos da true si es un grupo vegetal, o false si no lo es.
+  let esGrupoVegetal = $derived(
+    gruposVegetales.some(ing => (ingredientEdit?.foodGroup ?? '') == ing)
+  );
+
+  // El origen es animal si NO es un grupo vegetal.
+  let esOrigenAnimalReactivo = $derived(!esGrupoVegetal);
   
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
@@ -38,7 +47,7 @@
       (formData.get("name") ?? "").toString(),
       Number(formData.get("cost") ?? 0),
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
-      ingredientEdit.esOrigenAnimal,
+      esOrigenAnimalReactivo,
     )
     console.info("el nuevo ingrediente es ", ingredient)
 
@@ -77,10 +86,10 @@
 
 <style>
   @import url('$lib/css/flex-grid.css');
-  @import url("$lib/css/components-css/switch-button.css");
   @import url("$lib/css/components-css/icon.css");
   @import url("$lib/css/components-css/buttons.css");
   @import url("$lib/css/components-css/input.css");
+  @import url("$lib/css/components-css/switch-button.css");
   @import url("$lib/css/pages-css/8-ingredient-edit.css");
 </style>
 
