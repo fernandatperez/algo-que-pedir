@@ -4,7 +4,7 @@
 
   import { IngredientType } from "$lib/domain/ingredient"
   import type { ValidationMessage } from '$lib/domain/validationMessage'
-  import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
+  import { foodGroupDict, FoodGroupValue } from '$lib/domain/ingredient'
   import { ingredientService } from '$lib/services/IngredientService'
   import { onMount } from 'svelte'
   import { showError } from '$lib/domain/errorHandler'
@@ -19,7 +19,10 @@
   let ingredients = $state<IngredientType[]>([])
   
   // Creamos un ingrediente nuevo 
-  let newIngredient = <IngredientType>(new IngredientType())
+  let newIngredient = new IngredientType()
+
+  let selectFoodGroup = $state(newIngredient.foodGroup)
+  let displayedFoodGroup = $derived(selectFoodGroup)
 
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
@@ -91,27 +94,27 @@
 
     try {
       await ingredientService.createIngredient(ingredient)
-
       await findIngredients()
-      toasts.push('Ingrediente guardado exitosamente', {type: 'success'})
-      showForm = false
-      errors = [] // limpiar errores
 
+      toasts.push('Ingrediente guardado exitosamente', {type: 'success'})
     } catch (error) {
       showError("Error al crear el ingrediente", error)
+    } finally {
+      resetNewIngredient()
     }
-  }
-
-  const onCancel = () => {
-    // Reset
-    newIngredient = new IngredientType()
-    showForm = false
-    errors = [] // limpiar errores
   }
 
   const releaseToast = () => {
     toastLock = false
   }  
+
+  const resetNewIngredient = () => {
+    newIngredient = new IngredientType() // nuevo objeto
+    displayedFoodGroup = newIngredient.foodGroup // le seteo el foodGroup default para que en la vista mobile no rompa
+    showForm = false
+    errors = [] // limpiar errores
+  }
+
 </script>
 
 <style>
@@ -152,7 +155,7 @@
         <!-- use:enhance: te trae la data del form cuando llamas al onSubmit, permitiendo sacar el bind:value  -->
         <!-- type="reset" -> onreset={reset} -->
         <!-- type="submit" -> use:enhance={onSubmit} pero es necesario el es necesario el +page.server.ts, asi que de baja-->
-          <form onsubmit={onSubmit} onreset={onCancel} id="form-ingredient" class="flex-table-row product-edit-ingredients-table-content">
+          <form onsubmit={onSubmit} onreset={resetNewIngredient} id="form-ingredient" class="flex-table-row product-edit-ingredients-table-content">
             <div class="fieldset-section">
               <section class="cell">
                 <Input 
@@ -180,21 +183,23 @@
                 />
                 <ValidationField errors={errors} field="cost" />
               </section>
-              <section class="cell">
-                <select class="input-primary" name="foodGroup">
+              <section class="cell display-none-mobile">
+                <select class="input-primary" name="foodGroup" bind:value={displayedFoodGroup}>
                   <option value="" disabled selected hidden>Seleccionar</option>
-                  <!-- {#each Object.entries(foodGroupDict) as [value, grupo]}
-                    <option value={value}> {grupo.label} </option>
-                  {/each} -->
                   {#each Object.keys(foodGroupDict) as value}
                     <option value={value}>{foodGroupDict[value as FoodGroupValue].label}</option>
                   {/each}
                 </select>
                 <ValidationField errors={errors} field="foodGroup" />
               </section>
-
+              <section class="cell display-none-mobile icon-cell">
+                <!-- Para que me muestre el icono del foodGroup que selecciono -->
+                {#if displayedFoodGroup && foodGroupDict[displayedFoodGroup]}
+                  <i class={"ph " + foodGroupDict[displayedFoodGroup].icon + " gray-icon"}></i>
+                {/if}
+              </section>
             </div>
-            <section class="btn-group-actions btn-group-new-ingredient">
+            <section class="btn-group-actions btn-group-new-ingredient cell">
               <button form="form-ingredient" class="btn btn-secondary" type="reset">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
               <button form="form-ingredient" class="btn btn-primary" type="submit">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
             </section>
