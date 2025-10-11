@@ -1,5 +1,3 @@
-package ar.edu.unsam.algo2.algoQuePedir
-
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.errores.SobrepasoPuntuacion
 import io.kotest.assertions.throwables.shouldThrow

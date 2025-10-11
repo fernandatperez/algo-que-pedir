@@ -1,7 +1,7 @@
 package ar.edu.unsam.algo3.modelo.plato
 
 // import kotlinx.datetime.*
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.diasHastaAhora
+import ar.edu.unsam.algo3.modelo.utils.diasHastaAhora
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.errores.DescuentoMayorAlCienException

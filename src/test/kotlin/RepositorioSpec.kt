@@ -1,11 +1,10 @@
-package ar.edu.unsam.algo2.algoQuePedir
-
 import ar.edu.unsam.algo3.repositorio.Repositorio
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.errores.IdInexistente
 import ar.edu.unsam.algo3.errores.ObjetoIDoVerificacionFallaron
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.delivery.Delivery
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import io.kotest.assertions.throwables.shouldThrow
@@ -95,7 +94,7 @@ class RepositorioSpec : DescribeSpec({
         }
 
         it("En cualquier caso, devuelve una lista vacia si no coincide con el criterio de busqueda") {
-            val repoIng = Repositorio<ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente>()
+            val repoIng = Repositorio<Ingrediente>()
             val repoPlato = Repositorio<Plato>()
             val repoUsuario = Repositorio<Usuario>()
             val repoLocal = Repositorio<Local>()
@@ -106,8 +105,8 @@ class RepositorioSpec : DescribeSpec({
                 Point(-34.549925523494096, -58.523963730918084),
                 Point(-34.53863012525849, -58.4997130260628)
             )
-            val ingrediente = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(nombre = "Curcuma")
-            val usuario = Usuario(nombre = "Mateo", apellido = "mamon", username = "Matute123")
+            val ingrediente = Ingrediente(nombre = "Curcuma")
+            val usuario = Usuario(nombre = "Mateo", apellido = "mamon", username = "Matute123", mailPrincipal = "matute@hotmail.com")
             val delivery = Delivery(username = "RicardoYa", zonaDeTrabajo = Polygon(listaPuntos))
 
             repoIng.crear(ingrediente)
@@ -130,8 +129,8 @@ class RepositorioSpec : DescribeSpec({
 
         it("Devuelve el ingrediente si coincide exactamente con el nombre buscado") {
             // Arrange
-            val repositorioIngrediente = Repositorio<ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente>()
-            val ingrediente = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(nombre = "zanahoria")
+            val repositorioIngrediente = Repositorio<Ingrediente>()
+            val ingrediente = Ingrediente(nombre = "zanahoria")
             // Act
             repositorioIngrediente.crear(ingrediente)
             // Assert

@@ -1,6 +1,5 @@
 package ar.edu.unsam.algo3.modelo.local
-
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.diasHastaAhora
+import ar.edu.unsam.algo3.modelo.utils.diasHastaAhora
 import ar.edu.unsam.algo3.errores.SobrepasoPuntuacion
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido

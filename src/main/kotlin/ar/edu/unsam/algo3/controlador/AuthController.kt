@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.servicios.usuarioService
 import ar.edu.unsam.algo3.DTO.AuthRequest
 import ar.edu.unsam.algo3.DTO.AuthResponse

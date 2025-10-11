@@ -1,7 +1,7 @@
-package ar.edu.unsam.algo2.algoQuePedir
-
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.errores.PerteneceAotraListaException
+import ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
@@ -26,23 +26,23 @@ import org.uqbar.geodds.Point // se importo aca no me anda lo de bulid.gradle.kt
 //import io.kotest.matchers.shouldNotBe
 
 class UsuarioSpec : DescribeSpec({
-    val carne = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
+    val carne = Ingrediente(
         nombre = "carne",
         costoMercado = 1000.0,
         esOrigenAnimal = true,
-        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.PROTEINAS
+        grupoAlimenticio = GrupoAlimenticio.PROTEINAS
     )
-    val papa = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
+    val papa = Ingrediente(
         nombre = "papa",
         costoMercado = 200.0,
         esOrigenAnimal = false,
-        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.FRUTAS_Y_VERDURAS
+        grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS
     )
-    val aceite = ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente(
+    val aceite = Ingrediente(
         nombre = "aceite",
         costoMercado = 500.0,
         esOrigenAnimal = false,
-        grupoAlimenticio = ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.GRASAS_Y_ACEITES
+        grupoAlimenticio = GrupoAlimenticio.GRASAS_Y_ACEITES
     )
 
     val direccionLocalCercano = Direccion(ubicacion = Point(-34.52564, -58.51289))
