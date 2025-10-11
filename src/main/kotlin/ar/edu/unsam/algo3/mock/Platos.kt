@@ -11,6 +11,7 @@ val pastaAlbondigas: Plato = Plato(
 //    nombre local: Pollos Fire
 //    nombre calle local: Avenida Melo
     valorBase = 12.99,
+    urldeImagen = "/src/lib/assets/img/spagettis.png",
     ingredientes = mutableListOf(
         carneDeRenacuajo,
         quesoCheddar,
@@ -26,6 +27,7 @@ val hambuerguesa: Plato = Plato(
 //    nombre local: Pollos Fire
 //    nombre calle local: Avenida Melo
     valorBase = 9.99,
+    urldeImagen = "/src/lib/assets/img/hamburguesa2.jpg",
     ingredientes = mutableListOf(
         carneDeRenacuajo,
         quesoCheddar,
@@ -39,6 +41,7 @@ val ensaladaHuerta: Plato = Plato(
 //    nombre local: Pollos Fire
 //    nombre calle local: Avenida Melo
     valorBase = 7.5,
+    urldeImagen = "/src/lib/assets/img/ensalada.png",
     ingredientes = mutableListOf(
         carneDeRenacuajo,
     )
@@ -51,6 +54,7 @@ val pizzaMuzzaTomate: Plato = Plato(
 //    nombre local: Pollos Fire
 //    nombre calle local: Avenida Melo
     valorBase = 11.75,
+    urldeImagen = "/src/lib/assets/img/pizza.png",
     ingredientes = mutableListOf(
         carneDeRenacuajo,
         quesoCheddar,
@@ -66,6 +70,7 @@ val salmonGrillado: Plato = Plato(
 //    nombre local: Pollos Fire
 //    nombre calle local: Avenida Melo
     valorBase = 14.25,
+    urldeImagen = "/src/lib/assets/img/salmon.png",
     ingredientes = mutableListOf(
         quesoCheddar,
         lechuga,
