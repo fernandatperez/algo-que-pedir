@@ -23,9 +23,7 @@
   const crearPlato = () => {
     goto('/dish-edit/nuevoPlato')
   }
-
   onMount(findMenuItems)
-
 </script>
 
 <style>

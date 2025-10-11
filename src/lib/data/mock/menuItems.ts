@@ -1,5 +1,5 @@
 import { MenuItemType, type MenuItemJSON } from '$lib/domain/menuItem'
-import {INGREDIENT_MOCK} from '$lib/data/mock/ingredients'
+import { INGREDIENT_MOCK } from '$lib/data/mock/ingredients'
 import { IngredientType } from '$lib/domain/ingredient'
 
 // Datos JSON "planos" que simularían venir del servidor
@@ -10,7 +10,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     descripcion: 'Deliciosa pasta con salsa de tomates y albondigas de cerdo',
     precio: 12.99,
     imagen: '/src/lib/assets/img/spagettis.png',
-    alt: 'spagettis',
+    // alt: 'spagettis',
     enPromocion: false,
     esDeAutor: false,
     ingredientes: [
@@ -26,7 +26,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     descripcion: 'Combo de hamburguesa con papas y bebida',
     precio: 9.99,
     imagen: '/src/lib/assets/img/hamburguesa2.jpg',
-    alt: 'hamburguesa',
+    // alt: 'hamburguesa',
     enPromocion: false,
     esDeAutor: false,
     ingredientes: [
@@ -40,7 +40,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     descripcion: 'Ensalada fresca con hojas mixtas y vinagreta',
     precio: 7.50,
     imagen: '/src/lib/assets/img/ensalada.png',
-    alt: 'ensalada',
+    // alt: 'ensalada',
     enPromocion: false,
     esDeAutor: false,
     ingredientes: [
@@ -53,7 +53,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     descripcion: 'Pizza a la piedra con salsa de tomates frescos y extra queso',
     precio: 11.75,
     imagen: '/src/lib/assets/img/pizza.png',
-    alt: 'pizza',
+    // alt: 'pizza',
     enPromocion: false,
     esDeAutor: false,
     ingredientes: [
@@ -69,7 +69,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     descripcion: 'Salmon fresco a la plancha acompañado de vegetales',
     precio: 14.25,
     imagen: '/src/lib/assets/img/salmon.png',
-    alt: 'salmon',
+    // alt: 'salmon',
     enPromocion: false,
     esDeAutor: false,
     ingredientes: [
@@ -82,7 +82,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
 // Instancias individuales usando la clase
 const hamburguesaJSON: MenuItemJSON = {
   id: 12,
-  alt: 'Hamburguesa con queso',
+  // alt: 'Hamburguesa con queso',
   nombre: 'Hamburguesa con queso',
   descripcion: 'Hamburguesa con queso acompañada de papas fritas y bebida',
   precio: 12.0,
@@ -98,7 +98,7 @@ const hamburguesaJSON: MenuItemJSON = {
 
 const pizzaJSON: MenuItemJSON = {
   id: 13,
-  alt: 'Pizza Margarita',
+  // alt: 'Pizza Margarita',
   nombre: 'Pizza Margarita',
   descripcion: 'De muzzarella con tomate y albahaca',
   precio: 16.0,
@@ -115,7 +115,7 @@ const pizzaJSON: MenuItemJSON = {
 
 const ensaladaJSON: MenuItemJSON = {
   id: 14,
-  alt: 'Ensalada clásica',
+  // alt: 'Ensalada clásica',
   nombre: 'Ensalada clásica',
   descripcion: 'De hojas frescas y vegetales organicos',
   precio: 10.0,

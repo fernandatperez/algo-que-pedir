@@ -3,7 +3,7 @@ import { IngredientType } from './ingredient'
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
   id: number
-  alt: string
+  // alt: string
   nombre: string
   descripcion: string
   precio: number
@@ -26,7 +26,7 @@ export class MenuItemType {
   constructor(
     public id: number = -1,
     // trim: eliminar los espacios en blanco al inicio y al final del texto
-    public alt: string = ''.trim(),
+    // public alt: string = ''.trim(),
     public nombre: string = ''.trim(),
     public descripcion: string = ''.trim(),
     public precio: number = 0,
@@ -47,7 +47,7 @@ export class MenuItemType {
   toJSON(): MenuItemJSON {
     return {
       id: this.id,
-      alt: this.alt,
+      // alt: this.alt,
       nombre: this.nombre,
       descripcion: this.descripcion,
       precio: this.precio,
