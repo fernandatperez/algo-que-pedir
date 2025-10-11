@@ -59,10 +59,7 @@
   let errorMessages: string[] = $state([])
 
   console.log(USERS_LIST_MOCK);
-
 </script>
-
-
 
 <section class="login-container">
   <main class="login-section">

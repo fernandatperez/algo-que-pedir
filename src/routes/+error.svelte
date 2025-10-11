@@ -9,7 +9,7 @@
     class="blend"
   />
   <h4>Dont worry, you can go back where its still safe</h4>
-  <a href="/" class="back-home">home</a>
+  <a href="/orders" class="back-home">home</a>
 </div>
 
 <style>
