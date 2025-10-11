@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo3.DTO
+package ar.edu.unsam.algo3.dto
 
 // REQUEST - Lo que recibe el endpoint
 data class AuthRequest(
