@@ -133,6 +133,12 @@
   opacity: 0.6;             
 }
 
+@media (min-width: 431px) and (max-width: 768px) {
+    .btn-group-actions.btn-group-new-ingredient{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
 /** Mobile: max: 400px */
 @media screen and (max-width: 430px) {
 

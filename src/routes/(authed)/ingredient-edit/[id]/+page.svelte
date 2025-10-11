@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { foodGroupDict, type FoodGroupValue } from '$lib/domain/ingredient'
+  import { foodGroupDict, FoodGroupValue } from '$lib/domain/ingredient'
   import type { ValidationMessage } from '$lib/domain/validationMessage.js'
   import { IngredientType} from '$lib/domain/ingredient'
   import { ingredientService } from '$lib/services/IngredientService.js'
@@ -22,6 +22,8 @@
     ingredient?.name != ingredientEdit?.name || ingredient?.cost != ingredientEdit?.cost ||
     ingredient?.foodGroup != ingredientEdit?.foodGroup || ingredient?.esOrigenAnimal != ingredientEdit?.esOrigenAnimal
   )
+
+  let switchButtonLock = $derived( ingredientEdit?.foodGroup == FoodGroupValue.GRASAS_Y_ACEITES )
   
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
@@ -78,6 +80,7 @@
   @import url("$lib/css/components-css/switch-button.css");
   @import url("$lib/css/components-css/icon.css");
   @import url("$lib/css/components-css/buttons.css");
+  @import url("$lib/css/components-css/input.css");
   @import url("$lib/css/pages-css/8-ingredient-edit.css");
 </style>
 
@@ -99,8 +102,6 @@
               name="name"
           />
           <ValidationField errors={errors} field="name" />
-          <!-- <label class="label-color" for="form-ingredient-name">Nombre del ingrediente*</label>
-          <input type="text" id="form-ingredient-name" bind:value={ingredientEdit.name} class="input-primary" name="name" required> -->
         </section>
 
         <section class="input-group">
@@ -116,8 +117,6 @@
               step="any"
           />
           <ValidationField errors={errors} field="cost" />
-          <!-- <label class="label-color" for="form-ingredient-cost">Costo*</label>
-          <input type="text" id="form-ingredient-cost" bind:value={ingredientEdit.cost} class="input-primary" name="cost" required> -->
         </section>
 
         <section class="input-group">
@@ -134,39 +133,19 @@
           </label>
 
           <ValidationField errors={errors} field="foodGroup" />
-          <!-- <label class="label-color" for="form-ingredient-group">Grupo Alimenticio</label>
-          <select id="form-ingredient-group" class="input-primary" name="foodGroup" required value={ingredientEdit.foodGroup}> 
-            <option value="" disabled selected hidden>{ingredientEdit.foodGroup}</option>
-            {#each Object.keys(foodGroupDict) as value}
-              <option value={value}>{foodGroupDict[value as FoodGroupValue].label}</option>
-            {/each}
-          </select> -->
         </section>
 
-        <section class="animal-origin-display input-group">
-          <h3>Origen Animal</h3>
-          <div class="slide-button">
-            <!-- <Input
-              description="Origen animal"
-              input_type={InputTypes.Checkbox}
-              labelProps={{
-                class: "label-color",
-                for: "switch-button",
-              }}
-              inputProps={{
-                class: "toggle",
-                id: "switch-button",
-                name: "esOrigenAnimal",
-              }}
-              bind:checked={ingredientEdit.esOrigenAnimal}
-            /> -->
-            <input type="checkbox" class="toggle" id="switch-button" bind:checked={ingredientEdit.esOrigenAnimal} name="esOrigenAnimal"/>
-            <div class="background-div">
-              <div class="circle-slide"></div>
-            </div>
-          </div>          
-          <ValidationField errors={errors} field="esOrigenAnimal" />
-        </section>
+      <section class="animal-origin-display input-group">
+        
+        <h3>Origen Animal</h3>
+        <div class="slide-button {switchButtonLock ? '' : 'disabled-slide'}">
+          <input type="checkbox" class="toggle" id="switch-button" bind:checked={ingredientEdit.esOrigenAnimal} name="esOrigenAnimal" disabled={!switchButtonLock}/>
+          <div class="background-div">
+            <div class="circle-slide"></div>
+          </div>
+        </div>          
+        <ValidationField errors={errors} field="esOrigenAnimal" />
+      </section>
       </form>
 
       <section class="btn-group-actions">

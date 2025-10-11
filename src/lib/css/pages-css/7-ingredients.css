@@ -64,7 +64,7 @@ padding: 4px;
 .fieldset-section {
     display: flex;
     flex-direction: row;
-    width: 60%;
+    width: 80%;
     flex-wrap: wrap; 
 }
 
@@ -79,6 +79,12 @@ padding: 4px;
     font-size: 1.5em;
     color: var(--icon-color);
 }
+
+.fieldset-section .icon-cell{
+    justify-content: center;
+    align-self: center;
+}
+
 @media (min-width: 769px) {
     .hidden-icons {
         display: none;
@@ -89,6 +95,9 @@ padding: 4px;
     .hidden-icons {
         display: none;
     }   
+    .display-none-mobile{
+        display: none;
+    }
 }
 
 @media (max-width: 430px) {
@@ -110,7 +119,10 @@ padding: 4px;
     /* .grid-table-row {
         grid-template-columns: 2fr 1.5fr 1.5fr;
     } */
-     .fieldset-section{
-        width: 100%;
-     }
+    .cell.display-none-mobile{
+        display: none;
+    }
+    .fieldset-section{
+        width: 65%;
+    }
 }
