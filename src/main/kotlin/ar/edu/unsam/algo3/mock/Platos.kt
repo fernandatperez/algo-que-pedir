@@ -1,7 +1,6 @@
 package ar.edu.unsam.algo3.mock
 
 import ar.edu.unsam.algo3.modelo.plato.Plato
-import java.time.LocalDate
 
 // TODO: [PROFE dijo] Vean la implementación de un boostrap para sacar los mocks, otra cosa que quiero investiguen y la hablamos
 

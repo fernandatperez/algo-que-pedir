@@ -19,6 +19,7 @@ class Plato(
     val nombre: String = "",
     val descripcion: String = "",
     private var valorBase: Double = 0.0,
+    var urldeImagen: String = "Sin URL para mostrar",
     var esDeAutor: Boolean = false,
     val local: Local = Local(),
     val ingredientes: MutableList<Ingrediente> = mutableListOf(),
