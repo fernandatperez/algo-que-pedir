@@ -131,6 +131,7 @@
 
   const descartarModal = () => {
     showModalAdd = false
+    updateAvailables()
   }
 
   function openModal(id: number) {

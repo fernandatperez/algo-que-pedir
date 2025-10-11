@@ -123,6 +123,10 @@
   @import url("$lib/css/components-css/icon.css");
   @import url("$lib/css/components-css/buttons.css");
   @import url("$lib/css/pages-css/7-ingredients.css");
+
+  .content-section-ingredients {
+    font-size: 1.5rem;
+  }
 </style>
 
 <section class="flex-column">
