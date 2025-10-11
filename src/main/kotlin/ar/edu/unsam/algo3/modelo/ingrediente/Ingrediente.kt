@@ -16,7 +16,7 @@ enum class GrupoAlimenticio {
 }
 
 @Serializable
-data class Ingrediente(
+open class Ingrediente(
     val nombre: String = "",
     @SerialName("costo")
     var costoMercado: Double = 0.0, // puede ser decimal

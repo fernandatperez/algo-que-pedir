@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping

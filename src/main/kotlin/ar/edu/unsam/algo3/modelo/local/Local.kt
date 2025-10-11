@@ -13,7 +13,7 @@ enum class Pago {
     TRANSFERENCIA_BANCARIA,
 }
 
-class Local(
+open class Local(
     val nombre: String = "",
     val direccion: Direccion = Direccion(),
     var porcentajeAcordado: Double = 0.0,
