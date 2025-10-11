@@ -7,20 +7,21 @@ data class PlatoRequest(
     val nombre: String,
     val descripcion: String,
     val URLdeImagen: String,
-    val valorBase: Double,
-    val platoAutor: Boolean,
-    val platoEnPromo: Boolean,
+    val precio: Double,
+    val esDeAutor: Boolean,
+    val enPromocion: Boolean,
     val costoDeProduccion: Double,
     val ingredientes: MutableList<Ingrediente>
 ) {}
 
 data class PlatoResponse(
+    val id : String,
     val nombre: String,
     val descripcion: String,
-    val URLdeImagen: String,
-    val valorBase: Double,
-    val platoAutor: Boolean,
-    val platoEnPromo: Boolean,
-    val costoDeProduccion: Double,
+    val imagen: String,
+    val precio: Double,
+    val esDeAutor: Boolean,
+    val enPromocion: Boolean,
+    //val costoDeProduccion: Double,
     val ingredientes: MutableList<Ingrediente>
 ) {}
