@@ -15,7 +15,7 @@ import kotlin.math.max
 val porcentajePorNuevoMAX = 30.0
 val porcentajePorNuevoMIN = 10.0
 
-open class Plato(
+class Plato(
     val nombre: String = "",
     val descripcion: String = "",
     private var valorBase: Double = 0.0,
