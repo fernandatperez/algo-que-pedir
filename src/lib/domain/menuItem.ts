@@ -8,6 +8,7 @@ export type MenuItemJSON = {
   descripcion: string
   precio: number
   imagen: string
+  costoProduccion: number // ! Cambiar en tests & en mock
   esDeAutor: boolean
   enPromocion: boolean
   ingredientes: IngredientType[]
@@ -31,6 +32,7 @@ export class MenuItemType {
     public descripcion: string = ''.trim(),
     public precio: number = 0,
     public imagen: string = ''.trim(),
+    public costoProduccion: number = 0,
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
     public ingredientes: IngredientType[] = []
@@ -52,6 +54,7 @@ export class MenuItemType {
       descripcion: this.descripcion,
       precio: this.precio,
       imagen: this.imagen,
+      costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
       ingredientes: this.ingredientes
@@ -82,13 +85,6 @@ export class MenuItemType {
   // Metodo helper para obtener la ruta completa de la imagen no se si esta bien porque ya tiene parte de la ruta
   getImagePath(): string {
     return `src/lib/assets/img/${this.imagen}`
-  }
-
-  static costoDeProduccion(menuItemJSON: MenuItemJSON): number {
-    const menuItem = Object.assign(new MenuItemType(), menuItemJSON, {})
-    return menuItem.ingredientes.reduce((accumulator, currentItem) => 
-      accumulator + currentItem.cost, 0
-    )
   }
 }
 
