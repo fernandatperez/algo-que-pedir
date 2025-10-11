@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RestController
 class PlatoController {
 //  Inyeccion de dependencias de los singletons de servicios (y servicio conoce repo)
 
-    @GetMapping("/platos") // Maxi
-    fun getPlatos() {
-//        Obtener la lista completa de platos para mostrar la viste
-//        que pusiste
+    @GetMapping("/platos")
+    fun getPlatos(): List<PlatoResponse> {
+        return platoService.getPlatos()
     }
 
     @GetMapping("/platos/{id}")

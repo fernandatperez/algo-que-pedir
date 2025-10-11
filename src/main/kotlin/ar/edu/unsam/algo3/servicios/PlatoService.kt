@@ -10,8 +10,8 @@ val platoService: PlatoService = PlatoService()
 
 class PlatoService {
 
-    fun getPlatos() {
-
+    fun getPlatos(): List<PlatoResponse> {
+        return repositorioPlato.objetosDeRepositorio().map { it.toDTO() }
     }
 
     fun obtenerPlato(id: Int): PlatoResponse {
