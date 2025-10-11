@@ -9,11 +9,11 @@ val platoService: PlatoService = PlatoService()
 class PlatoService {
 
     fun getPlatos(): List<PlatoResponse> {
-        return repositorioPlato.objetosDeRepositorio().map { it.toDTO() }
+        return repositorioPlato.objetosDeRepositorio().map { it.toDTO(it.id) }
     }
 
     fun getPlato(id: Int): PlatoResponse {
         val platoModelo = repositorioPlato.obtenerObjeto(id)
-        return platoModelo.toDTO()
+        return platoModelo.toDTO(id)
     }
 }

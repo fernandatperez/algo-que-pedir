@@ -1,8 +1,8 @@
 package ar.edu.unsam.algo3.modelo.plato
 
-fun Plato.toDTO(): PlatoResponse {
+fun Plato.toDTO(id: Int): PlatoResponse {
     return PlatoResponse(
-        id = "1",
+        id = id,
         nombre = this.nombre,
         descripcion = this.descripcion,
         imagen = this.urldeImagen,

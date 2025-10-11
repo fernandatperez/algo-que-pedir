@@ -15,7 +15,7 @@ data class PlatoRequest(
 ) {}
 
 data class PlatoResponse(
-    val id : String,
+    val id : Int,
     val nombre: String,
     val descripcion: String,
     val imagen: String,
