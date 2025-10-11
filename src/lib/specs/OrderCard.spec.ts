@@ -3,7 +3,7 @@ import { firstOrder, thirdOrder } from '../data/mock/orders'
 import { describe, it, expect } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/svelte'
 
-import OrderCard from './OrderCard.svelte'
+import OrderCard from '../components/OrderCard.svelte'
 import orderPage from '../../routes/(authed)/orders/+page.svelte'
 
 describe('order card', () => {
