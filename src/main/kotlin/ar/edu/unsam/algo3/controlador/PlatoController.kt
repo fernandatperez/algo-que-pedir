@@ -1,7 +1,6 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.modelo.plato.PlatoRequest
-import ar.edu.unsam.algo3.modelo.plato.PlatoResponse
+import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
 import ar.edu.unsam.algo3.servicios.platoService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,12 +16,12 @@ class PlatoController {
 //  Inyeccion de dependencias de los singletons de servicios (y servicio conoce repo)
 
     @GetMapping("/platos")
-    fun getPlatos(): List<PlatoResponse> {
+    fun getPlatos(): List<PlatoDTO> {
         return platoService.getPlatos()
     }
 
     @GetMapping("/platos/{id}")
-    fun getPlato(@PathVariable id: Int): PlatoResponse {
+    fun getPlato(@PathVariable id: Int): PlatoDTO {
 //        Obtener informacion de un plato especifico
         return platoService.obtenerPlato(id)
     }
@@ -32,9 +31,9 @@ class PlatoController {
 //        Crear un nuevo plato usando boton "agregar plato"
     }
 
-    @PutMapping("/platos/{id}")
-    fun putPlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoRequest): PlatoResponse {
-//        Editar un plato existente
-        platoService.modificarPlato(platoAModificar)
-    }
+//    @PutMapping("/platos/{id}")
+//    fun putPlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO): PlatoDTO {
+////        Editar un plato existente
+//        platoService.modificarPlato(platoAModificar)
+//    }
 }
