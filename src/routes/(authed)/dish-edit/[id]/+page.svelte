@@ -7,8 +7,6 @@
   import { menuItemsService } from "$lib/services/MenuItemService.js";
   import { MenuItemType } from "$lib/domain/menuItem.js";
   import { goto } from "$app/navigation";
-  import { GLOBAL_ID } from "$lib/services/MenuItemService.js";
-  import { MENU_ITEMS_JSON_MOCK } from "$lib/data/mock/menuItems.js";
   import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients.js"
   import { IngredientType, type IngredientJSON } from "$lib/domain/ingredient.js";
   import ValidationField from "$lib/components/ValidationField.svelte";
@@ -22,7 +20,6 @@
   const { nuevoItem, item } = data
   
   const itemEdit = $state(item.toJSON())
-
   console.info(itemEdit)
 
   let errors: ValidationMessage[] = $state([])
@@ -48,7 +45,7 @@
     
     // Con form data
     const menuItem: MenuItemType = new MenuItemType(
-      (itemEdit.id == -1 ? GLOBAL_ID() : itemEdit.id),
+      itemEdit.id,
       (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
       (formData.get("precio") ? formData.get("precio") : itemEdit.precio) as number,
@@ -58,8 +55,6 @@
       platoEnPromo,
       itemEdit.ingredientes
     )
-    
-    console.info("El plato modificado quedo asi: ", menuItem)
     
     menuItem.validate()
     
@@ -75,11 +70,10 @@
       } else {
         await menuItemsService.updateMenuItem(menuItem)
       }
-      console.info(MENU_ITEMS_JSON_MOCK) 
       // Aca poner un toast de guardado exitoso
       setTimeout(() => {
         goto("/menu")
-      }, 3000)
+      }, 2000)
       errors = [] // limpiar errores
     } catch (error) {
       if(!toastLock) {
@@ -108,15 +102,17 @@
       goto("/menu")
   }
   
+  // Modificar cuando alla ingredientes posta ->
   let availableIngredients: IngredientJSON[] = $state(
     itemEdit.ingredientes && itemEdit.ingredientes.length > 0
       ? INGREDIENT_MOCK.filter(
         ing => !itemEdit.ingredientes.some(sel => sel.id == ing.id))
       : INGREDIENT_MOCK
   )
-  
+  // Modificar cuando alla ingredientes posta ->
   let selectedIngs: IngredientType[] = $state([])
   
+  // Modificar cuando alla ingredientes posta ->
   const updateAvailables = () => {
     availableIngredients = INGREDIENT_MOCK.filter(
     ing => !itemEdit.ingredientes.some(itemIng => itemIng.id == ing.id))

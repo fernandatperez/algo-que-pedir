@@ -1,6 +1,5 @@
 <script lang='ts'>
   import type { IngredientType } from '$lib/domain/ingredient'
-  import { foodGroupDict } from '$lib/domain/ingredient'
 
   interface Props {
     ingredient: IngredientType

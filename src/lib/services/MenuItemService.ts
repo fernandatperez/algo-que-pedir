@@ -1,33 +1,32 @@
 import { MenuItemType, type MenuItemJSON } from '$lib/domain/menuItem'
 import { MENU_ITEMS_JSON_MOCK } from '$lib/data/mock/menuItems'
-let GLOBAL_VAR = 5
-export const GLOBAL_ID = () => {
-  GLOBAL_VAR += 1
-  return GLOBAL_VAR
-}
 
 import axios from 'axios'
 import { REST_SERVER_URL } from './configuration'
+import { IngredientType } from '$lib/domain/ingredient'
 
 class MenuItemsService {
   async getAllMenuItems(){
     const response = await axios.get<MenuItemJSON[]>(REST_SERVER_URL + '/platos')
     // console.log('Respuesta del backend:', response.data)
+    // como "cosa"... hdp
     const cosa = response.data.map(MenuItemType.fromJson)
     // console.log('Primer item mapeado:', cosa[0]) 
     return cosa
     // return MENU_ITEMS_JSON_MOCK.map(MenuItemType.fromJson)
   }
 
-  
   async getMenuItem(searchId: number) {
-    const menuItem = MENU_ITEMS_JSON_MOCK.find(menuItem => 
-      menuItem.id == searchId
+    const response = await axios.get<MenuItemJSON>(
+      REST_SERVER_URL + '/platos/' + searchId
     )
+    
+    const plato = MenuItemType.fromJson(response.data)
+    plato.ingredientes = plato.ingredientes.map(ingredienteJSON =>
+      IngredientType.fromJson(ingredienteJSON))
 
-    if (menuItem != null) {
-      return MenuItemType.fromJson(menuItem)
-    }
+    if (plato != null)
+      return plato
 
     return new MenuItemType()
   }
