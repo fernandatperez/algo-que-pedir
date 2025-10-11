@@ -1,57 +1,40 @@
 import Input from '$lib/components/Input.svelte'
 import { describe, it, expect } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/svelte'
-import { InputTypes } from './InputPropsI'
+import { InputTypes } from '$lib/components/InputPropsI'
 
 describe('el input', () => {
-
   const testLoginInput = {
-    description: 'Usuario*',
+    label_text: 'Usuario*',
+    label_for: 'username',
     input_type: InputTypes.Normal,
-    labelProps: {
-      class: 'label-color',
-      for: 'username',
-    },
-    inputProps: {
-      class: 'input-primary',
-      type: 'email',
-      placeholder: 'Usuario',
-      id: 'input-id',
-      name: 'username',
-    },
+    value: '',
+    class: 'input-primary',
+    type: 'email',
+    placeholder: 'Usuario',
+    id: 'input-id',
+    name: 'username',
   }
 
   const testRegisterInput = {
-    description:'Contraseña*',
-    input_type:InputTypes.Hidden,
-    labelProps:{
-      class: 'label-color',
-      for: 'password',
-    },
-    inputProps:{
-      class: 'input-primary',
-      id: 'password-id',
-      name: 'password',
-    },
+    label_text: 'Contraseña*',
+    label_for: 'password',
+    input_type: InputTypes.Hidden,
+    value: '',
+    class: 'input-primary',
+    id: 'password-id',
+    name: 'password',
   }
-            
-
+        
   const testIngInput = {
-    description: 'Nombre del ingrediente*',
+    label_text: 'Nombre del ingrediente*',
+    label_for: 'form-ingredient-name',
     input_type: InputTypes.Normal,
-    labelProps: {
-      class: 'label-color',
-      for: 'form-ingredient-name',
-    },
-    inputProps: {
-      class: 'input-primary',
-      id: 'form-ingredient-name',
-      type: 'text',
-      name: 'name',
-    },
-    value: 'Lechuga',
+    class: 'input-primary',
+    id: 'form-ingredient-name',
+    type: 'text',
+    name: 'name',
   }
-
 
   describe('unauthed', () => {
     it('login', () => {

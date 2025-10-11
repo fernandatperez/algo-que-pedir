@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/svelte'
 import { menuItemsService } from '$lib/services/MenuItemService.js'
 import { MenuItemType } from '$lib/domain/menuItem'
 
-import MenuItem from './MenuItem.svelte'
+import MenuItem from '../components/MenuItem.svelte'
 import userEvent from '@testing-library/user-event'
 
 describe('dummy', () => { //? esto es solo para probar que te anden los tests en primer lugar, si funciona podes probar lo de abajo
