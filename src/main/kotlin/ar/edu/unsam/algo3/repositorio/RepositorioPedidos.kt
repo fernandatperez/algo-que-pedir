@@ -1,11 +1,11 @@
 package ar.edu.unsam.algo3.repositorio
 
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import org.springframework.stereotype.Component
 
 

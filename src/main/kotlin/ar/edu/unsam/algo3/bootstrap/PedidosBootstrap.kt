@@ -10,7 +10,7 @@ import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.Repositorio
 import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
-import ar.edu.unsam.algo3.repositorio.repositorioIngredientes
+import ar.edu.unsam.algo3.repositorio.RepositorioIngredientes
 import ar.edu.unsam.algo3.repositorio.repositorioPlatos
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
@@ -19,6 +19,7 @@ import org.uqbar.geodds.Point
 @Service
 class PedidosBootstrap(
     val repositorioPedidos: RepositorioPedidos,
+    val repositorioIngredientes: RepositorioIngredientes
 ) : InitializingBean {
 
     private var local = Local(
@@ -35,6 +36,7 @@ class PedidosBootstrap(
     private lateinit var quesocheddar: Ingrediente
     private lateinit var lechuga: Ingrediente
     private lateinit var tomate: Ingrediente
+    private lateinit var huevo: Ingrediente
 
     private lateinit var hamburguesa: Plato
     private lateinit var pizza: Plato
@@ -108,11 +110,18 @@ class PedidosBootstrap(
             grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS,
             esOrigenAnimal = false
         )
+        huevo = Ingrediente(
+            nombre = "Huevo",
+            costoMercado = 50.0,
+            esOrigenAnimal = true,
+            grupoAlimenticio = GrupoAlimenticio.PROTEINAS
+        )
         repositorioIngredientes.apply {
             crear(carnederenacuajo)
             crear(quesocheddar)
             crear(lechuga)
             crear(tomate)
+            crear(huevo)
         }
     }
 

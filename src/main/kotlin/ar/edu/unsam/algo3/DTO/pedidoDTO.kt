@@ -1,11 +1,11 @@
 package ar.edu.unsam.algo3.DTO
 
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import org.uqbar.geodds.Point
 import java.time.LocalTime
