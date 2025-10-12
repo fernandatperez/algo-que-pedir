@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.DTO.PedidoDTO
+import ar.edu.unsam.algo3.DTO.fromDTO
 import ar.edu.unsam.algo3.DTO.toDTO
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
@@ -20,4 +21,17 @@ class PedidosService(
     fun pedidosFiltrados(estado: Estado) = repositorioPedidos.filteredInstances(estado).map { it.toDTO() }
 
     fun pedidoPorId(id: Int): PedidoDTO = repositorioPedidos.buscarPorId(id)?.toDTO() ?: throw RuntimeException("No se encontró el pedido de id <$id>")
+
+    fun actualizarEstado(id: Int, pedidoActualizado: PedidoDTO) : PedidoDTO {
+        if (pedidoActualizado.id == null || pedidoActualizado.id == -1) {
+            throw RuntimeException("Debe proveerse el ID de la tarea a actualizar")
+        }
+        if (pedidoActualizado.id!! != id) {
+            throw RuntimeException("Id en URL distinto del id que viene en el body")
+        }
+        val pedido = pedidoActualizado.fromDTO()
+        repositorioPedidos.update(pedido)
+        return pedidoPorId(pedido.id)
+    }
+
 }

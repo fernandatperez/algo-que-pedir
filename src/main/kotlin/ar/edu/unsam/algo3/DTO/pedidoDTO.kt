@@ -15,6 +15,8 @@ data class PedidoDTO (
     val id: Int,
     val nombre: String,
     val username: String,
+    var direccion: String,
+    var altura: Int,
     val lat: String,
     val long: String,
     val deliveryComission: Number,
@@ -23,7 +25,7 @@ data class PedidoDTO (
     val horarioEntrega: String,
 ) {
     lateinit var platos: MutableList<PlatoDTO> // Lista de Platos
-    lateinit var direccion: String
+    lateinit var direccionEntera: String
     var precioSubtotal: Double = 0.0
 }
 
@@ -32,6 +34,8 @@ fun Pedido.toDTO(): PedidoDTO {
         id = this.id,
         nombre = this.usuario.nombre,
         username = this.usuario.username,
+        direccion = this.usuario.direccion.calle,
+        altura = this.usuario.direccion.altura,
         lat = this.usuario.direccion.ubicacion.x.toString(),
         long = this.usuario.direccion.ubicacion.y.toString(),
         deliveryComission = this.costoDeliveryPlatos(),
@@ -39,50 +43,37 @@ fun Pedido.toDTO(): PedidoDTO {
         estado = this.estado,
         horarioEntrega = this.horarioEntrega.toString(),
     ).apply {
-        val direccionEntera = this@toDTO.usuario.direccion.calle + " " + this@toDTO.usuario.direccion.altura
-        this.direccion = direccionEntera
+        this.direccionEntera = this@toDTO.usuario.direccion.calle + " " + this@toDTO.usuario.direccion.altura
         this.precioSubtotal = this@toDTO.costoBasePlatos()
         this.platos = this@toDTO.platos.map { it.toDTO() }.toMutableList()
     }
     return pedidoDTO
 }
 
-fun Pedido.fromDTO(
-    id: Int,
-    nombre: String,
-    username: String,
-    direccion: String,
-    lat: String,
-    long: String,
-    platos: MutableList<Plato>, // Lista de Platos
-    deliveryComission: Number,
-    metodoDePago: Pago,
-    estado: Estado,
-    horarioEntrega: LocalTime,
-) {
+fun PedidoDTO.fromDTO() : Pedido {
     val direccionUsuario = Direccion(
-        calle = direccion,
-        // altura: Int = 0,
+        calle = this.direccion,
+        altura = this.altura,
         // deberia haber calle y altura pero por ahora queda asi
         ubicacion = Point(lat.toDouble(), long.toDouble()),
     )
     val usuario = Usuario(
-        nombre = nombre,
-        username = username,
+        nombre = this.nombre,
+        username = this.username,
         direccion = direccionUsuario,
     )
 
-    val pedido = Pedido(
-        usuario = usuario,
-        local = Local(),
-        platos = platos,
-        medioDePagoElegido = metodoDePago,
-        estado = estado,
+  val pedido = Pedido(
+      usuario = usuario,
+      local = Local(),
+      platos = this.platos.map { it.fromDTO() }.toMutableList(),
+      medioDePagoElegido = this.metodoDePago,
+      estado = this.estado,
     ).apply {
-        this.horarioEntrega = horarioEntrega.plusMinutes(40)
-        this.id = id
-    }
-
+      this.id = this@fromDTO.id
+      // this.horarioEntrega = this@fromDTO.horarioEntrega
+  }
+    return pedido
 }
 
 data class PlatoDTO (
@@ -112,4 +103,8 @@ fun Plato.toDTO() : PlatoDTO {
         this.precio = this@toDTO.valorVenta()
     }
     return platoDTO
+}
+
+fun PlatoDTO.fromDTO() : Plato {
+    return Plato()
 }

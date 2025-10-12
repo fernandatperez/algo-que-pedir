@@ -1,10 +1,14 @@
 package ar.edu.unsam.algo3.controlador
 
+import ar.edu.unsam.algo3.DTO.PedidoDTO
 import ar.edu.unsam.algo3.modelo.pedido.Estado
+import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.servicios.PedidosService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
@@ -20,4 +24,9 @@ class PedidosController(val pedidosService: PedidosService) {
 
     @GetMapping("/pedidos/{id}")
     fun pedidoPorId(@PathVariable id: Int) = pedidosService.pedidoPorId(id)
+
+    @PutMapping("/pedidos/{id}")
+    fun actualizarEstado(@PathVariable id: Int, @RequestBody pedidoNuevo: PedidoDTO): PedidoDTO {
+        return pedidosService.actualizarEstado(id, pedidoNuevo)
+    }
 }
