@@ -29,8 +29,8 @@ class Pedido(
     var cupon: Cupon? = nullCupon,
     val pedidoObservers: MutableList<PedidoConfirmadoObserver> = mutableListOf<PedidoConfirmadoObserver>()
 ) {
-
     var horarioEntrega: LocalTime = LocalTime.of(17, 0)
+    var id: Int = -1
 
     fun pagaCon(medioDePago: Pago) {
         if (local.esValidoMedioDePago(medioDePago)) {

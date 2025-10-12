@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.modelo.utils
 
-import ar.edu.unsam.algo3.modelo.ingrediente.InstanciaActualizador
+import ar.edu.unsam.algo3.servicios.InstanciaActualizador
 import ar.edu.unsam.algo3.modelo.cupon.Cupon
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
