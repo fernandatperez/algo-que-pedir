@@ -42,7 +42,7 @@ class IngredientService {
   }
 
   async deleteIngredient(ingredient: IngredientType){
-    return axios.delete(REST_SERVER_URL + '/tareas/' + ingredient)
+    return axios.delete(REST_SERVER_URL + '/ingredientes/' + ingredient.id)
     // const index = INGREDIENT_MOCK.findIndex(item => item.id === ingredient.id)
     // if (index !== -1) {
     //   return INGREDIENT_MOCK.splice(index, 1)[0]
