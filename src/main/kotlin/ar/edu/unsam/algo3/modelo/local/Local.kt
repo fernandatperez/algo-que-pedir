@@ -13,9 +13,9 @@ enum class Pago {
     TRANSFERENCIA_BANCARIA,
 }
 
-class Local(
-    var nombre: String = "",
-    var direccion: Direccion = Direccion(),
+open class Local(
+    val nombre: String = "",
+    val direccion: Direccion = Direccion(),
     var porcentajeAcordado: Double = 0.0,
     var regalias: Double = 0.0,
     //esto lo agrego por que se pide en ALGO3

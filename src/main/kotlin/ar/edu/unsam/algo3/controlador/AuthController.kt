@@ -2,8 +2,8 @@ package ar.edu.unsam.algo3.controlador
 
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.servicios.usuarioService
-import ar.edu.unsam.algo3.DTO.AuthRequest
-import ar.edu.unsam.algo3.DTO.AuthResponse
+import ar.edu.unsam.algo3.dto.AuthRequest
+import ar.edu.unsam.algo3.dto.AuthResponse
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
