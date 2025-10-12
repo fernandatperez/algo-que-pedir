@@ -1,22 +1,28 @@
 package ar.edu.unsam.algo3.controlador
 
-
-import org.springframework.web.bind.annotation.*
+import ar.edu.unsam.algo3.DTO.StoreProfileResponse
+import ar.edu.unsam.algo3.DTO.StoreProfileRequest
+import ar.edu.unsam.algo3.DTO.toDomain
+import ar.edu.unsam.algo3.DTO.toResponse
 import ar.edu.unsam.algo3.servicios.LocalService
-import ar.edu.unsam.algo3.dominio.Local
+import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping("/api")
 @CrossOrigin("*")
 class ControladorLocal(val localService: LocalService) {
 
-    @PutMapping("/store-profile")
-    fun actualizarPerfil(@RequestBody local: Local): Local {
-        // El JSON no necesita enviar ID
-        return  localService.actualizarPerfil(local)
+    @GetMapping("/store-profile")
+    fun obtenerPerfil(): StoreProfileResponse {
+        //uso el extension method toResponse
+        return localService.obtenerPerfil().toResponse()
     }
 
-    @GetMapping("/store-profile")
-    fun obtenerPerfil(): Local = localService.obtenerPerfil()
-
-// El frontend envía JSON sin ID, o con ID=1
+    @PutMapping("/store-profile")
+    fun actualizarPerfil(@RequestBody request: StoreProfileRequest): StoreProfileResponse {
+        //aca uso el extension method toDomain
+        val localDomain = request.toDomain()
+        val localActualizado = localService.actualizarPerfil(localDomain)
+        return localActualizado.toResponse()
+    }
 }

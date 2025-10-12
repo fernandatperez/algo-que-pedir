@@ -118,6 +118,18 @@ class Local : Entity(), ElementoDeRepositorio {
         if (nombre.isEmpty()) {
             throw BusinessException("Debe ingresar el nombre del local")
         }
+        if (direccion.calle.isEmpty()) {
+            throw BusinessException("Debe ingresar la direccion del local")
+        }
+        if (direccion.altura == 0) {
+            throw BusinessException("Debe ingresar la altura del local")
+        }
+        if (direccion.ubicacion.x.isNaN() || direccion.ubicacion.x == 0.0){
+            throw BusinessException("Debe ingresar la latitud del local")
+        }
+        if (direccion.ubicacion.y.isNaN() || direccion.ubicacion.y == 0.0){
+            throw BusinessException("Debe ingresar la longitud del local")
+        }
         if (!url.startsWith("http")) {
             throw BusinessException("URL debe comenzar con http")
         }

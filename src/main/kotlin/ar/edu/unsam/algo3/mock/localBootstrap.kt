@@ -23,7 +23,7 @@ class LocalBootstrap(
             val localInicial = Local().apply {
                 id = 1
                 nombre = "Carlo's Bake Shop"
-                url = "https://images.unsplash.com/photo-1509440159596-0249088772ff"
+                url = "https://networthbro.com/wp-content/uploads/2019/07/buddy-valastro-networth-salary.jpg"
                 regalias = 3.0
                 porcentajeAcordado = 6.0
                 mediosDePago = mutableSetOf(Pago.EFECTIVO)
@@ -48,7 +48,7 @@ class LocalBootstrap(
 
         } else {
             val localExistente = repositorioLocal.obtenerObjeto(1)
-            println("📊 Local existente: ${localExistente.nombre}")
+            println(" Local existente: ${localExistente.nombre}")
         }
     }
 }
