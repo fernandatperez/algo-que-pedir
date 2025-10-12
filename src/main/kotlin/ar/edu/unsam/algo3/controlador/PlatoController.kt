@@ -28,7 +28,7 @@ class PlatoController {
 
     @PostMapping("/platos") // Maxi
     fun postPlato() {
-//        Crear un nuevo plato usando boton "agregar plato"
+//
     }
 
 //    @PutMapping("/platos/{id}")
