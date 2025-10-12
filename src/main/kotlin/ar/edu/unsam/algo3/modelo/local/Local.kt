@@ -18,7 +18,9 @@ open class Local(
     val direccion: Direccion = Direccion(),
     var porcentajeAcordado: Double = 0.0,
     var regalias: Double = 0.0,
-    val mediosDePago: MutableSet<Pago> = mutableSetOf(Pago.EFECTIVO),
+    //esto lo agrego por que se pide en ALGO3
+    var url: String = "",
+    var mediosDePago: MutableSet<Pago> = mutableSetOf(Pago.EFECTIVO),
     val inbox: MutableList<Mensaje> = mutableListOf()
 ) : ElementoDeRepositorio {
 
