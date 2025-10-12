@@ -20,6 +20,10 @@ class PlatoService {
         return platoModelo.toDTO(id)
     }
 
+    fun crearPlato(plato: Plato) {
+        repositorioPlato.crear(plato)
+    }
+
 //    fun modificarPlato(plato: PlatoDTO): PlatoDTO {
 //        repositorioPlato.obtenerObjeto(plato.id)
 //    }

@@ -1,5 +1,8 @@
 package ar.edu.unsam.algo3.controlador
 
+import ar.edu.unsam.algo3.mock.LocalPollos
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
+import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
 import ar.edu.unsam.algo3.servicios.platoService
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import kotlin.String
 
 @CrossOrigin("*") // Habilita comunicacion entre distintos puertos (acepta requests de cualquier parte)
 @RestController
@@ -27,8 +31,18 @@ class PlatoController {
     }
 
     @PostMapping("/platos") // Maxi
-    fun postPlato() {
-//
+    fun postPlato(@RequestBody objeto: PlatoDTO) {
+
+        var objetoTrans = Plato(
+            nombre = objeto.nombre,
+            descripcion = objeto.descripcion,
+            valorBase = objeto.precio,
+            urldeImagen = objeto.imagen,
+            esDeAutor = objeto.esDeAutor,
+            ingredientes = objeto.ingredientes,
+            local = LocalPollos, // en ningun lugar pones el local no se como seria
+        )
+        platoService.crearPlato(objetoTrans)
     }
 
 //    @PutMapping("/platos/{id}")
