@@ -1,12 +1,12 @@
 package ar.edu.unsam.algo3.bootstrap
 
-import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
 import ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.Repositorio
 import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
