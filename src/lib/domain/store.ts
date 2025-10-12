@@ -62,6 +62,16 @@ export class StoreType {
     return this.errors.length > 0
   }
 
+  getValidImageUrl(defaultImage: string): string {
+    if (!this.storeURL || 
+        this.storeURL.trim() === '' || 
+        this.storeURL === 'null' || 
+        this.storeURL === 'undefined') {
+      return defaultImage
+    }
+    return this.storeURL
+  }
+
 
   validate() {
     this.errors = []
@@ -70,9 +80,21 @@ export class StoreType {
       this.addError('name', 'Debe ingresar nombre del local')
     }
  
-    if (!this.storeURL) {
-      this.addError('img', 'Debe ingresar URL de imagen')
+
+    if (!this.storeURL || this.storeURL.trim() === '' || this.storeURL === 'null' || this.storeURL === 'undefined') {
+      this.addError('url', 'Debe ingresar URL de imagen')
     }
+
+    // Validación de URL vacía
+    if (!this.storeURL || this.storeURL.trim() === '' || this.storeURL === 'null' || this.storeURL === 'undefined') {
+      this.addError('url', 'Debe ingresar URL de imagen')
+    }
+    // Verificar que comience con http o https (como en el back)
+    else if (!this.storeURL.startsWith('http://') && !this.storeURL.startsWith('https://')) {
+      this.addError('url', 'La URL debe comenzar con http:// o https://')
+    }
+
+    
 
     if (!this.storeAddress) {
       this.addError('address', 'Debe ingresar dirección')

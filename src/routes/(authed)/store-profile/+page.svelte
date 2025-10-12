@@ -10,23 +10,66 @@
   import ValidationField from "$lib/components/ValidationField.svelte";
   import Input from "$lib/components/Input.svelte";
   import Checkbox from "$lib/components/checkbox.svelte";
+  import errorImage from '$lib/assets/img/error.png';
   
   let store = $state<StoreType[]>([])
   let newStore = <StoreType>(new StoreType())
   let currentStore = $state<StoreType | null>(null) 
+  let formElement: HTMLFormElement | null = null
+  let originalStore = $state<StoreType | null>(null)
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
+  let formKey = $state(0)
 
   const findStore = async () => {
     try{
       store = await storeService.getStore()
+      originalStore = JSON.parse(JSON.stringify(store[0]))
       currentStore = store[0]
     } catch (error){
       showError('Conexion al servidor fallida', error)
     }
   }
 
-  onMount(findStore)
+  function discardChanges() {
+    if (originalStore) {
+      // Recrear completamente el objeto para forzar reactividad
+      currentStore = Object.assign(new StoreType(), JSON.parse(JSON.stringify(originalStore)))
+      errors = []
+      
+      // También resetear los valores del formulario manualmente
+      setTimeout(() => {
+        const form = document.getElementById('form-store-profile') as HTMLFormElement
+        if (form && currentStore) {
+          // Resetear valores de inputs
+          const inputs = form.querySelectorAll('input')
+          inputs.forEach(input => {
+            if (input.type === 'checkbox') {
+              // Para checkboxes
+              if (input.name === 'storePaymentEfectivo') input.checked = currentStore!.storePaymentEfectivo
+              if (input.name === 'storePaymentQR') input.checked = currentStore!.storePaymentQR
+              if (input.name === 'storePaymentTransferencia') input.checked = currentStore!.storePaymentTransferencia
+            } else {
+              // Para inputs normales
+              if (input.name === 'name') input.value = currentStore!.name || ""
+              if (input.name === 'storeURL') input.value = currentStore!.storeURL || ""
+              if (input.name === 'storeAddress') input.value = currentStore!.storeAddress || ""
+              if (input.name === 'storeAltitude') input.value = currentStore!.storeAltitude?.toString() || "0"
+              if (input.name === 'storeLatitude') input.value = currentStore!.storeLatitude?.toString() || "0"
+              if (input.name === 'storeLongitude') input.value = currentStore!.storeLongitude?.toString() || "0"
+              if (input.name === 'storeAppCommission') input.value = currentStore!.storeAppCommission?.toString() || "0"
+              if (input.name === 'storeAuthorCommission') input.value = currentStore!.storeAuthorCommission?.toString() || "0"
+            }
+          })
+        }
+      }, 0)
+    }
+  }
+
+   onMount(() => {
+    findStore()
+
+  })
 
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault()
@@ -89,7 +132,7 @@
 
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title">Información del local</h1>
+    <h1 class="header-title">Información del local</h1> 
      <form action="" id="form-store-profile" class="container-column form-store-profile" onsubmit={onSubmit}>
       <!-- Datos del Local  -->
         <fieldset form="form-store-profile" name="store-info" class="content-section form-section-store-info">
@@ -119,7 +162,7 @@
               </div>
             </div>  
             <div class="img-store-container">
-              <img src={currentStore?.storeURL || "src/lib/assets/img/CarlosBakeShop.jpg"} alt="local" class="img-store-profile">
+              <img src={errors.some(e => e.field === 'url') ? errorImage : (currentStore?.storeURL || errorImage)} alt="local" class="img-store-profile">
             </div>  
             
           </div> 
@@ -244,7 +287,7 @@
           </div>
         </fieldset>           
     <section class="btn-group-actions">
-      <button type="button" class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+      <button type="button" class="btn btn-secondary btn-store" onclick={discardChanges}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
       <button type="submit" class="btn btn-primary btn-store" > Guardar<span class="p-cambios display-none-mobile">Cambios</span></button>
     </section>
     </form>
