@@ -8,14 +8,12 @@ import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin("*")
+@CrossOrigin(origins = ["*"])
 class ControladorLocal(val localService: LocalService) {
 
     @GetMapping("/store-profile")
-    fun obtenerPerfil(): StoreProfileResponse {
-        //uso el extension method toResponse
-        return localService.obtenerPerfil().toResponse()
+    fun obtenerPerfil(): List<StoreProfileResponse> { // Cambia a List<>
+        return listOf(localService.obtenerPerfil().toResponse())
     }
 
     @PutMapping("/store-profile")
