@@ -133,8 +133,8 @@ class Local : Entity(), ElementoDeRepositorio {
         nombre = nuevoLocal.nombre
         url = nuevoLocal.url
         direccion = nuevoLocal.direccion
-        comisionApp = nuevoLocal.regalias
-        comisionAutor = nuevoLocal.porcentajeAcordado
+        comisionApp = nuevoLocal.porcentajeAcordado
+        comisionAutor = nuevoLocal.regalias
         mediosDePago.clear()
         mediosDePago.addAll(nuevoLocal.mediosDePago)
     }
