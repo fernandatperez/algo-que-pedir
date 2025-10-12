@@ -19,6 +19,8 @@ export type OrderJSON = {
   nombre: string
   username: string
   direccion: string
+  altura: string
+  direccionEntera: string
   lat: string
   long: string
   platos: MenuItemType[] // Lista de Platos
@@ -35,6 +37,8 @@ export class Order {
     public nombre: string = '',
     public username: string = '',
     public direccion: string = '',
+    public altura: string = '',
+    public direccionEntera: string = '',
     public lat: string = '',
     public long: string = '',
     public platos: MenuItemType[] = [], // Lista de Platos
@@ -91,6 +95,8 @@ export class Order {
       nombre: this.nombre,
       username: this.username,
       direccion: this.direccion,
+      altura: this.altura,
+      direccionEntera: this.direccionEntera,
       lat: this.lat,
       long: this.long,
       platos: this.platos, // Lista de Platos

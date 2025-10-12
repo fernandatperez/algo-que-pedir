@@ -46,7 +46,7 @@
             <i class="ph ph-map-pin"></i>
           </div>
           <div>
-            <div class="address"><strong>{order.direccion}</strong></div>
+            <div class="address"><strong>{order.direccionEntera}</strong></div>
             <div class="coordinates">Lat: {order.lat}, Long: {order.long}</div>
           </div>
         </address>

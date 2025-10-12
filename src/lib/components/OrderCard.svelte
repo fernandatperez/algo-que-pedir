@@ -39,7 +39,7 @@
         </div>
         <div class="address-coordinates">
             <span class="address"
-                ><strong>{order.direccion}</strong></span
+                ><strong>{order.direccionEntera}</strong></span
             >
             <div class="coordinates">Lat: {order.lat}, Long: {order.long}</div>
         </div>
