@@ -69,5 +69,20 @@
     grid-template-columns: repeat(auto-fit, 27em);
     justify-content: center; /* optional, centers the content */
     gap: 0.5em;
-    margin-right: 1em;
+    /* margin-right: 1em; */
+}
+
+/* ============================= Media-Queries ============================= */
+/* vista en celular */
+@media (max-width: 430px) {
+    .line {
+        width: 100%;
+    }
+    .title-tabs {
+        width: 100%;
+    }
+    .tabs {
+        width: 100%;
+        flex-wrap: wrap;
+    }
 }

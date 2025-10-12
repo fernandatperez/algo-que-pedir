@@ -47,7 +47,7 @@
 
     <div class="payment">
         <i class="ph ph-credit-card"></i>
-        <span class="payment-text">Pago con <b>{order.metodoDePago}</b></span>
+        <span class="payment-text">Pago con <b>{order.metodoDePago.split('_').join(' ')}</b></span>
     </div>
 
     <div class="action-container">

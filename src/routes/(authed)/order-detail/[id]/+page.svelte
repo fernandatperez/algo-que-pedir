@@ -25,7 +25,7 @@
       <h1 class="header-title jc-space-between ellipsis-text" data-testid="order-id">Pedido #{order.id}</h1>
       <div class="flex-row state-btn-container">
         <h2 class="subtitle ellipsis-text">Estado del Pedido</h2>
-        <span class="btn btn-alternate">{order.state}</span>
+        <span class="btn btn-alternate">{order.estado}</span>
       </div>
     </div>
     <section class="content-section-grid grid-cols-2">
@@ -34,8 +34,8 @@
         <div class="user">
           <i class="ph ph-user-circle"></i>
           <div class="user-info">
-            <div class="name">{order.name}</div>
-            <div class="username"><strong>usuario:</strong> {order.user}</div>
+            <div class="name">{order.nombre}</div>
+            <div class="username"><strong>usuario:</strong> {order.username}</div>
           </div>
         </div>
       </section>
@@ -46,7 +46,7 @@
             <i class="ph ph-map-pin"></i>
           </div>
           <div>
-            <div class="address"><strong>{order.address}</strong></div>
+            <div class="address"><strong>{order.direccion}</strong></div>
             <div class="coordinates">Lat: {order.lat}, Long: {order.long}</div>
           </div>
         </address>
@@ -59,14 +59,14 @@
       </section>
 
       <!-- Grid Content  -->
-      <Grid platos={order.dishes} />
+      <Grid platos={order.platos} />
       </section>
 
     <section class="content-section-grid grid">
       <h3>Pago</h3>
       <div class="flex-row jc-space-between">
         <p>Subtotal</p>
-        <p>${order.precioSubtotal().toFixed(2)}</p>
+        <p>${order.precioSubtotal.toFixed(2)}</p>
       </div>
       <div class="flex-row jc-space-between">
         <p>Incremento por tipo de pago</p>
@@ -74,7 +74,7 @@
       </div>
       <div class="flex-row jc-space-between">
         <p>Comision del delivery</p>
-        <p>${order.deliveryComission}</p>
+        <p>${order.deliveryComission.toFixed(2)}</p>
       </div>
       <div class="flex-row jc-space-between">
         <p>Total</p>
@@ -85,7 +85,7 @@
       <h3 class="padding-top-05-05 h3">Metodo de pago</h3>
       <div class="payment">
         <i class="ph ph-credit-card"></i>
-        <span class="payment-text">Pago con <b>{order.paymentMethod}</b></span>
+        <span class="payment-text">Pago con <b>{order.metodoDePago.split('_').join(' ')}</b></span>
       </div>
       <div class="action-container">
         <button class="btn btn-primary" onclick={() => goto('/orders')}>Volver</button>

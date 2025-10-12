@@ -22,6 +22,7 @@ export type OrderJSON = {
   lat: string
   long: string
   platos: MenuItemType[] // Lista de Platos
+  precioSubtotal: number
   deliveryComission: number
   metodoDePago: Pago
   estado: Estado
@@ -37,6 +38,7 @@ export class Order {
     public lat: string = '',
     public long: string = '',
     public platos: MenuItemType[] = [], // Lista de Platos
+    public precioSubtotal: number = 0.0,
     public deliveryComission: number = 0.0,
     public metodoDePago: Pago = Pago.EFECTIVO,
     public estado: Estado = Estado.PENDIENTE,
@@ -49,11 +51,11 @@ export class Order {
   }
 
   // Suma de Precios de Platos
-  precioSubtotal(): number { 
-    return this.platos.reduce((accumulator, currentItem) => {
-      return accumulator + currentItem.precio
-    }, 0)
-  }
+  // precioSubtotal(): number { 
+  //   return this.platos.reduce((accumulator, currentItem) => {
+  //     return accumulator + currentItem.precio
+  //   }, 0)
+  // }
   
   // Recargo del 10%, solo cuando no es EFVO
   recargoPago(): number { 
@@ -69,13 +71,13 @@ export class Order {
     if (this.recargoPago() == 1) {
       recargo = 0
     } else {
-      recargo = this.precioSubtotal() * 0.1
+      recargo = this.precioSubtotal * 0.1
     }
     return recargo 
   }
 
   precioTotal(): number { 
-    return this.precioSubtotal() * this.recargoPago()  + this.deliveryComission  
+    return this.precioSubtotal * this.recargoPago()  + this.deliveryComission  
   }
 
   get horarioEntregaString(): string {
@@ -92,6 +94,7 @@ export class Order {
       lat: this.lat,
       long: this.long,
       platos: this.platos, // Lista de Platos
+      precioSubtotal: this.precioSubtotal,
       deliveryComission: this.deliveryComission,
       metodoDePago: this.metodoDePago,
       estado: this.estado,

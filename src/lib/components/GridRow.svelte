@@ -1,6 +1,9 @@
 <script lang="ts">
+    import type { MenuItemType } from "$lib/domain/menuItem"
 
-  let { platos } = $props();
+
+  let { platos }: { platos: MenuItemType[] } = $props();
+  console.log('Platos in GridRow:', platos);
 </script>
 
 <style>
@@ -29,7 +32,11 @@
     justify-content: space-between; 
     align-items: center;
     gap: 1em;
-    font-size: 0.8em; 
+  }
+
+  .cell:nth-child(2),
+  .cell:nth-child(3) {
+    text-align: center;
   }
 
   .product-cell {
@@ -82,8 +89,8 @@
                 </p>
               </div>
             </div>
-            <div class="cell">{"Falta attr"}</div>
-            <div class="cell">${plato.precio.toFixed(2)}</div>
+            <div class="cell">{1}</div>
+            <div class="cell">${plato.costoProduccion.toFixed(2)}</div>
           </section>
         {/each}
 </section>
