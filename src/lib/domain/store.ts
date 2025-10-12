@@ -79,20 +79,15 @@ export class StoreType {
     if (!this.name) {
       this.addError('name', 'Debe ingresar nombre del local')
     }
- 
-
-    if (!this.storeURL || this.storeURL.trim() === '' || this.storeURL === 'null' || this.storeURL === 'undefined') {
-      this.addError('url', 'Debe ingresar URL de imagen')
-    }
 
     // Validación de URL vacía
     if (!this.storeURL || this.storeURL.trim() === '' || this.storeURL === 'null' || this.storeURL === 'undefined') {
       this.addError('url', 'Debe ingresar URL de imagen')
-    }
+    }else{
     // Verificar que comience con http o https (como en el back)
-    else if (!this.storeURL.startsWith('http://') && !this.storeURL.startsWith('https://')) {
-      this.addError('url', 'La URL debe comenzar con http:// o https://')
-    }
+      if (!this.storeURL.startsWith('http://') && !this.storeURL.startsWith('https://')) {
+        this.addError('url', 'La URL debe comenzar con http:// o https://')
+      }}
 
     
 
