@@ -13,6 +13,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     // alt: 'spagettis',
     enPromocion: false,
     esDeAutor: false,
+    costoProduccion : 10,
     ingredientes: [
       IngredientType.fromJson(INGREDIENT_MOCK[0]),
       IngredientType.fromJson(INGREDIENT_MOCK[1]),
@@ -29,6 +30,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     // alt: 'hamburguesa',
     enPromocion: false,
     esDeAutor: false,
+    costoProduccion : 10,
     ingredientes: [
       IngredientType.fromJson(INGREDIENT_MOCK[0]),
       IngredientType.fromJson(INGREDIENT_MOCK[1]),
@@ -41,6 +43,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     precio: 7.50,
     imagen: '/src/lib/assets/img/ensalada.png',
     // alt: 'ensalada',
+    costoProduccion : 10,
     enPromocion: false,
     esDeAutor: false,
     ingredientes: [
@@ -56,6 +59,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     // alt: 'pizza',
     enPromocion: false,
     esDeAutor: false,
+    costoProduccion : 10,
     ingredientes: [
       IngredientType.fromJson(INGREDIENT_MOCK[0]),
       IngredientType.fromJson(INGREDIENT_MOCK[1]),
@@ -72,6 +76,7 @@ export const MENU_ITEMS_JSON_MOCK: MenuItemJSON[] = [
     // alt: 'salmon',
     enPromocion: false,
     esDeAutor: false,
+    costoProduccion : 10,
     ingredientes: [
       IngredientType.fromJson(INGREDIENT_MOCK[1]),
       IngredientType.fromJson(INGREDIENT_MOCK[2])
@@ -89,6 +94,7 @@ const hamburguesaJSON: MenuItemJSON = {
   imagen: '/src/lib/assets/img/hamburguesa.png',
   enPromocion: false,
   esDeAutor: false,
+  costoProduccion : 10,
   ingredientes: [
     IngredientType.fromJson(INGREDIENT_MOCK[1]),
     IngredientType.fromJson(INGREDIENT_MOCK[2]),
@@ -105,6 +111,7 @@ const pizzaJSON: MenuItemJSON = {
   imagen: '/src/lib/assets/img/pizza.png',
   enPromocion: false,
   esDeAutor: false,
+  costoProduccion : 10,
   ingredientes: [
     IngredientType.fromJson(INGREDIENT_MOCK[0]),
     IngredientType.fromJson(INGREDIENT_MOCK[1]),
@@ -122,6 +129,7 @@ const ensaladaJSON: MenuItemJSON = {
   imagen: '/src/lib/assets/img/ensalada.png',
   enPromocion: false,
   esDeAutor: false,
+  costoProduccion : 10,
   ingredientes: [
     IngredientType.fromJson(INGREDIENT_MOCK[0]),
     IngredientType.fromJson(INGREDIENT_MOCK[1]),

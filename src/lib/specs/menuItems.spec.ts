@@ -35,7 +35,7 @@ describe('MenuItem Component', () => {
     // Verificar imagen
     const imagen = screen.getByTestId('menu-imagen')
     expect(imagen).toHaveAttribute('src', '/src/lib/assets/img/spagettis.png')
-    expect(imagen).toHaveAttribute('alt', 'spagettis')
+    // expect(imagen).toHaveAttribute('alt', 'spagettis')
   })
 
   it('genera el link correcto para la edicion del plato', () => {
@@ -59,7 +59,7 @@ describe('MenuItem Component', () => {
 
   it('deberia aumentar de 5 a 6 platos cuando se agrega uno nuevo', async () => {
     // Obtener cantidad inicial de platos
-    const menuItemsInicial = await menuItemsService.getAllMenuItems()
+    const menuItemsInicial = await menuItemsService.getAllMenuItems() //! esto se rompio por cambiar el service
     const cantidadInicial = menuItemsInicial.length
     
     // Crear un nuevo plato
@@ -69,13 +69,14 @@ describe('MenuItem Component', () => {
     nuevoPlato.descripcion = 'Pizza tradicional con tomate, mozzarella y albahaca'
     nuevoPlato.precio = 15.99
     nuevoPlato.imagen = '/src/lib/assets/img/pizza.png'
-    nuevoPlato.alt = 'pizza'
+    // nuevoPlato.alt = 'pizza'
+    nuevoPlato.costoProduccion = 10
     
     await menuItemsService.createMenuItem(nuevoPlato)
     
     const menuItemsActualizado = await menuItemsService.getAllMenuItems()
     
-    expect(menuItemsActualizado.length).toBe(cantidadInicial + 1)
+    expect(menuItemsActualizado.length).toBe(cantidadInicial + 1) //! hay que cambiar en el platoRepositorio
     
     // Verificar que el nuevo plato esta en la lista
     const platoAgregado = menuItemsActualizado.find(item => item.id === 6)
@@ -86,7 +87,7 @@ describe('MenuItem Component', () => {
 
   it('deberia actualizar las propiedades de un plato y reflejar los cambios al obtenerlo', async () => {
     // Obtener un plato existente
-    const platoOriginal = await menuItemsService.getMenuItem(1)
+    const platoOriginal = await menuItemsService.getMenuItem(1) //! esto se rompio por cambiar el service
     
     // Guardar valores originales
     const nombreOriginal = platoOriginal.nombre
