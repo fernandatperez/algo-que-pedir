@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.servicios
 
+import ar.edu.unsam.algo3.DTO.PedidoDTO
 import ar.edu.unsam.algo3.DTO.toDTO
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
@@ -17,4 +18,6 @@ class PedidosService(
     fun pedidos() = repositorioPedidos.allInstances()
 
     fun pedidosFiltrados(estado: Estado) = repositorioPedidos.filteredInstances(estado).map { it.toDTO() }
+
+    fun pedidoPorId(id: Int): PedidoDTO = repositorioPedidos.buscarPorId(id)?.toDTO() ?: throw RuntimeException("No se encontró el pedido de id <$id>")
 }

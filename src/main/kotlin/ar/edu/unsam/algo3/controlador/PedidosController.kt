@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.servicios.PedidosService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -14,7 +15,9 @@ class PedidosController(val pedidosService: PedidosService) {
     @GetMapping("/pedidos")
     fun pedidos() = pedidosService.pedidos()
 
-    @GetMapping("/pedidos/{estado}")
-    fun pedidosFiltrados(@PathVariable estado: Estado) = pedidosService.pedidosFiltrados(estado)
+    @GetMapping("/pedidos/")
+    fun pedidosFiltrados(@RequestParam estado: Estado) = pedidosService.pedidosFiltrados(estado)
 
+    @GetMapping("/pedidos/{id}")
+    fun pedidoPorId(@PathVariable id: Int) = pedidosService.pedidoPorId(id)
 }

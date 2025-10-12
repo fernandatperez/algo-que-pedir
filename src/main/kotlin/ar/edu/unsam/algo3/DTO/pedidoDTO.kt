@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.DTO
 
 import ar.edu.unsam.algo2.algoQuePedir.ar.edu.unsam.algo3.Usuario
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Estado
@@ -16,13 +17,14 @@ data class PedidoDTO (
     val username: String,
     val lat: String,
     val long: String,
-    val platos: MutableList<Plato>, // Lista de Platos
     val deliveryComission: Number,
     val metodoDePago: Pago,
     val estado: Estado,
     val horarioEntrega: String,
 ) {
+    lateinit var platos: MutableList<PlatoDTO> // Lista de Platos
     lateinit var direccion: String
+    var precioSubtotal: Double = 0.0
 }
 
 fun Pedido.toDTO(): PedidoDTO {
@@ -32,7 +34,6 @@ fun Pedido.toDTO(): PedidoDTO {
         username = this.usuario.username,
         lat = this.usuario.direccion.ubicacion.x.toString(),
         long = this.usuario.direccion.ubicacion.y.toString(),
-        platos = this.platos, // Lista de Platos
         deliveryComission = this.costoDeliveryPlatos(),
         metodoDePago = this.medioDePagoElegido,
         estado = this.estado,
@@ -40,6 +41,8 @@ fun Pedido.toDTO(): PedidoDTO {
     ).apply {
         val direccionEntera = this@toDTO.usuario.direccion.calle + " " + this@toDTO.usuario.direccion.altura
         this.direccion = direccionEntera
+        this.precioSubtotal = this@toDTO.costoBasePlatos()
+        this.platos = this@toDTO.platos.map { it.toDTO() }.toMutableList()
     }
     return pedidoDTO
 }
@@ -80,4 +83,33 @@ fun Pedido.fromDTO(
         this.id = id
     }
 
+}
+
+data class PlatoDTO (
+    val id: Int,
+    // alt: string
+    val nombre: String,
+    val descripcion: String,
+//     val imagen: String,
+    val esDeAutor: Boolean,
+    val enPromocion: Boolean,
+    val ingredientes: MutableList<Ingrediente>,
+) {
+    var precio: Double = 0.0
+    var costoProduccion: Double = 0.0
+}
+
+fun Plato.toDTO() : PlatoDTO {
+    val platoDTO = PlatoDTO(
+        id = this.id,
+        nombre = this.nombre,
+        descripcion = this.descripcion,
+        esDeAutor = this.esDeAutor,
+        enPromocion = false,
+        ingredientes = this.ingredientes,
+    ).apply {
+        this.costoProduccion = this@toDTO.costoProduccion()
+        this.precio = this@toDTO.valorVenta()
+    }
+    return platoDTO
 }
