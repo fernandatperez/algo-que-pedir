@@ -60,7 +60,7 @@ class LocalServiceIntegrationTest {
         val localInicial = Local().apply {
             nombre = "Inicial"
             url = "https://inicial.com"
-            direccion = Direccion("calle falsa", 111, Point(0.0, 0.0))
+            direccion = Direccion("calle falsa", 111, Point(1.0, 1.0))
             comisionApp = 1.0
             comisionAutor = 2.0
             mediosDePago = mutableSetOf(Pago.EFECTIVO)
@@ -91,7 +91,7 @@ class LocalServiceIntegrationTest {
         val localInvalido = Local().apply {
             nombre = "Test"
             url = "url-invalida" // Sin http
-            direccion = Direccion("Test", 123, Point(0.0, 0.0))
+            direccion = Direccion("Test", 123, Point(1.0, 1.0))
             comisionApp = 5.0
             comisionAutor = 10.0
             mediosDePago = mutableSetOf(Pago.EFECTIVO)
