@@ -21,6 +21,7 @@
   top: 5em;
   right: 1em;
   margin-top: 1em;
+  margin-left: 1em;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -35,7 +36,7 @@
   padding: 1rem 1.25rem;
   border-radius: 8px;
   color: white;
-  font-size: 2em;
+  font-size: var(--font-h4);
   font-weight: 500;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   animation: slide-in 0.3s ease-out;
