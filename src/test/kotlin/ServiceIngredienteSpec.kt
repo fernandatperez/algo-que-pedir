@@ -1,4 +1,4 @@
-import ar.edu.unsam.algo3.modelo.ingrediente.InstanciaActualizador
+import ar.edu.unsam.algo3.servicios.InstanciaActualizador
 import ar.edu.unsam.algo3.repositorio.Repositorio
 import ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente

@@ -4,6 +4,7 @@ import ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 
 data class IngredienteDTO(
+//    Tienen que ser los mismo nombre que estan en el front
     val id: Int,
     val name: String,
     val cost: Double,

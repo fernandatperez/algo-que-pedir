@@ -7,15 +7,16 @@ import kotlinx.serialization.Serializable
 // defino los grupos alimenticios en una clase enumerada
 // Mayúscula y separado por _ : SCREAMING_SNAKE_CASE
 
-enum class GrupoAlimenticio(val displayName: String) {
+enum class GrupoAlimenticio(val nombre: String) {
     FRUTAS_Y_VERDURAS("Frutas y Verduras"),
     PROTEINAS("Proteínas"),
     CEREALES_Y_TUBERCULOS("Cereales y tuberculos"),
     LACTEOS("Lácteos"),
     GRASAS_Y_ACEITES("Grasas y aceites"),
     AZUCARES_Y_DULCES("Azucares y dulces");
+
     @JsonValue
-    fun toDisplayName() = displayName
+    fun nombreAMostrar() = nombre
 }
 
 @Serializable
