@@ -32,9 +32,12 @@ class MenuItemsService {
   }
 
   async createMenuItem(item: MenuItemType) {
-    const itemJSON = { ...item }
-    MENU_ITEMS_JSON_MOCK.push(itemJSON)
-    return MENU_ITEMS_JSON_MOCK  
+    const { id, ...itemSinId } = item // Elimina el ID si existe
+    await axios.post<MenuItemJSON>(REST_SERVER_URL + '/platos', itemSinId)
+
+    //     const itemJSON = { ...item }
+    // MENU_ITEMS_JSON_MOCK.push(itemJSON)
+    // return MENU_ITEMS_JSON_MOCK  
   }
 
   async updateMenuItem(menuItem: MenuItemType) {
