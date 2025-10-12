@@ -6,6 +6,9 @@ import ar.edu.unsam.algo3.errores.ObjetoIDoVerificacionFallaron
 // Para que un tipo generico pueda ser mas de una sola cosa
 // class Repositorio<Type> where Type : UnaInterfaz, Type : OtraInterfaz...
 // Generics (Type: ...)
+import org.springframework.stereotype.Repository
+
+
 open class Repositorio<Type : ElementoDeRepositorio> {
     var contadorIDs: Int = 1
     val coleccion: MutableList<Type> = mutableListOf()
