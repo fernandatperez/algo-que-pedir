@@ -88,11 +88,3 @@ tasks.register("runOnGitHub") {
     group = "custom"
     description = "$ ./gradlew runOnGitHub # runs on GitHub Action"
 }
-//agrego esto por que el cache hace fallar la ejecucion de spring
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        allWarningsAsErrors = false
-    }
-    // Deshabilitar cache
-    outputs.cacheIf { false }
-}
