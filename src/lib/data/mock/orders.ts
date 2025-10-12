@@ -14,7 +14,7 @@ export let firstOrder: OrderJSON = {
   deliveryComission: 2.0, // Asi o porcentaje ??
   paymentMethod: Pago.TRANSFERENCIA,
   state: Estado.PENDIENTE,
-  createdAt: new Date().toLocaleString(),
+  horarioEntrega: "",
 }
 
 // Otro pedido
@@ -29,7 +29,7 @@ let secondOrder: OrderJSON = {
   deliveryComission: 2.0, // Asi o porcentaje ??
   paymentMethod: Pago.EFECTIVO,
   state: Estado.PENDIENTE,
-  createdAt: new Date().toLocaleString(),
+  horarioEntrega: "",
 }
 
 // Otro pedido
@@ -44,7 +44,7 @@ export let thirdOrder: OrderJSON = {
   deliveryComission: 2.0, // Asi o porcentaje ??
   paymentMethod: Pago.TRANSFERENCIA,
   state: Estado.PREPARADO,
-  createdAt: new Date().toLocaleString(),
+  horarioEntrega: "",
 }
 
 // Lista de type OrderJSON

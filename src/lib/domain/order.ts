@@ -16,50 +16,48 @@ export enum Pago {
 
 export type OrderJSON = {
   id: number
-  name: string
-  user: string
-  address: string
+  nombre: string
+  username: string
+  direccion: string
   lat: string
   long: string
-  dishes: MenuItemType[] // Lista de Platos
+  platos: MenuItemType[] // Lista de Platos
   deliveryComission: number
-  paymentMethod: Pago
-  state: Estado
-  createdAt: string
+  metodoDePago: Pago
+  estado: Estado
+  horarioEntrega: string
 }
 
 export class Order {
   constructor(
     public id: number = -1, // no existe
-    public name: string = '',
-    public user: string = '',
-    public address: string = '',
+    public nombre: string = '',
+    public username: string = '',
+    public direccion: string = '',
     public lat: string = '',
     public long: string = '',
-    public dishes: MenuItemType[] = [], // Lista de Platos
+    public platos: MenuItemType[] = [], // Lista de Platos
     public deliveryComission: number = 0.0,
-    public paymentMethod: Pago = Pago.EFECTIVO,
-    public state: Estado = Estado.PENDIENTE,
-    public createdAt: Date = new Date(),
+    public metodoDePago: Pago = Pago.EFECTIVO,
+    public estado: Estado = Estado.PENDIENTE,
+    public horarioEntrega: string = '',
   ) {}
 
   // transforma json del back a una Order de ts
   static fromJSON(orderJSON: OrderJSON): Order {
-    return Object.assign(new Order(), orderJSON, {
-      createdAt: Date.parse(orderJSON.createdAt) // parseo string a Date
-    })
+    return Object.assign(new Order(), orderJSON)
   }
 
   // Suma de Precios de Platos
   precioSubtotal(): number { 
-    return this.dishes.reduce((accumulator, currentItem) => {
+    return this.platos.reduce((accumulator, currentItem) => {
       return accumulator + currentItem.precio
     }, 0)
   }
   
   // Recargo del 10%, solo cuando no es EFVO
   recargoPago(): number { 
-    if (this.paymentMethod == 'EFECTIVO') {
+    if (this.metodoDePago == 'EFECTIVO') {
       return 1
     } else {
       return 1.1
@@ -80,24 +78,24 @@ export class Order {
     return this.precioSubtotal() * this.recargoPago()  + this.deliveryComission  
   }
 
-  get createdAtString(): string {
-    // return this.createdAt.toLocaleString()
-    return this.createdAt.toString()
+  get horarioEntregaString(): string {
+    // return this.horarioEntrega.toLocaleString()
+    return this.horarioEntrega.toString()
   }
 
   toJSON(): OrderJSON {
     return {
       id: this.id,
-      name: this.name,
-      user: this.user,
-      address: this.address,
+      nombre: this.nombre,
+      username: this.username,
+      direccion: this.direccion,
       lat: this.lat,
       long: this.long,
-      dishes: this.dishes, // Lista de Platos
+      platos: this.platos, // Lista de Platos
       deliveryComission: this.deliveryComission,
-      paymentMethod: this.paymentMethod,
-      state: this.state,
-      createdAt: this.createdAtString,
+      metodoDePago: this.metodoDePago,
+      estado: this.estado,
+      horarioEntrega: this.horarioEntrega,
     }
   }
 }

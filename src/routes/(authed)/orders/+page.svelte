@@ -5,7 +5,7 @@
     import { onMount } from "svelte"
     import { showError } from "$lib/domain/errorHandler"
     // import Toaster from "$lib/components/toast/Toaster.svelte"
-    import ToastContainer from "$lib/components/toast/ToastContainer.svelte";
+    // import ToastContainer from "$lib/components/toast/ToastContainer.svelte";
     import { toasts } from "$lib/components/toast/toastStore";
 
     // Para filtrar pedidos por estado
@@ -13,7 +13,7 @@
     const handleStateChange = async (newState: string) => {
         estadoActual = newState
         // console.log("Estado cambiado a:", estado)
-        await getTareas()
+        await getOrders()
     }
 
     // Todos los pedidos (ejemplo)
@@ -22,28 +22,29 @@
     let errorMessage = $state('')
     let toastLock: boolean = false
 
-    const getTareas = async () => {
+    const getOrders = async () => {
         errorMessage = ''
         try {
             orders = await orderService.getFilteredOrders(estadoActual)
+            // console.log("Pedidos cargados:", orders)
         } catch (error) {
             if (!toastLock) {
-                toasts.push('Error cargando los pedidos', {type: 'error'})
+                // toasts.push('Error cargando los pedidos', {type: 'error'})
+                showError('Error cargando los pedidos', error)
                 toastLock = true
                 setTimeout(releaseToast, 5000)
             }
-            showError('Error cargando los pedidos', error)
         }
     }
     
-    onMount(getTareas)
+    onMount(getOrders)
 
     const prepararPedido = async (order: Order) => {
         // console.log("Preparando pedido", order.id)
-        order.state = Estado.PREPARADO
+        order.estado = Estado.PREPARADO
         toasts.push('Pedido enviado a preparación', {type: 'info'})
         await orderService.updateOrderState(order)
-        await getTareas()
+        await getOrders()
         // console.log("Pedido preparado", order.id)
     }
 
