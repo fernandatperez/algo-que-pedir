@@ -54,7 +54,6 @@ fun PedidoDTO.fromDTO() : Pedido {
     val direccionUsuario = Direccion(
         calle = this.direccion,
         altura = this.altura,
-        // deberia haber calle y altura pero por ahora queda asi
         ubicacion = Point(lat.toDouble(), long.toDouble()),
     )
     val usuario = Usuario(
