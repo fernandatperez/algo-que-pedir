@@ -33,6 +33,8 @@
   let showModalAdd = $state(false)
   let showModalDelete = $state(false)
 
+  const productionCost = $derived(itemEdit.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0))
+
 
   const onSubmit = async (ev: SubmitEvent) => {
     const esNuevoItem = itemEdit.id == -1
@@ -309,7 +311,8 @@
         <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
         <div class="product-ingredients-cost-subtitle w-100">
           <h3 class="h3">Costo de Producción</h3>
-          <p>${itemEdit.costoProduccion}</p>
+          <!-- Aca se agrega este $derived para que se muestre reactivamente. Cuando se guarda el menuItem lo que se envia es el costo de produccion del elemento. -->
+          <p>${productionCost}</p>
           <button type="button" class="add-ingredient-btn" onclick={() => showModalAdd = true}>Añadir ingrediente</button>
           
         </div>
