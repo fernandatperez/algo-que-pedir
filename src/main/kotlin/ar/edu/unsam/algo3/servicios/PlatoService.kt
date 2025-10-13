@@ -3,30 +3,44 @@ package ar.edu.unsam.algo3.servicios
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
 import ar.edu.unsam.algo3.modelo.plato.toDTO
-import ar.edu.unsam.algo3.repositorio.Repositorio
-import ar.edu.unsam.algo3.repositorio.repositorioPlato
-import org.springframework.stereotype.Service
+import ar.edu.unsam.algo3.bootstrap.repositorioPlatos
+import ar.edu.unsam.algo3.mock.LocalPollos
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
+import ar.edu.unsam.algo3.modelo.plato.fromDTO
+import ar.edu.unsam.algo3.DTO.IngredienteDTO
+import ar.edu.unsam.algo3.DTO.toDOM
 
 val platoService: PlatoService = PlatoService()
 
 class PlatoService {
 
     fun getPlatos(): List<PlatoDTO> =
-        repositorioPlato.objetosDeRepositorio().map { it.toDTO(it.id) }
+        repositorioPlatos.objetosDeRepositorio().map { it.toDTO() }
 
     fun obtenerPlato(id: Int): PlatoDTO {
 //        obtenerObjeto ya hace la validacion de existencia del plato en el repo
-        val platoModelo = repositorioPlato.obtenerObjeto(id)
-        return platoModelo.toDTO(id)
+        val platoModelo = repositorioPlatos.obtenerObjeto(id)
+        return platoModelo.toDTO()
     }
 
-    fun crearPlato(plato: Plato) {
-        repositorioPlato.crear(plato)
+    fun crearPlato(platoDTO: PlatoDTO) {
+        val ingredientesDOM: MutableList<Ingrediente> = platoDTO.ingredientes.map { it: IngredienteDTO -> it.toDOM()}.toMutableList()
+        var platoDOM = Plato(
+            nombre = platoDTO.nombre,
+            descripcion = platoDTO.descripcion,
+            valorBase = platoDTO.precio,
+            urldeImagen = platoDTO.imagen,
+            esDeAutor = platoDTO.esDeAutor,
+            ingredientes = ingredientesDOM,
+            local = LocalPollos, // en ningun lugar pones el local no se como seria
+        )
+        repositorioPlatos.crear(platoDOM)
     }
 
-//    fun modificarPlato(plato: PlatoDTO): PlatoDTO {
-//        repositorioPlato.obtenerObjeto(plato.id)
-//    }
+    fun modificarPlato(plato: PlatoDTO) {
+        val platoDOM: Plato = Plato().fromDTO(plato)
+        repositorioPlatos.actualizar(platoDOM)
+    }
 }
 
 

@@ -23,10 +23,11 @@ fun Ingrediente.toDTO(): IngredienteDTO{
     return ingredienteDTO
 }
 
-fun Ingrediente.fromDTO(
-    id: Int,
-    nombre: String,
-    costoMercado: Double,
-    esOrigenAnimal: Boolean,
-    grupoAlimenticio: GrupoAlimenticio
-){}
+fun IngredienteDTO.toDOM(): Ingrediente {
+    return Ingrediente(
+        nombre = this.name,
+        costoMercado = this.cost,
+        grupoAlimenticio = this.foodGroup,
+        esOrigenAnimal = this.esOrigenAnimal,
+    )
+}
