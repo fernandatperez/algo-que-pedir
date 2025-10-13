@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo3.DTO
+package ar.edu.unsam.algo3.dto
 import ar.edu.unsam.algo3.dominio.Local
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.modelo.local.Pago

@@ -1,7 +1,7 @@
 package ar.edu.unsam.algo3.servicios
 
-import ar.edu.unsam.algo3.DTO.IngredienteDTO
-import ar.edu.unsam.algo3.DTO.toDTO
+import ar.edu.unsam.algo3.dto.IngredienteDTO
+import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.JSONVacioException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.Repositorio

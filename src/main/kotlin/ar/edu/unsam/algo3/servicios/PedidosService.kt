@@ -1,8 +1,7 @@
 package ar.edu.unsam.algo3.servicios
 
-import ar.edu.unsam.algo3.DTO.toDTO
+import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.modelo.pedido.Estado
-import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
 import ar.edu.unsam.algo3.repositorio.RepositorioPlatos
 import org.springframework.stereotype.Service

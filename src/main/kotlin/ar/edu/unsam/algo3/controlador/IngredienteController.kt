@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.DTO.IngredienteDTO
+import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.servicios.IngredienteService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
