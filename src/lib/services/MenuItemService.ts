@@ -41,14 +41,10 @@ class MenuItemsService {
   }
 
   async updateMenuItem(menuItem: MenuItemType) {
+    const menuItemJSON = menuItem.toJSON()
     // Aca no se como seria
-    const newItem = MENU_ITEMS_JSON_MOCK.findIndex(item => item.id == menuItem.id)
-    if (newItem != -1) {
-      MENU_ITEMS_JSON_MOCK[newItem] = {...menuItem}
-      return MENU_ITEMS_JSON_MOCK[newItem]
-    } else {
-      throw new Error('Item no encontrado')
-    }
+    return axios.put<MenuItemJSON>(REST_SERVER_URL + '/platos/' + menuItem.id, menuItemJSON)
+    // return axios.put<IngredientJSON>(REST_SERVER_URL + '/ingredientes/' + ingredient.id, ingredient.toJSON())
   }
 }
 

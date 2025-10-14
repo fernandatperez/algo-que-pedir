@@ -35,7 +35,6 @@
 
   const productionCost = $derived(itemEdit.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0))
 
-
   const onSubmit = async (ev: SubmitEvent) => {
     const esNuevoItem = itemEdit.id == -1
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
@@ -69,8 +68,10 @@
     try {
       if (esNuevoItem) {
         await menuItemsService.createMenuItem(menuItem)
+        toasts.push('Plato generado exitosamente. Seras redirigido a Menu', {type: 'success'})
       } else {
         await menuItemsService.updateMenuItem(menuItem)
+        toasts.push('Plato modificado con exito. Seras redirigido a Menu', {type: 'success'})
       }
       // Aca poner un toast de guardado exitoso
       setTimeout(() => {
