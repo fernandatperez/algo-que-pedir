@@ -2,9 +2,10 @@ package ar.edu.unsam.algo3.servicios
 
 import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.dominio.Local
+import ar.edu.unsam.algo3.dto.LocalDTO
+import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.errores.BusinessException
-import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 
 
 // LocalService.kt
@@ -13,7 +14,9 @@ class LocalService(
     private val repositorioLocal: RepositorioLocal  // ← Inyecta el repositorio específico
 ) {
 
-    fun actualizarPerfil(localActualizado: Local): Local {
+    fun actualizarPerfil(localDTO: LocalDTO): Local {
+        // Convertir DTO a dominio
+        val localActualizado = localDTO.fromDTO()
         localActualizado.id = 1
 
         try {
@@ -31,7 +34,6 @@ class LocalService(
             return localActualizado
         }
     }
-
 
     fun obtenerPerfil(): Local {
 //        println("obtenerPerfil")

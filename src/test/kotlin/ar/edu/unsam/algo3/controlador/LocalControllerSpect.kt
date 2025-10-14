@@ -15,7 +15,7 @@ private lateinit var mockMvc: MockMvc
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ControladorLocalRealTest {
+class LocalControllerRealTest {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
