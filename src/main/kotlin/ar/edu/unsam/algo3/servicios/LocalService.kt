@@ -34,12 +34,12 @@ class LocalService(
 
 
     fun obtenerPerfil(): Local {
-        println("obtenerPerfil")
+//        println("obtenerPerfil")
         return try {
-            println("obtenerPerfil entro al try")
+//            println("obtenerPerfil entro al try")
             repositorioLocal.obtenerObjeto(1)
         } catch (e: Exception) {
-            println("obtenerPerfil entro al catch")
+//            println("obtenerPerfil entro al catch")
             throw BusinessException("Perfil de tienda no configurado")
         }
     }

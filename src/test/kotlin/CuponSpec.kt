@@ -86,9 +86,9 @@ class CuponSpec : DescribeSpec({
             //total a pagar con cupon, %10 de descuento base osea 220 + 500$ de descuento por cupon = 720$ total descuento
 
             pedidoConCupon.totalAPagar() shouldBe 2200.0
-            println(cuponDescuentoPorTope.montoBaseDescuento(pedidoConCupon))
-            println(cuponDescuentoPorTope.descuentoEspecialPorCupon(pedidoConCupon))
-            println(pedidoConCupon.totalAPagarConCupon())
+//            println(cuponDescuentoPorTope.montoBaseDescuento(pedidoConCupon))
+//            println(cuponDescuentoPorTope.descuentoEspecialPorCupon(pedidoConCupon))
+//            println(pedidoConCupon.totalAPagarConCupon())
             pedidoConCupon.totalAPagarConCupon() shouldBe 1480.0
         }
         it("Testeo que no se pueda agregar un cupon a un pedido que ya tiene uno aplicado") {

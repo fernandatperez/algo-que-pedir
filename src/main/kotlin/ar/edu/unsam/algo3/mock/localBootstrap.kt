@@ -37,18 +37,18 @@ class LocalBootstrap(
 
             repositorioLocal.crear(localInicial)
 
-            println("""
-                Local inicial creado exitosamente:
-                 Nombre: ${localInicial.nombre}
-                 Dirección: ${localInicial.direccion.calle} ${localInicial.direccion.altura}
-                 Ubicación: (${localInicial.direccion.ubicacion.x}, ${localInicial.direccion.ubicacion.y})
-                 URL: ${localInicial.url}
-                 Comisiones: App ${localInicial.regalias}% | Autor ${localInicial.porcentajeAcordado}%
-            """.trimIndent())
+//            println("""
+//                Local inicial creado exitosamente:
+//                 Nombre: ${localInicial.nombre}
+//                 Dirección: ${localInicial.direccion.calle} ${localInicial.direccion.altura}
+//                 Ubicación: (${localInicial.direccion.ubicacion.x}, ${localInicial.direccion.ubicacion.y})
+//                 URL: ${localInicial.url}
+//                 Comisiones: App ${localInicial.regalias}% | Autor ${localInicial.porcentajeAcordado}%
+//            """.trimIndent())
 
         } else {
             val localExistente = repositorioLocal.obtenerObjeto(1)
-            println(" Local existente: ${localExistente.nombre}")
+//            println(" Local existente: ${localExistente.nombre}")
         }
     }
 }
