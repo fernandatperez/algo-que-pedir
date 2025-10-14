@@ -69,7 +69,6 @@
 
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault()
-    console.log('🔍 DEBUG INICIADO - TEST FORZADO')
     errors = []
     const form = ev.currentTarget as HTMLFormElement
 
