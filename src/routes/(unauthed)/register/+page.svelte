@@ -98,40 +98,47 @@
       <!-- FORM FIELD -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
-          <Input
-            label_text="Usuario*"
-            label_for="username"
-            input_type={InputTypes.Normal}
-            value=""
-            type= "email"
-            placeholder= "Escribir"
-            id= "register-username-id"
-            class= "input-primary"
-            name= "username"
-          />
-          <ValidationField errors={errors} field="username" />
-        
-          <Input
-            label_text="Contraseña*"
-            label_for="password"
-            input_type={InputTypes.Hidden}
-            value=""
-            id= "register-password-id"
-            class= "input-primary"
-            name= "password"
-          />
-          <ValidationField errors={errors} field="password" />
+          <div class="input-wrapper">
+            <Input
+              label_text="Usuario*"
+              label_for="username"
+              input_type={InputTypes.Normal}
+              value=""
+              type= "email"
+              placeholder= "Escribir"
+              id= "register-username-id"
+              class= "input-primary"
+              name= "username"
+            />
+            <ValidationField errors={errors} field="username" />
+          </div>
 
-          <Input
-            label_text="Re-ingrese la contraseña*"
-            label_for="register-password-retry"
-            input_type={InputTypes.Hidden}
-            value=""
-            id= "register-password-retry-id"
-            class= "input-primary"
-            name= "password-retry"
-          />
-          <ValidationField errors={errors} field="password"/>
+          <div class="input-wrapper">
+            <Input
+              label_text="Contraseña*"
+              label_for="password"
+              input_type={InputTypes.Hidden}
+              value=""
+              id= "register-password-id"
+              class= "input-primary"
+              name= "password"
+            />
+            <ValidationField errors={errors} field="password" />
+        </div>
+
+          <div class="input-wrapper">
+            <Input
+              label_text="Re-ingrese la contraseña*"
+              label_for="register-password-retry"
+              input_type={InputTypes.Hidden}
+              value=""
+              id= "register-password-retry-id"
+              class= "input-primary"
+              name= "password-retry"
+            />
+            <ValidationField errors={errors} field="password"/>
+          </div>
+
         </div>
       </fieldset>
 
