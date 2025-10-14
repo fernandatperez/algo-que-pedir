@@ -54,7 +54,7 @@
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
       ingredientEdit.esOrigenAnimal,
     )
-    console.info("el nuevo ingrediente es ", ingredient)
+    // console.info("el nuevo ingrediente es ", ingredient)
 
     ingredient.validate()
 

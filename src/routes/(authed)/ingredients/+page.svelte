@@ -83,7 +83,7 @@
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
       Boolean(formData.get("esOrigenAnimal") ?? "true")
     )
-    console.info("el nuevo ingrediente es ", ingredient)
+    // console.info("el nuevo ingrediente es ", ingredient)
 
     ingredient.validate()
 

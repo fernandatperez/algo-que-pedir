@@ -14,7 +14,7 @@
   const findMenuItems = async () => {
     try{
       menuitems = await menuItemsService.getAllMenuItems()
-      console.info(menuitems)
+      // console.info(menuitems)
     } catch (error){
       showError('Conexion al servidor fallida', error)
     }

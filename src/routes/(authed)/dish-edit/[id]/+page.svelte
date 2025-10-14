@@ -20,7 +20,7 @@
   const { nuevoItem, item } = data
   
   const itemEdit = $state(item.toJSON())
-  console.info(itemEdit)
+  // console.info(itemEdit)
 
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
