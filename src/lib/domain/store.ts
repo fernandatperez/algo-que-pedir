@@ -19,6 +19,7 @@ export class StoreType {
   errors: ValidationMessage[] = []
 
   constructor(
+    public id: number= 0,
     public name: string = ''.trim(), 
     public storeURL: string = ''.trim(), 
     public storeAddress: string = ''.trim(),               

@@ -79,6 +79,7 @@
 
     // Crear store actualizado con los valores ACTUALES del formulario
     const store = new StoreType(
+      0,
       (formData.get("name" )?? "")?.toString(),
       (formData.get("storeURL" )?? "")?.toString(),
       (formData.get("storeAddress" )?? "")?.toString(),
@@ -102,7 +103,16 @@
     }
 
     try {
-      await storeService.updateStore(store)
+      // OBTENER EL ID ANTES DE ACTUALIZAR
+      const stores = await storeService.getStore()
+      if (stores.length === 0) {
+        throw new Error('No se encontró el store')
+      }
+      
+      const storeId = stores[0].id
+      
+      // PASAR EL ID AL MÉTODO updateStore
+      await storeService.updateStore(storeId, store)
       await findStore()
       errors = []
       toasts.push('Tienda actualizada exitosamente', {type: 'success'})
