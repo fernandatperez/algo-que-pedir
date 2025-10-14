@@ -4,15 +4,15 @@ import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.PedidoDTO
 import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.modelo.pedido.Estado
-import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
-import ar.edu.unsam.algo3.repositorio.RepositorioPlatos
+import ar.edu.unsam.algo3.repositorio.RepositorioPedido
+import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
 
 
 @Service
-class PedidosService(
-    val repositorioPedidos: RepositorioPedidos,
-    val repositorioPlatos: RepositorioPlatos
+class PedidoService(
+    val repositorioPedidos: RepositorioPedido,
+    val repositorioPlatos: RepositorioPlato
 ) {
 
     fun pedidos() = repositorioPedidos.allInstances()

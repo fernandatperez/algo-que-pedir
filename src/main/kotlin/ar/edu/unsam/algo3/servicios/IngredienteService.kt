@@ -5,7 +5,7 @@ import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.JSONVacioException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.Repositorio
-import ar.edu.unsam.algo3.repositorio.RepositorioIngredientes
+import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import kotlinx.serialization.json.*
 import org.springframework.stereotype.Service
 
@@ -50,9 +50,7 @@ class InstanciaActualizador(
 
 // ========= LO NUEVO =========
 @Service
-class IngredienteService(
-    val repositorioIngredientes: RepositorioIngredientes
-) {
+class IngredienteService( val repositorioIngredientes: RepositorioIngrediente) {
     fun ingredientes(): List<IngredienteDTO> {
         return repositorioIngredientes.objetosDeRepositorio().map { it.toDTO() }
     }
@@ -61,14 +59,15 @@ class IngredienteService(
         return repositorioIngredientes.obtenerObjeto(id).toDTO()
     }
 
-    fun crearIngrediente(ingredienteDTO: IngredienteDTO): IngredienteDTO {
-        val ingredienteNuevo = repositorioIngredientes.crear(
-            name = ingredienteDTO.name,
-            cost = ingredienteDTO.cost,
+    fun crearIngrediente(ingredienteDTO: IngredienteDTO) {
+        val ingredienteNuevo = Ingrediente(
+            nombre = ingredienteDTO.name,
+            costoMercado = ingredienteDTO.cost,
             esOrigenAnimal = ingredienteDTO.esOrigenAnimal,
-            foodGroup = ingredienteDTO.foodGroup
+            grupoAlimenticio = ingredienteDTO.foodGroup
         )
-        return ingredienteNuevo.toDTO()
+        ingredienteNuevo.cumpleCriterioDeCreacion()
+        repositorioIngredientes.crear(ingredienteNuevo)
     }
 
     fun actualizarIngrediente(id: Int,ingredienteDTO: IngredienteDTO): IngredienteDTO {
@@ -79,6 +78,7 @@ class IngredienteService(
             grupoAlimenticio = ingredienteDTO.foodGroup
         ).apply { this.id = id }
 
+        ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)
         return ingredienteActualizado.toDTO()
     }

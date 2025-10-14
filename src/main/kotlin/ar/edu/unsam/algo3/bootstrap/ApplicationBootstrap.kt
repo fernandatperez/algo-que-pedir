@@ -8,21 +8,20 @@ import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
-import ar.edu.unsam.algo3.repositorio.Repositorio
-import ar.edu.unsam.algo3.repositorio.RepositorioClientes
-import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
-import ar.edu.unsam.algo3.repositorio.RepositorioIngredientes
-import ar.edu.unsam.algo3.repositorio.RepositorioPlatos
+import ar.edu.unsam.algo3.repositorio.RepositorioCliente
+import ar.edu.unsam.algo3.repositorio.RepositorioPedido
+import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
+import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
 import org.uqbar.geodds.Point
 
 @Service
 class ApplicationBootstrap(
-    val repositorioPedidos: RepositorioPedidos,
-    val repositorioIngredientes: RepositorioIngredientes,
-    val repositorioClientes: RepositorioClientes,
-    val repositorioPlatos: RepositorioPlatos
+    val repositorioPedidos: RepositorioPedido,
+    val repositorioIngredientes: RepositorioIngrediente,
+    val repositorioClientes: RepositorioCliente,
+    val repositorioPlatos: RepositorioPlato
 ) : InitializingBean {
 
     private var local = Local(
