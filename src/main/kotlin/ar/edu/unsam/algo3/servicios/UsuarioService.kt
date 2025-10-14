@@ -1,7 +1,7 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
-import ar.edu.unsam.algo3.repositorio.repositorioUsuario
+import ar.edu.unsam.algo3.repositorio.repositorioUsuarios
 
 val usuarioService = UsuarioService()
 
@@ -16,7 +16,7 @@ class UsuarioService {
     }
 
     fun buscar(usuario: Usuario): Usuario {
-        val usuarioEncontrado = repositorioUsuario.buscar(usuario.mailPrincipal)
+        val usuarioEncontrado = repositorioUsuarios.buscar(usuario.mailPrincipal)
         if (usuarioEncontrado.isEmpty()) {
             throw RuntimeException("No existe un usuario con ese email")
         }

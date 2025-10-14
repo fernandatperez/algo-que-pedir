@@ -1,6 +1,14 @@
 package ar.edu.unsam.algo3.repositorio
 
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
+import org.springframework.stereotype.Repository
+
+@Repository
+class RepositorioUsuarios: Repositorio<Usuario>(
+
+){
+
+}
 
 val usuario1 = Usuario(
     nombre = "Carlos",
@@ -9,6 +17,6 @@ val usuario1 = Usuario(
     password = "123"
 )
 
-val repositorioUsuario = Repositorio<Usuario>().apply {
+val repositorioUsuarios: RepositorioUsuarios = RepositorioUsuarios().apply {
     this.crear(usuario1)
 }

@@ -9,8 +9,10 @@ import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.Repositorio
+import ar.edu.unsam.algo3.repositorio.RepositorioClientes
 import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
 import ar.edu.unsam.algo3.repositorio.RepositorioIngredientes
+import ar.edu.unsam.algo3.repositorio.RepositorioPlatos
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
 import org.uqbar.geodds.Point
@@ -18,7 +20,9 @@ import org.uqbar.geodds.Point
 @Service
 class ApplicationBootstrap(
     val repositorioPedidos: RepositorioPedidos,
-    val repositorioIngredientes: RepositorioIngredientes
+    val repositorioIngredientes: RepositorioIngredientes,
+    val repositorioClientes: RepositorioClientes,
+    val repositorioPlatos: RepositorioPlatos
 ) : InitializingBean {
 
     private var local = Local(
@@ -193,6 +197,3 @@ class ApplicationBootstrap(
         this.crearPedidos()
     }
 }
-
-val repositorioClientes = Repositorio<Usuario>()
-val repositorioPlatos = Repositorio<Plato>()

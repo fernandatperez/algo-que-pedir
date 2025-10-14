@@ -3,16 +3,18 @@ package ar.edu.unsam.algo3.servicios
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
 import ar.edu.unsam.algo3.modelo.plato.toDTO
-import ar.edu.unsam.algo3.bootstrap.repositorioPlatos
 import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.fromDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDOM
+import ar.edu.unsam.algo3.repositorio.RepositorioPlatos
+import org.springframework.stereotype.Service
 
-val platoService: PlatoService = PlatoService()
-
-class PlatoService {
+@Service
+class PlatoService(
+    val repositorioPlatos: RepositorioPlatos
+) {
 
     fun getPlatos(): List<PlatoDTO> =
         repositorioPlatos.objetosDeRepositorio().map { it.toDTO() }
