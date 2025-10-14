@@ -13,3 +13,10 @@ data class AuthResponse(
     val correo: String
 ) {}
 // la respuesta nunca tiene que tener datos sensibles
+
+data class AuthRegisterRequest(
+    var name: String,
+    var surname: String,
+    var username: String,
+    var password: String,
+) {}
