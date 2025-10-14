@@ -11,13 +11,12 @@ import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.Repositorio
 import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
 import ar.edu.unsam.algo3.repositorio.RepositorioIngredientes
-import ar.edu.unsam.algo3.repositorio.repositorioPlatos
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
 import org.uqbar.geodds.Point
 
 @Service
-class PedidosBootstrap(
+class ApplicationBootstrap(
     val repositorioPedidos: RepositorioPedidos,
     val repositorioIngredientes: RepositorioIngredientes
 ) : InitializingBean {
@@ -130,23 +129,27 @@ class PedidosBootstrap(
         hamburguesa = Plato(
             nombre = "Hamburguesa con queso",
             descripcion = "Hamburguesa con queso acompañada de papas fritas y bebida",
+            valorBase = 9.99,
+            urldeImagen = "/src/lib/assets/img/hamburguesa2.jpg",
             local = local,
-            esDeAutor = false,
             ingredientes = mutableListOf(carnederenacuajo,quesocheddar,lechuga)
         )
         pizza = Plato(
             nombre = "Pizza Margarita",
             descripcion = "De muzzarella con tomate y albahaca",
+            urldeImagen = "/src/lib/assets/img/pizza.png",
+            valorBase = 11.75,
             local = local,
-            esDeAutor = false,
             ingredientes = mutableListOf(quesocheddar,lechuga,tomate)
 
         )
         ensalada = Plato(
             nombre = "Ensalada clásica",
             descripcion = "De hojas frescas y vegetales organicos",
-            local = local,
+            valorBase = 7.5,
+            urldeImagen = "/src/lib/assets/img/ensalada.png",
             esDeAutor = true,
+            local = local,
             ingredientes = mutableListOf(lechuga,tomate)
         )
         repositorioPlatos.apply {
@@ -192,3 +195,4 @@ class PedidosBootstrap(
 }
 
 val repositorioClientes = Repositorio<Usuario>()
+val repositorioPlatos = Repositorio<Plato>()
