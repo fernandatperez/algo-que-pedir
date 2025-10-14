@@ -33,6 +33,8 @@ class ApplicationBootstrap(
     private lateinit var sofiamiller: Usuario
     private lateinit var ricardofort: Usuario
     private lateinit var alexcaniggia: Usuario
+    private lateinit var buzz: Usuario
+    private lateinit var locomotora: Usuario
 
     private lateinit var carnederenacuajo: Ingrediente
     private lateinit var quesocheddar: Ingrediente
@@ -79,10 +81,34 @@ class ApplicationBootstrap(
                 ubicacion = Point(41.89193,12.51133)
             ),
         )
+        buzz = Usuario(
+            nombre = "Buzz",
+            apellido = "Lightyear",
+            username = "alinfinito",
+            mailPrincipal = "woodyteamo@gmail.com",
+            direccion = Direccion(
+                calle = "Morph",
+                altura = 256,
+                ubicacion = Point(41.89193,12.51133)
+            ),
+        )
+        locomotora = Usuario(
+            nombre = "La Locomotora",
+            apellido = "RIP",
+            username = "noterindasss",
+            mailPrincipal = "bostadevaca@gmail.com",
+            direccion = Direccion(
+                calle = "Rosario, Arg",
+                altura = 111,
+                ubicacion = Point(41.89193,12.51133)
+            ),
+        )
         repositorioClientes.apply {
             this.crear(sofiamiller)
             this.crear(ricardofort)
             this.crear(alexcaniggia)
+            this.crear(buzz)
+            this.crear(locomotora)
         }
     }
 
@@ -185,6 +211,20 @@ class ApplicationBootstrap(
                 platos = mutableListOf(pizza, hamburguesa),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.PREPARADO
+            )
+            crear(
+                usuario = buzz,
+                local = local,
+                platos = mutableListOf(pizza, hamburguesa),
+                medioDePago = Pago.QR,
+                estado = Estado.ENTREGADO
+            )
+            crear(
+                usuario = locomotora,
+                local = local,
+                platos = mutableListOf(ensalada),
+                medioDePago = Pago.EFECTIVO,
+                estado = Estado.CANCELADO
             )
         }
     }

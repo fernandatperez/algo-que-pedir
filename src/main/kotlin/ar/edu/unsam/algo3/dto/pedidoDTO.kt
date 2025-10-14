@@ -1,15 +1,16 @@
 package ar.edu.unsam.algo3.dto
 
-import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
+import ar.edu.unsam.algo3.modelo.plato.fromDTO
+import ar.edu.unsam.algo3.modelo.plato.toDTO
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import org.uqbar.geodds.Point
-import java.time.LocalTime
 
 data class PedidoDTO (
     val id: Int,
@@ -65,7 +66,8 @@ fun PedidoDTO.fromDTO() : Pedido {
   val pedido = Pedido(
       usuario = usuario,
       local = Local(),
-      platos = this.platos.map { it.fromDTO() }.toMutableList(),
+//      platos = this.platos.map { it.fromDTO() }.toMutableList(),
+      platos = this.platos.map { Plato().fromDTO(it) }.toMutableList(),
       medioDePagoElegido = this.metodoDePago,
       estado = this.estado,
     ).apply {
@@ -73,37 +75,4 @@ fun PedidoDTO.fromDTO() : Pedido {
       // this.horarioEntrega = this@fromDTO.horarioEntrega
   }
     return pedido
-}
-
-data class PlatoDTO (
-    val id: Int,
-    // alt: string
-    val nombre: String,
-    val descripcion: String,
-//     val imagen: String,
-    val esDeAutor: Boolean,
-    val enPromocion: Boolean,
-    val ingredientes: MutableList<Ingrediente>,
-) {
-    var precio: Double = 0.0
-    var costoProduccion: Double = 0.0
-}
-
-fun Plato.toDTO() : PlatoDTO {
-    val platoDTO = PlatoDTO(
-        id = this.id,
-        nombre = this.nombre,
-        descripcion = this.descripcion,
-        esDeAutor = this.esDeAutor,
-        enPromocion = false,
-        ingredientes = this.ingredientes,
-    ).apply {
-        this.costoProduccion = this@toDTO.costoProduccion()
-        this.precio = this@toDTO.valorVenta()
-    }
-    return platoDTO
-}
-
-fun PlatoDTO.fromDTO() : Plato {
-    return Plato()
 }
