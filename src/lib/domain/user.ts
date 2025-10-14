@@ -15,6 +15,13 @@ export interface UserLoginJSON {
   // token: string; // esto se podria poner
   username: string;
   email: string;
+} // Che esto creo que no esta bien, mira UserService.ts
+
+export interface UserRegisterJSON {
+  name: string
+  surname: string
+  username: string
+  password: string
 }
 
 export class UserType {
