@@ -19,6 +19,11 @@
 /* ========== Order tag ========== */
 
 .order { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    width: 100%;
     color: var(--light-gray)
 }
 

@@ -1,7 +1,8 @@
 <script lang="ts">
   import Grid from "$lib/components/GridRow.svelte"
+  import OrderState from "$lib/components/OrderState.svelte"
   
-  import { goto } from "$app/navigation";
+  import { goto } from "$app/navigation"
 
   let { data } = $props()
   let { order } = data
@@ -25,7 +26,8 @@
       <h1 class="header-title jc-space-between ellipsis-text" data-testid="order-id">Pedido #{order.id}</h1>
       <div class="flex-row state-btn-container">
         <h2 class="subtitle ellipsis-text">Estado del Pedido</h2>
-        <span class="btn btn-alternate">{order.estado}</span>
+        <OrderState {order} />
+        <!-- <span class="btn btn-alternate {estadoColor}">{order.estado}</span> -->
       </div>
     </div>
     <section class="content-section-grid grid-cols-2">

@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { MouseEventHandler } from 'svelte/elements'
     import { type Order, Estado } from '../domain/order'
+    import OrderState from './OrderState.svelte';
 
     interface Props {
         order: Order,
@@ -8,7 +9,7 @@
     }
 
     let { order, action = $bindable() } : Props = $props()
-    
+
 </script>
 
 <style>
@@ -18,7 +19,12 @@
 
 <div class="order-card">
     <a href="/order-detail/{order.id}"  data-testid="goto-detail">
-        <header class="order" data-testid="order-id">Pedido #{order.id}</header>
+        <div class="order" >
+            <header data-testid="order-id">Pedido #{order.id}</header>
+            {#if order.estado != Estado.PENDIENTE}
+                <OrderState {order} />
+            {/if}
+        </div>
     
         <div class="user">
             <i class="ph ph-user-circle"></i>
@@ -50,7 +56,9 @@
         <span class="payment-text">Pago con <b>{order.metodoDePago.split('_').join(' ')}</b></span>
     </div>
 
-    <div class="action-container">
-        <button onclick={action} class="btn btn-primary" data-testid='preparar-{order.id}' disabled={order.estado!=Estado.PENDIENTE}> Preparar </button>
-    </div>
+    {#if order.estado === Estado.PENDIENTE}
+        <div class="action-container">
+            <button onclick={action} class="btn btn-primary" data-testid='preparar-{order.id}' disabled={order.estado!=Estado.PENDIENTE}> Preparar </button>
+        </div>
+    {/if}
 </div>
