@@ -22,7 +22,7 @@
         <div class="order" >
             <header data-testid="order-id">Pedido #{order.id}</header>
             {#if order.estado != Estado.PENDIENTE}
-                <OrderState {order} />
+                <OrderState estado={order.estado} />
             {/if}
         </div>
     

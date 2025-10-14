@@ -26,7 +26,7 @@
       <h1 class="header-title jc-space-between ellipsis-text" data-testid="order-id">Pedido #{order.id}</h1>
       <div class="flex-row state-btn-container">
         <h2 class="subtitle ellipsis-text">Estado del Pedido</h2>
-        <OrderState {order} />
+        <OrderState estado={order.estado}  />
         <!-- <span class="btn btn-alternate {estadoColor}">{order.estado}</span> -->
       </div>
     </div>

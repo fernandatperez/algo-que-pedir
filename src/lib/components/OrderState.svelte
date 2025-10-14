@@ -1,15 +1,12 @@
 <script lang="ts">
     import { Estado, type Order } from "$lib/domain/order"
 
-    interface Props {
-      order: Order,
-    }
 
-  let { order } : Props = $props()
+  let { estado } = $props()
 
     // defino color del estado (con un switch-?!)
   const stateColor = () => {
-      switch (order.estado) {
+      switch (estado) {
       case 'PENDIENTE':
           return 'pendiente'
       case 'PREPARADO':
@@ -45,4 +42,4 @@
 </style>
 
 
-<div class="order-state btn-alternate {estadoColor}">{order.estado}</div>
+<div class="order-state btn-alternate {estadoColor}">{estado}</div>
