@@ -19,12 +19,12 @@ class PedidoController(val pedidosService: PedidoService) {
     fun pedidos() = pedidosService.pedidos()
 
     @GetMapping("/pedidos/")
-    fun pedidosFiltrados(@RequestParam estado: Estado) = pedidosService.pedidosFiltrados(estado)
+    fun pedidos(@RequestParam estado: Estado) = pedidosService.pedidosFiltrados(estado)
 
-    @GetMapping("/pedidos/{id}")
+    @GetMapping("/pedido/{id}")
     fun pedidoPorId(@PathVariable id: Int) = pedidosService.pedidoPorId(id)
 
-    @PutMapping("/pedidos/{id}")
+    @PutMapping("/modificar_pedido/{id}")
     fun actualizarEstado(@PathVariable id: Int, @RequestBody pedidoNuevo: PedidoDTO): PedidoDTO {
         return pedidosService.actualizarEstado(id, pedidoNuevo)
     }
