@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 
 
 @Component
-class RepositorioPedidos {
+class RepositorioPedido {
 
     val pedidos = mutableListOf<Pedido>()
 

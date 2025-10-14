@@ -9,6 +9,10 @@ import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.*
+import ar.edu.unsam.algo3.repositorio.RepositorioCliente
+import ar.edu.unsam.algo3.repositorio.RepositorioPedido
+import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
+import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
 import org.uqbar.geodds.Point

@@ -1,4 +1,5 @@
 package ar.edu.unsam.algo3.modelo.ingrediente
+import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import com.fasterxml.jackson.annotation.JsonValue
 import kotlinx.serialization.SerialName

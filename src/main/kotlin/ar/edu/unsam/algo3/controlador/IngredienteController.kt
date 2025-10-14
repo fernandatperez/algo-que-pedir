@@ -14,24 +14,23 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/ingredientes")
 class IngredienteController(val ingredientesService: IngredienteService) {
 
-    @GetMapping
+    @GetMapping("/ingredientes")
     fun ingredientes() = ingredientesService.ingredientes()
 
-    @GetMapping("/{id}")
+    @GetMapping("/ingrediente/{id}")
     fun ingredientePorId(@PathVariable id: Int) = ingredientesService.ingredientePorId(id)
 
-    @PostMapping
+    @PostMapping("/crear-ingrediente")
     fun crearIngrediente(@RequestBody ingredienteDTO: IngredienteDTO) =
         ingredientesService.crearIngrediente(ingredienteDTO)
 
-    @PutMapping("/{id}")
+    @PutMapping("/actualizar-ingrediente/{id}")
     fun actualizarIngrediente(@PathVariable id: Int, @RequestBody ingredienteDTO: IngredienteDTO) =
         ingredientesService.actualizarIngrediente(id, ingredienteDTO)
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar-ingrediente/{id}")
     fun eliminarIngrediente(@PathVariable id: Int) =
         ingredientesService.eliminarIngrediente(id)
 }

@@ -8,12 +8,12 @@ import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.fromDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDOM
-import ar.edu.unsam.algo3.repositorio.RepositorioPlatos
+import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
 
 @Service
 class PlatoService(
-    val repositorioPlatos: RepositorioPlatos
+    val repositorioPlatos: RepositorioPlato
 ) {
 
     fun getPlatos(): List<PlatoDTO> =
