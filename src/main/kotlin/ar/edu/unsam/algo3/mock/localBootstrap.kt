@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.mock
 
-import ar.edu.unsam.algo3.dominio.Local
+import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
