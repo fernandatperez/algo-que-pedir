@@ -7,8 +7,8 @@ import ar.edu.unsam.algo3.bootstrap.repositorioPlatos
 import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.fromDTO
-import ar.edu.unsam.algo3.DTO.IngredienteDTO
-import ar.edu.unsam.algo3.DTO.toDOM
+import ar.edu.unsam.algo3.dto.IngredienteDTO
+import ar.edu.unsam.algo3.dto.toDOM
 
 val platoService: PlatoService = PlatoService()
 
@@ -37,8 +37,8 @@ class PlatoService {
         repositorioPlatos.crear(platoDOM)
     }
 
-    fun modificarPlato(plato: PlatoDTO) {
-        val platoDOM: Plato = Plato().fromDTO(plato)
+    fun modificarPlato(id: Int, plato: PlatoDTO) {
+        val platoDOM: Plato = Plato().fromDTO(plato). apply {this.id = id}
         repositorioPlatos.actualizar(platoDOM)
     }
 }

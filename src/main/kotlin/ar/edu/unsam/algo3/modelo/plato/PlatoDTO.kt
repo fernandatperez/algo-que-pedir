@@ -1,8 +1,8 @@
 package ar.edu.unsam.algo3.modelo.plato
 
-import ar.edu.unsam.algo3.DTO.IngredienteDTO
-import ar.edu.unsam.algo3.DTO.toDOM
-import ar.edu.unsam.algo3.DTO.toDTO
+import ar.edu.unsam.algo3.dto.IngredienteDTO
+import ar.edu.unsam.algo3.dto.toDOM
+import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.modelo.local.Local
 

@@ -34,6 +34,6 @@ class PlatoController {
     @PutMapping("/platos/{id}")
     fun putPlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO) {
 //        Editar un plato existente
-        platoService.modificarPlato(platoAModificar)
+        platoService.modificarPlato(id, platoAModificar)
     }
 }

@@ -1,9 +1,9 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.DTO.StoreProfileResponse
-import ar.edu.unsam.algo3.DTO.StoreProfileRequest
-import ar.edu.unsam.algo3.DTO.toDomain
-import ar.edu.unsam.algo3.DTO.toResponse
+import ar.edu.unsam.algo3.dto.StoreProfileResponse
+import ar.edu.unsam.algo3.dto.StoreProfileRequest
+import ar.edu.unsam.algo3.dto.toDomain
+import ar.edu.unsam.algo3.dto.toResponse
 import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
 

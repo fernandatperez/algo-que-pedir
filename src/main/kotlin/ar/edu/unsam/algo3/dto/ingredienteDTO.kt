@@ -1,4 +1,4 @@
-package ar.edu.unsam.algo3.DTO
+package ar.edu.unsam.algo3.dto
 
 import ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
