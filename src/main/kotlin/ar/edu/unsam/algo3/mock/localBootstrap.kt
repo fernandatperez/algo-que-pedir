@@ -1,11 +1,11 @@
 package ar.edu.unsam.algo3.mock
 
-import ar.edu.unsam.algo3.dominio.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
+import ar.edu.unsam.algo3.modelo.local.Local
 import org.uqbar.geodds.Point
 
 @Service
@@ -34,21 +34,9 @@ class LocalBootstrap(
                 )
 
             }
-
             repositorioLocal.crear(localInicial)
-
-//            println("""
-//                Local inicial creado exitosamente:
-//                 Nombre: ${localInicial.nombre}
-//                 Dirección: ${localInicial.direccion.calle} ${localInicial.direccion.altura}
-//                 Ubicación: (${localInicial.direccion.ubicacion.x}, ${localInicial.direccion.ubicacion.y})
-//                 URL: ${localInicial.url}
-//                 Comisiones: App ${localInicial.regalias}% | Autor ${localInicial.porcentajeAcordado}%
-//            """.trimIndent())
-
         } else {
             val localExistente = repositorioLocal.obtenerObjeto(1)
-//            println(" Local existente: ${localExistente.nombre}")
         }
     }
 }

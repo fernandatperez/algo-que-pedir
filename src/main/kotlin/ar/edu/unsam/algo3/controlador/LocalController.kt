@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*
 class LocalController(val localService: LocalService) {
 
     @GetMapping("/store-profile")
-    fun obtenerPerfil(): List<LocalDTO> { // Cambia a List<>
-        return listOf(localService.obtenerPerfil().toDTO())
+    fun getLocal(): List<LocalDTO> { // Cambia a List<>
+        return localService.getLocal()
     }
-
-    @PutMapping("/store-profile")
-    fun actualizarPerfil(@RequestBody request: LocalDTO): LocalDTO {
-        return localService.actualizarPerfil(request).toDTO()
+//si bien local es unico, no va a ser el unico en a bbdd
+    @PutMapping("/store-profile/{id}")
+    fun updateLocal(@PathVariable id: Int,@RequestBody request: LocalDTO){
+        return localService.updateLocal(id,request)
     }
 }

@@ -24,7 +24,7 @@ class LocalControllerRealTest {
     @Test
     fun `PUT con datos validos retorna 200`() {
         val jsonValido = """
-            {
+            {  
                 "name": "Test Valido",
                 "storeURL": "https://valido.com",
                 "storeAddress": "Test 123",
@@ -41,7 +41,7 @@ class LocalControllerRealTest {
 
         mockMvc
             .perform(
-                MockMvcRequestBuilders.put("/store-profile")
+                MockMvcRequestBuilders.put("/store-profile/1")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonValido)
             )
@@ -52,7 +52,7 @@ class LocalControllerRealTest {
     @Test
     fun `PUT con URL invalida retorna 400`() {
         val jsonInvalido = """
-            {
+            {   "id": 1,
                 "name": "Test",
                 "storeURL": "url-invalida",  // Sin http
                 "storeAddress": "Test 123",

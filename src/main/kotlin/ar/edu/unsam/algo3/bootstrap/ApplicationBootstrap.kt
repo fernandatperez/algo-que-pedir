@@ -8,11 +8,7 @@ import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
-import ar.edu.unsam.algo3.repositorio.Repositorio
-import ar.edu.unsam.algo3.repositorio.RepositorioClientes
-import ar.edu.unsam.algo3.repositorio.RepositorioPedidos
-import ar.edu.unsam.algo3.repositorio.RepositorioIngredientes
-import ar.edu.unsam.algo3.repositorio.RepositorioPlatos
+import ar.edu.unsam.algo3.repositorio.*
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
 import org.uqbar.geodds.Point
@@ -22,15 +18,16 @@ class ApplicationBootstrap(
     val repositorioPedidos: RepositorioPedidos,
     val repositorioIngredientes: RepositorioIngredientes,
     val repositorioClientes: RepositorioClientes,
-    val repositorioPlatos: RepositorioPlatos
+    val repositorioPlatos: RepositorioPlatos,
+    val repositorioLocal: RepositorioLocal
 ) : InitializingBean {
 
-    private var local = Local(
-        nombre = "un Local",
-        direccion = Direccion(calle = "maipu"),
-        mediosDePago = mutableSetOf(Pago.TRANSFERENCIA_BANCARIA, Pago.EFECTIVO, Pago.QR)
-    )
-
+//    private var local = Local(
+//        nombre = "un Local",
+//        direccion = Direccion(calle = "maipu"),
+//        mediosDePago = mutableSetOf(Pago.TRANSFERENCIA_BANCARIA, Pago.EFECTIVO, Pago.QR)
+//    )
+    private lateinit var local: Local
     private lateinit var sofiamiller: Usuario
     private lateinit var ricardofort: Usuario
     private lateinit var alexcaniggia: Usuario
@@ -44,6 +41,23 @@ class ApplicationBootstrap(
     private lateinit var hamburguesa: Plato
     private lateinit var pizza: Plato
     private lateinit var ensalada: Plato
+
+    fun crearLocal(){
+        repositorioLocal.limpiarColeccion()
+        local = Local(
+            nombre = "Carlo's Bake Shop",
+            url = "https://networthbro.com/wp-content/uploads/2019/07/buddy-valastro-networth-salary.jpg",
+            regalias = 3.0,
+            porcentajeAcordado = 6.0,
+            mediosDePago = mutableSetOf(Pago.EFECTIVO),
+            direccion = Direccion(
+                calle = "Av. Siempre Viva",
+                altura = 123,
+                ubicacion = Point(-34.603722, -58.381592)  // lat, long
+            )
+        )
+
+    }
 
     fun crearClientes() {
         repositorioClientes.limpiarColeccion()
@@ -191,6 +205,7 @@ class ApplicationBootstrap(
     }
 
     override fun afterPropertiesSet() {
+        this.crearLocal()
         this.crearClientes()
         this.crearIngredientes()
         this.crearPlatos()

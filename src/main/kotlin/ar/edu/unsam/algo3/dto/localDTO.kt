@@ -1,7 +1,7 @@
 package ar.edu.unsam.algo3.dto
-import ar.edu.unsam.algo3.dominio.Local
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.modelo.local.Pago
+import ar.edu.unsam.algo3.modelo.local.Local
 import org.uqbar.geodds.Point
 import com.fasterxml.jackson.annotation.JsonProperty
 
@@ -30,8 +30,8 @@ fun Local.toDTO(): LocalDTO {
         storeAltitude = this.direccion.altura,
         storeLatitude = this.direccion.ubicacion.x,
         storeLongitude = this.direccion.ubicacion.y,
-        storeAppCommission = this.comisionApp,
-        storeAuthorCommission = this.comisionAutor,
+        storeAppCommission = this.regalias,
+        storeAuthorCommission = this.porcentajeAcordado,
         storePaymentEfectivo = this.mediosDePago.contains(Pago.EFECTIVO),
         storePaymentQR = this.mediosDePago.contains(Pago.QR),
         storePaymentTransferencia = this.mediosDePago.contains(Pago.TRANSFERENCIA_BANCARIA)
@@ -40,6 +40,7 @@ fun Local.toDTO(): LocalDTO {
 
 fun LocalDTO.fromDTO(): Local {
     return Local().apply {
+        id = this@fromDTO.id
         nombre = this@fromDTO.name
         url = this@fromDTO.storeURL
         direccion = Direccion(
@@ -47,8 +48,8 @@ fun LocalDTO.fromDTO(): Local {
             altura = this@fromDTO.storeAltitude,
             ubicacion = Point(this@fromDTO.storeLatitude, this@fromDTO.storeLongitude)
         )
-        comisionApp = this@fromDTO.storeAppCommission
-        comisionAutor = this@fromDTO.storeAuthorCommission
+        regalias = this@fromDTO.storeAppCommission
+        porcentajeAcordado = this@fromDTO.storeAuthorCommission
         mediosDePago = mutableSetOf<Pago>().apply {
             if (this@fromDTO.storePaymentEfectivo) add(Pago.EFECTIVO)
             if (this@fromDTO.storePaymentQR) add(Pago.QR)
