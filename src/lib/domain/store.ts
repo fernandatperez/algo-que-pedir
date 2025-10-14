@@ -92,8 +92,12 @@ export class StoreType {
 
     
 
-    if (!this.storeAddress) {
+    if (!this.storeAddress || this.storeAddress.trim() === '' || this.storeAddress === 'null' || this.storeAddress === 'undefined') {
       this.addError('address', 'Debe ingresar dirección')
+    }
+
+    if (this.storeAltitude > 2147483647 || this.storeAltitude < -2147483648) {
+      this.addError('altitude', 'El valor de altura es demasiado grande')
     }
 
     if (this.storeAltitude == 0) {
@@ -104,16 +108,32 @@ export class StoreType {
       this.addError('latitude', 'Debe ingresar latitud válida')
     }
 
+    if (this.storeLatitude < -90 || this.storeLatitude > 90) {
+      this.addError('latitude', 'La latitud debe estar entre -90 y 90 grados')
+    }
+
     if (this.storeLongitude == 0) {
       this.addError('longitude', 'Debe ingresar altura válida')
+    }
+
+    if (this.storeLongitude < -90 || this.storeLongitude > 90) {
+      this.addError('latitude', 'La latitud debe estar entre -90 y 90 grados')
     }
 
     if (this.storeAuthorCommission == 0) {
       this.addError('authorcommission', 'Debe ingresar una comision')
     }
 
+    if (this.storeAuthorCommission < 0 || this.storeAuthorCommission > 100){
+      this.addError('authorcommission', 'La comision debe ser de 0% a 100%')
+    }
+
     if (this.storeAppCommission == 0) {
       this.addError('appcommission', 'Debe ingresar una comision')
+    }
+
+    if (this.storeAppCommission < 0 || this.storeAppCommission > 100){
+      this.addError('appcommission', 'La comision debe ser de 0% a 100%')
     }
 
     if (!this.storePaymentEfectivo && !this.storePaymentQR && !this.storePaymentTransferencia )
