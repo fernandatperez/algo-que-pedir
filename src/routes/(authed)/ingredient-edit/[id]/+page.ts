@@ -12,6 +12,5 @@ export const load: PageLoad = async ({ params }) => {
     return { ingredient }
   } catch (error) {
     showError('Error loading ingredient', error)
-    return { ingredient: null } // para no romper el componente
   }
 }

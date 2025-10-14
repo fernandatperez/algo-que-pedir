@@ -123,10 +123,6 @@
   @import url("$lib/css/components-css/icon.css");
   @import url("$lib/css/components-css/buttons.css");
   @import url("$lib/css/pages-css/7-ingredients.css");
-
-  .content-section-ingredients {
-    font-size: 1.5rem;
-  }
 </style>
 
 <section class="flex-column">
@@ -159,7 +155,7 @@
         <!-- use:enhance: te trae la data del form cuando llamas al onSubmit, permitiendo sacar el bind:value  -->
         <!-- type="reset" -> onreset={reset} -->
         <!-- type="submit" -> use:enhance={onSubmit} pero es necesario el es necesario el +page.server.ts, asi que de baja-->
-          <form onsubmit={onSubmit} onreset={resetNewIngredient} id="form-ingredient" class="flex-table-row product-edit-ingredients-table-content">
+          <form onsubmit={onSubmit} onreset={resetNewIngredient} id="form-ingredient" class="flex-table-row">
             <div class="fieldset-section">
               <section class="cell">
                 <Input 

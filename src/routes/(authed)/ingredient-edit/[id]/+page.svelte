@@ -26,13 +26,18 @@
 
   let switchButtonLock = $derived( ingredientEdit?.foodGroup == FoodGroupValue.GRASAS_Y_ACEITES )
 
-  // .some() ya nos da true si es un grupo vegetal, o false si no lo es.
-  let esGrupoVegetal = $derived(
-    gruposVegetales.some(ing => (ingredientEdit?.foodGroup ?? '') == ing)
-  );
-
-  // El origen es animal si NO es un grupo vegetal.
-  let esOrigenAnimalReactivo = $derived(!esGrupoVegetal);
+  $effect(() => {
+    // produce una accion cuando cambia el foodGroup (observer)
+    if (ingredientEdit?.foodGroup) {
+      const group = ingredientEdit.foodGroup
+      
+      if (!(group === FoodGroupValue.GRASAS_Y_ACEITES)) {
+        // Esto determina si el grupo seleccionado está en la lista de grupos vegetales
+        const esVegetal = gruposVegetales.some(g => g == group)
+        ingredientEdit.esOrigenAnimal = !esVegetal
+      }
+    }
+  })
   
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
@@ -47,7 +52,7 @@
       (formData.get("name") ?? "").toString(),
       Number(formData.get("cost") ?? 0),
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
-      esOrigenAnimalReactivo,
+      ingredientEdit.esOrigenAnimal,
     )
     console.info("el nuevo ingrediente es ", ingredient)
 
