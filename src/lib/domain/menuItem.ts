@@ -1,4 +1,6 @@
+import { storeMOCK } from '$lib/data/mock/store'
 import { IngredientType } from './ingredient'
+import type { StoreJSON } from './store'
 
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
@@ -8,10 +10,11 @@ export type MenuItemJSON = {
   descripcion: string
   precio: number
   imagen: string
-  costoProduccion: number // ! Cambiar en tests & en mock
+  costoProduccion: number
   esDeAutor: boolean
   enPromocion: boolean
   ingredientes: IngredientType[]
+  store: StoreJSON
 }
 
 export class ValidationMessage { //esto pordiramos usar todos la misma
@@ -35,7 +38,8 @@ export class MenuItemType {
     public costoProduccion: number = 0,
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
-    public ingredientes: IngredientType[] = []
+    public ingredientes: IngredientType[] = [],
+    public store: StoreJSON = storeMOCK
   ) {}
 
   static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
@@ -57,7 +61,8 @@ export class MenuItemType {
       costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
-      ingredientes: this.ingredientes
+      ingredientes: this.ingredientes,
+      store: this.store
     }
   }
 
