@@ -53,7 +53,7 @@ class RepositorioPedidos {
         // busco el pedido por id y me guardo el indice
         val indexPedido = pedidos.indexOfFirst { it.id == pedido.id }
         pedidos.removeAt(indexPedido)
-        pedidos.add(pedido)
+        pedidos.add(indexPedido, pedido)
         return pedido
     }
 
