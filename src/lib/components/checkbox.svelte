@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   let { 
     name,
     label, 
@@ -6,8 +6,6 @@
     checked = false,
     class: className = ''
   } = $props();
-  
-  let isChecked = $state(checked);
 </script>
 
 <label class="checkbox-wrapper {className}">
@@ -15,11 +13,8 @@
     type="checkbox"
     {name}
     {value}
-    checked={isChecked}
-    onchange={() => isChecked = !isChecked}
+    {checked}
     class="checkbox-input"
   />
-  
-  
   <span class="checkbox-label">{label}</span>
 </label>

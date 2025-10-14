@@ -33,24 +33,20 @@
 
   function discardChanges() {
     if (originalStore) {
-      // Recrear completamente el objeto para forzar reactividad
       currentStore = Object.assign(new StoreType(), JSON.parse(JSON.stringify(originalStore)))
       errors = []
       
-      // También resetear los valores del formulario manualmente
+      // resetea los valores 
       setTimeout(() => {
         const form = document.getElementById('form-store-profile') as HTMLFormElement
         if (form && currentStore) {
-          // Resetear valores de inputs
           const inputs = form.querySelectorAll('input')
           inputs.forEach(input => {
             if (input.type === 'checkbox') {
-              // Para checkboxes
               if (input.name === 'storePaymentEfectivo') input.checked = currentStore!.storePaymentEfectivo
               if (input.name === 'storePaymentQR') input.checked = currentStore!.storePaymentQR
               if (input.name === 'storePaymentTransferencia') input.checked = currentStore!.storePaymentTransferencia
             } else {
-              // Para inputs normales
               if (input.name === 'name') input.value = currentStore!.name || ""
               if (input.name === 'storeURL') input.value = currentStore!.storeURL || ""
               if (input.name === 'storeAddress') input.value = currentStore!.storeAddress || ""
@@ -74,23 +70,30 @@
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault()
     errors = []
-    const form =ev.currentTarget as HTMLFormElement
+    const form = ev.currentTarget as HTMLFormElement
+
+    //los checkboxes no son elementos nativos del formdata como el input, textarea y select, por eso no
+    //los reconoce, aca lo que hago es que tome las propiedades del input para poder detectarla
+    //la otra opcion es bindear el checkbox
+    const storePaymentEfectivo = (form.elements.namedItem('storePaymentEfectivo') as HTMLInputElement)?.checked || false
+    const storePaymentQR = (form.elements.namedItem('storePaymentQR') as HTMLInputElement)?.checked || false
+    const storePaymentTransferencia = (form.elements.namedItem('storePaymentTransferencia') as HTMLInputElement)?.checked || false
+
     const formData = new FormData(form)
 
-    // Crear store actualizado con los valores ACTUALES del formulario
     const store = new StoreType(
-      (formData.get("name" )?? "")?.toString(),
-      (formData.get("storeURL" )?? "")?.toString(),
-      (formData.get("storeAddress" )?? "")?.toString(),
-      Number(formData.get("storeAltitude" )?? 0),
-      Number(formData.get("storeLatitude" )?? 0),
-      Number(formData.get("storeLongitude" )?? 0),
-      Number(formData.get("storeAppCommission" )?? 0),
-      Number(formData.get("storeAuthorCommission" )?? 0),
-      // no estoy segura si deberia traer asi los checkbox del formdata
-      formData.has("storePaymentEfectivo"),  
-      formData.has("storePaymentQR"),         
-      formData.has("storePaymentTransferencia") 
+      0,
+      (formData.get("name") ?? "")?.toString(),
+      (formData.get("storeURL") ?? "")?.toString(),
+      (formData.get("storeAddress") ?? "")?.toString(),
+      Number(formData.get("storeAltitude") ?? 0),
+      Number(formData.get("storeLatitude") ?? 0),
+      Number(formData.get("storeLongitude") ?? 0),
+      Number(formData.get("storeAppCommission") ?? 0),
+      Number(formData.get("storeAuthorCommission") ?? 0),
+      storePaymentEfectivo,  
+      storePaymentQR,        
+      storePaymentTransferencia,
     )
 
     // Validar
@@ -102,23 +105,27 @@
     }
 
     try {
-      await storeService.updateStore(store)
+      const stores = await storeService.getStore()
+      if (stores.length === 0) {
+        throw new Error('No se encontró el store')
+      }
+      
+      const storeId = stores[0].id
+      
+      await storeService.updateStore(storeId, store)
       await findStore()
       errors = []
       toasts.push('Tienda actualizada exitosamente', {type: 'success'})
+      
     } catch (error) {
-      // error 500
       if(!toastLock) {
         toasts.push('Error al actualizar la tienda', {type: 'error'})
-        setTimeout(releaseToast, 5000)
       }
       showError("Error al actualizar la tienda", error)
     } 
   }
 
-  function releaseToast() {
-    toastLock = false
-  }
+  
 </script>
 
 <style>
@@ -269,6 +276,7 @@
             />
 
             <!-- Checkbox QR -->
+             <!-- alternativa a htmlinputelement bind:checked={storePaymentEfectivo}-->
             <Checkbox
               name="storePaymentQR"
               label="QR" 
