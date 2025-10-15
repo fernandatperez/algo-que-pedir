@@ -15,6 +15,8 @@ export type MenuItemJSON = {
   enPromocion: boolean
   ingredientes: IngredientType[]
   store: StoreJSON
+  fechaCreacion: string
+  porcentajeDescuento: number
 }
 
 export class ValidationMessage { //esto pordiramos usar todos la misma
@@ -39,7 +41,9 @@ export class MenuItemType {
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
     public ingredientes: IngredientType[] = [],
-    public store: StoreJSON = storeMOCK
+    public store: StoreJSON = storeMOCK,
+    public fechaCreacion: string = '',
+    public porcentajeDescuento: number = 0
   ) {}
 
   static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
@@ -62,7 +66,9 @@ export class MenuItemType {
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
       ingredientes: this.ingredientes,
-      store: this.store
+      store: this.store,
+      fechaCreacion: this.fechaCreacion,
+      porcentajeDescuento: this.porcentajeDescuento
     }
   }
 

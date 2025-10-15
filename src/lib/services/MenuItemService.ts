@@ -32,6 +32,8 @@ class MenuItemsService {
   }
 
   async createMenuItem(item: MenuItemType) {
+    const creacion = new Date()
+    item.fechaCreacion = creacion.toISOString().split('T')[0]
     const { id, ...itemSinId } = item // Elimina el ID si existe
     await axios.post<MenuItemJSON>(REST_SERVER_URL + '/platos', itemSinId)
 

@@ -5,10 +5,11 @@
 
     interface Props {
         order: Order,
-        action?: MouseEventHandler<HTMLButtonElement>
+        preparar?: MouseEventHandler<HTMLButtonElement>,
+        cancelar?: MouseEventHandler<HTMLButtonElement>,
     }
 
-    let { order, action = $bindable() } : Props = $props()
+    let { order, preparar = $bindable(), cancelar = $bindable()} : Props = $props()
 
 </script>
 
@@ -56,9 +57,12 @@
         <span class="payment-text">Pago con <b>{order.metodoDePago.split('_').join(' ')}</b></span>
     </div>
 
-    {#if order.estado === Estado.PENDIENTE}
-        <div class="action-container">
-            <button onclick={action} class="btn btn-primary" data-testid='preparar-{order.id}' disabled={order.estado!=Estado.PENDIENTE}> Preparar </button>
-        </div>
-    {/if}
+    <div class="action-container">
+        {#if order.estado != Estado.ENTREGADO && order.estado != Estado.CANCELADO}
+        <button onclick={cancelar} class="btn btn-primary" data-testid='cancelar-{order.id}'> Cancelar </button>
+        {/if}
+        {#if order.estado === Estado.PENDIENTE}
+        <button onclick={preparar} class="btn btn-primary btn-preparar" data-testid='preparar-{order.id}'> Preparar </button>
+        {/if}
+    </div>
 </div>

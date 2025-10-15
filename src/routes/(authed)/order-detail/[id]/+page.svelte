@@ -3,9 +3,12 @@
   import OrderState from "$lib/components/OrderState.svelte"
   
   import { goto } from "$app/navigation"
+    import { Estado, Order } from "$lib/domain/order.js";
+    import { orderService } from "$lib/services/orderService.js";
 
   let { data } = $props()
   let { order } = data
+
 
 </script>
 
@@ -91,6 +94,12 @@
       </div>
       <div class="action-container">
         <button class="btn btn-primary" onclick={() => goto('/orders')}>Volver</button>
+        <!-- {#if order.estado != Estado.ENTREGADO && order.estado != Estado.CANCELADO}
+        <button onclick={cancelar} class="btn btn-primary" data-testid='cancelar-{order.id}'> Cancelar </button>
+        {/if}
+        {#if order.estado === Estado.PENDIENTE}
+        <button onclick={} class="btn btn-primary btn-preparar" data-testid='preparar-{order.id}'> Preparar </button>
+        {/if} -->
       </div>
     </section>
   </div>

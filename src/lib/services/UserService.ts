@@ -22,9 +22,11 @@ class UserService {
       password: password
     })
     
+    console.log(response.data)
     // Guardar datos en sessionStorage son solo para cuando esta el navegador se borra al cerrar la pestaña supuestamente....
-    sessionStorage.setItem('userName', response.data.username)
-    sessionStorage.setItem('email', response.data.email)
+    sessionStorage.setItem('userName', response.data.nombreLocal)
+    sessionStorage.setItem('userName', response.data.nombre)
+    sessionStorage.setItem('email', response.data.correo)
     //! no se en que usarlo igual, pero ahi estan
     
     return UserType.fromLoginJson(response.data)

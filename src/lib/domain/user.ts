@@ -13,8 +13,8 @@ export type UserJSON = {
 
 export interface UserLoginJSON {
   // token: string; // esto se podria poner
-  username: string;
-  email: string;
+  nombre: string;
+  correo: string;
 } // Che esto creo que no esta bien, mira UserService.ts
 
 export interface UserRegisterJSON {
