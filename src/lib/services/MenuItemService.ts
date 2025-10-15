@@ -34,8 +34,10 @@ class MenuItemsService {
   async createMenuItem(item: MenuItemType) {
     const creacion = new Date()
     item.fechaCreacion = creacion.toISOString().split('T')[0]
-    const { id, ...itemSinId } = item // Elimina el ID si existe
-    await axios.post<MenuItemJSON>(REST_SERVER_URL + '/platos', itemSinId)
+    const itemJSON: MenuItemJSON = item.toJSON()
+    // eslint-disable-next-line no-console
+    console.info(itemJSON.id)
+    await axios.post<MenuItemJSON>(REST_SERVER_URL + '/platos', itemJSON)
 
     //     const itemJSON = { ...item }
     // MENU_ITEMS_JSON_MOCK.push(itemJSON)
@@ -44,7 +46,6 @@ class MenuItemsService {
 
   async updateMenuItem(menuItem: MenuItemType) {
     const menuItemJSON = menuItem.toJSON()
-    // Aca no se como seria
     return axios.put<MenuItemJSON>(REST_SERVER_URL + '/platos/' + menuItem.id, menuItemJSON)
     // return axios.put<IngredientJSON>(REST_SERVER_URL + '/ingredientes/' + ingredient.id, ingredient.toJSON())
   }

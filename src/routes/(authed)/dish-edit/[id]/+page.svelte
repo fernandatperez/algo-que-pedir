@@ -228,7 +228,7 @@
               class="input-primary"
               id="product-name"
               name="name"
-              value={itemEdit.nombre}
+              bind:value={itemEdit.nombre}
               placeholder="Escribir |"
             />
             <ValidationField errors={errors} field="nombre" />

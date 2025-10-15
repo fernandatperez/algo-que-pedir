@@ -3,7 +3,6 @@ import axios from 'axios'
 import { REST_SERVER_URL } from './configuration'
 
 class UserService {
-  // Usamos el mismo, cambia en el back. Esta muy mal?
   async getUser(username: string, password: string) {
     // -------------------------------------------------------------------
     // const usuario: UserLoginJSON = {
@@ -22,6 +21,7 @@ class UserService {
       password: password
     })
     
+    // eslint-disable-next-line no-console
     console.log(response.data)
     // Guardar datos en sessionStorage son solo para cuando esta el navegador se borra al cerrar la pestaña supuestamente....
     sessionStorage.setItem('userName', response.data.nombreLocal)
