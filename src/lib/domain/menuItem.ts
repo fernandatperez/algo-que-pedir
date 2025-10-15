@@ -1,5 +1,5 @@
 import { storeMOCK } from '$lib/data/mock/store'
-import { IngredientType } from './ingredient'
+import { IngredientType, type IngredientJSON } from './ingredient'
 import type { StoreJSON } from './store'
 
 // Tipo para datos que vienen del servidor/API
@@ -13,7 +13,7 @@ export type MenuItemJSON = {
   costoProduccion: number
   esDeAutor: boolean
   enPromocion: boolean
-  ingredientes: IngredientType[]
+  ingredientes: IngredientJSON[]
   store: StoreJSON
 }
 
@@ -53,7 +53,6 @@ export class MenuItemType {
   toJSON(): MenuItemJSON {
     return {
       id: this.id,
-      // alt: this.alt,
       nombre: this.nombre,
       descripcion: this.descripcion,
       precio: this.precio,
@@ -61,8 +60,12 @@ export class MenuItemType {
       costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
-      ingredientes: this.ingredientes,
-      store: this.store
+      ingredientes: this.ingredientes.map(it => it.toJSON()),
+      // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
+      // y despues a dominio de aca
+      store: this.store, 
+      fechaCreacion: this.fechaCreacion,
+      porcentajeDescuento: this.porcentajeDescuento
     }
   }
 
