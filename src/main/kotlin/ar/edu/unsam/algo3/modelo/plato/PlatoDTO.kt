@@ -6,19 +6,6 @@ import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.modelo.local.Local
 
-// Esto deberia ser uno solo? tipo PlatoDTO por que mando lo mismo que recibo
-//data class PlatoRequest(
-//    val id: Int,
-//    val nombre: String,
-//    val descripcion: String,
-//    val imagen: String,
-//    val precio: Double,
-//    val esDeAutor: Boolean,
-//    val enPromocion: Boolean,
-//    val costoDeProduccion: Double,
-//    val ingredientes: MutableList<Ingrediente>
-//) {}
-
 data class PlatoDTO(
     val id : Int,
     val nombre: String,
@@ -56,5 +43,7 @@ fun Plato.fromDTO(platoDTO: PlatoDTO): Plato {
         urldeImagen = platoDTO.imagen,
         esDeAutor = platoDTO.esDeAutor,
         ingredientes = ingredientesDom
-    )
+    ).apply {
+        this.id = this@fromDTO.id
+    }
 }

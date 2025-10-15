@@ -29,5 +29,7 @@ fun IngredienteDTO.toDOM(): Ingrediente {
         costoMercado = this.cost,
         grupoAlimenticio = this.foodGroup,
         esOrigenAnimal = this.esOrigenAnimal,
-    )
+    ).apply {
+        this.id = this@toDOM.id
+    }
 }

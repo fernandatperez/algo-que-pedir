@@ -26,38 +26,20 @@ class PlatoService(
     }
 
     fun crearPlato(platoDTO: PlatoDTO) {
-        val ingredientesDOM: MutableList<Ingrediente> = platoDTO.ingredientes.map { it: IngredienteDTO -> it.toDOM()}.toMutableList()
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
             valorBase = platoDTO.precio,
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
-            ingredientes = ingredientesDOM,
+            ingredientes = platoDTO.ingredientes.map { it.toDOM() }.toMutableList(),
             local = LocalPollos, // en ningun lugar pones el local no se como seria
         )
         repositorioPlatos.crear(platoDOM)
     }
 
     fun modificarPlato(id: Int, plato: PlatoDTO) {
-        val platoDOM: Plato = Plato().fromDTO(plato). apply {this.id = id}
+        val platoDOM: Plato = Plato().fromDTO(plato).apply { this.id = id }
         repositorioPlatos.actualizar(platoDOM)
     }
 }
-
-
-/* no me funciona esto, se rompe el controller
-@Service
-class PlatoService(
-    val repoPlatos: Repositorio<Plato> // Spring lo inyecta automaticaemnte
-) {
-
-    fun getPlatos(): List<PlatoDTO> =
-        repoPlatos.objetosDeRepositorio().map { it.toDTO(it.id) }
-
-    fun obtenerPlato(id: Int): PlatoDTO {
-        val platoModelo = repoPlatos.obtenerObjeto(id)
-        return platoModelo.toDTO(id)
-    }
-}
-*/
