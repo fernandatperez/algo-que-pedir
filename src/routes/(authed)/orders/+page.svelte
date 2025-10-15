@@ -48,6 +48,16 @@
         // console.log("Pedido preparado", order.id)
     }
 
+    // Como hago para hacerlo una sola funcion que reciba el estado al que cambiará
+    const cancelarPedido = async (order: Order) => {
+        // console.log("Preparando pedido", order.id)
+        order.estado = Estado.CANCELADO
+        await orderService.updateOrderState(order)
+        await getOrders()
+        toasts.push('Pedido CANCELADO', {type: 'error'})
+        // console.log("Pedido cancelado", order.id)
+    }
+
     const releaseToast = () => {
         toastLock = false
     }
@@ -83,7 +93,7 @@
     <section class="main-grid">
         <!-- Single order -->
         {#each orders as order}
-            <OrderCard order={order} action={() => prepararPedido(order)} />
+            <OrderCard order={order} preparar={() => prepararPedido(order)} cancelar={() => cancelarPedido(order)}/>
         {/each}
         {#if orders.length == 0}
                 <div class="no-orders">No hay pedidos</div>
