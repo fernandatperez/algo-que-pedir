@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class LocalDTO(
     val id: Int,
     val name: String,
+    val email: String,
     val storeURL: String,
     val storeAddress: String,
     val storeAltitude: Int,
@@ -25,6 +26,7 @@ fun Local.toDTO(): LocalDTO {
     return LocalDTO(
         id = this.id,
         name = this.nombre,
+        email = this.email,
         storeURL = this.url,
         storeAddress = this.direccion.calle,
         storeAltitude = this.direccion.altura,

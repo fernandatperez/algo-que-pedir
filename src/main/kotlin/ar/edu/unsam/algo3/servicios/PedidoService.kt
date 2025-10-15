@@ -17,7 +17,7 @@ class PedidoService(
 
     fun pedidos() = repositorioPedidos.allInstances()
 
-    fun pedidosFiltrados(estado: Estado) = repositorioPedidos.filteredInstances(estado).map { it.toDTO() }
+    fun pedidosFiltrados(estado: Estado, email: String) = repositorioPedidos.filteredInstances(estado, email).map { it.toDTO() }
 
     fun pedidoPorId(id: Int): PedidoDTO = repositorioPedidos.buscarPorId(id)?.toDTO() ?: throw RuntimeException("No se encontró el pedido de id <$id>")
 

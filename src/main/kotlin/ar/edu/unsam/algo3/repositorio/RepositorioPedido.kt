@@ -22,7 +22,7 @@ class RepositorioPedido {
         return pedidos
     }
 
-    fun filteredInstances(estado: Estado): List<Pedido> = allInstances().filter { it.estado == estado }
+    fun filteredInstances(estado: Estado, email: String): List<Pedido> = allInstances().filter { it.estado == estado && it.local.email == email }
 
     fun crear(
         usuario: Usuario,

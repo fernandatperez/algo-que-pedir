@@ -1,27 +1,31 @@
 package ar.edu.unsam.algo3.servicios
 
+import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
+import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.repositorio.repositorioUsuarios
 import org.springframework.stereotype.Service
 
 @Service
-class UsuarioService {
-    fun validar(usuario: Usuario): Usuario {
-        val usuarioRepo = this.buscar(usuario)
-        if (usuarioRepo.password == usuario.password) {
-            return usuarioRepo
+class UsuarioService (
+    val repositorioLocal: RepositorioLocal  // ← Inyecta el repositorio específico
+){
+    fun validar(usuario: Usuario): Local {
+        val localRepo = this.buscar(usuario)
+        if (localRepo.password == usuario.password) {
+            return localRepo
         } else {
             throw RuntimeException("Las credenciales no coinciden")
         }
     }
 
-    fun buscar(usuario: Usuario): Usuario {
-        val usuarioEncontrado = repositorioUsuarios.buscar(usuario.mailPrincipal)
-        if (usuarioEncontrado.isEmpty()) {
+    fun buscar(usuario: Usuario): Local {
+        val localCorrespondiente = repositorioLocal.buscar(usuario.mailPrincipal)
+        if (localCorrespondiente.isEmpty()) {
             throw RuntimeException("No existe un usuario con ese email")
         }
         else {
-            return usuarioEncontrado[0]
+            return localCorrespondiente[0]
         }
     }
 

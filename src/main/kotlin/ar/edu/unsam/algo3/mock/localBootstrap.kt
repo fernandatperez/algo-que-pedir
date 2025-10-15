@@ -23,6 +23,8 @@ class LocalBootstrap(
             val localInicial = Local().apply {
                 id = 1
                 nombre = "Carlo's Bake Shop"
+                email = "jorge@hotmail.com"
+                password = "123"
                 url = "https://networthbro.com/wp-content/uploads/2019/07/buddy-valastro-networth-salary.jpg"
                 regalias = 3.0
                 porcentajeAcordado = 6.0

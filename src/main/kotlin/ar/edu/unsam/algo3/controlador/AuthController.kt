@@ -24,10 +24,12 @@ class AuthController( val usuarioService: UsuarioService ) {
             password = request.password
         )
         val userValidado = usuarioService.validar(user)
-
+        // aca te tenes que fijas que es lo que devuelve la idea seria comparar el email con el de el local
+        // y lo que tiene que devolver es tambien el local, de manera
         return AuthResponse(
-            correo = userValidado.mailPrincipal,
-            nombre = userValidado.nombre
+            correo = userValidado.email,
+            nombre = userValidado.nombre,
+            nombreLocal = userValidado.nombre
         )
     }
 
@@ -43,7 +45,8 @@ class AuthController( val usuarioService: UsuarioService ) {
 
         return AuthResponse(
             correo = usuario.mailPrincipal,
-            nombre = usuario.nombre
+            nombre = usuario.nombre,
+            nombreLocal = usuario.nombre // esto hay que cambiarlo despues
         )
     }
 

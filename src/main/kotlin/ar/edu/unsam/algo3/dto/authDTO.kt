@@ -8,9 +8,9 @@ data class AuthRequest(
 
 // RESPONSE - Lo que devuelve el endpoint, lo que necesita el front
 data class AuthResponse(
-    //val token: String, // todo preguntar si se podria usar esto
     val nombre: String,
-    val correo: String
+    val correo: String,
+    val nombreLocal: String
 ) {}
 // la respuesta nunca tiene que tener datos sensibles
 

@@ -16,6 +16,8 @@ enum class Pago {
 
 open class Local(
     var nombre: String = "",
+    var email: String = "",
+    var password: String = "",
     var direccion: Direccion = Direccion(),
     var porcentajeAcordado: Double = 0.0,
     var regalias: Double = 0.0,
@@ -90,10 +92,10 @@ open class Local(
 
     override fun cumpleCriterioDeBusqueda(criterio: String): Boolean =
         coincideParcialmenteCon(criterio, nombre) ||
-                coincideTotalmenteCon(criterio, direccion.calle)
+                coincideTotalmenteCon(criterio, direccion.calle) || coincideTotalmenteCon(criterio, email)
 
     override fun cumpleCriterioDeCreacion(): Boolean =
-        noEstaVacio(nombre) && noEstaVacio(direccion.calle)
+        noEstaVacio(nombre) || noEstaVacio(direccion.calle) || noEstaVacio(email)
 
 
 
