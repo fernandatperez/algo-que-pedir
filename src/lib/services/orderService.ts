@@ -26,7 +26,7 @@ class OrderService {
     
   // Orders filtradas
   async getFilteredOrders(estado: string) {
-    const queryByState = () => axios.get<OrderJSON[]>(REST_SERVER_URL + '/pedidos/?estado=' + estado)
+    const queryByState = () => axios.get<OrderJSON[]>(REST_SERVER_URL + '/pedidos/?estado=' + estado + '&local=' + sessionStorage.getItem('email'))
     return (await getAxiosData(queryByState)).map((it) => Order.fromJSON(it))
   }
 
@@ -41,7 +41,7 @@ class OrderService {
   // }
 
   async getOrderByID(id: number) {
-    const queryById = () => axios.get<OrderJSON>(REST_SERVER_URL + '/pedidos/' + id)
+    const queryById = () => axios.get<OrderJSON>(REST_SERVER_URL + '/pedido/' + id)
     const orderJson = await getAxiosData(queryById)
     if (orderJson != null) {
       return Order.fromJSON(orderJson)
@@ -61,7 +61,7 @@ class OrderService {
   // }
 
   async updateOrderState(order: Order) {
-    return axios.put<OrderJSON>(REST_SERVER_URL + '/pedidos/' + order.id, order.toJSON())
+    return axios.put<OrderJSON>(REST_SERVER_URL + '/modificar_pedido/' + order.id, order.toJSON())
   }
 
 }

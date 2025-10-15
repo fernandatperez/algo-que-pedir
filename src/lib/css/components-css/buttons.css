@@ -95,10 +95,10 @@
     background-color: var(--alternative-color);
     border: none;
     color: white;
-    padding: 0.2em 5.7em 0.2em 5.7em;
+    padding: 0.3em 4em;
     border-radius: var(--border-radius-rounded);
     &:hover{
-        background-color: #ff8127;
+        /* background-color: #ff8127; */
         transition: background-color 0.3s ease;
         transition: color 0.3s ease;
     }

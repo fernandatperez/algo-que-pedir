@@ -21,8 +21,6 @@
   let registerMessageNoMatched: string = $state("");
   let successmessages: string[] = $state([]);
 
-  console.log(USERS_LIST_MOCK);
-
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault() // cancela el comportamiento por defecto del navegador frente al evento del submit
 
@@ -43,10 +41,11 @@
       return errors
     }
     try {
-      // Esto no esta devolviendo nada catcheable (->)
-      // Ver service y returns
-      await userService.alreadyRegisteredUsername(user.username)
+      // await userService.alreadyRegisteredUsername(user.username)
       if (formData.get("password") == formData.get("password-retry")) {
+        
+        await userService.createUser(user)
+        
         successmessages = ['Usuario generado con exito.',' Seras redirigido a la pagina de Ingreso']
 
         if(!toastLock) {
@@ -57,12 +56,12 @@
           setTimeout(releaseToast, 5000)
         }
 
-        await userService.createUser(user)
-
         setTimeout(() => {
           goto("/")
         }, 2000)
+
       } else {
+        // Cambiar a error de front
         registerMessageNoMatched = "Las contraseñas no coinciden"
         toasts.push(registerMessageNoMatched, {type: 'error'})
         setTimeout(() => {
@@ -71,8 +70,9 @@
       }
       errors = [] // limpiar errores
     } catch (error) {
-      toasts.push("Error al crear el ingrediente", {type: 'error'})
-      showError("Error al crear el ingrediente", error)
+      toasts.push("Error al generar usuario", {type: 'error'})
+      // Esto esta mal, hay que mostrar el error del back
+      showError("Error al generar usuario", error)
     }
   }
 
@@ -98,40 +98,47 @@
       <!-- FORM FIELD -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
-          <Input
-            label_text="Usuario*"
-            label_for="username"
-            input_type={InputTypes.Normal}
-            value=""
-            type= "email"
-            placeholder= "Escribir"
-            id= "register-username-id"
-            class= "input-primary"
-            name= "username"
-          />
-          <ValidationField errors={errors} field="username" />
-        
-          <Input
-            label_text="Contraseña*"
-            label_for="password"
-            input_type={InputTypes.Hidden}
-            value=""
-            id= "register-password-id"
-            class= "input-primary"
-            name= "password"
-          />
-          <ValidationField errors={errors} field="password" />
+          <div class="input-wrapper">
+            <Input
+              label_text="Usuario*"
+              label_for="username"
+              input_type={InputTypes.Normal}
+              value=""
+              type= "email"
+              placeholder= "Escribir"
+              id= "register-username-id"
+              class= "input-primary"
+              name= "username"
+            />
+            <ValidationField errors={errors} field="username" />
+          </div>
 
-          <Input
-            label_text="Re-ingrese la contraseña*"
-            label_for="register-password-retry"
-            input_type={InputTypes.Hidden}
-            value=""
-            id= "register-password-retry-id"
-            class= "input-primary"
-            name= "password-retry"
-          />
-          <ValidationField errors={errors} field="password"/>
+          <div class="input-wrapper">
+            <Input
+              label_text="Contraseña*"
+              label_for="password"
+              input_type={InputTypes.Hidden}
+              value=""
+              id= "register-password-id"
+              class= "input-primary"
+              name= "password"
+            />
+            <ValidationField errors={errors} field="password" />
+        </div>
+
+          <div class="input-wrapper">
+            <Input
+              label_text="Re-ingrese la contraseña*"
+              label_for="register-password-retry"
+              input_type={InputTypes.Hidden}
+              value=""
+              id= "register-password-retry-id"
+              class= "input-primary"
+              name= "password-retry"
+            />
+            <ValidationField errors={errors} field="password"/>
+          </div>
+
         </div>
       </fieldset>
 

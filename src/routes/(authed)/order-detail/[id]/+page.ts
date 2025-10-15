@@ -6,7 +6,7 @@ export async function load({ params }) {
     const id = Number(params.id)
     const order = await orderService.getOrderByID(id)
     // eslint-disable-next-line no-console
-    console.log('Order loaded:', order)
+    // console.log('Order loaded:', order)
 
     if (order.id == -1) {
       // Si el pedido no existe te redirige a orders

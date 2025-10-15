@@ -68,8 +68,7 @@
   }
 
  .btn-alternate{
-  padding-left: 2em;
-  padding-right: 2em;
+  padding: .3em 2em;
  }
 
  .product-cell {
@@ -93,10 +92,8 @@
   }
 
   .btn-alternate{
-    padding-left: 2em;
-    padding-right: 2em;
+    padding: .3em 2em;
   }
-
   .state-btn-container {
     width: 100%;
   }

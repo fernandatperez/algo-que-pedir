@@ -73,6 +73,15 @@
     width: 78%;
 }
 
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    margin: 0.2em !important;
+}
+
 .ph-eye-slash{
     right: 0.8em;
     cursor: pointer;

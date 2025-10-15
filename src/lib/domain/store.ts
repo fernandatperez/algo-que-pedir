@@ -19,6 +19,7 @@ export class StoreType {
   errors: ValidationMessage[] = []
 
   constructor(
+    public id: number= 0,
     public name: string = ''.trim(), 
     public storeURL: string = ''.trim(), 
     public storeAddress: string = ''.trim(),               
@@ -62,6 +63,16 @@ export class StoreType {
     return this.errors.length > 0
   }
 
+  getValidImageUrl(defaultImage: string): string {
+    if (!this.storeURL || 
+        this.storeURL.trim() === '' || 
+        this.storeURL === 'null' || 
+        this.storeURL === 'undefined') {
+      return defaultImage
+    }
+    return this.storeURL
+  }
+
 
   validate() {
     this.errors = []
@@ -69,13 +80,24 @@ export class StoreType {
     if (!this.name) {
       this.addError('name', 'Debe ingresar nombre del local')
     }
- 
-    if (!this.storeURL) {
-      this.addError('img', 'Debe ingresar URL de imagen')
+
+    // Validación de URL vacía
+    if (!this.storeURL || this.storeURL.trim() === '' || this.storeURL === 'null' || this.storeURL === 'undefined') {
+      this.addError('url', 'Debe ingresar URL de imagen')
+    }else{
+    // Verificar que comience con http o https (como en el back)
+      if (!this.storeURL.startsWith('http://') && !this.storeURL.startsWith('https://')) {
+        this.addError('url', 'La URL debe comenzar con http:// o https://')
+      }}
+
+    
+
+    if (!this.storeAddress || this.storeAddress.trim() === '' || this.storeAddress === 'null' || this.storeAddress === 'undefined') {
+      this.addError('address', 'Debe ingresar dirección')
     }
 
-    if (!this.storeAddress) {
-      this.addError('address', 'Debe ingresar dirección')
+    if (this.storeAltitude > 2147483647 || this.storeAltitude < -2147483648) {
+      this.addError('altitude', 'El valor de altura es demasiado grande')
     }
 
     if (this.storeAltitude == 0) {
@@ -86,16 +108,32 @@ export class StoreType {
       this.addError('latitude', 'Debe ingresar latitud válida')
     }
 
+    if (this.storeLatitude < -90 || this.storeLatitude > 90) {
+      this.addError('latitude', 'La latitud debe estar entre -90 y 90 grados')
+    }
+
     if (this.storeLongitude == 0) {
       this.addError('longitude', 'Debe ingresar altura válida')
+    }
+
+    if (this.storeLongitude < -90 || this.storeLongitude > 90) {
+      this.addError('latitude', 'La latitud debe estar entre -90 y 90 grados')
     }
 
     if (this.storeAuthorCommission == 0) {
       this.addError('authorcommission', 'Debe ingresar una comision')
     }
 
+    if (this.storeAuthorCommission < 0 || this.storeAuthorCommission > 100){
+      this.addError('authorcommission', 'La comision debe ser de 0% a 100%')
+    }
+
     if (this.storeAppCommission == 0) {
       this.addError('appcommission', 'Debe ingresar una comision')
+    }
+
+    if (this.storeAppCommission < 0 || this.storeAppCommission > 100){
+      this.addError('appcommission', 'La comision debe ser de 0% a 100%')
     }
 
     if (!this.storePaymentEfectivo && !this.storePaymentQR && !this.storePaymentTransferencia )

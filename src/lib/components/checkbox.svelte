@@ -1,25 +1,22 @@
-<script>
+<script lang="ts">
+    import type { HTMLInputAttributes } from "svelte/elements";
+
+
+interface Check extends HTMLInputAttributes{
+    label_text: string
+}
+
   let { 
-    name,
-    label, 
-    value = 'on',
-    checked = false,
-    class: className = ''
-  } = $props();
-  
-  let isChecked = $state(checked);
+    label_text,
+    ...rest
+  }:Check = $props();
 </script>
 
-<label class="checkbox-wrapper {className}">
+<label class="checkbox-wrapper">
   <input
     type="checkbox"
-    {name}
-    {value}
-    checked={isChecked}
-    onchange={() => isChecked = !isChecked}
     class="checkbox-input"
+    {...rest}
   />
-  
-  
-  <span class="checkbox-label">{label}</span>
+  <span class="checkbox-label">{label_text}</span>
 </label>

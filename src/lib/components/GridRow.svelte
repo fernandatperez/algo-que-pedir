@@ -3,7 +3,7 @@
 
 
   let { platos }: { platos: MenuItemType[] } = $props();
-  console.log('Platos in GridRow:', platos);
+  // console.log('Platos in GridRow:', platos);
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 export interface CheckboxProps {
   name: string;
   label: string;
-  value?: boolean;
+  value?: string;
   checked?: boolean;
   disabled?: boolean;
   required?: boolean;

@@ -1,10 +1,14 @@
 <script lang="ts">
   import Grid from "$lib/components/GridRow.svelte"
+  import OrderState from "$lib/components/OrderState.svelte"
   
-  import { goto } from "$app/navigation";
+  import { goto } from "$app/navigation"
+    import { Estado, Order } from "$lib/domain/order.js";
+    import { orderService } from "$lib/services/orderService.js";
 
   let { data } = $props()
   let { order } = data
+
 
 </script>
 
@@ -25,7 +29,8 @@
       <h1 class="header-title jc-space-between ellipsis-text" data-testid="order-id">Pedido #{order.id}</h1>
       <div class="flex-row state-btn-container">
         <h2 class="subtitle ellipsis-text">Estado del Pedido</h2>
-        <span class="btn btn-alternate">{order.estado}</span>
+        <OrderState estado={order.estado}  />
+        <!-- <span class="btn btn-alternate {estadoColor}">{order.estado}</span> -->
       </div>
     </div>
     <section class="content-section-grid grid-cols-2">
@@ -46,7 +51,7 @@
             <i class="ph ph-map-pin"></i>
           </div>
           <div>
-            <div class="address"><strong>{order.direccion}</strong></div>
+            <div class="address"><strong>{order.direccionEntera}</strong></div>
             <div class="coordinates">Lat: {order.lat}, Long: {order.long}</div>
           </div>
         </address>
@@ -89,6 +94,12 @@
       </div>
       <div class="action-container">
         <button class="btn btn-primary" onclick={() => goto('/orders')}>Volver</button>
+        <!-- {#if order.estado != Estado.ENTREGADO && order.estado != Estado.CANCELADO}
+        <button onclick={cancelar} class="btn btn-primary" data-testid='cancelar-{order.id}'> Cancelar </button>
+        {/if}
+        {#if order.estado === Estado.PENDIENTE}
+        <button onclick={} class="btn btn-primary btn-preparar" data-testid='preparar-{order.id}'> Preparar </button>
+        {/if} -->
       </div>
     </section>
   </div>

@@ -10,44 +10,87 @@
   import ValidationField from "$lib/components/ValidationField.svelte";
   import Input from "$lib/components/Input.svelte";
   import Checkbox from "$lib/components/checkbox.svelte";
+  import errorImage from '$lib/assets/img/error.png';
   
   let store = $state<StoreType[]>([])
   let newStore = <StoreType>(new StoreType())
   let currentStore = $state<StoreType | null>(null) 
+  let formElement: HTMLFormElement | null = null
+  let originalStore = $state<StoreType | null>(null)
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
+  let formKey = $state(0)
 
   const findStore = async () => {
     try{
       store = await storeService.getStore()
+      originalStore = JSON.parse(JSON.stringify(store[0]))
       currentStore = store[0]
     } catch (error){
       showError('Conexion al servidor fallida', error)
     }
   }
 
-  onMount(findStore)
+  function discardChanges() {
+    if (originalStore) {
+      currentStore = Object.assign(new StoreType(), JSON.parse(JSON.stringify(originalStore)))
+      errors = []
+      
+      // resetea los valores 
+      setTimeout(() => {
+        const form = document.getElementById('form-store-profile') as HTMLFormElement
+        if (form && currentStore) {
+          const inputs = form.querySelectorAll('input')
+          inputs.forEach(input => {
+            if (input.type === 'checkbox') {
+              if (input.name === 'storePaymentEfectivo') input.checked = currentStore!.storePaymentEfectivo
+              if (input.name === 'storePaymentQR') input.checked = currentStore!.storePaymentQR
+              if (input.name === 'storePaymentTransferencia') input.checked = currentStore!.storePaymentTransferencia
+            } else {
+              if (input.name === 'name') input.value = currentStore!.name || ""
+              if (input.name === 'storeURL') input.value = currentStore!.storeURL || ""
+              if (input.name === 'storeAddress') input.value = currentStore!.storeAddress || ""
+              if (input.name === 'storeAltitude') input.value = currentStore!.storeAltitude?.toString() || "0"
+              if (input.name === 'storeLatitude') input.value = currentStore!.storeLatitude?.toString() || "0"
+              if (input.name === 'storeLongitude') input.value = currentStore!.storeLongitude?.toString() || "0"
+              if (input.name === 'storeAppCommission') input.value = currentStore!.storeAppCommission?.toString() || "0"
+              if (input.name === 'storeAuthorCommission') input.value = currentStore!.storeAuthorCommission?.toString() || "0"
+            }
+          })
+        }
+      }, 0)
+    }
+  }
+
+   onMount(() => {
+    findStore()
+
+  })
 
   const onSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault()
     errors = []
-    const form =ev.currentTarget as HTMLFormElement
+    const form = ev.currentTarget as HTMLFormElement
+
+    //los checkboxes no son elementos nativos del formdata como el input, textarea y select, por eso no
+    //los reconoce, aca lo que hago es que tome las propiedades del input para poder detectarla
+    //la otra opcion es bindear el checkbox
+   
     const formData = new FormData(form)
 
-    // Crear store actualizado con los valores ACTUALES del formulario
     const store = new StoreType(
-      (formData.get("name" )?? "")?.toString(),
-      (formData.get("storeURL" )?? "")?.toString(),
-      (formData.get("storeAddress" )?? "")?.toString(),
-      Number(formData.get("storeAltitude" )?? 0),
-      Number(formData.get("storeLatitude" )?? 0),
-      Number(formData.get("storeLongitude" )?? 0),
-      Number(formData.get("storeAppCommission" )?? 0),
-      Number(formData.get("storeAuthorCommission" )?? 0),
-      // no estoy segura si deberia traer asi los checkbox del formdata
-      formData.has("storePaymentEfectivo"),  
-      formData.has("storePaymentQR"),         
-      formData.has("storePaymentTransferencia") 
+      0,
+      (formData.get("name") ?? "")?.toString(),
+      (formData.get("storeURL") ?? "")?.toString(),
+      (formData.get("storeAddress") ?? "")?.toString(),
+      Number(formData.get("storeAltitude") ?? 0),
+      Number(formData.get("storeLatitude") ?? 0),
+      Number(formData.get("storeLongitude") ?? 0),
+      Number(formData.get("storeAppCommission") ?? 0),
+      Number(formData.get("storeAuthorCommission") ?? 0),
+      Boolean(formData.get("storePaymentEfectivo") ?? false), 
+      Boolean(formData.get("storePaymentQR") ?? false),
+      Boolean(formData.get("storePaymentTransferencia") ?? false), 
     )
 
     // Validar
@@ -59,23 +102,27 @@
     }
 
     try {
-      await storeService.updateStore(store)
+      const stores = await storeService.getStore()
+      if (stores.length === 0) {
+        throw new Error('No se encontró el store')
+      }
+      
+      const storeId = stores[0].id
+      
+      await storeService.updateStore(storeId, store)
       await findStore()
       errors = []
       toasts.push('Tienda actualizada exitosamente', {type: 'success'})
+      
     } catch (error) {
-      // error 500
       if(!toastLock) {
         toasts.push('Error al actualizar la tienda', {type: 'error'})
-        setTimeout(releaseToast, 5000)
       }
       showError("Error al actualizar la tienda", error)
     } 
   }
 
-  function releaseToast() {
-    toastLock = false
-  }
+  
 </script>
 
 <style>
@@ -89,7 +136,7 @@
 
 <main class="container-column">
   <article class="container-column main-content">
-    <h1 class="header-title">Información del local</h1>
+    <h1 class="header-title">Información del local</h1> 
      <form action="" id="form-store-profile" class="container-column form-store-profile" onsubmit={onSubmit}>
       <!-- Datos del Local  -->
         <fieldset form="form-store-profile" name="store-info" class="content-section form-section-store-info">
@@ -119,7 +166,7 @@
               </div>
             </div>  
             <div class="img-store-container">
-              <img src={currentStore?.storeURL || "src/lib/assets/img/CarlosBakeShop.jpg"} alt="local" class="img-store-profile">
+              <img src={errors.some(e => e.field === 'url') ? errorImage : (currentStore?.storeURL || errorImage)} alt="local" class="img-store-profile">
             </div>  
             
           </div> 
@@ -220,31 +267,33 @@
             <!-- Checkbox Efectivo -->
             <Checkbox
               name="storePaymentEfectivo"
-              label="Efectivo" 
-              value="efectivo"
-              checked={currentStore?.storePaymentEfectivo ?? false}
+              label_text="Efectivo" 
+              value={currentStore?.storePaymentEfectivo ?? false} 
+              checked={currentStore?.storePaymentEfectivo ?? false }
             />
+            <!-- <p>{currentStore?.storePaymentEfectivo ?? false}</p> -->
 
             <!-- Checkbox QR -->
+             <!-- alternativa a htmlinputelement bind:checked={storePaymentEfectivo}-->
             <Checkbox
               name="storePaymentQR"
-              label="QR" 
-              value="qr"
-              checked={currentStore?.storePaymentQR ?? true }
+              label_text="QR" 
+              value={currentStore?.storePaymentQR ?? false} 
+              checked={currentStore?.storePaymentQR ?? false }
             />
 
             <!-- Checkbox Transferencia -->
             <Checkbox
               name="storePaymentTransferencia"
-              label="Transferencia" 
-              value="transferencia"
+              label_text="Transferencia" 
+              value={currentStore?.storePaymentTransferencia ?? false} 
               checked={currentStore?.storePaymentTransferencia ?? false}
             />
             <ValidationField errors={errors} field="metodopago" />
           </div>
         </fieldset>           
     <section class="btn-group-actions">
-      <button type="button" class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+      <button type="button" class="btn btn-secondary btn-store" onclick={discardChanges}>Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
       <button type="submit" class="btn btn-primary btn-store" > Guardar<span class="p-cambios display-none-mobile">Cambios</span></button>
     </section>
     </form>

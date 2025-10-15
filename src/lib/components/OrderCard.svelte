@@ -1,14 +1,16 @@
 <script lang="ts">
     import type { MouseEventHandler } from 'svelte/elements'
     import { type Order, Estado } from '../domain/order'
+    import OrderState from './OrderState.svelte';
 
     interface Props {
         order: Order,
-        action?: MouseEventHandler<HTMLButtonElement>
+        preparar?: MouseEventHandler<HTMLButtonElement>,
+        cancelar?: MouseEventHandler<HTMLButtonElement>,
     }
 
-    let { order, action = $bindable() } : Props = $props()
-    
+    let { order, preparar = $bindable(), cancelar = $bindable()} : Props = $props()
+
 </script>
 
 <style>
@@ -18,7 +20,12 @@
 
 <div class="order-card">
     <a href="/order-detail/{order.id}"  data-testid="goto-detail">
-        <header class="order" data-testid="order-id">Pedido #{order.id}</header>
+        <div class="order" >
+            <header data-testid="order-id">Pedido #{order.id}</header>
+            {#if order.estado != Estado.PENDIENTE}
+                <OrderState estado={order.estado} />
+            {/if}
+        </div>
     
         <div class="user">
             <i class="ph ph-user-circle"></i>
@@ -39,7 +46,7 @@
         </div>
         <div class="address-coordinates">
             <span class="address"
-                ><strong>{order.direccion}</strong></span
+                ><strong>{order.direccionEntera}</strong></span
             >
             <div class="coordinates">Lat: {order.lat}, Long: {order.long}</div>
         </div>
@@ -51,6 +58,11 @@
     </div>
 
     <div class="action-container">
-        <button onclick={action} class="btn btn-primary" data-testid='preparar-{order.id}' disabled={order.estado!=Estado.PENDIENTE}> Preparar </button>
+        {#if order.estado != Estado.ENTREGADO && order.estado != Estado.CANCELADO}
+        <button onclick={cancelar} class="btn btn-primary" data-testid='cancelar-{order.id}'> Cancelar </button>
+        {/if}
+        {#if order.estado === Estado.PENDIENTE}
+        <button onclick={preparar} class="btn btn-primary btn-preparar" data-testid='preparar-{order.id}'> Preparar </button>
+        {/if}
     </div>
 </div>

@@ -59,7 +59,7 @@
 
   let errorMessages: string[] = $state([])
 
-  console.log(USERS_LIST_MOCK);
+  // console.log(USERS_LIST_MOCK);
 </script>
 
 <section class="login-container">
@@ -72,29 +72,33 @@
       <!-- Chequear estos for y type -->
       <fieldset form="form-login" class="form-field" name="login-user">
         <div class="form-group">
-          <Input
-            label_text="Usuario*"
-            label_for="username"
-            input_type={InputTypes.Normal}
-            value=""
-            class= "input-primary"
-            type= "email"
-            placeholder= "Usuario"
-            id= "input-id"
-            name= "username"
-          />
-          <ValidationField errors={errors} field="username" />
-          <!-- Password -->
-          <Input
-            label_text="Contraseña*"
-            label_for="password"
-            input_type={InputTypes.Hidden}
-            value=""
-            class= "input-primary"
-            id= "password-id"
-            name= "password"
-          />
-          <ValidationField errors={errors} field="password" />
+          <div class="input-wrapper">
+            <Input
+              label_text="Usuario*"
+              label_for="username"
+              input_type={InputTypes.Normal}
+              value=""
+              class="input-primary"
+              type="email"
+              placeholder="Usuario"
+              id="input-id"
+              name="username"
+            />
+            <ValidationField errors={errors} field="username" />
+          </div>
+
+          <div class="input-wrapper">
+            <Input
+              label_text="Contraseña*"
+              label_for="password"
+              input_type={InputTypes.Hidden}
+              value=""
+              class="input-primary"
+              id="password-id"
+              name="password"
+            />
+            <ValidationField errors={errors} field="password" />
+          </div>
         </div>
       </fieldset>
 

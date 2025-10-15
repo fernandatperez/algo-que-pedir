@@ -14,13 +14,47 @@
   import Modal from "$lib/components/Modal.svelte";
   import Input from "$lib/components/Input.svelte";
   import { toasts } from '$lib/components/toast/toastStore'
+    import { ingredientService } from "$lib/services/IngredientService.js";
+
+  /*
+  // Modificar cuando haya ingredientes posta ->
+  let selectedIngs: IngredientType[] = $state([])
+  
+  let dishIngs: IngredientType[] = $state(itemEdit.ingredientes)
+  
+  let availableIngs: IngredientType[] = fetIng
+
+  const fetchIng = async () => {
+    try {
+      availableIngs = await ingredientService.getAllIngredients()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  
+  
+  // Modificar cuando haya ingredientes posta ->
+  let availableIngredients: IngredientJSON[] = $derived(
+    dishIngs && dishIngs.length > 0
+      ? availableIngs.filter(
+        ing => !dishIngs.some(sel => sel.id == ing.id))
+      : availableIngs
+  )
+  
+  // Modificar cuando haya ingredientes posta ->
+  const updateAvailables = () => {
+    availableIngs = availableIngs.filter(
+    ing => !dishIngs.some(itemIng => itemIng.id == ing.id))
+    selectedIngs = []
+  }
+  */
 
   // Recibir los datos del +page.ts
   let { data } = $props()
   const { nuevoItem, item } = data
   
-  const itemEdit = $state(item.toJSON())
-  console.info(itemEdit)
+  const itemEdit = $state({...item})
+  // console.info(itemEdit)
 
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
@@ -95,7 +129,7 @@
     const index = itemEdit.ingredientes.findIndex(i => i.id == ingredientId)
     if (index != -1) {
       itemEdit.ingredientes.splice(index, 1)
-      updateAvailables()
+      selectedIngs.length = 0
     }
     showModalDelete = false
   }
@@ -105,32 +139,32 @@
       goto("/menu")
   }
   
-  // Modificar cuando alla ingredientes posta ->
-  let availableIngredients: IngredientJSON[] = $state(
-    itemEdit.ingredientes && itemEdit.ingredientes.length > 0
-      ? INGREDIENT_MOCK.filter(
-        ing => !itemEdit.ingredientes.some(sel => sel.id == ing.id))
-      : INGREDIENT_MOCK
-  )
-  // Modificar cuando alla ingredientes posta ->
   let selectedIngs: IngredientType[] = $state([])
-  
-  // Modificar cuando alla ingredientes posta ->
-  const updateAvailables = () => {
-    availableIngredients = INGREDIENT_MOCK.filter(
-    ing => !itemEdit.ingredientes.some(itemIng => itemIng.id == ing.id))
-    selectedIngs = []
+  let availableIngs: IngredientType[] = $state([])
+
+  const fetchIng = async () => {
+    try {
+      const allIngs = await ingredientService.getAllIngredients()
+      console.info(allIngs)
+      availableIngs = MenuItemType.availableIngs(allIngs, itemEdit)
+      console.info(availableIngs)
+      showModalAdd = true
+    } catch (error) {
+      console.error(error)
+    }
   }
+  
+  // let availableIngs: IngredientType[] = fetchIng
 
   const guardarModal = () => {
     showModalAdd = false
-    selectedIngs.forEach(ing => itemEdit.ingredientes.push(IngredientType.fromJson(ing)))
-    updateAvailables()
+    itemEdit.ingredientes = selectedIngs
+    selectedIngs.length = 0 // ??
   }
 
   const descartarModal = () => {
     showModalAdd = false
-    updateAvailables()
+    selectedIngs.length = 0 // ??
   }
 
   function openModal(id: number) {
@@ -314,7 +348,7 @@
           <h3 class="h3">Costo de Producción</h3>
           <!-- Aca se agrega este $derived para que se muestre reactivamente. Cuando se guarda el menuItem lo que se envia es el costo de produccion del elemento. -->
           <p>${productionCost}</p>
-          <button type="button" class="add-ingredient-btn" onclick={() => showModalAdd = true}>Añadir ingrediente</button>
+          <button type="button" class="add-ingredient-btn" onclick={fetchIng}>Añadir ingrediente</button>
           
         </div>
         {#if showModalAdd}
@@ -326,8 +360,8 @@
             actionCancel={descartarModal}
           >
             {#snippet children()}
-              {#if availableIngredients.length != 0}
-                {#each availableIngredients as ingr}
+              {#if availableIngs.length != 0}
+                {#each availableIngs as ingr}
                 <div class="modal-checkbox">
                   <label>
                     <input type="checkbox" bind:group={selectedIngs} value={ingr}>
@@ -356,13 +390,14 @@
           </section>
           <section class="cell col-centered" id="acciones">Acciones</section>
         </header>
-        {#each itemEdit.ingredientes as ing}
+        {#each itemEdit.ingredientes as ing (ing.name)}
           <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing} />
             <section class="cell multiple-action-buttons">
               <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
               <span><i class="ph ph-line-vertical gray-icon"></i></span>
               <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+              <p>{ing.id}</p>
               <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
             </section>
           </article>            

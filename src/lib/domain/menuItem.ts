@@ -15,6 +15,8 @@ export type MenuItemJSON = {
   enPromocion: boolean
   ingredientes: IngredientJSON[]
   store: StoreJSON
+  fechaCreacion: string
+  porcentajeDescuento: number
 }
 
 export class ValidationMessage { //esto pordiramos usar todos la misma
@@ -39,7 +41,9 @@ export class MenuItemType {
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
     public ingredientes: IngredientType[] = [],
-    public store: StoreJSON = storeMOCK
+    public store: StoreJSON = storeMOCK,
+    public fechaCreacion: string = '',
+    public porcentajeDescuento: number = 0
   ) {}
 
   static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
@@ -67,6 +71,11 @@ export class MenuItemType {
       fechaCreacion: this.fechaCreacion,
       porcentajeDescuento: this.porcentajeDescuento
     }
+  }
+
+  static availableIngs(ingredients: IngredientType[], menuItem: MenuItemJSON): IngredientType[] {
+    const difference: IngredientType[] = ingredients.filter(ingredient => !menuItem.ingredientes.find(ing => ingredient.id == ing.id))
+    return difference
   }
 
   validate() {
