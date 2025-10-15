@@ -24,14 +24,16 @@
     ingredient?.foodGroup != ingredientEdit?.foodGroup || ingredient?.esOrigenAnimal != ingredientEdit?.esOrigenAnimal
   )
 
-  let switchButtonLock = $derived( ingredientEdit?.foodGroup == FoodGroupValue.GRASAS_Y_ACEITES )
+  let switchButtonLock = $derived( ingredientEdit?.foodGroup == FoodGroupValue.GRASAS_Y_ACEITES || 
+    ingredientEdit?.foodGroup == FoodGroupValue.LACTEOS || ingredientEdit?.foodGroup == FoodGroupValue.PROTEINAS
+  )
 
   $effect(() => {
     // produce una accion cuando cambia el foodGroup (observer)
     if (ingredientEdit?.foodGroup) {
       const group = ingredientEdit.foodGroup
       
-      if (!(group === FoodGroupValue.GRASAS_Y_ACEITES)) {
+      if (!(switchButtonLock)) {
         // Esto determina si el grupo seleccionado está en la lista de grupos vegetales
         const esVegetal = gruposVegetales.some(g => g == group)
         ingredientEdit.esOrigenAnimal = !esVegetal

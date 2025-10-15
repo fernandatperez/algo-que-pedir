@@ -75,10 +75,7 @@
     //los checkboxes no son elementos nativos del formdata como el input, textarea y select, por eso no
     //los reconoce, aca lo que hago es que tome las propiedades del input para poder detectarla
     //la otra opcion es bindear el checkbox
-    const storePaymentEfectivo = (form.elements.namedItem('storePaymentEfectivo') as HTMLInputElement)?.checked || false
-    const storePaymentQR = (form.elements.namedItem('storePaymentQR') as HTMLInputElement)?.checked || false
-    const storePaymentTransferencia = (form.elements.namedItem('storePaymentTransferencia') as HTMLInputElement)?.checked || false
-
+   
     const formData = new FormData(form)
 
     const store = new StoreType(
@@ -91,9 +88,9 @@
       Number(formData.get("storeLongitude") ?? 0),
       Number(formData.get("storeAppCommission") ?? 0),
       Number(formData.get("storeAuthorCommission") ?? 0),
-      storePaymentEfectivo,  
-      storePaymentQR,        
-      storePaymentTransferencia,
+      Boolean(formData.get("storePaymentEfectivo") ?? false), 
+      Boolean(formData.get("storePaymentQR") ?? false),
+      Boolean(formData.get("storePaymentTransferencia") ?? false), 
     )
 
     // Validar
@@ -270,25 +267,26 @@
             <!-- Checkbox Efectivo -->
             <Checkbox
               name="storePaymentEfectivo"
-              label="Efectivo" 
-              value="efectivo"
-              checked={currentStore?.storePaymentEfectivo ?? false}
+              label_text="Efectivo" 
+              value={currentStore?.storePaymentEfectivo ?? false} 
+              checked={currentStore?.storePaymentEfectivo ?? false }
             />
+            <!-- <p>{currentStore?.storePaymentEfectivo ?? false}</p> -->
 
             <!-- Checkbox QR -->
              <!-- alternativa a htmlinputelement bind:checked={storePaymentEfectivo}-->
             <Checkbox
               name="storePaymentQR"
-              label="QR" 
-              value="qr"
-              checked={currentStore?.storePaymentQR ?? true }
+              label_text="QR" 
+              value={currentStore?.storePaymentQR ?? false} 
+              checked={currentStore?.storePaymentQR ?? false }
             />
 
             <!-- Checkbox Transferencia -->
             <Checkbox
               name="storePaymentTransferencia"
-              label="Transferencia" 
-              value="transferencia"
+              label_text="Transferencia" 
+              value={currentStore?.storePaymentTransferencia ?? false} 
               checked={currentStore?.storePaymentTransferencia ?? false}
             />
             <ValidationField errors={errors} field="metodopago" />

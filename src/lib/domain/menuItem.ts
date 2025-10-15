@@ -66,6 +66,11 @@ export class MenuItemType {
     }
   }
 
+  static availableIngs(ingredients: IngredientType[], menuItem: MenuItemJSON): IngredientType[] {
+    const difference: IngredientType[] = ingredients.filter(ingredient => !menuItem.ingredientes.find(ing => ingredient.id == ing.id))
+    return difference
+  }
+
   validate() {
     this.errors = []
     

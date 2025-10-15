@@ -7,6 +7,8 @@ import axios from 'axios'
 class IngredientService {
   async getAllIngredients(){
     const queryIngredients = () => axios.get<IngredientJSON[]>(REST_SERVER_URL + '/ingredientes')
+    // eslint-disable-next-line no-console
+    console.info((await getAxiosData(queryIngredients)))
     return (await getAxiosData(queryIngredients)).map(IngredientType.fromJson)
   }
 

@@ -41,7 +41,7 @@ class OrderService {
   // }
 
   async getOrderByID(id: number) {
-    const queryById = () => axios.get<OrderJSON>(REST_SERVER_URL + '/pedidos/' + id)
+    const queryById = () => axios.get<OrderJSON>(REST_SERVER_URL + '/pedido/' + id)
     const orderJson = await getAxiosData(queryById)
     if (orderJson != null) {
       return Order.fromJSON(orderJson)
