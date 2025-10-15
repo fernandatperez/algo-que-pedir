@@ -19,7 +19,7 @@ class PedidoController(val pedidosService: PedidoService) {
     fun pedidos() = pedidosService.pedidos()
 
     @GetMapping("/pedidos/")
-    fun pedidos(@RequestParam estado: Estado, @RequestParam email: String) = pedidosService.pedidosFiltrados(estado, email)
+    fun pedidos(@RequestParam estado: Estado, @RequestParam("local") email: String) = pedidosService.pedidosFiltrados(estado, email)
 
     @GetMapping("/pedido/{id}")
     fun pedidoPorId(@PathVariable id: Int) = pedidosService.pedidoPorId(id)
