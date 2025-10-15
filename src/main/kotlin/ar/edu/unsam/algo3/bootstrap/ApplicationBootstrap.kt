@@ -8,27 +8,65 @@ import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
-import ar.edu.unsam.algo3.repositorio.RepositorioCliente
-import ar.edu.unsam.algo3.repositorio.RepositorioPedido
-import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
-import ar.edu.unsam.algo3.repositorio.RepositorioPlato
+import ar.edu.unsam.algo3.repositorio.*
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
 import org.uqbar.geodds.Point
 
 @Service
 class ApplicationBootstrap(
+    val repositorioLocal: RepositorioLocal,
     val repositorioPedidos: RepositorioPedido,
     val repositorioIngredientes: RepositorioIngrediente,
     val repositorioClientes: RepositorioCliente,
     val repositorioPlatos: RepositorioPlato
 ) : InitializingBean {
 
+    private lateinit var localInicial: Local
+
     private var local = Local(
         nombre = "un Local",
         direccion = Direccion(calle = "maipu"),
         mediosDePago = mutableSetOf(Pago.TRANSFERENCIA_BANCARIA, Pago.EFECTIVO, Pago.QR)
     )
+
+    private fun crearLocalInicial() {
+        if (repositorioLocal.objetosDeRepositorio().isEmpty()) {
+
+            localInicial = Local().apply {
+                id = 1
+                nombre = "Carlo's Bake Shop"
+                email = "jorge@hotmail.com"
+                password = "123"
+                url = "https://networthbro.com/wp-content/uploads/2019/07/buddy-valastro-networth-salary.jpg"
+                regalias = 3.0
+                porcentajeAcordado = 6.0
+                mediosDePago = mutableSetOf(Pago.EFECTIVO)
+                direccion = Direccion(
+                    calle = "Av. Siempre Viva",
+                    altura = 123,
+                    ubicacion = Point(-34.603722, -58.381592)  // lat, long
+                )
+
+            }
+
+            repositorioLocal.crear(localInicial)
+            repositorioLocal.crear(local)
+
+//            println("""
+//                Local inicial creado exitosamente:
+//                 Nombre: ${localInicial.nombre}
+//                 Dirección: ${localInicial.direccion.calle} ${localInicial.direccion.altura}
+//                 Ubicación: (${localInicial.direccion.ubicacion.x}, ${localInicial.direccion.ubicacion.y})
+//                 URL: ${localInicial.url}
+//                 Comisiones: App ${localInicial.regalias}% | Autor ${localInicial.porcentajeAcordado}%
+//            """.trimIndent())
+
+        } else {
+            val localExistente = repositorioLocal.obtenerObjeto(1)
+//            println(" Local existente: ${localExistente.nombre}")
+        }
+    }
 
     private lateinit var sofiamiller: Usuario
     private lateinit var ricardofort: Usuario
@@ -200,28 +238,28 @@ class ApplicationBootstrap(
             )
             crear(
                 usuario = ricardofort,
-                local = local,
+                local = localInicial,
                 platos = mutableListOf(hamburguesa, ensalada),
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.PENDIENTE
             )
             crear(
                 usuario = alexcaniggia,
-                local = local,
+                local = localInicial,
                 platos = mutableListOf(pizza, hamburguesa),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.PREPARADO
             )
             crear(
                 usuario = buzz,
-                local = local,
+                local = localInicial,
                 platos = mutableListOf(pizza, hamburguesa),
                 medioDePago = Pago.QR,
                 estado = Estado.ENTREGADO
             )
             crear(
                 usuario = locomotora,
-                local = local,
+                local = localInicial,
                 platos = mutableListOf(ensalada),
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.CANCELADO
@@ -230,6 +268,7 @@ class ApplicationBootstrap(
     }
 
     override fun afterPropertiesSet() {
+        this.crearLocalInicial()
         this.crearClientes()
         this.crearIngredientes()
         this.crearPlatos()
