@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.dto.IngredienteDTO
+import ar.edu.unsam.algo3.dto.toDOM
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.JSONVacioException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
@@ -50,7 +51,7 @@ class InstanciaActualizador(
 
 // ========= LO NUEVO =========
 @Service
-class IngredienteService( val repositorioIngredientes: RepositorioIngrediente) {
+class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, val servicePlato: PlatoService) {
     fun ingredientes(): List<IngredienteDTO> {
         return repositorioIngredientes.objetosDeRepositorio().map { it.toDTO() }
     }
@@ -80,6 +81,8 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente) {
 
         ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)
+//        println("Entra a servicePlato")
+        servicePlato.actualizarIngrediente(ingredienteActualizado)
         return ingredienteActualizado.toDTO()
     }
 

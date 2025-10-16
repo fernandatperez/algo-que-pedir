@@ -42,4 +42,17 @@ class PlatoService(
         val platoDOM: Plato = Plato().fromDTO(plato).apply { this.id = id }
         repositorioPlatos.actualizar(platoDOM)
     }
+
+    fun actualizarIngrediente(ingrediente: Ingrediente) {
+//        Buscar todos los platos que tengan el ingrediente
+        val platosConIng = repositorioPlatos.objetosDeRepositorio().filter { plato -> plato.ingredientes.any{ing -> ing.id == ingrediente.id} }
+//        println(platosConIng)
+//        Borrar el ingrediente que tenga el mismo ID, y reemplazar por este nuevo
+        platosConIng.forEach { plato -> plato.ingredientes.removeIf { ing -> ing.id == ingrediente.id }}
+//        println(platosConIng)
+        platosConIng.forEach { plato -> plato.ingredientes.add(ingrediente) }
+//        println(platosConIng)
+        platosConIng.forEach { plato -> repositorioPlatos.actualizar(plato) }
+        // Ahre
+    }
 }
