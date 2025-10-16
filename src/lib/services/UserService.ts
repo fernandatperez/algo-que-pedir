@@ -1,48 +1,36 @@
-import { UserType, type UserLoginJSON, type UserRegisterJSON } from '$lib/domain/user'
+import { UserType, type UserJSONLoginRequest, type UserJSONRegisterRequest, type UserJSONResponse } from '$lib/domain/user'
 import axios from 'axios'
 import { REST_SERVER_URL } from './configuration'
 
 class UserService {
-  async getUser(username: string, password: string) {
-    // -------------------------------------------------------------------
-    // const usuario: UserLoginJSON = {
-    //   username: username,
-    //   email: password
-    // }
-    // Seria mas bien asi, no?
-    // const usuario: UserJSON = {
-    //   username: username,
-    //   password: password
-    // } // Y esto si lo mandas al post, no mandas un objeto generado ahi y hay que cambiar el <UserLoginJSON> por <UserJSON>
-    // --------------------------------------------------------------------
+  async getUser(emailSent: string, passwordSent: string) {
     // Hace el POST al backend
-    const response = await axios.post<UserLoginJSON>( REST_SERVER_URL + '/login',{
-      correo: username,
-      password: password
-    })
+    const userLocal: UserJSONLoginRequest = {
+      email: emailSent,
+      password: passwordSent
+    }
+    const response = await axios.post<UserJSONResponse>( REST_SERVER_URL + '/login', userLocal)
     
     // eslint-disable-next-line no-console
     console.log(response.data)
     // Guardar datos en sessionStorage son solo para cuando esta el navegador se borra al cerrar la pestaña supuestamente....
-    sessionStorage.setItem('userName', response.data.nombreLocal)
-    sessionStorage.setItem('userName', response.data.nombre)
-    sessionStorage.setItem('email', response.data.correo)
+    sessionStorage.setItem('name', response.data.name) // Esto antes era username
+    sessionStorage.setItem('email', response.data.email)
     //! no se en que usarlo igual, pero ahi estan
     
-    return UserType.fromLoginJson(response.data)
+    return UserType.fromJSON(response.data)
   }
 
   async createUser(user: UserType) {
-    const userJSON: UserRegisterJSON = {
-      name: 'Carlos',
-      surname: 'Martinez',
-      username: user.username,
+    const userLocal: UserJSONRegisterRequest = {
+      name: user.name,
+      email: user.email,
       password: user.password
     }
 
-    await axios.post<UserRegisterJSON>(
+    await axios.post<UserJSONResponse>(
       REST_SERVER_URL + '/register', 
-      userJSON
+      userLocal
     )
   }
 }

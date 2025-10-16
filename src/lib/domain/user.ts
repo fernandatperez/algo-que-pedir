@@ -4,23 +4,21 @@ export class ValidationMessage {
     public message: string
   ) {}
 }
-
-export type UserJSON = {
-  username: string
+// Mandas
+export type UserJSONLoginRequest = {
+  email: string
   password: string
 }
-//! esto lo saque porque por lo que entendi de el profe no tiene que estar la contraseña aca, la tenemos en el back
 
-export interface UserLoginJSON {
-  // token: string; // esto se podria poner
-  nombre: string;
-  correo: string;
-} // Che esto creo que no esta bien, mira UserService.ts
+// Recibis
+export interface UserJSONResponse {
+  email: string;
+  name: string;
+} 
 
-export interface UserRegisterJSON {
+export interface UserJSONRegisterRequest {
   name: string
-  surname: string
-  username: string
+  email: string
   password: string
 }
 
@@ -28,16 +26,12 @@ export class UserType {
   errors: ValidationMessage[] = []
 
   constructor(
-    public username: string = ''.trim(),
+    public name: string = ''.trim(),
     public password: string = ''.trim(),
-    public email?: string
+    public email: string = ""
   ) {}
 
-  static fromJson(userJSON: UserJSON): UserType {
-    return Object.assign(new UserType(), userJSON, {})
-  }
-
-  static fromLoginJson(userJSON: UserLoginJSON): UserType {
+  static fromJSON(userJSON: UserJSONResponse): UserType {
     return Object.assign(new UserType(), userJSON, {})
   }
 
@@ -47,8 +41,8 @@ export class UserType {
 
   validate(){
     this.errors = []
-    if(!this.username){
-      this.addError('username', 'Debe ingresar email')
+    if(!this.email){
+      this.addError('email', 'Debe ingresar email')
     }
     if (!this.password){
       this.addError('password', 'Debe ingresar una contraseña')
