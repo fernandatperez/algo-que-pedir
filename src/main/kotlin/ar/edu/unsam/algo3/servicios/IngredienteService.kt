@@ -87,6 +87,8 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
     }
 
     fun eliminarIngrediente(id: Int) {
+        val ingrediente = repositorioIngredientes.obtenerObjeto(id)
         repositorioIngredientes.eliminarDeColeccion(id)
+        servicePlato.eliminarIngrediente(ingrediente)
     }
 }

@@ -43,16 +43,29 @@ class PlatoService(
         repositorioPlatos.actualizar(platoDOM)
     }
 
+//    Mostrar a pablo
+    private fun prepararPlatosParaIngrediente(ingrediente: Ingrediente, accion: (Plato) -> Unit) {
+
+        val platosConIng = repositorioPlatos.objetosDeRepositorio()
+            .filter { plato -> plato.ingredientes.any { ing -> ing.id == ingrediente.id } }
+
+        platosConIng.forEach { plato ->
+            plato.ingredientes.removeIf { ing -> ing.id == ingrediente.id }
+        }
+
+        platosConIng.forEach { plato ->
+            accion(plato)
+            repositorioPlatos.actualizar(plato)
+        }
+    }
+
     fun actualizarIngrediente(ingrediente: Ingrediente) {
-//        Buscar todos los platos que tengan el ingrediente
-        val platosConIng = repositorioPlatos.objetosDeRepositorio().filter { plato -> plato.ingredientes.any{ing -> ing.id == ingrediente.id} }
-//        println(platosConIng)
-//        Borrar el ingrediente que tenga el mismo ID, y reemplazar por este nuevo
-        platosConIng.forEach { plato -> plato.ingredientes.removeIf { ing -> ing.id == ingrediente.id }}
-//        println(platosConIng)
-        platosConIng.forEach { plato -> plato.ingredientes.add(ingrediente) }
-//        println(platosConIng)
-        platosConIng.forEach { plato -> repositorioPlatos.actualizar(plato) }
-        // Ahre
+        prepararPlatosParaIngrediente(ingrediente) { // syntactic sugar. Lambda despues de funcion. Se puede pasar como parametro tambien.
+            plato -> plato.ingredientes.add(ingrediente)
+        }
+    }
+
+    fun eliminarIngrediente(ingrediente: Ingrediente) {
+        prepararPlatosParaIngrediente(ingrediente) {}
     }
 }
