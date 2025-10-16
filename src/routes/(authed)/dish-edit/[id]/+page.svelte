@@ -159,6 +159,10 @@
   }
 
   .add-ingredient-btn {
+    background-color: var(--background-color-secondary);
+    padding: 0.3em 1em;
+    font-size: 1em;
+    border-radius: 1em;
     position: absolute;
     right: 0;
   }
@@ -313,7 +317,7 @@
           <h3 class="h3">Costo de Producción</h3>
           <!-- Aca se agrega este $derived para que se muestre reactivamente. Cuando se guarda el menuItem lo que se envia es el costo de produccion del elemento. -->
           <p>${productionCost}</p>
-          <button type="button" class="add-ingredient-btn" onclick={fetchIng}>Añadir ingrediente</button>
+          <button type="button" class="add-ingredient-btn" onclick={fetchIng}>Añadir ingredientes</button>
           
         </div>
         {#if showModalAdd}
@@ -326,7 +330,7 @@
           >
             {#snippet children()}
               {#if availableIngs.length != 0}
-                {#each availableIngs as ingr (ingr.name)}
+                {#each availableIngs as ingr (ingr.id)}
                 <div class="modal-checkbox">
                   <label>
                     <input type="checkbox" bind:group={selectedIngs} value={ingr}>
@@ -355,7 +359,7 @@
           </section>
           <section class="cell col-centered" id="acciones">Acciones</section>
         </header>
-        {#each itemEdit.ingredientes as ing (ing.name)}
+        {#each itemEdit.ingredientes as ing (ing.id)}
           <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing} />
             <section class="cell multiple-action-buttons">
