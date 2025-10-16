@@ -19,48 +19,35 @@ class AuthController( val usuarioService: UsuarioService ) {
 
     @PostMapping("/login") // esto no devuelve nada
     fun getUser(@RequestBody request: AuthRequest): AuthResponse {
-        /*
-            val user = Usuario(
-                mailPrincipal = request.correo,
-                password = request.password
-            )
-        */
 
         val userLocal = Local(
-            email = request.correo,
+            email = request.email,
             password = request.password,
         )
 
         val userValidado = usuarioService.validar(userLocal)
-        // aca te tenes que fijas que es lo que devuelve la idea seria comparar el email con el de el local
-        // y lo que tiene que devolver es tambien el local, de manera
+
         return AuthResponse(
-            correo = userValidado.email,
-            nombre = userValidado.nombre,
-            nombreLocal = userValidado.nombre
+            email = userValidado.email,
+            name = userValidado.nombre,
+//            nombreLocal = userValidado.nombre
         )
     }
 
     @PostMapping("/register")
     fun createUser(@RequestBody request: AuthRegisterRequest): AuthResponse {
-        /*
-            val usuario = Usuario(
-                mailPrincipal = request.correo,
-                nombre = request.nombre,
-                password = request.password
-            )
-        */
+
         val userLocal = Local(
-            email = request.correo,
+            email = request.email,
             password = request.password,
-            nombre = request.nombre
+            nombre = request.name
         )
 //        Se genera el local
         usuarioService.generarUsuario(userLocal)
         return AuthResponse(
-            correo = userLocal.email,
-            nombre = userLocal.nombre,
-            nombreLocal = userLocal.nombre // esto hay que cambiarlo despues
+            email = userLocal.email,
+            name = userLocal.nombre,
+//            nombreLocal = userLocal.nombre // esto hay que cambiarlo despues
         )
     }
 
