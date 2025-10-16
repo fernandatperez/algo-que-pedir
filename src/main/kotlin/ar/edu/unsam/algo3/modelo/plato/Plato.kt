@@ -85,6 +85,10 @@ class Plato(
     fun porcentajePorNuevo(): Double = max(porcentajePorNuevoMAX - diasDesdeCreacion(), porcentajePorNuevoMIN) / 100
 
     fun esVegano(): Boolean = !this.esDeOrigenAnimal()
+
+    fun getValorBase(): Double = this.valorBase
+
+    fun setValorBase(valor: Double) { this.valorBase = valor }
     //    ========== Metodos de busqueda del repositorio ==============
 
     override var id = 0

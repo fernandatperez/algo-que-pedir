@@ -5,19 +5,21 @@ import ar.edu.unsam.algo3.dto.toDOM
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.modelo.local.Local
+import org.springframework.hateoas.mediatype.alps.Descriptor
 
 data class PlatoDTO(
     val id : Int,
     val nombre: String,
     val descripcion: String,
     val precio: Double,
+    val valorBase: Double,
     val imagen: String,
     val costoProduccion: Double,
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
     val ingredientes: MutableList<IngredienteDTO>,
     val store: Local = LocalPollos, // Esto deberia ser DTO tambien
-) {}
+)
 
 fun Plato.toDTO(): PlatoDTO {
     return PlatoDTO(
@@ -25,6 +27,7 @@ fun Plato.toDTO(): PlatoDTO {
         nombre = this.nombre,
         descripcion = this.descripcion,
         precio = this.valorVenta(),
+        valorBase = this.getValorBase(),
         imagen = this.urldeImagen,
         costoProduccion = this.costoProduccion(),
         esDeAutor = this.esDeAutor,
@@ -45,5 +48,6 @@ fun Plato.fromDTO(platoDTO: PlatoDTO): Plato {
         ingredientes = ingredientesDom
     ).apply {
         this.id = this@fromDTO.id
+        setValorBase(platoDTO.valorBase)
     }
 }
