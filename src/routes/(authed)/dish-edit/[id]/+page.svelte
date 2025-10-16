@@ -48,7 +48,8 @@
       itemEdit.id,
       (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
-      (formData.get("precio") ? formData.get("precio") : itemEdit.precio) as number,
+      itemEdit.precio,
+      (formData.get("valorBase") ? formData.get("valorBase") : itemEdit.valorBase) as number,
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
       itemEdit.costoProduccion,
       platoAutor,
@@ -250,12 +251,12 @@
               type="number"
               class="input-primary number-input"
               id="product-base-cost"
-              name="precio"
-              bind:value={itemEdit.precio}
+              name="valorBase"
+              bind:value={itemEdit.valorBase}
               placeholder="Escribir |"
               step="any"
             />
-          <ValidationField errors={errors} field="precio" />
+          <ValidationField errors={errors} field="valorBase" />
         </div>
 
         <div class="switch-button-group">

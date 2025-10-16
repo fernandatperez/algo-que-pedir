@@ -9,6 +9,7 @@ export type MenuItemJSON = {
   nombre: string
   descripcion: string
   precio: number
+  valorBase: number
   imagen: string
   costoProduccion: number
   esDeAutor: boolean
@@ -36,6 +37,7 @@ export class MenuItemType {
     public nombre: string = ''.trim(),
     public descripcion: string = ''.trim(),
     public precio: number = 0,
+    public valorBase: number = 0,
     public imagen: string = ''.trim(),
     public costoProduccion: number = 0,
     public esDeAutor: boolean = false,
@@ -60,6 +62,7 @@ export class MenuItemType {
       nombre: this.nombre,
       descripcion: this.descripcion,
       precio: this.precio,
+      valorBase: this.valorBase,
       imagen: this.imagen,
       costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
