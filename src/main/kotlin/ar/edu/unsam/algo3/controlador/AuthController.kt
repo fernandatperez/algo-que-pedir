@@ -4,6 +4,7 @@ import ar.edu.unsam.algo3.dto.AuthRegisterRequest
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.dto.AuthRequest
 import ar.edu.unsam.algo3.dto.AuthResponse
+import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.repositorio.repositorioUsuarios
 import ar.edu.unsam.algo3.servicios.UsuarioService
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -18,12 +19,19 @@ class AuthController( val usuarioService: UsuarioService ) {
 
     @PostMapping("/login") // esto no devuelve nada
     fun getUser(@RequestBody request: AuthRequest): AuthResponse {
+        /*
+            val user = Usuario(
+                mailPrincipal = request.correo,
+                password = request.password
+            )
+        */
 
-        val user = Usuario(
-            mailPrincipal = request.correo,
-            password = request.password
+        val userLocal = Local(
+            email = request.correo,
+            password = request.password,
         )
-        val userValidado = usuarioService.validar(user)
+
+        val userValidado = usuarioService.validar(userLocal)
         // aca te tenes que fijas que es lo que devuelve la idea seria comparar el email con el de el local
         // y lo que tiene que devolver es tambien el local, de manera
         return AuthResponse(
@@ -35,18 +43,24 @@ class AuthController( val usuarioService: UsuarioService ) {
 
     @PostMapping("/register")
     fun createUser(@RequestBody request: AuthRegisterRequest): AuthResponse {
-        val usuario = Usuario(
-            nombre = request.name,
-            apellido = request.surname,
-            mailPrincipal = request.username,
-            password = request.password
+        /*
+            val usuario = Usuario(
+                mailPrincipal = request.correo,
+                nombre = request.nombre,
+                password = request.password
+            )
+        */
+        val userLocal = Local(
+            email = request.correo,
+            password = request.password,
+            nombre = request.nombre
         )
-        usuarioService.generarUsuario(usuario)
-
+//        Se genera el local
+        usuarioService.generarUsuario(userLocal)
         return AuthResponse(
-            correo = usuario.mailPrincipal,
-            nombre = usuario.nombre,
-            nombreLocal = usuario.nombre // esto hay que cambiarlo despues
+            correo = userLocal.email,
+            nombre = userLocal.nombre,
+            nombreLocal = userLocal.nombre // esto hay que cambiarlo despues
         )
     }
 

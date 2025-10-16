@@ -15,8 +15,8 @@ data class AuthResponse(
 // la respuesta nunca tiene que tener datos sensibles
 
 data class AuthRegisterRequest(
-    var name: String,
-    var surname: String,
-    var username: String,
-    var password: String,
+    val nombre: String,
+    val correo: String,
+    val nombreLocal: String,
+    val password: String,
 ) {}
