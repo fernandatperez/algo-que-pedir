@@ -1,5 +1,4 @@
 import { MenuItemType, type MenuItemJSON } from '$lib/domain/menuItem'
-import { MENU_ITEMS_JSON_MOCK } from '$lib/data/mock/menuItems'
 
 import axios from 'axios'
 import { REST_SERVER_URL } from './configuration'
@@ -34,20 +33,19 @@ class MenuItemsService {
   async createMenuItem(item: MenuItemType) {
     const creacion = new Date()
     item.fechaCreacion = creacion.toISOString().split('T')[0]
-    const itemJSON: MenuItemJSON = item.toJSON()
-    // eslint-disable-next-line no-console
-    console.info(itemJSON.id)
-    await axios.post<MenuItemJSON>(REST_SERVER_URL + '/platos', itemJSON)
-
-    //     const itemJSON = { ...item }
-    // MENU_ITEMS_JSON_MOCK.push(itemJSON)
-    // return MENU_ITEMS_JSON_MOCK  
+    // const itemJSON: MenuItemJSON = item.toJSON()
+    // // eslint-disable-next-line no-console
+    // console.info(itemJSON.id)
+    const {id, ...itemSinId} = item
+    await axios.post<MenuItemJSON>(
+      REST_SERVER_URL + '/platos',
+      itemSinId
+    )
   }
 
   async updateMenuItem(menuItem: MenuItemType) {
     const menuItemJSON = menuItem.toJSON()
     return axios.put<MenuItemJSON>(REST_SERVER_URL + '/platos/' + menuItem.id, menuItemJSON)
-    // return axios.put<IngredientJSON>(REST_SERVER_URL + '/ingredientes/' + ingredient.id, ingredient.toJSON())
   }
 }
 

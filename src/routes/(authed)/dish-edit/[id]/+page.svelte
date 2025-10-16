@@ -7,60 +7,25 @@
   import { menuItemsService } from "$lib/services/MenuItemService.js";
   import { MenuItemType } from "$lib/domain/menuItem.js";
   import { goto } from "$app/navigation";
-  import { INGREDIENT_MOCK } from "$lib/data/mock/ingredients.js"
-  import { IngredientType, type IngredientJSON } from "$lib/domain/ingredient.js";
+  import { IngredientType } from "$lib/domain/ingredient.js";
   import ValidationField from "$lib/components/ValidationField.svelte";
   import { InputTypes } from "$lib/components/InputPropsI.js";
   import Modal from "$lib/components/Modal.svelte";
   import Input from "$lib/components/Input.svelte";
   import { toasts } from '$lib/components/toast/toastStore'
-    import { ingredientService } from "$lib/services/IngredientService.js";
-
-  /*
-  // Modificar cuando haya ingredientes posta ->
-  let selectedIngs: IngredientType[] = $state([])
-  
-  let dishIngs: IngredientType[] = $state(itemEdit.ingredientes)
-  
-  let availableIngs: IngredientType[] = fetIng
-
-  const fetchIng = async () => {
-    try {
-      availableIngs = await ingredientService.getAllIngredients()
-    } catch (error) {
-      console.error(error)
-    }
-  }
-  
-  
-  // Modificar cuando haya ingredientes posta ->
-  let availableIngredients: IngredientJSON[] = $derived(
-    dishIngs && dishIngs.length > 0
-      ? availableIngs.filter(
-        ing => !dishIngs.some(sel => sel.id == ing.id))
-      : availableIngs
-  )
-  
-  // Modificar cuando haya ingredientes posta ->
-  const updateAvailables = () => {
-    availableIngs = availableIngs.filter(
-    ing => !dishIngs.some(itemIng => itemIng.id == ing.id))
-    selectedIngs = []
-  }
-  */
+  import { ingredientService } from "$lib/services/IngredientService.js";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
   const { nuevoItem, item } = data
   
-  const itemEdit = $state({...item})
-  // console.info(itemEdit)
-
+  let itemEdit = $state(item.toJSON())
+  // console.info("INGREDIENTES:", itemEdit.ingredientes[0])
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
-  let platoAutor: boolean = $state(itemEdit.esDeAutor);
-  let platoEnPromo: boolean = $state(itemEdit.enPromocion);
+  let platoAutor: boolean = $derived(itemEdit.esDeAutor);
+  let platoEnPromo: boolean = $derived(itemEdit.enPromocion);
 
   let modalId: number = $state(0)
 
@@ -90,12 +55,11 @@
       platoEnPromo,
       itemEdit.ingredientes
     )
-    
+    console.info("MENU ITEM GENERADO:", menuItem)
     menuItem.validate()
     
     if (menuItem.errors.length > 0) {
       errors = [...menuItem.errors]
-      console.info(errors)
       return 
     }
     
@@ -114,10 +78,10 @@
       errors = [] // limpiar errores
     } catch (error) {
       if(!toastLock) {
-        toasts.push("Error al crear el ingrediente", {type: 'error'})
+        toasts.push("Error al generar el plato", {type: 'error'})
         setTimeout(releaseToast, 5000)
       }
-      showError("Error al crear el ingrediente", error)
+      showError("Algo fallo.", error)
     }
   }
 
@@ -158,7 +122,7 @@
 
   const guardarModal = () => {
     showModalAdd = false
-    itemEdit.ingredientes = selectedIngs
+    selectedIngs.forEach(it => itemEdit.ingredientes.push(it))
     selectedIngs.length = 0 // ??
   }
 
@@ -361,7 +325,7 @@
           >
             {#snippet children()}
               {#if availableIngs.length != 0}
-                {#each availableIngs as ingr}
+                {#each availableIngs as ingr (ingr.name)}
                 <div class="modal-checkbox">
                   <label>
                     <input type="checkbox" bind:group={selectedIngs} value={ingr}>

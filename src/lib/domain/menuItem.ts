@@ -13,7 +13,7 @@ export type MenuItemJSON = {
   costoProduccion: number
   esDeAutor: boolean
   enPromocion: boolean
-  ingredientes: IngredientJSON[]
+  ingredientes: IngredientType[]
   store: StoreJSON
   fechaCreacion: string
   porcentajeDescuento: number
@@ -64,7 +64,7 @@ export class MenuItemType {
       costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
-      ingredientes: this.ingredientes.map(it => it.toJSON()),
+      ingredientes: this.ingredientes,
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
       store: this.store, 
