@@ -12,9 +12,9 @@ class UserService {
     const response = await axios.post<UserJSONResponse>( REST_SERVER_URL + '/login', userLocal)
     
     // eslint-disable-next-line no-console
-    console.log(response.data)
+
     // Guardar datos en sessionStorage son solo para cuando esta el navegador se borra al cerrar la pestaña supuestamente....
-    sessionStorage.setItem('name', response.data.name) // Esto antes era username
+    sessionStorage.setItem('userName', response.data.name)
     sessionStorage.setItem('email', response.data.email)
     //! no se en que usarlo igual, pero ahi estan
     
@@ -25,7 +25,7 @@ class UserService {
     const userLocal: UserJSONRegisterRequest = {
       name: user.name,
       email: user.email,
-      password: user.password
+      password: user.password,
     }
 
     await axios.post<UserJSONResponse>(

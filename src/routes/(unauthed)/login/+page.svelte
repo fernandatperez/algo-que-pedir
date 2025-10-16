@@ -6,7 +6,6 @@
   import IconText from "$lib/components/IconText.svelte";
 
   import { InputTypes } from "$lib/components/InputPropsI";
-  import { USERS_LIST_MOCK } from "$lib/data/mock/users";
   import { UserType } from "$lib/domain/user";
   import type { ValidationMessage } from "$lib/domain/user";
   import { userService } from "$lib/services/UserService";
@@ -26,10 +25,14 @@
     // as HTMLFormElement es un type assertion de TypeScript: le decís explícitamente al compilador “esto es un formulario”
     const form = ev.currentTarget as HTMLFormElement
     const formData = new FormData(form) // creo el formData
+    
+    console.info((formData.get("email") ?? "").toString())
+    console.info((formData.get("password") ?? "").toString())
 
     const user = new UserType(
-      (formData.get("username") ?? "").toString(),
-      (formData.get("password") ?? "").toString()
+      "Default name",
+      (formData.get("password") ?? "").toString(),
+      (formData.get("email") ?? "").toString()
     )
 
     user.validate()
@@ -40,7 +43,7 @@
     }
 
     try {
-      let validation = await userService.getUser(user.username, user.password)
+      let validation = await userService.getUser(user.email, user.password)
       if (validation) goto ("/orders") // si devuelve Truthy redirige a orders, quiza se podria mejorar esto con token? 
       else {
         errorMessages = ["Nombre de usuario y/o contraseña incorrecto/s"]
@@ -75,16 +78,16 @@
           <div class="input-wrapper">
             <Input
               label_text="Usuario*"
-              label_for="username"
+              label_for="email"
               input_type={InputTypes.Normal}
               value=""
               class="input-primary"
               type="email"
               placeholder="Usuario"
               id="input-id"
-              name="username"
+              name="email"
             />
-            <ValidationField errors={errors} field="username" />
+            <ValidationField errors={errors} field="email" />
           </div>
 
           <div class="input-wrapper">

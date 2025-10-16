@@ -26,9 +26,9 @@ export class UserType {
   errors: ValidationMessage[] = []
 
   constructor(
-    public name: string = ''.trim(),
+    public name: string = 'Default User'.trim(),
     public password: string = ''.trim(),
-    public email: string = ""
+    public email: string = ''
   ) {}
 
   static fromJSON(userJSON: UserJSONResponse): UserType {
@@ -42,6 +42,7 @@ export class UserType {
   validate(){
     this.errors = []
     if(!this.email){
+      // eslint-disable-next-line no-console
       this.addError('email', 'Debe ingresar email')
     }
     if (!this.password){
