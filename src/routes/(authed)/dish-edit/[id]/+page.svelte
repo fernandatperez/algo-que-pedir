@@ -20,7 +20,6 @@
   const { nuevoItem, item } = data
   
   let itemEdit = $state(item.toJSON())
-  // console.info("INGREDIENTES:", itemEdit.ingredientes[0])
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
@@ -31,6 +30,7 @@
 
   let showModalAdd = $state(false)
   let showModalDelete = $state(false)
+  let showModalDiscard = $state(false)
 
   const productionCost = $derived(itemEdit.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2))
 
@@ -98,11 +98,6 @@
     }
     showModalDelete = false
   }
-
-  const discardBtn = () => {
-    // Aca deberia aparecer el cartel de dana de confirmar descartar
-      goto("/menu")
-  }
   
   let selectedIngs: IngredientType[] = $state([])
   let availableIngs: IngredientType[] = $state([])
@@ -132,9 +127,17 @@
     selectedIngs.length = 0 // ??
   }
 
-  function openModal(id: number) {
+  function openModalDelete(id: number) {
     modalId = id
     showModalDelete = true
+  }
+
+  function discardChanges(event: MouseEvent) {
+    if (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    goto("/menu")
   }
 
 </script>
@@ -159,7 +162,8 @@
   }
 
   .add-ingredient-btn {
-    background-color: var(--background-color-secondary);
+    color: white;
+    background-color: var(--icon-color);
     padding: 0.3em 1em;
     font-size: 1em;
     border-radius: 1em;
@@ -361,11 +365,11 @@
         </header>
         {#each itemEdit.ingredientes as ing (ing.id)}
           <article class="grid-table-row product-edit-ingredients-table-content">
-            <Ingredient ingredient={ing} />
+            <Ingredient ingredient={ing}/>
             <section class="cell multiple-action-buttons">
               <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
               <span><i class="ph ph-line-vertical gray-icon"></i></span>
-              <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModal(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
+              <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModalDelete(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
               <p>{ing.id}</p>
               <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
             </section>
@@ -374,6 +378,10 @@
          
         </div>
       </fieldset>
+      <!-- Terminar de ver esto. Algunas veces no funciona, otras si. -->
+      {#if itemEdit.ingredientes.length == 0}
+        <ValidationField errors={errors} field="ingredients" />        
+      {/if}
       {#if showModalDelete && modalId}
         <Modal
           title={`¿Seguro que querés eliminar el ingrediente "${itemEdit.ingredientes.find(i => i.id === modalId)?.name}"?`} 
@@ -385,9 +393,18 @@
       {/if}
 
       <section class="btn-group-actions">
-        <button class="btn btn-secondary btn-dish" type="reset" onclick={discardBtn}
+        <button class="btn btn-secondary btn-dish" type="button" onclick={() => showModalDiscard = true}
           >Descartar <span class="p-cambios display-none-mobile">Cambios</span></button
         >
+        {#if showModalDiscard}
+          <Modal
+            title={`¿Seguro que querés descartar los cambios?`} 
+            confirmLabel="Sí"
+            cancelLabel="No"
+            actionConfirm={(e) => discardChanges(e)}
+            actionCancel={() => showModalDiscard = false}
+          />
+        {/if}
         <button class="btn btn-primary btn-dish" type="submit"
           >Guardar <span class="p-cambios display-none-mobile">Cambios</span></button
         >

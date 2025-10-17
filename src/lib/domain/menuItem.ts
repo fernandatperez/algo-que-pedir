@@ -1,5 +1,5 @@
 import { storeMOCK } from '$lib/data/mock/store'
-import { IngredientType, type IngredientJSON } from './ingredient'
+import { IngredientType } from './ingredient'
 import type { StoreJSON } from './store'
 
 // Tipo para datos que vienen del servidor/API
@@ -95,6 +95,19 @@ export class MenuItemType {
     if (!this.imagen) {
       this.addError('imagen', 'Debe seleccionar una imagen')
     }
+
+    if (!this.valorBase) {
+      this.addError('valorBase', 'Ingrese un valor base para el plato.')
+    }
+
+    if (this.valorBase <= 0) {
+      this.addError('valorBase', 'El valor base no puede ser 0 o menor a el')
+    }
+
+    if (this.ingredientes.length == 0) {
+      this.addError('ingredients', 'El plato debe tener al menos 1 ingrediente')
+    }
+
   }
 
   // Metodo helper para formatear precio
