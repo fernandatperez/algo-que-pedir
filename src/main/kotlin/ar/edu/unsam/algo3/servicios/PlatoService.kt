@@ -11,6 +11,23 @@ import ar.edu.unsam.algo3.dto.toDOM
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
 
+/*
+*   REPOSITORIOS:
+*       No tira errores. Usemos mismos nombres para metodos (en service tambien, los que sean generales).
+*
+*   DOMINIOS:
+*       Lista de ingredientes solo con IDs, los ingredientes los sacamos del repositorio de ingredientes. NO son DTOs.
+*
+*   CONTROLLERS:
+*       Serializamos en el controller siempre que se pueda. Flexibilizable segun diseño.
+*
+*   SERVICES:
+*       Devolvemos objetos de dominio siempre y cuando convenga.
+*       NO inyectar un service en otro. SI se puede inyectar mas de 1 service.
+*
+*   Endpoint de local nos trae TODO lo de local.
+* */
+
 @Service
 class PlatoService(
     val repositorioPlatos: RepositorioPlato
@@ -19,10 +36,10 @@ class PlatoService(
     fun getPlatos(): List<PlatoDTO> =
         repositorioPlatos.objetosDeRepositorio().map { it.toDTO() }
 
-    fun obtenerPlato(id: Int): PlatoDTO {
+    fun obtenerPlato(id: Int): Plato {
 //        obtenerObjeto ya hace la validacion de existencia del plato en el repo
         val platoModelo = repositorioPlatos.obtenerObjeto(id)
-        return platoModelo.toDTO()
+        return platoModelo
     }
 
     fun crearPlato(platoDTO: PlatoDTO) {
@@ -32,16 +49,25 @@ class PlatoService(
             valorBase = platoDTO.precio,
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
-            ingredientes = platoDTO.ingredientes.map { it.toDOM() }.toMutableList(),
+            ingredientes = platoDTO.ingredientes.map { it.id },
             local = LocalPollos, // en ningun lugar pones el local no se como seria
         )
         repositorioPlatos.crear(platoDOM)
     }
 
-    fun modificarPlato(id: Int, plato: PlatoDTO) {
-        val platoDOM: Plato = Plato().fromDTO(plato).apply { this.id = id }
-        repositorioPlatos.actualizar(platoDOM)
+//    fun modificarPlato(id: Int, plato: PlatoDTO) {
+//        val platoDOM: Plato = Plato().fromDTO(plato).apply { this.id = id }
+//        repositorioPlatos.actualizar(platoDOM)
+//    }
+
+    fun modificarPlato(platoUpdate: PlatoDTO) {
+//        Buscar plato en repositorio
+        val platoAModificar = this.obtenerPlato(platoUpdate.id)
+        val ingredientesViejos = platoAModificar.ingredientes
+        val ingredientesNuevos = platoUpdate.ingredientes
+//        Diferencia de conjuntos y metemos en la lista los ingredientes traidos por ID del repositorio
     }
+
 
 //    Mostrar a pablo
     private fun prepararPlatosParaIngrediente(ingrediente: Ingrediente, accion: (Plato) -> Unit) {

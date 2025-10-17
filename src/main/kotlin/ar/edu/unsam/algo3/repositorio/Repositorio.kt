@@ -25,15 +25,17 @@ open class Repositorio<Type : ElementoDeRepositorio> {
     }
 
     fun eliminarDeColeccion(id: Int) = coleccion.remove(obtenerObjeto(id))
-
+//    update
     fun actualizar(objetoActualizado: Type) {
-        // si lo encuentra, elimina el que estaba antes y agrega el nuevo
-        eliminarDeColeccion(obtenerObjeto(objetoActualizado.id).id) // Esto puede parecer un toque raro pero tiene sentido, es el id del objeto que devuelve obtenerObjeto con el id del objetoActualizado
-        coleccion.add(objetoActualizado)
+//        // si lo encuentra, elimina el que estaba antes y agrega el nuevo
+//        eliminarDeColeccion(obtenerObjeto(objetoActualizado.id).id) // Esto puede parecer un toque raro pero tiene sentido, es el id del objeto que devuelve obtenerObjeto con el id del objetoActualizado
+//        coleccion.add(objetoActualizado)
+        val index = coleccion.indexOfFirst { it.id == objetoActualizado.id }
+        coleccion[index] = objetoActualizado
     }
 
     fun objetoEnColeccion(id: Int) = coleccion.any { item -> item.id == id }
-
+//    getById
     fun obtenerObjeto(id: Int): Type {
         if (objetoEnColeccion(id)) {
             return coleccion.find { item -> item.id == id }!! // '!!' Asegura que no va a ser null
@@ -41,6 +43,6 @@ open class Repositorio<Type : ElementoDeRepositorio> {
     }
 
     fun limpiarColeccion() = coleccion.clear()
-
+//    search
     fun buscar(criterio: String): List<Type> = coleccion.filter { item -> item.cumpleCriterioDeBusqueda(criterio) }
 }

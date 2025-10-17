@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.controlador
 
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
+import ar.edu.unsam.algo3.modelo.plato.toDTO
 import ar.edu.unsam.algo3.servicios.PlatoService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,16 +25,16 @@ class PlatoController(val platoService: PlatoService) {
     @GetMapping("/platos/{id}")
     fun getPlato(@PathVariable id: Int): PlatoDTO {
 //        Obtener informacion de un plato especifico
-        return platoService.obtenerPlato(id)
+        return platoService.obtenerPlato(id).toDTO()
     }
 
     @PostMapping("/platos") // Maxi
-    fun postPlato(@RequestBody objeto: PlatoDTO) {
+    fun createPlato(@RequestBody objeto: PlatoDTO) {
         platoService.crearPlato(objeto)
     }
 
     @PutMapping("/platos/{id}")
-    fun putPlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO) {
+    fun updatePlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO) {
 //        Editar un plato existente
         platoService.modificarPlato(id, platoAModificar)
     }
