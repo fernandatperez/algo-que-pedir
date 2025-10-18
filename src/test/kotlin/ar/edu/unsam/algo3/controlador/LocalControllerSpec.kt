@@ -9,6 +9,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import ar.edu.unsam.algo3.servicios.UsuarioService
 
 @Autowired
 private lateinit var mockMvc: MockMvc
@@ -27,6 +28,7 @@ class ControladorLocalRealTest {
             {
                 "name": "Test Valido",
                 "storeURL": "https://valido.com",
+                "email": "jorge@hotmail.com",
                 "storeAddress": "Test 123",
                 "storeAltitude": 100,
                 "storeLatitude": -34.6,
@@ -41,7 +43,7 @@ class ControladorLocalRealTest {
 
         mockMvc
             .perform(
-                MockMvcRequestBuilders.put("/store-profile")
+                MockMvcRequestBuilders.put("/store-profile/1")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonValido)
             )
