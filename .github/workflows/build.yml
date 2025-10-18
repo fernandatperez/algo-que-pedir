@@ -16,8 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: # para que se pueda loguear
-          token: ${{ secrets.GITHUB_TOKEN }} # ← NUEVO
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # ← NUEVO - Trae todo el historial
+          persist-credentials: true  # ← NUEVO - Mantiene credenciales
 
       - uses: actions/setup-java@v4
         with:
@@ -51,14 +53,15 @@ jobs:
           ls -la .github
 
       - name: Commit and push the badge (if it changed)
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'  # ← NUEVO - Solo en main/master
         uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: 'commit badge'
+          message: 'Update coverage badge'  # ← Mejor mensaje
           add: '*.svg'
-          #branch: ${{ github.ref_name }} # - Especifica la rama
+          new_branch: main  # ← NUEVO - Usa new_branch en lugar de branch
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # ← NUEVO
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v4
