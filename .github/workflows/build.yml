@@ -24,6 +24,10 @@ jobs:
       # Execute Gradle commands in GitHub Actions workflows
       - uses: gradle/actions/setup-gradle@v3
 
+        # le doy permiso de ejecucion a gradle para que deje de fallar en github
+      - name: Give execute permission to gradle
+        run: chmod +x ./gradlew
+
       - name: Execute tests with coverage
         run: ./gradlew runOnGitHub
 
