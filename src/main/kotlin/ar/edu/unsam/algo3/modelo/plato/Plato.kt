@@ -8,6 +8,7 @@ import ar.edu.unsam.algo3.errores.DescuentoMayorAlCienException
 import ar.edu.unsam.algo3.errores.IngredienteNoEstaEnElPlatoException
 import ar.edu.unsam.algo3.errores.IngredienteYaPerteneceAlPlato
 import ar.edu.unsam.algo3.errores.NoAplicaDescuentoEnPlatoNuevoException
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import java.time.LocalDate
 import kotlin.math.max
@@ -99,8 +100,10 @@ class Plato(
                 coincideParcialmenteCon(criterio, local.nombre) ||
                 coincideTotalmenteCon(criterio, local.direccion.calle)
 
-    override fun cumpleCriterioDeCreacion(): Boolean =
-        noEstaVacio(nombre) && noEstaVacio(descripcion) && noEstaVacio(local.nombre) && noEstaVacio(
-            local.direccion.calle
-        )
+    override fun cumpleCriterioDeCreacion() {
+        if (!noEstaVacio(nombre)) throw NotFoundException("El Plato tiene que tener un nombre")
+        if (!noEstaVacio(descripcion)) throw NotFoundException("El Plato tiene que tener una descripcion")
+        if (!noEstaVacio(local.nombre)) throw NotFoundException("El Local tiene que tener un nombre")
+        if (!noEstaVacio(local.direccion.calle)) throw NotFoundException("El Local tiene que tener una calle")
+    }
 }

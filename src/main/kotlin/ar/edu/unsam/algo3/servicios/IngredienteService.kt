@@ -9,6 +9,9 @@ import ar.edu.unsam.algo3.repositorio.Repositorio
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import kotlinx.serialization.json.*
 import org.springframework.stereotype.Service
+import ar.edu.unsam.algo3.errores.BusinessException
+import ar.edu.unsam.algo3.errores.NotFoundException
+
 
 open class ActualizadorIngredientes(
     val service: ServiceIngredientes,
@@ -52,13 +55,11 @@ class InstanciaActualizador(
 // ========= LO NUEVO =========
 @Service
 class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, val servicePlato: PlatoService) {
-    fun ingredientes(): List<IngredienteDTO> {
-        return repositorioIngredientes.objetosDeRepositorio().map { it.toDTO() }
-    }
+    fun ingredientes(): List<IngredienteDTO> =
+        repositorioIngredientes.objetosDeRepositorio().map { it.toDTO() }
 
-    fun ingredientePorId(id: Int): IngredienteDTO {
-        return repositorioIngredientes.obtenerObjeto(id).toDTO()
-    }
+    fun ingredientePorId(id: Int): IngredienteDTO =
+        repositorioIngredientes.obtenerObjeto(id)?.toDTO() ?: throw RuntimeException("No se encontró el pedido de id <$id>")
 
     fun crearIngrediente(ingredienteDTO: IngredienteDTO) {
         val ingredienteNuevo = Ingrediente(
@@ -71,7 +72,7 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
         repositorioIngredientes.crear(ingredienteNuevo)
     }
 
-    fun actualizarIngrediente(id: Int,ingredienteDTO: IngredienteDTO): IngredienteDTO {
+    fun actualizarIngrediente(ingredienteDTO: IngredienteDTO): IngredienteDTO {
         val ingredienteActualizado = Ingrediente(
             nombre = ingredienteDTO.name,
             costoMercado = ingredienteDTO.cost,
@@ -81,14 +82,14 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
 
         ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)
-//        println("Entra a servicePlato")
-        servicePlato.actualizarIngrediente(ingredienteActualizado)
+//        servicePlato.actualizarIngrediente(ingredienteActualizado)
+
         return ingredienteActualizado.toDTO()
     }
 
     fun eliminarIngrediente(id: Int) {
-        val ingrediente = repositorioIngredientes.obtenerObjeto(id)
+//        val ingrediente = repositorioIngredientes.obtenerObjeto(id)
         repositorioIngredientes.eliminarDeColeccion(id)
-        servicePlato.eliminarIngrediente(ingrediente)
+//        servicePlato.eliminarIngrediente(ingrediente)
     }
 }

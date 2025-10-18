@@ -22,7 +22,7 @@ class PlatoService(
     fun obtenerPlato(id: Int): PlatoDTO {
 //        obtenerObjeto ya hace la validacion de existencia del plato en el repo
         val platoModelo = repositorioPlatos.obtenerObjeto(id)
-        return platoModelo.toDTO()
+        return platoModelo!!.toDTO()
     }
 
     fun crearPlato(platoDTO: PlatoDTO) {

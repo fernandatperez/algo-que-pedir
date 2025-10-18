@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.modelo.local
 
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.utils.diasHastaAhora
 import ar.edu.unsam.algo3.errores.SobrepasoPuntuacion
 import ar.edu.unsam.algo3.modelo.pedido.Estado
@@ -94,9 +95,9 @@ open class Local(
         coincideParcialmenteCon(criterio, nombre) ||
                 coincideTotalmenteCon(criterio, direccion.calle) || coincideTotalmenteCon(criterio, email)
 
-    override fun cumpleCriterioDeCreacion(): Boolean =
-        noEstaVacio(nombre) || noEstaVacio(direccion.calle) || noEstaVacio(email)
-
-
-
+    override fun cumpleCriterioDeCreacion() {
+        if (!noEstaVacio(nombre)) throw NotFoundException("El Local tiene que tener un nombre")
+        if (!noEstaVacio(direccion.calle)) throw NotFoundException("El Local tiene que tener una direccion")
+        if (!noEstaVacio(email))throw NotFoundException("El Local tiene que tener una email")
+    }
 }

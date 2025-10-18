@@ -14,7 +14,7 @@ interface ElementoDeRepositorio {
 
     fun noEstaVacio(string: String) = string.isNotBlank()
 
-    fun cumpleCriterioDeCreacion(): Boolean
+    fun cumpleCriterioDeCreacion()
 
     fun cumpleCriterioDeNuevo(): Boolean = id == 0
 }
