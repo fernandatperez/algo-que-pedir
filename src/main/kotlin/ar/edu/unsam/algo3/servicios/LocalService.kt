@@ -1,13 +1,13 @@
 package ar.edu.unsam.algo3.servicios
 
 import org.springframework.stereotype.Service
-import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.dto.LocalDTO
-import ar.edu.unsam.algo3.dto.fromDTO
+import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.dto.toDTO
+import org.uqbar.geodds.Point
+import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.errores.BusinessException
-import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 
 
 // LocalService.kt
@@ -18,9 +18,34 @@ class LocalService(
 
     fun getLocal(): List<LocalDTO> =
             repositorioLocal.objetosDeRepositorio().map { it.toDTO() }
-    fun updateLocal( id: Int,localDTO: LocalDTO) {
-        val localDOM: Local = localDTO.fromDTO(). apply {this.id = id}
-        repositorioLocal.actualizar(localDOM)
+    fun updateLocal(email: String, localDTO: LocalDTO) {
+        //estos cambios son por quitar el fromDTO, que en vez de actualizar el objeto
+        //lo pisaba con un objeto nuevo
+        // busca el local existente por email
+
+        val localExistente = repositorioLocal.findByEmail(email)
+            ?: throw BusinessException("No se encontró local con email: $email")
+
+        // actualiza todo menos el mail
+        localExistente.apply {
+            nombre = localDTO.name
+            url = localDTO.storeURL
+            direccion = Direccion(
+                calle = localDTO.storeAddress,
+                altura = localDTO.storeAltitude,
+                ubicacion = Point(localDTO.storeLatitude, localDTO.storeLongitude)
+            )
+            regalias = localDTO.storeAppCommission
+            porcentajeAcordado = localDTO.storeAuthorCommission
+            mediosDePago = mutableSetOf<Pago>().apply {
+                if (localDTO.storePaymentEfectivo) add(Pago.EFECTIVO)
+                if (localDTO.storePaymentQR) add(Pago.QR)
+                if (localDTO.storePaymentTransferencia) add(Pago.TRANSFERENCIA_BANCARIA)
+            }
+        }
+
+        // se guarda el objeto actualizado
+        repositorioLocal.actualizar(localExistente)
     }
 
 }

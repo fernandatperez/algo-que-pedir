@@ -40,6 +40,7 @@ open class Repositorio<Type : ElementoDeRepositorio> {
         } else { throw IdInexistente("El ID = $id no existe en la coleccion o no hay ningun objeto asociado a el") } // Se evalua tdo aca, asi que no hace falta tirar mas excepciones
     }
 
+
     fun limpiarColeccion() = coleccion.clear()
 
     fun buscar(criterio: String): List<Type> = coleccion.filter { item -> item.cumpleCriterioDeBusqueda(criterio) }
