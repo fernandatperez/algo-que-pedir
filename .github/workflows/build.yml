@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: # para que se pueda loguear
+          token: ${{ secrets.GITHUB_TOKEN }} # ← NUEVO
+
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -24,7 +27,7 @@ jobs:
       # Execute Gradle commands in GitHub Actions workflows
       - uses: gradle/actions/setup-gradle@v3
 
-        # le doy permiso de ejecucion a gradle para que deje de fallar en github
+      # le doy permiso de ejecucion a gradle para que deje de fallar en github
       - name: Give execute permission to gradle
         run: chmod +x ./gradlew
 
@@ -53,6 +56,9 @@ jobs:
           default_author: github_actions
           message: 'commit badge'
           add: '*.svg'
+          branch: ${{ github.ref_name }} # - Especifica la rama
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # ← NUEVO
 
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v4
