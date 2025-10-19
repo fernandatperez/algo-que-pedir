@@ -24,11 +24,11 @@ class ApplicationBootstrap(
 
     private lateinit var localInicial: Local
 
-    private var local = Local(
-        nombre = "un Local",
-        direccion = Direccion(calle = "maipu"),
-        mediosDePago = mutableSetOf(Pago.TRANSFERENCIA_BANCARIA, Pago.EFECTIVO, Pago.QR)
-    )
+//    private var local = Local(
+//        nombre = "un Local",
+//        direccion = Direccion(calle = "maipu"),
+//        mediosDePago = mutableSetOf(Pago.TRANSFERENCIA_BANCARIA, Pago.EFECTIVO, Pago.QR)
+//    )
 
     private fun crearLocalInicial() {
         if (repositorioLocal.objetosDeRepositorio().isEmpty()) {
@@ -51,7 +51,7 @@ class ApplicationBootstrap(
             }
 
             repositorioLocal.crear(localInicial)
-            repositorioLocal.crear(local)
+//            repositorioLocal.crear(local)
 
 //            println("""
 //                Local inicial creado exitosamente:
@@ -198,7 +198,7 @@ class ApplicationBootstrap(
             descripcion = "Hamburguesa con queso acompañada de papas fritas y bebida",
             valorBase = 9.99,
             urldeImagen = "/src/lib/assets/img/hamburguesa2.jpg",
-            local = local,
+            local = localInicial,
             ingredientes = mutableListOf(carnederenacuajo,quesocheddar,lechuga)
         )
         pizza = Plato(
@@ -206,7 +206,7 @@ class ApplicationBootstrap(
             descripcion = "De muzzarella con tomate y albahaca",
             urldeImagen = "/src/lib/assets/img/pizza.png",
             valorBase = 11.75,
-            local = local,
+            local = localInicial,
             ingredientes = mutableListOf(quesocheddar,lechuga,tomate)
 
         )
@@ -216,7 +216,7 @@ class ApplicationBootstrap(
             valorBase = 7.5,
             urldeImagen = "/src/lib/assets/img/ensalada.png",
             esDeAutor = true,
-            local = local,
+            local = localInicial,
             ingredientes = mutableListOf(lechuga,tomate)
         )
         repositorioPlatos.apply {
@@ -231,7 +231,7 @@ class ApplicationBootstrap(
         repositorioPedidos.apply {
             crear(
                 usuario = sofiamiller,
-                local = local,
+                local = localInicial,
                 platos = mutableListOf(hamburguesa, pizza, ensalada),
                 medioDePago = Pago.QR,
                 estado = Estado.PENDIENTE

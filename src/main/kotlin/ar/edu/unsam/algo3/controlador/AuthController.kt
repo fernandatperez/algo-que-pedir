@@ -27,6 +27,8 @@ class AuthController( val usuarioService: UsuarioService ) {
 
         val userValidado = usuarioService.validar(userLocal)
 
+
+
         return AuthResponse(
             email = userValidado.email,
             name = userValidado.nombre,

@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.modelo.usuario
 
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.usuario.UsuarioCommands
 import ar.edu.unsam.algo3.errores.PerteneceAotraListaException
 import ar.edu.unsam.algo3.modelo.local.Local
@@ -119,7 +120,10 @@ class Usuario(
                 coincideParcialmenteCon(criterio, apellido) ||
                 coincideTotalmenteCon(criterio, mailPrincipal) // ->
 
-    override fun cumpleCriterioDeCreacion(): Boolean =
-        noEstaVacio(nombre) && noEstaVacio(apellido) && noEstaVacio(mailPrincipal) // ->
+    override fun cumpleCriterioDeCreacion() {
+        if (!noEstaVacio(nombre)) throw NotFoundException("El Usuario tiene que tener un nombre")
+        if (!noEstaVacio(apellido)) throw NotFoundException("El Usuario tiene que tener un apellido")
+        if (!noEstaVacio(mailPrincipal)) throw NotFoundException("El Usuario tiene que tener un mail")
+    }
 }
 

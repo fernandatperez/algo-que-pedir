@@ -8,49 +8,32 @@ import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.fromDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDOM
-import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
 
-/*
-*   REPOSITORIOS:
-*       No tira errores. Usemos mismos nombres para metodos (en service tambien, los que sean generales).
-*
-*   DOMINIOS:
-*       Lista de ingredientes solo con IDs, los ingredientes los sacamos del repositorio de ingredientes. NO son DTOs.
-*
-*   CONTROLLERS:
-*       Serializamos en el controller siempre que se pueda. Flexibilizable segun diseño.
-*
-*   SERVICES:
-*       Devolvemos objetos de dominio siempre y cuando convenga.
-*       NO inyectar un service en otro. SI se puede inyectar mas de 1 service.
-*
-*   Endpoint de local nos trae TODO lo de local.
-* */
-
 @Service
 class PlatoService(
-    val repositorioPlatos: RepositorioPlato,
-    val repositorioIngredientes: RepositorioIngrediente
+    val repositorioPlatos: RepositorioPlato
 ) {
 
-    fun getPlatos(): List<Plato> =
-        repositorioPlatos.objetosDeRepositorio()
+    fun getPlatos(): List<PlatoDTO> =
+        repositorioPlatos.objetosDeRepositorio().map { it.toDTO() }
 
-//  obtenerObjeto ya hace la validacion de existencia del plato en el repo
-    fun obtenerPlato(id: Int): Plato = repositorioPlatos.obtenerObjeto(id)
+    fun obtenerPlato(id: Int): PlatoDTO {
+//        obtenerObjeto ya hace la validacion de existencia del plato en el repo
+        val platoModelo = repositorioPlatos.obtenerObjeto(id)
+        return platoModelo.toDTO()
+    }
 
     fun crearPlato(platoDTO: PlatoDTO) {
-        val ingredientes: List<Ingrediente> = platoDTO.ingredientes.map { id -> repositorioIngredientes.ob }
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
             valorBase = platoDTO.precio,
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
-            ingredientes = platoDTO.ingredientes.map { it.id },
-            local = LocalPollos, // Esto tiene que venir del front. Se crea con el local en el que este logueado (sessionStorage)
+            ingredientes = platoDTO.ingredientes.map { it.toDOM() }.toMutableList(),
+            local = LocalPollos, // en ningun lugar pones el local no se como seria
         )
         repositorioPlatos.crear(platoDOM)
     }
@@ -67,7 +50,6 @@ class PlatoService(
         val ingredientesNuevos = platoUpdate.ingredientes
 //        Diferencia de conjuntos y metemos en la lista los ingredientes traidos por ID del repositorio
     }
-
 
 //    Mostrar a pablo
     private fun prepararPlatosParaIngrediente(ingrediente: Ingrediente, accion: (Plato) -> Unit) {
