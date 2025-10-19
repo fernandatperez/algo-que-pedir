@@ -44,17 +44,7 @@ class LocalService(
             }
         }
 
-        val puedeActualizar = localActualizado.cumpleCriterioDeCreacion()
-        //esto lo tiene que levantar el exception handler
-        if (!puedeActualizar) {
-            println("ERROR: No cumple criterios de creación")
-            throw BusinessException("""
-        Campos obligatorios incompletos:
-        - Nombre: '${localActualizado.nombre}' 
-        - Calle: '${localActualizado.direccion.calle}'
-        - Email: '${localActualizado.email}'
-    """.trimIndent())
-        }
+        localActualizado.cumpleCriterioDeCreacion()
 
         repositorioLocal.actualizar(localActualizado)
     }

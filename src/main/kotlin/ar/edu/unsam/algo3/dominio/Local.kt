@@ -7,6 +7,7 @@ import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.dominio.Local
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.local.Pago
 import org.uqbar.geodds.Point
 
@@ -151,8 +152,8 @@ class Local : Entity(), ElementoDeRepositorio {
         mediosDePago.addAll(nuevoLocal.mediosDePago)
     }
 
-    override fun cumpleCriterioDeCreacion(): Boolean {
-        return nombre.isNotEmpty() && url.startsWith("http")
+    override fun cumpleCriterioDeCreacion() {
+        if(!noEstaVacio(nombre) && url.startsWith("http")) throw NotFoundException("El local tiene que tener un nombre")
     }
 
     override fun cumpleCriterioDeNuevo(): Boolean = id == 0

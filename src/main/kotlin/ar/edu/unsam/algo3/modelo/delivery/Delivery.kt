@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.modelo.delivery
 
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.errores.YaEstaEnLaListaException
 import ar.edu.unsam.algo3.modelo.pedido.Estado
@@ -52,6 +53,7 @@ class Delivery(
 
     override fun cumpleCriterioDeBusqueda(criterio: String): Boolean = coincideConElPrincipio(criterio, username)
 
-    override fun cumpleCriterioDeCreacion(): Boolean =
-        noEstaVacio(username)
+    override fun cumpleCriterioDeCreacion() {
+        if(!noEstaVacio(name)) throw NotFoundException("El Delivery tiene que tener un nombre")
+    }
 }

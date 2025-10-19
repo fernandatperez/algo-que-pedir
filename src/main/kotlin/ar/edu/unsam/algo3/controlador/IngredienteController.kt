@@ -27,8 +27,8 @@ class IngredienteController(val ingredientesService: IngredienteService) {
         ingredientesService.crearIngrediente(ingredienteDTO)
 
     @PutMapping("/actualizar-ingrediente/{id}")
-    fun actualizarIngrediente(@PathVariable id: Int, @RequestBody ingredienteDTO: IngredienteDTO) =
-        ingredientesService.actualizarIngrediente(id, ingredienteDTO)
+    fun actualizarIngrediente(@RequestBody ingredienteDTO: IngredienteDTO) =
+        ingredientesService.actualizarIngrediente(ingredienteDTO)
 
     @DeleteMapping("/eliminar-ingrediente/{id}")
     fun eliminarIngrediente(@PathVariable id: Int) =

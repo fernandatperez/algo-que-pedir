@@ -1,4 +1,5 @@
 package ar.edu.unsam.algo3.modelo.cupon
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
@@ -58,7 +59,9 @@ abstract class Cupon(
     // primero lo hace int o null, let es una funcion extencion -> ( ?.let{} ) si lo que sea que este antes no es null ejecuta el codigo dentro de el let
     // ?: esto es el operador elvis, lo que hace es devolver lo que esta a la izquierda si no es null sino lo de la derecha, es como el operador ternario
 
-    override fun cumpleCriterioDeCreacion(): Boolean = porcentajeBaseDescuento != 0.0
+    override fun cumpleCriterioDeCreacion() {
+        if (porcentajeBaseDescuento == 0.0) throw NotFoundException("El cupon tiene que ser mayor a 0")
+    }
 }
 
 class DescuentoPorDia : Cupon() {

@@ -22,7 +22,7 @@ class PlatoService(
     fun obtenerPlato(id: Int): PlatoDTO {
 //        obtenerObjeto ya hace la validacion de existencia del plato en el repo
         val platoModelo = repositorioPlatos.obtenerObjeto(id)
-        return platoModelo.toDTO()
+        return platoModelo!!.toDTO()
     }
 // aca no vas a tener ID, te lo devuelve la BBDD (el repo de algo2)
 //get create find update delete count search --> metodos estandar en controller y repo
