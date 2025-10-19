@@ -16,18 +16,18 @@ class LocalService(
     private val repositorioLocal: RepositorioLocal  // ← Inyecta el repositorio específico
 ) {
 
-    fun getLocal(): List<LocalDTO> =
+    fun getAll(): List<LocalDTO> =
             repositorioLocal.objetosDeRepositorio().map { it.toDTO() }
-    fun updateLocal(email: String, localDTO: LocalDTO) {
+    fun update(email: String, localDTO: LocalDTO) {
         //estos cambios son por quitar el fromDTO, que en vez de actualizar el objeto
         //lo pisaba con un objeto nuevo
         // busca el local existente por email
 
-        val localExistente = repositorioLocal.findByEmail(email)
+        val localActualizado = repositorioLocal.findByEmail(email)
             ?: throw BusinessException("No se encontró local con email: $email")
 
         // actualiza todo menos el mail
-        localExistente.apply {
+        localActualizado.apply {
             nombre = localDTO.name
             url = localDTO.storeURL
             direccion = Direccion(
@@ -44,8 +44,9 @@ class LocalService(
             }
         }
 
-        // se guarda el objeto actualizado
-        repositorioLocal.actualizar(localExistente)
+        localActualizado.cumpleCriterioDeCreacion()
+
+        repositorioLocal.actualizar(localActualizado)
     }
 
 }

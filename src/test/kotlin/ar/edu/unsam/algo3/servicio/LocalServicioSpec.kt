@@ -31,7 +31,7 @@ class LocalServiceIntegrationTest {
         val local1 = repositorioLocal.crear(Local(nombre = "nuevo local", email = "nuevo@gmail.com", password = "nuevo"))
         val local2 = repositorioLocal.crear(Local(nombre = "nuevo local2", email = "nuevo1@gmail.com", password = "nuevo"))
 
-        val result = localService.getLocal()
+        val result = localService.getAll()
 
         assertEquals(2, result.size)
         assertEquals("nuevo local", result[0].name)
@@ -65,7 +65,7 @@ class LocalServiceIntegrationTest {
             storePaymentTransferencia = true
         )
 
-        localService.updateLocal(email = email, localDTO = localDTO)
+        localService.update(email = email, localDTO = localDTO)
 
         val localActualizado = repositorioLocal.findByEmail(email)
         assertEquals("local actualizado", localActualizado!!.nombre)
@@ -92,7 +92,7 @@ class LocalServiceIntegrationTest {
         val emailInexistente = "pepito@hotmail.com"
 
         assertThrows<Exception> {
-            localService.updateLocal(email = emailInexistente, localDTO)
+            localService.update(email = emailInexistente, localDTO)
         }
     }
 }

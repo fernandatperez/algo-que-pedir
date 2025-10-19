@@ -20,7 +20,7 @@ class LocalController(
 
     @GetMapping
     fun getLocal(): List<LocalDTO> {
-        return localService.getLocal()
+        return localService.getAll()
     }
 
     @PutMapping
@@ -30,10 +30,7 @@ class LocalController(
     ): ResponseEntity<Any> {
         try {
             val email = localDTO.email
-                ?: return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email requerido")
-
-            println("✅ Actualizando local para: $email")
-            localService.updateLocal(email, localDTO)
+            localService.update(email, localDTO)
             return ResponseEntity.ok("Local actualizado correctamente")
         } catch (e: BusinessException) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)

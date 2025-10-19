@@ -24,7 +24,8 @@ class PlatoService(
         val platoModelo = repositorioPlatos.obtenerObjeto(id)
         return platoModelo!!.toDTO()
     }
-
+// aca no vas a tener ID, te lo devuelve la BBDD (el repo de algo2)
+//get create find update delete count search --> metodos estandar en controller y repo
     fun crearPlato(platoDTO: PlatoDTO) {
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
@@ -37,7 +38,7 @@ class PlatoService(
         )
         repositorioPlatos.crear(platoDOM)
     }
-
+ //platoDTO ya trae el ID adentro
     fun modificarPlato(id: Int, plato: PlatoDTO) {
         val platoDOM: Plato = Plato().fromDTO(plato).apply { this.id = id }
         repositorioPlatos.actualizar(platoDOM)
