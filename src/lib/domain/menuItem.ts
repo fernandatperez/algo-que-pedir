@@ -14,7 +14,8 @@ export type MenuItemJSON = {
   costoProduccion: number
   esDeAutor: boolean
   enPromocion: boolean
-  ingredientes: IngredientType[]
+  // ->
+  ingredientes: number[]
   store: StoreJSON
   fechaCreacion: string
   porcentajeDescuento: number
@@ -42,6 +43,7 @@ export class MenuItemType {
     public costoProduccion: number = 0,
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
+    // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
     public store: StoreJSON = storeMOCK,
     public fechaCreacion: string = '',
@@ -67,7 +69,7 @@ export class MenuItemType {
       costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
-      ingredientes: this.ingredientes,
+      ingredientes: this.ingredientes.map(ing => ing.id) as number[], // Feo pero sino me dice que puede ser undefined ->
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
       store: this.store, 
@@ -77,8 +79,13 @@ export class MenuItemType {
   }
 
   static availableIngs(ingredients: IngredientType[], menuItem: MenuItemJSON): IngredientType[] {
-    const difference: IngredientType[] = ingredients.filter(ingredient => !menuItem.ingredientes.find(ing => ingredient.id == ing.id))
+    // -> ahora se filtra con IDs. Testear
+    const difference: IngredientType[] = ingredients.filter(ingredient => !menuItem.ingredientes.find(id => ingredient.id == id))
     return difference
+  }
+
+  costoDeProduccion(): string {
+    return this.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2)
   }
 
   validate() {
@@ -109,6 +116,7 @@ export class MenuItemType {
     }
 
   }
+  // Si no usamos esto saquemoslo ->
 
   // Metodo helper para formatear precio
   getFormattedPrice(): string {

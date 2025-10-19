@@ -2,14 +2,14 @@
 <script lang="ts">
   import MenuItem from '$lib/components/MenuItem.svelte';
 
-  import type { MenuItemJSON } from "$lib/domain/menuItem";
+  import type { MenuItemJSON, MenuItemType } from "$lib/domain/menuItem";
   import { goto } from '$app/navigation'
 
   import { menuItemsService } from "$lib/services/MenuItemService.js"
   import { showError } from "$lib/domain/errorHandler";
   import { onMount } from "svelte";
 
-  let menuitems: MenuItemJSON[]
+  let menuitems: MenuItemType[]
 
   const findMenuItems = async () => {
     try{

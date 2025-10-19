@@ -5,7 +5,7 @@
   import type { ValidationMessage } from "$lib/domain/validationMessage";
   import { showError } from "$lib/domain/errorHandler.js";
   import { menuItemsService } from "$lib/services/MenuItemService.js";
-  import { MenuItemType } from "$lib/domain/menuItem.js";
+  import { MenuItemType, type MenuItemJSON } from "$lib/domain/menuItem.js";
   import { goto } from "$app/navigation";
   import { IngredientType } from "$lib/domain/ingredient.js";
   import ValidationField from "$lib/components/ValidationField.svelte";
@@ -19,7 +19,7 @@
   let { data } = $props()
   const { nuevoItem, item } = data
   
-  let itemEdit = $state(item.toJSON())
+  let itemEdit = $state(item)
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
@@ -32,7 +32,7 @@
   let showModalDelete = $state(false)
   let showModalDiscard = $state(false)
 
-  const productionCost = $derived(itemEdit.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2))
+  const productionCost = $derived(itemEdit.costoDeProduccion())
 
   const onSubmit = async (ev: SubmitEvent) => {
     const esNuevoItem = itemEdit.id == -1
@@ -44,7 +44,7 @@
     const formData = new FormData(form) // creo el formData
     
     // Con form data
-    const menuItem: MenuItemType = new MenuItemType(
+    const newItem: MenuItemType = new MenuItemType(
       itemEdit.id,
       (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
@@ -56,20 +56,20 @@
       platoEnPromo,
       itemEdit.ingredientes
     )
-    console.info("MENU ITEM GENERADO:", menuItem)
-    menuItem.validate()
+    //  Primero valido con el item de dominio, despues paso a JSON y lo mando. No?
+    newItem.validate()
     
-    if (menuItem.errors.length > 0) {
-      errors = [...menuItem.errors]
+    if (newItem.errors.length > 0) {
+      errors = [...newItem.errors]
       return 
     }
-    
+
     try {
       if (esNuevoItem) {
-        await menuItemsService.createMenuItem(menuItem)
+        await menuItemsService.createMenuItem(newItem)
         toasts.push('Plato generado exitosamente. Seras redirigido a Menu', {type: 'success'})
       } else {
-        await menuItemsService.updateMenuItem(menuItem)
+        await menuItemsService.updateMenuItem(newItem)
         toasts.push('Plato modificado con exito. Seras redirigido a Menu', {type: 'success'})
       }
       // Aca poner un toast de guardado exitoso
@@ -106,7 +106,7 @@
     try {
       const allIngs = await ingredientService.getAllIngredients()
       console.info(allIngs)
-      availableIngs = MenuItemType.availableIngs(allIngs, itemEdit)
+      availableIngs = MenuItemType.availableIngs(allIngs, itemEdit.toJSON()) // Serializa a JSON para la funcion de busqueda
       console.info(availableIngs)
       showModalAdd = true
     } catch (error) {
@@ -114,8 +114,6 @@
     }
   }
   
-  // let availableIngs: IngredientType[] = fetchIng
-
   const guardarModal = () => {
     showModalAdd = false
     selectedIngs.forEach(it => itemEdit.ingredientes.push(it))
@@ -201,9 +199,10 @@
               class="input-primary"
               id="product-name"
               name="name"
-              bind:value={itemEdit.nombre}
+              value={itemEdit.nombre}
               placeholder="Escribir |"
             />
+            <!-- Saque los bind:value, si despues vamos a usar el formData no me interesa bindear con nada reactivamente -->
             <ValidationField errors={errors} field="nombre" />
           </div>
           <div class="container-column input-group">
@@ -228,7 +227,7 @@
               class="input-primary"
               id="url-product-img"
               name="imagen"
-              bind:value={itemEdit.imagen}
+              value={itemEdit.imagen}
               placeholder="Escribir |"
             />
             <ValidationField errors={errors} field="imagen" />
@@ -260,7 +259,7 @@
               class="input-primary number-input"
               id="product-base-cost"
               name="valorBase"
-              bind:value={itemEdit.valorBase}
+              value={itemEdit.valorBase}
               placeholder="Escribir |"
               step="any"
             />
