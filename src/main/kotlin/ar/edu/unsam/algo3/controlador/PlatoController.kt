@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin("*") // Habilita comunicacion entre distintos puertos (acepta requests de cualquier parte)
@@ -17,8 +18,8 @@ class PlatoController(val platoService: PlatoService) {
 //  Inyeccion de dependencias de los singletons de servicios (y servicio conoce repo)
 
     @GetMapping("/platos")
-    fun getPlatos(): List<PlatoDTO> {
-        return platoService.getPlatos()
+    fun getPlatos(@RequestParam mail: String): List<PlatoDTO> {
+        return platoService.getPlatos(mail)
     }
 
     @GetMapping("/platos/{id}")

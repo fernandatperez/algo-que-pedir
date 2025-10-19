@@ -15,9 +15,11 @@ import ar.edu.unsam.algo3.errores.BusinessException
 class LocalService(
     private val repositorioLocal: RepositorioLocal  // ← Inyecta el repositorio específico
 ) {
+    // antes esto devolvia una lista de localDTO, lo que me parece que no esta bien porque un perfil esta vinculado a un solo local, pero lo dejo porque si no tengo que cambiar todo el funcionamiento
+    fun getLocal(mail: String): List<LocalDTO> =
+        listOf(repositorioLocal.findByEmail(mail)?.toDTO() ?: throw BusinessException("No se encontro un local"))
+// listOf solo porque espera una lista pero devuleve 1 solo
 
-    fun getLocal(): List<LocalDTO> =
-            repositorioLocal.objetosDeRepositorio().map { it.toDTO() }
     fun updateLocal(email: String, localDTO: LocalDTO) {
         //estos cambios son por quitar el fromDTO, que en vez de actualizar el objeto
         //lo pisaba con un objeto nuevo

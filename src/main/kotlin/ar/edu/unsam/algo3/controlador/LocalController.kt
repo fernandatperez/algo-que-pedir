@@ -19,8 +19,8 @@ class LocalController(
 ) {
 
     @GetMapping
-    fun getLocal(): List<LocalDTO> {
-        return localService.getLocal()
+    fun getLocal(@RequestParam mail: String): List<LocalDTO> {
+        return localService.getLocal(mail)
     }
 
     @PutMapping

@@ -16,8 +16,9 @@ class PlatoService(
     val repositorioPlatos: RepositorioPlato
 ) {
 
-    fun getPlatos(): List<PlatoDTO> =
-        repositorioPlatos.objetosDeRepositorio().map { it.toDTO() }
+    fun getPlatos(mail: String): List<PlatoDTO> =
+        repositorioPlatos.buscar(mail).map { it.toDTO() }
+    //repositorioPlatos.objetosDeRepositorio().map { it.toDTO() }
 
     fun obtenerPlato(id: Int): PlatoDTO {
 //        obtenerObjeto ya hace la validacion de existencia del plato en el repo
