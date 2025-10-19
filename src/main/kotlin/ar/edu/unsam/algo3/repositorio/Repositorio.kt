@@ -40,6 +40,7 @@ open class Repositorio<Type : ElementoDeRepositorio> {
 
     fun obtenerObjeto(id: Int): Type? = coleccion.find { item -> item.id == id }
 
+
     fun limpiarColeccion() = coleccion.clear()
 
     fun buscar(criterio: String): List<Type> = coleccion.filter { item -> item.cumpleCriterioDeBusqueda(criterio) }

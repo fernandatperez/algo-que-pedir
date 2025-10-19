@@ -43,9 +43,10 @@ class ControladorLocalRealTest {
 
         mockMvc
             .perform(
-                MockMvcRequestBuilders.put("/store-profile/1")
+                MockMvcRequestBuilders.put("/store-profile")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonValido)
+                    .sessionAttr("userEmail", "jorge@hotmail.com")
             )
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
