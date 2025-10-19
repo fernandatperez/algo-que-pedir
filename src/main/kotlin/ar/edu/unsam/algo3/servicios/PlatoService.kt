@@ -8,6 +8,7 @@ import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.fromDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDOM
+import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
 
@@ -30,19 +31,18 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlatoService(
-    val repositorioPlatos: RepositorioPlato
+    val repositorioPlatos: RepositorioPlato,
+    val repositorioIngredientes: RepositorioIngrediente
 ) {
 
-    fun getPlatos(): List<PlatoDTO> =
-        repositorioPlatos.objetosDeRepositorio().map { it.toDTO() }
+    fun getPlatos(): List<Plato> =
+        repositorioPlatos.objetosDeRepositorio()
 
-    fun obtenerPlato(id: Int): Plato {
-//        obtenerObjeto ya hace la validacion de existencia del plato en el repo
-        val platoModelo = repositorioPlatos.obtenerObjeto(id)
-        return platoModelo
-    }
+//  obtenerObjeto ya hace la validacion de existencia del plato en el repo
+    fun obtenerPlato(id: Int): Plato = repositorioPlatos.obtenerObjeto(id)
 
     fun crearPlato(platoDTO: PlatoDTO) {
+        val ingredientes: List<Ingrediente> = platoDTO.ingredientes.map { id -> repositorioIngredientes.ob }
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
@@ -50,7 +50,7 @@ class PlatoService(
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = platoDTO.ingredientes.map { it.id },
-            local = LocalPollos, // en ningun lugar pones el local no se como seria
+            local = LocalPollos, // Esto tiene que venir del front. Se crea con el local en el que este logueado (sessionStorage)
         )
         repositorioPlatos.crear(platoDOM)
     }

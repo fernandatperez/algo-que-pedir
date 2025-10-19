@@ -1,11 +1,7 @@
 package ar.edu.unsam.algo3.modelo.plato
 
-import ar.edu.unsam.algo3.dto.IngredienteDTO
-import ar.edu.unsam.algo3.dto.toDOM
-import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.modelo.local.Local
-import org.springframework.hateoas.mediatype.alps.Descriptor
 // Armar DTO aparte para el menu
 
 // Esto seria edicion de plato. Falta armar el return de plato
@@ -19,7 +15,7 @@ data class PlatoDTO(
     val costoProduccion: Double,
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
-    val ingredientes: List<Int>, // Esto podria ser solo de IDs
+    val ingredientes: List<Int>,
     val store: Local = LocalPollos, // Esto deberia ser DTO tambien
 )
 
@@ -41,7 +37,7 @@ fun Plato.toDTO(): PlatoDTO {
 }
 
 fun Plato.fromDTO(platoDTO: PlatoDTO): Plato {
-    val ingredientesDom = platoDTO.ingredientes.map { it -> it.toDOM() }.toMutableList()
+    val ingredientesDom = repositorioIngredientes
     return Plato(
         nombre = platoDTO.nombre,
         descripcion = platoDTO.descripcion,

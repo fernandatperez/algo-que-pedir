@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
+/*
+*   CAMBIOS REALIZADOS:
+*       todos los endpoints reciben platos de dominio del service y devuelven dtos (para visualizacion)
+*
+*
+* */
+
+
 @CrossOrigin("*") // Habilita comunicacion entre distintos puertos (acepta requests de cualquier parte)
 @RestController
 class PlatoController(val platoService: PlatoService) {
@@ -19,7 +27,8 @@ class PlatoController(val platoService: PlatoService) {
 
     @GetMapping("/platos")
     fun getPlatos(): List<PlatoDTO> {
-        return platoService.getPlatos()
+        val platos = platoService.getPlatos()
+        return platos.map { it.toDTO() }
     }
 
     @GetMapping("/platos/{id}")
@@ -29,13 +38,15 @@ class PlatoController(val platoService: PlatoService) {
     }
 
     @PostMapping("/platos") // Maxi
-    fun createPlato(@RequestBody objeto: PlatoDTO) {
+    fun createPlato(@RequestBody objeto: PlatoDTO): PlatoDTO {
         platoService.crearPlato(objeto)
+        return platoService.obtenerPlato(objeto.id).toDTO()
     }
 
     @PutMapping("/platos/{id}")
-    fun updatePlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO) {
+    fun updatePlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO): PlatoDTO {
 //        Editar un plato existente
-        platoService.modificarPlato(id, platoAModificar)
+        platoService.modificarPlato(platoAModificar)
+        return platoService.obtenerPlato(platoAModificar.id).toDTO()
     }
 }
