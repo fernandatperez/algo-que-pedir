@@ -73,12 +73,7 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
     }
 
     fun actualizarIngrediente(ingredienteDTO: IngredienteDTO): IngredienteDTO {
-        val ingredienteActualizado = Ingrediente(
-            nombre = ingredienteDTO.name,
-            costoMercado = ingredienteDTO.cost,
-            esOrigenAnimal = ingredienteDTO.esOrigenAnimal,
-            grupoAlimenticio = ingredienteDTO.foodGroup
-        ).apply { this.id = id }
+        val ingredienteActualizado = ingredienteDTO.toDOM()
 
         ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)

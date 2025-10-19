@@ -25,7 +25,6 @@ open class Repositorio<Type : ElementoDeRepositorio> {
 //        } else throw ObjetoIDoVerificacionFallaron("El ID o el objeto ya se encuentran en la coleccion, o bien la verificacion fallo")
     }
 
-//    Poner la validacion aca
     fun eliminarDeColeccion(id: Int) =
         if (id == -1) throw BusinessException("No existe elemento en repositorio")
         else coleccion.remove(obtenerObjeto(id))
