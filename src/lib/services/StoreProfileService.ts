@@ -5,9 +5,17 @@ import axios from 'axios'
 
 class StoreService {
   async getStore(){
-    const queryStore = () => axios.get<StoreJSON[]>(REST_SERVER_URL + '/store-profile')
+
+    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
+    const queryStore = () => axios.get<StoreJSON[]>(REST_SERVER_URL + '/store-profile', { params: { mail: storeMail }})
     return (await getAxiosData(queryStore)).map(StoreType.fromJson)
-    //return STORE_MOCK.map(StoreType.fromJson)
+
+
+    //! esto es lo que deberia hacer ya que estas buscando una store no una lista
+    //! no lo cambio porque hay que cambiar la pagina svelte
+    // const queryStore = await axios.get<StoreJSON>(REST_SERVER_URL + '/store-profile')
+    // const local = StoreType.fromJson(queryStore.data)
+    // return local
   }
   
   async updateStore(storeId: number, store: StoreType): Promise<void> {

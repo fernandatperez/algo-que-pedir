@@ -6,11 +6,9 @@ import { IngredientType } from '$lib/domain/ingredient'
 
 class MenuItemsService {
   async getAllMenuItems(){
-    const response = await axios.get<MenuItemJSON[]>(REST_SERVER_URL + '/platos')
-    // console.log('Respuesta del backend:', response.data)
-    // como "cosa"... hdp
+    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
+    const response = await axios.get<MenuItemJSON[]>(REST_SERVER_URL + '/platos', { params: { mail: storeMail }})
     const cosa = response.data.map(MenuItemType.fromJson)
-    // console.log('Primer item mapeado:', cosa[0]) 
     return cosa
     // return MENU_ITEMS_JSON_MOCK.map(MenuItemType.fromJson)
   }
