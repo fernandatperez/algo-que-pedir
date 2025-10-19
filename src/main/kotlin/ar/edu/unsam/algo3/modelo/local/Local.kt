@@ -95,8 +95,6 @@ open class Local(
                 coincideTotalmenteCon(criterio, direccion.calle) || coincideTotalmenteCon(criterio, email)
 
     override fun cumpleCriterioDeCreacion(): Boolean =
-        noEstaVacio(nombre) || noEstaVacio(direccion.calle) || noEstaVacio(email)
-
-
+        noEstaVacio(nombre) && noEstaVacio(direccion.calle) && noEstaVacio(email)
 
 }
