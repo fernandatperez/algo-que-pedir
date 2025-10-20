@@ -10,6 +10,7 @@ import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import kotlinx.serialization.json.*
 import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.errores.BusinessException
+import ar.edu.unsam.algo3.errores.ConflictException
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 
@@ -64,29 +65,23 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
         repositorioIngredientes.obtenerObjeto(id) ?: throw RuntimeException("No se encontró el pedido de id <$id>")
 
     fun crearIngrediente(ingredienteNuevo: Ingrediente) {
-//        val ingredienteNuevo = Ingrediente(
-//            nombre = ingredienteDTO.name,
-//            costoMercado = ingredienteDTO.cost,
-//            esOrigenAnimal = ingredienteDTO.esOrigenAnimal,
-//            grupoAlimenticio = ingredienteDTO.foodGroup
-//        )
         ingredienteNuevo.cumpleCriterioDeCreacion()
+        if (repositorioIngredientes.ingredienteYaExiste(ingredienteNuevo.nombre)){
+            throw ConflictException("El ingrediente con el nombre '${ingredienteNuevo.nombre}' ya existe.")
+        }
         repositorioIngredientes.crear(ingredienteNuevo)
     }
 
     fun actualizarIngrediente(ingredienteActualizado: Ingrediente): Ingrediente {
-//        val ingredienteActualizado = ingredienteDTO.toDOM()
-
         ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)
-
 
         return ingredienteActualizado
     }
 
     fun eliminarIngrediente(id: Int) {
         if (repositorioPlatos.algunoContieneIngrediente(id))
-            throw BusinessException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
+            throw ConflictException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
         repositorioIngredientes.eliminarDeColeccion(id)
 
     }
