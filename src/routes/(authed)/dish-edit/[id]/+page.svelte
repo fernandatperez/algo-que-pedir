@@ -5,7 +5,7 @@
   import type { ValidationMessage } from "$lib/domain/validationMessage";
   import { showError } from "$lib/domain/errorHandler.js";
   import { menuItemsService } from "$lib/services/MenuItemService.js";
-  import { MenuItemType } from "$lib/domain/menuItem.js";
+  import { MenuItemType, type MenuItemJSON } from "$lib/domain/menuItem.js";
   import { goto } from "$app/navigation";
   import { IngredientType } from "$lib/domain/ingredient.js";
   import ValidationField from "$lib/components/ValidationField.svelte";
@@ -19,7 +19,7 @@
   let { data } = $props()
   const { nuevoItem, item } = data
   
-  let itemEdit = $state(item.toJSON())
+  let itemEdit = $state(item)
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
@@ -44,9 +44,9 @@
     const formData = new FormData(form) // creo el formData
     
     // Con form data
-    const menuItem: MenuItemType = new MenuItemType(
+    const newItem: MenuItemType = new MenuItemType(
       itemEdit.id,
-      (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
+      (formData.get("name") ? formData.get("name") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
       itemEdit.precio,
       (formData.get("valorBase") ? formData.get("valorBase") : itemEdit.valorBase) as number,
@@ -56,20 +56,21 @@
       platoEnPromo,
       itemEdit.ingredientes
     )
-    console.info("MENU ITEM GENERADO:", menuItem)
-    menuItem.validate()
+    //  Primero valido con el item de dominio, despues paso a JSON y lo mando. No?
+    newItem.validate()
     
-    if (menuItem.errors.length > 0) {
-      errors = [...menuItem.errors]
+    if (newItem.errors.length > 0) {
+      errors = [...newItem.errors]
       return 
     }
-    
+
     try {
       if (esNuevoItem) {
-        await menuItemsService.createMenuItem(menuItem)
+        console.info(newItem)
+        await menuItemsService.createMenuItem(newItem)
         toasts.push('Plato generado exitosamente. Seras redirigido a Menu', {type: 'success'})
       } else {
-        await menuItemsService.updateMenuItem(menuItem)
+        await menuItemsService.updateMenuItem(newItem)
         toasts.push('Plato modificado con exito. Seras redirigido a Menu', {type: 'success'})
       }
       // Aca poner un toast de guardado exitoso
@@ -90,41 +91,36 @@
     toastLock = false
   }  
   
-  const deleteItem = (ingredientId: number) => {
-    const index = itemEdit.ingredientes.findIndex(i => i.id == ingredientId)
-    if (index != -1) {
-      itemEdit.ingredientes.splice(index, 1)
-      selectedIngs.length = 0
-    }
+  const deleteItem = (ingredientId: number) => {  
+    itemEdit.ingredientes = itemEdit.ingredientes.filter(i => i.id !== ingredientId)
+    itemEdit = {...itemEdit} as MenuItemType
     showModalDelete = false
   }
-  
+
   let selectedIngs: IngredientType[] = $state([])
   let availableIngs: IngredientType[] = $state([])
 
   const fetchIng = async () => {
     try {
       const allIngs = await ingredientService.getAllIngredients()
-      console.info(allIngs)
-      availableIngs = MenuItemType.availableIngs(allIngs, itemEdit)
-      console.info(availableIngs)
+      const itemIngs = itemEdit.ingredientes.map(it => it.id as number)
+      availableIngs = MenuItemType.availableIngs(allIngs, itemIngs)
       showModalAdd = true
     } catch (error) {
       console.error(error)
     }
   }
   
-  // let availableIngs: IngredientType[] = fetchIng
-
   const guardarModal = () => {
     showModalAdd = false
     selectedIngs.forEach(it => itemEdit.ingredientes.push(it))
-    selectedIngs.length = 0 // ??
+    itemEdit = {...itemEdit} as MenuItemType
+    selectedIngs.length = 0
   }
 
   const descartarModal = () => {
     showModalAdd = false
-    selectedIngs.length = 0 // ??
+    selectedIngs.length = 0
   }
 
   function openModalDelete(id: number) {
@@ -201,9 +197,10 @@
               class="input-primary"
               id="product-name"
               name="name"
-              bind:value={itemEdit.nombre}
+              value={itemEdit.nombre}
               placeholder="Escribir |"
             />
+            <!-- Saque los bind:value, si despues vamos a usar el formData no me interesa bindear con nada reactivamente -->
             <ValidationField errors={errors} field="nombre" />
           </div>
           <div class="container-column input-group">
@@ -228,7 +225,7 @@
               class="input-primary"
               id="url-product-img"
               name="imagen"
-              bind:value={itemEdit.imagen}
+              value={itemEdit.imagen}
               placeholder="Escribir |"
             />
             <ValidationField errors={errors} field="imagen" />
@@ -260,7 +257,7 @@
               class="input-primary number-input"
               id="product-base-cost"
               name="valorBase"
-              bind:value={itemEdit.valorBase}
+              value={itemEdit.valorBase}
               placeholder="Escribir |"
               step="any"
             />
@@ -363,6 +360,7 @@
           </section>
           <section class="cell col-centered" id="acciones">Acciones</section>
         </header>
+        <!-- No logro hacer que se actualice la vista. Cuando era JSON funcionaba por algun motivo, ahora ya no -->
         {#each itemEdit.ingredientes as ing (ing.id)}
           <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing}/>
@@ -412,3 +410,11 @@
     </form>
   </article>
 </main>
+
+<!-- <div style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;">
+  <pre style="font-weight: bold; font-size: 1.2rem; white-space: pre-wrap; word-wrap: break-word;">
+    {JSON.stringify(itemEdit.ingredientes, null, 2)}
+    {JSON.stringify(itemEdit.precio, null, 2)}
+    {JSON.stringify(itemEdit.valorBase, null, 2)}
+  </pre>
+</div> -->
