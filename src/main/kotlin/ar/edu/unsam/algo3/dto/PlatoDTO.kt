@@ -6,6 +6,13 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.plato.Plato
 
 // Armar DTO aparte para el menu
+data class PlatoMenuDTO(
+    val id: Int,
+    val nombre: String,
+    val descripcion: String,
+    val precio: Double,
+    val imagen: String
+)
 
 data class PlatoDTO(
     val id : Int,
@@ -71,6 +78,15 @@ fun Plato.toDTO(): PlatoDTO {
     )
 }
 
+fun Plato.toPlatoMenuDTO(): PlatoMenuDTO {
+    return PlatoMenuDTO(
+        id = this.id,
+        nombre = this.nombre,
+        descripcion = this.descripcion,
+        precio = this.valorVenta(),
+        imagen = this.urldeImagen
+    )
+}
 // Necesito que reciba la lista de ingredientes ya resuelta
 fun Plato.fromDTOUpdate(platoDTO: PlatoDTOUpdate, ingredientesMap: MutableList<Ingrediente>): Plato {
     val plato = Plato(

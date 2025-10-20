@@ -2,7 +2,9 @@ package ar.edu.unsam.algo3.controlador
 
 //import ar.edu.unsam.algo3.dto.PlatoDTO
 import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
+import ar.edu.unsam.algo3.dto.PlatoMenuDTO
 import ar.edu.unsam.algo3.dto.toDTOUpdate
+import ar.edu.unsam.algo3.dto.toPlatoMenuDTO
 //import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.servicios.PlatoService
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -19,9 +21,9 @@ class PlatoController(val platoService: PlatoService) {
 //  Inyeccion de dependencias de los singletons de servicios (y servicio conoce repo)
 
     @GetMapping("/platos")
-    fun getPlatos(): List<PlatoDTOUpdate> {
+    fun getPlatos(): List<PlatoMenuDTO> {
         val platos = platoService.getPlatos()
-        return platos.map { it.toDTOUpdate() }
+        return platos.map { it.toPlatoMenuDTO() }
     }
 
     @GetMapping("/platos/{id}")
