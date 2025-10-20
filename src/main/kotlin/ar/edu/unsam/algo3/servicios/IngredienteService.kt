@@ -11,6 +11,7 @@ import kotlinx.serialization.json.*
 import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.NotFoundException
+import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 
 
 open class ActualizadorIngredientes(
@@ -54,34 +55,41 @@ class InstanciaActualizador(
 
 // ========= LO NUEVO =========
 @Service
-class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, val servicePlato: PlatoService) {
-    fun ingredientes(): List<Ingrediente> =
-        repositorioIngredientes.objetosDeRepositorio()
+class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, val repositorioPlatos: RepositorioPlato) {
+    fun ingredientes(): List<IngredienteDTO> =
+        repositorioIngredientes.objetosDeRepositorio().map { it.toDTO() }
 
-    fun ingredientePorId(id: Int): Ingrediente =
-        repositorioIngredientes.obtenerObjeto(id) ?: throw RuntimeException("No se encontró el pedido de id <$id>")
+    fun ingredientePorId(id: Int): IngredienteDTO =
+        repositorioIngredientes.obtenerObjeto(id)?.toDTO() ?: throw RuntimeException("No se encontró el pedido de id <$id>")
 
-    fun crearIngrediente(ingredienteNuevo: Ingrediente) {
-//        val ingredienteNuevo = Ingrediente(
-//            nombre = ingredienteDTO.name,
-//            costoMercado = ingredienteDTO.cost,
-//            esOrigenAnimal = ingredienteDTO.esOrigenAnimal,
-//            grupoAlimenticio = ingredienteDTO.foodGroup
-//        )
+    fun crearIngrediente(ingredienteDTO: IngredienteDTO) {
+        val ingredienteNuevo = Ingrediente(
+            nombre = ingredienteDTO.name,
+            costoMercado = ingredienteDTO.cost,
+            esOrigenAnimal = ingredienteDTO.esOrigenAnimal,
+            grupoAlimenticio = ingredienteDTO.foodGroup
+        )
         ingredienteNuevo.cumpleCriterioDeCreacion()
         repositorioIngredientes.crear(ingredienteNuevo)
     }
 
-    fun actualizarIngrediente(ingredienteActualizado: Ingrediente): Ingrediente {
-//        val ingredienteActualizado = ingredienteDTO.toDOM()
+    fun actualizarIngrediente(ingredienteDTO: IngredienteDTO): IngredienteDTO {
+        val ingredienteActualizado = Ingrediente(
+            nombre = ingredienteDTO.name,
+            costoMercado = ingredienteDTO.cost,
+            esOrigenAnimal = ingredienteDTO.esOrigenAnimal,
+            grupoAlimenticio = ingredienteDTO.foodGroup
+        ).apply { this.id = ingredienteDTO.id }
 
         ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)
 
-        return ingredienteActualizado
+        return ingredienteActualizado.toDTO()
     }
 
     fun eliminarIngrediente(id: Int) {
+        if (repositorioPlatos.algunoContieneIngrediente(id))
+            throw BusinessException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
         repositorioIngredientes.eliminarDeColeccion(id)
     }
 }

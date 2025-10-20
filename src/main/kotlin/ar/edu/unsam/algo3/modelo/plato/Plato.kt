@@ -12,6 +12,8 @@ import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import java.time.LocalDate
 import kotlin.math.max
+import kotlin.math.pow
+import kotlin.math.round
 
 val porcentajePorNuevoMAX = 30.0
 val porcentajePorNuevoMIN = 10.0
@@ -58,7 +60,7 @@ class Plato(
 
     fun costoProduccion(): Double = ingredientes.sumOf { it.costoMercado }
 
-    fun valorVenta(): Double = if (this.esNuevo()) valorVentaNuevo() else valorVentaEnPromo()
+    fun valorVenta(): Double = (if (this.esNuevo()) valorVentaNuevo() else valorVentaEnPromo()).redondear(2)
 
     private fun valorVentaNuevo(): Double =
         this.aplicacionesPrecioBase() - (this.aplicacionesPrecioBase() * this.porcentajePorNuevo())
@@ -90,6 +92,11 @@ class Plato(
     fun getValorBase(): Double = this.valorBase
 
     fun setValorBase(valor: Double) { this.valorBase = valor }
+
+    fun Double.redondear(digitos: Int): Double {
+        val factor = 10.0.pow(digitos)
+        return round(this * factor) / factor
+    }
     //    ========== Metodos de busqueda del repositorio ==============
 
     override var id = 0

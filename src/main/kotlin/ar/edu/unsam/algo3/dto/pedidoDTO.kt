@@ -3,8 +3,6 @@ package ar.edu.unsam.algo3.dto
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
-import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
-import ar.edu.unsam.algo3.modelo.plato.toDTO
 
 data class PedidoDTO (
     val id: Int,

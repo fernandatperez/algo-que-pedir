@@ -1,7 +1,11 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.modelo.plato.Plato
-import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
+//import ar.edu.unsam.algo3.dto.PlatoDTO
+import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
+import ar.edu.unsam.algo3.dto.PlatoMenuDTO
+import ar.edu.unsam.algo3.dto.toDTOUpdate
+import ar.edu.unsam.algo3.dto.toPlatoMenuDTO
+//import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.servicios.PlatoService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,24 +21,26 @@ class PlatoController(val platoService: PlatoService) {
 //  Inyeccion de dependencias de los singletons de servicios (y servicio conoce repo)
 
     @GetMapping("/platos")
-    fun getPlatos(): List<PlatoDTO> {
-        return platoService.getPlatos()
+    fun getPlatos(): List<PlatoMenuDTO> {
+        val platos = platoService.getPlatos()
+        return platos.map { it.toPlatoMenuDTO() }
     }
 
     @GetMapping("/platos/{id}")
-    fun getPlato(@PathVariable id: Int): PlatoDTO {
+    fun getPlato(@PathVariable id: Int): PlatoDTOUpdate {
 //        Obtener informacion de un plato especifico
-        return platoService.obtenerPlato(id)
+        return platoService.obtenerPlato(id).toDTOUpdate()
     }
 
     @PostMapping("/platos") // Maxi
-    fun postPlato(@RequestBody objeto: PlatoDTO) {
-        platoService.crearPlato(objeto)
+    fun createPlato(@RequestBody objeto: PlatoDTOUpdate): PlatoDTOUpdate {
+        return platoService.crearPlato(objeto).toDTOUpdate()
     }
 
     @PutMapping("/platos/{id}")
-    fun putPlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO) {
+    fun updatePlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTOUpdate): PlatoDTOUpdate {
 //        Editar un plato existente
-        platoService.modificarPlato(id, platoAModificar)
+        platoService.modificarPlato(platoAModificar)
+        return platoService.obtenerPlato(platoAModificar.id).toDTOUpdate()
     }
 }
