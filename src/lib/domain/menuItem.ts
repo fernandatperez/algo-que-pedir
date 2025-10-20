@@ -1,6 +1,4 @@
-import { storeMOCK } from '$lib/data/mock/store'
 import { IngredientType } from './ingredient'
-import type { StoreJSON } from './store'
 
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
@@ -16,7 +14,6 @@ export type MenuItemJSON = {
   enPromocion: boolean
   // ->
   ingredientes: number[]
-  store: StoreJSON
   fechaCreacion: string
   porcentajeDescuento: number
 }
@@ -53,7 +50,6 @@ export class MenuItemType {
     public enPromocion: boolean = false,
     // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
-    public store: StoreJSON = storeMOCK, // ! tenes que cambiar esto
     public fechaCreacion: string = '',
     public porcentajeDescuento: number = 0
   ) {}
@@ -80,7 +76,6 @@ export class MenuItemType {
       ingredientes: this.ingredientes.map(ing => ing.id) as number[], // Feo pero sino me dice que puede ser undefined ->
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
-      store: this.store, 
       fechaCreacion: this.fechaCreacion,
       porcentajeDescuento: this.porcentajeDescuento
     }
