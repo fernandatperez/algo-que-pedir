@@ -15,10 +15,12 @@ import ar.edu.unsam.algo3.errores.BusinessException
 class LocalService(
     private val repositorioLocal: RepositorioLocal  // ← Inyecta el repositorio específico
 ) {
-    // antes esto devolvia una lista de localDTO, lo que me parece que no esta bien porque un perfil esta vinculado a un solo local, pero lo dejo porque si no tengo que cambiar todo el funcionamiento
-    fun get(mail: String): List<LocalDTO> =
-        listOf(repositorioLocal.findByEmail(mail).toDTO() ?: throw BusinessException("No se encontro un local"))
-// listOf solo porque espera una lista pero devuleve 1 solo
+    //aca cambio para que el local que traiga sea el unico que matchee con el mail logueado
+    fun get(mail: String): LocalDTO {
+        val local = repositorioLocal.findByEmail(mail)
+        return local.toDTO()
+    }
+
     fun update(localDTO: LocalDTO) {
         val email = localDTO.email ?: throw BusinessException("Email es requerido")
         val localExistente = repositorioLocal.findByEmail(email)
@@ -40,10 +42,6 @@ class LocalService(
             if (localDTO.storePaymentTransferencia) add(Pago.TRANSFERENCIA_BANCARIA)
         }
     }
-
     repositorioLocal.actualizar(localExistente)
-}
-
-
-
+    }
 }

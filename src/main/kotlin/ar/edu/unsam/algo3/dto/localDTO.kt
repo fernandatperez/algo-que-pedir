@@ -19,9 +19,6 @@ data class LocalDTO(
     val storePaymentTransferencia: Boolean
 )
 
-
-
-
 fun Local.toDTO(): LocalDTO {
     return LocalDTO(
         id = this.id,

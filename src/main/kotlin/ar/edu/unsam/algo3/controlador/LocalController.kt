@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.controlador
 
+import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.LocalDTO
 import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
@@ -12,7 +13,7 @@ class LocalController(
 ) {
 
     @GetMapping
-    fun get(@RequestParam mail: String): List<LocalDTO> {
+    fun get(@RequestParam mail: String): LocalDTO {
         return localService.get(mail)
     }
 
