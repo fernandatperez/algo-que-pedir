@@ -18,7 +18,7 @@
 
     // Todos los pedidos (ejemplo)
     // mejor pedirlo filtrado al back, y no pedir todo
-    let orders = $state<Order[]>([]);
+    let orders = $state<Order[]>([])
     let errorMessage = $state('')
     let toastLock: boolean = false
 
@@ -40,22 +40,17 @@
     onMount(getOrders)
 
     const prepararPedido = async (order: Order) => {
-        // console.log("Preparando pedido", order.id)
-        order.estado = Estado.PREPARADO
-        await orderService.updateOrderState(order)
-        await getOrders()
-        toasts.push('Pedido enviado a preparación', {type: 'info'})
-        // console.log("Pedido preparado", order.id)
-    }
-
-    // Como hago para hacerlo una sola funcion que reciba el estado al que cambiará
-    const cancelarPedido = async (order: Order) => {
-        // console.log("Preparando pedido", order.id)
-        order.estado = Estado.CANCELADO
-        await orderService.updateOrderState(order)
-        await getOrders()
-        toasts.push('Pedido CANCELADO', {type: 'error'})
-        // console.log("Pedido cancelado", order.id)
+        const response = await orderService.updateOrderState(order.id)
+        if (response.status == 200) {
+            orders = orders.filter(o => o.id != order.id)
+            toasts.push('Pedido enviado a preparación', {type: 'info'})
+        } else {    
+            showError('Error actualizando el estado del pedido', new Error('Error en la respuesta del servidor'))
+            return
+        }
+        // console.log("Updated Order:", updatedOrder)
+        console.log(orders)
+        // await getOrders() // no hacer esto puede set costoso. Hacerla en memoria
     }
 
     const releaseToast = () => {
@@ -93,7 +88,7 @@
     <section class="main-grid">
         <!-- Single order -->
         {#each orders as order}
-            <OrderCard order={order} preparar={() => prepararPedido(order)} cancelar={() => cancelarPedido(order)}/>
+            <OrderCard order={order} action={() => prepararPedido(order)}/>
         {/each}
         {#if orders.length == 0}
                 <div class="no-orders">No hay pedidos</div>

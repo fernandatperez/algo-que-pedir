@@ -1,24 +1,33 @@
-import { MenuItemType, type MenuItemJSON } from '$lib/domain/menuItem'
+import { MenuItemType, type MenuItemJSON, type MenuItemJSONReduced } from '$lib/domain/menuItem'
 
 import axios from 'axios'
 import { REST_SERVER_URL } from './configuration'
+import { ingredientService } from './IngredientService'
 import { IngredientType } from '$lib/domain/ingredient'
 
 class MenuItemsService {
   async getAllMenuItems(){
     const storeMail = sessionStorage.getItem('email') // envio el dato como query param
-    const response = await axios.get<MenuItemJSON[]>(REST_SERVER_URL + '/platos', { params: { mail: storeMail }})
-    const cosa = response.data.map(MenuItemType.fromJson)
-    return cosa
-    // return MENU_ITEMS_JSON_MOCK.map(MenuItemType.fromJson)
+    const response = await axios.get<MenuItemJSONReduced[]>(REST_SERVER_URL + '/platos', { params: { mail: storeMail }})
+    const menuItemReduced = response.data
+    return menuItemReduced
+
   }
 
   async getMenuItem(searchId: number) {
     const response = await axios.get<MenuItemJSON>(
       REST_SERVER_URL + '/platos/' + searchId
     )
-    
+    // Como del back traigo IDs, los tengo que buscar para mostrarlos aca
+    const ingredients = await Promise.all(
+      response.data.ingredientes.map(ingId =>
+        ingredientService.getIngredientById(ingId)
+      )
+    )
+
     const plato = MenuItemType.fromJson(response.data)
+    plato.ingredientes = ingredients
+
     plato.ingredientes = plato.ingredientes.map(ingredienteJSON =>
       IngredientType.fromJson(ingredienteJSON))
 
@@ -32,13 +41,10 @@ class MenuItemsService {
     const creacion = new Date()
     const storeMail = sessionStorage.getItem('email') // envio el dato como query param
     item.fechaCreacion = creacion.toISOString().split('T')[0]
-    // const itemJSON: MenuItemJSON = item.toJSON()
-    // // eslint-disable-next-line no-console
-    // console.info(itemJSON.id)
-    const {id, ...itemSinId} = item
     await axios.post<MenuItemJSON>(
       REST_SERVER_URL + '/platos',
-      itemSinId, { params: { mail: storeMail }}
+      item.toJSON(), 
+      { params: { mail: storeMail }}
     )
   }
 

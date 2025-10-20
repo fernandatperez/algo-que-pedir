@@ -60,8 +60,8 @@ class OrderService {
   //  return Order.fromJSON(ORDERS_MOCK[index])
   // }
 
-  async updateOrderState(order: Order) {
-    return axios.put<OrderJSON>(REST_SERVER_URL + '/modificar_pedido/' + order.id, order.toJSON())
+  async updateOrderState(id: number) {
+    return axios.put<OrderJSON>(REST_SERVER_URL + '/preparar_pedido/' + id)
   }
 
 }

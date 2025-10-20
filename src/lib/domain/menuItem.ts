@@ -14,10 +14,19 @@ export type MenuItemJSON = {
   costoProduccion: number
   esDeAutor: boolean
   enPromocion: boolean
-  ingredientes: IngredientType[]
+  // ->
+  ingredientes: number[]
   store: StoreJSON
   fechaCreacion: string
   porcentajeDescuento: number
+}
+
+export type MenuItemJSONReduced = {
+  id: number
+  nombre: string
+  descripcion: string
+  imagen: string
+  precio: number
 }
 
 export class ValidationMessage { //esto pordiramos usar todos la misma
@@ -42,6 +51,7 @@ export class MenuItemType {
     public costoProduccion: number = 0,
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
+    // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
     public store: StoreJSON = storeMOCK, // ! tenes que cambiar esto
     public fechaCreacion: string = '',
@@ -67,7 +77,7 @@ export class MenuItemType {
       costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
-      ingredientes: this.ingredientes,
+      ingredientes: this.ingredientes.map(ing => ing.id) as number[], // Feo pero sino me dice que puede ser undefined ->
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
       store: this.store, 
@@ -76,10 +86,15 @@ export class MenuItemType {
     }
   }
 
-  static availableIngs(ingredients: IngredientType[], menuItem: MenuItemJSON): IngredientType[] {
-    const difference: IngredientType[] = ingredients.filter(ingredient => !menuItem.ingredientes.find(ing => ingredient.id == ing.id))
+  static availableIngs(availableIngredients: IngredientType[], menuItemIngredients: number[]): IngredientType[] {
+    // -> ahora se filtra con IDs. Testear
+    const difference: IngredientType[] = availableIngredients.filter(ingredient => !menuItemIngredients.find(id => ingredient.id == id))
     return difference
   }
+
+  // costoDeProduccion(): string {
+  //   return this.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2)
+  // }
 
   validate() {
     this.errors = []
@@ -88,9 +103,9 @@ export class MenuItemType {
       this.addError('nombre', 'Debe ingresar nombre del plato')
     }
     
-    if (this.precio <= 0 || !this.precio) {
-      this.addError('precio', 'El precio debe ser mayor a 0')
-    }
+    // if (this.precio <= 0 || !this.precio) {
+    //   this.addError('precio', 'El precio debe ser mayor a 0')
+    // }
     
     if (!this.imagen) {
       this.addError('imagen', 'Debe seleccionar una imagen')
@@ -104,16 +119,13 @@ export class MenuItemType {
       this.addError('valorBase', 'El valor base no puede ser 0 o menor a el')
     }
 
-    if (this.ingredientes.length == 0) {
-      this.addError('ingredients', 'El plato debe tener al menos 1 ingrediente')
-    }
-
   }
+  // Si no usamos esto saquemoslo ->
 
   // Metodo helper para formatear precio
-  getFormattedPrice(): string {
-    return `$${this.precio}`
-  }
+  // getFormattedPrice(): string {
+  //   return `$${this.precio}`
+  // }
 
   // Metodo helper para obtener la ruta completa de la imagen no se si esta bien porque ya tiene parte de la ruta
   getImagePath(): string {
