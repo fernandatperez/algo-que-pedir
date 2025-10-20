@@ -411,8 +411,10 @@
   </article>
 </main>
 
-<div style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;">
+<!-- <div style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;">
   <pre style="font-weight: bold; font-size: 1.2rem; white-space: pre-wrap; word-wrap: break-word;">
     {JSON.stringify(itemEdit.ingredientes, null, 2)}
+    {JSON.stringify(itemEdit.precio, null, 2)}
+    {JSON.stringify(itemEdit.valorBase, null, 2)}
   </pre>
-</div>
+</div> -->
