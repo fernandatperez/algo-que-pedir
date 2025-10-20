@@ -29,13 +29,13 @@ class PlatoService(
         if (platoModelo != null) {
             return platoModelo
         }
-        throw NotFoundException("No se encontro el plato en el repositorio")
+        throw NotFoundException("Plato con id $id no existe en el repositorio")
     }
 
     fun obtenerIngredientes(ids: List<Int>): MutableList<Ingrediente> {
         val ingredientes = ids.map { id ->
             repositorioIngredientes.obtenerObjeto(id)
-                ?: throw NotFoundException("Ingrediente con id $id no encontrado")
+                ?: throw NotFoundException("Ingrediente con id $id no existe en el repositorio")
         }.toMutableList()
         return ingredientes
     }
