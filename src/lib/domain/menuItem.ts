@@ -21,6 +21,14 @@ export type MenuItemJSON = {
   porcentajeDescuento: number
 }
 
+export type MenuItemJSONReduced = {
+  id: number
+  nombre: string
+  descripcion: string
+  imagen: string
+  precio: number
+}
+
 export class ValidationMessage { //esto pordiramos usar todos la misma
   constructor(
     public field: string,

@@ -1,4 +1,4 @@
-import { MenuItemType, type MenuItemJSON } from '$lib/domain/menuItem'
+import { MenuItemType, type MenuItemJSON, type MenuItemJSONReduced } from '$lib/domain/menuItem'
 
 import axios from 'axios'
 import { REST_SERVER_URL } from './configuration'
@@ -7,9 +7,9 @@ import { IngredientType } from '$lib/domain/ingredient'
 
 class MenuItemsService {
   async getAllMenuItems(){
-    const response = await axios.get<MenuItemJSON[]>(REST_SERVER_URL + '/platos')
-    const menuItemDom = response.data.map(content => MenuItemType.fromJson(content))
-    return menuItemDom
+    const response = await axios.get<MenuItemJSONReduced[]>(REST_SERVER_URL + '/platos')
+    const menuItemReduced = response.data
+    return menuItemReduced
   }
 
   async getMenuItem(searchId: number) {

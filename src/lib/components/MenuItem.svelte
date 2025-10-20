@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { MenuItemType } from "$lib/domain/menuItem.ts";
+  import type { MenuItemJSONReduced } from "$lib/domain/menuItem.ts";
 
-  const { menuitem } = $props<{ menuitem: MenuItemType }>();
+  const { menuitem } = $props<{ menuitem: MenuItemJSONReduced }>();
   // aca decis que menuitem es de tipo MenuItemType que es la interfaz
   // const { imagen, alt = "", nombre, descripcion, precio } = $props<MenuItemType>();
 
