@@ -13,13 +13,10 @@
   import errorImage from '$lib/assets/img/error.png';
   
   let store = $state<StoreType[]>([])
-  let newStore = <StoreType>(new StoreType())
   let currentStore = $state<StoreType | null>(null) 
-  let formElement: HTMLFormElement | null = null
   let originalStore = $state<StoreType | null>(null)
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
-  let formKey = $state(0)
 
   const findStore = async () => {
     try{
@@ -108,8 +105,8 @@
       }
       
       const storeId = stores[0].id
-      
-      await storeService.updateStore(storeId, store)
+
+      await storeService.updateStore(store)
       await findStore()
       errors = []
       toasts.push('Tienda actualizada exitosamente', {type: 'success'})
