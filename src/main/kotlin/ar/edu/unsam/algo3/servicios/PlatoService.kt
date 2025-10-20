@@ -50,7 +50,7 @@ class PlatoService(
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = ingredientes,
-            local = LocalPollos, // en ningun lugar pones el local no se como seria
+            local = platoDTO.store, // en ningun lugar pones el local no se como seria
         )
         platoDOM.crear()
         repositorioPlatos.crear(platoDOM)

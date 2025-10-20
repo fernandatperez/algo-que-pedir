@@ -25,7 +25,7 @@ data class PlatoDTO(
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
     val ingredientes: List<IngredienteDTO>,
-    val store: Local = LocalPollos, // Esto deberia ser DTO tambien
+    val store: Local, // Esto deberia ser DTO tambien
 )
 
 
@@ -41,7 +41,7 @@ data class PlatoDTOUpdate(
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
     val ingredientes: List<Int>,
-    val store: Local = LocalPollos, // Esto deberia ser DTO tambien
+    val store: Local, // Esto deberia ser DTO tambien
 )
 
 fun Plato.toDTOUpdate(): PlatoDTOUpdate {
