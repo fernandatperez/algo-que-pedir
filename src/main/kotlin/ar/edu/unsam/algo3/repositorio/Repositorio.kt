@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.repositorio
 
 import ar.edu.unsam.algo3.errores.BusinessException
+import ar.edu.unsam.algo3.errores.NotFoundException
 
 // Para que un tipo generico pueda ser mas de una sola cosa
 // class Repositorio<Type> where Type : UnaInterfaz, Type : OtraInterfaz...
@@ -20,12 +21,12 @@ open class Repositorio<Type : ElementoDeRepositorio> {
     }
 
     fun eliminarDeColeccion(id: Int) =
-        if (id == -1) throw BusinessException("No existe el id $id en repositorio para eliminarlo de la coleccion")
+        if (id == -1) throw NotFoundException("No existe el id $id en repositorio para eliminarlo de la coleccion")
         else coleccion.remove(obtenerObjeto(id))
 
     fun actualizar(objetoActualizado: Type) {
         val index = coleccion.indexOfFirst { it.id == objetoActualizado.id }
-        if (index == -1) throw BusinessException("No existe un indice donde exista este elemento en el repositorio. ${objetoActualizado.id}}")
+        if (index == -1) throw NotFoundException("No existe un indice donde exista este elemento en el repositorio. ${objetoActualizado.id}}")
         coleccion[index] = objetoActualizado
     }
 

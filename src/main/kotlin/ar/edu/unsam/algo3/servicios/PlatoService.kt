@@ -8,6 +8,7 @@ import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
 //import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.fromDTOUpdate
+import ar.edu.unsam.algo3.errores.NotFoundException
 //import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
@@ -28,13 +29,13 @@ class PlatoService(
         if (platoModelo != null) {
             return platoModelo
         }
-        throw BusinessException("No se encontro el plato en el repositorio")
+        throw NotFoundException("No se encontro el plato en el repositorio")
     }
 
     fun obtenerIngredientes(ids: List<Int>): MutableList<Ingrediente> {
         val ingredientes = ids.map { id ->
             repositorioIngredientes.obtenerObjeto(id)
-                ?: throw IllegalArgumentException("Ingrediente con id $id no encontrado")
+                ?: throw NotFoundException("Ingrediente con id $id no encontrado")
         }.toMutableList()
         return ingredientes
     }
