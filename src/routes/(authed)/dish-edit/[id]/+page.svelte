@@ -32,7 +32,7 @@
   let showModalDelete = $state(false)
   let showModalDiscard = $state(false)
 
-  const productionCost = $derived(itemEdit.costoDeProduccion())
+  const productionCost = $derived(itemEdit.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2))
 
   const onSubmit = async (ev: SubmitEvent) => {
     const esNuevoItem = itemEdit.id == -1
@@ -46,7 +46,7 @@
     // Con form data
     const newItem: MenuItemType = new MenuItemType(
       itemEdit.id,
-      (formData.get("nombre") ? formData.get("nombre") : itemEdit.nombre) as string,
+      (formData.get("name") ? formData.get("name") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
       itemEdit.precio,
       (formData.get("valorBase") ? formData.get("valorBase") : itemEdit.valorBase) as number,
@@ -66,6 +66,7 @@
 
     try {
       if (esNuevoItem) {
+        console.info(newItem)
         await menuItemsService.createMenuItem(newItem)
         toasts.push('Plato generado exitosamente. Seras redirigido a Menu', {type: 'success'})
       } else {
@@ -90,24 +91,20 @@
     toastLock = false
   }  
   
-  const deleteItem = (ingredientId: number) => {
-    const index = itemEdit.ingredientes.findIndex(i => i.id == ingredientId)
-    if (index != -1) {
-      itemEdit.ingredientes.splice(index, 1)
-      selectedIngs.length = 0
-    }
+  const deleteItem = (ingredientId: number) => {  
+    itemEdit.ingredientes = itemEdit.ingredientes.filter(i => i.id !== ingredientId)
+    itemEdit = {...itemEdit} as MenuItemType
     showModalDelete = false
   }
-  
+
   let selectedIngs: IngredientType[] = $state([])
   let availableIngs: IngredientType[] = $state([])
 
   const fetchIng = async () => {
     try {
       const allIngs = await ingredientService.getAllIngredients()
-      console.info(allIngs)
-      availableIngs = MenuItemType.availableIngs(allIngs, itemEdit.toJSON()) // Serializa a JSON para la funcion de busqueda
-      console.info(availableIngs)
+      const itemIngs = itemEdit.ingredientes.map(it => it.id as number)
+      availableIngs = MenuItemType.availableIngs(allIngs, itemIngs)
       showModalAdd = true
     } catch (error) {
       console.error(error)
@@ -117,12 +114,13 @@
   const guardarModal = () => {
     showModalAdd = false
     selectedIngs.forEach(it => itemEdit.ingredientes.push(it))
-    selectedIngs.length = 0 // ??
+    itemEdit = {...itemEdit} as MenuItemType
+    selectedIngs.length = 0
   }
 
   const descartarModal = () => {
     showModalAdd = false
-    selectedIngs.length = 0 // ??
+    selectedIngs.length = 0
   }
 
   function openModalDelete(id: number) {
@@ -362,6 +360,7 @@
           </section>
           <section class="cell col-centered" id="acciones">Acciones</section>
         </header>
+        <!-- No logro hacer que se actualice la vista. Cuando era JSON funcionaba por algun motivo, ahora ya no -->
         {#each itemEdit.ingredientes as ing (ing.id)}
           <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing}/>
@@ -411,3 +410,9 @@
     </form>
   </article>
 </main>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;">
+  <pre style="font-weight: bold; font-size: 1.2rem; white-space: pre-wrap; word-wrap: break-word;">
+    {JSON.stringify(itemEdit.ingredientes, null, 2)}
+  </pre>
+</div>

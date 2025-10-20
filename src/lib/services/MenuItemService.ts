@@ -2,6 +2,7 @@ import { MenuItemType, type MenuItemJSON } from '$lib/domain/menuItem'
 
 import axios from 'axios'
 import { REST_SERVER_URL } from './configuration'
+import { ingredientService } from './IngredientService'
 import { IngredientType } from '$lib/domain/ingredient'
 
 class MenuItemsService {
@@ -15,8 +16,16 @@ class MenuItemsService {
     const response = await axios.get<MenuItemJSON>(
       REST_SERVER_URL + '/platos/' + searchId
     )
-    
+    // Como del back traigo IDs, los tengo que buscar para mostrarlos aca
+    const ingredients = await Promise.all(
+      response.data.ingredientes.map(ingId =>
+        ingredientService.getIngredientById(ingId)
+      )
+    )
+
     const plato = MenuItemType.fromJson(response.data)
+    plato.ingredientes = ingredients
+
     plato.ingredientes = plato.ingredientes.map(ingredienteJSON =>
       IngredientType.fromJson(ingredienteJSON))
 

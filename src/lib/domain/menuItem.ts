@@ -78,15 +78,15 @@ export class MenuItemType {
     }
   }
 
-  static availableIngs(ingredients: IngredientType[], menuItem: MenuItemJSON): IngredientType[] {
+  static availableIngs(availableIngredients: IngredientType[], menuItemIngredients: number[]): IngredientType[] {
     // -> ahora se filtra con IDs. Testear
-    const difference: IngredientType[] = ingredients.filter(ingredient => !menuItem.ingredientes.find(id => ingredient.id == id))
+    const difference: IngredientType[] = availableIngredients.filter(ingredient => !menuItemIngredients.find(id => ingredient.id == id))
     return difference
   }
 
-  costoDeProduccion(): string {
-    return this.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2)
-  }
+  // costoDeProduccion(): string {
+  //   return this.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2)
+  // }
 
   validate() {
     this.errors = []
@@ -109,10 +109,6 @@ export class MenuItemType {
 
     if (this.valorBase <= 0) {
       this.addError('valorBase', 'El valor base no puede ser 0 o menor a el')
-    }
-
-    if (this.ingredientes.length == 0) {
-      this.addError('ingredients', 'El plato debe tener al menos 1 ingrediente')
     }
 
   }
