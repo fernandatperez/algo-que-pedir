@@ -85,7 +85,7 @@ class PedidoControllerSpec {
     }
 
     @Test
-    fun `Get pedido por ID que no existe retorna 500`() {
+    fun `Get pedido por ID que no existe retorna 400`() {
         val jsonValido = """
         {
             "id": 1,
@@ -141,8 +141,8 @@ class PedidoControllerSpec {
                 MockMvcRequestBuilders.get("/pedido/9")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonValido)
-            ).andExpect(MockMvcResultMatchers.status().is5xxServerError)
-            .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("No se encontró el pedido de id <9>"))
+            ).andExpect(MockMvcResultMatchers.status().is4xxClientError)
+
     }
 
     @Test

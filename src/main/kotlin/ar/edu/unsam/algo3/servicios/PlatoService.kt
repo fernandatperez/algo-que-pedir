@@ -1,15 +1,12 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.modelo.plato.Plato
-//import ar.edu.unsam.algo3.dto.PlatoDTO
-import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
+import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
-//import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.fromDTOUpdate
 import ar.edu.unsam.algo3.errores.NotFoundException
-//import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
@@ -17,11 +14,12 @@ import org.springframework.stereotype.Service
 @Service
 class PlatoService(
     val repositorioPlatos: RepositorioPlato,
+    private val repositorioLocal: RepositorioLocal,
     val repositorioIngredientes: RepositorioIngrediente
 ) {
 
-    fun getPlatos(): List<Plato> =
-        repositorioPlatos.objetosDeRepositorio()
+    fun getPlatos(mail: String): List<Plato> =
+        repositorioPlatos.buscar(mail)
 
     fun obtenerPlato(id: Int): Plato {
 //        obtenerObjeto ya hace la validacion de existencia del plato en el repo
@@ -40,18 +38,19 @@ class PlatoService(
         return ingredientes
     }
 
-    fun crearPlato(platoDTO: PlatoDTOUpdate): Plato {
+    fun crearPlato(platoDTO: PlatoDTOUpdate, mail: String): Plato  {
+        val localDePlato = repositorioLocal.findByEmail(mail)
+            ?: throw BusinessException("No se encontró un local con el mail $mail")
         val ingredientes = this.obtenerIngredientes(platoDTO.ingredientes)
-        println(ingredientes.toString())
 
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
-            valorBase = platoDTO.valorBase,
+            valorBase = platoDTO.precio,
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = ingredientes,
-            local = platoDTO.store, // en ningun lugar pones el local no se como seria
+            local = localDePlato,
         )
         platoDOM.crear()
         println(platoDOM.toString())
@@ -60,14 +59,16 @@ class PlatoService(
         return platoDOM
     }
 
-    fun modificarPlato(platoNuevo: PlatoDTOUpdate) {
+    fun modificarPlato(platoNuevo: PlatoDTOUpdate, mail: String): Plato {
 //        Buscar plato en repositorio
         var platoAModificar = this.obtenerPlato(platoNuevo.id)
 
         val ingredientes = this.obtenerIngredientes(platoNuevo.ingredientes)
         platoAModificar = platoAModificar.fromDTOUpdate(platoNuevo, ingredientes)
+        val localDePlato = repositorioLocal.findByEmail(mail)
+        platoAModificar.local = localDePlato
 
         repositorioPlatos.actualizar(platoAModificar)
-
+        return platoAModificar
     }
 }

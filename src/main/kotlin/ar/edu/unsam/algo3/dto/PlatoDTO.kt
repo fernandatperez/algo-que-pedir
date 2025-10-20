@@ -24,8 +24,7 @@ data class PlatoDTO(
     val costoProduccion: Double,
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
-    val ingredientes: List<IngredienteDTO>,
-    val store: Local, // Esto deberia ser DTO tambien
+    val ingredientes: List<IngredienteDTO>
 )
 
 
@@ -40,8 +39,7 @@ data class PlatoDTOUpdate(
     val costoProduccion: Double,
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
-    val ingredientes: List<Int>,
-    val store: Local, // Esto deberia ser DTO tambien
+    val ingredientes: List<Int>
 )
 
 fun Plato.toDTOUpdate(): PlatoDTOUpdate {
@@ -56,8 +54,6 @@ fun Plato.toDTOUpdate(): PlatoDTOUpdate {
         esDeAutor = this.esDeAutor,
         enPromocion = this.esNuevo(),
         ingredientes = this.ingredientes.map{ it.id },
-//        store = this.local.toResponse(), // Cuando tengamos lo mismo
-        store = this.local
     )
 }
 
@@ -72,9 +68,7 @@ fun Plato.toDTO(): PlatoDTO {
         costoProduccion = this.costoProduccion(),
         esDeAutor = this.esDeAutor,
         enPromocion = this.esNuevo(),
-        ingredientes = this.ingredientes.map{ it.toDTO() },
-//        store = this.local.toResponse(), // Cuando tengamos lo mismo
-        store = this.local
+        ingredientes = this.ingredientes.map{ it.toDTO() }
     )
 }
 

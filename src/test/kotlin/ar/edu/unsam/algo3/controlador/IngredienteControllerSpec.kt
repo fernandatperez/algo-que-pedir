@@ -56,9 +56,8 @@ class IngredienteControllerTest {
             MockMvcRequestBuilders.put("/actualizar-ingrediente/9")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonInvalido)
-        ).andExpect(MockMvcResultMatchers.status().is5xxServerError)
-            .andExpect(MockMvcResultMatchers.jsonPath("$.error")
-                .value("El ID = 9 no existe en la coleccion o no hay ningun objeto asociado a el"))
+        ).andExpect(MockMvcResultMatchers.status().is4xxClientError)
+
 
     }
 

@@ -4,9 +4,9 @@ import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.local.Local
 
 data class LocalDTO(
-    val id: Int,
+    val id: Int? = null,
     val name: String,
-    val email: String,
+    val email: String? = null,
     val storeURL: String,
     val storeAddress: String,
     val storeAltitude: Int,

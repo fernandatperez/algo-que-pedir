@@ -23,6 +23,8 @@ class ApplicationBootstrap(
 ) : InitializingBean {
 
     private lateinit var localInicial: Local
+    private lateinit var mcdonals: Local
+
 
 //    private var local = Local(
 //        nombre = "un Local",
@@ -50,7 +52,25 @@ class ApplicationBootstrap(
 
             }
 
+            mcdonals = Local().apply {
+                id = 121
+                nombre = "McDonald's"
+                email = "mcdonals@gmail.com"
+                password = "123"
+                url = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/2d/22/ba/it-s-mcdonalds-what-else.jpg?w=900&h=-1&s=1"
+                regalias = 5.0
+                porcentajeAcordado = 10.0
+                mediosDePago = mutableSetOf(Pago.EFECTIVO, Pago.QR)
+                direccion = Direccion(
+                    calle = "Av. Corrientes",
+                    altura = 3500,
+                    ubicacion = Point(-34.605, -58.41)
+                )
+            }
+
             repositorioLocal.crear(localInicial)
+            repositorioLocal.crear(mcdonals)
+
 //            repositorioLocal.crear(local)
 
 //            println("""
@@ -83,6 +103,11 @@ class ApplicationBootstrap(
     private lateinit var hamburguesa: Plato
     private lateinit var pizza: Plato
     private lateinit var ensalada: Plato
+    private lateinit var salmon: Plato
+    private lateinit var spaghettis: Plato
+    private lateinit var bigMac: Plato
+    private lateinit var alitas: Plato
+
 
     fun crearClientes() {
         repositorioClientes.limpiarColeccion()
@@ -219,10 +244,50 @@ class ApplicationBootstrap(
             local = localInicial,
             ingredientes = mutableListOf(lechuga,tomate)
         )
+        salmon = Plato(
+            nombre = "Salmón grillado",
+            descripcion = "Filete de salmón grillado con guarnición de verduras asadas",
+            valorBase = 14.5,
+            urldeImagen = "/src/lib/assets/img/salmon.png",
+            local = localInicial,
+            ingredientes = mutableListOf(carnederenacuajo, tomate, lechuga)
+        )
+
+        spaghettis = Plato(
+            nombre = "Spaghettis al pesto",
+            descripcion = "Pasta fresca con salsa de albahaca y queso rallado",
+            valorBase = 12.0,
+            urldeImagen = "/src/lib/assets/img/spagettis.png",
+            local = localInicial,
+            ingredientes = mutableListOf(quesocheddar, tomate)
+        )
+
+        bigMac = Plato(
+            nombre = "Big Mac",
+            descripcion = "Doble carne, queso cheddar, lechuga, pepinos y salsa especial",
+            valorBase = 10.99,
+            urldeImagen = "/src/lib/assets/img/hamburguesa.png",
+            local = mcdonals,
+            ingredientes = mutableListOf(carnederenacuajo, lechuga, quesocheddar)
+        )
+
+        alitas = Plato(
+            nombre = "Alitas BBQ",
+            descripcion = "Alitas de pollo bañadas en salsa barbacoa, acompañadas de papas fritas",
+            valorBase = 9.25,
+            urldeImagen = "/src/lib/assets/img/alitas.png",
+            local = mcdonals,
+            ingredientes = mutableListOf(carnederenacuajo, tomate)
+        )
+
         repositorioPlatos.apply {
             crear(hamburguesa)
             crear(pizza)
             crear(ensalada)
+            crear(salmon)
+            crear(spaghettis)
+            crear(bigMac)
+            crear(alitas)
         }
     }
 
@@ -231,7 +296,7 @@ class ApplicationBootstrap(
         repositorioPedidos.apply {
             crear(
                 usuario = sofiamiller,
-                local = Local(),
+                local = mcdonals, // a pedido de catt ;)
                 platos = mutableListOf(hamburguesa, pizza, ensalada),
                 medioDePago = Pago.QR,
                 estado = Estado.PENDIENTE

@@ -46,54 +46,27 @@ class ControladorLocalRealTest {
                 MockMvcRequestBuilders.put("/store-profile")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonValido)
-                    .sessionAttr("userEmail", "jorge@hotmail.com")
+                    .param("mail", "jorge@hotmail.com")
             )
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
 
-//    @Test
-//    fun `PUT con URL invalida retorna 500`() {
-//        val jsonInvalido = """
-//            {
-//                "name": "Test",
-//                "email": "jorge@hotmail.com",
-//                "storeURL": "url-invalida",
-//                "storeAddress": "Test 123",
-//                "storeAltitude": 100,
-//                "storeLatitude": -34.6,
-//                "storeLongitude": -58.4,
-//                "storeAppCommission": 50.0,
-//                "storeAuthorCommission": 50.0,
-//                "storePaymentEfectivo": true,
-//                "storePaymentQR": false,
-//                "storePaymentTransferencia": false
-//            }
-//        """.trimIndent()
-//
-//        mockMvc
-//            .perform(
-//                MockMvcRequestBuilders.put("/store-profile")
-//                    .contentType(MediaType.APPLICATION_JSON)
-//                    .content(jsonInvalido)
-//            )
-//            .andExpect(MockMvcResultMatchers.status().is5xxServerError)
-//    }
-
-
     @Test
-    fun `PUT sin medios de pago retorna 500`() {
+    fun `PUT con URL invalida retorna 400`() {
         val jsonInvalido = """
             {
                 "name": "Test",
-                "storeURL": "https://valido.com",
-                "email": "jorge@hotmail.com",
+                "storeURL": "url-invalida",  // Sin http
                 "storeAddress": "Test 123",
                 "storeAltitude": 100,
                 "storeLatitude": -34.6,
                 "storeLongitude": -58.4,
                 "storeAppCommission": 50.0,
                 "storeAuthorCommission": 50.0,
+                "storePaymentEfectivo": true,
+                "storePaymentQR": false,
+                "storePaymentTransferencia": false
             }
         """.trimIndent()
 
@@ -102,15 +75,46 @@ class ControladorLocalRealTest {
                 MockMvcRequestBuilders.put("/store-profile")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonInvalido)
+                    .param("mail", "jorge@hotmail.com")
             )
-            .andExpect(MockMvcResultMatchers.status().is5xxServerError)
+            .andExpect(MockMvcResultMatchers.status().is4xxClientError)
+    }
+
+
+    @Test
+    fun `PUT sin medios de pago retorna 400`() {
+        val jsonInvalido = """
+            {
+                "name": "Test",
+                "storeURL": "https://valido.com",
+                "storeAddress": "Test 123",
+                "storeAltitude": 100,
+                "storeLatitude": -34.6,
+                "storeLongitude": -58.4,
+                "storeAppCommission": 50.0,
+                "storeAuthorCommission": 50.0,
+                "storePaymentEfectivo": false,  // Todos false
+                "storePaymentQR": false,
+                "storePaymentTransferencia": false
+            }
+        """.trimIndent()
+
+        mockMvc
+            .perform(
+                MockMvcRequestBuilders.put("/store-profile")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(jsonInvalido)
+                    .param("mail", "jorge@hotmail.com")
+            )
+            .andExpect(MockMvcResultMatchers.status().is4xxClientError)
     }
 
 
     @Test
     fun `GET store-profile retorna 200`() {
         mockMvc
-            .perform(MockMvcRequestBuilders.get("/store-profile"))
+            .perform(MockMvcRequestBuilders.get("/store-profile")
+            .param("mail", "jorge@hotmail.com"))
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 }

@@ -25,7 +25,7 @@ class Plato(
     private var valorBase: Double = 0.0,
     var urldeImagen: String = "Sin URL para mostrar",
     var esDeAutor: Boolean = false,
-    val local: Local = Local(),
+    var local: Local = Local(),
     val ingredientes: MutableList<Ingrediente> = mutableListOf(),
     val fechaDeCreacion: LocalDate = LocalDate.of(2000, 1, 1),
 ) : ElementoDeRepositorio {
@@ -106,9 +106,10 @@ class Plato(
         coincideParcialmenteCon(criterio, nombre) ||
                 coincideParcialmenteCon(criterio, descripcion) ||
                 coincideParcialmenteCon(criterio, local.nombre) ||
-                coincideTotalmenteCon(criterio, local.direccion.calle)
+                coincideTotalmenteCon(criterio, local.direccion.calle) ||
+                coincideParcialmenteCon(criterio, local.email)
 
-    override fun cumpleCriterioDeCreacion() {
+                override fun cumpleCriterioDeCreacion() {
         if (!noEstaVacio(nombre)) throw NotFoundException("El Plato tiene que tener un nombre")
         if (!noEstaVacio(descripcion)) throw NotFoundException("El Plato tiene que tener una descripcion")
         if (!noEstaVacio(local.nombre)) throw NotFoundException("El Local tiene que tener un nombre")

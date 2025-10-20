@@ -1,15 +1,9 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.dto.*
+import ar.edu.unsam.algo3.dto.toDTO
+import ar.edu.unsam.algo3.dto.LocalDTO
 import ar.edu.unsam.algo3.servicios.LocalService
-import jakarta.servlet.http.HttpServletRequest
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import ar.edu.unsam.algo3.errores.BusinessException
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin("*")
 @RestController
@@ -19,14 +13,20 @@ class LocalController(
 ) {
 
     @GetMapping
-    fun getLocal(): List<LocalDTO> {
-        return localService.getAll()
+    fun get(@RequestParam mail: String): LocalDTO {
+        return localService.get(mail)
     }
 
     @PutMapping
-    fun updateLocal(
-        @RequestBody localDTO: LocalDTO, // ← DTO debe tener campo email
-        request: HttpServletRequest){
-        localService.update(localDTO)
+    fun update(
+        @RequestParam mail: String,
+        @RequestBody localDTO: LocalDTO
+    ) {
+        //se carga en el DTO del local el mail que trae de la session storage,
+        //ya que local originalmente no tiene mail
+            val localDTOConEmail = localDTO.copy(email = mail)
+            localService.update(localDTOConEmail)
+    }
+}
 
-}}
+

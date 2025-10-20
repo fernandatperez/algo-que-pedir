@@ -30,7 +30,7 @@ class ServiceIngredientesSpec : DescribeSpec({
             repositorioIngrediente.objetoEnColeccion(1) shouldBe true
 
             val ingredienteCreado = repositorioIngrediente.obtenerObjeto(1)
-            ingredienteCreado.costoMercado shouldBe 200.5
+            ingredienteCreado?.costoMercado shouldBe 200.5
         }
 
         it("Testeo de actualizacion de ingredientes") {
@@ -57,9 +57,9 @@ class ServiceIngredientesSpec : DescribeSpec({
 
             actualizadorIngredientes.actualizarIng()
 
-            repositorioIngrediente.obtenerObjeto(1).costoMercado shouldBe 200.5
-            repositorioIngrediente.obtenerObjeto(1).grupoAlimenticio shouldBe GrupoAlimenticio.LACTEOS
-            repositorioIngrediente.obtenerObjeto(1).esOrigenAnimal shouldBe true
+            repositorioIngrediente.obtenerObjeto(1)?.costoMercado shouldBe 200.5
+            repositorioIngrediente.obtenerObjeto(1)?.grupoAlimenticio shouldBe GrupoAlimenticio.LACTEOS
+            repositorioIngrediente.obtenerObjeto(1)?.esOrigenAnimal shouldBe true
         }
 
         it("Actualizar un repo con un JSON con un ingrediente vacio da error") {
