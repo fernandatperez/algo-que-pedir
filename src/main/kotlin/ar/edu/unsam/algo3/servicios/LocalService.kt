@@ -18,13 +18,13 @@ class LocalService(
 
     fun getAll(): List<LocalDTO> =
             repositorioLocal.objetosDeRepositorio().map { it.toDTO() }
-    fun update(email: String, localDTO: LocalDTO) {
+    fun update(localDTO: LocalDTO) {
         //estos cambios son por quitar el fromDTO, que en vez de actualizar el objeto
         //lo pisaba con un objeto nuevo
         // busca el local existente por email
 
-        val localActualizado = repositorioLocal.findByEmail(email)
-            ?: throw BusinessException("No se encontró local con email: $email")
+        val localActualizado = repositorioLocal.findByEmail(localDTO.email)
+            ?: throw BusinessException("No se encontró local con email: $localDTO.email")
 
         // actualiza todo menos el mail
         localActualizado.apply {

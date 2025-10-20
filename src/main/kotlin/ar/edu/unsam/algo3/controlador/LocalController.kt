@@ -26,14 +26,7 @@ class LocalController(
     @PutMapping
     fun updateLocal(
         @RequestBody localDTO: LocalDTO, // ← DTO debe tener campo email
-        request: HttpServletRequest
-    ): ResponseEntity<Any> {
-        try {
-            val email = localDTO.email
-            localService.update(email, localDTO)
-            return ResponseEntity.ok("Local actualizado correctamente")
-        } catch (e: BusinessException) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
-        }
-    }
-}
+        request: HttpServletRequest){
+        localService.update(localDTO)
+
+}}
