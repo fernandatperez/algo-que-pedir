@@ -19,6 +19,8 @@ data class PlatoDTO(
     val enPromocion: Boolean,
     val ingredientes: MutableList<IngredienteDTO>,
     val store: Local // Esto deberia ser DTO tambien
+    //val fechaCreacion: String,
+    //val porcentajeDescuento: Double
 )
 
 fun Plato.toDTO(): PlatoDTO {

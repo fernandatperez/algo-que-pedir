@@ -8,6 +8,7 @@ import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.fromDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDOM
+import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
@@ -31,11 +32,11 @@ class PlatoService(
     fun crearPlato(platoDTO: PlatoDTO, mail: String) {
 
         val localDePlato = repositorioLocal.findByEmail(mail)
-
+            ?: throw BusinessException("No se encontró un local con el mail $mail")
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
-            valorBase = platoDTO.precio,
+            valorBase = platoDTO.valorBase, // valorBase o precio?
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = platoDTO.ingredientes.map { it.toDOM() }.toMutableList(),
@@ -50,6 +51,10 @@ class PlatoService(
             ?: throw IllegalArgumentException("Plato no encontrado con id: $id")
 
         val platoDOM: Plato = Plato().fromDTO(plato).apply { this.id = id }
+
+        val localDePlato = repositorioLocal.findByEmail(mail)
+        platoDOM.local = localDePlato
+        // le asigno el local asi, porque de el front viene con un localMock
 
         repositorioPlatos.actualizar(platoDOM)
     }

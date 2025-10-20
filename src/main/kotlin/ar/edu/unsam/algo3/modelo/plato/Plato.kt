@@ -22,7 +22,7 @@ class Plato(
     private var valorBase: Double = 0.0,
     var urldeImagen: String = "Sin URL para mostrar",
     var esDeAutor: Boolean = false,
-    val local: Local = Local(),
+    var local: Local = Local(),
     val ingredientes: MutableList<Ingrediente> = mutableListOf(),
     val fechaDeCreacion: LocalDate = LocalDate.of(2000, 1, 1),
 ) : ElementoDeRepositorio {
