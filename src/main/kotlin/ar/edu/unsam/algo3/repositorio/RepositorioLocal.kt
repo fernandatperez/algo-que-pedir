@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class RepositorioLocal : Repositorio<Local>(){
     //agrego este metodo para poder buscar por email los locales, ya que va a ser la clave
-    fun findByEmail(email: String): Local? {
-        return coleccion.find { it.email == email }
+    fun findByEmail(email: String): Local {
+        return coleccion.find { it.email == email }!! // esto hay que cambiarlo !!
     }
 }

@@ -8,12 +8,14 @@ import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.plato.fromDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDOM
+import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
 
 @Service
 class PlatoService(
-    val repositorioPlatos: RepositorioPlato
+    val repositorioPlatos: RepositorioPlato,
+    private val repositorioLocal: RepositorioLocal
 ) {
 
     fun getPlatos(mail: String): List<PlatoDTO> =
@@ -26,7 +28,10 @@ class PlatoService(
         return platoModelo!!.toDTO()
     }
 
-    fun crearPlato(platoDTO: PlatoDTO) {
+    fun crearPlato(platoDTO: PlatoDTO, mail: String) {
+
+        val localDePlato = repositorioLocal.findByEmail(mail)
+
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
@@ -34,13 +39,18 @@ class PlatoService(
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = platoDTO.ingredientes.map { it.toDOM() }.toMutableList(),
-            local = LocalPollos, // en ningun lugar pones el local no se como seria
+            local = localDePlato
         )
         repositorioPlatos.crear(platoDOM)
+        println(platoDOM)
     }
 
-    fun modificarPlato(id: Int, plato: PlatoDTO) {
+    fun modificarPlato(id: Int, plato: PlatoDTO, mail: String) {
+        val platoExistente = repositorioPlatos.obtenerObjeto(id)
+            ?: throw IllegalArgumentException("Plato no encontrado con id: $id")
+
         val platoDOM: Plato = Plato().fromDTO(plato).apply { this.id = id }
+
         repositorioPlatos.actualizar(platoDOM)
     }
 

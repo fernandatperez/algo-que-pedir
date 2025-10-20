@@ -18,7 +18,7 @@ data class PlatoDTO(
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
     val ingredientes: MutableList<IngredienteDTO>,
-    val store: Local = LocalPollos, // Esto deberia ser DTO tambien
+    val store: Local // Esto deberia ser DTO tambien
 )
 
 fun Plato.toDTO(): PlatoDTO {
@@ -45,7 +45,8 @@ fun Plato.fromDTO(platoDTO: PlatoDTO): Plato {
         descripcion = platoDTO.descripcion,
         urldeImagen = platoDTO.imagen,
         esDeAutor = platoDTO.esDeAutor,
-        ingredientes = ingredientesDom
+        ingredientes = ingredientesDom,
+        local = platoDTO.store
     ).apply {
         this.id = this@fromDTO.id
         setValorBase(platoDTO.valorBase)

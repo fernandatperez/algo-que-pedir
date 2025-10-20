@@ -29,13 +29,19 @@ class PlatoController(val platoService: PlatoService) {
     }
 
     @PostMapping("/platos") // Maxi
-    fun postPlato(@RequestBody objeto: PlatoDTO) {
-        platoService.crearPlato(objeto)
+    fun postPlato(@RequestBody objeto: PlatoDTO, @RequestParam mail: String) {
+        platoService.crearPlato(objeto, mail)
+        // ESTO NO FUNCIONA ARREGLAR
     }
 
     @PutMapping("/platos/{id}")
-    fun putPlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO) {
-//        Editar un plato existente
-        platoService.modificarPlato(id, platoAModificar)
+    fun putPlato(
+        @PathVariable id: Int,
+        @RequestBody platoAModificar: PlatoDTO,
+        @RequestParam mail: String  // AGREGADO
+    ) {
+        platoService.modificarPlato(id, platoAModificar, mail)
     }
+    // Editar un plato existente
+
 }

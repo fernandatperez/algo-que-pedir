@@ -26,7 +26,8 @@ class LocalController(
     @PutMapping
     fun updateLocal(
         @RequestBody localDTO: LocalDTO, // ← DTO debe tener campo email
-        request: HttpServletRequest
+        request: HttpServletRequest,
+        @RequestParam mail: String
     ): ResponseEntity<Any> {
         try {
             val email = localDTO.email
