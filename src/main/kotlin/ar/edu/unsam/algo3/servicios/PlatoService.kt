@@ -42,17 +42,19 @@ class PlatoService(
 
     fun crearPlato(platoDTO: PlatoDTOUpdate): Plato {
         val ingredientes = this.obtenerIngredientes(platoDTO.ingredientes)
+        println(ingredientes.toString())
 
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
-            valorBase = platoDTO.precio,
+            valorBase = platoDTO.valorBase,
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = ingredientes,
             local = platoDTO.store, // en ningun lugar pones el local no se como seria
         )
         platoDOM.crear()
+        println(platoDOM.toString())
         repositorioPlatos.crear(platoDOM)
 
         return platoDOM
