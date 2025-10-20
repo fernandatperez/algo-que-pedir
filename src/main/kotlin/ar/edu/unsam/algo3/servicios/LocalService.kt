@@ -10,44 +10,40 @@ import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.errores.BusinessException
 
 
-// LocalService.kt
+
 @Service
 class LocalService(
     private val repositorioLocal: RepositorioLocal  // ← Inyecta el repositorio específico
 ) {
     // antes esto devolvia una lista de localDTO, lo que me parece que no esta bien porque un perfil esta vinculado a un solo local, pero lo dejo porque si no tengo que cambiar todo el funcionamiento
-    fun getLocal(mail: String): List<LocalDTO> =
-        listOf(repositorioLocal.findByEmail(mail)?.toDTO() ?: throw BusinessException("No se encontro un local"))
+    fun get(mail: String): List<LocalDTO> =
+        listOf(repositorioLocal.findByEmail(mail).toDTO() ?: throw BusinessException("No se encontro un local"))
 // listOf solo porque espera una lista pero devuleve 1 solo
-
-    fun updateLocal(email: String, localDTO: LocalDTO) {
-        //estos cambios son por quitar el fromDTO, que en vez de actualizar el objeto
-        //lo pisaba con un objeto nuevo
-        // busca el local existente por email
-
+    fun update(localDTO: LocalDTO) {
+        val email = localDTO.email ?: throw BusinessException("Email es requerido")
         val localExistente = repositorioLocal.findByEmail(email)
-            ?: throw BusinessException("No se encontró local con email: $email")
 
-        // actualiza todo menos el mail
-        localExistente.apply {
-            nombre = localDTO.name
-            url = localDTO.storeURL
-            direccion = Direccion(
-                calle = localDTO.storeAddress,
-                altura = localDTO.storeAltitude,
-                ubicacion = Point(localDTO.storeLatitude, localDTO.storeLongitude)
-            )
-            regalias = localDTO.storeAppCommission
-            porcentajeAcordado = localDTO.storeAuthorCommission
-            mediosDePago = mutableSetOf<Pago>().apply {
-                if (localDTO.storePaymentEfectivo) add(Pago.EFECTIVO)
-                if (localDTO.storePaymentQR) add(Pago.QR)
-                if (localDTO.storePaymentTransferencia) add(Pago.TRANSFERENCIA_BANCARIA)
-            }
+    // Actualizar
+    localExistente.apply {
+        nombre = localDTO.name
+        url = localDTO.storeURL
+        direccion = Direccion(
+            calle = localDTO.storeAddress,
+            altura = localDTO.storeAltitude,
+            ubicacion = Point(localDTO.storeLatitude, localDTO.storeLongitude)
+        )
+        regalias = localDTO.storeAppCommission
+        porcentajeAcordado = localDTO.storeAuthorCommission
+        mediosDePago = mutableSetOf<Pago>().apply {
+            if (localDTO.storePaymentEfectivo) add(Pago.EFECTIVO)
+            if (localDTO.storePaymentQR) add(Pago.QR)
+            if (localDTO.storePaymentTransferencia) add(Pago.TRANSFERENCIA_BANCARIA)
         }
-
-        // se guarda el objeto actualizado
-        repositorioLocal.actualizar(localExistente)
     }
+
+    repositorioLocal.actualizar(localExistente)
+}
+
+
 
 }
