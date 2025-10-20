@@ -58,11 +58,6 @@
       findIngredients()
       showModal = false
     } catch (error: unknown) {
-      if(!toastLock) {
-        toasts.push('Error al eliminar el ingrediente', {type: 'error'})
-        toastLock = true
-        setTimeout(releaseToast, 5000)
-      }
       showError('Error al eliminar el ingrediente', error)
       await findIngredients()
     }
@@ -97,7 +92,7 @@
       await findIngredients()
 
       toasts.push('Ingrediente guardado exitosamente', {type: 'success'})
-    } catch (error) {
+    } catch (error: unknown) {
       showError("Error al crear el ingrediente", error)
     } finally {
       resetNewIngredient()

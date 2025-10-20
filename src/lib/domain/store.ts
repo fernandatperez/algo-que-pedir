@@ -2,6 +2,7 @@ import { ValidationMessage } from './validationMessage'
 
 
 export type StoreJSON ={
+  id: number
   name: string
   storeURL: string
   storeAddress: string              
@@ -41,6 +42,7 @@ export class StoreType {
 
   toJSON(): StoreJSON {
     return {
+      id:this.id,
       name: this.name,
       storeURL: this.storeURL,
       storeAddress: this.storeAddress,                 
@@ -63,15 +65,6 @@ export class StoreType {
     return this.errors.length > 0
   }
 
-  getValidImageUrl(defaultImage: string): string {
-    if (!this.storeURL || 
-        this.storeURL.trim() === '' || 
-        this.storeURL === 'null' || 
-        this.storeURL === 'undefined') {
-      return defaultImage
-    }
-    return this.storeURL
-  }
 
 
   validate() {

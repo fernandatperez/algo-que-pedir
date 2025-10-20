@@ -1,6 +1,4 @@
-import { storeMOCK } from '$lib/data/mock/store'
 import { IngredientType } from './ingredient'
-import type { StoreJSON } from './store'
 
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
@@ -16,7 +14,6 @@ export type MenuItemJSON = {
   enPromocion: boolean
   // ->
   ingredientes: number[]
-  store: StoreJSON
   fechaDeCreacion: string
   porcentajeDescuento: number
 }
@@ -53,7 +50,6 @@ export class MenuItemType {
     public enPromocion: boolean = false,
     // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
-    public store: StoreJSON = storeMOCK,
     public fechaDeCreacion: Date = new Date(),
     public porcentajeDescuento: number = 0
   ) {}
@@ -95,7 +91,6 @@ export class MenuItemType {
       ingredientes: this.ingredientes.map(ing => ing.id) as number[], // Feo pero sino me dice que puede ser undefined ->
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
-      store: this.store, 
       fechaDeCreacion: this.fechaDeCreacion.toISOString().split('T')[0],
       porcentajeDescuento: this.porcentajeDescuento
     }
@@ -142,9 +137,9 @@ export class MenuItemType {
   // Si no usamos esto saquemoslo ->
 
   // Metodo helper para formatear precio
-  getFormattedPrice(): string {
-    return `$${this.precio}`
-  }
+  // getFormattedPrice(): string {
+  //   return `$${this.precio}`
+  // }
 
   // Metodo helper para obtener la ruta completa de la imagen no se si esta bien porque ya tiene parte de la ruta
   getImagePath(): string {

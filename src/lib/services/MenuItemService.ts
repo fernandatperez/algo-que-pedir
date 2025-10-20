@@ -7,9 +7,11 @@ import { IngredientType } from '$lib/domain/ingredient'
 
 class MenuItemsService {
   async getAllMenuItems(){
-    const response = await axios.get<MenuItemJSONReduced[]>(REST_SERVER_URL + '/platos')
+    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
+    const response = await axios.get<MenuItemJSONReduced[]>(REST_SERVER_URL + '/platos', { params: { mail: storeMail }})
     const menuItemReduced = response.data
     return menuItemReduced
+
   }
 
   async getMenuItem(searchId: number) {
@@ -36,19 +38,28 @@ class MenuItemsService {
   }
 
   async createMenuItem(item: MenuItemType) {
+    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
     item.fechaDeCreacion = new Date()
     // console.log(item.fechaDeCreacion)
     await axios.post<MenuItemJSON>(
       REST_SERVER_URL + '/platos',
-      item.toJSON()
+      item.toJSON(), 
+      { params: { mail: storeMail }}
     )
   }
 
   async updateMenuItem(menuItem: MenuItemType) {
+    const storeMail = sessionStorage.getItem('email') 
     const menuItemJSON = menuItem.toJSON()
+    
+    const updateResponse = await axios.put<MenuItemJSON>(
+      REST_SERVER_URL + '/platos/' + menuItem.id, 
+      menuItemJSON,
+      { params: { mail: storeMail }}
+    )
     // eslint-disable-next-line no-console
     console.log('Updating MenuItem:', menuItemJSON)
-    return axios.put<MenuItemJSON>(REST_SERVER_URL + '/platos/' + menuItem.id, menuItemJSON)
+    return updateResponse
   }
 }
 
