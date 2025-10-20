@@ -52,7 +52,6 @@ class MenuItemsService {
       { params: { mail: storeMail }}
     )
     
-    console.info(updateResponse)
     return updateResponse
   }
 }

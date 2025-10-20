@@ -43,7 +43,7 @@ export class MenuItemType {
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
     public ingredientes: IngredientType[] = [],
-    public store: StoreJSON = storeMOCK,
+    public store: StoreJSON = storeMOCK, // ! tenes que cambiar esto
     public fechaCreacion: string = '',
     public porcentajeDescuento: number = 0
   ) {}
