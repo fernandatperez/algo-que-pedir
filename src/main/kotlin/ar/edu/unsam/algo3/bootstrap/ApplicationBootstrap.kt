@@ -231,7 +231,7 @@ class ApplicationBootstrap(
         repositorioPedidos.apply {
             crear(
                 usuario = sofiamiller,
-                local = localInicial,
+                local = Local(),
                 platos = mutableListOf(hamburguesa, pizza, ensalada),
                 medioDePago = Pago.QR,
                 estado = Estado.PENDIENTE

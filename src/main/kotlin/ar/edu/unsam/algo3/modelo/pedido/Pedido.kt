@@ -21,9 +21,9 @@ enum class Estado {
 }
 
 class Pedido(
-    val usuario: Usuario = Usuario(),
-    val local: Local,
-    val platos: MutableList<Plato> = mutableListOf(),
+    var usuario: Usuario = Usuario(),
+    var local: Local,
+    var platos: MutableList<Plato> = mutableListOf(),
     var medioDePagoElegido: Pago = Pago.EFECTIVO,
     var estado: Estado = Estado.PENDIENTE, // siempre tiene que comenzar en PENDIENTE según el profe.
     var cupon: Cupon? = nullCupon,
@@ -106,6 +106,19 @@ class Pedido(
     }
 
     fun totalmenteVegano() = platos.all{ it.esVegano() }
+
+    fun actualizar(otroPedido: Pedido) {
+        usuario = otroPedido.usuario
+        local = Local()
+        platos = otroPedido.platos
+        medioDePagoElegido = otroPedido.medioDePagoElegido
+        estado = otroPedido.estado
+        id = otroPedido.id
+    }
+
+    fun prepararPedido() {
+        this.estado = Estado.PREPARADO
+    }
 }
 
 

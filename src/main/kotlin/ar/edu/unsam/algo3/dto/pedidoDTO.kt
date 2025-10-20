@@ -1,16 +1,10 @@
 package ar.edu.unsam.algo3.dto
 
 import ar.edu.unsam.algo3.modelo.local.Pago
-import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
-import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
-import ar.edu.unsam.algo3.modelo.plato.fromDTO
 import ar.edu.unsam.algo3.modelo.plato.toDTO
-import ar.edu.unsam.algo3.modelo.usuario.Usuario
-import ar.edu.unsam.algo3.modelo.utils.Direccion
-import org.uqbar.geodds.Point
 
 data class PedidoDTO (
     val id: Int,
@@ -51,28 +45,28 @@ fun Pedido.toDTO(): PedidoDTO {
     return pedidoDTO
 }
 
-fun PedidoDTO.fromDTO() : Pedido {
-    val direccionUsuario = Direccion(
-        calle = this.direccion,
-        altura = this.altura,
-        ubicacion = Point(lat.toDouble(), long.toDouble()),
-    )
-    val usuario = Usuario(
-        nombre = this.nombre,
-        username = this.username,
-        direccion = direccionUsuario,
-    )
-
-  val pedido = Pedido(
-      usuario = usuario,
-      local = Local(),
-//      platos = this.platos.map { it.fromDTO() }.toMutableList(),
-      platos = this.platos.map { Plato().fromDTO(it) }.toMutableList(),
-      medioDePagoElegido = this.metodoDePago,
-      estado = this.estado,
-    ).apply {
-      this.id = this@fromDTO.id
-      // this.horarioEntrega = this@fromDTO.horarioEntrega
-  }
-    return pedido
-}
+//fun PedidoDTO.fromDTO() : Pedido {
+//    val direccionUsuario = Direccion(
+//        calle = this.direccion,
+//        altura = this.altura,
+//        ubicacion = Point(lat.toDouble(), long.toDouble()),
+//    )
+//    val usuario = Usuario(
+//        nombre = this.nombre,
+//        username = this.username,
+//        direccion = direccionUsuario,
+//    )
+//
+//  val pedido = Pedido(
+//      usuario = usuario,
+//      local = Local(),
+////      platos = this.platos.map { it.fromDTO() }.toMutableList(),
+//      platos = this.platos.map { Plato().fromDTO(it) }.toMutableList(),
+//      medioDePagoElegido = this.metodoDePago,
+//      estado = this.estado,
+//    ).apply {
+//      this.id = this@fromDTO.id
+//      // this.horarioEntrega = this@fromDTO.horarioEntrega
+//  }
+//    return pedido
+//}
