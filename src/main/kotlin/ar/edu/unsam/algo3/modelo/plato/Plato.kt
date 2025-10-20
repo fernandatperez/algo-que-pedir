@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.modelo.plato
 
 // import kotlinx.datetime.*
+import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.modelo.utils.diasHastaAhora
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
@@ -12,6 +13,8 @@ import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import java.time.LocalDate
 import kotlin.math.max
+import kotlin.math.pow
+import kotlin.math.round
 
 val porcentajePorNuevoMAX = 30.0
 val porcentajePorNuevoMIN = 10.0
@@ -32,7 +35,7 @@ class Plato(
 
     fun agregarIngrediente(ingrediente: Ingrediente) {
         if (this.contieneIngrediente(ingrediente)) {
-            throw IngredienteYaPerteneceAlPlato("${ingrediente.nombre} ya pertenece al plato")
+            throw BusinessException("${ingrediente.nombre} ya pertenece al plato")
         } else {
             ingredientes.add(ingrediente)
         }
@@ -42,7 +45,7 @@ class Plato(
         if (this.contieneIngrediente(ingrediente)) {
             ingredientes.remove(ingrediente)
         } else {
-            throw IngredienteNoEstaEnElPlatoException("${ingrediente.nombre} no pertenece al plato.")
+            throw BusinessException("${ingrediente.nombre} no pertenece al plato.")
         }
     }
 
@@ -58,7 +61,7 @@ class Plato(
 
     fun costoProduccion(): Double = ingredientes.sumOf { it.costoMercado }
 
-    fun valorVenta(): Double = if (this.esNuevo()) valorVentaNuevo() else valorVentaEnPromo()
+    fun valorVenta(): Double = (if (this.esNuevo()) valorVentaNuevo() else valorVentaEnPromo()).redondear(2)
 
     private fun valorVentaNuevo(): Double =
         this.aplicacionesPrecioBase() - (this.aplicacionesPrecioBase() * this.porcentajePorNuevo())
@@ -71,8 +74,8 @@ class Plato(
             // Aplica descuento solo si el plato no es nuevo y el descuento es menor al 100%
             if (!this.esNuevo()) {
                 porcentajeDescuento = descuento
-            } else throw NoAplicaDescuentoEnPlatoNuevoException("Descuento no aplicable. El plato es nuevo.")
-        } else throw DescuentoMayorAlCienException("Descuento mayor al 100% no aplicable.")
+            } else throw BusinessException("Descuento no aplicable. El plato es nuevo.")
+        } else throw BusinessException("Descuento mayor al 100% no aplicable.")
     }
 
     fun sacarDescuento() {
@@ -90,6 +93,11 @@ class Plato(
     fun getValorBase(): Double = this.valorBase
 
     fun setValorBase(valor: Double) { this.valorBase = valor }
+
+    fun Double.redondear(digitos: Int): Double {
+        val factor = 10.0.pow(digitos)
+        return round(this * factor) / factor
+    }
     //    ========== Metodos de busqueda del repositorio ==============
 
     override var id = 0

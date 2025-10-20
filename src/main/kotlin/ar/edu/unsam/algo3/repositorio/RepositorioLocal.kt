@@ -13,4 +13,7 @@ class RepositorioLocal : Repositorio<Local>(){
     fun findByEmail(email: String): Local {
         return coleccion.find { it.email == email } ?: throw Exception("Local no encontrado para email: $email")
     }
+    //si se necesita se puede agregar mas
+    //si se necesita modificar algun elemento
+    //buscar entidad, hidratarla, buscar entidades que se utilicen, hidratarlas y despues guardar en bbdd
 }
