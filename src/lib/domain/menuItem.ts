@@ -53,7 +53,7 @@ export class MenuItemType {
     public enPromocion: boolean = false,
     // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
-    public store: StoreJSON = storeMOCK,
+    public store: StoreJSON = storeMOCK, // ! tenes que cambiar esto
     public fechaCreacion: string = '',
     public porcentajeDescuento: number = 0
   ) {}

@@ -1,6 +1,5 @@
 // src/lib/stores/storeProfileStore.ts
 import { defaultData } from '$lib/data/mock/storeProfileDefaultData'
-import { storeProfileService } from '$lib/services/StoreProfileService'
 import type { FormData } from '$lib/type/storeProfileTypes'
 import type { ValidationMessage } from '$lib/domain/validationMessage'
 

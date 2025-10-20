@@ -7,9 +7,11 @@ import { IngredientType } from '$lib/domain/ingredient'
 
 class MenuItemsService {
   async getAllMenuItems(){
-    const response = await axios.get<MenuItemJSONReduced[]>(REST_SERVER_URL + '/platos')
+    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
+    const response = await axios.get<MenuItemJSONReduced[]>(REST_SERVER_URL + '/platos', { params: { mail: storeMail }})
     const menuItemReduced = response.data
     return menuItemReduced
+
   }
 
   async getMenuItem(searchId: number) {
@@ -37,16 +39,26 @@ class MenuItemsService {
 
   async createMenuItem(item: MenuItemType) {
     const creacion = new Date()
+    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
     item.fechaCreacion = creacion.toISOString().split('T')[0]
     await axios.post<MenuItemJSON>(
       REST_SERVER_URL + '/platos',
-      item.toJSON()
+      item.toJSON(), 
+      { params: { mail: storeMail }}
     )
   }
 
   async updateMenuItem(menuItem: MenuItemType) {
+    const storeMail = sessionStorage.getItem('email') 
     const menuItemJSON = menuItem.toJSON()
-    return axios.put<MenuItemJSON>(REST_SERVER_URL + '/platos/' + menuItem.id, menuItemJSON)
+    
+    const updateResponse = await axios.put<MenuItemJSON>(
+      REST_SERVER_URL + '/platos/' + menuItem.id, 
+      menuItemJSON,
+      { params: { mail: storeMail }}
+    )
+    
+    return updateResponse
   }
 }
 
