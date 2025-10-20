@@ -1,14 +1,11 @@
 package ar.edu.unsam.algo3.repositorio
 
-import ar.edu.unsam.algo3.errores.IdInexistente
-import ar.edu.unsam.algo3.errores.ObjetoIDoVerificacionFallaron
 import ar.edu.unsam.algo3.errores.BusinessException
 
 // Para que un tipo generico pueda ser mas de una sola cosa
 // class Repositorio<Type> where Type : UnaInterfaz, Type : OtraInterfaz...
 // Generics (Type: ...)
 import org.springframework.stereotype.Repository
-
 
 open class Repositorio<Type : ElementoDeRepositorio> {
     var contadorIDs: Int = 1
@@ -18,21 +15,18 @@ open class Repositorio<Type : ElementoDeRepositorio> {
     fun objetosDeRepositorio() = this.coleccion
 
     fun crear(objeto: Type) {
-//        if (objeto.cumpleCriterioDeCreacion()) {
-            // Esto tiene sentido que sean 2 llamadas, xq que este bien creado o sea nuevo en el repo no van de la mano me parece.
-            if (objeto.cumpleCriterioDeNuevo()) objeto.id = generarID()
-            coleccion.add(objeto)
-//        } else throw ObjetoIDoVerificacionFallaron("El ID o el objeto ya se encuentran en la coleccion, o bien la verificacion fallo")
+        if (objeto.cumpleCriterioDeNuevo()) objeto.id = generarID() // esto deja baches. No esta piola (igual queda). Revisar
+        coleccion.add(objeto)
     }
 
 //    Poner la validacion aca
     fun eliminarDeColeccion(id: Int) =
-        if (id == -1) throw BusinessException("No existe elemento en repositorio")
+        if (id == -1) throw BusinessException("No existe el id $id en repositorio para eliminarlo de la coleccion")
         else coleccion.remove(obtenerObjeto(id))
 
     fun actualizar(objetoActualizado: Type) {
         val index = coleccion.indexOfFirst { it.id == objetoActualizado.id }
-        if (index == -1) throw BusinessException("No existe elemento en repositorio")
+        if (index == -1) throw BusinessException("No existe un indice donde exista este elemento en el repositorio. ${objetoActualizado.id}}")
         coleccion[index] = objetoActualizado
     }
 

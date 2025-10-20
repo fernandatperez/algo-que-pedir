@@ -11,6 +11,7 @@ import kotlinx.serialization.json.*
 import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.NotFoundException
+import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 
 
 open class ActualizadorIngredientes(
@@ -54,7 +55,7 @@ class InstanciaActualizador(
 
 // ========= LO NUEVO =========
 @Service
-class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, val servicePlato: PlatoService) {
+class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, val repositorioPlatos: RepositorioPlato) {
     fun ingredientes(): List<IngredienteDTO> =
         repositorioIngredientes.objetosDeRepositorio().map { it.toDTO() }
 
@@ -78,7 +79,7 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
             costoMercado = ingredienteDTO.cost,
             esOrigenAnimal = ingredienteDTO.esOrigenAnimal,
             grupoAlimenticio = ingredienteDTO.foodGroup
-        ).apply { this.id = id }
+        ).apply { this.id = ingredienteDTO.id }
 
         ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)
@@ -89,6 +90,8 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
 
     fun eliminarIngrediente(id: Int) {
 //        val ingrediente = repositorioIngredientes.obtenerObjeto(id)
+//        Repasar repositorio de platos con el ingrediente.
+//        Si ninguno lo tiene, borrar, sino, error
         repositorioIngredientes.eliminarDeColeccion(id)
 //        servicePlato.eliminarIngrediente(ingrediente)
     }

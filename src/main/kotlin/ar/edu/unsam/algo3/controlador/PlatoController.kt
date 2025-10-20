@@ -1,8 +1,10 @@
 package ar.edu.unsam.algo3.controlador
 
 import ar.edu.unsam.algo3.modelo.plato.Plato
-import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
-import ar.edu.unsam.algo3.modelo.plato.toDTO
+//import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
+import ar.edu.unsam.algo3.modelo.plato.PlatoDTOUpdate
+import ar.edu.unsam.algo3.modelo.plato.toDTOUpdate
+//import ar.edu.unsam.algo3.modelo.plato.toDTO
 import ar.edu.unsam.algo3.servicios.PlatoService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,41 +14,32 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
-/*
-*   CAMBIOS REALIZADOS:
-*       todos los endpoints reciben platos de dominio del service y devuelven dtos (para visualizacion)
-*
-*
-* */
-
-
 @CrossOrigin("*") // Habilita comunicacion entre distintos puertos (acepta requests de cualquier parte)
 @RestController
 class PlatoController(val platoService: PlatoService) {
 //  Inyeccion de dependencias de los singletons de servicios (y servicio conoce repo)
 
     @GetMapping("/platos")
-    fun getPlatos(): List<PlatoDTO> {
+    fun getPlatos(): List<PlatoDTOUpdate> {
         val platos = platoService.getPlatos()
-        return platos.map { it.toDTO() }
+        return platos.map { it.toDTOUpdate() }
     }
 
     @GetMapping("/platos/{id}")
-    fun getPlato(@PathVariable id: Int): PlatoDTO {
+    fun getPlato(@PathVariable id: Int): PlatoDTOUpdate {
 //        Obtener informacion de un plato especifico
-        return platoService.obtenerPlato(id).toDTO()
+        return platoService.obtenerPlato(id).toDTOUpdate()
     }
 
     @PostMapping("/platos") // Maxi
-    fun createPlato(@RequestBody objeto: PlatoDTO): PlatoDTO {
-        platoService.crearPlato(objeto)
-        return platoService.obtenerPlato(objeto.id).toDTO()
+    fun createPlato(@RequestBody objeto: PlatoDTOUpdate): PlatoDTOUpdate {
+        return platoService.crearPlato(objeto).toDTOUpdate()
     }
 
     @PutMapping("/platos/{id}")
-    fun updatePlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTO): PlatoDTO {
+    fun updatePlato(@PathVariable id: Int, @RequestBody platoAModificar: PlatoDTOUpdate): PlatoDTOUpdate {
 //        Editar un plato existente
         platoService.modificarPlato(platoAModificar)
-        return platoService.obtenerPlato(platoAModificar.id).toDTO()
+        return platoService.obtenerPlato(platoAModificar.id).toDTOUpdate()
     }
 }
