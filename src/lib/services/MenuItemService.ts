@@ -30,6 +30,7 @@ class MenuItemsService {
 
   async createMenuItem(item: MenuItemType) {
     const creacion = new Date()
+    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
     item.fechaCreacion = creacion.toISOString().split('T')[0]
     // const itemJSON: MenuItemJSON = item.toJSON()
     // // eslint-disable-next-line no-console
@@ -37,13 +38,22 @@ class MenuItemsService {
     const {id, ...itemSinId} = item
     await axios.post<MenuItemJSON>(
       REST_SERVER_URL + '/platos',
-      itemSinId
+      itemSinId, { params: { mail: storeMail }}
     )
   }
 
   async updateMenuItem(menuItem: MenuItemType) {
+    const storeMail = sessionStorage.getItem('email') 
     const menuItemJSON = menuItem.toJSON()
-    return axios.put<MenuItemJSON>(REST_SERVER_URL + '/platos/' + menuItem.id, menuItemJSON)
+    
+    const updateResponse = await axios.put<MenuItemJSON>(
+      REST_SERVER_URL + '/platos/' + menuItem.id, 
+      menuItemJSON,
+      { params: { mail: storeMail }}
+    )
+    
+    console.info(updateResponse)
+    return updateResponse
   }
 }
 

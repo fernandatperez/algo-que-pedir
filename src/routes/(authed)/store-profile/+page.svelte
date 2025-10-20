@@ -69,14 +69,11 @@
     errors = []
     const form = ev.currentTarget as HTMLFormElement
 
-    //los checkboxes no son elementos nativos del formdata como el input, textarea y select, por eso no
-    //los reconoce, aca lo que hago es que tome las propiedades del input para poder detectarla
-    //la otra opcion es bindear el checkbox
    
     const formData = new FormData(form)
 
     const store = new StoreType(
-      0,
+      Number(formData.get("id") ?? 0),
       (formData.get("name") ?? "")?.toString(),
       (formData.get("storeURL") ?? "")?.toString(),
       (formData.get("storeAddress") ?? "")?.toString(),

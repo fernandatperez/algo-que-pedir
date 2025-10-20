@@ -2,6 +2,7 @@ import { ValidationMessage } from './validationMessage'
 
 
 export type StoreJSON ={
+  id: number
   name: string
   storeURL: string
   storeAddress: string              
@@ -41,6 +42,7 @@ export class StoreType {
 
   toJSON(): StoreJSON {
     return {
+      id:this.id,
       name: this.name,
       storeURL: this.storeURL,
       storeAddress: this.storeAddress,                 
