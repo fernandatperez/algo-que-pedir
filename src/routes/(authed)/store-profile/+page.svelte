@@ -11,8 +11,9 @@
   import Input from "$lib/components/Input.svelte";
   import Checkbox from "$lib/components/checkbox.svelte";
   import errorImage from '$lib/assets/img/error.png';
+  import { tick } from 'svelte';
   
-  let store = $state<StoreType[]>([])
+  let store = $state<StoreType>()
   let currentStore = $state<StoreType | null>(null) 
   let originalStore = $state<StoreType | null>(null)
   let errors: ValidationMessage[] = $state([])
@@ -21,18 +22,20 @@
   const findStore = async () => {
     try{
       store = await storeService.getStore()
-      originalStore = JSON.parse(JSON.stringify(store[0]))
-      currentStore = store[0]
+      originalStore = JSON.parse(JSON.stringify(store)) 
+      currentStore = store 
     } catch (error){
       showError('Conexion al servidor fallida', error)
     }
   }
 
-  function discardChanges() {
+  async function discardChanges() {
     if (originalStore) {
       currentStore = Object.assign(new StoreType(), JSON.parse(JSON.stringify(originalStore)))
       errors = []
-      
+
+      await tick()
+
       // resetea los valores 
       setTimeout(() => {
         const form = document.getElementById('form-store-profile') as HTMLFormElement
@@ -55,7 +58,7 @@
             }
           })
         }
-      }, 0)
+      })
     }
   }
 
@@ -72,8 +75,9 @@
    
     const formData = new FormData(form)
 
+    
     const store = new StoreType(
-      Number(formData.get("id") ?? 0),
+      currentStore?.id,
       (formData.get("name") ?? "")?.toString(),
       (formData.get("storeURL") ?? "")?.toString(),
       (formData.get("storeAddress") ?? "")?.toString(),
@@ -96,18 +100,23 @@
     }
 
     try {
-      const stores = await storeService.getStore()
-      if (stores.length === 0) {
-        throw new Error('No se encontró el store')
-      }
-      
-      const storeId = stores[0].id
+      // ⛔️ PROBLEMA: Esto no es necesario y puede devolver undefined
+    // const stores = await storeService.getStore()
+    // if (stores.length === 0) {
+    //   throw new Error('No se encontró el store')
+    // }
+    // const storeId = stores[0].id
 
-      await storeService.updateStore(store)
-      await findStore()
-      errors = []
-      toasts.push('Tienda actualizada exitosamente', {type: 'success'})
-      
+    // ✅ SOLUCIÓN: Usa el ID que ya tienes del store actual
+    if (!store.id || store.id === 0) {
+      throw new Error('ID del store no válido')
+    }
+
+    await storeService.updateStore(store)
+    await findStore() // Esto refresca los datos
+    errors = []
+    toasts.push('Tienda actualizada exitosamente', {type: 'success'})
+    
     } catch (error) {
       if(!toastLock) {
         toasts.push('Error al actualizar la tienda', {type: 'error'})
