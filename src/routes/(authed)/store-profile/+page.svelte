@@ -13,11 +13,12 @@
   import errorImage from '$lib/assets/img/error.png';
   import { tick } from 'svelte';
   
-  let store = $state<StoreType>()
-  let currentStore = $state<StoreType | null>(null) 
-  let originalStore = $state<StoreType | null>(null)
+  let store = $state<StoreType>(new StoreType())
+  let currentStore = $state<StoreType>(new StoreType())
+  let originalStore = $state<StoreType>(new StoreType())
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
+  let showErrorImage = false
 
   const findStore = async () => {
     try{
@@ -33,7 +34,7 @@
     if (originalStore) {
       currentStore = Object.assign(new StoreType(), JSON.parse(JSON.stringify(originalStore)))
       errors = []
-
+      showErrorImage = false
       await tick()
 
       // resetea los valores 
@@ -43,18 +44,18 @@
           const inputs = form.querySelectorAll('input')
           inputs.forEach(input => {
             if (input.type === 'checkbox') {
-              if (input.name === 'storePaymentEfectivo') input.checked = currentStore!.storePaymentEfectivo
-              if (input.name === 'storePaymentQR') input.checked = currentStore!.storePaymentQR
-              if (input.name === 'storePaymentTransferencia') input.checked = currentStore!.storePaymentTransferencia
+              if (input.name === 'storePaymentEfectivo') input.checked = currentStore.storePaymentEfectivo
+              if (input.name === 'storePaymentQR') input.checked = currentStore.storePaymentQR
+              if (input.name === 'storePaymentTransferencia') input.checked = currentStore.storePaymentTransferencia
             } else {
-              if (input.name === 'name') input.value = currentStore!.name || ""
+              if (input.name === 'name') input.value = currentStore.name || ""
               if (input.name === 'storeURL') input.value = currentStore!.storeURL || ""
-              if (input.name === 'storeAddress') input.value = currentStore!.storeAddress || ""
-              if (input.name === 'storeAltitude') input.value = currentStore!.storeAltitude?.toString() || "0"
-              if (input.name === 'storeLatitude') input.value = currentStore!.storeLatitude?.toString() || "0"
-              if (input.name === 'storeLongitude') input.value = currentStore!.storeLongitude?.toString() || "0"
-              if (input.name === 'storeAppCommission') input.value = currentStore!.storeAppCommission?.toString() || "0"
-              if (input.name === 'storeAuthorCommission') input.value = currentStore!.storeAuthorCommission?.toString() || "0"
+              if (input.name === 'storeAddress') input.value = currentStore.storeAddress || ""
+              if (input.name === 'storeAltitude') input.value = currentStore.storeAltitude.toString() || "0"
+              if (input.name === 'storeLatitude') input.value = currentStore.storeLatitude.toString() || "0"
+              if (input.name === 'storeLongitude') input.value = currentStore.storeLongitude.toString() || "0"
+              if (input.name === 'storeAppCommission') input.value = currentStore.storeAppCommission?.toString() || "0"
+              if (input.name === 'storeAuthorCommission') input.value = currentStore.storeAuthorCommission?.toString() || "0"
             }
           })
         }
@@ -71,7 +72,7 @@
     ev.preventDefault()
     errors = []
     const form = ev.currentTarget as HTMLFormElement
-
+    showErrorImage = false
    
     const formData = new FormData(form)
 
@@ -92,38 +93,26 @@
     )
 
     // Validar
-    store.validate()
+store.validate()
 
-    if (store.errors.length > 0) {
-      errors = [...store.errors]
-      return errors
-    }
+if (store.errors.length > 0) {
+  errors = [...store.errors]
+  return errors
+}
 
-    try {
-      // ⛔️ PROBLEMA: Esto no es necesario y puede devolver undefined
-    // const stores = await storeService.getStore()
-    // if (stores.length === 0) {
-    //   throw new Error('No se encontró el store')
-    // }
-    // const storeId = stores[0].id
-
-    // ✅ SOLUCIÓN: Usa el ID que ya tienes del store actual
-    if (!store.id || store.id === 0) {
-      throw new Error('ID del store no válido')
-    }
-
-    await storeService.updateStore(store)
-    await findStore() // Esto refresca los datos
-    errors = []
-    toasts.push('Tienda actualizada exitosamente', {type: 'success'})
-    
-    } catch (error) {
-      if(!toastLock) {
-        toasts.push('Error al actualizar la tienda', {type: 'error'})
-      }
-      showError("Error al actualizar la tienda", error)
-    } 
+try {
+  await storeService.updateStore(store)
+  await findStore()
+  errors = [] 
+  toasts.push('Tienda actualizada exitosamente', {type: 'success'})
+  
+} catch (error) {
+  if(!toastLock) {
+    toasts.push('Error al actualizar la tienda', {type: 'error'})
   }
+  showError("Error al actualizar la tienda", error)
+}
+}
 
   
 </script>
@@ -150,7 +139,7 @@
                   label_text="Nombre del local*"
                   label_for="name"
                   input_type={InputTypes.Normal}
-                  value={currentStore?.name || ""}
+                  value={currentStore.name || ""}
                   class= "input-primary"
                   name= "name"
                 />
@@ -161,7 +150,7 @@
                 label_text="URL de la imagen*"
                 label_for="storeURL"
                 input_type={InputTypes.Normal}
-                value={currentStore?.storeURL || ""}
+                value={currentStore.storeURL || ""}
                 class= "input-primary"
                 name= "storeURL"
                 />
@@ -169,7 +158,7 @@
               </div>
             </div>  
             <div class="img-store-container">
-              <img src={errors.some(e => e.field === 'url') ? errorImage : (currentStore?.storeURL || errorImage)} alt="local" class="img-store-profile">
+              <img src={currentStore.storeURL} alt="local" class="img-store-profile" />
             </div>  
             
           </div> 
@@ -184,7 +173,7 @@
                 label_text="Direccion Local"
                 label_for="storeAddress"
                 input_type={InputTypes.Normal}
-                value={currentStore?.storeAddress || ""}
+                value={currentStore.storeAddress || ""}
                 class= "input-primary"
                 name= "storeAddress"
               />
@@ -195,7 +184,7 @@
                 label_text="Altura"
                 label_for="storeAltitude"
                 input_type={InputTypes.Normal}
-                value={currentStore?.storeAltitude || 0}
+                value={currentStore.storeAltitude || 0}
                 class= "input-primary"
                 name= "storeAltitude"
                 type="number"
@@ -208,7 +197,7 @@
               label_text="Latitud"
               label_for="storeLatitude"
               input_type={InputTypes.Normal}
-              value={currentStore?.storeLatitude || ""}
+              value={currentStore.storeLatitude || ""}
               class= "input-primary"
               name= "storeLatitude"
               type="number"
@@ -221,7 +210,7 @@
               label_text="Longitud"
               label_for="storeLongitude"
               input_type={InputTypes.Normal}
-              value={currentStore?.storeLongitude || ""}
+              value={currentStore.storeLongitude || ""}
               class= "input-primary"
               name= "storeLongitude"
               type="number"
@@ -239,7 +228,7 @@
               label_text="Porcentaje de comision con la app*"
               label_for="storeAppCommission"
               input_type={InputTypes.Normal}
-              value={currentStore?.storeAppCommission || ""}
+              value={currentStore.storeAppCommission || ""}
               class= "input-primary"
               name= "storeAppCommission"
               type="number"
@@ -253,7 +242,7 @@
               label_text="Porcentaje de comision con autores de platos*"
               label_for="storeAuthorCommission"
               input_type={InputTypes.Normal}
-              value={currentStore?.storeAuthorCommission || ""}
+              value={currentStore.storeAuthorCommission || ""}
               class= "input-primary number-input"
               name= "storeAuthorCommission"
               type="number"
@@ -271,8 +260,8 @@
             <Checkbox
               name="storePaymentEfectivo"
               label_text="Efectivo" 
-              value={currentStore?.storePaymentEfectivo ?? false} 
-              checked={currentStore?.storePaymentEfectivo ?? false }
+              value={currentStore.storePaymentEfectivo ?? false} 
+              checked={currentStore.storePaymentEfectivo ?? false }
             />
             <!-- <p>{currentStore?.storePaymentEfectivo ?? false}</p> -->
 
@@ -281,16 +270,16 @@
             <Checkbox
               name="storePaymentQR"
               label_text="QR" 
-              value={currentStore?.storePaymentQR ?? false} 
-              checked={currentStore?.storePaymentQR ?? false }
+              value={currentStore.storePaymentQR ?? false} 
+              checked={currentStore.storePaymentQR ?? false }
             />
 
             <!-- Checkbox Transferencia -->
             <Checkbox
               name="storePaymentTransferencia"
               label_text="Transferencia" 
-              value={currentStore?.storePaymentTransferencia ?? false} 
-              checked={currentStore?.storePaymentTransferencia ?? false}
+              value={currentStore.storePaymentTransferencia ?? false} 
+              checked={currentStore.storePaymentTransferencia ?? false}
             />
             <ValidationField errors={errors} field="metodopago" />
           </div>

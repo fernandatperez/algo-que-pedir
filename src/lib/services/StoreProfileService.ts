@@ -12,7 +12,6 @@ class StoreService {
   //}
 
   async getStore() {
- 
     const storeMail = sessionStorage.getItem('email')
     const queryStore = () => axios.get<StoreJSON>(REST_SERVER_URL + '/store-profile', {params: { mail: storeMail } })
     const response = await getAxiosData(queryStore)
@@ -23,7 +22,6 @@ class StoreService {
 
   
   async updateStore(store: StoreType): Promise<void> {
-  
     const storeMail = sessionStorage.getItem('email') 
     await axios.put(`${REST_SERVER_URL}/store-profile`,store,{params: { mail: storeMail },headers: { 'Content-Type': 'application/json' }})
   

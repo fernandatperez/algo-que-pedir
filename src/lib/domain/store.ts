@@ -65,15 +65,6 @@ export class StoreType {
     return this.errors.length > 0
   }
 
-  getValidImageUrl(defaultImage: string): string {
-    if (!this.storeURL || 
-        this.storeURL.trim() === '' || 
-        this.storeURL === 'null' || 
-        this.storeURL === 'undefined') {
-      return defaultImage
-    }
-    return this.storeURL
-  }
 
 
   validate() {
