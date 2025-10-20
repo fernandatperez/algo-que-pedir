@@ -14,6 +14,7 @@
   import Input from "$lib/components/Input.svelte";
   import { toasts } from '$lib/components/toast/toastStore'
   import { ingredientService } from "$lib/services/IngredientService.js";
+    import { AxiosError } from "axios";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -78,12 +79,17 @@
         goto("/menu")
       }, 2000)
       errors = [] // limpiar errores
-    } catch (error) {
-      if(!toastLock) {
-        toasts.push("Error al generar el plato", {type: 'error'})
-        setTimeout(releaseToast, 5000)
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        if(!toastLock) {
+          toasts.push("Error al generar el plato", {type: 'error'})
+          setTimeout(releaseToast, 5000)
+        }
+        showError("Algo fallo.", error.message)
       }
-      showError("Algo fallo.", error)
+      else {
+        showError("Algo fallo. Consulte a un administrador del sistema", error)
+      }
     }
   }
 
