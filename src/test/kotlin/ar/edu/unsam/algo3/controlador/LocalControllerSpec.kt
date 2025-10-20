@@ -46,7 +46,7 @@ class ControladorLocalRealTest {
                 MockMvcRequestBuilders.put("/store-profile")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonValido)
-                    .sessionAttr("userEmail", "jorge@hotmail.com")
+                    .param("mail", "jorge@hotmail.com")
             )
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
@@ -75,6 +75,7 @@ class ControladorLocalRealTest {
                 MockMvcRequestBuilders.put("/store-profile")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonInvalido)
+                    .param("mail", "jorge@hotmail.com")
             )
             .andExpect(MockMvcResultMatchers.status().is4xxClientError)
     }
@@ -103,6 +104,7 @@ class ControladorLocalRealTest {
                 MockMvcRequestBuilders.put("/store-profile")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonInvalido)
+                    .param("mail", "jorge@hotmail.com")
             )
             .andExpect(MockMvcResultMatchers.status().is4xxClientError)
     }
@@ -111,7 +113,8 @@ class ControladorLocalRealTest {
     @Test
     fun `GET store-profile retorna 200`() {
         mockMvc
-            .perform(MockMvcRequestBuilders.get("/store-profile"))
+            .perform(MockMvcRequestBuilders.get("/store-profile")
+            .param("mail", "jorge@hotmail.com"))
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 }

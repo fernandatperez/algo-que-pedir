@@ -19,17 +19,17 @@ class AuthControllerTest {
     private lateinit var mockMvc: MockMvc
 
     @Test
-    fun `login con usuario que no existe retorna error 500`() {
+    fun `login con usuario que no existe retorna error 400`() {
         mockMvc.post("/login") {
             contentType = MediaType.APPLICATION_JSON
             content = """
             {
-                "email": "noexiste@example.com",
+                "correo": "noexiste@example.com",
                 "password": "password123"
             }
             """
         }.andExpect {
-            status { isInternalServerError() }
+            status { is4xxClientError() }
         }
     }
 
@@ -44,7 +44,7 @@ class AuthControllerTest {
             }
             """
         }.andExpect {
-            status { isInternalServerError() }
+            status { is4xxClientError() }
         }
     }
 

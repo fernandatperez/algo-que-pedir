@@ -92,8 +92,8 @@ class ProcesosAdminSpec: DescribeSpec ({
             procesoAdministracion.ejecutarAcciones()
 
             val ingredienteActualizado = repoIng.obtenerObjeto(1)
-            ingredienteActualizado.costoMercado shouldBe 200.5
-            ingredienteActualizado.grupoAlimenticio shouldBe ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.LACTEOS
+            ingredienteActualizado?.costoMercado shouldBe 200.5
+            ingredienteActualizado?.grupoAlimenticio shouldBe ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio.LACTEOS
         }
         it("Borra cupones no aplicados y vencidos") {
             val mockedMailSender = mockk<MailSender>(relaxUnitFun = true)
