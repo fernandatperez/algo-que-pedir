@@ -36,8 +36,8 @@ class MenuItemsService {
   }
 
   async createMenuItem(item: MenuItemType) {
-    const creacion = new Date()
-    item.fechaCreacion = creacion.toISOString().split('T')[0]
+    item.fechaDeCreacion = new Date()
+    // console.log(item.fechaDeCreacion)
     await axios.post<MenuItemJSON>(
       REST_SERVER_URL + '/platos',
       item.toJSON()
@@ -46,6 +46,8 @@ class MenuItemsService {
 
   async updateMenuItem(menuItem: MenuItemType) {
     const menuItemJSON = menuItem.toJSON()
+    // eslint-disable-next-line no-console
+    console.log('Updating MenuItem:', menuItemJSON)
     return axios.put<MenuItemJSON>(REST_SERVER_URL + '/platos/' + menuItem.id, menuItemJSON)
   }
 }

@@ -17,7 +17,7 @@ export type MenuItemJSON = {
   // ->
   ingredientes: number[]
   store: StoreJSON
-  fechaCreacion: string
+  fechaDeCreacion: string
   porcentajeDescuento: number
 }
 
@@ -54,16 +54,31 @@ export class MenuItemType {
     // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
     public store: StoreJSON = storeMOCK,
-    public fechaCreacion: string = '',
+    public fechaDeCreacion: Date = new Date(),
     public porcentajeDescuento: number = 0
   ) {}
 
   static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
-    return Object.assign(new MenuItemType(), menuItemJSON, {})
+    return Object.assign(new MenuItemType(), menuItemJSON, {
+      fechaDeCreacion: new Date(menuItemJSON.fechaDeCreacion)
+    })
   }
 
   addError(field: string, message: string) {
     this.errors.push(new ValidationMessage(field, message))
+  }
+
+  setPromocion() {
+    if (this.porcentajeDescuento > 0) {
+      this.enPromocion = true
+    }
+  }
+
+  esNuevo(): boolean {
+    const ahora = new Date()
+    const diferenciaMs = ahora.getTime() - this.fechaDeCreacion.getTime()
+    const dias = diferenciaMs / (1000 * 60 * 60 * 24)
+    return dias <= 30
   }
 
   toJSON(): MenuItemJSON {
@@ -81,7 +96,7 @@ export class MenuItemType {
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
       store: this.store, 
-      fechaCreacion: this.fechaCreacion,
+      fechaDeCreacion: this.fechaDeCreacion.toISOString().split('T')[0],
       porcentajeDescuento: this.porcentajeDescuento
     }
   }
@@ -103,9 +118,9 @@ export class MenuItemType {
       this.addError('nombre', 'Debe ingresar nombre del plato')
     }
     
-    if (this.precio <= 0 || !this.precio) {
-      this.addError('precio', 'El precio debe ser mayor a 0')
-    }
+    // if (this.precio <= 0 || !this.precio) {
+    //   this.addError('precio', 'El precio debe ser mayor a 0')
+    // }
     
     if (!this.imagen) {
       this.addError('imagen', 'Debe seleccionar una imagen')
@@ -117,6 +132,10 @@ export class MenuItemType {
 
     if (this.valorBase <= 0) {
       this.addError('valorBase', 'El valor base no puede ser 0 o menor a el')
+    }
+
+    if (0 > this.porcentajeDescuento || this.porcentajeDescuento > 100) {
+      this.addError('porcentajeDescuento', 'Ingrese un valor entre 0 y 100.')
     }
 
   }
