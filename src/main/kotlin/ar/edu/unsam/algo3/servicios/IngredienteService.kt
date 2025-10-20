@@ -83,16 +83,13 @@ class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, v
 
         ingredienteActualizado.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteActualizado)
-//        servicePlato.actualizarIngrediente(ingredienteActualizado)
 
         return ingredienteActualizado.toDTO()
     }
 
     fun eliminarIngrediente(id: Int) {
-//        val ingrediente = repositorioIngredientes.obtenerObjeto(id)
-//        Repasar repositorio de platos con el ingrediente.
-//        Si ninguno lo tiene, borrar, sino, error
+        if (repositorioPlatos.algunoContieneIngrediente(id))
+            throw BusinessException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
         repositorioIngredientes.eliminarDeColeccion(id)
-//        servicePlato.eliminarIngrediente(ingrediente)
     }
 }

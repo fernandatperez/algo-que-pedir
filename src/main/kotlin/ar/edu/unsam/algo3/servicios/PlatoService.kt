@@ -1,15 +1,14 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.modelo.plato.Plato
-//import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
+//import ar.edu.unsam.algo3.dto.PlatoDTO
 import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
-import ar.edu.unsam.algo3.modelo.plato.PlatoDTOUpdate
-//import ar.edu.unsam.algo3.modelo.plato.fromDTO
-import ar.edu.unsam.algo3.modelo.plato.fromDTOUpdate
-import ar.edu.unsam.algo3.modelo.plato.toDTOUpdate
-//import ar.edu.unsam.algo3.modelo.plato.toDTO
+import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
+//import ar.edu.unsam.algo3.dto.fromDTO
+import ar.edu.unsam.algo3.dto.fromDTOUpdate
+//import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service

@@ -1,10 +1,9 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.modelo.plato.Plato
-//import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
-import ar.edu.unsam.algo3.modelo.plato.PlatoDTOUpdate
-import ar.edu.unsam.algo3.modelo.plato.toDTOUpdate
-//import ar.edu.unsam.algo3.modelo.plato.toDTO
+//import ar.edu.unsam.algo3.dto.PlatoDTO
+import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
+import ar.edu.unsam.algo3.dto.toDTOUpdate
+//import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.servicios.PlatoService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping

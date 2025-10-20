@@ -5,9 +5,6 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
-import ar.edu.unsam.algo3.modelo.plato.PlatoDTO
-import ar.edu.unsam.algo3.modelo.plato.fromDTO
-import ar.edu.unsam.algo3.modelo.plato.toDTO
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import org.uqbar.geodds.Point
