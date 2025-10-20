@@ -103,9 +103,9 @@ export class MenuItemType {
       this.addError('nombre', 'Debe ingresar nombre del plato')
     }
     
-    if (this.precio <= 0 || !this.precio) {
-      this.addError('precio', 'El precio debe ser mayor a 0')
-    }
+    // if (this.precio <= 0 || !this.precio) {
+    //   this.addError('precio', 'El precio debe ser mayor a 0')
+    // }
     
     if (!this.imagen) {
       this.addError('imagen', 'Debe seleccionar una imagen')
@@ -123,9 +123,9 @@ export class MenuItemType {
   // Si no usamos esto saquemoslo ->
 
   // Metodo helper para formatear precio
-  getFormattedPrice(): string {
-    return `$${this.precio}`
-  }
+  // getFormattedPrice(): string {
+  //   return `$${this.precio}`
+  // }
 
   // Metodo helper para obtener la ruta completa de la imagen no se si esta bien porque ya tiene parte de la ruta
   getImagePath(): string {

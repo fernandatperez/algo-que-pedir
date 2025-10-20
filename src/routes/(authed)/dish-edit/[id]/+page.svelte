@@ -24,8 +24,8 @@
   let errors: ValidationMessage[] = $state([])
   let toastLock: boolean = false
 
-  let platoAutor: boolean = $derived(itemEdit.esDeAutor);
-  let platoEnPromo: boolean = $derived(itemEdit.enPromocion);
+  let platoAutor: boolean = $derived(item.esDeAutor);
+  let platoEnPromo: boolean = $derived(item.enPromocion);
 
   let modalId: number = $state(0)
 
@@ -52,7 +52,7 @@
       itemEdit.precio,
       (formData.get("valorBase") ? formData.get("valorBase") : itemEdit.valorBase) as number,
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
-      itemEdit.costoProduccion,
+      +productionCost,
       platoAutor,
       platoEnPromo,
       itemEdit.ingredientes
@@ -203,7 +203,7 @@
               class="input-primary"
               id="product-name"
               name="name"
-              value={itemEdit.nombre}
+              value={item.nombre}
               placeholder="Escribir |"
             />
             <!-- Saque los bind:value, si despues vamos a usar el formData no me interesa bindear con nada reactivamente -->
@@ -219,7 +219,7 @@
               minlength="100"
               class="input-primary description-textarea"
               name="descripcion"
-              value = {itemEdit.descripcion}
+              value = {item.descripcion}
             ></textarea>
           </div>
           <div class="container-column">
@@ -231,7 +231,7 @@
               class="input-primary"
               id="url-product-img"
               name="imagen"
-              value={itemEdit.imagen}
+              value={item.imagen}
               placeholder="Escribir |"
             />
             <ValidationField errors={errors} field="imagen" />
@@ -239,7 +239,7 @@
         </div>
         <div class="image-product-edit img-edit-container">
           <DinamicImage
-            imageURL = {itemEdit.imagen}
+            imageURL = {item.imagen}
             imageDescription = "product-load-img"
             imageProps={{
               class: "img-product-edit"
@@ -263,7 +263,7 @@
               class="input-primary number-input"
               id="product-base-cost"
               name="valorBase"
-              value={itemEdit.valorBase}
+              value={item.valorBase}
               placeholder="Escribir |"
               step="any"
             />
@@ -383,9 +383,9 @@
         </div>
       </fieldset>
       <!-- Terminar de ver esto. Algunas veces no funciona, otras si. -->
-      {#if itemEdit.ingredientes.length == 0}
+      <!-- {#if itemEdit.ingredientes.length == 0}
         <ValidationField errors={errors} field="ingredients" />        
-      {/if}
+      {/if} -->
       {#if showModalDelete && modalId}
         <Modal
           title={`¿Seguro que querés eliminar el ingrediente "${itemEdit.ingredientes.find(i => i.id === modalId)?.name}"?`} 
