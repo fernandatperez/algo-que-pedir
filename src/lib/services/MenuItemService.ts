@@ -58,7 +58,7 @@ class MenuItemsService {
       { params: { mail: storeMail }}
     )
     // eslint-disable-next-line no-console
-    console.log('Updating MenuItem:', menuItemJSON)
+    // console.log('Updating MenuItem:', menuItemJSON)
     return updateResponse
   }
 }

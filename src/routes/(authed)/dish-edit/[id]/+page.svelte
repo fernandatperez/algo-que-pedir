@@ -56,9 +56,8 @@
       platoAutor,
       platoEnPromo,
       itemEdit.ingredientes,
-      itemEdit.store, 
       itemEdit.fechaDeCreacion,
-      Number(formData.get("porcentajeDescuento") ? formData.get("porcentajeDescuento") : itemEdit.porcentajeDescuento),
+      Number(formData.get("porcentajeDescuento") ? formData.get("porcentajeDescuento") : itemEdit.porcentajeDescuento) /100, // porcentaje
     )
     // console.log(newItem.porcentajeDescuento)
     //  Primero valido con el item de dominio, despues paso a JSON y lo mando. No?
@@ -72,7 +71,7 @@
 
     try {
       if (esNuevoItem) {
-        console.info("Nuevo Plato:", newItem)
+        // console.info("Nuevo Plato:", newItem)
         await menuItemsService.createMenuItem(newItem)
         toasts.push('Plato generado exitosamente. Seras redirigido a Menu', {type: 'success'})
       } else {
@@ -338,7 +337,7 @@
             id="product-discount-percentage"
             name="porcentajeDescuento"
             value={itemEdit.porcentajeDescuento}
-            placeholder="Escribir |"
+            placeholder="%"
             step="any"
             />
             <ValidationField errors={errors} field="porcentajeDescuento" />

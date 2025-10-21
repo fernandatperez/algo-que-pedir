@@ -56,6 +56,7 @@ export class MenuItemType {
 
   static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
     return Object.assign(new MenuItemType(), menuItemJSON, {
+      porcentajeDescuento: menuItemJSON.porcentajeDescuento*100,
       fechaDeCreacion: new Date(menuItemJSON.fechaDeCreacion)
     })
   }
@@ -129,7 +130,7 @@ export class MenuItemType {
       this.addError('valorBase', 'El valor base no puede ser 0 o menor a el')
     }
 
-    if (0 > this.porcentajeDescuento || this.porcentajeDescuento > 100) {
+    if (0 > this.porcentajeDescuento || this.porcentajeDescuento > 1) {
       this.addError('porcentajeDescuento', 'Ingrese un valor entre 0 y 100.')
     }
 
