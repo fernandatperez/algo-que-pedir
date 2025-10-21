@@ -56,6 +56,7 @@
     try {
       await ingredientService.deleteIngredient(ingredient)
       findIngredients()
+      toasts.push('Ingrediente eliminado exitosamente', {type: 'success'})
       showModal = false
     } catch (error) {
       if(!toastLock) {
