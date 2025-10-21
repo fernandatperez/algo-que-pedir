@@ -28,9 +28,6 @@ class MenuItemsService {
     const plato = MenuItemType.fromJson(response.data)
     plato.ingredientes = ingredients
 
-    plato.ingredientes = plato.ingredientes.map(ingredienteJSON =>
-      IngredientType.fromJson(ingredienteJSON))
-
     if (plato != null)
       return plato
 
@@ -57,8 +54,7 @@ class MenuItemsService {
       menuItemJSON,
       { params: { mail: storeMail }}
     )
-    // eslint-disable-next-line no-console
-    // console.log('Updating MenuItem:', menuItemJSON)
+
     return updateResponse
   }
 }

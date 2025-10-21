@@ -35,11 +35,15 @@
 
   const productionCost = $derived(itemEdit.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2))
 
-  const esNuevo = $derived(() => {
+  const newItem = $derived(() => {
     const ahora = new Date()
     const diferenciaMs = ahora.getTime() - itemEdit.fechaDeCreacion.getTime()
     const dias = diferenciaMs / (1000 * 60 * 60 * 24)
     return dias <= 30
+  })
+
+  const emptyIngredients = $derived(() => {
+    return itemEdit.ingredientes.length == 0
   })
 
   const onSubmit = async (ev: SubmitEvent) => {
@@ -67,7 +71,6 @@
       Number(formData.get("porcentajeDescuento") ? formData.get("porcentajeDescuento") : itemEdit.porcentajeDescuento) /100, // porcentaje
     )
     // console.log(newItem.porcentajeDescuento)
-    //  Primero valido con el item de dominio, despues paso a JSON y lo mando. No?
     newItem.validate()
     // console.log("Validando nuevo plato:", newItem.errors)
     
@@ -226,7 +229,6 @@
               value={item.nombre}
               placeholder="Escribir |"
             />
-            <!-- Saque los bind:value, si despues vamos a usar el formData no me interesa bindear con nada reactivamente -->
             <ValidationField errors={errors} field="nombre" />
           </div>
           <div class="container-column input-group">
@@ -312,7 +314,7 @@
           </div>
         </div>
 
-      {#if esNuevo()}
+      {#if newItem()}
         <p class="no-promocion">Los platos nuevos no pueden estar en promocion. 
           Esta funcionalidad se habilitará luego de 30 días de creado el plato.</p>
       {:else}
@@ -366,7 +368,6 @@
         <h2 class="subtitle product-edit-subtitle">Ingredientes</h2>
         <div class="product-ingredients-cost-subtitle w-100">
           <h3 class="h3">Costo de Producción</h3>
-          <!-- Aca se agrega este $derived para que se muestre reactivamente. Cuando se guarda el menuItem lo que se envia es el costo de produccion del elemento. -->
           <p>${productionCost}</p>
           <button type="button" class="add-ingredient-btn" onclick={fetchIng}>Añadir ingredientes</button>
           
@@ -410,7 +411,6 @@
           </section>
           <section class="cell col-centered" id="acciones">Acciones</section>
         </header>
-        <!-- No logro hacer que se actualice la vista. Cuando era JSON funcionaba por algun motivo, ahora ya no -->
         {#each itemEdit.ingredientes as ing (ing.id)}
           <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing}/>
@@ -418,18 +418,15 @@
               <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
               <span><i class="ph ph-line-vertical gray-icon"></i></span>
               <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModalDelete(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
-              <p>{ing.id}</p>
-              <!-- <button type="button" class="icon-action-btn" onclick={() => removeItem(ing.id)} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button> -->
             </section>
           </article>            
         {/each}
          
         </div>
       </fieldset>
-      <!-- Terminar de ver esto. Algunas veces no funciona, otras si. -->
-      <!-- {#if itemEdit.ingredientes.length == 0}
+      {#if emptyIngredients()}
         <ValidationField errors={errors} field="ingredients" />        
-      {/if} -->
+      {/if}
       {#if showModalDelete && modalId}
         <Modal
           title={`¿Seguro que querés eliminar el ingrediente "${itemEdit.ingredientes.find(i => i.id === modalId)?.name}"?`} 
@@ -460,11 +457,3 @@
     </form>
   </article>
 </main>
-
-<!-- <div style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;">
-  <pre style="font-weight: bold; font-size: 1.2rem; white-space: pre-wrap; word-wrap: break-word;">
-    {JSON.stringify(itemEdit.ingredientes, null, 2)}
-    {JSON.stringify(itemEdit.precio, null, 2)}
-    {JSON.stringify(itemEdit.valorBase, null, 2)}
-  </pre>
-</div> -->

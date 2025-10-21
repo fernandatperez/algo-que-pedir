@@ -114,5 +114,9 @@ export class MenuItemType {
       this.addError('porcentajeDescuento', 'Ingrese un valor entre 0 y 100.')
     }
 
+    if (this.ingredientes.length == 0) {
+      this.addError('ingredients', 'El plato debe tener al menos 1 ingrediente')
+    }
+
   }
 }
