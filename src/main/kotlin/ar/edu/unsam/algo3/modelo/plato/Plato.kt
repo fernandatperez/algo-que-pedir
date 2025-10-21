@@ -110,7 +110,7 @@ class Plato(
                 coincideTotalmenteCon(criterio, local.direccion.calle) ||
                 coincideParcialmenteCon(criterio, local.email)
 
-                override fun cumpleCriterioDeCreacion() {
+    override fun cumpleCriterioDeCreacion() {
         if (!noEstaVacio(nombre)) throw NotFoundException("El Plato tiene que tener un nombre")
         if (!noEstaVacio(descripcion)) throw NotFoundException("El Plato tiene que tener una descripcion")
         if (!noEstaVacio(local.nombre)) throw NotFoundException("El Local tiene que tener un nombre")

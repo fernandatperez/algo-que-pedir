@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
 import ar.edu.unsam.algo3.dto.fromDTOUpdate
+import ar.edu.unsam.algo3.errores.ConflictException
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
@@ -45,7 +46,7 @@ class PlatoService(
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
             descripcion = platoDTO.descripcion,
-            valorBase = platoDTO.precio,
+            valorBase = platoDTO.valorBase,
             urldeImagen = platoDTO.imagen,
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = ingredientes,
@@ -54,8 +55,8 @@ class PlatoService(
         ).apply {
             porcentajeDescuento = platoDTO.porcentajeDescuento
         }
-        platoDOM.crear()
-        println(platoDOM.toString())
+        platoDOM.cumpleCriterioDeCreacion()
+//        println(platoDOM.toString())
         repositorioPlatos.crear(platoDOM)
 
         return platoDOM

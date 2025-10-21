@@ -17,8 +17,4 @@ interface ElementoDeRepositorio {
     fun cumpleCriterioDeCreacion()
 
     fun cumpleCriterioDeNuevo(): Boolean = id == 0
-
-    fun crear() {
-        this.cumpleCriterioDeCreacion()
-    }
 }
