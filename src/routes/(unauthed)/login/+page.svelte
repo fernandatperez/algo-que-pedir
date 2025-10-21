@@ -26,8 +26,8 @@
     const form = ev.currentTarget as HTMLFormElement
     const formData = new FormData(form) // creo el formData
     
-    console.info((formData.get("email") ?? "").toString())
-    console.info((formData.get("password") ?? "").toString())
+    // console.info((formData.get("email") ?? "").toString())
+    // console.info((formData.get("password") ?? "").toString())
 
     const user = new UserType(
       "Default name",

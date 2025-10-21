@@ -3,13 +3,13 @@
   import OrderState from "$lib/components/OrderState.svelte"
   
   import { goto } from "$app/navigation"
-    import { Estado, Order } from "$lib/domain/order.js";
-    import { orderService } from "$lib/services/orderService.js";
 
   let { data } = $props()
   let { order } = data
 
-
+  if (!order) {
+    goto('/orders')
+  }
 </script>
 
 <style>

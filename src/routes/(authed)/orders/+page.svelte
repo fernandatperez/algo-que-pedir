@@ -40,16 +40,18 @@
     onMount(getOrders)
 
     const prepararPedido = async (order: Order) => {
-        const response = await orderService.updateOrderState(order.id)
-        if (response.status == 200) {
-            orders = orders.filter(o => o.id != order.id)
-            toasts.push('Pedido enviado a preparación', {type: 'info'})
-        } else {    
-            showError('Error actualizando el estado del pedido', new Error('Error en la respuesta del servidor'))
+        try {
+            const response = await orderService.updateOrderState(order.id)
+            if (response.status == 200) {
+                orders = orders.filter(o => o.id != order.id)
+                toasts.push('Pedido enviado a preparación', {type: 'info'})
+            }
+        } catch (error) {
+            showError('Error actualizando el estado del pedido', error)
             return
         }
         // console.log("Updated Order:", updatedOrder)
-        console.log(orders)
+        // console.log(orders)
         // await getOrders() // no hacer esto puede set costoso. Hacerla en memoria
     }
 
