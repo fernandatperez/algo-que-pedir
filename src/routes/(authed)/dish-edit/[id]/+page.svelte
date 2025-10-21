@@ -14,8 +14,7 @@
   import Input from "$lib/components/Input.svelte";
   import { toasts } from '$lib/components/toast/toastStore'
   import { ingredientService } from "$lib/services/IngredientService.js";
-    import { AxiosError } from "axios";
-    import type { MouseEventHandler } from "svelte/elements";
+  import { AxiosError } from "axios";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -35,6 +34,13 @@
   let showModalDiscard = $state(false)
 
   const productionCost = $derived(itemEdit.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2))
+
+  const esNuevo = $derived(() => {
+    const ahora = new Date()
+    const diferenciaMs = ahora.getTime() - itemEdit.fechaDeCreacion.getTime()
+    const dias = diferenciaMs / (1000 * 60 * 60 * 24)
+    return dias <= 30
+  })
 
   const onSubmit = async (ev: SubmitEvent) => {
     const esNuevoItem = itemEdit.id == -1
@@ -306,7 +312,7 @@
           </div>
         </div>
 
-      {#if itemEdit.esNuevo()}
+      {#if esNuevo()}
         <p class="no-promocion">Los platos nuevos no pueden estar en promocion. 
           Esta funcionalidad se habilitará luego de 30 días de creado el plato.</p>
       {:else}

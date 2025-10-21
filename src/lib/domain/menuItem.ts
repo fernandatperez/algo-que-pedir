@@ -3,7 +3,6 @@ import { IngredientType } from './ingredient'
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
   id: number
-  // alt: string
   nombre: string
   descripcion: string
   precio: number
@@ -12,7 +11,6 @@ export type MenuItemJSON = {
   costoProduccion: number
   esDeAutor: boolean
   enPromocion: boolean
-  // ->
   ingredientes: number[]
   fechaDeCreacion: string
   porcentajeDescuento: number
@@ -38,8 +36,6 @@ export class MenuItemType {
 
   constructor(
     public id: number = -1,
-    // trim: eliminar los espacios en blanco al inicio y al final del texto
-    // public alt: string = ''.trim(),
     public nombre: string = ''.trim(),
     public descripcion: string = ''.trim(),
     public precio: number = 0,
@@ -48,7 +44,6 @@ export class MenuItemType {
     public costoProduccion: number = 0,
     public esDeAutor: boolean = false,
     public enPromocion: boolean = false,
-    // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
     public fechaDeCreacion: Date = new Date(),
     public porcentajeDescuento: number = 0
@@ -69,13 +64,6 @@ export class MenuItemType {
     if (this.porcentajeDescuento > 0) {
       this.enPromocion = true
     }
-  }
-
-  esNuevo(): boolean {
-    const ahora = new Date()
-    const diferenciaMs = ahora.getTime() - this.fechaDeCreacion.getTime()
-    const dias = diferenciaMs / (1000 * 60 * 60 * 24)
-    return dias <= 30
   }
 
   toJSON(): MenuItemJSON {
@@ -103,20 +91,12 @@ export class MenuItemType {
     return difference
   }
 
-  // costoDeProduccion(): string {
-  //   return this.ingredientes.reduce((acc, ing) => {return acc + ing.cost}, 0).toFixed(2)
-  // }
-
   validate() {
     this.errors = []
     
     if (!this.nombre) {
       this.addError('nombre', 'Debe ingresar nombre del plato')
     }
-    
-    // if (this.precio <= 0 || !this.precio) {
-    //   this.addError('precio', 'El precio debe ser mayor a 0')
-    // }
     
     if (!this.imagen) {
       this.addError('imagen', 'Debe seleccionar una imagen')
@@ -135,20 +115,4 @@ export class MenuItemType {
     }
 
   }
-  // Si no usamos esto saquemoslo ->
-
-  // Metodo helper para formatear precio
-  // getFormattedPrice(): string {
-  //   return `$${this.precio}`
-  // }
-
-  // Metodo helper para obtener la ruta completa de la imagen no se si esta bien porque ya tiene parte de la ruta
-  getImagePath(): string {
-    return `src/lib/assets/img/${this.imagen}`
-  }
-}
-
-// Factory function sin nada, la idea seria que (AGREGAR NUEVO PLATO) llame esto y te lleva a una nueva pagina con esto o algo asi
-export function createEmptyMenuItem(): MenuItemType {
-  return new MenuItemType()
 }
