@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.repositorio
 
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Estado
@@ -52,6 +53,7 @@ class RepositorioPedido {
     fun update(pedido: Pedido): Pedido {
         // busco el pedido por id y me guardo el indice
         val indexPedido = pedidos.indexOfFirst { it.id == pedido.id }
+        if (indexPedido == -1) throw NotFoundException("El id ${pedido.id} no existe en el repositorio")
         pedidos.removeAt(indexPedido)
         pedidos.add(indexPedido, pedido)
         return pedido
