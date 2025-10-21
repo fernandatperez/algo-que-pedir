@@ -31,20 +31,17 @@ class PlatoController(val platoService: PlatoService) {
         return platoService.obtenerPlato(id).toDTOUpdate()
     }
 
-    @PostMapping("/platos") // Maxi
+    @PostMapping("/platos")
     fun create(@RequestBody objeto: PlatoDTOUpdate, @RequestParam mail: String): PlatoDTOUpdate {
         return platoService.crearPlato(objeto, mail).toDTOUpdate()
     }
 
     @PutMapping("/platos/{id}")
     fun update(
-//        @PathVariable id: Int,
         @RequestBody platoAModificar: PlatoDTOUpdate,
         @RequestParam mail: String  // AGREGADO
     ): PlatoDTOUpdate {
         platoService.modificarPlato(platoAModificar, mail).toDTOUpdate()
         return platoService.obtenerPlato(platoAModificar.id).toDTOUpdate()
     }
-    // Editar un plato existente
-
 }

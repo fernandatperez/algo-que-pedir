@@ -97,7 +97,8 @@ open class Local(
 
     override fun cumpleCriterioDeCreacion() {
         if (!noEstaVacio(nombre)) throw NotFoundException("El Local tiene que tener un nombre")
-        if (!noEstaVacio(direccion.calle)) throw NotFoundException("El Local tiene que tener una direccion")
+//        Esto se va por que habria que poner en register un campo para darle una calle.
+//        if (!noEstaVacio(direccion.calle)) throw NotFoundException("El Local tiene que tener una direccion")
         if (!noEstaVacio(email))throw NotFoundException("El Local tiene que tener una email")
     }
 

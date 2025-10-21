@@ -32,7 +32,6 @@ class AuthController( val usuarioService: UsuarioService ) {
         return AuthResponse(
             email = userValidado.email,
             name = userValidado.nombre,
-//            nombreLocal = userValidado.nombre
         )
     }
 
@@ -49,7 +48,6 @@ class AuthController( val usuarioService: UsuarioService ) {
         return AuthResponse(
             email = userLocal.email,
             name = userLocal.nombre,
-//            nombreLocal = userLocal.nombre // esto hay que cambiarlo despues
         )
     }
 

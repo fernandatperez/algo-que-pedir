@@ -34,6 +34,7 @@ class UsuarioService (
     fun generarUsuario(usuario: Local) {
         val existeUsuarioConMail: List<Local> = repositorioLocal.buscar(usuario.email)
         if (existeUsuarioConMail.isEmpty()) {
+            usuario.crear()
             repositorioLocal.crear(usuario)
         } else {
             throw RuntimeException("Ya existe un usuario con ese email")

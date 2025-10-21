@@ -1,7 +1,6 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.modelo.plato.Plato
-import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
@@ -23,7 +22,6 @@ class PlatoService(
         repositorioPlatos.buscar(mail)
 
     fun obtenerPlato(id: Int): Plato {
-//        obtenerObjeto ya hace la validacion de existencia del plato en el repo
         val platoModelo = repositorioPlatos.obtenerObjeto(id)
         if (platoModelo != null) {
             return platoModelo
@@ -64,7 +62,6 @@ class PlatoService(
     }
 
     fun modificarPlato(platoNuevo: PlatoDTOUpdate, mail: String): Plato {
-//        Buscar plato en repositorio
         var platoAModificar = this.obtenerPlato(platoNuevo.id)
 
         val ingredientes = this.obtenerIngredientes(platoNuevo.ingredientes)
