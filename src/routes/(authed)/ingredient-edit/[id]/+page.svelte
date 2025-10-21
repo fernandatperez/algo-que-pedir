@@ -67,6 +67,8 @@
 
     try {
       await ingredientService.updateIngredient(ingredient)
+      console.info("el ingrediente modificado es ", ingredient)
+
       toasts.push('Ingrediente modificado exitosamente', {type: 'success'})
 
       setTimeout(() => {
