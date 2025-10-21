@@ -6,13 +6,13 @@
   import type { ValidationMessage } from '$lib/domain/validationMessage'
   import { foodGroupDict, FoodGroupValue } from '$lib/domain/ingredient'
   import { ingredientService } from '$lib/services/IngredientService'
-  import { onMount } from 'svelte'
+  import { onMount, tick } from 'svelte'
   import { showError } from '$lib/domain/errorHandler'
   import ValidationField from '$lib/components/ValidationField.svelte'
   import Modal from '$lib/components/Modal.svelte'
   import { toasts } from '$lib/components/toast/toastStore'
   import { InputTypes } from "$lib/components/InputPropsI"
-  import Input from "$lib/components/Input.svelte";
+  import Input from "$lib/components/Input.svelte"
 
   // Valores reactivos $state()
   // https://svelte.dev/docs/svelte/$state
@@ -57,8 +57,13 @@
       await ingredientService.deleteIngredient(ingredient)
       findIngredients()
       showModal = false
-    } catch (error: unknown) {
-      showError('Error al eliminar el ingrediente', error)
+    } catch (error) {
+      if(!toastLock) {
+        // toasts.push('Error al eliminar el ingrediente', {type: 'error'})
+        showError('Error al eliminar el ingrediente', error)
+        toastLock = true
+        setTimeout(releaseToast, 5000)
+      }
       await findIngredients()
     }
   }
@@ -72,13 +77,13 @@
     const formData = new FormData(form) // creo el formData
 
     const ingredient = new IngredientType(
-      ingredients.length + 1,
+      newIngredient.id,
       (formData.get("name") ?? "").toString(),
       Number(formData.get("cost") ?? 0),
       (formData.get("foodGroup") ?? "") as FoodGroupValue,
       Boolean(formData.get("esOrigenAnimal") ?? "true")
     )
-    // console.info("el nuevo ingrediente es ", ingredient)
+    console.info("el nuevo ingrediente es ", ingredient)
 
     ingredient.validate()
 
