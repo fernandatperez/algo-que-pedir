@@ -103,6 +103,7 @@
               id= "register-email-id"
               class= "input-primary"
               name= "email"
+              tabindex={1}
             />
             <ValidationField errors={errors} field="email" />
           </div>
@@ -117,6 +118,7 @@
               id= "register-name-id"
               class= "input-primary"
               name= "name"
+              tabindex={2}
             />
             <ValidationField errors={errors} field="name" />
           </div>
@@ -130,6 +132,7 @@
               id= "register-password-id"
               class= "input-primary"
               name= "password"
+              tabindex={3}
             />
             <ValidationField errors={errors} field="password" />
         </div>
@@ -143,6 +146,7 @@
               id= "register-password-retry-id"
               class= "input-primary"
               name= "password-retry"
+              tabindex={4}
             />
             <ValidationField errors={errors} field="password"/>
           </div>

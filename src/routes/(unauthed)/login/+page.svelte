@@ -86,6 +86,7 @@
               placeholder="Usuario"
               id="input-id"
               name="email"
+              tabindex={1}
             />
             <ValidationField errors={errors} field="email" />
           </div>
@@ -99,6 +100,7 @@
               class="input-primary"
               id="password-id"
               name="password"
+              tabindex={2}
             />
             <ValidationField errors={errors} field="password" />
           </div>
