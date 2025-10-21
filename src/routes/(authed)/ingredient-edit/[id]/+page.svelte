@@ -69,15 +69,19 @@
       await ingredientService.updateIngredient(ingredient)
       console.info("el ingrediente modificado es ", ingredient)
 
-      toasts.push('Ingrediente modificado exitosamente', {type: 'success'})
-
+      toasts.push('Ingrediente modificado exitosamente. Seras redirigido a ingredientes', {type: 'success'})
       setTimeout(() => {
         goto("/ingredients")
       }, 2000)
       
       errors = [] // limpiar errores
     } catch (error: unknown) {
-      showError("Error al crear el ingrediente", error)
+      if(!toastLock) {
+        // toasts.push('Error al eliminar el ingrediente', {type: 'error'})
+        showError('Error al crear el ingrediente', error)
+        toastLock = true
+        setTimeout(releaseToast, 5000)
+      }
     }
   }
   

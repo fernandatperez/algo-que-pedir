@@ -6,9 +6,6 @@ export const load: PageLoad = async ({ params }) => {
   const id = parseInt(params.id)
   try {
     const ingredient = await ingredientService.getIngredientById(id)
-    if (!ingredient) {
-      throw new Error('Ingrediente no encontrado')
-    }
     return { ingredient }
   } catch (error) {
     showError('Error loading ingredient', error)
