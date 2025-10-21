@@ -93,17 +93,17 @@
         goto("/menu")
       }, 2000)
       errors = [] // limpiar errores
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        if(!toastLock) {
-          toasts.push("Error al generar el plato", {type: 'error'})
-          setTimeout(releaseToast, 5000)
-        }
-        showError("Algo fallo.", error.message)
-      }
-      else {
-        showError("Algo fallo. Consulte a un administrador del sistema", error)
-      }
+    } catch (error) {
+      // if (error instanceof AxiosError) {
+      //   if(!toastLock) {
+      //     toasts.push("Error al generar el plato", {type: 'error'})
+      //     setTimeout(releaseToast, 5000)
+      //   }
+      showError("Algo fallo", error)
+      // }
+      // else {
+      //   showError("Algo fallo. Consulte a un administrador del sistema", error)
+      // }
     }
   }
 

@@ -85,8 +85,8 @@
       Number(formData.get("storeAltitude") ?? 0),
       Number(formData.get("storeLatitude") ?? 0),
       Number(formData.get("storeLongitude") ?? 0),
-      Number(formData.get("storeAppCommission") ?? 0),
-      Number(formData.get("storeAuthorCommission") ?? 0),
+      Number(formData.get("storeAppCommission") ?? 0) / 100, // porcentaje
+      Number(formData.get("storeAuthorCommission") ?? 0) / 100, // porcentaje
       Boolean(formData.get("storePaymentEfectivo") ?? false), 
       Boolean(formData.get("storePaymentQR") ?? false),
       Boolean(formData.get("storePaymentTransferencia") ?? false), 

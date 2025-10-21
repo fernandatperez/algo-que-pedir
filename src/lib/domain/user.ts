@@ -45,6 +45,9 @@ export class UserType {
       // eslint-disable-next-line no-console
       this.addError('email', 'Debe ingresar email')
     }
+    if (!this.name){
+      this.addError('name', 'Debe ingresar un nombre')
+    }
     if (!this.password){
       this.addError('password', 'Debe ingresar una contraseña')
     }
