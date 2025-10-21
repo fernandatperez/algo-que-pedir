@@ -37,7 +37,10 @@ export class StoreType {
 
   static fromJson(storeJSON: StoreJSON): StoreType {
     // Crear instancia pasando todos los parámetros
-    return Object.assign(new StoreType(), storeJSON, {})
+    return Object.assign(new StoreType(), storeJSON, {
+      storeAppCommission: storeJSON.storeAppCommission*100,
+      storeAuthorCommission: storeJSON.storeAuthorCommission*100,
+    })
   }
 
   toJSON(): StoreJSON {
