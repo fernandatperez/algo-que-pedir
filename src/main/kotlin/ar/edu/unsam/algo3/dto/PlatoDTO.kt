@@ -4,6 +4,7 @@ import ar.edu.unsam.algo3.mock.LocalPollos
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import java.time.LocalDate
 
 // Armar DTO aparte para el menu
 data class PlatoMenuDTO(
@@ -24,7 +25,8 @@ data class PlatoDTO(
     val costoProduccion: Double,
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
-    val ingredientes: List<IngredienteDTO>
+    val ingredientes: List<IngredienteDTO>,
+    val porcentajeDescuento: Double
 )
 
 
@@ -39,7 +41,9 @@ data class PlatoDTOUpdate(
     val costoProduccion: Double,
     val esDeAutor: Boolean,
     val enPromocion: Boolean,
-    val ingredientes: List<Int>
+    val ingredientes: List<Int>,
+    val porcentajeDescuento: Double,
+    var fechaDeCreacion: String
 )
 
 fun Plato.toDTOUpdate(): PlatoDTOUpdate {
@@ -52,8 +56,10 @@ fun Plato.toDTOUpdate(): PlatoDTOUpdate {
         imagen = this.urldeImagen,
         costoProduccion = this.costoProduccion(),
         esDeAutor = this.esDeAutor,
-        enPromocion = this.esNuevo(),
+        enPromocion = this.enPromocion,
         ingredientes = this.ingredientes.map{ it.id },
+        porcentajeDescuento = this.porcentajeDescuento,
+        fechaDeCreacion = this.fechaDeCreacion.toString(),
     )
 }
 
@@ -67,8 +73,9 @@ fun Plato.toDTO(): PlatoDTO {
         imagen = this.urldeImagen,
         costoProduccion = this.costoProduccion(),
         esDeAutor = this.esDeAutor,
-        enPromocion = this.esNuevo(),
-        ingredientes = this.ingredientes.map{ it.toDTO() }
+        enPromocion = this.enPromocion,
+        ingredientes = this.ingredientes.map{ it.toDTO() },
+        porcentajeDescuento = this.porcentajeDescuento,
     )
 }
 
@@ -91,6 +98,9 @@ fun Plato.fromDTOUpdate(platoDTO: PlatoDTOUpdate, ingredientesMap: MutableList<I
         ingredientes = ingredientesMap
     ).apply {
         this.id = this@fromDTOUpdate.id
+        this.enPromocion = platoDTO.enPromocion
+        this.porcentajeDescuento = platoDTO.porcentajeDescuento
+        this.fechaDeCreacion = LocalDate.parse(platoDTO.fechaDeCreacion)
         setValorBase(platoDTO.valorBase)
     }
     return plato
@@ -105,6 +115,8 @@ fun Plato.fromDTO(platoDTO: PlatoDTO): Plato {
         ingredientes = platoDTO.ingredientes.map { it.toDOM() }.toMutableList()
     ).apply {
         this.id = this@fromDTO.id
+        this.enPromocion = platoDTO.enPromocion
+        this.porcentajeDescuento = platoDTO.porcentajeDescuento
         setValorBase(platoDTO.valorBase)
     }
     return plato
