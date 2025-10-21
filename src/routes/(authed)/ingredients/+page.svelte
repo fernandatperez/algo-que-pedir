@@ -124,6 +124,10 @@
   @import url("$lib/css/components-css/icon.css");
   @import url("$lib/css/components-css/buttons.css");
   @import url("$lib/css/pages-css/7-ingredients.css");
+
+  .aniadir-ing {
+    text-align: center;
+  }
 </style>
 
 <section class="flex-column">
@@ -132,7 +136,7 @@
       <h1 class="header-title-ingredients ingredients-title">Ingredientes</h1>
       <div class="new-ingredient">
         <!--Es un button-->
-        <button class="btn-add" onclick={() => (showForm = true)}>Nuevo Ingrediente</button>
+        <button class="btn-add aniadir-ing" onclick={() => (showForm = true)}>Nuevo Ingrediente</button>
       </div>
     </section>
 

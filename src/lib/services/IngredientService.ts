@@ -6,8 +6,7 @@ import axios from 'axios'
 
 class IngredientService {
   async getAllIngredients(){
-    const storeMail = sessionStorage.getItem('email') // envio el dato como query param
-    const queryIngredients = () => axios.get<IngredientJSON[]>(REST_SERVER_URL + '/ingredientes', {params: {mail: storeMail}})
+    const queryIngredients = () => axios.get<IngredientJSON[]>(REST_SERVER_URL + '/ingredientes')
     return (await getAxiosData(queryIngredients)).map(IngredientType.fromJson)
   }
 
@@ -18,19 +17,16 @@ class IngredientService {
   }
 
   async createIngredient(ingredient: IngredientType) {
-    const storeMail = sessionStorage.getItem('email')
     const ingredientJSON = ingredient.toJSON()
-    const response = await axios.post(REST_SERVER_URL + '/crear-ingrediente', ingredientJSON, {params: {mail: storeMail}})
+    const response = await axios.post(REST_SERVER_URL + '/crear-ingrediente', ingredientJSON)
     return response.data
   }
 
   async updateIngredient(ingredient: IngredientType){
-    const storeMail = sessionStorage.getItem('email') 
-    return axios.put<IngredientJSON>(REST_SERVER_URL + '/actualizar-ingrediente/' + ingredient.id, ingredient.toJSON(), {params: {mail: storeMail}})
+    return axios.put<IngredientJSON>(REST_SERVER_URL + '/actualizar-ingrediente/' + ingredient.id, ingredient.toJSON())
   }
 
   async deleteIngredient(ingredient: IngredientType){
-    // const storeMail = sessionStorage.getItem('email') 
     return axios.delete(REST_SERVER_URL + '/eliminar-ingrediente/' + ingredient.id)
   }
 }

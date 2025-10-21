@@ -102,6 +102,16 @@ padding: 4px;
 }
 
 @media (max-width: 430px) {
+    .section-title {
+        flex-direction: column;
+        row-gap: 1em;
+        align-items: flex-start;
+    }
+    .btn-group-actions {
+        flex-direction: column;
+        row-gap: 1em;
+        align-items: center;
+    }
     .hidden-icons {
         display: flex;
     }

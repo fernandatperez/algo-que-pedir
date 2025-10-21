@@ -116,7 +116,7 @@
       event.preventDefault()
       event.stopPropagation()
     }
-    itemEdit.ingredientes = itemEdit.ingredientes.filter(i => i.id !== ingredientId)
+    item.ingredientes = item.ingredientes.filter(i => i.id !== ingredientId)
     itemEdit = {...itemEdit} as MenuItemType
     showModalDelete = false
   }
@@ -137,7 +137,7 @@
   
   const guardarModal = () => {
     showModalAdd = false
-    selectedIngs.forEach(it => itemEdit.ingredientes.push(it))
+    selectedIngs.forEach(it => item.ingredientes.push(it))
     itemEdit = {...itemEdit} as MenuItemType
     selectedIngs.length = 0
   }
@@ -386,7 +386,7 @@
                 <div class="modal-checkbox">
                   <label>
                     <input type="checkbox" bind:group={selectedIngs} value={ingr}>
-                    {ingr.name}
+                    {ingr.name} ${ingr.cost}
                   </label>
                   <br>
                 </div>
@@ -411,12 +411,12 @@
           </section>
           <section class="cell col-centered" id="acciones">Acciones</section>
         </header>
-        {#each itemEdit.ingredientes as ing (ing.id)}
+        {#each item.ingredientes as ing (ing.id)}
           <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing}/>
             <section class="cell multiple-action-buttons">
-              <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
-              <span><i class="ph ph-line-vertical gray-icon"></i></span>
+              <!-- <button type="button" class="icon-action-btn" onclick={() => goto (`/ingredient-edit/${ing.id}`)} aria-label="Editar"><i class="ph ph-pencil gray-icon"></i></button>
+              <span><i class="ph ph-line-vertical gray-icon"></i></span> -->
               <button type="button" class="icon-action-btn" onclick={() =>{deleteItem ; openModalDelete(ing.id as number);}} aria-label="Eliminar"><i class="ph ph-trash gray-icon"></i></button>
             </section>
           </article>            
@@ -429,7 +429,7 @@
       {/if}
       {#if showModalDelete && modalId}
         <Modal
-          title={`¿Seguro que querés eliminar el ingrediente "${itemEdit.ingredientes.find(i => i.id === modalId)?.name}"?`} 
+          title={`¿Seguro que querés eliminar el ingrediente "${item.ingredientes.find(i => i.id === modalId)?.name}"?`} 
           confirmLabel="Sí"
           cancelLabel="No"
           actionConfirm={(e) => deleteItem(modalId, e)}

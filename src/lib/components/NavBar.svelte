@@ -34,7 +34,7 @@
   {/each}
 
   <!-- Texto del link activo (solo tablet) -->
-  <span class="activeLink">
+  <!-- <span class="activeLink">
     {#each routes as route}
       {#if isActive(route.path)}
         <a class:active={isActive(route.path)} href={route.path}>
@@ -42,7 +42,7 @@
         </a>
       {/if}
     {/each}
-  </span>
+  </span> -->
 
 <div class="dropdown">
   <!-- <i class="ph ph-list hidden"></i> -->

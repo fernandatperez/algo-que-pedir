@@ -19,14 +19,14 @@ class MenuItemsService {
       REST_SERVER_URL + '/platos/' + searchId
     )
     // Como del back traigo IDs, los tengo que buscar para mostrarlos aca
-    const ingredients = await Promise.all(
-      response.data.ingredientes.map(ingId =>
-        ingredientService.getIngredientById(ingId)
-      )
-    )
+    // const ingredients = await Promise.all(
+    //   response.data.ingredientes.map(ing =>
+    //     ingredientService.getIngredientById(ing.id?? 0)
+    //   )
+    // )
 
     const plato = MenuItemType.fromJson(response.data)
-    plato.ingredientes = ingredients
+    // plato.ingredientes = ingredients
 
     if (plato != null)
       return plato

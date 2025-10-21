@@ -1,4 +1,4 @@
-import { IngredientType } from './ingredient'
+import { IngredientType, type IngredientJSON } from './ingredient'
 
 // Tipo para datos que vienen del servidor/API
 export type MenuItemJSON = {
@@ -11,7 +11,7 @@ export type MenuItemJSON = {
   costoProduccion: number
   esDeAutor: boolean
   enPromocion: boolean
-  ingredientes: number[]
+  ingredientes: IngredientJSON[]
   fechaDeCreacion: string
   porcentajeDescuento: number
 }
@@ -24,7 +24,7 @@ export type MenuItemJSONReduced = {
   precio: number
 }
 
-export class ValidationMessage { //esto pordiramos usar todos la misma
+export class ValidationMessage { //esto pordriamos usar todos la misma
   constructor(
     public field: string,
     public message: string
@@ -51,6 +51,7 @@ export class MenuItemType {
 
   static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
     return Object.assign(new MenuItemType(), menuItemJSON, {
+      ingredientes: menuItemJSON.ingredientes.map(ingJson => IngredientType.fromJson(ingJson)),
       porcentajeDescuento: menuItemJSON.porcentajeDescuento*100,
       fechaDeCreacion: new Date(menuItemJSON.fechaDeCreacion)
     })
@@ -77,7 +78,7 @@ export class MenuItemType {
       costoProduccion: this.costoProduccion,
       esDeAutor: this.esDeAutor,
       enPromocion: this.enPromocion,
-      ingredientes: this.ingredientes.map(ing => ing.id) as number[], // Feo pero sino me dice que puede ser undefined ->
+      ingredientes: this.ingredientes.map(ing => ing.toJSON()), // Feo pero sino me dice que puede ser undefined ->
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
       fechaDeCreacion: this.fechaDeCreacion.toISOString().split('T')[0],
