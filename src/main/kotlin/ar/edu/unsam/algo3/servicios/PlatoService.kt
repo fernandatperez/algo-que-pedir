@@ -3,9 +3,8 @@ package ar.edu.unsam.algo3.servicios
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
-import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
-import ar.edu.unsam.algo3.dto.fromDTOUpdate
-import ar.edu.unsam.algo3.errores.ConflictException
+import ar.edu.unsam.algo3.dto.PlatoDTO
+import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
@@ -30,18 +29,18 @@ class PlatoService(
         throw NotFoundException("Plato con id $id no existe en el repositorio")
     }
 
-    fun obtenerIngredientes(ids: List<Int>): MutableList<Ingrediente> {
-        val ingredientes = ids.map { id ->
-            repositorioIngredientes.obtenerObjeto(id)
-                ?: throw NotFoundException("Ingrediente con id $id no existe en el repositorio")
-        }.toMutableList()
-        return ingredientes
-    }
+//    fun obtenerIngredientes(ids: List<Int>): MutableList<Ingrediente> {
+//        val ingredientes = ids.map { id ->
+//            repositorioIngredientes.obtenerObjeto(id)
+//                ?: throw NotFoundException("Ingrediente con id $id no existe en el repositorio")
+//        }.toMutableList()
+//        return ingredientes
+//    }
 
-    fun crearPlato(platoDTO: PlatoDTOUpdate, mail: String): Plato  {
+    fun crearPlato(platoDTO: PlatoDTO, mail: String): Plato  {
         val localDePlato = repositorioLocal.findByEmail(mail)
 
-        val ingredientes = this.obtenerIngredientes(platoDTO.ingredientes)
+        val ingredientes = platoDTO.ingredientes.map { it.fromDTO() }.toMutableList()
 
         var platoDOM = Plato(
             nombre = platoDTO.nombre,
@@ -62,11 +61,11 @@ class PlatoService(
         return platoDOM
     }
 
-    fun modificarPlato(platoNuevo: PlatoDTOUpdate, mail: String): Plato {
+    fun modificarPlato(platoNuevo: PlatoDTO, mail: String): Plato {
         var platoAModificar = this.obtenerPlato(platoNuevo.id)
 
-        val ingredientes = this.obtenerIngredientes(platoNuevo.ingredientes)
-        platoAModificar = platoAModificar.fromDTOUpdate(platoNuevo, ingredientes)
+        val ingredientes = platoNuevo.ingredientes.map { it.fromDTO() }.toMutableList()
+        platoAModificar = platoAModificar.fromDTO(platoNuevo, ingredientes)
         val localDePlato = repositorioLocal.findByEmail(mail)
         platoAModificar.local = localDePlato
 

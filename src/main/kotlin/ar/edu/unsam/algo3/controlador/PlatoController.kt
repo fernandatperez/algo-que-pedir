@@ -1,8 +1,8 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.dto.PlatoDTOUpdate
+import ar.edu.unsam.algo3.dto.PlatoDTO
 import ar.edu.unsam.algo3.dto.PlatoMenuDTO
-import ar.edu.unsam.algo3.dto.toDTOUpdate
+import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.toPlatoMenuDTO
 import ar.edu.unsam.algo3.servicios.PlatoService
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -26,22 +26,22 @@ class PlatoController(val platoService: PlatoService) {
     }
 
     @GetMapping("/platos/{id}")
-    fun get(@PathVariable id: Int): PlatoDTOUpdate {
+    fun get(@PathVariable id: Int): PlatoDTO {
 //        Obtener informacion de un plato especifico
-        return platoService.obtenerPlato(id).toDTOUpdate()
+        return platoService.obtenerPlato(id).toDTO()
     }
 
     @PostMapping("/platos")
-    fun create(@RequestBody objeto: PlatoDTOUpdate, @RequestParam mail: String): PlatoDTOUpdate {
-        return platoService.crearPlato(objeto, mail).toDTOUpdate()
+    fun create(@RequestBody objeto: PlatoDTO, @RequestParam mail: String): PlatoDTO {
+        return platoService.crearPlato(objeto, mail).toDTO()
     }
 
     @PutMapping("/platos/{id}")
     fun update(
-        @RequestBody platoAModificar: PlatoDTOUpdate,
+        @RequestBody platoAModificar: PlatoDTO,
         @RequestParam mail: String  // AGREGADO
-    ): PlatoDTOUpdate {
-        platoService.modificarPlato(platoAModificar, mail).toDTOUpdate()
-        return platoService.obtenerPlato(platoAModificar.id).toDTOUpdate()
+    ): PlatoDTO {
+        platoService.modificarPlato(platoAModificar, mail).toDTO()
+        return platoService.obtenerPlato(platoAModificar.id).toDTO()
     }
 }

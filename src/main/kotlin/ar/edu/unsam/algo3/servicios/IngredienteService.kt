@@ -59,28 +59,22 @@ class IngredienteService(
     val repositorioPlatos: RepositorioPlato,
     private val repositorioLocal: RepositorioLocal
 ) {
-    fun ingredientes(email: String): List<Ingrediente> =
-        repositorioIngredientes.buscar(email)
+    fun ingredientes(): List<Ingrediente> =
+        repositorioIngredientes.objetosDeRepositorio()
 
     fun ingredientePorId(id: Int): Ingrediente =
         repositorioIngredientes.obtenerObjeto(id) ?: throw NotFoundException("No se encontró el ingrediente de id <$id>")
 
-    fun crearIngrediente(ingredienteNuevo: Ingrediente, mail: String) {
-        val localDeIngrediente = repositorioLocal.findByEmail(mail)
-
+    fun crearIngrediente(ingredienteNuevo: Ingrediente) {
         ingredienteNuevo.cumpleCriterioDeCreacion()
-        ingredienteNuevo.local = localDeIngrediente
-        if (repositorioIngredientes.ingredienteYaExiste(ingredienteNuevo.nombre, localDeIngrediente.nombre))
-            throw ConflictException("El ingrediente con el nombre '${ingredienteNuevo.nombre}' ya existe.")
+        if (repositorioIngredientes.ingredienteYaExiste(ingredienteNuevo))
+            throw ConflictException("El ingrediente '${ingredienteNuevo.nombre}' $${ingredienteNuevo.costoMercado} ya existe.")
 
         repositorioIngredientes.crear(ingredienteNuevo)
     }
 
-    fun actualizarIngrediente(ingredienteActualizado: IngredienteDTO, mail: String): Ingrediente {
-        val localDeIngrediente = repositorioLocal.findByEmail(mail)
-
+    fun actualizarIngrediente(ingredienteActualizado: IngredienteDTO,): Ingrediente {
         val ingredienteAModificar = ingredienteActualizado.fromDTO()
-        ingredienteAModificar.local = localDeIngrediente
         ingredienteAModificar.cumpleCriterioDeCreacion()
         repositorioIngredientes.actualizar(ingredienteAModificar)
 
@@ -88,8 +82,8 @@ class IngredienteService(
     }
 
     fun eliminarIngrediente(id: Int) {
-        if (repositorioPlatos.algunoContieneIngrediente(id))
-            throw ConflictException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
+//        if (repositorioPlatos.algunoContieneIngrediente(id))
+//            throw ConflictException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
         repositorioIngredientes.eliminarDeColeccion(id)
     }
 }

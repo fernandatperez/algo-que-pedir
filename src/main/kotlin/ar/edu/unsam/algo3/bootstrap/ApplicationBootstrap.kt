@@ -183,35 +183,30 @@ class ApplicationBootstrap(
             costoMercado = 0.7,
             grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
             esOrigenAnimal = true,
-            local = mcdonals
         )
         quesocheddar = Ingrediente(
             nombre = "Queso Cheddar",
             costoMercado = 0.5,
             grupoAlimenticio = GrupoAlimenticio.LACTEOS,
             esOrigenAnimal = true,
-            local = mcdonals
         )
         lechuga = Ingrediente(
             nombre = "Lechuga",
             costoMercado = 0.4,
             grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS,
             esOrigenAnimal = false,
-            local = mcdonals
         )
         tomate = Ingrediente(
             nombre = "Tomate",
             costoMercado = 0.2,
             grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS,
             esOrigenAnimal = false,
-            local = localInicial
         )
         huevo = Ingrediente(
             nombre = "Huevo",
             costoMercado = 50.0,
             esOrigenAnimal = true,
             grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
-            localInicial
         )
         repositorioIngredientes.apply {
             crear(carnederenacuajo)

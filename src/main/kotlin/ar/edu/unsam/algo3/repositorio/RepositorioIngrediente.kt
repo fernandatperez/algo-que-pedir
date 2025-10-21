@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class RepositorioIngrediente : Repositorio<Ingrediente>() {
-    fun ingredienteYaExiste(nombre: String, nombreLocal: String): Boolean =
-        this.coleccion.any { ing -> ing.nombre == nombre && ing.local.nombre == nombreLocal}
+    fun ingredienteYaExiste(ingredienteNuevo: Ingrediente): Boolean =
+        this.coleccion.any {
+            ing -> ing.nombre == ingredienteNuevo.nombre
+                && ing.id == ingredienteNuevo.id
+                && ing.costoMercado == ingredienteNuevo.costoMercado
+        }
 }

@@ -23,17 +23,6 @@ fun Ingrediente.toDTO(): IngredienteDTO{
     return ingredienteDTO
 }
 
-// PARA CREAR
-fun IngredienteDTO.toDOM(): Ingrediente {
-    // se crea sin asignarle un ID explícitamente, el repositorio se encarga de asignarlo con generarID()
-    return Ingrediente(
-        nombre = this.name,
-        costoMercado = this.cost,
-        grupoAlimenticio = this.foodGroup,
-        esOrigenAnimal = this.esOrigenAnimal
-    )
-}
-
 // PARA ACTUALIZAR
 fun IngredienteDTO.fromDTO(): Ingrediente{
     return Ingrediente(

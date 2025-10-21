@@ -1,7 +1,7 @@
 package ar.edu.unsam.algo3.controlador
 
 import ar.edu.unsam.algo3.dto.IngredienteDTO
-import ar.edu.unsam.algo3.dto.toDOM
+import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.servicios.IngredienteService
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -20,22 +20,22 @@ import org.springframework.web.bind.annotation.RestController
 class IngredienteController(val ingredientesService: IngredienteService) {
 
     @GetMapping("/ingredientes")
-    fun ingredientes(@RequestParam mail: String) =
-        ingredientesService.ingredientes(mail).map { it.toDTO() }
+    fun ingredientes() =
+        ingredientesService.ingredientes().map { it.toDTO() }
 
     @GetMapping("/ingrediente/{id}")
     fun ingredientePorId(@PathVariable id: Int) =
         ingredientesService.ingredientePorId(id).toDTO()
 
     @PostMapping("/crear-ingrediente")
-    fun crearIngrediente(@RequestBody ingredienteDTO: IngredienteDTO, @RequestParam mail: String) {
-        val ingredienteNuevo = ingredienteDTO.toDOM()
-        ingredientesService.crearIngrediente(ingredienteNuevo, mail)
+    fun crearIngrediente(@RequestBody ingredienteDTO: IngredienteDTO) {
+        val ingredienteNuevo = ingredienteDTO.fromDTO()
+        ingredientesService.crearIngrediente(ingredienteNuevo)
     }
 
     @PutMapping("/actualizar-ingrediente/{id}")
-    fun actualizarIngrediente(@RequestBody ingredienteDTO: IngredienteDTO, @RequestParam mail: String): IngredienteDTO {
-        return ingredientesService.actualizarIngrediente(ingredienteDTO, mail).toDTO()
+    fun actualizarIngrediente(@RequestBody ingredienteDTO: IngredienteDTO): IngredienteDTO {
+        return ingredientesService.actualizarIngrediente(ingredienteDTO).toDTO()
     }
 
     @DeleteMapping("/eliminar-ingrediente/{id}")

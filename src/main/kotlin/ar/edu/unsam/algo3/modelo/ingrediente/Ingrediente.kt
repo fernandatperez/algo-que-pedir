@@ -32,16 +32,14 @@ open class Ingrediente(
     val esOrigenAnimal: Boolean = true,
     @SerialName("grupo")
     val grupoAlimenticio: GrupoAlimenticio = GrupoAlimenticio.CEREALES_Y_TUBERCULOS, // Para tener algun default, null no me gusta
-    @Contextual
-    var local: Local = Local()
 ) : ElementoDeRepositorio {
 
     //    ========== Metodos de busqueda del repositorio ==============
     override var id = 0
 
-    override fun cumpleCriterioDeBusqueda(criterio: String): Boolean = coincideTotalmenteCon(criterio, nombre) || coincideParcialmenteCon(criterio, local.email)
+    override fun cumpleCriterioDeBusqueda(criterio: String): Boolean = coincideTotalmenteCon(criterio, nombre)
 
     override fun cumpleCriterioDeCreacion() {
-        if(!noEstaVacio(nombre)) throw NotFoundException("El ingrediente tiene que tener un nombre")
+//        if(!noEstaVacio(nombre)) throw NotFoundException("El ingrediente tiene que tener un nombre")
     }
 }
