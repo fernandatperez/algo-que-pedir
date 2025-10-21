@@ -99,11 +99,7 @@
       //     toasts.push("Error al generar el plato", {type: 'error'})
       //     setTimeout(releaseToast, 5000)
       //   }
-      showError("Algo fallo", error)
-      // }
-      // else {
-      //   showError("Algo fallo. Consulte a un administrador del sistema", error)
-      // }
+      showError("Error al generar plato", error)
     }
   }
 
@@ -116,7 +112,7 @@
       event.preventDefault()
       event.stopPropagation()
     }
-    item.ingredientes = item.ingredientes.filter(i => i.id !== ingredientId)
+    itemEdit.ingredientes = itemEdit.ingredientes.filter(i => i.id !== ingredientId)
     itemEdit = {...itemEdit} as MenuItemType
     showModalDelete = false
   }
@@ -137,7 +133,7 @@
   
   const guardarModal = () => {
     showModalAdd = false
-    selectedIngs.forEach(it => item.ingredientes.push(it))
+    selectedIngs.forEach(it => itemEdit.ingredientes.push(it))
     itemEdit = {...itemEdit} as MenuItemType
     selectedIngs.length = 0
   }
@@ -411,7 +407,7 @@
           </section>
           <section class="cell col-centered" id="acciones">Acciones</section>
         </header>
-        {#each item.ingredientes as ing (ing.id)}
+        {#each itemEdit.ingredientes as ing (ing.id)}
           <article class="grid-table-row product-edit-ingredients-table-content">
             <Ingredient ingredient={ing}/>
             <section class="cell multiple-action-buttons">
@@ -429,7 +425,7 @@
       {/if}
       {#if showModalDelete && modalId}
         <Modal
-          title={`¿Seguro que querés eliminar el ingrediente "${item.ingredientes.find(i => i.id === modalId)?.name}"?`} 
+          title={`¿Seguro que querés eliminar el ingrediente "${itemEdit.ingredientes.find(i => i.id === modalId)?.name}"?`} 
           confirmLabel="Sí"
           cancelLabel="No"
           actionConfirm={(e) => deleteItem(modalId, e)}
