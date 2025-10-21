@@ -1,6 +1,7 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.dto.IngredienteDTO
+import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toDOM
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.JSONVacioException
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.ConflictException
 import ar.edu.unsam.algo3.errores.NotFoundException
+import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 
 
@@ -57,26 +59,48 @@ class InstanciaActualizador(
 // ========= LO NUEVO =========
 
 @Service
-class IngredienteService( val repositorioIngredientes: RepositorioIngrediente, val repositorioPlatos: RepositorioPlato) {
-    fun ingredientes(): List<Ingrediente> =
-        repositorioIngredientes.objetosDeRepositorio()
+class IngredienteService(
+    val repositorioIngredientes: RepositorioIngrediente,
+    val repositorioPlatos: RepositorioPlato,
+    private val repositorioLocal: RepositorioLocal
+) {
+    fun ingredientes(email: String): List<Ingrediente> =
+        repositorioIngredientes.buscar(email)
 
     fun ingredientePorId(id: Int): Ingrediente =
-        repositorioIngredientes.obtenerObjeto(id) ?: throw RuntimeException("No se encontró el pedido de id <$id>")
+        repositorioIngredientes.obtenerObjeto(id) ?: throw NotFoundException("No se encontró el ingrediente de id <$id>")
 
-    fun crearIngrediente(ingredienteNuevo: Ingrediente) {
+    fun crearIngrediente(ingredienteNuevo: Ingrediente, mail: String) {
+        val localDeIngrediente = repositorioLocal.findByEmail(mail)
+
         ingredienteNuevo.cumpleCriterioDeCreacion()
-        if (repositorioIngredientes.ingredienteYaExiste(ingredienteNuevo.nombre)){
-            throw ConflictException("El ingrediente con el nombre '${ingredienteNuevo.nombre}' ya existe.")
-        }
+
+        ingredienteNuevo.local = localDeIngrediente
+
+//        if (repositorioIngredientes.ingredienteYaExiste(ingredienteNuevo.nombre)){
+//            throw ConflictException("El ingrediente con el nombre '${ingredienteNuevo.nombre}' ya existe.")
+//        }
+
+        println(ingredienteNuevo.local.toString())
+
         repositorioIngredientes.crear(ingredienteNuevo)
     }
 
-    fun actualizarIngrediente(ingredienteActualizado: Ingrediente): Ingrediente {
-        ingredienteActualizado.cumpleCriterioDeCreacion()
-        repositorioIngredientes.actualizar(ingredienteActualizado)
+    fun actualizarIngrediente(ingredienteActualizado: IngredienteDTO, mail: String): Ingrediente {
+        var ingredienteAModificar = ingredientePorId(ingredienteActualizado.id)
+        val localDeIngrediente = repositorioLocal.findByEmail(mail)
 
-        return ingredienteActualizado
+        println(ingredienteAModificar.toString())
+
+        ingredienteAModificar = ingredienteActualizado.fromDTO()
+
+        ingredienteAModificar.local = localDeIngrediente
+
+        ingredienteAModificar.cumpleCriterioDeCreacion()
+
+        repositorioIngredientes.actualizar(ingredienteAModificar)
+
+        return ingredienteAModificar
     }
 
     fun eliminarIngrediente(id: Int) {

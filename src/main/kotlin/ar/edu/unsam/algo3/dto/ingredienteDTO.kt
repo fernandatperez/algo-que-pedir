@@ -23,13 +23,24 @@ fun Ingrediente.toDTO(): IngredienteDTO{
     return ingredienteDTO
 }
 
+// PARA CREAR
 fun IngredienteDTO.toDOM(): Ingrediente {
     return Ingrediente(
         nombre = this.name,
         costoMercado = this.cost,
         grupoAlimenticio = this.foodGroup,
-        esOrigenAnimal = this.esOrigenAnimal,
-    ).apply {
-        this.id = this@toDOM.id
+        esOrigenAnimal = this.esOrigenAnimal
+    )
+}
+
+// PARA ACTUALIZAR
+fun IngredienteDTO.fromDTO(): Ingrediente{
+    return Ingrediente(
+        nombre = this.name,
+        costoMercado = this.cost,
+        grupoAlimenticio = this.foodGroup,
+        esOrigenAnimal = this.esOrigenAnimal
+    ).apply{
+        this.id = this@fromDTO.id
     }
 }

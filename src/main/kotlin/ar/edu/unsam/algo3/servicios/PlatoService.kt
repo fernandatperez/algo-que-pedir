@@ -41,7 +41,7 @@ class PlatoService(
 
     fun crearPlato(platoDTO: PlatoDTOUpdate, mail: String): Plato  {
         val localDePlato = repositorioLocal.findByEmail(mail)
-            ?: throw BusinessException("No se encontró un local con el mail $mail")
+
         val ingredientes = this.obtenerIngredientes(platoDTO.ingredientes)
 
         var platoDOM = Plato(

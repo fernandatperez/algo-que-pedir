@@ -38,7 +38,7 @@ class PlatoController(val platoService: PlatoService) {
 
     @PutMapping("/platos/{id}")
     fun update(
-        @PathVariable id: Int,
+//        @PathVariable id: Int,
         @RequestBody platoAModificar: PlatoDTOUpdate,
         @RequestParam mail: String  // AGREGADO
     ): PlatoDTOUpdate {

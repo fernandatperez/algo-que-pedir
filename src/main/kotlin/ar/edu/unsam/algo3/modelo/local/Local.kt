@@ -100,4 +100,5 @@ open class Local(
         if (!noEstaVacio(direccion.calle)) throw NotFoundException("El Local tiene que tener una direccion")
         if (!noEstaVacio(email))throw NotFoundException("El Local tiene que tener una email")
     }
+
 }
