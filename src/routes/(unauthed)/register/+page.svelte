@@ -30,10 +30,11 @@
     const formData = new FormData(form) // creo el formData
 
     const user = new UserType(
-      (formData.get("username") ?? "").toString(),
-      (formData.get("password") ?? "").toString()
+      (formData.get("name") ?? "").toString(),
+      (formData.get("password") ?? "").toString(),
+      (formData.get("email") ?? "").toString()
     )
-
+    console.info(user)
     user.validate()
 
     if (user.errors.length > 0) {
@@ -81,13 +82,6 @@
   } 
 </script>
 
-<style>
-  /* @import url("$lib/css/components-css/buttons.css");
-  @import url("$lib/css/components-css/icon.css");
-  @import url("$lib/css/pages-css/1-login.css");
-  @import url("$lib/css/pages-css/2-register.css"); */
-</style>
-
 <section class="login-container">
   <main class="login-section">
     <!-- HEADER -->
@@ -100,17 +94,31 @@
         <div class="form-group">
           <div class="input-wrapper">
             <Input
-              label_text="Usuario*"
-              label_for="username"
+              label_text="Email*"
+              label_for="email"
               input_type={InputTypes.Normal}
               value=""
               type= "email"
               placeholder= "Escribir"
-              id= "register-username-id"
+              id= "register-email-id"
               class= "input-primary"
-              name= "username"
+              name= "email"
             />
-            <ValidationField errors={errors} field="username" />
+            <ValidationField errors={errors} field="email" />
+          </div>
+
+          <div class="input-wrapper">
+            <Input
+              label_text="Nombre*"
+              label_for="name"
+              input_type={InputTypes.Normal}
+              value=""
+              placeholder= "Escribir"
+              id= "register-name-id"
+              class= "input-primary"
+              name= "name"
+            />
+            <ValidationField errors={errors} field="name" />
           </div>
 
           <div class="input-wrapper">
