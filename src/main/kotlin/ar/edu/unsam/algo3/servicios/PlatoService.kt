@@ -10,6 +10,7 @@ import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class PlatoService(
@@ -51,7 +52,10 @@ class PlatoService(
             esDeAutor = platoDTO.esDeAutor,
             ingredientes = ingredientes,
             local = localDePlato,
-        )
+            fechaDeCreacion = LocalDate.parse(platoDTO.fechaDeCreacion)
+        ).apply {
+            porcentajeDescuento = platoDTO.porcentajeDescuento
+        }
         platoDOM.crear()
         println(platoDOM.toString())
         repositorioPlatos.crear(platoDOM)

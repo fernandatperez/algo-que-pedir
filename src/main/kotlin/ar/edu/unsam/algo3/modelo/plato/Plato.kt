@@ -27,10 +27,11 @@ class Plato(
     var esDeAutor: Boolean = false,
     var local: Local = Local(),
     val ingredientes: MutableList<Ingrediente> = mutableListOf(),
-    val fechaDeCreacion: LocalDate = LocalDate.of(2000, 1, 1),
+    var fechaDeCreacion: LocalDate = LocalDate.of(2000, 1, 1),
 ) : ElementoDeRepositorio {
 
-    private var porcentajeDescuento: Double = 0.0
+    var enPromocion: Boolean = false
+    var porcentajeDescuento: Double = 0.0
 
 
     fun agregarIngrediente(ingrediente: Ingrediente) {

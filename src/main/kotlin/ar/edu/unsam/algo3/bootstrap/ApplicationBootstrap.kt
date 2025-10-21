@@ -12,6 +12,7 @@ import ar.edu.unsam.algo3.repositorio.*
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.stereotype.Service
 import org.uqbar.geodds.Point
+import java.time.LocalDate
 
 @Service
 class ApplicationBootstrap(
@@ -41,8 +42,8 @@ class ApplicationBootstrap(
                 email = "jorge@hotmail.com"
                 password = "123"
                 url = "https://networthbro.com/wp-content/uploads/2019/07/buddy-valastro-networth-salary.jpg"
-                regalias = 3.0
-                porcentajeAcordado = 6.0
+                regalias = 0.03
+                porcentajeAcordado = 0.06
                 mediosDePago = mutableSetOf(Pago.EFECTIVO)
                 direccion = Direccion(
                     calle = "Av. Siempre Viva",
@@ -58,8 +59,8 @@ class ApplicationBootstrap(
                 email = "mcdonals@gmail.com"
                 password = "123"
                 url = "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/2d/22/ba/it-s-mcdonalds-what-else.jpg?w=900&h=-1&s=1"
-                regalias = 5.0
-                porcentajeAcordado = 10.0
+                regalias = 0.05
+                porcentajeAcordado = 0.1
                 mediosDePago = mutableSetOf(Pago.EFECTIVO, Pago.QR)
                 direccion = Direccion(
                     calle = "Av. Corrientes",
@@ -224,6 +225,7 @@ class ApplicationBootstrap(
             valorBase = 9.99,
             urldeImagen = "/src/lib/assets/img/hamburguesa2.jpg",
             local = localInicial,
+            fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(carnederenacuajo,quesocheddar,lechuga)
         )
         pizza = Plato(
@@ -232,6 +234,7 @@ class ApplicationBootstrap(
             urldeImagen = "/src/lib/assets/img/pizza.png",
             valorBase = 11.75,
             local = localInicial,
+            fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(quesocheddar,lechuga,tomate)
 
         )
@@ -242,6 +245,7 @@ class ApplicationBootstrap(
             urldeImagen = "/src/lib/assets/img/ensalada.png",
             esDeAutor = true,
             local = localInicial,
+            fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(lechuga,tomate)
         )
         salmon = Plato(
@@ -250,6 +254,7 @@ class ApplicationBootstrap(
             valorBase = 14.5,
             urldeImagen = "/src/lib/assets/img/salmon.png",
             local = localInicial,
+            fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(carnederenacuajo, tomate, lechuga)
         )
 
@@ -259,6 +264,7 @@ class ApplicationBootstrap(
             valorBase = 12.0,
             urldeImagen = "/src/lib/assets/img/spagettis.png",
             local = localInicial,
+            fechaDeCreacion = LocalDate.now().minusDays(21),
             ingredientes = mutableListOf(quesocheddar, tomate)
         )
 
@@ -268,6 +274,7 @@ class ApplicationBootstrap(
             valorBase = 10.99,
             urldeImagen = "/src/lib/assets/img/hamburguesa.png",
             local = mcdonals,
+            fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(carnederenacuajo, lechuga, quesocheddar)
         )
 
@@ -277,6 +284,7 @@ class ApplicationBootstrap(
             valorBase = 9.25,
             urldeImagen = "/src/lib/assets/img/alitas.png",
             local = mcdonals,
+            fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(carnederenacuajo, tomate)
         )
 
