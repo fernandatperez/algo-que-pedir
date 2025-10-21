@@ -15,6 +15,7 @@
   import { toasts } from '$lib/components/toast/toastStore'
   import { ingredientService } from "$lib/services/IngredientService.js";
     import { AxiosError } from "axios";
+    import type { MouseEventHandler } from "svelte/elements";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -101,7 +102,11 @@
     toastLock = false
   }  
   
-  const deleteItem = (ingredientId: number) => {  
+  const deleteItem = (ingredientId: number, event: MouseEvent) => {  
+    if (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
     itemEdit.ingredientes = itemEdit.ingredientes.filter(i => i.id !== ingredientId)
     itemEdit = {...itemEdit} as MenuItemType
     showModalDelete = false
@@ -424,7 +429,7 @@
           title={`¿Seguro que querés eliminar el ingrediente "${itemEdit.ingredientes.find(i => i.id === modalId)?.name}"?`} 
           confirmLabel="Sí"
           cancelLabel="No"
-          actionConfirm={() => deleteItem(modalId)}
+          actionConfirm={(e) => deleteItem(modalId, e)}
           actionCancel={() => showModalDelete = false}
         />
       {/if}
