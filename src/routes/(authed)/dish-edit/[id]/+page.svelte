@@ -50,15 +50,19 @@
       (formData.get("name") ? formData.get("name") : itemEdit.nombre) as string,
       (formData.get("descripcion") ? formData.get("descripcion") : itemEdit.descripcion) as string,
       itemEdit.precio,
-      (formData.get("valorBase") ? formData.get("valorBase") : itemEdit.valorBase) as number,
+      Number(formData.get("valorBase") ? formData.get("valorBase") : itemEdit.valorBase),
       (formData.get("imagen") ? formData.get("imagen") : itemEdit.imagen) as string,
       +productionCost,
       platoAutor,
       platoEnPromo,
-      itemEdit.ingredientes
+      itemEdit.ingredientes,
+      itemEdit.fechaDeCreacion,
+      Number(formData.get("porcentajeDescuento") ? formData.get("porcentajeDescuento") : itemEdit.porcentajeDescuento) /100, // porcentaje
     )
+    // console.log(newItem.porcentajeDescuento)
     //  Primero valido con el item de dominio, despues paso a JSON y lo mando. No?
     newItem.validate()
+    // console.log("Validando nuevo plato:", newItem.errors)
     
     if (newItem.errors.length > 0) {
       errors = [...newItem.errors]
@@ -67,14 +71,14 @@
 
     try {
       if (esNuevoItem) {
-        console.info(newItem)
+        // console.info("Nuevo Plato:", newItem)
         await menuItemsService.createMenuItem(newItem)
         toasts.push('Plato generado exitosamente. Seras redirigido a Menu', {type: 'success'})
       } else {
+        // console.info("Nuevo Plato:", newItem)
         await menuItemsService.updateMenuItem(newItem)
         toasts.push('Plato modificado con exito. Seras redirigido a Menu', {type: 'success'})
       }
-      // Aca poner un toast de guardado exitoso
       setTimeout(() => {
         goto("/menu")
       }, 2000)
@@ -171,6 +175,11 @@
     border-radius: 1em;
     position: absolute;
     right: 0;
+  }
+
+  .no-promocion {
+    color: var(--alternative-color);
+    text-align: center;
   }
 
   @media screen and (max-width: 430px) {
@@ -292,6 +301,10 @@
           </div>
         </div>
 
+      {#if itemEdit.esNuevo()}
+        <p class="no-promocion">Los platos nuevos no pueden estar en promocion. 
+          Esta funcionalidad se habilitará luego de 30 días de creado el plato.</p>
+      {:else}
         <div class="switch-button-group">
           <label for="en-promocion">
             <h3>Plato de Promoción</h3>
@@ -301,17 +314,37 @@
           </label>
           <div class="slide-button">
             <input type="checkbox"
-              class="toggle"
-              id="en-promocion"
-              name="enPromocion"
-              onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}
-              checked={platoEnPromo}
-              />
+            class="toggle"
+            id="en-promocion"
+            name="enPromocion"
+            onclick={() => platoEnPromo = toggleVariable(platoEnPromo)}
+            checked={platoEnPromo}
+            />
             <div class="background-div">
               <div class="circle-slide"></div>
             </div>
           </div>
         </div>
+        
+        {#if platoEnPromo}
+          <div class="container-column input-group">
+            <Input
+            label_text="Porcentaje de Descuento*"
+            label_for="product-discount-percentage"
+            input_type={InputTypes.Normal}
+            type="number"
+            class="input-primary number-input"
+            id="product-discount-percentage"
+            name="porcentajeDescuento"
+            value={itemEdit.porcentajeDescuento}
+            placeholder="%"
+            step="any"
+            />
+            <ValidationField errors={errors} field="porcentajeDescuento" />
+          </div>
+        {/if}
+        <p class="label-color">El descuento se aplicará sobre el precio final del plato.</p>
+      {/if}
       </fieldset>
 
       <fieldset

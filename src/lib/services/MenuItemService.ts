@@ -38,9 +38,9 @@ class MenuItemsService {
   }
 
   async createMenuItem(item: MenuItemType) {
-    const creacion = new Date()
     const storeMail = sessionStorage.getItem('email') // envio el dato como query param
-    item.fechaCreacion = creacion.toISOString().split('T')[0]
+    item.fechaDeCreacion = new Date()
+    // console.log(item.fechaDeCreacion)
     await axios.post<MenuItemJSON>(
       REST_SERVER_URL + '/platos',
       item.toJSON(), 
@@ -57,7 +57,8 @@ class MenuItemsService {
       menuItemJSON,
       { params: { mail: storeMail }}
     )
-    
+    // eslint-disable-next-line no-console
+    // console.log('Updating MenuItem:', menuItemJSON)
     return updateResponse
   }
 }

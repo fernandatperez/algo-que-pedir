@@ -14,7 +14,7 @@ export type MenuItemJSON = {
   enPromocion: boolean
   // ->
   ingredientes: number[]
-  fechaCreacion: string
+  fechaDeCreacion: string
   porcentajeDescuento: number
 }
 
@@ -50,16 +50,32 @@ export class MenuItemType {
     public enPromocion: boolean = false,
     // ingredientes es una lista de IDs
     public ingredientes: IngredientType[] = [],
-    public fechaCreacion: string = '',
+    public fechaDeCreacion: Date = new Date(),
     public porcentajeDescuento: number = 0
   ) {}
 
   static fromJson(menuItemJSON: MenuItemJSON): MenuItemType {
-    return Object.assign(new MenuItemType(), menuItemJSON, {})
+    return Object.assign(new MenuItemType(), menuItemJSON, {
+      porcentajeDescuento: menuItemJSON.porcentajeDescuento*100,
+      fechaDeCreacion: new Date(menuItemJSON.fechaDeCreacion)
+    })
   }
 
   addError(field: string, message: string) {
     this.errors.push(new ValidationMessage(field, message))
+  }
+
+  setPromocion() {
+    if (this.porcentajeDescuento > 0) {
+      this.enPromocion = true
+    }
+  }
+
+  esNuevo(): boolean {
+    const ahora = new Date()
+    const diferenciaMs = ahora.getTime() - this.fechaDeCreacion.getTime()
+    const dias = diferenciaMs / (1000 * 60 * 60 * 24)
+    return dias <= 30
   }
 
   toJSON(): MenuItemJSON {
@@ -76,7 +92,7 @@ export class MenuItemType {
       ingredientes: this.ingredientes.map(ing => ing.id) as number[], // Feo pero sino me dice que puede ser undefined ->
       // "Store" tambien va a haber que serializarlo a JSON para mandarlo, y convertirlo en dominio en el back. CUando vuelva para aca, serializar a json en el back
       // y despues a dominio de aca
-      fechaCreacion: this.fechaCreacion,
+      fechaDeCreacion: this.fechaDeCreacion.toISOString().split('T')[0],
       porcentajeDescuento: this.porcentajeDescuento
     }
   }
@@ -112,6 +128,10 @@ export class MenuItemType {
 
     if (this.valorBase <= 0) {
       this.addError('valorBase', 'El valor base no puede ser 0 o menor a el')
+    }
+
+    if (0 > this.porcentajeDescuento || this.porcentajeDescuento > 1) {
+      this.addError('porcentajeDescuento', 'Ingrese un valor entre 0 y 100.')
     }
 
   }
