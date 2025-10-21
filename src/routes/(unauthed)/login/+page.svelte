@@ -45,18 +45,18 @@
     try {
       let validation = await userService.getUser(user.email, user.password)
       if (validation) goto ("/orders") // si devuelve Truthy redirige a orders, quiza se podria mejorar esto con token? 
-      else {
-        errorMessages = ["Nombre de usuario y/o contraseña incorrecto/s"]
-        if(!toastLock) {
-          errorMessages.forEach((error) => {
-            toasts.push(error, {type: 'error'})
-          })
-        }
-      }
-      errors = [] // limpiar errores
+      // else {
+      //   errorMessages = ["Nombre de usuario y/o contraseña incorrecto/s"]
+      //   if(!toastLock) {
+      //     errorMessages.forEach((error) => {
+      //       toasts.push(error, {type: 'error'})
+      //     })
+      //   }
+      // }
     } catch (error) {
-      showError("Nombre de usuario y/o contraseña incorrecto/s", error)
-      // showError("Error al crear el ingrediente", error)
+      toasts.push("Nombre de usuario y/o contraseña incorrecto/s", {type: 'error'})
+    } finally {
+      errors = [] // limpiar errores
     }
   }
 

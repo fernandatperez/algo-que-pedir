@@ -14,7 +14,7 @@ export async function load({ params }) {
     } else {
       item = await menuItemsService.getMenuItem(+params.id) // + para que sea un number
       // eslint-disable-next-line no-console
-      // console.log('Plato cargado:', item)
+      console.log('Plato cargado:', item)
       // item.setPromocion()
       return {nuevoItem, item}
     }
