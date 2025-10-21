@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 class RepositorioPlato: Repositorio<Plato>(
 
 ){
-    fun algunoContieneIngrediente(id: Int): Boolean = this.coleccion.any { plato -> plato.ingredientes.any { ing -> ing.id == id } }
+    fun algunoContieneIngrediente(id: Int): Boolean = this.coleccion.any { plato -> plato.ingredientes.any { ing -> ing.id == id  && ing.local.email == plato.local.email} }
 }

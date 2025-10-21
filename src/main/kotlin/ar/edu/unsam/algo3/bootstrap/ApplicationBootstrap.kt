@@ -181,31 +181,36 @@ class ApplicationBootstrap(
             nombre = "Carne de Renacuajo",
             costoMercado = 0.7,
             grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
-            esOrigenAnimal = true
+            esOrigenAnimal = true,
+            local = mcdonals
         )
         quesocheddar = Ingrediente(
             nombre = "Queso Cheddar",
             costoMercado = 0.5,
             grupoAlimenticio = GrupoAlimenticio.LACTEOS,
-            esOrigenAnimal = true
+            esOrigenAnimal = true,
+            local = mcdonals
         )
         lechuga = Ingrediente(
             nombre = "Lechuga",
             costoMercado = 0.4,
             grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS,
-            esOrigenAnimal = false
+            esOrigenAnimal = false,
+            local = mcdonals
         )
         tomate = Ingrediente(
             nombre = "Tomate",
             costoMercado = 0.2,
             grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS,
-            esOrigenAnimal = false
+            esOrigenAnimal = false,
+            local = localInicial
         )
         huevo = Ingrediente(
             nombre = "Huevo",
             costoMercado = 50.0,
             esOrigenAnimal = true,
-            grupoAlimenticio = GrupoAlimenticio.PROTEINAS
+            grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
+            localInicial
         )
         repositorioIngredientes.apply {
             crear(carnederenacuajo)
@@ -224,7 +229,7 @@ class ApplicationBootstrap(
             valorBase = 9.99,
             urldeImagen = "/src/lib/assets/img/hamburguesa2.jpg",
             local = localInicial,
-            ingredientes = mutableListOf(carnederenacuajo,quesocheddar,lechuga)
+            ingredientes = mutableListOf(tomate, huevo)
         )
         pizza = Plato(
             nombre = "Pizza Margarita",
@@ -232,7 +237,7 @@ class ApplicationBootstrap(
             urldeImagen = "/src/lib/assets/img/pizza.png",
             valorBase = 11.75,
             local = localInicial,
-            ingredientes = mutableListOf(quesocheddar,lechuga,tomate)
+            ingredientes = mutableListOf(tomate)
 
         )
         ensalada = Plato(
@@ -241,16 +246,16 @@ class ApplicationBootstrap(
             valorBase = 7.5,
             urldeImagen = "/src/lib/assets/img/ensalada.png",
             esDeAutor = true,
-            local = localInicial,
-            ingredientes = mutableListOf(lechuga,tomate)
+            local = mcdonals,
+            ingredientes = mutableListOf(lechuga,quesocheddar)
         )
         salmon = Plato(
             nombre = "Salmón grillado",
             descripcion = "Filete de salmón grillado con guarnición de verduras asadas",
             valorBase = 14.5,
             urldeImagen = "/src/lib/assets/img/salmon.png",
-            local = localInicial,
-            ingredientes = mutableListOf(carnederenacuajo, tomate, lechuga)
+            local = mcdonals,
+            ingredientes = mutableListOf(carnederenacuajo, lechuga)
         )
 
         spaghettis = Plato(
@@ -258,8 +263,8 @@ class ApplicationBootstrap(
             descripcion = "Pasta fresca con salsa de albahaca y queso rallado",
             valorBase = 12.0,
             urldeImagen = "/src/lib/assets/img/spagettis.png",
-            local = localInicial,
-            ingredientes = mutableListOf(quesocheddar, tomate)
+            local = mcdonals,
+            ingredientes = mutableListOf(quesocheddar)
         )
 
         bigMac = Plato(
@@ -277,7 +282,7 @@ class ApplicationBootstrap(
             valorBase = 9.25,
             urldeImagen = "/src/lib/assets/img/alitas.png",
             local = mcdonals,
-            ingredientes = mutableListOf(carnederenacuajo, tomate)
+            ingredientes = mutableListOf(carnederenacuajo)
         )
 
         repositorioPlatos.apply {
@@ -297,35 +302,35 @@ class ApplicationBootstrap(
             crear(
                 usuario = sofiamiller,
                 local = mcdonals, // a pedido de catt ;)
-                platos = mutableListOf(hamburguesa, pizza, ensalada),
+                platos = mutableListOf(bigMac, ensalada, alitas),
                 medioDePago = Pago.QR,
                 estado = Estado.PENDIENTE
             )
             crear(
                 usuario = ricardofort,
                 local = localInicial,
-                platos = mutableListOf(hamburguesa, ensalada),
+                platos = mutableListOf(hamburguesa, pizza),
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.PENDIENTE
             )
             crear(
                 usuario = alexcaniggia,
                 local = localInicial,
-                platos = mutableListOf(pizza, hamburguesa),
+                platos = mutableListOf(pizza),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.PREPARADO
             )
             crear(
                 usuario = buzz,
                 local = localInicial,
-                platos = mutableListOf(pizza, hamburguesa),
+                platos = mutableListOf(hamburguesa),
                 medioDePago = Pago.QR,
                 estado = Estado.ENTREGADO
             )
             crear(
                 usuario = locomotora,
                 local = localInicial,
-                platos = mutableListOf(ensalada),
+                platos = mutableListOf(hamburguesa),
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.CANCELADO
             )
