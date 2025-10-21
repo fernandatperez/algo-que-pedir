@@ -25,6 +25,7 @@ fun Ingrediente.toDTO(): IngredienteDTO{
 
 // PARA CREAR
 fun IngredienteDTO.toDOM(): Ingrediente {
+    // se crea sin asignarle un ID explícitamente, el repositorio se encarga de asignarlo con generarID()
     return Ingrediente(
         nombre = this.name,
         costoMercado = this.cost,
@@ -42,5 +43,6 @@ fun IngredienteDTO.fromDTO(): Ingrediente{
         esOrigenAnimal = this.esOrigenAnimal
     ).apply{
         this.id = this@fromDTO.id
+        // "Usa el ID que me enviaron para actualizar la instancia correspondiente"
     }
 }

@@ -2,21 +2,16 @@ package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.fromDTO
-import ar.edu.unsam.algo3.dto.toDOM
-import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.JSONVacioException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.Repositorio
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import kotlinx.serialization.json.*
 import org.springframework.stereotype.Service
-import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.ConflictException
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
-
-
 open class ActualizadorIngredientes(
     val service: ServiceIngredientes,
     val repositorio: Repositorio<Ingrediente>
@@ -74,30 +69,19 @@ class IngredienteService(
         val localDeIngrediente = repositorioLocal.findByEmail(mail)
 
         ingredienteNuevo.cumpleCriterioDeCreacion()
-
         ingredienteNuevo.local = localDeIngrediente
-
-//        if (repositorioIngredientes.ingredienteYaExiste(ingredienteNuevo.nombre)){
-//            throw ConflictException("El ingrediente con el nombre '${ingredienteNuevo.nombre}' ya existe.")
-//        }
-
-        println(ingredienteNuevo.local.toString())
+        if (repositorioIngredientes.ingredienteYaExiste(ingredienteNuevo.nombre, localDeIngrediente.nombre))
+            throw ConflictException("El ingrediente con el nombre '${ingredienteNuevo.nombre}' ya existe.")
 
         repositorioIngredientes.crear(ingredienteNuevo)
     }
 
     fun actualizarIngrediente(ingredienteActualizado: IngredienteDTO, mail: String): Ingrediente {
-        var ingredienteAModificar = ingredientePorId(ingredienteActualizado.id)
         val localDeIngrediente = repositorioLocal.findByEmail(mail)
 
-        println(ingredienteAModificar.toString())
-
-        ingredienteAModificar = ingredienteActualizado.fromDTO()
-
+        val ingredienteAModificar = ingredienteActualizado.fromDTO()
         ingredienteAModificar.local = localDeIngrediente
-
         ingredienteAModificar.cumpleCriterioDeCreacion()
-
         repositorioIngredientes.actualizar(ingredienteAModificar)
 
         return ingredienteAModificar
@@ -107,6 +91,5 @@ class IngredienteService(
         if (repositorioPlatos.algunoContieneIngrediente(id))
             throw ConflictException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
         repositorioIngredientes.eliminarDeColeccion(id)
-
     }
 }
