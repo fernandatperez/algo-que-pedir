@@ -90,7 +90,7 @@
               </div>
             </div>
             <div class="cell">{1}</div>
-            <div class="cell">${plato.costoProduccion.toFixed(2)}</div>
+            <div class="cell">${plato.precio.toFixed(2)}</div>
           </section>
         {/each}
 </section>
