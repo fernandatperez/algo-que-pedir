@@ -120,7 +120,7 @@ export class StoreType {
       this.addError('authorcommission', 'Debe ingresar una comision')
     }
 
-    if (this.storeAuthorCommission < 0 || this.storeAuthorCommission > 100){
+    if (this.storeAuthorCommission < 0 || this.storeAuthorCommission > 1){
       this.addError('authorcommission', 'La comision debe ser de 0% a 100%')
     }
 
@@ -128,7 +128,7 @@ export class StoreType {
       this.addError('appcommission', 'Debe ingresar una comision')
     }
 
-    if (this.storeAppCommission < 0 || this.storeAppCommission > 100){
+    if (this.storeAppCommission < 0 || this.storeAppCommission > 1){
       this.addError('appcommission', 'La comision debe ser de 0% a 100%')
     }
 

@@ -55,6 +55,7 @@
       // }
     } catch (error) {
       toasts.push("Nombre de usuario y/o contraseña incorrecto/s", {type: 'error'})
+      // showError("Error", error) // manejar el error de manera adecuada
     } finally {
       errors = [] // limpiar errores
     }
