@@ -313,6 +313,7 @@
       {#if newItem()}
         <p class="no-promocion">Los platos nuevos no pueden estar en promocion. 
           Esta funcionalidad se habilitará luego de 30 días de creado el plato.</p>
+          <p class="no-promocion">¡Los platos nuevos se generaran automaticamente con un 30% de descuento!</p>
       {:else}
         <div class="switch-button-group">
           <label for="en-promocion">
