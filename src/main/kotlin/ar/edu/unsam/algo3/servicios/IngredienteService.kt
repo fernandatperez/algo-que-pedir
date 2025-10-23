@@ -14,7 +14,7 @@ import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 open class ActualizadorIngredientes(
     val service: ServiceIngredientes,
-    val repositorio: Repositorio<Ingrediente>
+    val repositorio: Repositorio<Ingrediente>,
 ) {
     fun actualizarIng() {
         val jsonString = service.getIngredientes()

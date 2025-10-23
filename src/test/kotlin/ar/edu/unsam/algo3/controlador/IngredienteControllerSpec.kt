@@ -36,6 +36,7 @@ class IngredienteControllerTest {
         mockMvc
             .perform(
                 MockMvcRequestBuilders.post("/crear-ingrediente")
+                    .param("mail", "jorge@hotmail.com")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonValido)
             ).andExpect(MockMvcResultMatchers.status().isOk)
@@ -55,6 +56,7 @@ class IngredienteControllerTest {
         mockMvc.perform(
             MockMvcRequestBuilders.put("/actualizar-ingrediente/9")
                 .contentType(MediaType.APPLICATION_JSON)
+                .param("mail", "jorge@hotmail.com")
                 .content(jsonInvalido)
         ).andExpect(MockMvcResultMatchers.status().is4xxClientError)
 
@@ -64,6 +66,8 @@ class IngredienteControllerTest {
 
     @Test
     fun `GET actualizar-ingrediente retorna 200`() {
-        mockMvc.perform(MockMvcRequestBuilders.get("/ingredientes")).andExpect(MockMvcResultMatchers.status().isOk)
+        mockMvc.perform(MockMvcRequestBuilders.get("/ingredientes")
+            .param("mail", "jorge@hotmail.com"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
     }
 }

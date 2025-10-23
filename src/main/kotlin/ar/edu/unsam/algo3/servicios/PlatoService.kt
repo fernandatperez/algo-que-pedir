@@ -1,7 +1,6 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.modelo.plato.Plato
-import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.dto.PlatoDTO
 import ar.edu.unsam.algo3.dto.fromDTO
@@ -15,7 +14,6 @@ import java.time.LocalDate
 class PlatoService(
     val repositorioPlatos: RepositorioPlato,
     private val repositorioLocal: RepositorioLocal,
-    val repositorioIngredientes: RepositorioIngrediente
 ) {
 
     fun getPlatos(mail: String): List<Plato> =
