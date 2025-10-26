@@ -22,7 +22,7 @@ class LocalService(
     }
 
     fun update(localDTO: LocalDTO) {
-        val email = localDTO.email ?: throw BusinessException("Email es requerido")
+        val email = localDTO.email ?: throw BusinessException("Debe estar logueado para realizar cambios en el perfil")
         val localExistente = repositorioLocal.findByEmail(email)
 
     // Actualizar

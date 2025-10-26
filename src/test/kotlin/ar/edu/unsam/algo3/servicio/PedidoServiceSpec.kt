@@ -127,7 +127,7 @@ class PedidoServiceSpec {
 
 
         assertThrows<NotFoundException> {
-            servicio.actualizarEstado(pedidoInexistenteDTO)
+            servicio.actualizarEstado(pedidoInexistenteDTO.id)
         }
     }
 }

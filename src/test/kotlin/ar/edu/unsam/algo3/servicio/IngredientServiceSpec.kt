@@ -25,17 +25,17 @@ class IngredienteServiceIntegrationTest {
 
     @Test
     fun `crear ingrediente valido lo guarda en la base de datos`() {
-        // Given
-        val ingredienteDTO = IngredienteDTO(
-            name = "Carne de rata",
-            cost = 1.5,
+        val mail = "mcdonalds@gmail.com"
+
+        val ingrediente = Ingrediente(
+            nombre = "Carne de rata",
+            costoMercado = 1.5,
             esOrigenAnimal = false,
-            foodGroup = GrupoAlimenticio.PROTEINAS,
-            id = 10,
+            grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
         )
 
         // When
-        ingredienteService.crearIngrediente(ingredienteDTO)
+        ingredienteService.crearIngrediente(ingrediente)
 
         // Then - Buscar en la lista
         val ingredientesEncontrados = repositorioIngrediente.buscar("Carne de rata")
