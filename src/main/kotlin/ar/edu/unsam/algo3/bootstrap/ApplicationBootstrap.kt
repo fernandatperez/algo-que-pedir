@@ -334,8 +334,15 @@ class ApplicationBootstrap(
                 usuario = locomotora,
                 local = localInicial,
                 platos = mutableListOf(hamburguesa),
-                medioDePago = Pago.EFECTIVO,
+                medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.CANCELADO
+            )
+            crear(
+                usuario = sofiamiller,
+                local = localInicial,
+                platos = mutableListOf(hamburguesa),
+                medioDePago = Pago.EFECTIVO,
+                estado = Estado.ENTREGADO
             )
         }
     }

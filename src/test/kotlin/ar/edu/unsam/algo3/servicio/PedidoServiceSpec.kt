@@ -29,7 +29,7 @@ class PedidoServiceSpec {
         val estado = Estado.PENDIENTE
         val email = "rickyricon"
 
-        val resultado = servicio.pedidosFiltrados(estado, email)
+        val resultado = servicio.pedidosFiltradosLocal(estado, email)
 
 
         assertNotNull(resultado)
@@ -49,7 +49,7 @@ class PedidoServiceSpec {
         val emailInexistente = "noexiste@ejemplo.com"
 
 
-        val resultado = servicio.pedidosFiltrados(estado, emailInexistente)
+        val resultado = servicio.pedidosFiltradosLocal(estado, emailInexistente)
 
         assertNotNull(resultado)
         assertTrue(resultado.isEmpty())
