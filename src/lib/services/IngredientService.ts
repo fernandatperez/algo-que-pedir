@@ -1,4 +1,3 @@
-import { INGREDIENT_MOCK } from '$lib/data/mock/ingredients'
 import { IngredientType, type IngredientJSON } from '$lib/domain/ingredient'
 import { REST_SERVER_URL } from './configuration'
 import { getAxiosData } from './common'

@@ -1,5 +1,4 @@
 import { Order, type OrderJSON } from '../domain/order'
-import { ORDERS_MOCK } from '$lib/data/mock/orders'
 import { REST_SERVER_URL } from './configuration'
 import { getAxiosData } from './common'
 import axios from 'axios'
