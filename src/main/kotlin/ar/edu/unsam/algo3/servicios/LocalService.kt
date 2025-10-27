@@ -8,7 +8,8 @@ import ar.edu.unsam.algo3.dto.toDTO
 import org.uqbar.geodds.Point
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.errores.BusinessException
-
+import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
+import ar.edu.unsam.algo3.modelo.local.Local
 
 
 @Service
@@ -20,6 +21,10 @@ class LocalService(
         val local = repositorioLocal.findByEmail(mail)
         return local.toDTO()
     }
+
+
+    fun getAll(): List<Local> =
+        repositorioLocal.objetosDeRepositorio()
 
     fun update(localDTO: LocalDTO) {
         val email = localDTO.email ?: throw BusinessException("Debe estar logueado para realizar cambios en el perfil")

@@ -25,6 +25,10 @@ class ApplicationBootstrap(
 
     private lateinit var localInicial: Local
     private lateinit var mcdonals: Local
+    private lateinit var sushipop: Local
+    private lateinit var migusto: Local
+    private lateinit var grido: Local
+    private lateinit var lomitos: Local
 
 
 //    private var local = Local(
@@ -48,7 +52,7 @@ class ApplicationBootstrap(
                 direccion = Direccion(
                     calle = "Av. Siempre Viva",
                     altura = 123,
-                    ubicacion = Point(-34.603722, -58.381592)  // lat, long
+                    ubicacion = Point(-34.6162132380519, -58.390811751881536)  // lat, long
                 )
 
             }
@@ -65,12 +69,82 @@ class ApplicationBootstrap(
                 direccion = Direccion(
                     calle = "Av. Corrientes",
                     altura = 3500,
-                    ubicacion = Point(-34.605, -58.41)
+                    ubicacion = Point(-34.60315598140907, -58.41140804487885)
                 )
             }
 
+            sushipop = Local().apply {
+                id = 3
+                nombre = "SushiPop"
+                email = "sushipop@gmail.com"
+                password = "123"
+                url = "https://cdn.pixabay.com/photo/2020/04/04/15/07/sushi-5002639_1280.jpg"
+                regalias = 0.05
+                porcentajeAcordado = 0.1
+                mediosDePago = mutableSetOf(Pago.EFECTIVO)
+                direccion = Direccion(
+                    calle = "Lacroze",
+                    altura = 5006,
+                    ubicacion = Point(-34.54721730459346, -58.55472453690146)
+                )
+            }
+
+            grido = Local().apply {
+                id = 4
+                nombre = "Grido"
+                email = "grido@gmail.com"
+                password = "123"
+                url = "https://infomercado.pe/wp-content/uploads/2023/04/Grido.jpg"
+                regalias = 0.4
+                porcentajeAcordado = 0.9
+                mediosDePago = mutableSetOf(Pago.QR)
+                direccion = Direccion(
+                    calle = "Ayacucho",
+                    altura = 3454,
+                    ubicacion = Point(-34.558853, -58.548947)
+                )
+            }
+
+            migusto = Local().apply {
+                id = 5
+                nombre = "Mi Gusto"
+                email = "migusto@gmail.com"
+                password = "123"
+                url = "https://lh5.googleusercontent.com/p/AF1QipNFS6K8G6XeSvyV0-DKBoQkFV1ua37A_p26YU5g=w408-h306-k-no"
+                regalias = 0.5
+                porcentajeAcordado = 0.5
+                mediosDePago = mutableSetOf(Pago.QR)
+                direccion = Direccion(
+                    calle = "Gral San Martin",
+                    altura = 1904,
+                    ubicacion = Point(-34.5235380087158, -58.48952314781408)
+                )
+            }
+
+            lomitos = Local().apply {
+                id = 6
+                nombre = "Lomito´s"
+                email = "lomitos@gmail.com"
+                password = "123"
+                url = "https://media-cdn.tripadvisor.com/media/photo-s/07/0e/c7/a6/betos-lomitos.jpg"
+                regalias = 0.5
+                porcentajeAcordado = 0.5
+                mediosDePago = mutableSetOf(Pago.TRANSFERENCIA_BANCARIA)
+                direccion = Direccion(
+                    calle = "Presidente Illia",
+                    altura = 3170,
+                    ubicacion = Point(-34.5232471721764, -58.703041085973894)
+                )
+            }
+
+
+
             repositorioLocal.crear(localInicial)
             repositorioLocal.crear(mcdonals)
+            repositorioLocal.crear(grido)
+            repositorioLocal.crear(migusto)
+            repositorioLocal.crear(lomitos)
+            repositorioLocal.crear(sushipop)
 
 //            repositorioLocal.crear(local)
 
