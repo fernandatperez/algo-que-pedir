@@ -4,9 +4,9 @@ import ar.edu.unsam.algo3.dto.AuthRegisterRequest
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.dto.AuthRequest
 import ar.edu.unsam.algo3.dto.AuthResponse
+import ar.edu.unsam.algo3.dto.AuthUserRegisterRequest
 import ar.edu.unsam.algo3.modelo.local.Local
-import ar.edu.unsam.algo3.repositorio.repositorioUsuarios
-import ar.edu.unsam.algo3.servicios.UsuarioService
+import ar.edu.unsam.algo3.servicios.AuthService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin("*") // Habilita comunicacion entre distintos puertos (acepta requests de cualquier parte)
 @RestController
-class AuthController( val usuarioService: UsuarioService ) {
+class AuthController( val authService: AuthService ) {
 //  Inyeccion de dependencias de los singletons de servicios (y servicio conoce repo)
 
     @PostMapping("/login") // esto no devuelve nada
@@ -25,7 +25,7 @@ class AuthController( val usuarioService: UsuarioService ) {
             password = request.password,
         )
 
-        val userValidado = usuarioService.validar(userLocal)
+        val userValidado = authService.validar(userLocal)
 
 
 
@@ -44,12 +44,43 @@ class AuthController( val usuarioService: UsuarioService ) {
             nombre = request.name
         )
 //        Se genera el local
-        usuarioService.generarUsuario(userLocal)
+        authService.generarUsuario(userLocal)
         return AuthResponse(
             email = userLocal.email,
             name = userLocal.nombre,
         )
     }
 
+    @PostMapping("/userLogin") // esto no devuelve nada
+    fun getUserCliente(@RequestBody request: AuthRequest): AuthResponse {
+        // .fromDTO()
+        val userAValidar = Usuario(
+            mailPrincipal = request.email,
+            password = request.password,
+        )
+
+        val userValidado = authService.validar(userAValidar)
+
+
+        return AuthResponse(
+            email = userValidado.mailPrincipal,
+            name = userValidado.nombre,
+        )
+    }
+
+    @PostMapping("/userRegister")
+    fun createUserCliente(@RequestBody request: AuthUserRegisterRequest): AuthResponse {
+        // .fromDTO()
+        val userCliente = Usuario(
+            mailPrincipal = request.email,
+            apellido = request.lastName
+        )
+        // Se genera el usuario
+        authService.generarUsuario(userCliente)
+        return AuthResponse(
+            email = userCliente.mailPrincipal,
+            name = userCliente.nombre,
+        )
+    }
 
 }

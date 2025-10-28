@@ -117,6 +117,7 @@ class ApplicationBootstrap(
             apellido = "Miller",
             username = "smiller2006",
             mailPrincipal = "sofiamiller@gmail.com",
+            password = "123",
             direccion = Direccion(
                 calle = "Av siempre viva",
                 altura = 555,
@@ -128,6 +129,7 @@ class ApplicationBootstrap(
             apellido = "Fort",
             username = "rickyricon",
             mailPrincipal = "rickyfort@gmail.com",
+            password = "123",
             direccion = Direccion(
                 calle = "Maiame",
                 altura = 354,
@@ -139,6 +141,7 @@ class ApplicationBootstrap(
             apellido = "Caniggia",
             username = "fuerabarat",
             mailPrincipal = "fuerabarat@gmail.com",
+            password = "123",
             direccion = Direccion(
                 calle = "Roma, Italia",
                 altura = 100,
@@ -150,6 +153,7 @@ class ApplicationBootstrap(
             apellido = "Lightyear",
             username = "alinfinito",
             mailPrincipal = "woodyteamo@gmail.com",
+            password = "123",
             direccion = Direccion(
                 calle = "Morph",
                 altura = 256,
@@ -161,6 +165,7 @@ class ApplicationBootstrap(
             apellido = "RIP",
             username = "noterindasss",
             mailPrincipal = "bostadevaca@gmail.com",
+            password = "123",
             direccion = Direccion(
                 calle = "Rosario, Arg",
                 altura = 111,

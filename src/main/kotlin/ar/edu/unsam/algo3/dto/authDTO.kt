@@ -19,3 +19,11 @@ data class AuthRegisterRequest(
 //    val nombreLocal: String,
     val password: String
 ) {}
+
+data class AuthUserRegisterRequest(
+    val name: String = "nombre", // Agregar esto en register
+    var lastName: String = "apellido",
+    val email: String,
+//    val nombreLocal: String,
+    val password: String
+) {}
