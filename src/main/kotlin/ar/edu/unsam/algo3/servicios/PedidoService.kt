@@ -13,7 +13,9 @@ class PedidoService(
     val repositorioPedidos: RepositorioPedido
 ) {
 
-    fun pedidosFiltrados(estado: Estado, email: String) = repositorioPedidos.filteredInstances(estado, email).map { it.toDTO() }
+    fun pedidosFiltradosLocal(estado: Estado, email: String) = repositorioPedidos.filteredStoreInstances(estado, email).map { it.toDTO() }
+
+    fun pedidosFiltradosUsuario(estado: Estado, email: String) = repositorioPedidos.filteredUserInstances(estado, email).map { it.toDTO() }
 
     fun buscarPorID(id: Int): Pedido = repositorioPedidos.buscarPorId(id) ?: throw NotFoundException("No se encontró el pedido de id <$id>")
 

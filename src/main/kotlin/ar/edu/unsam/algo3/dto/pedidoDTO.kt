@@ -16,6 +16,7 @@ data class PedidoDTO (
     val metodoDePago: Pago,
     val estado: Estado,
     val horarioEntrega: String,
+    val local: LocalDTO
 ) {
     lateinit var platos: MutableList<PlatoDTO> // Lista de Platos
     lateinit var direccionEntera: String
@@ -35,6 +36,7 @@ fun Pedido.toDTO(): PedidoDTO {
         metodoDePago = this.medioDePagoElegido,
         estado = this.estado,
         horarioEntrega = this.horarioEntrega.toString(),
+        local = this.local.toDTO()
     ).apply {
         this.direccionEntera = this@toDTO.usuario.direccion.calle + " " + this@toDTO.usuario.direccion.altura
         this.precioSubtotal = this@toDTO.costoBasePlatos()

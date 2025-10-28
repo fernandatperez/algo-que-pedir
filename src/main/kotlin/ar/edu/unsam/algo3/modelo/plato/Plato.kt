@@ -115,5 +115,6 @@ class Plato(
         if (!noEstaVacio(descripcion)) throw NotFoundException("El Plato tiene que tener una descripcion")
         if (!noEstaVacio(local.nombre)) throw NotFoundException("El Local tiene que tener un nombre")
         if (!noEstaVacio(local.direccion.calle)) throw NotFoundException("El Local tiene que tener una calle")
+
     }
 }

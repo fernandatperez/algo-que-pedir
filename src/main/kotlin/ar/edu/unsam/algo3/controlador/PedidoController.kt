@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
@@ -17,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController
 class PedidoController(val pedidosService: PedidoService) {
 
     @GetMapping("/pedidos/")
-    fun pedidos(@RequestParam estado: Estado, @RequestParam("local") email: String) = pedidosService.pedidosFiltrados(estado, email)
+    fun pedidos(@RequestParam estado: Estado, @RequestParam("local") email: String) = pedidosService.pedidosFiltradosLocal(estado, email)
+
+    @GetMapping("/pedidos-usuario/")
+    fun getByUserEmail(@RequestParam estado: Estado, @RequestParam("usuario") email: String) = pedidosService.pedidosFiltradosUsuario(estado, email)
 
     @GetMapping("/pedido/{id}")
     fun pedidoPorId(@PathVariable id: Int) = pedidosService.buscarPorID(id).toDTO()

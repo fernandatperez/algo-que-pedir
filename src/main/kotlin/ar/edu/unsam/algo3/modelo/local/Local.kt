@@ -100,6 +100,18 @@ open class Local(
 //        Esto se va por que habria que poner en register un campo para darle una calle.
 //        if (!noEstaVacio(direccion.calle)) throw NotFoundException("El Local tiene que tener una direccion")
         if (!noEstaVacio(email))throw NotFoundException("El Local tiene que tener una email")
+        if (!noEstaVacio(direccion.ubicacion.x.toString() ))
+            throw NotFoundException("El Local tiene que tener latitud informada")
+        if ((direccion.ubicacion.y < -90 || direccion.ubicacion.y > 90 ) || direccion.ubicacion.y.isNaN())
+            throw NotFoundException("El Local tiene que tener longitud entre -90° y 90°")
+        if ((direccion.ubicacion.x < -90 || direccion.ubicacion.x > 90) || direccion.ubicacion.x.isNaN())
+            throw NotFoundException("El Local tiene que tener latitud entre -90° y 90°")
+        if ( regalias.isNaN() || regalias < 0 || regalias > 100)
+            throw NotFoundException("El local debe tener un porcentaje valido entre 0 y 100" )
+
+        if ( porcentajeAcordado.isNaN() || porcentajeAcordado < 0 || porcentajeAcordado > 100)
+            throw NotFoundException("El local debe tener un porcentaje valido entre 0 y 100" )
     }
+
 
 }

@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers
+import ar.edu.unsam.algo3.controlador.PedidoController
 
 
 @Autowired
@@ -146,7 +145,14 @@ class PedidoControllerSpec {
     }
 
     @Test
-    fun `GET pedidoss retorna 200`() {
-        mockMvc.perform(MockMvcRequestBuilders.get("/pedidos")).andExpect(MockMvcResultMatchers.status().isOk)
+    fun `GET pedidos filtrados por estado y local retorna 200`() {
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/pedidos/")
+                .param("estado", "PENDIENTE")
+                .param("local", "jorge@hotmail.com")
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isOk)
     }
 }

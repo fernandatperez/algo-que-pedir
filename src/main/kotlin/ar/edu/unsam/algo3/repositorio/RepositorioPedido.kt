@@ -23,7 +23,9 @@ class RepositorioPedido {
         return pedidos
     }
 
-    fun filteredInstances(estado: Estado, email: String): List<Pedido> = allInstances().filter { it.estado == estado && it.local.email == email }
+    fun filteredStoreInstances(estado: Estado, email: String): List<Pedido> = allInstances().filter { it.estado == estado && it.local.email == email }
+
+    fun filteredUserInstances(estado: Estado, email: String): List<Pedido> = allInstances().filter { it.estado == estado && it.usuario.mailPrincipal == email }
 
     fun crear(
         usuario: Usuario,

@@ -7,17 +7,27 @@ import org.springframework.web.bind.annotation.*
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/store-profile")
+
 class LocalController(
     private val localService: LocalService
 ) {
 
-    @GetMapping
+    @GetMapping("/store-profile")
     fun get(@RequestParam mail: String): LocalDTO {
         return localService.get(mail)
     }
 
-    @PutMapping
+    @GetMapping("/store-profile/{id}")
+    fun get(@PathVariable id: Int): LocalDTO {
+        return localService.getByID(id)
+    }
+
+    @GetMapping("/store-profiles")
+    fun get(): List<LocalDTO> {
+        return localService.getAll().map { it.toDTO()}}
+
+
+    @PutMapping("/store-profile")
     fun update(
         @RequestParam mail: String,
         @RequestBody localDTO: LocalDTO
