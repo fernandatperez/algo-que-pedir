@@ -17,6 +17,11 @@ class LocalController(
         return localService.get(mail)
     }
 
+    @GetMapping("/store-profile/{id}")
+    fun get(@PathVariable id: Int): LocalDTO {
+        return localService.getByID(id)
+    }
+
     @GetMapping("/store-profiles")
     fun get(): List<LocalDTO> {
         return localService.getAll().map { it.toDTO()}}

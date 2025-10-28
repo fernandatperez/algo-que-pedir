@@ -8,6 +8,7 @@ import ar.edu.unsam.algo3.dto.toDTO
 import org.uqbar.geodds.Point
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.errores.BusinessException
+import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
 
@@ -21,6 +22,9 @@ class LocalService(
         val local = repositorioLocal.findByEmail(mail)
         return local.toDTO()
     }
+
+    fun getByID(id: Int): LocalDTO =
+        repositorioLocal.obtenerObjeto(id)?.toDTO() ?: throw NotFoundException("No se encontró el ingrediente de id <$id>")
 
 
     fun getAll(): List<Local> =
