@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository
 class RepositorioPlato: Repositorio<Plato>(
 
 ){
+//    Deprecado
     fun algunoContieneIngrediente(id: Int): Boolean = this.coleccion.any { plato -> plato.ingredientes.any { ing -> ing.id == id }}
 }

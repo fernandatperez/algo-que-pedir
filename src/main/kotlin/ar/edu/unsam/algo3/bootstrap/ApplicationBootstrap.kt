@@ -382,6 +382,7 @@ class ApplicationBootstrap(
         repositorioPedidos.clearInit()
         repositorioPedidos.apply {
             crear(
+//                1
                 usuario = sofiamiller,
                 local = mcdonals, // a pedido de catt ;)
                 platos = mutableListOf(bigMac, ensalada, alitas),
@@ -417,6 +418,7 @@ class ApplicationBootstrap(
                 estado = Estado.CANCELADO
             )
             crear(
+//                6
                 usuario = sofiamiller,
                 local = localInicial,
                 platos = mutableListOf(hamburguesa),
@@ -424,6 +426,7 @@ class ApplicationBootstrap(
                 estado = Estado.ENTREGADO
             )
             crear(
+//                7
                 usuario = sofiamiller,
                 local = grido,
                 platos = mutableListOf(hamburguesa, alitas, pizza, ensalada, bigMac),

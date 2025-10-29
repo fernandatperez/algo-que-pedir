@@ -52,6 +52,15 @@ open class Local(
         return if (puntuaciones.isNotEmpty()) puntuaciones.average() else 0.0
     }
 
+//    Esto como hago para que no este hardcodeado? No tenemos una lista de pedidos realizados ni en cuanto
+//    tiempo se hicieron...alto bondi agregar eso
+    fun promedioTiempoEntrega(): String = "30-40 min"
+
+//    Es costoso si tiene muchas regalias.
+//    Lo habia pensado tambien por el lado de que si los platos eran muy caros pero es un bondi
+//    xq local no conoce platos.
+    fun esCostoso(): Boolean = this.regalias >= 0.5
+
     // el local lo prepara?
     fun prepararPedido(pedido: Pedido) {
         pedido.estado = Estado.PREPARADO

@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.dto
 
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.utils.redondear
 
 data class LocalDTO(
     val id: Int? = null,
@@ -34,6 +35,26 @@ fun Local.toDTO(): LocalDTO {
         storePaymentEfectivo = this.mediosDePago.contains(Pago.EFECTIVO),
         storePaymentQR = this.mediosDePago.contains(Pago.QR),
         storePaymentTransferencia = this.mediosDePago.contains(Pago.TRANSFERENCIA_BANCARIA)
+    )
+}
+
+data class LocalCardDTO(
+    val id: Int,
+    val name: String,
+    val imageURL: String,
+    val gradePointAvg: Double,
+    val deliveryTimeAvg: String,
+    val isExpensive: Boolean
+)
+
+fun Local.toCardDTO(): LocalCardDTO {
+    return LocalCardDTO(
+        id = this.id,
+        name = this.nombre,
+        imageURL = this.url,
+        gradePointAvg = this.promedioPuntuacion().redondear(1),
+        deliveryTimeAvg = this.promedioTiempoEntrega(),
+        isExpensive = this.esCostoso()
     )
 }
 

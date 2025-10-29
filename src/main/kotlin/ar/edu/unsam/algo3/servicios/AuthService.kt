@@ -6,7 +6,6 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.repositorio.RepositorioCliente
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
-import ar.edu.unsam.algo3.repositorio.repositorioUsuarios
 import org.springframework.stereotype.Service
 
 @Service

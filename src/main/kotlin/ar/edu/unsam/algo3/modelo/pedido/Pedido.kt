@@ -63,7 +63,7 @@ class Pedido(
             throw NoEsElMismoUsuario("El usuario no puede confirmar el pedido porque no le pertenece")
         }
         estado = Estado.CONFIRMADO // el usuario es el que lo confirma
-        usuario.registarLocalParaPuntuar(this)
+        usuario.registrarLocalParaPuntuar(this)
     }
 
     fun estaEnEstado(estado: Estado) = this.estado == estado

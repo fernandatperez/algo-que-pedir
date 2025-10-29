@@ -5,16 +5,11 @@ import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.modelo.utils.diasHastaAhora
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
-import ar.edu.unsam.algo3.errores.DescuentoMayorAlCienException
-import ar.edu.unsam.algo3.errores.IngredienteNoEstaEnElPlatoException
-import ar.edu.unsam.algo3.errores.IngredienteYaPerteneceAlPlato
-import ar.edu.unsam.algo3.errores.NoAplicaDescuentoEnPlatoNuevoException
 import ar.edu.unsam.algo3.errores.NotFoundException
+import ar.edu.unsam.algo3.modelo.utils.redondear
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
 import java.time.LocalDate
 import kotlin.math.max
-import kotlin.math.pow
-import kotlin.math.round
 
 val porcentajePorNuevoMAX = 30.0
 val porcentajePorNuevoMIN = 10.0
@@ -95,10 +90,6 @@ class Plato(
 
     fun setValorBase(valor: Double) { this.valorBase = valor }
 
-    fun Double.redondear(digitos: Int): Double {
-        val factor = 10.0.pow(digitos)
-        return round(this * factor) / factor
-    }
     //    ========== Metodos de busqueda del repositorio ==============
 
     override var id = 0
