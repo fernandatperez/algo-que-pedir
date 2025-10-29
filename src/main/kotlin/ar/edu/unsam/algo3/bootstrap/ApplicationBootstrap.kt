@@ -423,6 +423,13 @@ class ApplicationBootstrap(
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.ENTREGADO
             )
+            crear(
+                usuario = sofiamiller,
+                local = grido,
+                platos = mutableListOf(hamburguesa, alitas, pizza, ensalada, bigMac),
+                medioDePago = Pago.EFECTIVO,
+                estado = Estado.PENDIENTE
+            )
         }
     }
 
