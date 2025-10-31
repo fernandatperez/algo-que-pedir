@@ -381,14 +381,32 @@ class ApplicationBootstrap(
     fun crearPedidos() {
         repositorioPedidos.clearInit()
         repositorioPedidos.apply {
+//            Sofia Miller
+//            ---
             crear(
-//                1
                 usuario = sofiamiller,
                 local = mcdonals, // a pedido de catt ;)
                 platos = mutableListOf(bigMac, ensalada, alitas),
                 medioDePago = Pago.QR,
                 estado = Estado.PENDIENTE
             )
+            crear(
+                usuario = sofiamiller,
+                local = localInicial,
+                platos = mutableListOf(hamburguesa),
+                medioDePago = Pago.EFECTIVO,
+                estado = Estado.ENTREGADO
+            )
+            crear(
+                usuario = sofiamiller,
+                local = grido,
+                platos = mutableListOf(hamburguesa, alitas, pizza, ensalada, bigMac),
+                medioDePago = Pago.EFECTIVO,
+                estado = Estado.PENDIENTE
+            )
+//            ---
+//            Ricardo Fort
+//            ---
             crear(
                 usuario = ricardofort,
                 local = localInicial,
@@ -397,12 +415,32 @@ class ApplicationBootstrap(
                 estado = Estado.PENDIENTE
             )
             crear(
+                usuario = ricardofort,
+                local = mcdonals,
+                platos = mutableListOf(bigMac),
+                medioDePago = Pago.TRANSFERENCIA_BANCARIA,
+                estado = Estado.ENTREGADO
+            )
+//            ---
+//            Alex Caniggia
+//            ---
+            crear(
+                usuario = alexcaniggia,
+                local = localInicial,
+                platos = mutableListOf(spaghettis, alitas, bigMac),
+                medioDePago = Pago.TRANSFERENCIA_BANCARIA,
+                estado = Estado.ENTREGADO
+            )
+            crear(
                 usuario = alexcaniggia,
                 local = localInicial,
                 platos = mutableListOf(pizza),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.PREPARADO
             )
+//            ---
+//            Buzz
+//            ---
             crear(
                 usuario = buzz,
                 local = localInicial,
@@ -410,6 +448,9 @@ class ApplicationBootstrap(
                 medioDePago = Pago.QR,
                 estado = Estado.ENTREGADO
             )
+//            ---
+//            Locomotora
+//            ---
             crear(
                 usuario = locomotora,
                 local = localInicial,
@@ -418,42 +459,20 @@ class ApplicationBootstrap(
                 estado = Estado.CANCELADO
             )
             crear(
-//                6
-                usuario = sofiamiller,
-                local = localInicial,
-                platos = mutableListOf(hamburguesa),
-                medioDePago = Pago.EFECTIVO,
-                estado = Estado.ENTREGADO
-            )
-            crear(
-//                7
-                usuario = sofiamiller,
-                local = grido,
-                platos = mutableListOf(hamburguesa, alitas, pizza, ensalada, bigMac),
-                medioDePago = Pago.EFECTIVO,
-                estado = Estado.PENDIENTE
-            )
-            crear(
                 usuario = locomotora,
                 local = mcdonals,
                 platos = mutableListOf(alitas),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
-                estado = Estado.CONFIRMADO
+                estado = Estado.ENTREGADO
             )
             crear(
-                usuario = ricardofort,
+                usuario = locomotora,
                 local = mcdonals,
-                platos = mutableListOf(bigMac),
+                platos = mutableListOf(alitas, hamburguesa),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
-                estado = Estado.CONFIRMADO
+                estado = Estado.PENDIENTE
             )
-            crear(
-                usuario = alexcaniggia,
-                local = localInicial,
-                platos = mutableListOf(spaghettis, alitas, bigMac),
-                medioDePago = Pago.TRANSFERENCIA_BANCARIA,
-                estado = Estado.CONFIRMADO
-            )
+//            ---
         }
     }
 

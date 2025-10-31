@@ -82,8 +82,6 @@ class IngredienteService(
     }
 
     fun eliminarIngrediente(id: Int) {
-//        if (repositorioPlatos.algunoContieneIngrediente(id))
-//            throw ConflictException("No se puede eliminar el ingrediente por que algun plato aun lo tiene")
         repositorioIngredientes.eliminarDeColeccion(id)
     }
 }

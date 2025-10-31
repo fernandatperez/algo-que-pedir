@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.RestController
 class ClienteController( val clienteService: ClienteService ) {
 
     //    Esto cambialo como quieras, lo arme para que ya estuviera nada mas
-    @GetMapping("/perfil")
-    fun get(@RequestParam id: Int) {
+    @GetMapping("/perfil/{id}")
+    fun get(@PathVariable id: Int) {
 
     }
 
-    @PutMapping("/perfil/{id}")
+    @PutMapping("/perfil/")
     fun update(@RequestParam id: Int, @RequestBody perfilDTO: ClientePerfilDTO) {
 
     }
 
-    @GetMapping("/locales-puntuables")
-    fun getUnratedStores(@RequestParam id: Int): List<LocalCardDTO> {
+    @GetMapping("/locales-puntuables/{id}")
+    fun getUnratedStores(@PathVariable id: Int): List<LocalCardDTO> {
         val localesDTO =
             clienteService.obtenerLocalesPuntuables(id).map { local ->
                 local.toCardDTO()
@@ -37,8 +37,13 @@ class ClienteController( val clienteService: ClienteService ) {
         return localesDTO
     }
 
-    @PostMapping("puntuar-local/{id}")
-    fun postStoreRate(@PathVariable id: Int) {
+    @PostMapping("/puntuar-local/")
+    fun postStoreRate(@RequestParam id: Int) {
 
+    }
+
+    @PostMapping("/confirmar-pedido/")
+    fun postConfirm(@RequestParam clienteID: Int, @RequestParam pedidoID: Int) {
+        clienteService.confirmarPedido(clienteID, pedidoID)
     }
 }
