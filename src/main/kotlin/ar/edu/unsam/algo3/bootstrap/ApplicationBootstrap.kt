@@ -433,6 +433,27 @@ class ApplicationBootstrap(
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.PENDIENTE
             )
+            crear(
+                usuario = locomotora,
+                local = mcdonals,
+                platos = mutableListOf(alitas),
+                medioDePago = Pago.TRANSFERENCIA_BANCARIA,
+                estado = Estado.CONFIRMADO
+            )
+            crear(
+                usuario = ricardofort,
+                local = mcdonals,
+                platos = mutableListOf(bigMac),
+                medioDePago = Pago.TRANSFERENCIA_BANCARIA,
+                estado = Estado.CONFIRMADO
+            )
+            crear(
+                usuario = alexcaniggia,
+                local = localInicial,
+                platos = mutableListOf(spaghettis, alitas, bigMac),
+                medioDePago = Pago.TRANSFERENCIA_BANCARIA,
+                estado = Estado.CONFIRMADO
+            )
         }
     }
 
