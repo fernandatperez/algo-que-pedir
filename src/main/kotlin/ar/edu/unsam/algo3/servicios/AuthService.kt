@@ -59,8 +59,7 @@ class AuthService (
         val usuarioCorrespondiente = respositorioClientes.buscar(usuario.mailPrincipal)
 //        println(usuarioCorrespondiente)
         if (usuarioCorrespondiente.isEmpty()) {
-//            throw RuntimeException("No existe un usuario con ese email")
-            throw NotFoundException("No existe un usuario con ese email")
+            throw NotFoundException("Credenciales incorrectas.")
         }
         else {
             return usuarioCorrespondiente[0]

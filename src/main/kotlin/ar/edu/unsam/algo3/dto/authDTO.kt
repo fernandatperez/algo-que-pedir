@@ -10,6 +10,7 @@ data class AuthRequest(
 data class AuthResponse(
     val name: String,
     val email: String,
+    val id: Int
 //    val nombreLocal: String
 ) {}
 

@@ -32,6 +32,7 @@ class AuthController( val authService: AuthService ) {
         return AuthResponse(
             email = userValidado.email,
             name = userValidado.nombre,
+            id = userValidado.id
         )
     }
 
@@ -48,6 +49,7 @@ class AuthController( val authService: AuthService ) {
         return AuthResponse(
             email = userLocal.email,
             name = userLocal.nombre,
+            id = userLocal.id
         )
     }
 
@@ -58,13 +60,13 @@ class AuthController( val authService: AuthService ) {
             mailPrincipal = request.email,
             password = request.password,
         )
-
         val userValidado = authService.validar(userAValidar)
 
 
         return AuthResponse(
             email = userValidado.mailPrincipal,
             name = userValidado.nombre,
+            id = userValidado.id
         )
     }
 
@@ -73,13 +75,16 @@ class AuthController( val authService: AuthService ) {
         // .fromDTO()
         val userCliente = Usuario(
             mailPrincipal = request.email,
-            apellido = request.lastName
+            nombre = request.name,
+            apellido = request.lastName,
+            password = request.password,
         )
         // Se genera el usuario
         authService.generarUsuario(userCliente)
         return AuthResponse(
             email = userCliente.mailPrincipal,
             name = userCliente.nombre,
+            id = userCliente.id
         )
     }
 
