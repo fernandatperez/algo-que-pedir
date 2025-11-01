@@ -127,5 +127,8 @@ class Usuario(
         if (!noEstaVacio(apellido)) throw NotFoundException("El Usuario tiene que tener un apellido")
         if (!noEstaVacio(mailPrincipal)) throw NotFoundException("El Usuario tiene que tener un mail")
     }
+
+    fun esIngredientePreferidoPorID(id: Int) = ingredientesPreferidos.any{it.id == id}
+    fun esIngredienteAEvitarPorID(id: Int) = ingredientesEvitar.any{it.id == id}
 }
 
