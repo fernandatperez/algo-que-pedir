@@ -77,8 +77,10 @@ class Usuario(
 
     val localesAPuntuar: MutableMap<Local, LocalDate> = mutableMapOf()
 
+    fun obtenerLocalesAPuntuar(): MutableSet<Local> = this.localesAPuntuar.keys
+
     // todo: tiene que recibir pedido y este tiene que saber el local y el local lo tiene que haber preparado
-    fun registarLocalParaPuntuar(pedido: Pedido) {
+    fun registrarLocalParaPuntuar(pedido: Pedido) {
         if (pedido.estaEnEstado(Estado.CONFIRMADO)) {
             localesAPuntuar[pedido.local] = LocalDate.now()
         }

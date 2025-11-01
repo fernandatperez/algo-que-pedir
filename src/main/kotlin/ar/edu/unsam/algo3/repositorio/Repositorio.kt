@@ -32,7 +32,13 @@ open class Repositorio<Type : ElementoDeRepositorio> {
 
     fun objetoEnColeccion(id: Int) = coleccion.any { item -> item.id == id }
 
-    fun obtenerObjeto(id: Int): Type? = coleccion.find { item -> item.id == id }
+    fun obtenerObjeto(id: Int): Type {
+        val objeto = coleccion.find { item -> item.id == id }
+        if (objeto != null) {
+            return objeto
+        }
+        throw BusinessException("No existe el id $id en repositorio para obtenerlo de la coleccion")
+    }
 
 
     fun limpiarColeccion() = coleccion.clear()
