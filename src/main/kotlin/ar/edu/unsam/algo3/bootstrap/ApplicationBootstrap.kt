@@ -197,7 +197,10 @@ class ApplicationBootstrap(
                 altura = 555,
                 ubicacion = Point(40.7128,-74.006)
             ),
-        )
+        ).apply{
+            this.agregarPreferido(tomate)
+            this.agregarEvitar(huevo)
+        }
         ricardofort = Usuario(
             nombre = "Ricardo",
             apellido = "Fort",
@@ -478,8 +481,8 @@ class ApplicationBootstrap(
 
     override fun afterPropertiesSet() {
         this.crearLocalInicial()
-        this.crearClientes()
         this.crearIngredientes()
+        this.crearClientes()
         this.crearPlatos()
         this.crearPedidos()
     }

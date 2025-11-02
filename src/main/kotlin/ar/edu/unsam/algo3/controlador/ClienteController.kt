@@ -1,7 +1,9 @@
 package ar.edu.unsam.algo3.controlador
 
 import ar.edu.unsam.algo3.dto.ClientePerfilDTO
+import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.LocalCardDTO
+import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toCardDTO
 import ar.edu.unsam.algo3.servicios.ClienteService
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -45,5 +47,21 @@ class ClienteController( val clienteService: ClienteService ) {
     @PostMapping("/confirmar-pedido/")
     fun postConfirm(@RequestParam clienteID: Int, @RequestParam pedidoID: Int) {
         clienteService.confirmarPedido(clienteID, pedidoID)
+    }
+
+    @GetMapping("criterio-ingrediente/{criterio}")
+    fun getIngredientePorCriterio(@RequestParam id: Int, @PathVariable criterio: String): Set<IngredienteDTO> {
+        return clienteService.obtenerIngredientesPorCriterio(id, criterio)
+    }
+
+    @GetMapping("ingredientes-disponibles")
+    fun getIngredientesDisponibles(@RequestParam id: Int): Set<IngredienteDTO> {
+        return clienteService.obtenerIngredientesDisponibles(id)
+    }
+
+    @PutMapping("actualizar-ingredientes/{criterio}")
+    fun actualizarIngredientesPorCriterio(@RequestParam id: Int, @PathVariable criterio: String, @RequestBody ingredientes: List<IngredienteDTO>): Set<IngredienteDTO> {
+        val ingredientes = ingredientes.map { it.fromDTO()}.toList()
+        return clienteService.actualizarIngredientesPorCriterio(id, criterio, ingredientes)
     }
 }
