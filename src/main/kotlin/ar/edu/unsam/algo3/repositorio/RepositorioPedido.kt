@@ -9,6 +9,7 @@ import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 
 @Component
@@ -34,15 +35,18 @@ class RepositorioPedido {
         platos: MutableList<Plato>,
         medioDePago: Pago,
         estado: Estado,
-    ) {
+        fechaCreacion: LocalDate = LocalDate.now() // Agrego esto xq sino todos los pedidos son del mismo dia, hay que mandar la fecha en la que se realizan desde el front
+    ): Pedido {
         val pedido = Pedido(
             usuario = usuario,
             local = local,
             platos = platos,
             medioDePagoElegido = medioDePago,
             estado = estado,
+            fechaCreacion = fechaCreacion
         )
         crear(pedido)
+        return pedido
     }
 
     fun crear(pedido: Pedido): Pedido {

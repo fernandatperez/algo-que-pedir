@@ -391,8 +391,15 @@ class ApplicationBootstrap(
                 local = mcdonals, // a pedido de catt ;)
                 platos = mutableListOf(bigMac, ensalada, alitas),
                 medioDePago = Pago.QR,
-                estado = Estado.PENDIENTE
-            )
+                estado = Estado.PENDIENTE,
+                fechaCreacion = LocalDate.of(2025, 10, 28)
+            ) .apply {
+//                Esto se hace cuando se confirma el carrito o cuando el local lo prepara. El pedido pasa a CONFIRMADO y se registra como local a puntuar en el usuario.
+//                Una vez hecho eso vuela de aca.
+                this.estado = Estado.CONFIRMADO
+                sofiamiller.registrarLocalParaPuntuar(this)
+            }
+
             crear(
                 usuario = sofiamiller,
                 local = localInicial,
