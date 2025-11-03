@@ -44,4 +44,6 @@ open class Repositorio<Type : ElementoDeRepositorio> {
     fun limpiarColeccion() = coleccion.clear()
 
     fun buscar(criterio: String): List<Type> = coleccion.filter { item -> item.cumpleCriterioDeBusqueda(criterio) }
+
+
 }

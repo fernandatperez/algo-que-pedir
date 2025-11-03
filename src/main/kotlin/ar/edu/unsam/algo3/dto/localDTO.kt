@@ -4,6 +4,12 @@ import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.utils.redondear
 
+data class SearchRequest(
+    val searchName: String? = null
+) {
+    constructor() : this(null)
+}
+
 data class LocalDTO(
     val id: Int? = null,
     val name: String,

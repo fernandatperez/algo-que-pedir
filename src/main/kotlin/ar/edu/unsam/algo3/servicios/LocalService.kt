@@ -30,9 +30,28 @@ class LocalService(
     fun getAll(): List<Local> =
         repositorioLocal.objetosDeRepositorio()
 
+//    fun getBySearch(searchName: String?): List<Local> {
+//        return if (searchName.isNullOrBlank()) {
+//            getAll()
+//        } else {
+//            repositorioLocal.buscar(searchName)
+//        }
+//    }
+
+    fun getBySearch(searchName: String?): List<Local> {
+        val resultados = if (searchName.isNullOrBlank()) {
+            repositorioLocal.objetosDeRepositorio()
+        } else {
+            repositorioLocal.buscar(searchName)
+        }
+        return resultados
+    }
+
     fun update(localDTO: LocalDTO) {
         val email = localDTO.email ?: throw BusinessException("Debe estar logueado para realizar cambios en el perfil")
         val localExistente = repositorioLocal.findByEmail(email)
+
+
 
     // Actualizar
     localExistente.apply {

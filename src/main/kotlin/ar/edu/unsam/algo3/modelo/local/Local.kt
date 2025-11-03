@@ -100,9 +100,12 @@ open class Local(
 
     override var id = 0
 
-    override fun cumpleCriterioDeBusqueda(criterio: String): Boolean =
-        coincideParcialmenteCon(criterio, nombre) ||
-                coincideTotalmenteCon(criterio, direccion.calle) || coincideTotalmenteCon(criterio, email)
+    override fun cumpleCriterioDeBusqueda(criterio: String): Boolean {
+    val criterioLower = criterio.lowercase()
+
+    return coincideParcialmenteCon(criterioLower, nombre) ||
+                coincideParcialmenteCon(criterio, direccion.calle) || coincideParcialmenteCon(criterio, email)
+    }
 
     override fun cumpleCriterioDeCreacion() {
         if (!noEstaVacio(nombre)) throw NotFoundException("El Local tiene que tener un nombre")

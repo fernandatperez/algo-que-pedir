@@ -2,12 +2,12 @@ package ar.edu.unsam.algo3.controlador
 
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.LocalDTO
+import ar.edu.unsam.algo3.dto.SearchRequest
 import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin("*")
 @RestController
-
 class LocalController(
     private val localService: LocalService
 ) {
@@ -23,9 +23,15 @@ class LocalController(
     }
 
     @GetMapping("/store-profiles")
-    fun get(): List<LocalDTO> {
-        return localService.getAll().map { it.toDTO()}}
+    fun getAll(): List<LocalDTO> {
+        return localService.getAll().map { it.toDTO() }
+    }
 
+    @PostMapping("/store-profiles")
+    fun getStores(@RequestBody searchRequest: SearchRequest): List<LocalDTO> {
+        val resultados = localService.getBySearch(searchRequest.searchName)
+        return resultados.map { it.toDTO() }
+    }
 
     @PutMapping("/store-profile")
     fun update(
@@ -34,8 +40,8 @@ class LocalController(
     ) {
         //se carga en el DTO del local el mail que trae de la session storage,
         //ya que local originalmente no tiene mail
-            val localDTOConEmail = localDTO.copy(email = mail)
-            localService.update(localDTOConEmail)
+        val localDTOConEmail = localDTO.copy(email = mail)
+        localService.update(localDTOConEmail)
     }
 }
 
