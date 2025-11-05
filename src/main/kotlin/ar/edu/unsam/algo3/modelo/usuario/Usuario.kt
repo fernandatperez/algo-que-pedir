@@ -52,11 +52,11 @@ class Usuario(
     }
 
     fun eliminarPreferido(ingrediente: Ingrediente) {
-        ingredientesPreferidos.remove(ingrediente)
+        ingredientesPreferidos.removeIf { it.id == ingrediente.id }
     }
 
     fun eliminarEvitar(ingrediente: Ingrediente) {
-        ingredientesEvitar.remove(ingrediente)
+        ingredientesEvitar.removeIf { it.id == ingrediente.id }
     }
 
     // local es del tipo clase Local

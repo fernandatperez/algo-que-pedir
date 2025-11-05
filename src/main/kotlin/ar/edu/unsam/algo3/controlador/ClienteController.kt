@@ -7,6 +7,7 @@ import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toCardDTO
 import ar.edu.unsam.algo3.servicios.ClienteService
 import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -59,4 +60,9 @@ class ClienteController( val clienteService: ClienteService ) {
         val ingredientes = ingredientes.map { it.fromDTO()}.toList()
         return clienteService.actualizarIngredientesPorCriterio(id, criterio, ingredientes)
     }
+
+    @DeleteMapping("/eliminar-ingrediente-usuario/{criterio}")
+    fun eliminarIngredientePorCriterio(@RequestParam id: Int, @PathVariable criterio: String, @RequestParam ingredienteId: Int) =
+        clienteService.eliminarIngredientePorCriterio(id, criterio, ingredienteId)
+
 }

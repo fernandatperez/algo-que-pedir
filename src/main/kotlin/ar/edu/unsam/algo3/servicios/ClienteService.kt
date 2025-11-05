@@ -41,12 +41,8 @@ class ClienteService(
         val cliente = repositorioClientes.obtenerObjeto(id)
 
         when (criterio) {
-            "avoid" -> ingredientes.forEach {
-                cliente.agregarEvitar(it)
-            }
-            "prefers" -> ingredientes.forEach {
-                cliente.agregarPreferido(it)
-            }
+            "avoid" -> ingredientes.forEach { cliente.agregarEvitar(it)}
+            "prefers" -> ingredientes.forEach { cliente.agregarPreferido(it) }
             else -> throw NotFoundException("No se encontró el criterio <$criterio>")
         }
 
@@ -55,4 +51,16 @@ class ClienteService(
         return ingredientes.map { it.toDTO() }.toSet()
     }
 
+    fun eliminarIngredientePorCriterio(id: Int, criterio: String, ingredienteId: Int){
+        val cliente = repositorioClientes.obtenerObjeto(id)
+        val ingredienteAEliminar = repositorioIngredientes.obtenerObjeto(ingredienteId)
+
+        when (criterio) {
+            "avoid" -> cliente.eliminarEvitar(ingredienteAEliminar)
+            "prefers" -> cliente.eliminarPreferido(ingredienteAEliminar)
+            else -> throw NotFoundException("No se encontró el criterio <$criterio>")
+        }
+
+        repositorioClientes.actualizar(cliente)
+    }
 }
