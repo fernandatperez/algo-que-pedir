@@ -19,10 +19,10 @@ open class Repositorio<Type : ElementoDeRepositorio> {
         if (objeto.cumpleCriterioDeNuevo()) objeto.id = generarID() // esto deja baches. No esta piola (igual queda). Revisar
         coleccion.add(objeto)
     }
-
-    fun eliminarDeColeccion(id: Int) =
-        if (id == -1) throw NotFoundException("No existe el id $id en repositorio para eliminarlo de la coleccion")
-        else coleccion.remove(obtenerObjeto(id))
+//    Esto no esta bien. id==-1?
+    fun eliminarDeColeccion(id: Int) {
+        coleccion.remove(obtenerObjeto(id))
+    }
 
     fun actualizar(objetoActualizado: Type) {
         val index = coleccion.indexOfFirst { it.id == objetoActualizado.id }
@@ -37,7 +37,7 @@ open class Repositorio<Type : ElementoDeRepositorio> {
         if (objeto != null) {
             return objeto
         }
-        throw BusinessException("No existe el id $id en repositorio para obtenerlo de la coleccion")
+        throw NotFoundException("No existe el id $id en repositorio para obtenerlo de la coleccion")
     }
 
 

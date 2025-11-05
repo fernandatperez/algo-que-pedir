@@ -21,6 +21,10 @@ class ClienteService(
         return localesPuntuables
     }
 
+    fun confirmarPedido(clienteID: Int, pedidoID: Int): Int {
+        return 1
+    }
+
     fun obtenerIngredientesPorCriterio(id: Int, criterio: String): Set<IngredienteDTO> {
         val cliente = repositorioClientes.obtenerObjeto(id)
 

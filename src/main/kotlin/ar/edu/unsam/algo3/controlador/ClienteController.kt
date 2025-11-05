@@ -20,18 +20,18 @@ import org.springframework.web.bind.annotation.RestController
 class ClienteController( val clienteService: ClienteService ) {
 
     //    Esto cambialo como quieras, lo arme para que ya estuviera nada mas
-    @GetMapping("/perfil")
-    fun get(@RequestParam id: Int) {
+    @GetMapping("/perfil/{id}")
+    fun get(@PathVariable id: Int) {
 
     }
 
-    @PutMapping("/perfil/{id}")
+    @PutMapping("/perfil/")
     fun update(@RequestParam id: Int, @RequestBody perfilDTO: ClientePerfilDTO) {
 
     }
 
-    @GetMapping("/locales-puntuables")
-    fun getUnratedStores(@RequestParam id: Int): List<LocalCardDTO> {
+    @GetMapping("/locales-puntuables/{id}")
+    fun getUnratedStores(@PathVariable id: Int): List<LocalCardDTO> {
         val localesDTO =
             clienteService.obtenerLocalesPuntuables(id).map { local ->
                 local.toCardDTO()
@@ -39,22 +39,27 @@ class ClienteController( val clienteService: ClienteService ) {
         return localesDTO
     }
 
-    @PostMapping("puntuar-local/{id}")
-    fun postStoreRate(@PathVariable id: Int) {
+    @PostMapping("/puntuar-local/")
+    fun postStoreRate(@RequestParam id: Int) {
 
     }
 
-    @GetMapping("criterio-ingrediente/{criterio}")
+    @PostMapping("/confirmar-pedido/")
+    fun postConfirm(@RequestParam clienteID: Int, @RequestParam pedidoID: Int) {
+        clienteService.confirmarPedido(clienteID, pedidoID)
+    }
+
+    @GetMapping("/criterio-ingrediente/{criterio}")
     fun getIngredientePorCriterio(@RequestParam id: Int, @PathVariable criterio: String): Set<IngredienteDTO> {
         return clienteService.obtenerIngredientesPorCriterio(id, criterio)
     }
 
-    @GetMapping("ingredientes-disponibles")
+    @GetMapping("/ingredientes-disponibles")
     fun getIngredientesDisponibles(@RequestParam id: Int): Set<IngredienteDTO> {
         return clienteService.obtenerIngredientesDisponibles(id)
     }
 
-    @PutMapping("actualizar-ingredientes/{criterio}")
+    @PutMapping("/actualizar-ingredientes/{criterio}")
     fun actualizarIngredientesPorCriterio(@RequestParam id: Int, @PathVariable criterio: String, @RequestBody ingredientes: List<IngredienteDTO>): Set<IngredienteDTO> {
         val ingredientes = ingredientes.map { it.fromDTO()}.toList()
         return clienteService.actualizarIngredientesPorCriterio(id, criterio, ingredientes)
