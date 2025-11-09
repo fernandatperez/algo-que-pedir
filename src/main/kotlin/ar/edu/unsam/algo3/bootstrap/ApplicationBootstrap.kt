@@ -29,13 +29,7 @@ class ApplicationBootstrap(
     private lateinit var migusto: Local
     private lateinit var grido: Local
     private lateinit var lomitos: Local
-
-
-//    private var local = Local(
-//        nombre = "un Local",
-//        direccion = Direccion(calle = "maipu"),
-//        mediosDePago = mutableSetOf(Pago.TRANSFERENCIA_BANCARIA, Pago.EFECTIVO, Pago.QR)
-//    )
+    private lateinit var restauranteItaliano: Local
 
     private fun crearLocalInicial() {
         if (repositorioLocal.objetosDeRepositorio().isEmpty()) {
@@ -52,9 +46,8 @@ class ApplicationBootstrap(
                 direccion = Direccion(
                     calle = "Av. Siempre Viva",
                     altura = 123,
-                    ubicacion = Point(-34.6162132380519, -58.390811751881536)  // lat, long
+                    ubicacion = Point(-34.6162132380519, -58.390811751881536)
                 )
-
             }
 
             mcdonals = Local().apply {
@@ -137,7 +130,22 @@ class ApplicationBootstrap(
                 )
             }
 
-
+            restauranteItaliano = Local().apply {
+                id = 7
+                nombre = "Restaurante Italiano"
+                email = "italiano@gmail.com"
+                password = "123"
+                url = "https://images.unsplash.com/photo-1534650075489-3baecec1e8b1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+                regalias = 0.05
+                porcentajeAcordado = 0.1
+                mediosDePago = mutableSetOf(Pago.EFECTIVO, Pago.QR, Pago.TRANSFERENCIA_BANCARIA)
+                direccion = Direccion(
+                    calle = "Via Giovan Battista",
+                    altura = 2500,
+                    ubicacion = Point(-34.59823, -58.39451)
+                )
+                puntuaciones = mutableListOf(4,5,4,5,5,4,3,5,4)
+            }
 
             repositorioLocal.crear(localInicial)
             repositorioLocal.crear(mcdonals)
@@ -145,21 +153,10 @@ class ApplicationBootstrap(
             repositorioLocal.crear(migusto)
             repositorioLocal.crear(lomitos)
             repositorioLocal.crear(sushipop)
-
-//            repositorioLocal.crear(local)
-
-//            println("""
-//                Local inicial creado exitosamente:
-//                 Nombre: ${localInicial.nombre}
-//                 Dirección: ${localInicial.direccion.calle} ${localInicial.direccion.altura}
-//                 Ubicación: (${localInicial.direccion.ubicacion.x}, ${localInicial.direccion.ubicacion.y})
-//                 URL: ${localInicial.url}
-//                 Comisiones: App ${localInicial.regalias}% | Autor ${localInicial.porcentajeAcordado}%
-//            """.trimIndent())
+            repositorioLocal.crear(restauranteItaliano)
 
         } else {
             val localExistente = repositorioLocal.obtenerObjeto(1)
-//            println(" Local existente: ${localExistente.nombre}")
         }
     }
 
@@ -174,6 +171,14 @@ class ApplicationBootstrap(
     private lateinit var lechuga: Ingrediente
     private lateinit var tomate: Ingrediente
     private lateinit var huevo: Ingrediente
+    private lateinit var mozzarella: Ingrediente
+    private lateinit var albahaca: Ingrediente
+    private lateinit var pepperoni: Ingrediente
+    private lateinit var bacon: Ingrediente
+    private lateinit var crema: Ingrediente
+    private lateinit var parmesano: Ingrediente
+    private lateinit var pasta: Ingrediente
+    private lateinit var pesto: Ingrediente
 
     private lateinit var hamburguesa: Plato
     private lateinit var pizza: Plato
@@ -182,7 +187,11 @@ class ApplicationBootstrap(
     private lateinit var spaghettis: Plato
     private lateinit var bigMac: Plato
     private lateinit var alitas: Plato
-
+    private lateinit var pizzaMargherita: Plato
+    private lateinit var pizzaPepperoni: Plato
+    private lateinit var spaghettiCarbonara: Plato
+    private lateinit var fettuccineAlfredo: Plato
+    private lateinit var lasagnePortofino: Plato
 
     fun crearClientes() {
         repositorioClientes.limpiarColeccion()
@@ -290,12 +299,69 @@ class ApplicationBootstrap(
             esOrigenAnimal = true,
             grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
         )
+        mozzarella = Ingrediente(
+            nombre = "Mozzarella",
+            costoMercado = 0.6,
+            grupoAlimenticio = GrupoAlimenticio.LACTEOS,
+            esOrigenAnimal = true,
+        )
+        albahaca = Ingrediente(
+            nombre = "Albahaca",
+            costoMercado = 0.3,
+            grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS,
+            esOrigenAnimal = false,
+        )
+        pepperoni = Ingrediente(
+            nombre = "Pepperoni",
+            costoMercado = 0.8,
+            grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
+            esOrigenAnimal = true,
+        )
+        bacon = Ingrediente(
+            nombre = "Bacon",
+            costoMercado = 0.9,
+            grupoAlimenticio = GrupoAlimenticio.PROTEINAS,
+            esOrigenAnimal = true,
+        )
+        crema = Ingrediente(
+            nombre = "Crema",
+            costoMercado = 0.4,
+            grupoAlimenticio = GrupoAlimenticio.LACTEOS,
+            esOrigenAnimal = true,
+        )
+        parmesano = Ingrediente(
+            nombre = "Queso Parmesano",
+            costoMercado = 0.7,
+            grupoAlimenticio = GrupoAlimenticio.LACTEOS,
+            esOrigenAnimal = true,
+        )
+        pasta = Ingrediente(
+            nombre = "Pasta",
+            costoMercado = 0.5,
+            grupoAlimenticio = GrupoAlimenticio.CEREALES_Y_TUBERCULOS,
+            esOrigenAnimal = false,
+        )
+        pesto = Ingrediente(
+            nombre = "Pesto",
+            costoMercado = 0.6,
+            grupoAlimenticio = GrupoAlimenticio.FRUTAS_Y_VERDURAS,
+            esOrigenAnimal = false,
+        )
+
         repositorioIngredientes.apply {
             crear(carnederenacuajo)
             crear(quesocheddar)
             crear(lechuga)
             crear(tomate)
             crear(huevo)
+            crear(mozzarella)
+            crear(albahaca)
+            crear(pepperoni)
+            crear(bacon)
+            crear(crema)
+            crear(parmesano)
+            crear(pasta)
+            crear(pesto)
         }
     }
 
@@ -318,7 +384,6 @@ class ApplicationBootstrap(
             local = localInicial,
             fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(tomate)
-
         )
         ensalada = Plato(
             nombre = "Ensalada clásica",
@@ -339,7 +404,6 @@ class ApplicationBootstrap(
             local = mcdonals,
             ingredientes = mutableListOf(carnederenacuajo, lechuga)
         )
-
         spaghettis = Plato(
             nombre = "Spaghettis al pesto",
             descripcion = "Pasta fresca con salsa de albahaca y queso rallado",
@@ -349,7 +413,6 @@ class ApplicationBootstrap(
             local = mcdonals,
             ingredientes = mutableListOf(quesocheddar)
         )
-
         bigMac = Plato(
             nombre = "Big Mac",
             descripcion = "Doble carne, queso cheddar, lechuga, pepinos y salsa especial",
@@ -359,7 +422,6 @@ class ApplicationBootstrap(
             fechaDeCreacion = LocalDate.now().minusDays(31),
             ingredientes = mutableListOf(carnederenacuajo, lechuga, quesocheddar)
         )
-
         alitas = Plato(
             nombre = "Alitas BBQ",
             descripcion = "Alitas de pollo bañadas en salsa barbacoa, acompañadas de papas fritas",
@@ -370,6 +432,53 @@ class ApplicationBootstrap(
             ingredientes = mutableListOf(carnederenacuajo)
         )
 
+        // Platos del Restaurante Italiano
+        pizzaMargherita = Plato(
+            nombre = "Pizza Margherita",
+            descripcion = "Classic pizza with tomato sauce, mozzarella, and basil",
+            valorBase = 12.99,
+            urldeImagen = "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169",
+            local = restauranteItaliano,
+            fechaDeCreacion = LocalDate.now().minusDays(15),
+            ingredientes = mutableListOf(tomate, mozzarella, albahaca)
+        )
+        pizzaPepperoni = Plato(
+            nombre = "Pizza Pepperoni",
+            descripcion = "Pizza with tomato sauce, mozzarella, and pepperoni",
+            valorBase = 13.99,
+            urldeImagen = "https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+            local = restauranteItaliano,
+            fechaDeCreacion = LocalDate.now().minusDays(15),
+            ingredientes = mutableListOf(tomate, mozzarella, pepperoni)
+        )
+        spaghettiCarbonara = Plato(
+            nombre = "Spaghetti Carbonara",
+            descripcion = "Spaghetti with creamy sauce, bacon, and parmesan cheese",
+            valorBase = 14.99,
+            urldeImagen = "https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480_1_5x/img/recipe/ras/Assets/0346a29a89ef229b1a0ff9697184f944/Derivates/cb5051204f4a4525c8b013c16418ae2904e737b7.jpg",
+            local = restauranteItaliano,
+            fechaDeCreacion = LocalDate.now().minusDays(10),
+            ingredientes = mutableListOf(pasta, bacon, crema, parmesano)
+        )
+        fettuccineAlfredo = Plato(
+            nombre = "Fettuccine Alfredo",
+            descripcion = "Fettuccine with creamy Alfredo sauce",
+            valorBase = 13.99,
+            urldeImagen = "https://www.modernhoney.com/wp-content/uploads/2018/08/Fettuccine-Alfredo-Recipe-1-500x500.jpg",
+            local = restauranteItaliano,
+            fechaDeCreacion = LocalDate.now().minusDays(12),
+            ingredientes = mutableListOf(pasta, crema, parmesano)
+        )
+        lasagnePortofino = Plato(
+            nombre = "Lasagne alla Portofino",
+            descripcion = "Lasagne with creamy besciamella and pesto genovese",
+            valorBase = 16.99,
+            urldeImagen = "https://images.squarespace-cdn.com/content/v1/62422bb659ddd37045237686/0006ed59-9ec5-4858-b544-efb56b56d49b/8fe074b8-c1a4-4654-b6a4-3db060e8284c_4030x3024.jpeg",
+            local = restauranteItaliano,
+            fechaDeCreacion = LocalDate.now().minusDays(8),
+            ingredientes = mutableListOf(pasta, crema, pesto, mozzarella)
+        )
+
         repositorioPlatos.apply {
             crear(hamburguesa)
             crear(pizza)
@@ -378,6 +487,11 @@ class ApplicationBootstrap(
             crear(spaghettis)
             crear(bigMac)
             crear(alitas)
+            crear(pizzaMargherita)
+            crear(pizzaPepperoni)
+            crear(spaghettiCarbonara)
+            crear(fettuccineAlfredo)
+            crear(lasagnePortofino)
         }
     }
 
@@ -388,14 +502,12 @@ class ApplicationBootstrap(
 //            ---
             crear(
                 usuario = sofiamiller,
-                local = mcdonals, // a pedido de catt ;)
+                local = mcdonals,
                 platos = mutableListOf(bigMac, ensalada, alitas),
                 medioDePago = Pago.QR,
                 estado = Estado.PENDIENTE,
                 fechaCreacion = LocalDate.of(2025, 10, 28)
             ) .apply {
-//                Esto se hace cuando se confirma el carrito o cuando el local lo prepara. El pedido pasa a CONFIRMADO y se registra como local a puntuar en el usuario.
-//                Una vez hecho eso vuela de aca.
                 this.estado = Estado.CONFIRMADO
                 sofiamiller.registrarLocalParaPuntuar(this)
             }
@@ -414,6 +526,13 @@ class ApplicationBootstrap(
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.PENDIENTE
             )
+            crear(
+                usuario = sofiamiller,
+                local = restauranteItaliano,
+                platos = mutableListOf(pizzaMargherita, spaghettiCarbonara),
+                medioDePago = Pago.QR,
+                estado = Estado.ENTREGADO
+            )
 //            ---
 //            Ricardo Fort
 //            ---
@@ -431,6 +550,13 @@ class ApplicationBootstrap(
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.ENTREGADO
             )
+            crear(
+                usuario = ricardofort,
+                local = restauranteItaliano,
+                platos = mutableListOf(fettuccineAlfredo, pizzaPepperoni),
+                medioDePago = Pago.EFECTIVO,
+                estado = Estado.PREPARADO
+            )
 //            ---
 //            Alex Caniggia
 //            ---
@@ -447,6 +573,13 @@ class ApplicationBootstrap(
                 platos = mutableListOf(pizza),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.PREPARADO
+            )
+            crear(
+                usuario = alexcaniggia,
+                local = restauranteItaliano,
+                platos = mutableListOf(lasagnePortofino),
+                medioDePago = Pago.QR,
+                estado = Estado.ENTREGADO
             )
 //            ---
 //            Buzz

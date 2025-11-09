@@ -28,7 +28,9 @@ open class Local(
     val inbox: MutableList<Mensaje> = mutableListOf()
 ) : ElementoDeRepositorio {
 
-    private val puntuaciones = mutableListOf<Int>()
+    var puntuaciones = mutableListOf<Int>()
+
+    fun cantidadDePuntuaciones() = puntuaciones.size
 
     fun mejorPuntuado() = this.promedioPuntuacion() in (4.0..5.0)
 

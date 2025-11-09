@@ -64,4 +64,24 @@ fun Local.toCardDTO(): LocalCardDTO {
     )
 }
 
+data class LocalDetailDTO(
+    val id: Int,
+    val name: String,
+    val imageURL: String,
+    val gradePointAvg: Double,
+    val numberOfReviews: Int,
+    var numberOfOrders: Int,
+)
+
+fun Local.toDetailDTO(): LocalDetailDTO {
+    return LocalDetailDTO(
+        id = this.id,
+        name = this.nombre,
+        imageURL = this.url,
+        gradePointAvg = this.promedioPuntuacion().redondear(1),
+        numberOfReviews = this.cantidadDePuntuaciones(),
+        numberOfOrders = 2,
+    )
+}
+
 
