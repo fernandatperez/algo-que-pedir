@@ -36,16 +36,15 @@ class LocalService(
 
     fun getByIDReact(id: Int): LocalDetailDTO {
         val local = repositorioLocal.obtenerObjeto(id)
-        val pedidosDeLocal = repositorioPedidos.getAllOrdersOfLocal(local)
-        val AmountOfOrders = pedidosDeLocal.size
+            ?: throw NotFoundException("No se encontró el local con id <$id>")
 
-        val DTO = repositorioLocal.obtenerObjeto(id)?.toDetailDTO() ?: throw NotFoundException("No se encontró el ingrediente de id <$id>")
+        val pedidosDelLocal = repositorioPedidos.getAllOrdersOfLocal(local)
+        val cantidadPedidos = pedidosDelLocal.size
 
-        DTO.numberOfOrders = AmountOfOrders
-
-        return DTO
+        return local.toDetailDTO().apply {
+            numberOfOrders = cantidadPedidos
+        }
     }
-
 
     fun getAll(): List<Local> =
         repositorioLocal.objetosDeRepositorio()
