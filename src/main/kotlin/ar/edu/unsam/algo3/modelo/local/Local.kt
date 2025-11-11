@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.modelo.utils.diasHastaAhora
 import ar.edu.unsam.algo3.errores.SobrepasoPuntuacion
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.modelo.utils.Mensaje
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
@@ -29,6 +30,7 @@ open class Local(
 ) : ElementoDeRepositorio {
 
     var puntuaciones = mutableListOf<Int>()
+    var comentarios = mutableListOf<String>()
 
     fun cantidadDePuntuaciones() = puntuaciones.size
 
@@ -42,13 +44,16 @@ open class Local(
         regalias = regalia
     }
 
-    fun agregarPuntuacion(puntuacion: Int) {
-        if (puntuacion in (1..5)) {
-            puntuaciones.add(puntuacion)
+    fun agregarPuntuacion(calificacion: Calificacion) {
+        if (puntajeEntre1y5(calificacion.puntaje)) {
+            puntuaciones.add(calificacion.puntaje)
+            comentarios.add(calificacion.descripcion)
         } else {
             throw SobrepasoPuntuacion("La puntuación debe estar entre 1 y 5")
         }
     }
+
+    fun puntajeEntre1y5(puntaje: Int) = puntaje in (1..5)
 
     fun promedioPuntuacion(): Double {
         return if (puntuaciones.isNotEmpty()) puntuaciones.average() else 0.0
