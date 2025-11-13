@@ -64,7 +64,7 @@ class RepositorioPedido {
         if (pedido != null) {
             return pedido
         }
-        throw throw NotFoundException("No existe el id $id en repositorio para obtenerlo de la coleccion")
+        throw NotFoundException("No existe el id $id en repositorio para obtenerlo de la coleccion")
     }
 
     fun update(pedido: Pedido): Pedido {

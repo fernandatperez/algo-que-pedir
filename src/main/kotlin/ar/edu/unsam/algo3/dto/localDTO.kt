@@ -12,18 +12,18 @@ data class SearchRequest(
 
 data class LocalDTO(
     val id: Int? = null,
-    val name: String,
+    val name: String = "",
     val email: String? = null,
-    val storeURL: String,
-    val storeAddress: String,
-    val storeAltitude: Int,
-    val storeLatitude: Double,
-    val storeLongitude: Double,
-    val storeAppCommission: Double,
-    val storeAuthorCommission: Double,
-    val storePaymentEfectivo: Boolean,
-    val storePaymentQR: Boolean,
-    val storePaymentTransferencia: Boolean
+    val storeURL: String = "",
+    val storeAddress: String = "",
+    val storeAltitude: Int = 123,
+    val storeLatitude: Double = 0.0,
+    val storeLongitude: Double = 0.0,
+    val storeAppCommission: Double = 0.0,
+    val storeAuthorCommission: Double  = 0.0,
+    val storePaymentEfectivo: Boolean = true,
+    val storePaymentQR: Boolean = true,
+    val storePaymentTransferencia: Boolean  = true,
 )
 
 fun Local.toDTO(): LocalDTO {

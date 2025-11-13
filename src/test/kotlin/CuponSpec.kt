@@ -6,6 +6,7 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.spec.IsolationMode.*
@@ -57,7 +58,7 @@ class CuponSpec : DescribeSpec({
             localPedidoConCupon.agregarMedioDePago(Pago.EFECTIVO)
             cuponDescuentoPorLocal.locales.add(localPedidoConCupon)
             //assert
-            localPedidoConCupon.agregarPuntuacion(5)
+            localPedidoConCupon.agregarPuntuacion(Calificacion(5, "ok"))
             pedidoConCupon.esCertificado() shouldBe true
             cuponDescuentoPorLocal.esAplicable(pedidoConCupon) shouldBe true
             pedidoConCupon.cupon = cuponDescuentoPorLocal

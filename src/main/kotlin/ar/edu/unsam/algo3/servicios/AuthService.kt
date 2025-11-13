@@ -74,7 +74,7 @@ class AuthService (
             // se van a cambiar en el perfil de usuario
             respositorioClientes.crear(usuario)
         } else {
-            throw RuntimeException("Email incorrecto")
+            throw BusinessException("Email incorrecto")
 //            throw RuntimeException("Ya existe un usuario con ese email")
         }
     }

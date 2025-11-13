@@ -11,6 +11,7 @@ import ar.edu.unsam.algo3.modelo.delivery.DeliverySeguro
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
@@ -115,7 +116,7 @@ class DeliverySpec : DescribeSpec({
             // Arrange
             val deliveryCertificado = Delivery(zonaDeTrabajo = zonaDelivery, tipo = DeliveryCertificado)
 
-            localEnZona.agregarPuntuacion(5) // Promedio de puntuacion debe estar entre 4 y 5
+            localEnZona.agregarPuntuacion(Calificacion(5,"")) // Promedio de puntuacion debe estar entre 4 y 5
 
             // Assert
             deliveryCertificado.puedeEntregar(pedidoPreparado) shouldBe true
@@ -156,7 +157,7 @@ class DeliverySpec : DescribeSpec({
             val deliveryLocalesYCertificado = Delivery(zonaDeTrabajo = zonaDelivery, tipo = tipoCombinadoAnd)
             // Act
             tipoDeliveryLocal.agregarLocalPreferido(local = localEnZona)
-            localEnZona.agregarPuntuacion(5) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
+            localEnZona.agregarPuntuacion(Calificacion(5,"")) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
 
             // Assert
             deliveryLocalesYCertificado.puedeEntregar(pedidoPreparado) shouldBe true
@@ -189,7 +190,7 @@ class DeliverySpec : DescribeSpec({
             platoCaro.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente()) // debe tener al menos 1 ingrediente
             pedidoCaro.agregarPlato(platoCaro)
             tipoDeliveryLocal.agregarLocalPreferido(local = localEnZona)
-            localEnZona.agregarPuntuacion(5) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
+            localEnZona.agregarPuntuacion(Calificacion(5,"")) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
 
             // Assert
             delivery.puedeEntregar(pedidoCaro) shouldBe true
@@ -301,7 +302,7 @@ class DeliverySpec : DescribeSpec({
         it("Un Delivery Certificado no puede entregar un pedido No Certificado") {
             // Arrange
             val deliveryCertificado = Delivery(zonaDeTrabajo = zonaDelivery, tipo = DeliveryCertificado)
-            localEnZona.agregarPuntuacion(3) // Promedio de puntuacion debe estar entre 4 y 5
+            localEnZona.agregarPuntuacion(Calificacion(3,"")) // Promedio de puntuacion debe estar entre 4 y 5
 
             // Assert
             deliveryCertificado.puedeEntregar(pedidoEnZona) shouldBe false
@@ -340,7 +341,7 @@ class DeliverySpec : DescribeSpec({
 
             // Act
             tipoDeliveryLocal.agregarLocalPreferido(local = localPreferido)
-            localEnZona.agregarPuntuacion(5) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
+            localEnZona.agregarPuntuacion(Calificacion(5,"")) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
 
             // Assert
             deliveryLocalesYCertificado.puedeEntregar(pedidoEnZona) shouldBe false
@@ -371,7 +372,7 @@ class DeliverySpec : DescribeSpec({
             platoBarato.agregarIngrediente(ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente()) // debe tener al menos 1 ingrediente
             pedidoEnZona.agregarPlato(platoBarato)
             tipoDeliveryLocal.agregarLocalPreferido(local = localPreferido)
-            localEnZona.agregarPuntuacion(5) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
+            localEnZona.agregarPuntuacion(Calificacion(5,"")) // Certificado: Promedio de puntuacion debe estar entre 4 y 5
 
             // Assert
             delivery.puedeEntregar(pedidoEnZona) shouldBe false

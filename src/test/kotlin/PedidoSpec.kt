@@ -4,6 +4,7 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.spec.IsolationMode.*
@@ -20,7 +21,7 @@ class PedidoSpec : DescribeSpec({
             val usuarioCertificado = Usuario()
             val pedidoCertificado = Pedido(usuario = usuarioCertificado, local = localCertificado)
             // Act
-            localCertificado.agregarPuntuacion(5)
+            localCertificado.agregarPuntuacion(Calificacion(5,""))
             usuarioCertificado.tiempoRegistrado()
 
 
@@ -35,7 +36,7 @@ class PedidoSpec : DescribeSpec({
             val usuarioNoCertificado = Usuario(fechaDeRegistro = LocalDate.of(2025, 1, 1))
             val pedidoNoCertificado = Pedido(usuario = usuarioNoCertificado, local = localNoCertificado)
             // Act
-            val usuarioCertificadoAgregaPuntuacion = localNoCertificado.agregarPuntuacion(5)
+            val usuarioCertificadoAgregaPuntuacion = localNoCertificado.agregarPuntuacion(Calificacion(5,""))
             val antiguedadEnLaApp = usuarioNoCertificado.tiempoRegistrado()
 
             // Assert
