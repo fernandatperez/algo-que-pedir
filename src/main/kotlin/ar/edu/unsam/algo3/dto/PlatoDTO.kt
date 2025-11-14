@@ -10,7 +10,8 @@ data class PlatoMenuDTO(
     val nombre: String,
     val descripcion: String,
     val precio: Double,
-    val imagen: String
+    val imagen: String,
+    val local: String,
 )
 
 // Esto seria edicion de plato. Falta armar el return de plato
