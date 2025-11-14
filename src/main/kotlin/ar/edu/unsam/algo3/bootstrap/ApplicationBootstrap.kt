@@ -6,6 +6,7 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.*
@@ -144,7 +145,16 @@ class ApplicationBootstrap(
                     altura = 2500,
                     ubicacion = Point(-34.59823, -58.39451)
                 )
-                puntuaciones = mutableListOf(4,5,4,5,5,4,3,5,4)
+                calificaciones = mutableListOf(
+                    Calificacion(5, "Ahreeee, este local es posta genial, no lo puedo creer, realmente maravillado"),
+                    Calificacion(4, "Bastante bueno"),
+                    Calificacion(5, "Una locura"),
+                    Calificacion(5, "Que delicia!"),
+                    Calificacion(4, "Rico"),
+                    Calificacion(3, "Medio pelo"),
+                    Calificacion(5, "Un espectaculo de sabores"),
+                    Calificacion(4, "Realmente bueno, volveria"),
+                    Calificacion(3, "Que se yo me obligo Google Maps"))
             }
 
             repositorioLocal.crear(localInicial)

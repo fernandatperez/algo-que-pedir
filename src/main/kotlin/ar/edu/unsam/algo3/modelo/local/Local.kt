@@ -29,10 +29,9 @@ open class Local(
     val inbox: MutableList<Mensaje> = mutableListOf()
 ) : ElementoDeRepositorio {
 
-    var puntuaciones = mutableListOf<Int>()
-    var comentarios = mutableListOf<String>()
+    var calificaciones = mutableListOf<Calificacion>()
 
-    fun cantidadDePuntuaciones() = puntuaciones.size
+    fun cantidadDePuntuaciones() = calificaciones.size
 
     fun mejorPuntuado() = this.promedioPuntuacion() in (4.0..5.0)
 
@@ -46,8 +45,9 @@ open class Local(
 
     fun agregarPuntuacion(calificacion: Calificacion) {
         if (puntajeEntre1y5(calificacion.puntaje)) {
-            puntuaciones.add(calificacion.puntaje)
-            comentarios.add(calificacion.descripcion)
+            calificaciones.add(calificacion)
+//            puntuaciones.add(calificacion.puntaje)
+//            comentarios.add(calificacion.descripcion)
         } else {
             throw SobrepasoPuntuacion("La puntuación debe estar entre 1 y 5")
         }
@@ -55,8 +55,14 @@ open class Local(
 
     fun puntajeEntre1y5(puntaje: Int) = puntaje in (1..5)
 
+    fun obtenerCalificaciones(): List<Calificacion> = this.calificaciones
+
+    fun obtenerComentarios(): List<String> = this.calificaciones.map { it.comentario }
+
+    fun obtenerPuntuaciones(): List<Int> = this.calificaciones.map { it.puntaje }
+
     fun promedioPuntuacion(): Double {
-        return if (puntuaciones.isNotEmpty()) puntuaciones.average() else 0.0
+        return if (calificaciones.isNotEmpty()) calificaciones.map{ it.puntaje }.average() else 0.0
     }
 
 //    Esto como hago para que no este hardcodeado? No tenemos una lista de pedidos realizados ni en cuanto

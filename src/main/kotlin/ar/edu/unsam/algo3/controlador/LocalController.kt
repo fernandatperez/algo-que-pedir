@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.controlador
 
+import ar.edu.unsam.algo3.dto.CalificacionDTO
 import ar.edu.unsam.algo3.dto.LocalCardDTO
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.LocalDTO
@@ -49,6 +50,11 @@ class LocalController(
         //ya que local originalmente no tiene mail
         val localDTOConEmail = localDTO.copy(email = mail)
         localService.update(localDTOConEmail)
+    }
+
+    @GetMapping("/store-reviews/{id}")
+    fun getRatings(@PathVariable id: Int): List<CalificacionDTO> {
+        return localService.getStoreRatingsByID(id)
     }
 }
 

@@ -1,5 +1,7 @@
 package ar.edu.unsam.algo3.servicios
 
+import ar.edu.unsam.algo3.dto.CalificacionDTO
+import ar.edu.unsam.algo3.dto.CalificacionLocalDTO
 import ar.edu.unsam.algo3.dto.LocalCardDTO
 import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
@@ -16,6 +18,7 @@ import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.repositorio.RepositorioPedido
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 
@@ -66,11 +69,15 @@ class LocalService(
         return resultados
     }
 
+    fun getStoreRatingsByID(id: Int): List<CalificacionDTO> {
+        val local = repositorioLocal.obtenerObjeto(id)
+        val reviews: List<Calificacion> = local.obtenerCalificaciones()
+        return reviews.map { it.toDTO() }
+    }
+
     fun update(localDTO: LocalDTO) {
         val email = localDTO.email ?: throw BusinessException("Debe estar logueado para realizar cambios en el perfil")
         val localExistente = repositorioLocal.findByEmail(email)
-
-
 
     // Actualizar
     localExistente.apply {
