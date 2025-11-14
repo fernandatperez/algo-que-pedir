@@ -84,10 +84,4 @@ fun Local.toDetailDTO(): LocalDetailDTO {
     )
 }
 
-data class CalificacionLocalDTO (
-    val id: Int,
-    val rate: Int,
-    val text: String
-)
-
 

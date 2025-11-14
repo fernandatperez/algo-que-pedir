@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.servicios;
 
-import ar.edu.unsam.algo3.dto.CalificacionLocalDTO
+import ar.edu.unsam.algo3.dto.CalificacionDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.NotFoundException
@@ -30,19 +30,12 @@ class ClienteService(
         return 1
     }
 
-    fun puntuarLocal(clienteID: Int, localID: Int, calificacionDTO: CalificacionLocalDTO) {
+    fun puntuarLocal(clienteID: Int, localID: Int, calificacionDTO: CalificacionDTO) {
         val usuario: Usuario = repositorioClientes.obtenerObjeto(clienteID)
         val local = repositorioLocales.obtenerObjeto(localID)
-//        println(usuario.obtenerLocalesAPuntuar())
-//        println(local.promedioPuntuacion())
-//        println(local.comentarios)
-//        println(calificacionDTO.rate)
-//        println(calificacionDTO.text)
+
         val calificacion = Calificacion.fromDTO(calificacionDTO)
         usuario.puntuarLocal(local, calificacion)
-//        println(usuario.obtenerLocalesAPuntuar())
-//        println(local.promedioPuntuacion())
-//        println(local.comentarios)
     }
 
     fun obtenerIngredientesPorCriterio(id: Int, criterio: String): Set<IngredienteDTO> {

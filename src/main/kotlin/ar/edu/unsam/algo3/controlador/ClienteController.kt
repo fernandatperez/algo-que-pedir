@@ -1,6 +1,6 @@
 package ar.edu.unsam.algo3.controlador
 
-import ar.edu.unsam.algo3.dto.CalificacionLocalDTO
+import ar.edu.unsam.algo3.dto.CalificacionDTO
 import ar.edu.unsam.algo3.dto.ClientePerfilDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.LocalCardDTO
@@ -41,7 +41,7 @@ class ClienteController( val clienteService: ClienteService ) {
     }
 
     @PostMapping("/puntuar-local")
-    fun postStoreRate(@RequestParam localId: Int, @RequestParam userId: Int, @RequestBody calificacionDTO: CalificacionLocalDTO) {
+    fun postStoreRate(@RequestParam localId: Int, @RequestParam userId: Int, @RequestBody calificacionDTO: CalificacionDTO) {
         clienteService.puntuarLocal(userId, localId, calificacionDTO)
     }
 

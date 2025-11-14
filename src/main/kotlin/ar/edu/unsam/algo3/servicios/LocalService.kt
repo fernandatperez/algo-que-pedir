@@ -1,7 +1,6 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.dto.CalificacionDTO
-import ar.edu.unsam.algo3.dto.CalificacionLocalDTO
 import ar.edu.unsam.algo3.dto.LocalCardDTO
 import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal

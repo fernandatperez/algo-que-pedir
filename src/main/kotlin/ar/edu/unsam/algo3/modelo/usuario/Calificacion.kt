@@ -1,7 +1,6 @@
 package ar.edu.unsam.algo3.modelo.usuario
 
 import ar.edu.unsam.algo3.dto.CalificacionDTO
-import ar.edu.unsam.algo3.dto.CalificacionLocalDTO
 
 class Calificacion(
     val puntaje: Int,
@@ -9,10 +8,10 @@ class Calificacion(
 ) {
 
     companion object {
-        fun fromDTO(calificacionDTO: CalificacionLocalDTO): Calificacion {
+        fun fromDTO(calificacionDTO: CalificacionDTO): Calificacion {
             return Calificacion(
-                puntaje = calificacionDTO.rate,
-                comentario = calificacionDTO.text
+                puntaje = calificacionDTO.puntaje,
+                comentario = calificacionDTO.comentario
             )
         }
     }
