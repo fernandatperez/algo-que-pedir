@@ -52,7 +52,8 @@ fun Plato.toPlatoMenuDTO(): PlatoMenuDTO {
         nombre = this.nombre,
         descripcion = this.descripcion,
         precio = this.valorVenta(),
-        imagen = this.urldeImagen
+        imagen = this.urldeImagen,
+        local = this.local.nombre
     )
 }
 // Necesito que reciba la lista de ingredientes ya resuelta
