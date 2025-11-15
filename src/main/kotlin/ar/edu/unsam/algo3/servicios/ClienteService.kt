@@ -33,9 +33,10 @@ class ClienteService(
     fun puntuarLocal(clienteID: Int, localID: Int, calificacionDTO: CalificacionDTO) {
         val usuario: Usuario = repositorioClientes.obtenerObjeto(clienteID)
         val local = repositorioLocales.obtenerObjeto(localID)
-
+//        println(local.promedioPuntuacion())
         val calificacion = Calificacion.fromDTO(calificacionDTO)
         usuario.puntuarLocal(local, calificacion)
+//        println(local.promedioPuntuacion())
     }
 
     fun obtenerIngredientesPorCriterio(id: Int, criterio: String): Set<IngredienteDTO> {

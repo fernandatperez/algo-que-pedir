@@ -10,8 +10,8 @@ class Calificacion(
     companion object {
         fun fromDTO(calificacionDTO: CalificacionDTO): Calificacion {
             return Calificacion(
-                puntaje = calificacionDTO.puntaje,
-                comentario = calificacionDTO.comentario
+                puntaje = calificacionDTO.rate,
+                comentario = calificacionDTO.experienceDesc
             )
         }
     }
