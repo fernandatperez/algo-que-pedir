@@ -1,18 +1,23 @@
 package ar.edu.unsam.algo3.servicios;
 
+import ar.edu.unsam.algo3.dto.CalificacionDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.repositorio.RepositorioCliente
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
+import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import org.springframework.stereotype.Service;
 
 @Service
 class ClienteService(
     val repositorioClientes: RepositorioCliente,
-    val repositorioIngredientes: RepositorioIngrediente
+    val repositorioIngredientes: RepositorioIngrediente,
+    val repositorioLocales: RepositorioLocal
 ) {
 
     fun obtenerLocalesPuntuables(id: Int): MutableSet<Local> {
@@ -23,6 +28,15 @@ class ClienteService(
 
     fun confirmarPedido(clienteID: Int, pedidoID: Int): Int {
         return 1
+    }
+
+    fun puntuarLocal(clienteID: Int, localID: Int, calificacionDTO: CalificacionDTO) {
+        val usuario: Usuario = repositorioClientes.obtenerObjeto(clienteID)
+        val local = repositorioLocales.obtenerObjeto(localID)
+//        println(local.promedioPuntuacion())
+        val calificacion = Calificacion.fromDTO(calificacionDTO)
+        usuario.puntuarLocal(local, calificacion)
+//        println(local.promedioPuntuacion())
     }
 
     fun obtenerIngredientesPorCriterio(id: Int, criterio: String): Set<IngredienteDTO> {

@@ -29,6 +29,10 @@ class RepositorioPedido {
 
     fun filteredUserInstances(estado: Estado, email: String): List<Pedido> = allInstances().filter { it.estado == estado && it.usuario.mailPrincipal == email }
 
+    fun getAllOrdersOfLocal(local: Local): List<Pedido> {
+        return allInstances().filter { it.local.email == local.email }
+    }
+
     fun crear(
         usuario: Usuario,
         local: Local,
@@ -60,7 +64,7 @@ class RepositorioPedido {
         if (pedido != null) {
             return pedido
         }
-        throw throw NotFoundException("No existe el id $id en repositorio para obtenerlo de la coleccion")
+        throw NotFoundException("No existe el id $id en repositorio para obtenerlo de la coleccion")
     }
 
     fun update(pedido: Pedido): Pedido {

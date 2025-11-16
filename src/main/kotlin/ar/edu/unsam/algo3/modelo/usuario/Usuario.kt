@@ -86,11 +86,11 @@ class Usuario(
         }
     }
 
-    fun puntuarLocal(local: Local, puntaje: Int) {
+    fun puntuarLocal(local: Local, calificacion: Calificacion) {
         if (!sePuedePuntuarLocal(local)) {
-            throw RuntimeException("No se puede puntuar el local")
+            throw RuntimeException("No se puede puntuar el local. O bien el usuario no tiene derecho a puntuarlo, o el tiempo para calificar paso.")
         }
-        local.agregarPuntuacion(puntaje)
+        local.agregarPuntuacion(calificacion)
         localesAPuntuar.remove(local)
     }
 

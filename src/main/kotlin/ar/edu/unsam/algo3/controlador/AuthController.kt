@@ -53,7 +53,7 @@ class AuthController( val authService: AuthService ) {
         )
     }
 
-    @PostMapping("/userLogin") // esto no devuelve nada
+    @PostMapping("/userLogin")
     fun getUserCliente(@RequestBody request: AuthRequest): AuthResponse {
         // .fromDTO()
         val userAValidar = Usuario(

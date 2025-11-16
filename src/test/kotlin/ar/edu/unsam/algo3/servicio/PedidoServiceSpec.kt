@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.servicio
 
+import ar.edu.unsam.algo3.dto.LocalDTO
 import ar.edu.unsam.algo3.dto.PedidoDTO
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.local.Pago
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-
+import java.time.LocalDate
 
 
 @SpringBootTest
@@ -123,6 +124,8 @@ class PedidoServiceSpec {
             lat = "10.0",
             metodoDePago = Pago.QR,
             horarioEntrega = "TARDE",
+            fechaCreacion = LocalDate.now().minusDays(31),
+            local = LocalDTO()
         )
 
 

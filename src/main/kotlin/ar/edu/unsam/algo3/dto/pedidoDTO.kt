@@ -47,3 +47,16 @@ fun Pedido.toDTO(): PedidoDTO {
     }
     return pedidoDTO
 }
+
+// ver como cambiar esto para que sea mejor?
+data class OrderDTO (
+    val userID: Int,
+    val localID: Int,
+    val platosIDs: MutableList<Int>,
+    val medioDePago: String,
+    val estado: String,
+)
+
+//fun Pedido.fromOrderDTO(order : OrderDTO): PedidoDTO {
+//    return
+//}

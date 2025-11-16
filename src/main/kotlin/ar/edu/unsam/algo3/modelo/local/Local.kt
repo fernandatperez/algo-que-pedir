@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.modelo.utils.diasHastaAhora
 import ar.edu.unsam.algo3.errores.SobrepasoPuntuacion
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.modelo.utils.Mensaje
 import ar.edu.unsam.algo3.repositorio.ElementoDeRepositorio
@@ -28,7 +29,9 @@ open class Local(
     val inbox: MutableList<Mensaje> = mutableListOf()
 ) : ElementoDeRepositorio {
 
-    private val puntuaciones = mutableListOf<Int>()
+    var calificaciones = mutableListOf<Calificacion>()
+
+    fun cantidadDePuntuaciones() = calificaciones.size
 
     fun mejorPuntuado() = this.promedioPuntuacion() in (4.0..5.0)
 
@@ -40,16 +43,26 @@ open class Local(
         regalias = regalia
     }
 
-    fun agregarPuntuacion(puntuacion: Int) {
-        if (puntuacion in (1..5)) {
-            puntuaciones.add(puntuacion)
+    fun agregarPuntuacion(calificacion: Calificacion) {
+        if (puntajeEntre1y5(calificacion.puntaje)) {
+            calificaciones.add(calificacion)
+//            puntuaciones.add(calificacion.puntaje)
+//            comentarios.add(calificacion.descripcion)
         } else {
             throw SobrepasoPuntuacion("La puntuación debe estar entre 1 y 5")
         }
     }
 
+    fun puntajeEntre1y5(puntaje: Int) = puntaje in (1..5)
+
+    fun obtenerCalificaciones(): List<Calificacion> = this.calificaciones
+
+    fun obtenerComentarios(): List<String> = this.calificaciones.map { it.comentario }
+
+    fun obtenerPuntuaciones(): List<Int> = this.calificaciones.map { it.puntaje }
+
     fun promedioPuntuacion(): Double {
-        return if (puntuaciones.isNotEmpty()) puntuaciones.average() else 0.0
+        return if (calificaciones.isNotEmpty()) calificaciones.map{ it.puntaje }.average() else 0.0
     }
 
 //    Esto como hago para que no este hardcodeado? No tenemos una lista de pedidos realizados ni en cuanto
