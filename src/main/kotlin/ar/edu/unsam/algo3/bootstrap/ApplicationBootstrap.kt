@@ -701,7 +701,7 @@ class ApplicationBootstrap(
                 local = grido,
                 platos = mutableListOf(heladoVainilla, heladoChocolate),
                 medioDePago = Pago.EFECTIVO,
-                estado = Estado.PREPARADO
+                estado = Estado.PENDIENTE
             )
             crear(
                 usuario = sofiamiller,

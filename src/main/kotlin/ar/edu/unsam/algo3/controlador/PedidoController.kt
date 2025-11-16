@@ -37,4 +37,9 @@ class PedidoController(val pedidosService: PedidoService) {
     fun createOrder(@RequestBody order: OrderDTO) {
         pedidosService.createOrder(order)
     }
+
+    @PostMapping("/debug-pedidos")
+    fun debugPedidos(): List<Pedido> {
+        return pedidosService.repositorioPedidos.allInstances()
+    }
 }
