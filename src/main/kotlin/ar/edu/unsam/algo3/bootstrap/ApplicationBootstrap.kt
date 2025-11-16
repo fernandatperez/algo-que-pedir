@@ -718,7 +718,7 @@ class ApplicationBootstrap(
                 local = sushipop,
                 platos = mutableListOf(sushiRoll, sashimi),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
-                estado = Estado.PREPARADO
+                estado = Estado.PREPARADO // este no se muestra en react
             )
 //            ---
 //            Ricardo Fort
