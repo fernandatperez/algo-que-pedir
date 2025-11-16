@@ -71,6 +71,7 @@ data class LocalDetailDTO(
     val gradePointAvg: Double,
     val numberOfReviews: Int,
     var numberOfOrders: Int,
+    val mediosDePago: Set<String>
 )
 
 fun Local.toDetailDTO(): LocalDetailDTO {
@@ -80,7 +81,8 @@ fun Local.toDetailDTO(): LocalDetailDTO {
         imageURL = this.url,
         gradePointAvg = this.promedioPuntuacion().redondear(1),
         numberOfReviews = this.cantidadDePuntuaciones(),
-        numberOfOrders = 2,
+        numberOfOrders = 0, // se asigna despues en getByIDReact
+        mediosDePago = this.mediosDePago.map { it.name }.toSet()
     )
 }
 
