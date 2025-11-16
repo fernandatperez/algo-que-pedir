@@ -11,11 +11,14 @@ import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
+import ar.edu.unsam.algo3.repositorio.RepositorioCliente
 
 
 @Service
 class LocalService(
-    private val repositorioLocal: RepositorioLocal  // ← Inyecta el repositorio específico
+    private val repositorioLocal: RepositorioLocal,
+    private val repositorioUsuario: RepositorioCliente
 ) {
     //aca cambio para que el local que traiga sea el unico que matchee con el mail logueado
     fun get(mail: String): LocalDTO {
@@ -38,13 +41,23 @@ class LocalService(
 //        }
 //    }
 
-    fun getBySearch(searchName: String?): List<Local> {
+    fun getBySearch(searchName: String?, userId: Int = 0): List<LocalDTO> {
         val resultados = if (searchName.isNullOrBlank()) {
             repositorioLocal.objetosDeRepositorio()
         } else {
             repositorioLocal.buscar(searchName)
         }
-        return resultados
+
+        if (userId != 0) {
+            val usuarioLogueado = repositorioUsuario.obtenerObjeto(userId)
+
+            return resultados.map { local ->
+                val esCercano = usuarioLogueado.esCercano(local)
+                local.toDTO(usuarioCercano = esCercano)
+            }
+        }
+
+        return resultados.map { it.toDTO() }
     }
 
     fun update(localDTO: LocalDTO) {

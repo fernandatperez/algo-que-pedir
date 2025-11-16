@@ -5,7 +5,8 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.utils.redondear
 
 data class SearchRequest(
-    val searchName: String? = null
+    val searchName: String? = null,
+    val userId: String? = null,
 ) {
     constructor() : this(null)
 }
@@ -23,10 +24,11 @@ data class LocalDTO(
     val storeAuthorCommission: Double,
     val storePaymentEfectivo: Boolean,
     val storePaymentQR: Boolean,
-    val storePaymentTransferencia: Boolean
+    val storePaymentTransferencia: Boolean,
+    val usuarioCercano: Boolean = false,
 )
 
-fun Local.toDTO(): LocalDTO {
+fun Local.toDTO(usuarioCercano: Boolean = false): LocalDTO {
     return LocalDTO(
         id = this.id,
         name = this.nombre,
@@ -40,7 +42,8 @@ fun Local.toDTO(): LocalDTO {
         storeAuthorCommission = this.porcentajeAcordado,
         storePaymentEfectivo = this.mediosDePago.contains(Pago.EFECTIVO),
         storePaymentQR = this.mediosDePago.contains(Pago.QR),
-        storePaymentTransferencia = this.mediosDePago.contains(Pago.TRANSFERENCIA_BANCARIA)
+        storePaymentTransferencia = this.mediosDePago.contains(Pago.TRANSFERENCIA_BANCARIA),
+        usuarioCercano = usuarioCercano
     )
 }
 

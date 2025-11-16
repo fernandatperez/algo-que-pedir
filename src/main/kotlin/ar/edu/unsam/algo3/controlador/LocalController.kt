@@ -29,9 +29,12 @@ class LocalController(
 
     @PostMapping("/store-profiles")
     fun getStores(@RequestBody searchRequest: SearchRequest): List<LocalDTO> {
-        val resultados = localService.getBySearch(searchRequest.searchName)
-        return resultados.map { it.toDTO() }
+        val userId = searchRequest.userId?.toIntOrNull() ?: 0
+        val resultados = localService.getBySearch(searchRequest.searchName, userId)
+        return resultados
     }
+
+
 
     @PutMapping("/store-profile")
     fun update(
