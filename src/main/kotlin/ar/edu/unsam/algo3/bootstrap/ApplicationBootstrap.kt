@@ -111,9 +111,9 @@ class ApplicationBootstrap(
                 porcentajeAcordado = 0.9
                 mediosDePago = mutableSetOf(Pago.QR, Pago.EFECTIVO)
                 direccion = Direccion(
-                    calle = "Ayacucho",
+                    calle = "Av. Corrientes",
                     altura = 3454,
-                    ubicacion = Point(-34.558853, -58.548947)
+                    ubicacion = Point(-34.6035, -58.4115)  // lo cambio para que tambien sea cercano
                 )
                 calificaciones = mutableListOf(
                     Calificacion(4, "Buenos helados a buen precio"),
@@ -301,9 +301,9 @@ class ApplicationBootstrap(
             mailPrincipal = "woodyteamo@gmail.com",
             password = "123",
             direccion = Direccion(
-                calle = "Morph",
-                altura = 256,
-                ubicacion = Point(41.89193,12.51133)
+                calle = "Av. Corrientes",
+                altura = 3400,
+                ubicacion = Point(-34.6032, -58.4110)  //le cambio la ubi para que este cerca del mc
             ),
         )
         locomotora = Usuario(
