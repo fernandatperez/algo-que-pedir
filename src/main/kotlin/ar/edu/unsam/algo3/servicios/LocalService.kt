@@ -1,26 +1,20 @@
 package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.dto.CalificacionDTO
-import ar.edu.unsam.algo3.dto.LocalCardDTO
 import org.springframework.stereotype.Service
 import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.dto.LocalDTO
-import ar.edu.unsam.algo3.dto.LocalDetailDTO
-import ar.edu.unsam.algo3.dto.toCardDTO
+import ar.edu.unsam.algo3.dto.LocalDomDTO
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.dto.toDTO
-import ar.edu.unsam.algo3.dto.toDetailDTO
+import ar.edu.unsam.algo3.dto.toLocalDomDTO
 import org.uqbar.geodds.Point
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.NotFoundException
-import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
-import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.repositorio.RepositorioPedido
-import ar.edu.unsam.algo3.repositorio.RepositorioPlato
-
 
 @Service
 class LocalService(
@@ -36,14 +30,12 @@ class LocalService(
     fun getByID(id: Int): LocalDTO =
         repositorioLocal.obtenerObjeto(id)?.toDTO() ?: throw NotFoundException("No se encontró el ingrediente de id <$id>")
 
-    fun getByIDReact(id: Int): LocalDetailDTO {
+    fun getByIDReact(id: Int): LocalDomDTO {
         val local = repositorioLocal.obtenerObjeto(id)
-            ?: throw NotFoundException("No se encontró el local con id <$id>")
-
         val pedidosDelLocal = repositorioPedidos.getAllOrdersOfLocal(local)
         val cantidadPedidos = pedidosDelLocal.size
-
-        return local.toDetailDTO().apply {
+        
+        return local.toLocalDomDTO().apply {
             numberOfOrders = cantidadPedidos
         }
     }

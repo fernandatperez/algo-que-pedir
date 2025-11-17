@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.dto
 
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.local.Local
+import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.modelo.utils.redondear
 
 data class SearchRequest(
@@ -44,46 +45,26 @@ fun Local.toDTO(): LocalDTO {
     )
 }
 
-data class LocalCardDTO(
+data class LocalDomDTO(
     val id: Int,
     val name: String,
-    val imageURL: String,
-    val gradePointAvg: Double,
+    val storeURL: String,
     val deliveryTimeAvg: String,
-    val isExpensive: Boolean
-)
-
-fun Local.toCardDTO(): LocalCardDTO {
-    return LocalCardDTO(
-        id = this.id,
-        name = this.nombre,
-        imageURL = this.url,
-        gradePointAvg = this.promedioPuntuacion().redondear(1),
-        deliveryTimeAvg = this.promedioTiempoEntrega(),
-        isExpensive = this.esCostoso()
-    )
-}
-
-data class LocalDetailDTO(
-    val id: Int,
-    val name: String,
-    val imageURL: String,
-    val gradePointAvg: Double,
-    val numberOfReviews: Int,
+    val deliveryFee: Double,
     var numberOfOrders: Int,
-    val mediosDePago: Set<String>
+    val paymentTypes: Set<Pago>,
+    val reviews: List<CalificacionDTO>,
 )
 
-fun Local.toDetailDTO(): LocalDetailDTO {
-    return LocalDetailDTO(
+fun Local.toLocalDomDTO(): LocalDomDTO {
+    return LocalDomDTO(
         id = this.id,
         name = this.nombre,
-        imageURL = this.url,
-        gradePointAvg = this.promedioPuntuacion().redondear(1),
-        numberOfReviews = this.cantidadDePuntuaciones(),
-        numberOfOrders = 0, // se asigna despues en getByIDReact
-        mediosDePago = this.mediosDePago.map { it.name }.toSet()
+        storeURL = this.url,
+        deliveryTimeAvg = this.promedioTiempoEntrega(),
+        deliveryFee = this.deliveryFee,
+        numberOfOrders = 0, // Se asigna despues en el getByReact
+        paymentTypes = this.mediosDePago,
+        reviews = this.calificaciones.map { it.toDTO() }
     )
 }
-
-

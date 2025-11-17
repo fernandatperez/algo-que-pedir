@@ -26,7 +26,9 @@ open class Local(
     //esto lo agrego por que se pide en ALGO3
     var url: String = "",
     var mediosDePago: MutableSet<Pago> = mutableSetOf(Pago.EFECTIVO),
-    val inbox: MutableList<Mensaje> = mutableListOf()
+    val inbox: MutableList<Mensaje> = mutableListOf(),
+    var deliveryFee: Double = 0.0
+
 ) : ElementoDeRepositorio {
 
     var calificaciones = mutableListOf<Calificacion>()

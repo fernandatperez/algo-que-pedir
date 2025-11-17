@@ -75,8 +75,6 @@ class ApplicationBootstrap(
                     Calificacion(4, "Rápido y conveniente"),
                     Calificacion(3, "Está bien para salir del paso"),
                     Calificacion(4, "Las hamburguesas son buenas"),
-                    Calificacion(5, "Excelente atención"),
-                    Calificacion(3, "Normal, como todos los McDonald's")
                 )
             }
 
@@ -680,7 +678,7 @@ class ApplicationBootstrap(
             crear(
                 usuario = sofiamiller,
                 local = mcdonals,
-                platos = mutableListOf(bigMac, ensalada, alitas),
+                platos = mutableListOf(bigMac, bigMac, ensalada, alitas),
                 medioDePago = Pago.QR,
                 estado = Estado.PENDIENTE,
                 fechaCreacion = LocalDate.of(2025, 10, 28)

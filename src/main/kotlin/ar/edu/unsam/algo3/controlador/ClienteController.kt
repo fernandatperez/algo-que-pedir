@@ -3,9 +3,10 @@ package ar.edu.unsam.algo3.controlador
 import ar.edu.unsam.algo3.dto.CalificacionDTO
 import ar.edu.unsam.algo3.dto.ClientePerfilDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
-import ar.edu.unsam.algo3.dto.LocalCardDTO
+import ar.edu.unsam.algo3.dto.LocalDTO
+import ar.edu.unsam.algo3.dto.LocalDomDTO
 import ar.edu.unsam.algo3.dto.fromDTO
-import ar.edu.unsam.algo3.dto.toCardDTO
+import ar.edu.unsam.algo3.dto.toLocalDomDTO
 import ar.edu.unsam.algo3.servicios.ClienteService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -32,10 +33,10 @@ class ClienteController( val clienteService: ClienteService ) {
     }
 
     @GetMapping("/locales-puntuables/{id}")
-    fun getUnratedStores(@PathVariable id: Int): List<LocalCardDTO> {
+    fun getUnratedStores(@PathVariable id: Int): List<LocalDomDTO> {
         val localesDTO =
             clienteService.obtenerLocalesPuntuables(id).map { local ->
-                local.toCardDTO()
+                local.toLocalDomDTO()
             }
         return localesDTO
     }

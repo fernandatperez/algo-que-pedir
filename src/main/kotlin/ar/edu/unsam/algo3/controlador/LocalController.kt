@@ -1,10 +1,9 @@
 package ar.edu.unsam.algo3.controlador
 
 import ar.edu.unsam.algo3.dto.CalificacionDTO
-import ar.edu.unsam.algo3.dto.LocalCardDTO
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.LocalDTO
-import ar.edu.unsam.algo3.dto.LocalDetailDTO
+import ar.edu.unsam.algo3.dto.LocalDomDTO
 import ar.edu.unsam.algo3.dto.SearchRequest
 import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
@@ -26,7 +25,7 @@ class LocalController(
     }
 
     @GetMapping("/store-profile-react/{id}")
-    fun getReact(@PathVariable id: Int): LocalDetailDTO {
+    fun getReact(@PathVariable id: Int): LocalDomDTO {
         return localService.getByIDReact(id)
     }
 
