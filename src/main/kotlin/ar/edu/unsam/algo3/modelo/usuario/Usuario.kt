@@ -77,8 +77,6 @@ class Usuario(
     fun cancelarPedido(pedido: Pedido) {
         if (pedido.estado == Estado.CANCELADO) {
             throw BusinessException("No se puede cancelar un pedido ya cancelado")
-        } else if (pedido.estado == Estado.CONFIRMADO && this.sePuedePuntuarLocal(pedido.local)) {
-            this.localesAPuntuar.remove(pedido.local)
         }
         pedido.cancelar()
     }

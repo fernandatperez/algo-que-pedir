@@ -72,10 +72,24 @@ class LocalService(
         return resultados.map { it.toDTO() }
     }
 
-    fun getStoreRatingsByID(id: Int): List<CalificacionDTO> {
+    fun getStoreRatingsByID(id: Int, page: Int, limit: Int): Pair<List<CalificacionDTO>, Boolean> {
         val local = repositorioLocal.obtenerObjeto(id)
         val reviews: List<Calificacion> = local.obtenerCalificaciones()
-        return reviews.map { it.toDTO() }
+
+        val fromIndex = (page - 1) * limit
+        val toIndex = minOf(fromIndex + limit, reviews.size)
+
+        if (fromIndex >= reviews.size) {
+            return Pair(emptyList(), false)
+        }
+
+        val reviewsCut = reviews
+            .subList(fromIndex, toIndex)
+            .map { it.toDTO() }
+
+        val hasMore = toIndex < reviews.size
+
+        return Pair(reviewsCut, hasMore)
     }
 
     fun update(localDTO: LocalDTO) {

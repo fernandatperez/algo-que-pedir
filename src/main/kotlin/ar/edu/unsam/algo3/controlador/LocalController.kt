@@ -55,8 +55,15 @@ class LocalController(
     }
 
     @GetMapping("/store-reviews/{id}")
-    fun getRatings(@PathVariable id: Int): List<CalificacionDTO> {
-        return localService.getStoreRatingsByID(id)
+    fun getRatings(
+        @PathVariable id: Int,
+        @RequestParam page: Int,
+        @RequestParam limit: Int): Map<String, Any> {
+        val (reviewsCut, hasMore) = localService.getStoreRatingsByID(id, page, limit)
+        return mapOf(
+            "reviewsCut" to reviewsCut,
+            "hasMore" to hasMore
+        )
     }
 }
 
