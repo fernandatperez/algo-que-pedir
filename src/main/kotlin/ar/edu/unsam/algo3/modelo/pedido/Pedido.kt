@@ -27,7 +27,8 @@ class Pedido(
     var medioDePagoElegido: Pago = Pago.EFECTIVO,
     var estado: Estado = Estado.PENDIENTE, // siempre tiene que comenzar en PENDIENTE según el profe.
     var cupon: Cupon? = nullCupon,
-    val pedidoObservers: MutableList<PedidoConfirmadoObserver> = mutableListOf<PedidoConfirmadoObserver>()
+    val pedidoObservers: MutableList<PedidoConfirmadoObserver> = mutableListOf<PedidoConfirmadoObserver>(),
+    var fechaCreacion: LocalDate = LocalDate.now()
 ) {
     var horarioEntrega: LocalTime = LocalTime.of(17, 0)
     var id: Int = -1
@@ -118,6 +119,10 @@ class Pedido(
 
     fun prepararPedido() {
         this.estado = Estado.PREPARADO
+    }
+
+    fun cancelar() {
+        this.estado = Estado.CANCELADO
     }
 }
 

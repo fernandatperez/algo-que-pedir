@@ -19,6 +19,13 @@ class PlatoService(
     fun getPlatos(mail: String): List<Plato> =
         repositorioPlatos.buscar(mail)
 
+    fun getPlatosByLocalId(id: Int): List<Plato> {
+        val local = repositorioLocal.obtenerObjeto(id)
+            ?: throw NotFoundException("No se encontró el local con id <$id>")
+
+        return repositorioPlatos.buscar(local.email)
+    }
+
     fun obtenerPlato(id: Int): Plato {
         val platoModelo = repositorioPlatos.obtenerObjeto(id)
         if (platoModelo != null) {

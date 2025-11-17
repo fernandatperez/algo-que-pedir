@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.modelo.usuario
 
+import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.usuario.UsuarioCommands
 import ar.edu.unsam.algo3.errores.PerteneceAotraListaException
@@ -73,6 +74,15 @@ class Usuario(
         pedido.dispararObservers()
     }
 
+    fun cancelarPedido(pedido: Pedido) {
+        if (pedido.estado == Estado.CANCELADO) {
+            throw BusinessException("No se puede cancelar un pedido ya cancelado")
+        } else if (pedido.estado == Estado.CONFIRMADO && this.sePuedePuntuarLocal(pedido.local)) {
+            this.localesAPuntuar.remove(pedido.local)
+        }
+        pedido.cancelar()
+    }
+
     fun validarPlatosDePedido(pedido: Pedido) = pedido.platos.all { this.puedePedir(it) }
 
     val localesAPuntuar: MutableMap<Local, LocalDate> = mutableMapOf()
@@ -86,11 +96,11 @@ class Usuario(
         }
     }
 
-    fun puntuarLocal(local: Local, puntaje: Int) {
+    fun puntuarLocal(local: Local, calificacion: Calificacion) {
         if (!sePuedePuntuarLocal(local)) {
-            throw RuntimeException("No se puede puntuar el local")
+            throw RuntimeException("No se puede puntuar el local. O bien el usuario no tiene derecho a puntuarlo, o el tiempo para calificar paso.")
         }
-        local.agregarPuntuacion(puntaje)
+        local.agregarPuntuacion(calificacion)
         localesAPuntuar.remove(local)
     }
 

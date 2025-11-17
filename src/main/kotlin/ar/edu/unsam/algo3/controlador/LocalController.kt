@@ -1,7 +1,9 @@
 package ar.edu.unsam.algo3.controlador
 
+import ar.edu.unsam.algo3.dto.CalificacionDTO
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.LocalDTO
+import ar.edu.unsam.algo3.dto.LocalDomDTO
 import ar.edu.unsam.algo3.dto.SearchRequest
 import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
@@ -22,6 +24,11 @@ class LocalController(
         return localService.getByID(id)
     }
 
+    @GetMapping("/store-profile-react/{id}")
+    fun getReact(@PathVariable id: Int): LocalDomDTO {
+        return localService.getByIDReact(id)
+    }
+
     @GetMapping("/store-profiles")
     fun getAll(): List<LocalDTO> {
         return localService.getAll().map { it.toDTO() }
@@ -29,9 +36,12 @@ class LocalController(
 
     @PostMapping("/store-profiles")
     fun getStores(@RequestBody searchRequest: SearchRequest): List<LocalDTO> {
-        val resultados = localService.getBySearch(searchRequest.searchName)
-        return resultados.map { it.toDTO() }
+        val userId = searchRequest.userId?.toIntOrNull() ?: 0
+        val resultados = localService.getBySearch(searchRequest.searchName, userId)
+        return resultados
     }
+
+
 
     @PutMapping("/store-profile")
     fun update(
@@ -42,6 +52,11 @@ class LocalController(
         //ya que local originalmente no tiene mail
         val localDTOConEmail = localDTO.copy(email = mail)
         localService.update(localDTOConEmail)
+    }
+
+    @GetMapping("/store-reviews/{id}")
+    fun getRatings(@PathVariable id: Int): List<CalificacionDTO> {
+        return localService.getStoreRatingsByID(id)
     }
 }
 

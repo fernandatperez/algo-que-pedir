@@ -25,6 +25,12 @@ class PlatoController(val platoService: PlatoService) {
         return platos.map { it.toPlatoMenuDTO() }
     }
 
+    @GetMapping("/platos-react/{id}")
+    fun getReact(@PathVariable id: Int): List<PlatoMenuDTO> {
+        val platos = platoService.getPlatosByLocalId(id)
+        return platos.map { it.toPlatoMenuDTO() }
+    }
+
     @GetMapping("/platos/{id}")
     fun get(@PathVariable id: Int): PlatoDTO {
 //        Obtener informacion de un plato especifico

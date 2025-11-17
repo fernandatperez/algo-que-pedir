@@ -15,7 +15,12 @@ class EstablecerPedido(val pedido: Pedido) : UsuarioCommands { //todo: Estas sub
 }
 
 class Puntuar(
-    var puntuarStrategy : CriteriosPuntuacion =  PuntuarFijo(3)
+    var puntuarStrategy : CriteriosPuntuacion =  PuntuarFijo(
+        Calificacion(
+            3,
+            "Son todes iguales"
+        )
+    )
 ) : UsuarioCommands {
 
     override fun execute(usuario: Usuario) {
@@ -30,10 +35,10 @@ interface CriteriosPuntuacion {
     fun puntuarLocal(usuario: Usuario)
 }
 
-class PuntuarFijo(var puntaje: Int) : CriteriosPuntuacion {
+class PuntuarFijo(var calificacion: Calificacion) : CriteriosPuntuacion {
     override fun puntuarLocal(usuario: Usuario) {
         usuario.localesAPuntuar.keys.forEach { // .keys devuelve solo las claves del mapa, es decir, los Local que están pendientes de puntuación.
-            usuario.puntuarLocal(it, puntaje)
+            usuario.puntuarLocal(it, calificacion)
         }
     }
 }
@@ -41,7 +46,11 @@ class PuntuarFijo(var puntaje: Int) : CriteriosPuntuacion {
 class PuntuarAleatorio() : CriteriosPuntuacion {
     override fun puntuarLocal(usuario: Usuario) {
         usuario.localesAPuntuar.keys.forEach {
-            usuario.puntuarLocal(it, Random.nextInt(1, 6)) // desde el primero a 1 menos que el ultimo (1-5)
+            var calificacion = Calificacion(
+                Random.nextInt(1, 6),
+                "Descripcion random, no me interesa"
+            )
+            usuario.puntuarLocal(it, calificacion) // desde el primero a 1 menos que el ultimo (1-5)
         }
     }
 }
@@ -50,7 +59,11 @@ class PuntuarActual() : CriteriosPuntuacion {
     override fun puntuarLocal(usuario: Usuario) {
         usuario.localesAPuntuar.keys.forEach {
             val puntaje = it.promedioPuntuacion().toInt()
-            usuario.puntuarLocal(it, puntaje)
+            var calificacion = Calificacion(
+                puntaje,
+                "Acorde a su promedio...que se yo"
+            )
+            usuario.puntuarLocal(it, calificacion)
         }
     }
 }

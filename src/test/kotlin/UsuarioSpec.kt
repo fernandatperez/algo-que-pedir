@@ -1,19 +1,10 @@
-import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.errores.PerteneceAotraListaException
 import ar.edu.unsam.algo3.modelo.ingrediente.GrupoAlimenticio
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
 import ar.edu.unsam.algo3.modelo.plato.Plato
-import ar.edu.unsam.algo3.modelo.usuario.CambianteSegunEdad
-import ar.edu.unsam.algo3.modelo.usuario.Combinado
-import ar.edu.unsam.algo3.modelo.usuario.Conservador
-import ar.edu.unsam.algo3.modelo.usuario.Consumista
-import ar.edu.unsam.algo3.modelo.usuario.Exquisito
-import ar.edu.unsam.algo3.modelo.usuario.Fieles
-import ar.edu.unsam.algo3.modelo.usuario.Generalista
-import ar.edu.unsam.algo3.modelo.usuario.Impaciente
-import ar.edu.unsam.algo3.modelo.usuario.Vegano
+import ar.edu.unsam.algo3.modelo.usuario.*
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.assertions.throwables.shouldThrow
@@ -113,7 +104,7 @@ class UsuarioSpec : DescribeSpec({
 
             // Act
             usuario.confirmarPedido(pedidolejano)
-            usuario.puntuarLocal(pedidolejano.local, 4) // Confirmamos pedido y puntuamos
+            usuario.puntuarLocal(pedidolejano.local, Calificacion(4,"")) // Confirmamos pedido y puntuamos
 
             // Assert
             localAPuntuar.promedioPuntuacion() shouldBe 4.0
@@ -127,7 +118,7 @@ class UsuarioSpec : DescribeSpec({
             usuario.localesAPuntuar[localAPuntuar] = LocalDate.now().minusDays(10) // se simula 10 dias
 
             val excepcion = shouldThrow<RuntimeException> {
-                usuario.puntuarLocal(localAPuntuar, 3)
+                usuario.puntuarLocal(localAPuntuar, Calificacion(3,""))
             }
 
             excepcion.message shouldBe "No se puede puntuar el local"

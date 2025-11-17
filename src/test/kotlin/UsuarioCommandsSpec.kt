@@ -1,12 +1,8 @@
 import ar.edu.unsam.algo3.*
-import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.pedido.Pedido
-import ar.edu.unsam.algo3.modelo.usuario.EstablecerPedido
-import ar.edu.unsam.algo3.modelo.usuario.Puntuar
-import ar.edu.unsam.algo3.modelo.usuario.PuntuarActual
-import ar.edu.unsam.algo3.modelo.usuario.PuntuarFijo
+import ar.edu.unsam.algo3.modelo.usuario.*
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import org.uqbar.geodds.Point
@@ -35,7 +31,7 @@ class UsuarioCommandsSpec: DescribeSpec({
 
             usuario.agregarAcciones(EstablecerPedido(pedido))
 
-            usuario.agregarAcciones(Puntuar(PuntuarFijo(4)))
+            usuario.agregarAcciones(Puntuar(PuntuarFijo(Calificacion(4,""))))
 
             localCercano.promedioPuntuacion() shouldBe 0
 
@@ -47,8 +43,8 @@ class UsuarioCommandsSpec: DescribeSpec({
         it("Puntuar con estrategia actual redondea el promedio actual del local") {
             val usuario = Usuario()
             val localprom = Local("TestLocalActual", direccion = direccionLocalLejano)
-            localprom.agregarPuntuacion(3)
-            localprom.agregarPuntuacion(4) // Promedio = 3.5
+            localprom.agregarPuntuacion(Calificacion(3,""))
+            localprom.agregarPuntuacion(Calificacion(4,"")) // Promedio = 3.5
 
             val pedido = Pedido(local = localprom, usuario = usuario)
             usuario.agregarAcciones(EstablecerPedido(pedido))
