@@ -30,11 +30,20 @@ class ClienteService(
         return localesPuntuables
     }
 
-    fun confirmarPedido(clienteID: Int, pedidoID: Int): Int {
-        return 1
+    fun confirmarPedidoDeUsuario(id: Int, userId: Int): OrderDTO {
+        val user = repositorioClientes.obtenerObjeto(userId)
+        val order = repositorioPedido.buscarPorId(id)
+        user.confirmarPedido(order)
+        return OrderDTO(
+            user.id,
+            order.local.id,
+            order.platos.map { it.id }.toMutableList(),
+            order.medioDePagoElegido.toString(),
+            order.estado.toString()
+        )
     }
 
-    fun cancelarOrden(id: Int, userId: Int): OrderDTO {
+    fun cancelarOrdenDeUsuario(id: Int, userId: Int): OrderDTO {
         val user = repositorioClientes.obtenerObjeto(userId)
         val order = repositorioPedido.buscarPorId(id)
         user.cancelarPedido(order)

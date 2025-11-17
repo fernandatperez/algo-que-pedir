@@ -47,14 +47,14 @@ class ClienteController( val clienteService: ClienteService ) {
         clienteService.puntuarLocal(userId, localId, calificacionDTO)
     }
 
-    @PostMapping("/confirmar-pedido/")
-    fun postConfirm(@RequestParam clienteID: Int, @RequestParam pedidoID: Int) {
-        clienteService.confirmarPedido(clienteID, pedidoID)
+    @PostMapping("/confirm-order/{id}")
+    fun postConfirm(@PathVariable id: Int, @RequestParam userId: Int) {
+        clienteService.confirmarPedidoDeUsuario(id, userId)
     }
 
     @PostMapping("/cancel-order/{id}")
     fun cancelOrder(@PathVariable id: Int, @RequestParam userId: Int): OrderDTO {
-        return clienteService.cancelarOrden(id, userId)
+        return clienteService.cancelarOrdenDeUsuario(id, userId)
     }
 
     @GetMapping("/criterio-ingrediente/{criterio}")
