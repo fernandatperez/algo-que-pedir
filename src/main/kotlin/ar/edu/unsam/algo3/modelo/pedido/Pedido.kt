@@ -120,6 +120,10 @@ class Pedido(
     fun prepararPedido() {
         this.estado = Estado.PREPARADO
     }
+
+    fun cancelar() {
+        this.estado = Estado.CANCELADO
+    }
 }
 
 

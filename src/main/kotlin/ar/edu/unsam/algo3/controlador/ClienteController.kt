@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.dto.ClientePerfilDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.LocalDTO
 import ar.edu.unsam.algo3.dto.LocalDomDTO
+import ar.edu.unsam.algo3.dto.OrderDTO
 import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toLocalDomDTO
 import ar.edu.unsam.algo3.servicios.ClienteService
@@ -49,6 +50,11 @@ class ClienteController( val clienteService: ClienteService ) {
     @PostMapping("/confirmar-pedido/")
     fun postConfirm(@RequestParam clienteID: Int, @RequestParam pedidoID: Int) {
         clienteService.confirmarPedido(clienteID, pedidoID)
+    }
+
+    @PostMapping("/cancel-order/{id}")
+    fun cancelOrder(@PathVariable id: Int, @RequestParam userId: Int): OrderDTO {
+        return clienteService.cancelarOrden(id, userId)
     }
 
     @GetMapping("/criterio-ingrediente/{criterio}")

@@ -1,5 +1,6 @@
 package ar.edu.unsam.algo3.modelo.usuario
 
+import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.usuario.UsuarioCommands
 import ar.edu.unsam.algo3.errores.PerteneceAotraListaException
@@ -71,6 +72,15 @@ class Usuario(
         }
         pedido.validarUsuarioDePedido(this)
         pedido.dispararObservers()
+    }
+
+    fun cancelarPedido(pedido: Pedido) {
+        if (pedido.estado == Estado.CANCELADO) {
+            throw BusinessException("No se puede cancelar un pedido ya cancelado")
+        } else if (pedido.estado == Estado.CONFIRMADO && this.sePuedePuntuarLocal(pedido.local)) {
+            this.localesAPuntuar.remove(pedido.local)
+        }
+        pedido.cancelar()
     }
 
     fun validarPlatosDePedido(pedido: Pedido) = pedido.platos.all { this.puedePedir(it) }
