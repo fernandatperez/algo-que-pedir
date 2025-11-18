@@ -13,3 +13,10 @@ fun Calificacion.toDTO(): CalificacionDTO {
         experienceDesc = this.comentario
     )
 }
+
+fun CalificacionDTO.fromDTO(): Calificacion {
+    return Calificacion(
+        puntaje = this.rate,
+        comentario = this.experienceDesc
+    )
+}

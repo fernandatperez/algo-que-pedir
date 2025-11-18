@@ -71,3 +71,15 @@ fun Local.toLocalDomDTO(): LocalDomDTO {
         reviews = this.calificaciones.map { it.toDTO() }
     )
 }
+
+fun LocalDomDTO.fromDTO(): Local {
+    return Local(
+        nombre = name,
+        url = storeURL,
+        deliveryFee = this.deliveryFee,
+        mediosDePago = paymentTypes.toMutableSet(),
+    ).apply {
+        id = this@fromDTO.id
+        calificaciones = this@fromDTO.reviews.map { it.fromDTO() }.toMutableList()
+    }
+}

@@ -8,6 +8,7 @@ import ar.edu.unsam.algo3.dto.LocalDomDTO
 import ar.edu.unsam.algo3.dto.OrderDTO
 import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toLocalDomDTO
+import ar.edu.unsam.algo3.dto.toUsuarioDTO
 import ar.edu.unsam.algo3.servicios.ClienteService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -23,15 +24,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ClienteController( val clienteService: ClienteService ) {
 
-    //    Esto cambialo como quieras, lo arme para que ya estuviera nada mas
     @GetMapping("/perfil/{id}")
-    fun get(@PathVariable id: Int) {
+    fun clientePorId(@PathVariable id: Int) =
+        clienteService.clientePorId(id).toUsuarioDTO()
 
-    }
-
-    @PutMapping("/perfil/")
-    fun update(@RequestParam id: Int, @RequestBody perfilDTO: ClientePerfilDTO) {
-
+    @PutMapping("/actualizar-perfil/{id}")
+    fun update(@PathVariable id: Int, @RequestBody perfilDTO: ClientePerfilDTO): ClientePerfilDTO {
+        return clienteService.actualizarPerfil(perfilDTO).toUsuarioDTO()
     }
 
     @GetMapping("/locales-puntuables/{id}")
@@ -57,25 +56,4 @@ class ClienteController( val clienteService: ClienteService ) {
     fun cancelOrder(@PathVariable id: Int, @RequestParam userId: Int): OrderDTO {
         return clienteService.cancelarOrden(id, userId)
     }
-
-    @GetMapping("/criterio-ingrediente/{criterio}")
-    fun getIngredientePorCriterio(@RequestParam id: Int, @PathVariable criterio: String): Set<IngredienteDTO> {
-        return clienteService.obtenerIngredientesPorCriterio(id, criterio)
-    }
-
-    @GetMapping("/ingredientes-disponibles")
-    fun getIngredientesDisponibles(@RequestParam id: Int): Set<IngredienteDTO> {
-        return clienteService.obtenerIngredientesDisponibles(id)
-    }
-
-    @PutMapping("/actualizar-ingredientes/{criterio}")
-    fun actualizarIngredientesPorCriterio(@RequestParam id: Int, @PathVariable criterio: String, @RequestBody ingredientes: List<IngredienteDTO>): Set<IngredienteDTO> {
-        val ingredientes = ingredientes.map { it.fromDTO()}.toList()
-        return clienteService.actualizarIngredientesPorCriterio(id, criterio, ingredientes)
-    }
-
-    @DeleteMapping("/eliminar-ingrediente-usuario/{criterio}")
-    fun eliminarIngredientePorCriterio(@RequestParam id: Int, @PathVariable criterio: String, @RequestParam ingredienteId: Int) =
-        clienteService.eliminarIngredientePorCriterio(id, criterio, ingredienteId)
-
 }
