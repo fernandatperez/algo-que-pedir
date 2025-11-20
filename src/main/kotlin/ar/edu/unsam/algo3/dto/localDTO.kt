@@ -65,7 +65,7 @@ fun Local.toLocalDomDTO(): LocalDomDTO {
         name = this.nombre,
         storeURL = this.url,
         deliveryTimeAvg = this.promedioTiempoEntrega(),
-        deliveryFee = this.deliveryFee,
+        deliveryFee = this.deliveryFee(),
         numberOfOrders = 0, // Se asigna despues en el getByReact
         paymentTypes = this.mediosDePago,
         reviews = this.calificaciones.map { it.toDTO() }

@@ -27,9 +27,10 @@ open class Local(
     var url: String = "",
     var mediosDePago: MutableSet<Pago> = mutableSetOf(Pago.EFECTIVO),
     val inbox: MutableList<Mensaje> = mutableListOf(),
-    var deliveryFee: Double = 0.0
 
 ) : ElementoDeRepositorio {
+
+    fun deliveryFee(): Double = regalias + porcentajeAcordado
 
     var calificaciones = mutableListOf<Calificacion>()
 

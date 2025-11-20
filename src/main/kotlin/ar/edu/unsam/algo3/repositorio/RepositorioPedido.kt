@@ -62,6 +62,8 @@ class RepositorioPedido {
     fun buscarPorId(id: Int): Pedido {
         val pedido = allInstances().find { it.id == id }
         if (pedido != null) {
+            println(pedido.toString())
+            println(pedido.platos.size)
             return pedido
         }
         throw NotFoundException("No existe el id $id en repositorio para obtenerlo de la coleccion")

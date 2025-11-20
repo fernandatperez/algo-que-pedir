@@ -36,7 +36,6 @@ class LocalService(
         val local = repositorioLocal.obtenerObjeto(id)
         val pedidosDelLocal = repositorioPedidos.getAllOrdersOfLocal(local)
         val cantidadPedidos = pedidosDelLocal.size
-
         return local.toLocalDomDTO().apply {
             numberOfOrders = cantidadPedidos
         }

@@ -27,7 +27,7 @@ class PedidoService(
 
     fun pedidosFiltradosUsuario(estado: Estado, email: String) = repositorioPedidos.filteredUserInstances(estado, email).map { it.toDTO() }
 
-    fun buscarPorID(id: Int): Pedido = repositorioPedidos.buscarPorId(id) ?: throw NotFoundException("No se encontró el pedido de id <$id>")
+    fun buscarPorID(id: Int): Pedido = repositorioPedidos.buscarPorId(id)
 
     fun actualizarEstado(id: Int) : Pedido {
         val pedido = buscarPorID(id)
@@ -44,6 +44,7 @@ class PedidoService(
         val usuario: Usuario = repositorioCliente.obtenerObjeto(order.userID)
         val local: Local = repositorioLocal.obtenerObjeto(order.localID)
         val platos: MutableList<Plato> = order.platosIDs.map { repositorioPlato.obtenerObjeto(it) }.toMutableList()
+        println(platos.size)
 
         val medioDePago = Pago.valueOf(order.medioDePago)
         val estadoPedido = Estado.valueOf(order.estado)
