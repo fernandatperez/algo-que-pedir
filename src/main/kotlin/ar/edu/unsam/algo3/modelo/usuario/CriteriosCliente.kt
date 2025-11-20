@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.dto.FielesDeserializer
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonSubTypes
@@ -74,10 +75,10 @@ class Fieles : CriterioCliente {
 
 // Los que se dejan llevar por el marketing si en la descripción del plato tienen las palabras/frases como "nutritivo", “bajo en sodio”, “sin azúcar”.
 // STATEFUL
-@JsonTypeName("consumista")
-class Consumista : CriterioCliente {
+class Consumista @JsonCreator constructor(
+    @param:JsonProperty("frasesFavoritas")
     val frasesFavoritas: MutableSet<String> = mutableSetOf() // Estado mutable
-
+) : CriterioCliente {
     fun agregarFrasesFavoritas(frase: String) {
         frasesFavoritas.add(frase) // Modifica el estado
     }
@@ -101,7 +102,10 @@ object Generalista : CriterioCliente {
 } // solo le interesa lo basico
 
 // STATEFUL
-class Combinado(var criterios: MutableSet<CriterioCliente>) : CriterioCliente {
+class Combinado @JsonCreator constructor(
+    @param:JsonProperty("criterios")
+    var criterios: MutableSet<CriterioCliente>
+) : CriterioCliente {
     override fun puedePedir(plato: Plato, usuario: Usuario) =
         this.criterios.all { it.puedePedir(plato, usuario) }
 
