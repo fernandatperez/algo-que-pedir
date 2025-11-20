@@ -1,6 +1,5 @@
 package ar.edu.unsam.algo3.modelo.usuario
 
-import ar.edu.unsam.algo3.dto.FielesDTO
 import ar.edu.unsam.algo3.dto.FielesDeserializer
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.modelo.local.Local

@@ -21,7 +21,7 @@ class FielesDeserializer(
         if (localesNode != null && localesNode.isArray) {
             localesNode.forEach { localNode ->
                 // Leés el id del LocalDomDTO
-                val id = localNode.get("id")?.asInt()
+                val id = localNode.get("id")?.asInt() // TODO comentar esto, porque es un array de INTS.
                 if (id != null) {
                     // Buscás el Local de dominio en tu repositorio
                     val local = localRepo.obtenerObjeto(id)
