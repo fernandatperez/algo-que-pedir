@@ -60,7 +60,7 @@ class Pedido(
         this.costoBasePlatos() + this.costoDeliveryPlatos()
 
     fun validarUsuarioDePedido(usuario: Usuario) { // todo: también tendria que ver que los platos sean del local
-        if (this.usuario != usuario) {
+        if (this.usuario.id != usuario.id) {
             throw NoEsElMismoUsuario("El usuario no puede confirmar el pedido porque no le pertenece")
         }
         estado = Estado.CONFIRMADO // el usuario es el que lo confirma
