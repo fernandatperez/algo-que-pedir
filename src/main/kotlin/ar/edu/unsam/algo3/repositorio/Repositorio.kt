@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository
 open class Repositorio<Type : ElementoDeRepositorio> {
     var contadorIDs: Int = 1
     val coleccion: MutableList<Type> = mutableListOf()
-    fun generarID(): Int = contadorIDs++
+    fun generarID(): Int =(obtenerIDs().maxOrNull() ?: 0) + 1
 
     fun objetosDeRepositorio() = this.coleccion
 
     fun crear(objeto: Type) {
-        if (objeto.cumpleCriterioDeNuevo()) objeto.id = generarID() // esto deja baches. No esta piola (igual queda). Revisar
+        if (objeto.cumpleCriterioDeNuevo()) objeto.id = generarID()
         coleccion.add(objeto)
     }
 //    Esto no esta bien. id==-1?
@@ -45,5 +45,5 @@ open class Repositorio<Type : ElementoDeRepositorio> {
 
     fun buscar(criterio: String): List<Type> = coleccion.filter { item -> item.cumpleCriterioDeBusqueda(criterio) }
 
-
+    fun obtenerIDs(): List<Int> = coleccion.map { it.id }
 }
