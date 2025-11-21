@@ -6,8 +6,11 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
 import ar.edu.unsam.algo3.modelo.pedido.Estado
 import ar.edu.unsam.algo3.modelo.plato.Plato
+import ar.edu.unsam.algo3.modelo.usuario.Combinado
 import ar.edu.unsam.algo3.modelo.usuario.Calificacion
+import ar.edu.unsam.algo3.modelo.usuario.Fieles
 import ar.edu.unsam.algo3.modelo.usuario.Usuario
+import ar.edu.unsam.algo3.modelo.usuario.Vegano
 import ar.edu.unsam.algo3.modelo.utils.Direccion
 import ar.edu.unsam.algo3.repositorio.*
 import org.springframework.beans.factory.InitializingBean
@@ -266,7 +269,11 @@ class ApplicationBootstrap(
                 altura = 555,
                 ubicacion = Point(40.7128,-74.006)
             ),
+            tipoDeCliente = Combinado(mutableSetOf(Vegano, Fieles().apply{
+                this.agregarLocalFavorito(mcdonals)
+            }))
         ).apply{
+            this.id = 1
             this.agregarPreferido(tomate)
             this.agregarEvitar(huevo)
         }

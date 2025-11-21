@@ -1,8 +1,10 @@
 package ar.edu.unsam.algo3.servicios;
 
 import ar.edu.unsam.algo3.dto.CalificacionDTO
+import ar.edu.unsam.algo3.dto.ClientePerfilDTO
 import ar.edu.unsam.algo3.dto.IngredienteDTO
 import ar.edu.unsam.algo3.dto.OrderDTO
+import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.ingrediente.Ingrediente
@@ -23,6 +25,16 @@ class ClienteService(
     val repositorioLocales: RepositorioLocal,
     val repositorioPedido: RepositorioPedido
 ) {
+    fun clientePorId(id: Int): Usuario =
+        repositorioClientes.obtenerObjeto(id) ?: throw NotFoundException("No se encontró el cliente de id <$id>")
+
+    fun actualizarPerfil(perfilActualizado: ClientePerfilDTO): Usuario{
+        val perfilAModificar = perfilActualizado.fromDTO()
+        perfilAModificar.cumpleCriterioDeCreacion()
+        repositorioClientes.actualizar(perfilAModificar)
+
+        return perfilAModificar
+    }
 
     fun obtenerLocalesPuntuables(id: Int): MutableSet<Local> {
         val cliente = repositorioClientes.obtenerObjeto(id)
@@ -85,12 +97,8 @@ class ClienteService(
         val cliente = repositorioClientes.obtenerObjeto(id)
 
         when (criterio) {
-            "avoid" -> ingredientes.forEach {
-                cliente.agregarEvitar(it)
-            }
-            "prefers" -> ingredientes.forEach {
-                cliente.agregarPreferido(it)
-            }
+            "avoid" -> ingredientes.forEach { cliente.agregarEvitar(it)}
+            "prefers" -> ingredientes.forEach { cliente.agregarPreferido(it) }
             else -> throw NotFoundException("No se encontró el criterio <$criterio>")
         }
 
