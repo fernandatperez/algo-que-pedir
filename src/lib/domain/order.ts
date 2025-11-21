@@ -30,6 +30,7 @@ export type OrderJSON = {
   metodoDePago: Pago
   estado: Estado
   horarioEntrega: string
+  deliveryFee: number
 }
 
 export class Order {
@@ -48,6 +49,7 @@ export class Order {
     public metodoDePago: Pago = Pago.EFECTIVO,
     public estado: Estado = Estado.CONFIRMADO,
     public horarioEntrega: string = '',
+    public deliveryFee: number = 0.0
   ) {}
 
   // transforma json del back a una Order de ts
@@ -82,7 +84,7 @@ export class Order {
   }
 
   precioTotal(): number { 
-    return this.precioSubtotal * this.recargoPago()  + this.deliveryComission  
+    return this.precioSubtotal * this.recargoPago()  + this.deliveryFee  
   }
 
   get horarioEntregaString(): string {
@@ -106,6 +108,7 @@ export class Order {
       metodoDePago: this.metodoDePago,
       estado: this.estado,
       horarioEntrega: this.horarioEntrega,
+      deliveryFee: this.deliveryFee
     }
   }
 }

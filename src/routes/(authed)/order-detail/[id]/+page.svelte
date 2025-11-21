@@ -79,7 +79,7 @@
       </div>
       <div class="flex-row jc-space-between">
         <p>Comision del delivery</p>
-        <p>${order.deliveryComission.toFixed(2)}</p>
+        <p>${order.deliveryFee.toFixed(2)}</p>
       </div>
       <div class="flex-row jc-space-between">
         <p>Total</p>
