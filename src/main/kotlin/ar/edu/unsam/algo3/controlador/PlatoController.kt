@@ -26,8 +26,8 @@ class PlatoController(val platoService: PlatoService) {
     }
 
     @GetMapping("/platos-react/{id}")
-    fun getReact(@PathVariable id: Int): List<PlatoMenuDTO> {
-        val platos = platoService.getPlatosByLocalId(id)
+    fun getReact(@PathVariable id: Int, @RequestParam userId: Int): List<PlatoMenuDTO> {
+        val platos = platoService.getPlatosByLocalId(id, userId)
         return platos.map { it.toPlatoMenuDTO() }
     }
 

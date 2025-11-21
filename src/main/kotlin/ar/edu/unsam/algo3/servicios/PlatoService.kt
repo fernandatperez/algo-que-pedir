@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.dto.PlatoDTO
 import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.errores.NotFoundException
+import ar.edu.unsam.algo3.repositorio.RepositorioCliente
 import ar.edu.unsam.algo3.repositorio.RepositorioIngrediente
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
@@ -14,16 +15,16 @@ import java.time.LocalDate
 class PlatoService(
     val repositorioPlatos: RepositorioPlato,
     private val repositorioLocal: RepositorioLocal,
+    val repositorioUsuarios: RepositorioCliente
 ) {
 
     fun getPlatos(mail: String): List<Plato> =
         repositorioPlatos.buscar(mail)
 
-    fun getPlatosByLocalId(id: Int): List<Plato> {
+    fun getPlatosByLocalId(id: Int, userId: Int): List<Plato> {
         val local = repositorioLocal.obtenerObjeto(id)
-            ?: throw NotFoundException("No se encontró el local con id <$id>")
-
-        return repositorioPlatos.buscar(local.email)
+        val usuario = repositorioUsuarios.obtenerObjeto(userId)
+        return repositorioPlatos.buscar(local.email).filter { usuario.puedePedir(it) }
     }
 
     fun obtenerPlato(id: Int): Plato {
