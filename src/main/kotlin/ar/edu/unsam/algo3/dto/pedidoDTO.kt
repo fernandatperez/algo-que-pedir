@@ -23,7 +23,8 @@ data class PedidoDTO (
     lateinit var platos: MutableList<PlatoDTO> // Lista de Platos
     lateinit var direccionEntera: String
     var precioSubtotal: Double = 0.0
-    var precioFinal: Double = 0.0
+    var serviceFee: Double = 0.0
+    var deliveryFee: Double = 0.0
 }
 
 fun Pedido.toDTO(): PedidoDTO {
@@ -43,9 +44,14 @@ fun Pedido.toDTO(): PedidoDTO {
         local = this.local.toDTO()
     ).apply {
         this.direccionEntera = this@toDTO.usuario.direccion.calle + " " + this@toDTO.usuario.direccion.altura
-        this.precioSubtotal = this@toDTO.costoBasePlatos()
+
+        this.precioSubtotal = this@toDTO.costoBasePlatos() // subtotal
+        this.serviceFee = if (this@toDTO.medioDePagoElegido == Pago.EFECTIVO) 0.0 else this.precioSubtotal * 0.1 // serviceFee
+        this.deliveryFee = this@toDTO.local.deliveryFee() // deliveryFee
+
         this.platos = this@toDTO.platos.map { it.toDTO() }.toMutableList()
-        this.precioFinal = this@toDTO.costoPedido()
+
+
     }
     return pedidoDTO
 }

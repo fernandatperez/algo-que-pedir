@@ -26,7 +26,7 @@ class PedidoController(val pedidosService: PedidoService) {
     fun getByUserEmail(@RequestParam estado: Estado, @RequestParam("usuario") email: String) = pedidosService.pedidosFiltradosUsuario(estado, email)
 
     @GetMapping("/pedido/{id}")
-    fun pedidoPorId(@PathVariable id: Int) = pedidosService.buscarPorID(id).toDTO()
+    fun pedidoPorId(@PathVariable id: Int): PedidoDTO = pedidosService.buscarPorID(id).toDTO()
 
     @PutMapping("/preparar_pedido/{id}")
     fun actualizarEstado(@PathVariable id: Int): PedidoDTO {
