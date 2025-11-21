@@ -68,7 +68,7 @@ class Usuario(
 
     fun confirmarPedido(pedido: Pedido) {
         if (!this.validarPlatosDePedido(pedido)) {
-            throw RuntimeException("Hay por lo menos un plato que no puede pedir")
+            throw BusinessException("Hay por lo menos un plato que no puede pedir")
         }
         pedido.validarUsuarioDePedido(this)
         pedido.dispararObservers()

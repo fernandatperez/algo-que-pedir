@@ -10,6 +10,7 @@ import ar.edu.unsam.algo3.dto.fromDTO
 import ar.edu.unsam.algo3.dto.toLocalDomDTO
 import ar.edu.unsam.algo3.dto.toUsuarioDTO
 import ar.edu.unsam.algo3.servicios.ClienteService
+import org.springframework.core.annotation.Order
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -43,13 +44,13 @@ class ClienteController( val clienteService: ClienteService ) {
     }
 
     @PostMapping("/puntuar-local")
-    fun postStoreRate(@RequestParam localId: Int, @RequestParam userId: Int, @RequestBody calificacionDTO: CalificacionDTO) {
-        clienteService.puntuarLocal(userId, localId, calificacionDTO)
+    fun postStoreRate(@RequestParam localId: Int, @RequestParam userId: Int, @RequestBody calificacionDTO: CalificacionDTO): CalificacionDTO {
+        return clienteService.puntuarLocal(userId, localId, calificacionDTO)
     }
 
     @PostMapping("/confirm-order/{id}")
-    fun postConfirm(@PathVariable id: Int, @RequestParam userId: Int) {
-        clienteService.confirmarPedidoDeUsuario(id, userId)
+    fun postConfirm(@PathVariable id: Int, @RequestParam userId: Int): OrderDTO {
+        return clienteService.confirmarPedidoDeUsuario(id, userId)
     }
 
     @PostMapping("/cancel-order/{id}")

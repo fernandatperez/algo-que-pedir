@@ -63,6 +63,7 @@ data class OrderDTO (
     val platosIDs: MutableList<Int>,
     val medioDePago: String,
     val estado: String,
+    val subtotal: Double
 )
 
 //fun Pedido.fromOrderDTO(order : OrderDTO): PedidoDTO {

@@ -2,6 +2,7 @@ package ar.edu.unsam.algo3.servicios
 
 import ar.edu.unsam.algo3.dto.OrderDTO
 import ar.edu.unsam.algo3.dto.toDTO
+import ar.edu.unsam.algo3.errores.BusinessException
 import ar.edu.unsam.algo3.errores.NotFoundException
 import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.modelo.local.Pago
@@ -44,12 +45,13 @@ class PedidoService(
         val usuario: Usuario = repositorioCliente.obtenerObjeto(order.userID)
         val local: Local = repositorioLocal.obtenerObjeto(order.localID)
         val platos: MutableList<Plato> = order.platosIDs.map { repositorioPlato.obtenerObjeto(it) }.toMutableList()
-        println(platos.size)
+//        println(platos.size)
 
         val medioDePago = Pago.valueOf(order.medioDePago)
         val estadoPedido = Estado.valueOf(order.estado)
 
-        // estado y fecha pueden venir
+        if (order.subtotal != platos.sumOf { it.valorVenta() }) throw BusinessException("El valor de un plato cambio. Mal ahi.")
+
         repositorioPedidos.crear(
             usuario = usuario,
             local = local,
