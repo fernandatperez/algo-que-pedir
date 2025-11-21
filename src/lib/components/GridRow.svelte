@@ -1,8 +1,23 @@
 <script lang="ts">
-    import type { MenuItemType } from "$lib/domain/menuItem"
+    import type { MenuItemType } from "$lib/domain/menuItem";
 
 
   let { platos }: { platos: MenuItemType[] } = $props();
+
+  const map = new Map<number, { plato: MenuItemType; cantidad: number }>();
+
+  for (const plato of platos) {
+    if (!map.has(plato.id)) {
+      map.set(plato.id, { plato, cantidad: 1 });
+    } else {
+      map.get(plato.id)!.cantidad++;
+    }
+  }
+
+  const uniquePlatos = [...map.values()];
+
+
+
   // console.log('Platos in GridRow:', platos);
 </script>
 
@@ -72,25 +87,25 @@
           <div class="cell">Precio</div>
         </header>
         <!-- Grid Content  -->
-        {#each platos as plato }
+        {#each uniquePlatos as item }
           <section class="grid-table-row table-content">
             <div class="cell product-cell ellipsis-text">
               <div class="imgcontainer">
                 <img
-                  src={plato.imagen}
-                  alt={plato.nombre}
+                  src={item.plato.imagen}
+                  alt={item.plato.nombre}
                   class="hide-on-mobile"
                 />
               </div>
               <div class="text-wrapper">
-                <h4 class="ellipsis-text">{plato.nombre}</h4>
+                <h4 class="ellipsis-text">{item.plato.nombre}</h4>
                 <p class="hide-on-mobile ellipsis-text">
-                  {plato.descripcion}
+                  {item.plato.descripcion}
                 </p>
               </div>
             </div>
-            <div class="cell">{1}</div>
-            <div class="cell">${plato.precio.toFixed(2)}</div>
+            <div class="cell">{item.cantidad}</div>
+            <div class="cell">${(item.plato.precio * item.cantidad).toFixed(2)}</div>
           </section>
         {/each}
 </section>
