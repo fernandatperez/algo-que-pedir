@@ -31,8 +31,8 @@ class Usuario(
 ) : ElementoDeRepositorio {
 
     fun edad() = fechaNacimiento.aniosHastaAhora()
-    fun esIngredientePreferido(ingrediente: Ingrediente) = ingredientesPreferidos.contains(ingrediente)
-    fun esIngredienteAEvitar(ingrediente: Ingrediente) = ingredientesEvitar.contains(ingrediente)
+    fun esIngredientePreferido(ingrediente: Ingrediente) = ingredientesPreferidos.map { it.id }.contains(ingrediente.id)
+    fun esIngredienteAEvitar(ingrediente: Ingrediente) = ingredientesEvitar.map { it.id }.contains(ingrediente.id)
 
     fun esAntiguo() = this.tiempoRegistrado() > 1
 

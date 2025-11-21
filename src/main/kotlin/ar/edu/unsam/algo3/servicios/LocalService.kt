@@ -16,12 +16,14 @@ import ar.edu.unsam.algo3.modelo.local.Local
 import ar.edu.unsam.algo3.repositorio.RepositorioCliente
 import ar.edu.unsam.algo3.modelo.usuario.Calificacion
 import ar.edu.unsam.algo3.repositorio.RepositorioPedido
+import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 
 @Service
 class LocalService(
     private val repositorioLocal: RepositorioLocal,
     private val repositorioUsuario: RepositorioCliente,
     private val repositorioPedidos: RepositorioPedido,
+    private val repositorioPlato: RepositorioPlato
 ) {
     //aca cambio para que el local que traiga sea el unico que matchee con el mail logueado
     fun get(mail: String): LocalDTO {
@@ -59,16 +61,18 @@ class LocalService(
             repositorioLocal.buscar(searchName)
         }
 
-        if (userId != 0) {
-            val usuarioLogueado = repositorioUsuario.obtenerObjeto(userId)
+        val usuarioLogueado = repositorioUsuario.obtenerObjeto(userId)
 
-            return resultados.map { local ->
-                val esCercano = usuarioLogueado.esCercano(local)
-                local.toDTO(usuarioCercano = esCercano)
-            }
+        val localesDePlatosQueSePuedenPedir : List<Int> = repositorioPlato.coleccion.filter {
+            usuarioLogueado.puedePedir(it)
+        }.map { it.local.id }
+
+        val localesAMostrar : List<Local> = resultados.filter { localesDePlatosQueSePuedenPedir.contains(it.id) }
+
+        return localesAMostrar.map { local ->
+            val esCercano = usuarioLogueado.esCercano(local)
+            local.toDTO(usuarioCercano = esCercano)
         }
-
-        return resultados.map { it.toDTO() }
     }
 
     fun getStoreRatingsByID(id: Int, page: Int, limit: Int): Pair<List<CalificacionDTO>, Boolean> {
