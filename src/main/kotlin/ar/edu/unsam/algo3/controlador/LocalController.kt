@@ -5,6 +5,7 @@ import ar.edu.unsam.algo3.dto.toDTO
 import ar.edu.unsam.algo3.dto.LocalDTO
 import ar.edu.unsam.algo3.dto.LocalDomDTO
 import ar.edu.unsam.algo3.dto.SearchRequest
+import ar.edu.unsam.algo3.dto.toLocalDomDTO
 import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
 
@@ -58,6 +59,10 @@ class LocalController(
     fun getRatings(@PathVariable id: Int): List<CalificacionDTO> {
         return localService.getStoreRatingsByID(id)
     }
+
+    @GetMapping("/storesDom")
+    fun getStoresDom(): List<LocalDomDTO> =
+        localService.getAllStoresDom().map { it.toLocalDomDTO() }
 }
 
 

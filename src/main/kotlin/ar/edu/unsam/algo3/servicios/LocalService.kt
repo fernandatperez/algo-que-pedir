@@ -102,4 +102,10 @@ class LocalService(
     repositorioLocal.actualizar(localExistente)
     }
 
+    fun getAllStoresDom(): List<Local>{
+        val stores = repositorioLocal.objetosDeRepositorio()
+//        println(stores.map { it.toLocalDomDTO() })
+        return stores
+    }
+
 }
