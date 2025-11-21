@@ -1,18 +1,17 @@
 <script lang="ts">
-  import "$lib/css/components-css/buttons.css"
-  import "$lib/css/components-css/icon.css"
-  import "$lib/css/pages-css/1-login.css"
-  import "$lib/css/pages-css/2-register.css"
+  import "$lib/css/components-css/buttons.css";
+  import "$lib/css/components-css/icon.css";
+  import "$lib/css/pages-css/1-login.css";
+  import "$lib/css/pages-css/2-register.css";
 
   import IconText from "$lib/components/IconText.svelte";
   import { InputTypes } from "$lib/components/InputPropsI";
-  import { USERS_LIST_MOCK } from "$lib/data/mock/users";
   import { UserType, ValidationMessage } from "$lib/domain/user";
   import { userService } from "$lib/services/UserService";
   import { goto } from "$app/navigation";
   import { showError } from "$lib/domain/errorHandler";
   import ValidationField from "$lib/components/ValidationField.svelte";
-  import { toasts } from '$lib/components/toast/toastStore'
+  import { toasts } from '$lib/components/toast/toastStore';
   import Input from "$lib/components/Input.svelte";
 
   let errors: ValidationMessage[] = $state([])
