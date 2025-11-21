@@ -4,6 +4,6 @@
 </script>
 
 <header class="main-nav">
-  <IconText link="../" wrapperClass="icon-and-text" textClass="main-title" />
+  <IconText link="../orders" wrapperClass="icon-and-text" textClass="main-title" />
   <NavBar />
 </header>

@@ -2,7 +2,8 @@ import type { MenuItemType } from '$lib/domain/menuItem'
 // A MENU-ITEM LE FALTA: plato.cantidad
 
 export enum Estado {
-  PENDIENTE= 'PENDIENTE',
+  // PENDIENTE= 'PENDIENTE',
+  CONFIRMADO= 'CONFIRMADO',
   PREPARADO= 'PREPARADO',
   ENTREGADO= 'ENTREGADO',
   CANCELADO= 'CANCELADO',
@@ -45,7 +46,7 @@ export class Order {
     public precioSubtotal: number = 0.0,
     public deliveryComission: number = 0.0,
     public metodoDePago: Pago = Pago.EFECTIVO,
-    public estado: Estado = Estado.PENDIENTE,
+    public estado: Estado = Estado.CONFIRMADO,
     public horarioEntrega: string = '',
   ) {}
 

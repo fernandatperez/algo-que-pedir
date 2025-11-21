@@ -1,15 +1,15 @@
 <script lang="ts">
-    import OrderCard from '$lib/components/OrderCard.svelte'
-    import { Estado, Order } from '$lib/domain/order'
-    import { orderService } from '$lib/services/orderService'
-    import { onMount } from "svelte"
-    import { showError } from "$lib/domain/errorHandler"
-    // import Toaster from "$lib/components/toast/Toaster.svelte"
+    import OrderCard from '$lib/components/OrderCard.svelte';
+    import { Estado, Order } from '$lib/domain/order';
+    import { orderService } from '$lib/services/orderService';
+    import { onMount } from "svelte";
+    import { showError } from "$lib/domain/errorHandler";
+// import Toaster from "$lib/components/toast/Toaster.svelte"
     // import ToastContainer from "$lib/components/toast/ToastContainer.svelte";
     import { toasts } from "$lib/components/toast/toastStore";
 
     // Para filtrar pedidos por estado
-    let estadoActual = $state('PENDIENTE')
+    let estadoActual = $state('CONFIRMADO')
     const handleStateChange = async (newState: string) => {
         estadoActual = newState
         // console.log("Estado cambiado a:", estado)

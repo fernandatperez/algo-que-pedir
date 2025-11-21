@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { MouseEventHandler } from 'svelte/elements'
-    import { type Order, Estado } from '../domain/order'
+    import type { MouseEventHandler } from 'svelte/elements';
+    import { type Order, Estado } from '../domain/order';
     import OrderState from './OrderState.svelte';
 
     interface Props {
@@ -21,9 +21,9 @@
     <a href="/order-detail/{order.id}"  data-testid="goto-detail">
         <div class="order" >
             <header data-testid="order-id">Pedido #{order.id}</header>
-            {#if order.estado != Estado.PENDIENTE}
+            <!-- {#if order.estado != Estado.PENDIENTE} -->
                 <OrderState estado={order.estado} />
-            {/if}
+            <!-- {/if} -->
         </div>
     
         <div class="user">
@@ -57,7 +57,7 @@
     </div>
 
     <div class="action-container">
-        {#if order.estado === Estado.PENDIENTE}
+        {#if order.estado === Estado.CONFIRMADO}
         <button onclick={action} class="btn btn-primary btn-preparar" data-testid='preparar-{order.id}'> Preparar </button>
         {/if}
     </div>
