@@ -34,12 +34,16 @@ class LocalService(
     fun getByID(id: Int): LocalDTO =
         repositorioLocal.obtenerObjeto(id)?.toDTO() ?: throw NotFoundException("No se encontró el ingrediente de id <$id>")
 
-    fun getByIDReact(id: Int): LocalDomDTO {
+    fun getByIDReact(id: Int, userId: Int): LocalDomDTO {
         val local = repositorioLocal.obtenerObjeto(id)
         val pedidosDelLocal = repositorioPedidos.getAllOrdersOfLocal(local)
+        val usuarioQuePide = repositorioUsuario.obtenerObjeto(userId)
+        val distanciaLocalUser = usuarioQuePide.direccion.distanciaHasta(local.direccion.ubicacion)
+
         val cantidadPedidos = pedidosDelLocal.size
         return local.toLocalDomDTO().apply {
             numberOfOrders = cantidadPedidos
+            userDistance = distanciaLocalUser
         }
     }
 

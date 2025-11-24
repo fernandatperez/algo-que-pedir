@@ -6,6 +6,7 @@ import ar.edu.unsam.algo3.dto.LocalDTO
 import ar.edu.unsam.algo3.dto.LocalDomDTO
 import ar.edu.unsam.algo3.dto.SearchRequest
 import ar.edu.unsam.algo3.dto.toLocalDomDTO
+import ar.edu.unsam.algo3.modelo.usuario.Usuario
 import ar.edu.unsam.algo3.servicios.LocalService
 import org.springframework.web.bind.annotation.*
 
@@ -26,8 +27,8 @@ class LocalController(
     }
 
     @GetMapping("/store-profile-react/{id}")
-    fun getReact(@PathVariable id: Int): LocalDomDTO {
-        return localService.getByIDReact(id)
+    fun getReact(@PathVariable id: Int, @RequestParam userID: Int): LocalDomDTO {
+        return localService.getByIDReact(id, userID)
     }
 
     @GetMapping("/store-profiles")

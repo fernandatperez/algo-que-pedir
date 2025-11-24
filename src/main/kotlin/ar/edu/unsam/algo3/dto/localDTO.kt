@@ -57,6 +57,7 @@ data class LocalDomDTO(
     var numberOfOrders: Int,
     val paymentTypes: Set<Pago>,
     val reviews: List<CalificacionDTO>,
+    var userDistance: Double,
 )
 
 fun Local.toLocalDomDTO(): LocalDomDTO {
@@ -68,6 +69,7 @@ fun Local.toLocalDomDTO(): LocalDomDTO {
         deliveryFee = this.deliveryFee(),
         numberOfOrders = 0, // Se asigna despues en el getByReact
         paymentTypes = this.mediosDePago,
-        reviews = this.calificaciones.map { it.toDTO() }
+        reviews = this.calificaciones.map { it.toDTO() },
+        userDistance = 0.0 // Se asigna despues en el getByReact
     )
 }
