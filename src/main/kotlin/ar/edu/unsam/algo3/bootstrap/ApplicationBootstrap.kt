@@ -724,7 +724,9 @@ class ApplicationBootstrap(
                 platos = mutableListOf(sushiRoll, sashimi),
                 medioDePago = Pago.TRANSFERENCIA_BANCARIA,
                 estado = Estado.PREPARADO // este no se muestra en react
-            )
+            ).apply {
+                sofiamiller.registrarLocalParaPuntuar(this)
+            }
 //            ---
 //            Ricardo Fort
 //            ---
@@ -741,7 +743,9 @@ class ApplicationBootstrap(
                 platos = mutableListOf(bigMac),
                 medioDePago = Pago.QR,
                 estado = Estado.PREPARADO
-            )
+            ).apply {
+                ricardofort.registrarLocalParaPuntuar(this)
+            }
             crear(
                 usuario = ricardofort,
                 local = restauranteItaliano,
@@ -768,14 +772,18 @@ class ApplicationBootstrap(
                 platos = mutableListOf(pizza),
                 medioDePago = Pago.QR,
                 estado = Estado.PREPARADO
-            )
+            ).apply {
+                alexcaniggia.registrarLocalParaPuntuar(this)
+            }
             crear(
                 usuario = alexcaniggia,
                 local = restauranteItaliano,
                 platos = mutableListOf(lasagnePortofino),
                 medioDePago = Pago.QR,
                 estado = Estado.PREPARADO
-            )
+            ).apply {
+                alexcaniggia.registrarLocalParaPuntuar(this)
+            }
             crear(
                 usuario = alexcaniggia,
                 local = migusto,
@@ -792,7 +800,9 @@ class ApplicationBootstrap(
                 platos = mutableListOf(hamburguesa),
                 medioDePago = Pago.QR,
                 estado = Estado.PREPARADO
-            )
+            ).apply {
+                buzz.registrarLocalParaPuntuar(this)
+            }
             crear(
                 usuario = buzz,
                 local = grido,
@@ -809,14 +819,18 @@ class ApplicationBootstrap(
                 platos = mutableListOf(hamburguesa),
                 medioDePago = Pago.EFECTIVO,
                 estado = Estado.CANCELADO
-            )
+            ).apply {
+                locomotora.registrarLocalParaPuntuar(this)
+            }
             crear(
                 usuario = locomotora,
                 local = mcdonals,
                 platos = mutableListOf(alitas),
                 medioDePago = Pago.QR,
                 estado = Estado.PREPARADO
-            )
+            ).apply {
+                locomotora.registrarLocalParaPuntuar(this)
+            }
             crear(
                 usuario = locomotora,
                 local = lomitos,

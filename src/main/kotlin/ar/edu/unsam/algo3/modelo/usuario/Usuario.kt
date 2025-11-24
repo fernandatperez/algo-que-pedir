@@ -83,13 +83,13 @@ class Usuario(
 
     fun validarPlatosDePedido(pedido: Pedido) = pedido.platos.all { this.puedePedir(it) }
 
-    val localesAPuntuar: MutableMap<Local, LocalDate> = mutableMapOf()
+    var localesAPuntuar: MutableMap<Local, LocalDate> = mutableMapOf()
 
     fun obtenerLocalesAPuntuar(): MutableSet<Local> = this.localesAPuntuar.keys
 
     // todo: tiene que recibir pedido y este tiene que saber el local y el local lo tiene que haber preparado
     fun registrarLocalParaPuntuar(pedido: Pedido) {
-        if (pedido.estaEnEstado(Estado.CONFIRMADO)) {
+        if (!pedido.estaEnEstado(Estado.PENDIENTE)) {
             localesAPuntuar[pedido.local] = LocalDate.now()
         }
     }

@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 @Service
 class ClienteService(
     val repositorioClientes: RepositorioCliente,
-    val repositorioIngredientes: RepositorioIngrediente,
     val repositorioLocales: RepositorioLocal,
     val repositorioPedido: RepositorioPedido,
     val repositorioPlatos: RepositorioPlato
@@ -34,6 +33,7 @@ class ClienteService(
 
     fun actualizarPerfil(perfilActualizado: ClientePerfilDTO): Usuario{
         val perfilAModificar = perfilActualizado.fromDTO()
+        perfilAModificar.localesAPuntuar = repositorioClientes.obtenerObjeto(perfilActualizado.id).localesAPuntuar
         perfilAModificar.cumpleCriterioDeCreacion()
         repositorioClientes.actualizar(perfilAModificar)
 
@@ -43,6 +43,7 @@ class ClienteService(
     fun obtenerLocalesPuntuables(id: Int): MutableSet<Local> {
         val cliente = repositorioClientes.obtenerObjeto(id)
         val localesPuntuables: MutableSet<Local> = cliente.obtenerLocalesAPuntuar()
+//        println(localesPuntuables.size)
         return localesPuntuables
     }
 
@@ -83,36 +84,6 @@ class ClienteService(
         val calificacion = Calificacion.fromDTO(calificacionDTO)
         usuario.puntuarLocal(local, calificacion)
         return calificacion.toDTO()
-    }
-
-    fun obtenerIngredientesPorCriterio(id: Int, criterio: String): Set<IngredienteDTO> {
-        val cliente = repositorioClientes.obtenerObjeto(id)
-
-        if ( criterio == "avoid" ) return cliente.ingredientesEvitar.map { it.toDTO() }.toSet()
-        if ( criterio == "prefers" ) return cliente.ingredientesPreferidos.map { it.toDTO() }.toSet()
-        else throw NotFoundException("No se encontró el criterio <$criterio>")
-    }
-
-    fun obtenerIngredientesDisponibles(id: Int): Set<IngredienteDTO>{
-        val cliente = repositorioClientes.obtenerObjeto(id)
-        val ingredientes = repositorioIngredientes.objetosDeRepositorio()
-        val ingredientesDisponibles = ingredientes.filter { !cliente.esIngredientePreferidoPorID(it.id) && !cliente.esIngredienteAEvitarPorID(it.id)}
-
-        return ingredientesDisponibles.map { it.toDTO() }.toSet()
-    }
-
-    fun actualizarIngredientesPorCriterio(id: Int, criterio: String, ingredientes: List<Ingrediente>): Set<IngredienteDTO> {
-        val cliente = repositorioClientes.obtenerObjeto(id)
-
-        when (criterio) {
-            "avoid" -> ingredientes.forEach { cliente.agregarEvitar(it)}
-            "prefers" -> ingredientes.forEach { cliente.agregarPreferido(it) }
-            else -> throw NotFoundException("No se encontró el criterio <$criterio>")
-        }
-
-        repositorioClientes.actualizar(cliente)
-
-        return ingredientes.map { it.toDTO() }.toSet()
     }
 
 }

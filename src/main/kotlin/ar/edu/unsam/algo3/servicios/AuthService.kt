@@ -25,7 +25,7 @@ class AuthService (
 
     fun buscar(usuario: Local): Local {
         val localCorrespondiente = repositorioLocal.buscar(usuario.email)
-        println(localCorrespondiente[0])
+//        println(localCorrespondiente[0])
         if (localCorrespondiente.isEmpty()) {
             throw RuntimeException("No existe un usuario con ese email")
         }
