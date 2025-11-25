@@ -15,6 +15,7 @@ import ar.edu.unsam.algo3.repositorio.RepositorioLocal
 import ar.edu.unsam.algo3.repositorio.RepositorioPedido
 import ar.edu.unsam.algo3.repositorio.RepositorioPlato
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 
 @Service
@@ -48,14 +49,27 @@ class PedidoService(
         val estadoPedido = Estado.valueOf(order.estado)
 
         // Corroboramos subtotal de pedido con precios de platos en la BBDD
-        if (order.subtotal != platos.sumOf { it.valorVenta() }) throw BusinessException("El valor de un plato cambio. Mal ahi.")
+        if (order.subtotal != platos.sumOf { it.valorVenta() }) throw BusinessException("El valor de un plato cambio.")
 
-        repositorioPedidos.crear(
+        val pedido = Pedido(
             usuario = usuario,
             local = local,
             platos = platos,
-            medioDePago = medioDePago,
+            medioDePagoElegido = medioDePago,
             estado = estadoPedido,
+            fechaCreacion = LocalDate.now()
         )
+        if (!usuario.validarPlatosDePedido(pedido)) {
+            throw BusinessException("El pedido no cumple con sus criterios")
+        }
+
+        repositorioPedidos.crear(pedido)
+//        repositorioPedidos.crear(
+//            usuario = usuario,
+//            local = local,
+//            platos = platos,
+//            medioDePago = medioDePago,
+//            estado = estadoPedido,
+//        )
     }
 }
