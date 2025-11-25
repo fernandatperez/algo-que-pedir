@@ -5,16 +5,15 @@
   import type { ValidationMessage } from "$lib/domain/validationMessage";
   import { showError } from "$lib/domain/errorHandler.js";
   import { menuItemsService } from "$lib/services/MenuItemService.js";
-  import { MenuItemType, type MenuItemJSON } from "$lib/domain/menuItem.js";
+  import { MenuItemType } from "$lib/domain/menuItem.js";
   import { goto } from "$app/navigation";
   import { IngredientType } from "$lib/domain/ingredient.js";
   import ValidationField from "$lib/components/ValidationField.svelte";
   import { InputTypes } from "$lib/components/InputPropsI.js";
   import Modal from "$lib/components/Modal.svelte";
   import Input from "$lib/components/Input.svelte";
-  import { toasts } from '$lib/components/toast/toastStore'
+  import { toasts } from '$lib/components/toast/toastStore';
   import { ingredientService } from "$lib/services/IngredientService.js";
-  import { AxiosError } from "axios";
 
   // Recibir los datos del +page.ts
   let { data } = $props()
@@ -94,11 +93,6 @@
       }, 2000)
       errors = [] // limpiar errores
     } catch (error) {
-      // if (error instanceof AxiosError) {
-      //   if(!toastLock) {
-      //     toasts.push("Error al generar el plato", {type: 'error'})
-      //     setTimeout(releaseToast, 5000)
-      //   }
       showError("Error al generar plato", error)
     }
   }
