@@ -108,8 +108,7 @@ class Usuario(
     // lo cambio a funcion para que no quede setteado
     fun tiempoRegistrado() = fechaDeRegistro.aniosHastaAhora()
 
-    fun puedePedir(plato: Plato): Boolean = tipoDeCliente.puedePedir(plato, this)
-
+    fun puedePedir(plato: Plato): Boolean = tipoDeCliente.puedePedir(plato, this) && plato.ingredientes.all { !esIngredienteAEvitar(it) }
     var acciones: MutableSet<UsuarioCommands> = mutableSetOf() // hago esto tipo command porque pone "setear algunas acciones" supongo que se puede hacer un strategy para como da puntuaciones
 
     fun agregarAcciones(accion: UsuarioCommands) {

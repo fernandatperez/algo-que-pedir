@@ -83,7 +83,7 @@ class Consumista @JsonCreator constructor(
     }
 
     override fun puedePedir(plato: Plato, usuario: Usuario) =
-        frasesFavoritas.any { frase -> frase in plato.descripcion }
+        frasesFavoritas.any { frase -> frase in plato.descripcion.lowercase() }
 }
 
 // Los impacientes, como quieren recibir rápido su pedido, solo quieren platos de los locales cercanos.
