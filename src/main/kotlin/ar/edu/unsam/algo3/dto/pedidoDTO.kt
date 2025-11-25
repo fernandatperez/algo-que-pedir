@@ -20,7 +20,7 @@ data class PedidoDTO (
     val fechaCreacion: LocalDate,
     val local: LocalDTO
 ) {
-    lateinit var platos: MutableList<PlatoDTO> // Lista de Platos
+    lateinit var platos: MutableList<PlatoDTO>
     lateinit var direccionEntera: String
     var precioSubtotal: Double = 0.0
     var serviceFee: Double = 0.0
@@ -56,7 +56,6 @@ fun Pedido.toDTO(): PedidoDTO {
     return pedidoDTO
 }
 
-// ver como cambiar esto para que sea mejor?
 data class OrderDTO (
     val userID: Int,
     val localID: Int,
@@ -65,7 +64,3 @@ data class OrderDTO (
     val estado: String,
     val subtotal: Double
 )
-
-//fun Pedido.fromOrderDTO(order : OrderDTO): PedidoDTO {
-//    return
-//}

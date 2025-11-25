@@ -38,10 +38,7 @@ class PedidoService(
     }
 
     fun createOrder(order: OrderDTO) {
-        //! todo: aca lo mejor es buscar el
-        // usuario
-        // local
-        // platos
+        // buscamos cada entidad con su id
         val usuario: Usuario = repositorioCliente.obtenerObjeto(order.userID)
         val local: Local = repositorioLocal.obtenerObjeto(order.localID)
         val platos: MutableList<Plato> = order.platosIDs.map { repositorioPlato.obtenerObjeto(it) }.toMutableList()
@@ -50,6 +47,7 @@ class PedidoService(
         val medioDePago = Pago.valueOf(order.medioDePago)
         val estadoPedido = Estado.valueOf(order.estado)
 
+        // Corroboramos subtotal de pedido con precios de platos en la BBDD
         if (order.subtotal != platos.sumOf { it.valorVenta() }) throw BusinessException("El valor de un plato cambio. Mal ahi.")
 
         repositorioPedidos.crear(
@@ -58,10 +56,6 @@ class PedidoService(
             platos = platos,
             medioDePago = medioDePago,
             estado = estadoPedido,
-            //medioDePago = Pago.EFECTIVO,
-            //estado = Estado.PENDIENTE,
-        ) . apply {
-            usuario.registrarLocalParaPuntuar(this)
-        }
+        )
     }
 }

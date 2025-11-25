@@ -52,6 +52,7 @@ class ClienteService(
         val order = repositorioPedido.buscarPorId(id)
         val platos: List<Plato> = order.platos.map{ repositorioPlatos.obtenerObjeto(it.id) }
 
+        // Corroboramos subtotal de pedido con precios de platos en la BBDD
         if (order.platos.sumOf { it.valorVenta() } != platos.sumOf { it.valorVenta() }) throw BusinessException("El valor de un plato cambio. Mal ahi.")
         user.confirmarPedido(order)
         return OrderDTO(
