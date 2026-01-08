@@ -1,0 +1,139 @@
+/* Main container & initial definitions*/
+.flex-column {
+    align-items: center;
+}
+/* ------------------- */
+
+.main-content-ingredients { /* se le puede cambiar el nombre */
+    width: 80%;
+    row-gap: 0; /* gap entre secciones */
+    padding: 0; /* padding-bottom para que no joda el header en mobile */
+}
+
+.header-title-ingredients {
+    padding: 0;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Dimensions */
+    margin: 2.2em 0 2.2em 0;
+}
+
+/* ------------------- */
+.content-section-ingredients {
+    background-color: white;
+    padding: 0;
+    width: 80vw;
+    font-size: 1.3rem;
+}
+/* ------------- Ingredients table ---------- */
+.multiple-action-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-table-row {
+    grid-template-columns: 1.5fr 1fr 1.5fr 1fr 1fr;
+}
+
+.grid-table-container {
+    margin: 0;
+}
+
+/* ------------- Form ---------- */
+
+.form-nuevo-ingrediente {
+    display: flex;
+    gap: 8px;
+    /* margin: 10px 0; */
+    align-items: center;
+}
+
+/* .form-nuevo-ingrediente input,
+.form-nuevo-ingrediente select {
+padding: 4px;
+} */
+
+.form-nuevo-ingrediente button {
+    padding: 4px 10px;
+}
+
+.fieldset-section {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    flex-wrap: wrap; 
+}
+
+.fieldset-section .cell {
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+/* ----------- Icons ------------- */
+.ingredients-table-icons {
+    font-size: 1.5em;
+    color: var(--icon-color);
+}
+
+.fieldset-section .icon-cell{
+    justify-content: center;
+    align-self: center;
+}
+
+@media (min-width: 769px) {
+    .hidden-icons {
+        display: none;
+    }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+    .hidden-icons {
+        display: none;
+    }   
+    .display-none-mobile{
+        display: none;
+    }
+}
+
+@media (max-width: 430px) {
+    .section-title {
+        flex-direction: column;
+        row-gap: 1em;
+        align-items: flex-start;
+    }
+    .btn-group-actions {
+        flex-direction: column;
+        row-gap: 1em;
+        align-items: center;
+    }
+    .hidden-icons {
+        display: flex;
+    }
+
+    .later-hid {
+        display: none;
+    }
+
+    .new-ingredient-btn {
+        font-size: var(--font-text);
+    }
+    .display-none-mobile{
+        display: none;
+    }
+
+    /* .grid-table-row {
+        grid-template-columns: 2fr 1.5fr 1.5fr;
+    } */
+    .cell.display-none-mobile{
+        display: none;
+    }
+    .fieldset-section{
+        width: 65%;
+    }
+}

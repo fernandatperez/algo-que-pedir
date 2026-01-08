@@ -1,0 +1,43 @@
+/* ======= INPUT ======= */
+.input-primary{
+    padding: 0.5em;
+    border-radius: 0.2em;
+    border: 1px var(--font-color-secondary) solid;
+    width: 100%; /* se adapta al contenedor */
+    box-sizing: border-box;
+    &:focus {
+        outline: none;
+        border: 1.4px solid var(--font-color-secondary);
+    }
+}
+
+.input-group{
+    width: 100%;
+    position: relative;
+    align-items: start;
+    gap: 0.2em;
+}
+
+.input-password{
+    padding-right: 2.5em; 
+    font-size: 1em;
+}
+
+input.invalid-input{
+    border: 1px var(--error-text-color) solid;
+    &:focus {
+        outline: none;
+        border: 1.4px solid var(--button-hover-color);
+    }
+}
+
+/* ======= LABEL ======= */
+.label-color{
+    color: var(--font-color-secondary);
+}
+
+/* ======= FIELDSET ======= */
+fieldset {
+    border: 0;
+    gap: var(--gap-sm)
+}

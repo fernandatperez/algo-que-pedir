@@ -1,0 +1,94 @@
+/* ----------- MAIN SECTION ---------------- */
+.ingredient-edit-content {
+    max-width: 65em;
+}
+.header-title {
+    margin: 1em 0;
+}
+
+.ingredient-edit-section {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-h3);
+    justify-self: center;
+    margin-bottom: 1.671em;
+    row-gap: 1em;
+}
+/* 
+.ingredient-edit-section select {
+    padding: 0.5em 5em 0.5em 1.2em;
+    margin-bottom: 1em;
+    border: 1px solid var(--font-color-secondary);
+    border-radius: 0.5em;
+} */
+
+.ingredient-edit-section h3 {
+    color: var(--font-color-secondary);
+    font-weight: 400;
+}
+
+.ingredient-edit-section .animal-origin-display {
+    align-items: center;
+    margin-top: 1em;
+    gap: 1em;
+}
+
+.input-ingredient-edit{
+    padding-left: 1.8em;
+}
+
+.animal-origin-display {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.animal-origin-display h3 {
+    margin:0;
+}
+
+section .btn-group-actions {
+    justify-content: flex-end;
+    padding: 0;
+}
+
+section.btn-group-actions.hidden {
+    display: none;
+}
+/* ----------------------------------------------- */
+
+/* QUERIES */
+
+@media (min-width: 769px) {
+    .no-hid {
+        display: flex;
+    }
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+    .section-title {
+        margin-top: 5em;
+    }
+}
+
+@media (max-width: 430px) {
+    section.btn-group-actions {
+        justify-content: space-between;
+        padding: 0;
+    }
+    .btn-group-actions .btn {
+        width: 40%;
+    }
+    
+    .main-body {
+        width: 80%;
+    }
+    .section-title {
+        margin: 2em 0 1em 0;
+    }
+
+    .ingredient-edit-section {
+        margin-bottom: 2em;
+    }
+}

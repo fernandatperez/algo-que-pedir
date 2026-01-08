@@ -1,0 +1,88 @@
+/* ==== FLEX TABLE ==== */
+
+/* CONTAINER DE GRID PARA TABLA */
+.flex-table-container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 1rem; 
+}
+
+/* template de tabla (filas) */
+.flex-table-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-color);
+    /* grid-template-columns: 2fr 3fr 1fr 1fr; */ /* modificable en cada pag */
+}
+.flex-table-row:last-child {
+    border: 0; /* para que quede el borde final redondeado */
+}
+
+/* ESTILO DE CADA CELDA */
+/* .flex-table-row  */
+.cell {
+    width: 100%;
+    flex: 1; /* ancho igual por defecto */
+    padding: 1em;
+    overflow: hidden;
+    align-items: center;
+    height: fit-content;
+}
+
+.flex-table-row label{
+    width: 100%;
+}
+
+
+/* HEADER DE TABLA */
+.table-header {
+    font-weight: 700;
+}
+
+/* COLUMNAS CENTRADAS */
+.col-centered {
+  text-align: center;
+  justify-content: center;
+}
+
+/* ICONOS */
+.flex-table-row i {
+    font-size: 1.2em;
+}
+
+.cell .ph-trash {
+    color: var(--primary-color);
+}
+
+/* ----- MEDIA QUERIES ----- */
+
+/** Tablet: 401px - 768 px. */
+@media screen and (min-width: 431px) and (max-width: 768px) {
+
+    .flex-table-container .cell {
+        padding: .8em;
+        /* width: min-content; */
+        text-overflow: ellipsis;
+    }
+}
+
+/** Mobile: max: 400px */
+@media screen and (max-width: 430px) {
+
+    /* .grid-table-container .grid-table-row {
+        grid-template-columns: repeat(4,1fr); modificable
+    } */
+    .flex-table-row{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .flex-table-container .cell {
+        text-overflow: ellipsis;
+    }
+    
+}
