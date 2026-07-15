@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
+# 🍔 Algo que Pedir
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web desarrollada con **React + TypeScript** que implementa el frontend de una plataforma de pedidos de comida.
 
-Currently, two official plugins are available:
+Permite a los usuarios autenticarse, explorar locales, armar pedidos y gestionarlos de manera dinámica desde una interfaz mobile, integrándose con una API REST.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 💻 Tecnologías utilizadas
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=react,ts,vite,vitest&perline=4" />
+  </a>
+</p>
 
-## Expanding the ESLint configuration
+<p align="center">
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=reactrouter&logoColor=white" />
+  <img src="https://img.shields.io/badge/Material_UI-007FFF?style=flat&logo=mui&logoColor=white" />
+  <img src="https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white" />
+</p>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Funcionalidades
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Autenticación de usuarios con validaciones y manejo de errores.
+- Búsqueda y visualización de locales y productos.
+- Armado y edición de pedidos con reglas de negocio (sin duplicación de ítems).
+- Checkout con validación de método de pago.
+- Gestión e historial de pedidos.
+- Sistema de calificación de locales.
+- Validaciones de perfil y criterios personalizados.
+- Manejo centralizado de errores.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🧠 Enfoque Técnico
+
+- Arquitectura basada en componentes reutilizables.
+- Separación de responsabilidades mediante capa de servicios.
+- Integración con API REST.
+- Tipado fuerte con TypeScript.
+- Testing de integración (Vitest) y end-to-end (Playwright).
+- Código validado con ESLint.
+
+---
+
+## ⚙️ Instalación
+
+Requisitos: **Node.js (>= 18.x)** y **npm** o **yarn**
+
+```bash
+git clone https://github.com/danacreyes/algo-que-pedir-2025-react.git
+cd algo-que-pedir-2025-react
+npm install
+npm run dev
 ```
+Abrí tu navegador en [http://localhost:5173](http://localhost:5173)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+--- 
+## 👩‍💻 Proyecto desarrollado en equipo
+- Catalina Correa
+- Nicolas Cernadas
+- Dana Cossettini Reyes
+- Maximiliano Andres Bianchimano
+- Fernanda Perez
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
