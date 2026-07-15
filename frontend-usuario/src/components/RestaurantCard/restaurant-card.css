@@ -1,0 +1,33 @@
+.main-box-restaurant{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin-bottom: 0.5em; */
+    /* margin-top: 0.5em; */
+    background-color: rgb(255, 255, 255);
+    border: 1px #e2e2e2 solid;
+    border-radius: 10px;
+    padding: 0.4em;
+}
+
+div.box-item-restaurant{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 1em;
+    /* padding: 1em 0 0.2em 0; */
+    text-align: left;
+    /* height: 100%; */
+}
+
+.img-restaurant{
+    width: 4.2em;
+    height: 3.8em;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.icon-custom{
+    color: gray;
+    padding-right: 0.5em;
+}

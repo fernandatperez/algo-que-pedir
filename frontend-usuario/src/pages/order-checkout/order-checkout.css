@@ -1,0 +1,187 @@
+/* ==================== Main Container ==================== */
+div.order-checkout-container {
+    /* padding-bottom: 224px; */
+    width: 100vw;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+}
+
+div.order-content-container {
+    padding-top: 16px;
+    overflow-y: scroll;
+    flex: 1;
+}
+
+/* ==================== Restaurant Info ==================== */
+div.restaurant-section {
+    margin-bottom: 24px;
+}
+
+h6.section-title-order-checkout {
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+div.restaurant-info-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+img.restaurant-logo {
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid gray;
+}
+
+p.restaurant-name {
+    font-weight: bold;
+}
+
+p.restaurant-details {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* ==================== Divider ==================== */
+hr.section-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* ==================== Items Section ==================== */
+div.items-section {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+div.item-row {
+    /* overflow-y: scroll; */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+div.item-info {
+    flex: 1;
+}
+
+div.item-name-container {
+    display: flex;
+    margin-bottom: 4px;
+}
+
+p.item-name {
+    font-weight: bold;
+}
+
+p.item-quantity {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+p.item-unit-price {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+div.item-price-actions {
+    display: flex;
+    flex-direction: column;
+    width: 3em;
+    align-items: center;
+}
+
+p.item-total {
+    font-weight: bold;
+    align-self: flex-end;
+}
+
+button.remove-item-button {
+    margin-top: 12.8px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* ==================== Summary Section ==================== */
+div.summary-section {
+    margin-bottom: 24px;
+}
+
+div.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+p.summary-label {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+p.summary-value {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* ==================== Total Section ==================== */
+div.total-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+h6.total-label {
+    font-weight: bold;
+}
+
+h6.total-value {
+    font-weight: bold;
+}
+
+/* ==================== Payment Method Section ==================== */
+div.payment-section {
+    margin-bottom: 24px;
+}
+
+p.payment-label {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+div.payment-select {
+    background-color: white;
+    border-radius: 8px;
+}
+
+/* si no le pones la porqueria esta no anda */
+div.payment-select .MuiOutlinedInput-notchedOutline {
+    border-color: #e0e0e0;
+}
+
+
+/* ==================== Fixed Bottom Buttons ==================== */
+div.bottom-buttons-container {
+    /* position: fixed; */
+    /* bottom: var(--bottom-nav-height); */
+    /* left: 0; */
+    width: 100%;
+    padding: 16px;
+    background-color: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+button.confirm-order-button {
+    border-radius: 8px;
+    padding: 12px 0;
+    text-transform: none;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+button.clear-cart-button {
+    border-radius: 8px;
+    padding: 12px 0;
+    text-transform: none;
+    font-weight: bold;
+    border-width: 2px;
+}

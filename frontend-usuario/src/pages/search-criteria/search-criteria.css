@@ -1,0 +1,201 @@
+/* ============= SEARCH SECTION ============= */
+.main-container-search{
+    display: flex;
+    flex-direction: column; 
+    padding: 0; 
+    gap: 1em;
+    font-family: var(--primary-font);
+    height: 100%;
+    width: 100vw;
+}
+
+div.main-container-check{
+    min-height: auto;
+    padding: 1em;
+    border-radius: 15px;
+    border: solid 1px lightgray;
+    overflow: visible;
+    margin: 0 1em 0 1em;
+}
+
+div.box-counter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6em;
+}
+
+div.container-counter{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+}
+
+/* TITLE SECTION */
+.title-box{
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+h6.title-main-container{
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    width: 100%;
+}
+
+/* BOTON */
+.box-button{
+    display: flex;
+    justify-content: end;
+    padding-right: 0.5em;
+    overflow: none;
+}
+
+button.btn-add{
+    background-color: #E82933;
+    padding: 0.2em;
+    min-width: 0;
+    box-shadow: none;
+}
+
+/* --- Estilos para los Chips (Palabras buscadas) --- */
+
+.input-frases-wrapper{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.frase-chip-container {
+    padding-top: 8px; 
+    padding-left: 16px; 
+    padding-right: 16px;
+    margin-bottom: 8px; 
+}
+
+.frase-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    margin-right: 8px;
+    margin-top: 4px; 
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: #333;
+}
+
+.frase-chip-clear-icon {
+    margin-left: 4px;
+    padding: 0;
+    min-width: 0;
+    height: 18px;
+    width: 18px;
+    color: #999; 
+}
+
+.input-frases-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.input-frases-field input {
+    font-size: 1rem;
+    border: none;
+}
+
+.input-frases-field label {
+    color: gray;
+}
+
+.icon-button-control {
+    padding: 0;
+    min-width: 0;
+    color: gray;
+}
+
+.empty-msg{
+    color:#333;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+div.fieles-section{
+    margin-bottom: 0.5em;
+}
+
+button.btn-search-criteria{
+    width: 90%;
+    margin: 0 1em 0 1.2em;
+}
+
+/* RESTAURANT CARD */
+/* === CARD BASE === */
+.restaurant-card {
+    display: flex;
+    border-radius: 0.5em;
+    overflow: hidden;
+    /* cursor: pointer; */
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    margin-bottom: 12px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    height: 4em;
+    padding: 0;
+}
+
+/* === IMAGE ON LEFT (same size as DishCard image) === */
+.restaurant-image-left-profile {
+    width: 28%;
+    height: 4em;  
+    object-fit: cover;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+/* === CONTENT AREA === */
+.restaurant-card-content {
+    flex: 1;
+    /* padding: 12px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.restaurant-title {
+    font-weight: bold;
+    /* color: gray; */
+    /* color: #2e2e2e; */
+}
+
+.restaurant-description {
+    color: rgba(0,0,0,0.6);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-top: 4px;
+}
+
+/* === ICON RIGHT SIDE === */
+.restaurant-icon {
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: gray;
+}
+
+@media (min-width: 600px) {
+    div.container-counter{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

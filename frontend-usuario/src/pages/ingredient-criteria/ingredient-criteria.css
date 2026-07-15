@@ -1,0 +1,103 @@
+/* .box-section-criteria{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+} */
+
+div.box-ingredients{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+div.ingredients-group{
+    padding: 0 1em 1em 1em;
+    align-items: center;
+}
+
+div.ingredient-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+    width: 90%;
+}
+
+.no-ingredients{
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+/* MODAL */
+
+div.modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    gap: 1rem;
+    margin: 0 auto;
+    
+}
+.card-modal{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 500px;
+    width: 90%;
+    gap: 0.5em;
+    align-items: center;
+    
+}
+
+.modal-items{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    align-items: flex-start;
+    width: 55%;
+    margin: 0 auto;
+    gap: 1em
+}
+
+.div-scroll-ingredients{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    max-height: 30vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.label-item{
+    display: flex;
+    gap: 0.2em;
+}
+
+.btn-group{
+    display: flex;
+    gap: 0.5em;
+    width: 100%;
+}
+
+button.btn-add-ingredient{
+    /* position: fixed; */
+    border-radius: 8px;
+    padding: 9.6px 0;
+    text-transform: none;
+    /* font-weight: bold; */
+    width: 100%;
+}
+
+.advise-icon{
+    font-size: xx-large;
+    color: var(--primary-color);
+}

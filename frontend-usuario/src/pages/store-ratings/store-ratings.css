@@ -1,0 +1,44 @@
+div.main-container {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+}
+.go-back-and-title-section {
+    position: absolute;
+}
+
+.go-back-btn {
+    position: fixed;
+    top: 1.5em;
+    left: 1.5em;
+}
+
+section.section-title-and-tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.section-title {
+    position: fixed;
+    top: 0.5em;
+    left: 7.5em;
+}
+
+.main-body-and-form {
+    position: fixed;
+    top: 6em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.no-unrated-stores-card {
+    background: none;
+    margin-top: 1.5em;
+    width: 20em;
+    /* position: absolute; */
+    /* left: 3.5em; */
+    /* top: 5.5em; */
+}

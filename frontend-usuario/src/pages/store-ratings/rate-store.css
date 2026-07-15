@@ -1,0 +1,48 @@
+.rating-section {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button.spaced-top {
+    width: 8em;
+    left: 10.3em;
+}
+
+.experience-description-section {
+    position: relative;
+    width: fit-content;
+}
+
+textarea.experience-description-textarea {
+    margin-top: 0.5em;
+    padding: 0.5em;
+    height: 15em; 
+    min-width: 25em;  
+    resize: none; 
+    border-radius: 0.5em;
+    background: none;
+    border: 0.01em solid black;
+}
+
+.characters-counter {
+    width: 3em;
+    border-radius: 0.5em;
+    position: absolute;
+    left: 21.5em;
+    bottom: 1em;
+    color: white;
+    box-shadow: 0.15em 0.3em 0.15em rgba(92, 92, 92, 0.2);
+}
+
+.safe {
+    background-color:#458900;
+}
+
+.warning {
+    background-color:#FFD700;
+}
+
+.exceeded {
+    background-color:#E82933;
+}

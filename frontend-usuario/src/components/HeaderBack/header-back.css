@@ -1,0 +1,23 @@
+.header-container {
+    position: sticky; /* cambiar esto por que se pone borrozo, no me acuero como era */
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 16px;
+    width: 100%;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+button.header-back-button {
+    position: absolute;
+    left: 0;
+    color: #000;
+}
+

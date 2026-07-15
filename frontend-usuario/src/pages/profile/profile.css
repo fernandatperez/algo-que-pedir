@@ -1,0 +1,123 @@
+.container-profile{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 1em; 
+    gap: 1.15em;
+    font-family: var(--primary-font);
+}
+
+.text-with-icon{
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.icon-profile{
+    position: absolute;
+    top: 50%;
+    color: black;
+    transform: translateY(-50%);
+    margin-left: 0.5em;
+}
+
+.primary-title-profile{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.section-profile{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+form.group-section, div.group-section{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.8em;
+    padding: 0 0.2em;
+    width: 100%;
+}
+
+.avatar-img{
+    display: flex;
+    justify-content: center;
+}
+
+.grid-section{
+    align-items: center;
+}
+
+.restaurant-section{
+    min-height: fit-content;
+}
+
+/* PREFERENCES */
+div.form-field-preferences{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.preference-group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.box-preferences{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* FORMULARIO */
+div.form-field{
+    gap: 0.5em;
+}
+
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-profile{
+    display: flex;
+    justify-content: end;
+    color: hsl(1, 77%, 35%)
+}
+
+.input-profile {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.label-profile {
+    width: 100%;
+    display: block;
+    font-weight: 500;
+}
+
+.input-wrapper-direction{
+    display: flex;
+    flex-direction: column;
+}
+.input-wrapper-div{
+    display: flex;
+    gap: 0.5em;
+}
+
+/* INGREDIENT CRITERIA */
+div.main-box-preferences{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.icon-style{
+    color: black;
+    padding: 0;
+}

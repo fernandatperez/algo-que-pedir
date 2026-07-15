@@ -1,0 +1,258 @@
+/* ============================= Fonts ============================= */
+
+@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ============================= Variables ============================= */
+
+@import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css);
+@import url(https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css);
+
+/* ============================= Variables ============================= */
+
+:root {
+    /* --primary-font: "Roboto", sans-serif; */
+    --primary-font: "Montserrat", sans-serif;
+    --icon-font: "Roboto", sans-serif;
+    --font-color-primary: #171212;
+    --font-color-secondary: #606060;
+    --font-color-tertiary: rgb(167, 142, 142);
+    --font-color-special: #F9F9F9;
+    font-size: 16px;
+    --background-color-primary: #F9F9F9;
+    --background-color-secondary: #dbd9d9;
+    --background-color-alternate: #f1eeee;
+    --border-light-color: #bdc3c9;
+    --alternative-color: #FA954D;
+    --icon-color: #898989;
+    --error-text-color: red;
+    --bottom-nav-height: 3.5rem;
+    
+    --primary-color: #E82933;
+    --button-hover-color: hsl(1, 77%, 45%);
+    --button-active-color: hsl(1, 77%, 35%);
+    --button-color-secondary: #949292;
+    
+    --border-radius-rounded: 50px;
+    --border-radius-default: 10px;
+    --border-color: #ccc;
+
+    --font-h1: 2.5rem;
+    --font-h2: 2rem;
+    --font-h3: 1.5rem;
+    --font-h4: 1.25rem;
+    --font-text: 1.2rem;
+
+    --gap-sm: 1em;
+    --gap-md: 2em;
+    --gap-lg: 3em;
+}
+
+/*
+SE PUEDE COMPARTIR EL ICONO DE LA PAGINA
+EL NAV
+EL FOOTER PARA EL CELU
+LOS BOTONES
+*/
+
+/* VER SI CAMBIAR DE LUGAR*/
+/* ============================= Main-icon ============================= */
+
+.pot-container { 
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-rounded);
+    height: 3.2rem;
+    width: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* padding: 1em;*/ /* esto evita que se deforme */
+}
+.pot-container > i {
+    font-size: 1.85rem;
+    color: white;
+}
+.pot-container > i:hover{
+    animation: gentle-spin 0.3s ease-in-out 1;
+}
+
+/* hacer que las tarjetas cambien de tamaño no la linea eso se puede creo
+que el footer en cell se vea bien
+mejorar la anmacion */
+
+@keyframes gentle-spin {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* ============================= Reset ============================= */
+
+*, *::before, *::after, html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { font-family: var(--primary-font); } /* sin esto no se ven los iconos */
+
+body { 
+  /* background-color: var(--background-color-primary); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-wrapper {
+    max-width: 430px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.outlet-wrapper {
+    flex: 1; /* esto es importante!!! asi ocupa toda la pagina */
+    /* min-height: 0; */
+    overflow-y: auto; /* importante para que el hijo maneje su propio scroll, si no pone toda la pagina */
+    display: flex;
+    /* flex-direction: column; */
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* Esto se necesita para que los inputs hereden la fuente */
+input, select, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.btn-empty, button {
+    all: unset;        /* Quita todos los estilos heredados */
+    display: inline-block; /* Necesario para que siga comportándose como botón */
+    cursor: pointer;   /* Opcional, si quieres que parezca clickeable */
+    font-size: var(--font-h4);
+}
+
+/* =========== BOTONES =========== */
+/* Esto viene del css anterior */
+
+button.btn-primary{
+  background-color: #E82933;
+  color: white;
+  padding: 0.8em;
+  width: 100%;
+  border-radius: 6px;
+  text-transform: none;
+  box-shadow: none;
+}
+
+button.btn-secondary{
+  width: 100%;
+  color: #E82933;
+  background-color: #fff;
+  border-color: #E82933;
+  border: 1px solid;
+  padding: 0.6em;
+  border-radius: 6px;
+  text-transform: none;
+  box-shadow: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--font-color-primary);
+}
+ /* TAMAÑOS DE ENCABEZADOS */
+h1 {
+  font-size: var(--font-h1);
+}
+h2 {
+  font-size: var(--font-h2);
+}
+h3 {
+  font-size: var(--font-h3);
+}
+h4 {
+  font-size: var(--font-h4);
+}
+
+/* ============================= Active Class ============================= */
+.active {
+  font-weight: bold;
+  color: black;
+}
+
+/* ============================= Sizing ============================= */
+
+.w-50 {
+  width: 50% !important; 
+  /* es important porque si se usa es porque se requiere (despues explico) */
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.ellipsis-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;       /* o inline-block */
+  width: 100%;          /* dentro de un contenedor con min-width: 0 */
+}
+
+.text-wrapper {
+  min-width: 0;
+  flex: 1;
+}
+
+
+/* ============================= Fonts ============================= */
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-regular {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header-title {
+  font-size: var(--font-h1);
+  font-weight: 700;
+  font-style: normal;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  align-self: flex-start; /* En todas las pages está a la izquierda */
+  /* tiene que estar dentro de flex */
+}
+
+.subtitle {
+  font-size: var(--font-h2);
+  font-weight: 600;
+  font-style: normal;
+  margin: 0;
+  align-self: flex-start; /* En todas las pages está a la izquierda */
+  /* tiene que estar dentro de flex */
+}
+
+.gray-text{
+  color: var(--font-color-secondary);
+}
+
+/* ============================= Media Queries ============================= */
+/* vista en celular */
+@media (max-width: 430px) {
+  .hide-on-mobile {
+    display: none;
+  }
+}
