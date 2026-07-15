@@ -1,0 +1,60 @@
+/* Slide Button */
+.slide-button {
+    position: relative;
+}
+
+.background-div {
+    height: 1.8em;
+    width: 3.5em;
+    background-color: var(--background-color-alternate);
+    border-radius: 50px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.circle-slide {
+    position: absolute;
+    left: 8%;
+    width: 1.65em;
+    height: 1.62em;
+    background-color: var(--background-color-primary);
+    border-radius: 0.9em;
+    transform: translateX(-5%);
+
+    box-shadow: 0.15em 0.1em 0.3em rgba(0,0,0,0.2);
+}
+
+.toggle {
+    position: absolute;
+    left: 10%;
+    top: 25%;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.toggle:checked + .background-div {
+    background: var(--button-hover-color);
+}
+
+.toggle:checked {
+    transform: translateX(150%)
+}
+
+.toggle:checked + .background-div .circle-slide {
+    box-shadow: -0.15em 0.1em 0.3em rgba(0,0,0,0.2);
+    transform: translateX(90%);
+}
+
+/* Disable Slide */
+.disabled-slide {
+    background-color: none;
+    color: #f0f0f0;          
+    cursor: not-allowed;      
+    opacity: 0.6;             
+}
+
+.disabled-slide .toggle:checked {    
+  cursor: not-allowed;        
+}

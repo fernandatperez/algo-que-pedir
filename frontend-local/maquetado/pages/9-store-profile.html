@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/nav-bars.css">
+    <link rel="stylesheet" href="../css/flex-grid.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/component-css/input.css">
+    <link rel="stylesheet" href="../css/component-css/number-input.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/pages-css/9-store-profile.css">
+
+    <title>Informacion del Local</title>
+</head>
+<body>
+        <!-- Header -->
+        <header class="main-nav">
+
+            <div class="icon-and-text">
+                <a href="../pages/" class="pot-container">
+                    <i class="ph-fill ph-cooking-pot"></i>
+                </a>
+                <a href="../pages/">
+                    <span class="main-title">Algo que pedir</span> 
+                </a>
+            </div>
+
+            <nav class="options-and-icon">
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty">Menú</button> 
+                <button class="btn-empty">Ingredientes</button> 
+                <button class="btn-empty active">Cuentas</button> 
+                <!-- <i class="ph ph-list hidden"></i> -->
+                <label id="nav-hamburger" class="hidden">
+                    <input type="checkbox" id="hamburger-toggle">
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                </label>
+                    <i class="ph ph-user-circle user-img"></i>
+                <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
+            </nav>
+
+        </header>
+
+    <!-- Content -->
+    <main class="container-column">
+        <article class="container-column main-content">
+            <h1 class="header-title">Informacion del local</h1>
+            <form action="" id="form-store-profile" class="container-column form-store-profile">
+                <!-- Datos del Local  -->
+                <fieldset form="form-store-profile" name="store-info"
+                class="content-section form-section-store-info">
+                    <div class="container-column store-info">
+                        <div class="container-column input-group">
+                            <label for="store-name" class="label-color">Nombre del local*</label>
+                            <input type="text" id="store-name" 
+                            class="input-primary"
+                            placeholder="Carlo's Bake Shop">
+                        </div>
+                        <div class="container-column input-group">
+                            <label for="url-store-img" class="label-color">URL de la imagen*</label>
+                            <input type="text" id="url-store-img"
+                            class="input-primary"
+                            placeholder="http://images.google.com/CarlosBakeShop.jag">
+                        </div>
+                        
+                    </div>
+                    <div class="img-store-container"><img src="../assets/img/CarlosBakeShop.jpg" alt="local" class="img-store-profile"></div>
+                </fieldset>
+                <!-- Direccion  -->
+                <fieldset form="form-store-profile" name="store-dir"
+                class="container-column content-section">
+                    <h2 class="subtitle">Dirección</h2>
+                    <div class="grid-cols-2 input-group-dir ">
+                        <div class="container-column input-group">
+                            <label for="store-dir" class="label-color">Dirección*</label>
+                            <input type="text" id="store-dir" 
+                            class="input-primary"
+                            placeholder="Escribir">
+                        </div>
+                        <div class="container-column input-group">
+                            <label for="store-altitude" class="label-color">Altura*</label>
+                            <input type="number" id="store-altitude"
+                            class="input-primary number-input"
+                            placeholder="Escribir numero...">
+                        </div>
+                        <div class="container-column input-group">
+                            <label for="store-latitude" class="label-color">Latitud*</label>
+                            <input type="number" id="store-latitude"
+                            class="input-primary number-input"
+                            placeholder="Escribir numero...">
+                        </div>
+                        <div class="container-column input-group">
+                            <label for="store-longitude" class="label-color">Longitud*</label>
+                            <input type="number" id="store-longitude"
+                            class="input-primary number-input"
+                            placeholder="Escribir numero...">
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset form="form-store-profile" name="store-comission" 
+                class="container-column content-section form-section-store-commission">
+                    <h2 class="subtitle">Porcentajes</h2>
+                    <div class="grid-cols-2 input-group-dir ">
+                        <div class="container-column input-group">
+                            <label for="app-commission" class="label-color">Porcentaje de comision con la app*</label>
+                            <input type="number" id="app-commission"
+                            class="input-primary number-input"
+                            placeholder="Escribir numero...">
+                        </div>
+                        <div class="container-column input-group">
+                            <label for="author-commission" class="label-color">Porcentaje de comision con autores de platos*</label>
+                            <input type="number" id="author-commission"
+                            class="input-primary number-input"
+                            placeholder="Escribir numero...">
+                        </div>                    
+                    </div>
+                </fieldset>
+    
+                <fieldset form="form-store-profile" name="store-payment-methods" 
+                class="container-column content-section">
+                    <h2 class="subtitle">Metodos de Pago</h2>
+                    <div class="payments-checkbox-group">
+                        <label for="efectivo" class="label-color">
+                            <input type="checkbox" id="efectivo" 
+                            name="efectivo" 
+                            value="EFECTIVO"
+                            class="payment-checkbox">
+                            <span>Efectivo</span>
+                        </label>
+        
+                        <label for="qr" class="label-color">
+                            <input type="checkbox" id="qr" 
+                            name="qr" 
+                            value="QR"
+                            class="payment-checkbox">
+                            <span>QR</span>
+                        </label>
+    
+                        <label for="transferencia" class="label-color">
+                            <input type="checkbox" id="transferencia" 
+                            name="transferencia" 
+                            value="TRANSFERENCIA"
+                            class="payment-checkbox">
+                            <span>Transferencia</span>
+                        </label>
+    
+                    </div>
+                </fieldset>
+                
+                <section class="btn-group-actions">
+                    <button disabled class="btn btn-secondary btn-store">Descartar <span class="p-cambios display-none-mobile">Cambios</span></button>
+                    <button disabled class="btn btn-primary btn-store">Guardar <span class="p-cambios display-none-mobile">Cambios</span></button>
+                </section>
+            </form>
+        </article>
+    </main>
+
+</body>
+</html>

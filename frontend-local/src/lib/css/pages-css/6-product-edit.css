@@ -1,0 +1,117 @@
+/* -- GENERALES -------------------------- */
+.header-title {
+    margin: 1em 0em;
+}
+.main-content {
+    transition: .3s font-size ease-in-out;
+}
+
+.h3-product-edit {
+    font-weight: 700;
+}
+
+.form-product-edit {
+    gap: var(--gap-sm);
+}
+
+/* -- PRODUCT INFO SECTION -------------------------- */
+
+.form-section-product-info {
+    gap: var(--gap-md);
+}
+
+.product-info {
+    align-items: flex-start;
+    justify-content: space-between;
+    flex: 1;
+    gap: var(--gap-sm);
+}
+
+.img-edit-container {
+    flex: 1;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+.img-product-edit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.5em;
+}
+
+.description-textarea {
+    height: 10em;
+    width: 10em;
+    /* min-height: 10em; */
+    /* max-height: 10em; */
+    min-width: 100%;
+    max-width: 100%;
+    
+    resize: none;
+}
+
+/* -- COST SECTION -------------------------- */
+.switch-button-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* -- INGREDIENTS SECTION -------------------------- */
+.form-section-product-ingredients {
+    align-items: flex-start;
+}
+.product-ingredients-cost-subtitle {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    column-gap: var(--gap-sm);
+}
+
+/* MODIFICACIONES PARA MI TABLA */
+/* Cantidad de columnas */
+/* .product-edit-ingredients-table .grid-table-row {
+    grid-template-columns: 2fr 3fr 1fr 1fr;  
+} */
+/* texto de segunda columna */
+.product-edit-ingredients-table-content .cell:nth-child(2) {
+    font-weight: 600;
+    color: var(--font-color-tertiary);
+}
+
+/* -- ACTION BUTTONS -------------------------- */
+.btn-dish{
+    padding: 1em;
+}
+
+.modal-checkbox label{
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+/* -- MEDIA QUERIES -- */
+
+/** Tablet: 401px - 768 px. */
+@media screen and (min-width: 431px) and (max-width: 768px) {
+    /* Vacía ... */
+}
+
+/** Mobile: max: 400px */
+@media screen and (max-width: 430px) {
+
+    .form-section-product-info {
+        flex-direction: column;
+    }
+    
+    .product-edit-ingredients-table .grid-table-row {
+        /* grid-template-columns: repeat(4,1fr); */
+        grid-template-columns: 2fr 2fr 1.5fr 1.5fr;  
+    }
+    .grid-table-row .cell {
+        /* font-size: .8em; */
+        padding: .6em .3em;
+    }
+}

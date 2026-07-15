@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/component-css/user-details.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/pages-css/3-orders.css">
+    
+    <title>Current Orders</title>
+</head>
+<body>
+
+    <section class="container-column">
+
+        <!-- Header -->
+        <header class="main-nav">
+
+            <div class="icon-and-text">
+                <a href="../pages/" class="pot-container">
+                    <i class="ph-fill ph-cooking-pot"></i>
+                </a>
+                <a href="../pages/">
+                    <span class="main-title">Algo que pedir</span> 
+                </a>
+            </div>
+
+            <nav class="options-and-icon">
+                <button class="btn-empty active">Pedidos</button> 
+                <button class="btn-empty">Menú</button> 
+                <button class="btn-empty">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
+                <!-- <i class="ph ph-list hidden"></i> -->
+                <label id="nav-hamburger" class="hidden">
+                    <input type="checkbox" id="hamburger-toggle">
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                </label>
+                    <i class="ph ph-user-circle user-img"></i>
+                <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
+            </nav>
+
+        </header>
+
+        <!-- Tabs and content -->
+        <main class="title-tabs-grid">
+
+            <section class="line">
+                <div class="title-tabs">
+                    <h1 class="title">Pedidos actuales</h1>
+                    <nav class="tabs">
+                        <a class="btn-empty tab active">Pendientes</a>
+                        <a class="btn-empty tab">Preparados</a>
+                        <a class="btn-empty tab">Entregados</a>
+                        <a class="btn-empty tab">Cancelados</a>
+                    </nav>
+                </div>    
+            </section>
+
+            <!-- Orders grid -->
+            <section class="main-grid">
+
+                <!-- Single order -->
+                <article class="grid-item">
+
+                    <header class="order">Pedido #1234</header>
+
+                    <div class="user">
+                        <i class="ph ph-user-circle"></i>
+                        <div class="user-info">
+                            <div class="name">Sofía Miller</div>
+                            <div class="username"><strong>usuario:</strong> smiller2006</div>
+                        </div>
+                    </div>
+
+                    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+
+                    <address class="address-container">
+                        <div class="pin-container">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <div class="address-coordinates">
+                            <span class="address"><strong>Av siempre viva 555</strong></span>
+                            <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                        </div>
+                    </address>
+
+                    <div class="payment">
+                        <i class="ph ph-credit-card"></i> 
+                        <span class="payment-text">Pago con tarjeta de crédito</span>
+                    </div>
+
+                    <div class="action-container">
+                        <button class="btn btn-primary">Preparar</button>
+                    </div>
+
+                </article>
+
+                <!-- Single order -->
+                <article class="grid-item">
+
+                    <header class="order">Pedido #1234</header>
+
+                    <div class="user">
+                        <i class="ph ph-user-circle"></i>
+                        <div class="user-info">
+                            <div class="name">Sofía Miller</div>
+                            <div class="username"><strong>usuario:</strong> smiller2006</div>
+                        </div>
+                    </div>
+
+                    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+
+                    <address class="address-container">
+                        <div class="pin-container">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <div>
+                            <div class="address"><strong>Av siempre viva 555</strong></div>
+                            <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                        </div>
+                    </address>
+
+                    <div class="payment">
+                        <i class="ph ph-credit-card"></i> 
+                        <span class="payment-text">Pago con tarjeta de crédito</span>
+                    </div>
+
+                    <div class="action-container">
+                        <button class="btn btn-primary">Preparar</button>
+                    </div>
+
+                </article>
+
+                <!-- Single order -->
+                <article class="grid-item">
+
+                    <header class="order">Pedido #1234</header>
+
+                    <div class="user">
+                        <i class="ph ph-user-circle"></i>
+                        <div class="user-info">
+                            <div class="name">Sofía Miller</div>
+                            <div class="username"><strong>usuario:</strong> smiller2006</div>
+                        </div>
+                    </div>
+
+                    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+
+                    <address class="address-container">
+                        <div class="pin-container">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <div>
+                            <div class="address"><strong>Av siempre viva 555</strong></div>
+                            <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                        </div>
+                    </address>
+
+                    <div class="payment">
+                        <i class="ph ph-credit-card"></i> 
+                        <span class="payment-text">Pago con tarjeta de crédito</span>
+                    </div>
+
+                    <div class="action-container">
+                        <button class="btn btn-primary">Preparar</button>
+                    </div>
+
+                </article>
+
+                <!-- Single order -->
+                <article class="grid-item">
+
+                    <header class="order">Pedido #1234</header>
+
+                    <div class="user">
+                        <i class="ph ph-user-circle"></i>
+                        <div class="user-info">
+                            <div class="name">Sofía Miller</div>
+                            <div class="username"><strong>usuario:</strong> smiller2006</div>
+                        </div>
+                    </div>
+
+                    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+
+                    <address class="address-container">
+                        <div class="pin-container">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <div>
+                            <div class="address"><strong>Av siempre viva 555</strong></div>
+                            <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                        </div>
+                    </address>
+
+                    <div class="payment">
+                        <i class="ph ph-credit-card"></i> 
+                        <span class="payment-text">Pago con tarjeta de crédito</span>
+                    </div>
+
+                    <div class="action-container">
+                        <button class="btn btn-primary">Preparar</button>
+                    </div>
+
+                </article>
+
+                <!-- Single order -->
+                <article class="grid-item">
+
+                    <header class="order">Pedido #1234</header>
+
+                    <div class="user">
+                        <i class="ph ph-user-circle"></i>
+                        <div class="user-info">
+                            <div class="name">Sofía Miller</div>
+                            <div class="username"><strong>usuario:</strong> smiller2006</div>
+                        </div>
+                    </div>
+
+                    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+
+                    <address class="address-container">
+                        <div class="pin-container">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <div>
+                            <div class="address"><strong>Av siempre viva 555</strong></div>
+                            <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                        </div>
+                    </address>
+
+                    <div class="payment">
+                        <i class="ph ph-credit-card"></i> 
+                        <span class="payment-text">Pago con tarjeta de crédito</span>
+                    </div>
+
+                    <div class="action-container">
+                        <button class="btn btn-primary">Preparar</button>
+                    </div>
+
+                </article>
+
+                <!-- Single order -->
+                <article class="grid-item">
+
+                    <header class="order">Pedido #1234</header>
+
+                    <div class="user">
+                        <i class="ph ph-user-circle"></i>
+                        <div class="user-info">
+                            <div class="name">Sofía Miller</div>
+                            <div class="username"><strong>usuario:</strong> smiller2006</div>
+                        </div>
+                    </div>
+
+                    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+
+                    <address class="address-container">
+                        <div class="pin-container">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <div>
+                            <div class="address"><strong>Av siempre viva 555</strong></div>
+                            <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                        </div>
+                    </address>
+
+                    <div class="payment">
+                        <i class="ph ph-credit-card"></i> 
+                        <span class="payment-text">Pago con tarjeta de crédito</span>
+                    </div>
+
+                    <div class="action-container">
+                        <button class="btn btn-primary">Preparar</button>
+                    </div>
+
+                </article>
+
+                <!-- Single order -->
+                <article class="grid-item">
+
+                    <header class="order">Pedido #1234</header>
+
+                    <div class="user">
+                        <i class="ph ph-user-circle"></i>
+                        <div class="user-info">
+                            <div class="name">Sofía Miller</div>
+                            <div class="username"><strong>usuario:</strong> smiller2006</div>
+                        </div>
+                    </div>
+
+                    <p class="details">Hora: 12:30 PM | Artículos: 2 | Total: $25</p>
+
+                    <address class="address-container">
+                        <div class="pin-container">
+                            <i class="ph ph-map-pin"></i>
+                        </div>
+                        <div>
+                            <div class="address"><strong>Av siempre viva 555</strong></div>
+                            <div class="coordinates">Lat: 40.7128, Long: -74.0060</div>
+                        </div>
+                    </address>
+
+                    <div class="payment">
+                        <i class="ph ph-credit-card"></i> 
+                        <span class="payment-text">Pago con tarjeta de crédito</span>
+                    </div>
+
+                    <div class="action-container">
+                        <button class="btn btn-primary">Preparar</button>
+                    </div>
+
+                </article>
+
+            </section>
+
+        </main>
+        
+    </section>  
+        
+    </body>
+    </html>
+    

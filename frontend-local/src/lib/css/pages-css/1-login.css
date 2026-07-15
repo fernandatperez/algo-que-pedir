@@ -1,0 +1,139 @@
+/* ==== MAIN CONTAINER ====*/
+.login-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    font-size: 1.5em;
+    height: 100vh; /* ocupa toda la pantalla */
+    margin: 0;
+}
+
+/* ==== LOGIN SECTION ==== */
+.login-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: white;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+    width: 75%;
+    max-width: 40em;
+    min-width: 28em;
+    padding: 2em;
+    border-radius: 1em;
+    align-items: center;
+}
+
+/* ==== HEADER ==== */
+.header-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    gap: 0.5em;
+}
+
+.header-link{
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* separa icono y texto */
+}
+
+.title-header{
+    font-size: 2.3rem;
+    color: var(--font-color-primary);
+    font-weight: 700;
+}
+
+.icon-container{
+    /* el elemento padre les dice en que posicion tienen que ubicarse los hijos */
+    position: relative;
+    display: flex;
+}
+
+/* ==== FORM ==== */
+.form-container {
+    flex-direction: column;
+    display: flex;
+    gap: 1em;
+    width: 90%;
+}
+
+.form-field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 78%;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    margin: 0.2em !important;
+}
+
+.ph-eye-slash{
+    right: 0.8em;
+    cursor: pointer;
+}
+
+/* ==== FORM ACTIONS ==== */
+.form-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
+.register-section{
+    display: flex;
+    justify-content: center;
+    border: none;
+    color: var(--font-color-secondary);
+    margin-bottom: 3em;
+    gap: 0.5em;
+}
+
+.register-link{
+    color: var(--button-hover-color);
+    text-decoration: underline;
+}
+
+/* @media (min-width: 769px) {
+    .login-section{
+        font-size: 1.4em;
+    }
+    .main-title{
+        font-size: var(--h1);
+    }
+    
+} */
+
+
+@media (min-width: 431px) and (max-width: 768px) {
+    /* .form-group{
+        width: 90%;
+    } */
+}
+
+@media screen and (max-width: 430px) {
+    .login-section{
+        min-width: 90vw;
+        background-color: white;
+        box-shadow: none;
+        padding: 1em;
+    }
+    .form-group{
+        width: 90%;
+    }
+}

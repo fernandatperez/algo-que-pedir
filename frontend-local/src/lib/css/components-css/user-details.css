@@ -1,0 +1,66 @@
+:root {
+    --dark-gray: #374151;
+    --light-gray: #6b7280;
+    --lighter-gray: #e5e7eb;
+}
+
+/* ========== User ========== */
+.user {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
+.user > i { /* the first child */
+    font-size: 4.6em;
+    color: var(--light-gray)
+}
+
+.user .name {
+    font-size: var(--font-h4);
+    font-weight: bold;
+}
+.user-info .username {
+    font-size: var(--font-text);
+    /* color: burlywood; */
+    color: var(--font-color-tertiary);
+}
+/* 
+.ph-user-circle {
+    font-size: 2em;
+} */
+
+/* ========== Adress ========== */
+
+.address-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.pin-container {
+    background-color: hsl(220, 5%, 87%);
+    border-radius: var(--border-radius-default);
+    width: 3.5em;
+    height: 3.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pin-container i {
+    font-size: 2em;
+}
+.coordinates {
+    /* color: burlywood; */
+    color: var(--font-color-tertiary);
+}
+
+/* ========== Payment ========== */
+
+.payment {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    color: var(--dark-gray);
+}
+.payment i {
+    font-size: 2.2em;
+}

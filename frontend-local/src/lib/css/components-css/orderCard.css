@@ -1,0 +1,66 @@
+@import url('../components-css/user-details.css');
+
+/* ============================= Card ============================= */
+.order-card {
+    background-color: white;
+    padding: 2em;
+    border-radius: var(--border-radius-default);
+    border: 1px solid var(--border-color); 
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08); 
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+    transition: transform 0.2s ease;
+}
+.order-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ========== Order tag ========== */
+
+.order { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    width: 100%;
+    color: var(--light-gray)
+}
+
+/* ========== Details ========== */
+
+.details {
+    color: var(--dark-gray);
+}
+
+/* ========== Action Button Container ========== */
+
+.action-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    /* width: 100%;  */
+}
+
+.action-container button {
+    padding: 0.8em 1.6em;
+    font-size: var(--font-text);
+}
+.action-container button:active {
+    background-color: var(--button-active-color);
+}
+
+.btn-preparar {
+    background-color: var(--alternative-color);
+}
+
+/* ========== Text-Overflow Ellipsis ========== */
+/* .order, .user-info, .details, 
+.address-coordinates, .address, .coordinates {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+} */
+

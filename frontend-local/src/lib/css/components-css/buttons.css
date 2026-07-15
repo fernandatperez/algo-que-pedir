@@ -1,0 +1,172 @@
+/* ==== BUTTONS ==== */
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* margin: 0 auto; */
+    flex-wrap: wrap;
+}
+
+.btn-group-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 0 1em;
+}
+
+.btn-group-new-ingredient{
+    gap: 1em;
+    padding-left: 2em;
+    padding: 1em;
+    width: auto;
+}
+
+/* .btn-newIngredient{
+    width: 30%;
+    text-align: start;
+} */
+
+/* ==== PRIMARY BUTTON ==== */
+.btn-primary{
+    border: none;
+    color: white;
+    background-color: var(--primary-color);
+    padding: .5em;
+    border-radius: 0.5rem;
+}
+.btn-primary a{
+    color: white;
+}
+
+/* para que cuando pase el mouse por arriba, cambie le color del fondo */
+.btn-primary:hover {
+    background-color: var(--button-hover-color);
+    transition: background-color 0.3s ease;
+}
+
+/* ==== SECONDARY BUTTON ==== */
+.btn-secondary{  
+    color: var(--primary-color);
+    background-color: #fff;
+    border-color: var(--primary-color);
+    border: 1px solid;
+    padding: .5em;
+    border-radius: .5rem;
+    
+    &:hover{
+        color: #fff;
+        border-color: var(--primary-color);
+        background-color: var(--primary-color);
+        transition: background-color 0.3s ease;
+        transition: color 0.3s ease;
+    }
+}
+/* == palabra cambios en action buttons == */
+.p-cambios {
+    padding-left: .3em;
+}
+
+/* ==== LOGIN BUTTON ==== */
+.btn-login{
+    font-size: 0.9em;
+    justify-self: center; 
+    width: 100%;
+    border-radius: 2em;
+    max-width: 35em;
+    height: 3em;
+    padding: 0;
+}
+
+/* ==== ICON BUTTON ==== */
+.icon-action-btn {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    height: 100%
+}
+
+/* ==== ALTERNATE BUTTON (COLOR NARANJA LETRAS BLANCAS)==== */
+.btn-alternate{
+    font-size: 1em;
+    cursor: pointer;
+    background-color: var(--alternative-color);
+    border: none;
+    color: white;
+    padding: 0.3em 4em;
+    border-radius: var(--border-radius-rounded);
+    &:hover{
+        /* background-color: #ff8127; */
+        transition: background-color 0.3s ease;
+        transition: color 0.3s ease;
+    }
+}
+
+/* ==== ADD BUTTON (GRIS CON LETRAS NEGRAS) ==== */
+.btn-add {
+    /* Styles */
+    font-size: var(--font-h4);
+    color: var(--font-color-primary);
+    background-color: rgb(233, 233, 233);
+    font-weight: 550;
+    
+    /* Dimensions */
+    padding: 0.6em 1.5em 0.6em 1.5em;
+    border: none;
+    border-radius: 2em;
+}
+
+/* ==== BUTTON PSEUDO-CLASS SELECTORS ==== */
+.btn-primary:disabled {
+  background-color: #888888;
+  color: #f0f0f0;          
+  cursor: not-allowed;      
+  opacity: 0.6;             
+}
+
+.btn-primary:disabled:hover {
+  background-color: #bdbdbd; 
+  color: #f0f0f0;          
+  cursor: not-allowed;       /* cursor con "prohibido" */
+  opacity: 0.6;             
+}
+
+@media (min-width: 431px) and (max-width: 768px) {
+    .btn-group-actions.btn-group-new-ingredient{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+/** Mobile: max: 400px */
+@media screen and (max-width: 430px) {
+
+    .btn-group-actions .btn-primary, 
+    .btn-group-actions .btn-secondary {
+        padding: .8em;
+        flex: 1;
+        align-items: center;
+    }
+
+    .btn-add  {
+        font-size: var(--font-text);
+    }
+
+    .btn-login{
+        width: 92%;
+    }
+
+    .btn-primary.btn-group-new-ingredient{
+        padding: 0;
+        margin: 1em;
+    }
+    .btn-group-new-ingredient .btn {
+        font-size: 0.8em;
+    }
+
+    .btn-group-new-ingredient{
+        width: 90%;
+    }
+
+}

@@ -1,0 +1,164 @@
+/* ============================= Nav-bar ============================= */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.8em; /* good for centering, if not use space-evenly */
+    flex-direction: row;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem clamp(1.8rem, 4vw, 4rem); /* padding: top right bottom left; */
+                    /* minimo, ideal, maximo */
+    background-color: white;
+    width: 100%;
+}
+
+
+.icon-and-text {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.icon-and-text .main-title {
+    min-width: 12rem;
+    font-weight: bold;
+    font-size: var(--font-h3);
+}
+
+.options-and-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.icon-link i {
+  line-height: 1;
+  font-size: x-large;
+}
+
+.options-and-icon i {
+    font-size: 3rem;
+}
+/* No se usa */
+/* .icon-and-text-mobile {
+    display: flex;
+    align-items: center;
+} */
+
+.mobile-icons {
+    display: flex;
+    gap: 3rem;
+
+}
+.mobile-icons i {
+    font-size: 2rem;
+}
+
+/* ============================= Hamburguer ============================= */
+/* fuera el checkbox */
+#hamburger-toggle {
+    display: none;
+}
+
+/* creo icono */
+#nav-hamburger {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#nav-hamburger span {
+    height: 0.2rem;
+    width: 2.25em;
+    background: var(--font-color-primary);
+    border-radius: 1rem;
+    transition: 0.3s ease-in-out;
+}
+
+/* === cuando el checkbox está marcado (abierto) === */
+
+#hamburger-toggle:checked ~ span:nth-child(2) {
+    transform: translateY(7px) rotate(135deg);
+
+}
+
+#hamburger-toggle:checked ~ span:nth-child(3) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#hamburger-toggle:checked ~ span:nth-child(4) {
+transform: translateY(-7px) rotate(-135deg);
+}
+
+/* ============================= Media Queries ============================= */
+
+/* Desktop (>=769px) */
+@media (min-width: 769px) {
+    /* Mostrar navbar completo */
+    .main-nav {
+        display: flex;
+    }
+    /* Ocultar mobile icons y nav-hamburger */
+    .mobile-icons, #nav-hamburger {
+        display: none;
+    }
+}
+
+/* Tablet (431px – 768px) */
+@media (min-width: 431px) and (max-width: 768px) {
+    .main-nav {
+        display: flex;
+    }
+    .options-and-icon .btn-empty {
+        display: none; /* oculta todos */
+    }
+    .options-and-icon .btn-empty.active {
+        display: inline-block; /* solo mostrar el activo */
+    }
+
+    /* Ocultar mobile icons */
+    .mobile-icons {
+        display: none;
+    }
+
+    #nav-hamburger {
+        display: flex;
+    }
+}
+
+/* Mobile (<=430px) */
+@media (max-width: 430px) {
+    .main-nav {
+        position: fixed;
+        bottom: 0;      /* lo pega al borde inferior */
+        left: 0;        /* lo alinea a la izquierda */
+        width: 100%;    /* ocupa todo el ancho */
+        border-top: 1px solid #ccc;
+        gap: 3rem;
+        justify-content: center;
+        z-index: 1000;
+    }
+    .options-and-icon .btn-empty {
+        display: none; /* oculta todos */
+    }
+    .options-and-icon .btn-empty.active {
+        display: none; /* solo mostrar el activo */
+    }
+    #nav-hamburger {
+        display: none;
+    }
+    .user-img {
+        display: none;
+    }
+    .main-title {
+        display: none;
+    }
+}

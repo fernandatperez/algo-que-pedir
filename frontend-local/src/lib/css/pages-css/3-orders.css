@@ -1,0 +1,88 @@
+/* @import url('../components-css/buttons.css'); */
+
+/* ============================= General ============================= */
+:root {
+    --dark-gray: #374151;
+    --light-gray: #6b7280;
+    --lighter-gray: #e5e7eb;
+}
+
+/* ============================= State Tabs Container ============================= */
+
+.title-tabs-grid {
+    width: 100%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 8vh;
+
+    grid-area: main;
+}
+.title {
+    font-size: var(--font-h1);
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.line {
+    border-bottom: 1px solid var(--lighter-gray);
+    margin-bottom: 1em;
+}
+.title-tabs {
+    padding: 1em 1em 0em;
+}
+
+/* ============================= Tabs ============================= */
+
+.tabs {
+    display: flex;
+    gap: 2em;
+}
+.tab {
+    position: relative;
+    cursor: pointer;
+    color: var(--light-gray);
+    /* font-weight: normal; */
+    padding-bottom: 1.5em;
+    font-size: var(--font-text);
+}
+.tab::after { /* pseudo-element drawn after each .tab */
+    content: ""; /* this makes something render */
+    position: absolute;
+    bottom: 0; /* these two spawn it at the bottom left */
+    left: 0;
+    width: 100%;
+    height: 0.5em;
+    /* background-color: transparent; invisible by default */
+    background-color: var(--lighter-gray);
+}
+.active {
+    color: black;
+}
+
+/* ============================= Grid ============================= */
+
+.main-grid {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr 1fr; */
+    /* this makes it always have 3 columns and 3 rows */
+    grid-template-columns: repeat(auto-fit, 27em);
+    justify-content: center; /* optional, centers the content */
+    gap: 0.5em;
+    /* margin-right: 1em; */
+}
+
+/* ============================= Media-Queries ============================= */
+/* vista en celular */
+@media (max-width: 430px) {
+    .line {
+        width: 100%;
+    }
+    .title-tabs {
+        width: 100%;
+    }
+    .tabs {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}

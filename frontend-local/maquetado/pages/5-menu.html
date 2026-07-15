@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/flex-grid.css">
+    <link rel="stylesheet" href="../css/nav-bars.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/component-css/buttons.css">
+    <link rel="stylesheet" href="../css/pages-css/5-menu.css">
+
+  <title>Gestion Menu</title>
+</head>
+        
+<body>
+    <!-- Header -->
+        <header class="main-nav">
+
+            <div class="icon-and-text">
+                <a href="../pages/" class="pot-container">
+                    <i class="ph-fill ph-cooking-pot"></i>
+                </a>
+                <a href="../pages/">
+                  <span class="main-title">Algo que pedir</span> 
+                </a>
+            </div>
+
+            <nav class="options-and-icon">
+                <button class="btn-empty">Pedidos</button> 
+                <button class="btn-empty active">Menú</button> 
+                <button class="btn-empty">Ingredientes</button> 
+                <button class="btn-empty">Cuentas</button> 
+                <!-- <i class="ph ph-list hidden"></i> -->
+                <label id="nav-hamburger" class="hidden">
+                    <input type="checkbox" id="hamburger-toggle">
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                    <span class="hidden"></span>
+                </label>
+                    <i class="ph ph-user-circle user-img"></i>
+                <div class="mobile-icons">
+                    <i class="ph ph-shopping-cart hidden"></i>
+                    <i class="ph ph-fork-knife hidden"></i>
+                    <i class="ph ph-bowl-food hidden"></i>
+                    <i class="ph ph-user hidden"></i>
+                </div>
+            </nav>
+
+        </header>
+
+
+  <main class="container-column">
+    <div class="main-container container-column main-content">
+      <div class="w-100 flex-row jc-space-between gap-1">
+        <div class="text-wrapper"><h1 class="header-title ellipsis-text">Gestion del menú</h1> </div>
+        <button class = "btn-add">Agregar nuevo plato</button>
+      </div>
+        <h2 class="subtitle">Platos disponibles</h2>
+        <div class="container-column content-section">
+          <article class="meal">
+              <div class="imgcontainer"><img src="/assets/img/spagettis.png" alt="spagettis"></div>
+              <div class="text-meal text-wrapper">
+                <h4 class="ellipsis-text">Pasta con albondigas</h4> 
+                <p class="gray-text hide-on-mobile ellipsis-text">Deliciosa pasta con salsa de tomates y albondigas de cerdo</p>
+              </div>
+              <div class="price-meal"> $12.99 </div>
+          </article> 
+          <article class="meal">
+              <div class="imgcontainer"><img src="/assets/img/hamburguesa2.jpg" alt="hamburguesa" class="image-meal"></div>
+              <div class="text-meal text-wrapper">
+                <h4 class="ellipsis-text">Hamburguesa con queso y panceta</h4> 
+                <p class="gray-text hide-on-mobile ellipsis-text">Combo de hamburguesa con papas y bebida </p>
+              </div>
+              <div class="price-meal"> $9.99 </div>
+          </article> 
+          <article class="meal">
+              <div class="imgcontainer"><img src="/assets/img/ensalada.png" alt="ensalada" class="image-meal"> </div>
+              <div class="text-meal text-wrapper">
+                <h4 class="ellipsis-text">Ensalada de la Huerta</h4> 
+                <p class="gray-text hide-on-mobile ellipsis-text">Ensalada fresca con hojas mixtas y vinagreta</p>
+              </div>
+              <div class="price-meal"> $7.50 </div>
+          </article> 
+          <article class="meal">
+              <div class="imgcontainer"><img src="/assets/img/pizza.png" alt="pizza" class="image-meal"></div>
+              <div class="text-meal text-wrapper">
+                <h4 class="ellipsis-text">Pizza con mozzarella y tomate</h4> 
+                <p class="gray-text hide-on-mobile ellipsis-text">Pizza a la piedra con salsa de tomates frescos y extra queso</p>
+              </div>
+              <div class="price-meal">$11.75</div>
+          </article> 
+          <article class="meal">
+              <div class="imgcontainer"><img src="/assets/img/salmon.png" alt="salmon" class="image-meal"></div>
+              <div class="text-meal text-wrapper">
+                <h4 class="ellipsis-text">Salmon con vegetales grillados</h4> 
+                <p class="gray-text hide-on-mobile ellipsis-text">Salmon fresco a la plancha acompañado de vegetales</p>
+              </div>
+              <div class="price-meal">$14.25</div>
+          </article>   
+        </div>
+    </div>
+  </main>
+
+</body>
+</html>
